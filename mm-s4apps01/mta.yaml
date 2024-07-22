@@ -1,0 +1,69 @@
+_schema-version: "3.2"
+ID: mm-s4apps01
+description: MM - Fiori Apps
+version: 0.0.1
+modules:
+- name: mm-s4apps01-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: mm-s4apps01-destination-service
+    parameters:
+      content-target: true
+  - name: mm-s4apps01-repo-host
+    parameters:
+      service-key:
+        name: mm-s4apps01-repo-host-key
+  - name: mm-s4apps01-uaa
+    parameters:
+      service-key:
+        name: mm-s4apps01-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: mm-s4apps01_repo_host
+          ServiceInstanceName: mm-s4apps01-html5-srv
+          ServiceKeyName: mm-s4apps01-repo-host-key
+          sap.cloud.service: mm-s4apps01
+        - Authentication: OAuth2UserTokenExchange
+          Name: mm-s4apps01_uaa
+          ServiceInstanceName: mm-s4apps01-xsuaa-srv
+          ServiceKeyName: mm-s4apps01-uaa-key
+          sap.cloud.service: mm-s4apps01
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+resources:
+- name: mm-s4apps01-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: mm-s4apps01-xsuaa-srv
+    service-plan: application
+- name: mm-s4apps01-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: mm-s4apps01-destination-service
+    service-plan: lite
+- name: mm-s4apps01-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: mm-s4apps01-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
