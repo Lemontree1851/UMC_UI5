@@ -1,0 +1,69 @@
+_schema-version: "3.2"
+ID: fico-s4apps01
+description: FICO - Fiori Apps
+version: 0.0.1
+modules:
+- name: fico-s4apps01-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: fico-s4apps01-destination-service
+    parameters:
+      content-target: true
+  - name: fico-s4apps01-repo-host
+    parameters:
+      service-key:
+        name: fico-s4apps01-repo-host-key
+  - name: fico-s4apps01-uaa
+    parameters:
+      service-key:
+        name: fico-s4apps01-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: fico-s4apps01_repo_host
+          ServiceInstanceName: fico-s4apps01-html5-srv
+          ServiceKeyName: fico-s4apps01-repo-host-key
+          sap.cloud.service: fico-s4apps01
+        - Authentication: OAuth2UserTokenExchange
+          Name: fico-s4apps01_uaa
+          ServiceInstanceName: fico-s4apps01-xsuaa-srv
+          ServiceKeyName: fico-s4apps01-uaa-key
+          sap.cloud.service: fico-s4apps01
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+resources:
+- name: fico-s4apps01-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: fico-s4apps01-xsuaa-srv
+    service-plan: application
+- name: fico-s4apps01-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: fico-s4apps01-destination-service
+    service-plan: lite
+- name: fico-s4apps01-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: fico-s4apps01-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
