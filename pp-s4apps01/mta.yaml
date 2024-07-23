@@ -33,6 +33,30 @@ modules:
         existing_destinations_policy: update
   build-parameters:
     no-source: true
+- name: pp-s4apps01-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: pp-s4apps01-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - ppzbomupload.zip
+      name: ppzbomupload
+      target-path: resources/
+- name: ppzbomupload
+  type: html5
+  path: zbomupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: pp-s4apps01-uaa
   type: org.cloudfoundry.managed-service
