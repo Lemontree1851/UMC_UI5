@@ -30,16 +30,16 @@ server:
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
-          - authenticationType: reentranceTicket # SAML support for vscode
-            path: /sap
+          - path: /sap
             url: https://my412552-api.s4hana.cloud.sap
             destination: UMC_Dev_Customizing
+            authenticationType: SAMLAssertion
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
         mountPath: /
         services:
-          - urlPath: /sap/opu/odata/sap/ZUI_BOMUPLOAD_O2
+          - urlPath: /sap/opu/odata4/sap/zui_bomupload_o4/srvd/sap/zui_bomupload_o4/0001/
             metadataPath: ./webapp/localService/metadata.xml
             mockdataPath: ./webapp/localService/data
             generateMockData: true
