@@ -1,7 +1,177 @@
 <mvc:View controllerName="pp.zbomupload.controller.Main"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">
+    <Page >
+        <content>
+            <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+                <upload:UploadSet id="idTemplateCollection" multiple="true" items="{Attach>DocumentInfoRecordToAttachmentNavigation}" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                    <upload:items>
+                        <upload:UploadSetItem fileName="{Attach>FileName}" mediaType="{Attach>MimeType}" url="{ path:'Attach>__metadata/media_src', formatter:'.getMediaUrl' }" />
+                    </upload:items>
+                </upload:UploadSet>
+            </Panel>
+            <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+                <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
+            </Panel>
+            <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+                <table:Table rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                    <table:extension>
+                        <OverflowToolbar>
+                            <Text text="{local>/logInfo}"/>
+                            <ToolbarSpacer/>
+                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                    <table:columns>
+                        <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                            <table:template>
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>Message}">
+                            <table:template>
+                                <Text text="{local>Message}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>Material}">
+                            <table:template>
+                                <Text text="{local>Material}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Plant}">
+                            <table:template>
+                                <Text text="{local>Plant}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>BillOfMaterialVariantUsage}">
+                            <table:template>
+                                <Text text="{local>BillOfMaterialVariantUsage}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>IsMultipleBOMAlt}">
+                            <table:template>
+                                <Text text="{local>IsMultipleBOMAlt}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>HeaderValidityStartDate}">
+                            <table:template>
+                                <Text text="{ path:'local>HeaderValidityStartDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BOMHeaderQuantityInBaseUnit}" hAlign="End">
+                            <table:template>
+                                <Text text="{ path:'local>BOMHeaderQuantityInBaseUnit',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BOMHeaderText}">
+                            <table:template>
+                                <Text text="{local>BOMHeaderText}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BOMAlternativeText}">
+                            <table:template>
+                                <Text text="{local>BOMAlternativeText}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>BillOfMaterialStatus}">
+                            <table:template>
+                                <Text text="{local>BillOfMaterialStatus}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>BillOfMaterialItemNumber}">
+                            <table:template>
+                                <Text text="{local>BillOfMaterialItemNumber}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>BillOfMaterialItemCategory}">
+                            <table:template>
+                                <Text text="{local>BillOfMaterialItemCategory}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>BillOfMaterialComponent}">
+                            <table:template>
+                                <Text text="{local>BillOfMaterialComponent}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BillOfMaterialItemQuantity}" hAlign="End">
+                            <table:template>
+                                <Text text="{ path:'local>BillOfMaterialItemQuantity',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>BillOfMaterialItemUnit}">
+                            <table:template>
+                                <Text text="{local>BillOfMaterialItemUnit}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BOMItemSorter}">
+                            <table:template>
+                                <Text text="{local>BOMItemSorter}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>ComponentScrapInPercent}">
+                            <table:template>
+                                <Text text="{local>ComponentScrapInPercent}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>AlternativeItemGroup}">
+                            <table:template>
+                                <Text text="{local>AlternativeItemGroup}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>AlternativeItemPriority}">
+                            <table:template>
+                                <Text text="{local>AlternativeItemPriority}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>AlternativeItemStrategy}">
+                            <table:template>
+                                <Text text="{local>AlternativeItemStrategy}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>UsageProbabilityPercent}">
+                            <table:template>
+                                <Text text="{local>UsageProbabilityPercent}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BOMItemDescription}">
+                            <table:template>
+                                <Text text="{local>BOMItemDescription}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BOMItemText2}">
+                            <table:template>
+                                <Text text="{local>BOMItemText2}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>ProdOrderIssueLocation}">
+                            <table:template>
+                                <Text text="{local>ProdOrderIssueLocation}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BOMItemIsCostingRelevant}">
+                            <table:template>
+                                <Text text="{local>BOMItemIsCostingRelevant}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>BOMSubItemInstallationPoint}">
+                            <table:template>
+                                <Text text="{local>BOMSubItemInstallationPoint}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BillOfMaterialSubItemQuantity}" hAlign="End">
+                            <table:template>
+                                <Text text="{ path:'local>BillOfMaterialSubItemQuantity',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                </table:Table>
+            </Panel>
+        </content>
     </Page>
 </mvc:View>

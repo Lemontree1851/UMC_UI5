@@ -17,7 +17,8 @@ sap.ui.define([
         // Create local Model
         createLocalModel: function () {
             var oModel = new JSONModel({
-
+                logInfo: "",
+                excelSet: []
             });
             return oModel;
         },

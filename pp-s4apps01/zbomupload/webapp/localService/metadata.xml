@@ -77,8 +77,10 @@
                 <Property Name="BOMItemText2" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="ProdOrderIssueLocation" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="BOMItemIsCostingRelevant" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" Nullable="false" MaxLength="100"/>
                 <Property Name="BillOfMaterialSubItemQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false"/>
                 <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
@@ -88,7 +90,6 @@
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_bomupload_o4.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
             <ComplexType Name="ZR_UPLOAD_PARAMETER">
-                <Property Name="UploadFile" Type="Edm.Binary" Nullable="false"/>
                 <Property Name="Zzkey" Type="Edm.String" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="EntityControl">
@@ -104,9 +105,8 @@
                 <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false"/>
                 <Property Name="longtextUrl" Type="Edm.String"/>
             </ComplexType>
-            <Action Name="checkUploadData" IsBound="true">
+            <Action Name="uploadProcess" IsBound="true">
                 <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_bomupload_o4.v0001.BomUploadType)" Nullable="false"/>
-                <Parameter Name="UploadFile" Type="Edm.Binary" Nullable="false"/>
                 <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
                 <ReturnType Type="com.sap.gateway.srvd.zui_bomupload_o4.v0001.ZR_UPLOAD_PARAMETER" Nullable="false"/>
             </Action>
@@ -135,6 +135,14 @@
             </Annotations>
             <Annotations Target="SAP__self.BomUploadType/BillOfMaterialSubItemQuantity">
                 <Annotation Term="SAP__measures.Unit" Path="BillOfMaterialItemUnit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BomUploadType/Status">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BomUploadType/Message">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
             </Annotations>
             <Annotations Target="SAP__self.BomUploadType/CreatedBy">
                 <Annotation Term="SAP__core.Computed"/>
@@ -180,6 +188,15 @@
                 </Annotation>
                 <Annotation Term="SAP__capabilities.FilterRestrictions">
                     <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Message"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
                         <PropertyValue Property="NonFilterableProperties">
                             <Collection>
                                 <PropertyPath>__EntityControl</PropertyPath>
@@ -191,6 +208,7 @@
                     <Record>
                         <PropertyValue Property="NonSortableProperties">
                             <Collection>
+                                <PropertyPath>Message</PropertyPath>
                                 <PropertyPath>__EntityControl</PropertyPath>
                             </Collection>
                         </PropertyValue>
@@ -291,9 +309,6 @@
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/UploadFile">
-                <Annotation Term="SAP__common.Label" String="File Content"/>
-            </Annotations>
             <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/Zzkey">
                 <Annotation Term="SAP__common.Label" String="Zzkey"/>
                 <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
@@ -308,10 +323,7 @@
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
             </Annotations>
-            <Annotations Target="SAP__self.checkUploadData(Collection(SAP__self.BomUploadType))/UploadFile">
-                <Annotation Term="SAP__common.Label" String="File Content"/>
-            </Annotations>
-            <Annotations Target="SAP__self.checkUploadData(Collection(SAP__self.BomUploadType))/Zzkey">
+            <Annotations Target="SAP__self.uploadProcess(Collection(SAP__self.BomUploadType))/Zzkey">
                 <Annotation Term="SAP__common.Label" String="Zzkey"/>
                 <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
             </Annotations>
