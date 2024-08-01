@@ -30,7 +30,11 @@ server:
         mountPath: /
         services:
           - urlPath: /sap/opu/odata4/sap/zui_bomupload_o4/srvd/sap/zui_bomupload_o4/0001/
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/data
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
             generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/
+            generateMockData: true
+            metadataXmlPath: ./webapp/localService/zui_dtimp_conf_o4/metadata.xml
+            mockdataRootPath: ./webapp/localService/zui_dtimp_conf_o4/mockdata
         annotations: []

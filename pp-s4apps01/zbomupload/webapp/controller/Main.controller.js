@@ -18,11 +18,6 @@ sap.ui.define([
 
         _initialize: function () {
             this._BusyDialog = new BusyDialog();
-            // bind attachment path
-            var sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='" + "INF" +
-                "',DocumentInfoRecordDocNumber='" + "SALESDIFFPROCESS" + "',DocumentInfoRecordDocVersion='" +
-                "00" + "',DocumentInfoRecordDocPart='" + "000" + "')";
-            this.byId("idTemplateCollection").bindElement(sPath);
         },
 
         onFileChange: function (oEvent) {
@@ -90,18 +85,18 @@ sap.ui.define([
         },
 
         onCheck: function () {
-            this._callOData(false);
+            this._callOData("CHECK");
         },
 
         onExcute: function () {
-            this._callOData(true);
+            this._callOData("EXCUTE");
         },
 
         onExport: function () {
-
+            this._callOData("EXPORT");
         },
 
-        _callOData: function (bTestRun) {
+        _callOData: function (bEvent) {
             var aPromise = [];
             var aExcelSet = this.getModel("local").getProperty("/excelSet");
             var aGroupKey = this.removeDuplicates(aExcelSet, ["Material", "Plant"]);
@@ -115,18 +110,28 @@ sap.ui.define([
                         aGroupItems.push(aExcelSet[n]);
                     }
                 }
-                aPromise.push(this._callODataAction(aGroupItems, bTestRun));
+                aPromise.push(this._callODataAction(bEvent, aGroupItems));
             }
             try {
                 this._BusyDialog.open();
                 Promise.all(aPromise).then((aContext) => {
                     this._BusyDialog.close();
+                    var aExcelSet = this.getModel("local").getProperty("/excelSet");
                     for (const activeContext of aContext) {
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
+                        JSON.parse(object.Zzkey).forEach(element => {
+                            for (var index = 0; index < aExcelSet.length; index++) {
+                                if (aExcelSet[index].Row === element.ROW) {
+                                    aExcelSet[index].Status = element.STATUS;
+                                    aExcelSet[index].Message = element.MESSAGE;
+                                }
+                            }
+                        });
                     }
+                    this.getModel("local").setProperty("/excelSet", aExcelSet);
                 }).catch((error) => {
-                    debugger;
+                    MessageBox.error(error);
                 }).finally(() => {
                     this._BusyDialog.close();
                 });
@@ -136,14 +141,11 @@ sap.ui.define([
             }
         },
 
-        _callODataAction: function (aData, bTestRun) {
-            var requestData = {
-                TestRun: bTestRun,
-                data: aData
-            };
+        _callODataAction: function (bEvent, aRequestData) {
             return new Promise((resolve, reject) => {
-                var uploadProcess = this.getModel().bindContext("/BomUpload/com.sap.gateway.srvd.zui_bomupload_o4.v0001.uploadProcess(...)");
-                uploadProcess.setParameter("Zzkey", JSON.stringify(requestData));
+                var uploadProcess = this.getModel().bindContext("/BomUpload/com.sap.gateway.srvd.zui_bomupload_o4.v0001.processLogic(...)");
+                uploadProcess.setParameter("Event", bEvent);
+                uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
                 uploadProcess.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     resolve(uploadProcess);
                 }).catch((error) => {

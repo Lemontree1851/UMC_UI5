@@ -7,9 +7,9 @@
     <Page >
         <content>
             <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
-                <upload:UploadSet id="idTemplateCollection" multiple="true" items="{Attach>DocumentInfoRecordToAttachmentNavigation}" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_BOM' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
                     <upload:items>
-                        <upload:UploadSetItem fileName="{Attach>FileName}" mediaType="{Attach>MimeType}" url="{ path:'Attach>__metadata/media_src', formatter:'.getMediaUrl' }" />
+                        <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
                     </upload:items>
                 </upload:UploadSet>
             </Panel>

@@ -90,6 +90,7 @@
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_bomupload_o4.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
             <ComplexType Name="ZR_UPLOAD_PARAMETER">
+                <Property Name="Event" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="Zzkey" Type="Edm.String" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="EntityControl">
@@ -105,8 +106,9 @@
                 <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false"/>
                 <Property Name="longtextUrl" Type="Edm.String"/>
             </ComplexType>
-            <Action Name="uploadProcess" IsBound="true">
+            <Action Name="processLogic" IsBound="true">
                 <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_bomupload_o4.v0001.BomUploadType)" Nullable="false"/>
+                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
                 <ReturnType Type="com.sap.gateway.srvd.zui_bomupload_o4.v0001.ZR_UPLOAD_PARAMETER" Nullable="false"/>
             </Action>
@@ -323,7 +325,7 @@
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
             </Annotations>
-            <Annotations Target="SAP__self.uploadProcess(Collection(SAP__self.BomUploadType))/Zzkey">
+            <Annotations Target="SAP__self.processLogic(Collection(SAP__self.BomUploadType))/Zzkey">
                 <Annotation Term="SAP__common.Label" String="Zzkey"/>
                 <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
             </Annotations>
