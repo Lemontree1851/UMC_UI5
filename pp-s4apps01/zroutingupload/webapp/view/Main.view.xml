@@ -1,0 +1,167 @@
+<mvc:View controllerName="pp.zroutingupload.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">
+    <Page >
+        <content>
+            <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_ROUTING' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                    <upload:items>
+                        <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+                    </upload:items>
+                </upload:UploadSet>
+            </Panel>
+            <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+                <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
+            </Panel>
+            <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+                <table:Table rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                    <table:extension>
+                        <OverflowToolbar>
+                            <Text text="{local>/logInfo}"/>
+                            <ToolbarSpacer/>
+                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                    <table:columns>
+                        <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                            <table:template>
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>Message}">
+                            <table:template>
+                                <Text text="{local>Message}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>Product}">
+                            <table:template>
+                                <Text text="{local>Product}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Plant}">
+                            <table:template>
+                                <Text text="{local>Plant}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ValidityStartDate}">
+                            <table:template>
+                                <Text text="{ path:'local>ValidityStartDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BillOfOperationsDesc}">
+                            <table:template>
+                                <Text text="{local>BillOfOperationsDesc}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>BillOfOperationsUsage}">
+                            <table:template>
+                                <Text text="{local>BillOfOperationsUsage}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>BillOfOperationsStatus}">
+                            <table:template>
+                                <Text text="{local>BillOfOperationsStatus}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>ResponsiblePlannerGroup}">
+                            <table:template>
+                                <Text text="{local>ResponsiblePlannerGroup}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>Operation}">
+                            <table:template>
+                                <Text text="{local>Operation}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>WorkCenterInternalID}">
+                            <table:template>
+                                <Text text="{local>WorkCenterInternalID}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>OperationControlProfile}">
+                            <table:template>
+                                <Text text="{local>OperationControlProfile}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>OperationStandardTextCode}">
+                            <table:template>
+                                <Text text="{local>OperationStandardTextCode}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>StandardWorkQuantity1}" hAlign="End">
+                            <table:template>
+                                <Text text="{ path:'local>StandardWorkQuantity1',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>StandardWorkQuantityUnit1}">
+                            <table:template>
+                                <Text text="{local>StandardWorkQuantityUnit1}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>StandardWorkQuantity2}" hAlign="End">
+                            <table:template>
+                                <Text text="{ path:'local>StandardWorkQuantity2',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>StandardWorkQuantityUnit2}">
+                            <table:template>
+                                <Text text="{local>StandardWorkQuantityUnit2}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>StandardWorkQuantity3}" hAlign="End">
+                            <table:template>
+                                <Text text="{ path:'local>StandardWorkQuantity3',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>StandardWorkQuantityUnit3}">
+                            <table:template>
+                                <Text text="{local>StandardWorkQuantityUnit3}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>StandardWorkQuantity4}" hAlign="End">
+                            <table:template>
+                                <Text text="{ path:'local>StandardWorkQuantity4',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>StandardWorkQuantityUnit4}">
+                            <table:template>
+                                <Text text="{local>StandardWorkQuantityUnit4}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>StandardWorkQuantity5}" hAlign="End">
+                            <table:template>
+                                <Text text="{ path:'local>StandardWorkQuantity5',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>StandardWorkQuantityUnit5}">
+                            <table:template>
+                                <Text text="{local>StandardWorkQuantityUnit5}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>StandardWorkQuantity6}" hAlign="End">
+                            <table:template>
+                                <Text text="{ path:'local>StandardWorkQuantity6',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>StandardWorkQuantityUnit6}">
+                            <table:template>
+                                <Text text="{local>StandardWorkQuantityUnit6}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>NumberOfTimeTickets}">
+                            <table:template>
+                                <Text text="{local>NumberOfTimeTickets}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                </table:Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

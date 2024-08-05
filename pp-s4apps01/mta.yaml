@@ -51,6 +51,10 @@ modules:
             - ppzproductionversionupload.zip
           name: ppzproductionversionupload
           target-path: resources/
+        - artifacts:
+            - ppzroutingupload.zip
+          name: ppzroutingupload
+          target-path: resources/
   - name: ppzbomupload
     type: html5
     path: zbomupload
@@ -58,7 +62,6 @@ modules:
       build-result: dist
       builder: custom
       commands:
-        # - npm install
         - npm run build:cf
       supported-platforms: []
   - name: ppzproductionversionupload
@@ -68,7 +71,15 @@ modules:
       build-result: dist
       builder: custom
       commands:
-        # - npm install
+        - npm run build:cf
+      supported-platforms: []
+  - name: ppzroutingupload
+    type: html5
+    path: zroutingupload
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
         - npm run build:cf
       supported-platforms: []
 resources:
