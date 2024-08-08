@@ -1,0 +1,108 @@
+<mvc:View controllerName="mm.sourcelistupload.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">
+    <Page >
+        <content>
+            <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_SOURCELIST' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                    <upload:items>
+                        <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+                    </upload:items>
+                </upload:UploadSet>
+            </Panel>
+            <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+                <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
+            </Panel>
+            <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+                <table:Table id="tableSourceList" rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                    <table:extension>
+                        <OverflowToolbar>
+                            <Text text="{local>/logInfo}"/>
+                            <ToolbarSpacer/>
+                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                    <table:columns>
+                        <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                            <table:template>
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
+						    <Label text="{i18n>Type}"/>
+							<table:template>
+								<Text text="{parts:['local>Status'], formatter:'.formatter.formatResult'}"/>
+							</table:template>
+                        </table:Column>   
+                        <table:Column width="15rem" label="{i18n>Message}">
+                            <table:template>
+                                <Text text="{local>Message}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>Material}">
+                            <table:template>
+                                <Text text="{local>Material}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Plant}">
+                            <table:template>
+                                <Text text="{local>Plant}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>SourceListRecord}">
+                            <table:template>
+                                <Text text="{local>SourceListRecord}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ValidityStartDate}">
+                            <table:template>
+                                <Text text="{ path:'local>ValidityStartDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ValidityEndDate}">
+                            <table:template>
+                                <Text text="{ path:'local>ValidityEndDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Supplier}">
+                            <table:template>
+                                <Text text="{local>Supplier}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>PurchasingOrganization}">
+                            <table:template>
+                                <Text text="{local>PurchasingOrganization}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>SupplierIsFixed}">
+                            <table:template>
+                                <Text text="{local>SupplierIsFixed}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>SourceOfSupplyIsBlocked}">
+                            <table:template>
+                                <Text text="{local>SourceOfSupplyIsBlocked}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>MrpSourcingControl}">
+                            <table:template>
+                                <Text text="{local>MrpSourcingControl}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>Xflag}">
+                            <table:template>
+                                <Text text="{local>Xflag}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>                     
+                    </table:columns>
+                </table:Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>
+

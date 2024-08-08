@@ -33,6 +33,29 @@ modules:
         existing_destinations_policy: update
   build-parameters:
     no-source: true
+- name: mm-s4apps01-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+    - name: mm-s4apps01-repo-host
+      parameters:
+        content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+      - artifacts:
+          - mmsourcelistupload.zip
+        name: mmsourcelistupload
+        target-path: resources/
+- name: mmsourcelistupload
+  type: html5
+  path: sourcelistupload
+  build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
 resources:
 - name: mm-s4apps01-uaa
   type: org.cloudfoundry.managed-service
