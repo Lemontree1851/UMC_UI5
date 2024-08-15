@@ -5,7 +5,7 @@
     xmlns:unified="sap.ui.unified"
     xmlns:upload="sap.m.upload"
     xmlns:table="sap.ui.table">
-    <Dialog>
+    <Dialog title="{i18n>upload}">
         <layout:VerticalLayout core:require="{ handler: 'pp/zofsplitrule/ext/controller/ListReportExt' }">
             <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
                 <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_OFSPLIT' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
