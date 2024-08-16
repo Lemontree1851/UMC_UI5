@@ -1,7 +1,7 @@
 {
   "_version": "1.59.0",
   "sap.app": {
-    "id": "mm.sourcelistupload",
+    "id": "mm.purinforecordupload",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -12,12 +12,12 @@
     "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap/generator-fiori:basic",
-      "version": "1.14.2",
-      "toolsId": "9ac6f2e6-d2bc-4bfc-b36f-4a1c2ceea743"
+      "version": "1.14.3",
+      "toolsId": "5276e9d6-4e16-4273-945d-fb0c5649635c"
     },
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata4/sap/zui_purchasingsourcelist_o4/srvd/sap/zui_purchasingsourcelist_o4/0001/",
+        "uri": "/sap/opu/odata4/sap/zui_purinforecord_o4/srvd/sap/zui_purinforecord_o4/0001/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -29,25 +29,25 @@
         "uri": "/sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/",
         "type": "OData",
         "settings": {
-          "annotations": [],
-          "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
-          "odataVersion": "4.0"
+            "annotations": [],
+            "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
+            "odataVersion": "4.0"
         }
       }
     },
     "crossNavigation": {
-      "inbounds": {
-        "sourcelistupload-display": {
-          "semanticObject": "sourcrlistupload",
+			"inbounds": {
+				"sourcelistupload-display": {
+          "semanticObject": "purinforecordupload",
           "action": "display",
           "title": "{{flpTitle}}",
           "icon": "sap-icon://upload",
           "signature": {
-            "parameters": {},
-            "additionalParameters": "allowed"
-          }
-        }
-      }
+             "parameters": {},
+             "additionalParameters": "allowed"
+				  }
+			  }
+		  }
     }
   },
   "sap.ui": {
@@ -67,12 +67,12 @@
     }
   },
   "sap.platform.cf": {
-    "ui5VersionNumber": "1.120.18"
-  },
+		"ui5VersionNumber": "1.120.18"
+	},
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.120.18",
+      "minUI5Version": "1.120.17",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -92,7 +92,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "mm.sourcelistupload.i18n.i18n"
+          "bundleName": "mm.purinforecordupload.i18n.i18n"
         }
       },
       "": {
@@ -121,7 +121,7 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "mm.sourcelistupload.view",
+        "viewPath": "mm.purinforecordupload.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
@@ -146,7 +146,7 @@
       }
     },
     "rootView": {
-      "viewName": "mm.sourcelistupload.view.App",
+      "viewName": "mm.purinforecordupload.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

@@ -37,25 +37,38 @@ modules:
   type: com.sap.application.content
   path: .
   requires:
-    - name: mm-s4apps01-repo-host
-      parameters:
-        content-target: true
+  - name: mm-s4apps01-repo-host
+    parameters:
+      content-target: true
   build-parameters:
     build-result: resources
     requires:
-      - artifacts:
-          - mmsourcelistupload.zip
-        name: mmsourcelistupload
-        target-path: resources/
+    - artifacts:
+      - mmsourcelistupload.zip
+      name: mmsourcelistupload
+      target-path: resources/
+    - artifacts:
+      - mmpurinforecordupload.zip
+      name: mmpurinforecordupload
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
   build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm run build:cf
-      supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpurinforecordupload
+  type: html5
+  path: purinforecordupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: mm-s4apps01-uaa
   type: org.cloudfoundry.managed-service
