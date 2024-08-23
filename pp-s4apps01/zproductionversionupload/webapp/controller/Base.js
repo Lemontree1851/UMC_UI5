@@ -133,6 +133,9 @@ sap.ui.define([
                 this._pad2(date.getSeconds());
             return sTime;
         },
+        _pad2: function (n) {
+            return n < 10 ? "0" + n : n;
+        },
 
         /**
          * Convenience method for routing back and history
