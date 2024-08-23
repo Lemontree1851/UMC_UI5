@@ -59,6 +59,10 @@ modules:
       - ppzofsplitrule.zip
       name: ppzofsplitrule
       target-path: resources/
+    - artifacts:
+      - ppzmaterialrequisition.zip
+      name: ppzmaterialrequisition
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -93,6 +97,16 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzmaterialrequisition
+  type: html5
+  path: zmaterialrequisition
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:

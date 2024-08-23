@@ -1,0 +1,220 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "pp.zmaterialrequisition",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.14.4",
+      "toolsId": "d9031d47-5050-44e7-a87b-07022ec05e96"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zui_materialrequisition_o4/srvd/sap/zui_materialrequisition_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zmaterialrequisition-display": {
+          "semanticObject": "zmaterialrequisition",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.124.5",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "pp.zmaterialrequisition.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },
+      "local": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "MaterialRequisitionList",
+          "target": "MaterialRequisitionList"
+        },
+        {
+          "pattern": "MaterialRequisition({key}):?query:",
+          "name": "MaterialRequisitionObjectPage",
+          "target": "MaterialRequisitionObjectPage"
+        }
+      ],
+      "targets": {
+        "MaterialRequisitionList": {
+          "type": "Component",
+          "id": "MaterialRequisitionList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/MaterialRequisition",
+              "variantManagement": "Page",
+              "navigation": {
+                "MaterialRequisition": {
+                  "detail": {
+                    "route": "MaterialRequisitionObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  },
+                  "actions": {
+                    "create": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.openCreateDialog",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "{@i18n>create}"
+                    },
+                    "print": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onPrint",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{@i18n>print}"
+                    },
+                    "approve": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onApprove",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{@i18n>approve}"
+                    },
+                    "approvecancel": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onApproveCancel",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{@i18n>approveCancel}"
+                    },
+                    "posting": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onPosting",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{@i18n>posting}"
+                    },
+                    "postingcancel": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onPostingCancel",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{@i18n>postingCancel}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "MaterialRequisitionObjectPage": {
+          "type": "Component",
+          "id": "MaterialRequisitionObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/MaterialRequisition"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "pp-s4apps01"
+  },
+  "sap.platform.cf": {
+    "ui5VersionNumber": "1.120.18"
+  }
+}
