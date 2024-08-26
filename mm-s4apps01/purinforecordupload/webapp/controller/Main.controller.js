@@ -263,6 +263,7 @@ sap.ui.define([
                 var uploadProcess = this.getModel().bindContext("/PurInfoRecordHeader/com.sap.gateway.srvd.zui_purinforecord_o4.v0001.processLogic(...)");
                 uploadProcess.setParameter("Event", bEvent);
                 uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
+                uploadProcess.setParameter("RecordUUID", '');
                 uploadProcess.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     resolve(uploadProcess);
                 }).catch((error) => {
