@@ -3,9 +3,8 @@ sap.ui.define([
     "../model/formatter",
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
-    "sap/m/MessageToast",
     "sap/ui/core/Fragment"
-], function (ValueHelpDialog, formatter, BusyDialog, MessageBox, MessageToast, Fragment) {
+], function (ValueHelpDialog, formatter, BusyDialog, MessageBox, Fragment) {
     'use strict';
 
     var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog;
@@ -67,7 +66,7 @@ sap.ui.define([
             // *************************************************
         },
 
-        openCreateDialog: function () {
+        openOperationDialog: function () {
             var that = this;
             this.getModel("local").setProperty("/headSet", {
                 Plant: "",
@@ -80,36 +79,61 @@ sap.ui.define([
                 CustomerName: "",
                 Receiver: "",
                 RequisitionDate: new Date(),
-                ManufacturingOrder: "",
-                Product: "",
-                OrderIsClosed: "",
                 LineWarehouseStatus: false
             });
             this.getModel("local").setProperty("/itemSet", []);
-            _myBusyDialog.open();
-            Fragment.load({
-                name: "pp.zmaterialrequisition.ext.fragments.Create",
-                controller: this
-            }).then(function (oDialog) {
-                //ダイアログがロードされたら
-                this._oCreateDialog = oDialog;
-                //ダイアログからモデルを使用できるようにする
-                this._view.addDependent(this._oCreateDialog);
-                this._oCreateDialog.addButton(new sap.m.Button({
-                    text: "{i18n>closeBtn}",
-                    press: function () {
-                        that.getModel("local").setProperty("/headSet", {});
-                        that.getModel("local").setProperty("/itemSet", []);
-                        that._oCreateDialog.destroy();
+            MessageBox.information(this.getModel("i18n").getResourceBundle().getText("selectOperation"), {
+                actions: ["{i18n>create}", "{i18n>update}"],
+                onClose: function (sAction) {
+                    if (sAction === "{i18n>create}") {
+                        that.getModel("local").setProperty("/mode", "create");
+                    } else {
+                        that.getModel("local").setProperty("/mode", "update");
                     }
-                }));
-                _myBusyDialog.close();
-                this._oCreateDialog.open();
-            }.bind(this));
+                    _myBusyDialog.open();
+                    Fragment.load({
+                        name: "pp.zmaterialrequisition.ext.fragments.Operation",
+                        controller: that
+                    }).then(function (oDialog) {
+                        //ダイアログがロードされたら
+                        that._oOperationDialog = oDialog;
+                        //ダイアログからモデルを使用できるようにする
+                        that.routing.getView().addDependent(that._oOperationDialog);
+                        that._oOperationDialog.addButton(new sap.m.Button({
+                            text: "{i18n>closeBtn}",
+                            press: function () {
+                                that.getModel("local").setProperty("/headSet", {});
+                                that.getModel("local").setProperty("/itemSet", []);
+                                that._oOperationDialog.destroy();
+                            }
+                        }));
+                        _myBusyDialog.close();
+                        that._oOperationDialog.open();
+                    }.bind(that));
+                },
+                dependentOn: this.routing.getView()
+            });
+        },
+
+        onSearch: function () {
+            var that = this;
+            var oControl = sap.ui.getCore().byId("idMaterialRequisitionNo");
+            var sMaterialRequisitionNo = oControl.getValue();
+            if (sMaterialRequisitionNo) {
+                var oRequestData = {
+                    header: {
+                        MaterialRequisitionNo: sMaterialRequisitionNo
+                    }
+                }
+                _myFunction._callOData("QUERY", oRequestData, that);
+            } else {
+                oControl.setValueState("Error");
+            }
         },
 
         onSave: function (oEvent) {
             var that = this;
+            var oTable = oEvent.getSource().getParent().getParent();
             var header = this.getModel("local").getProperty("/headSet");
             var items = this.getModel("local").getProperty("/itemSet");
             var oRequestData = {
@@ -117,62 +141,50 @@ sap.ui.define([
                 items: items,
                 user: "P00001",
                 username: "Xinlei Xu",
-                datetime: _myFunction._getCurrentDateTime(),
+                datetime: _myFunction._getCurrentDateTime()
             }
-            if (_myFunction._requiredFields()) {
-                _myFunction._callOData("SAVE", oRequestData, that);
+            if (!_myFunction._requiredFields(oTable)) {
+                MessageBox.warning("The quantity you have reported exceeds the quantity planned.", {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
+                    onClose: function (sAction) {
+                        if (sAction === MessageBox.Action.OK) {
+                            _myFunction._callOData("SAVE", oRequestData, that);
+                        }
+                    },
+                    dependentOn: this.routing.getView()
+                });
             }
         },
 
         onAddLine: function () {
-            var sProduct = this.getModel("local").getProperty("/headSet/Product");
             var items = this.getModel("local").getProperty("/itemSet");
-            if (sProduct) {
-                var oContextBinding = this.getModel().bindContext("/ZC_ProductVH" + "('" + sProduct.replace(/\s/g, "") + "')");
-                oContextBinding.requestObject().then(function (context) {
-                    var item = {
-                        ItemNo: 0,
-                        Material: context.Product,
-                        MaterialDescription: context.ProductDescription,
-                        Quantity: "",
-                        BaseUnit: context.BaseUnit,
-                        StorageLocation: "",
-                        StorageLocationName: "",
-                        Remark: "",
-                        StandardPrice: context.StandardPrice,
-                        TotalAmount: 0,
-                        Currency: context.Currency
-                    };
-                    items.push(item);
-                    items.forEach((line, index) => {
-                        line.ItemNo = (index + 1) * 10;
-                    });
-                    this.getModel("local").setProperty("/itemSet", items);
-                }.bind(this));
-            } else {
-                var item = {
-                    ItemNo: 0,
-                    Material: "",
-                    MaterialDescription: "",
-                    Quantity: "",
-                    BaseUnit: "",
-                    StorageLocation: "",
-                    StorageLocationName: "",
-                    Remark: "",
-                    StandardPrice: "",
-                    TotalAmount: 0,
-                    Currency: ""
-                };
-                items.push(item);
-                items.forEach((line, index) => {
-                    line.ItemNo = (index + 1) * 10;
-                });
-                this.getModel("local").setProperty("/itemSet", items);
-            }
+            var item = {
+                ItemNo: 0,
+                ManufacturingOrder: "",
+                Product: "",
+                Material: "",
+                MaterialDescription: "",
+                Quantity: "",
+                BaseUnit: "",
+                StorageLocation: "",
+                StorageLocationName: "",
+                Remark: "",
+                StandardPrice: "",
+                TotalAmount: 0,
+                Currency: "",
+                OrderIsClosed: ""
+            };
+            items.push(item);
+            items.forEach((line, index) => {
+                line.ItemNo = (index + 1) * 10;
+            });
+            this.getModel("local").setProperty("/itemSet", items);
         },
 
         onDelLine: function (oEvent) {
-            var aSelectedIndices = oEvent.getSource().getParent().getParent().getSelectedIndices();
+            var oTable = oEvent.getSource().getParent().getParent();
+            var aSelectedIndices = oTable.getSelectedIndices();
             if (aSelectedIndices.length === 0) {
                 return;
             }
@@ -180,6 +192,14 @@ sap.ui.define([
             var iLen = aSelectedIndices.length - 1;
             do {
                 items.splice(aSelectedIndices[iLen], 1);
+                // begin: clear value state
+                var oCells = oTable.getRows()[aSelectedIndices[0]].getCells();
+                oCells.forEach(cell => {
+                    if (cell.sId.includes("input")) {
+                        cell.setValueState("None");
+                    }
+                });
+                // end: clear value state
                 iLen--;
             } while (iLen >= 0);
             items.forEach((line, index) => {
@@ -189,7 +209,8 @@ sap.ui.define([
         },
 
         handleChange: function (oEvent) {
-            var sValue, sInputBindingPath, sODataPath, sFieldName;
+            var aFieldName = [];
+            var sValue, sInputBindingPath, sODataPath, oContextBinding;
             this._oControl = oEvent.getSource();
             switch (this._oControl.getMetadata().getName()) {
                 case "sap.m.Input":
@@ -205,35 +226,97 @@ sap.ui.define([
                 default:
                     break;
             }
-            var oContextBinding = this.getModel().bindContext(sODataPath + "('" + sValue + "')");
-            var aFieldName = [];
-            if (sInputBindingPath.split("/")[2] === "ManufacturingOrder") {
-                aFieldName.push("Product");
-                aFieldName.push("OrderIsClosed");
-            } else if (sInputBindingPath.split("/")[2] === "Type") {
-                aFieldName.push("Zvalue2");
-            } else {
-                aFieldName.push(sInputBindingPath.split("/")[2] + "Name");
-            }
             this._oControl.setValueState("Error");
-            aFieldName.forEach(field => {
-                this.getModel("local").setProperty("/headSet/" + field, "");
-            });
-            oContextBinding.requestObject().then(function (context) {
-                this._oControl.setValueState("None");
+            if (sODataPath === "/ZC_ManufacturingOrderProductVH") {
+                oContextBinding = this.getModel().bindContext(sODataPath + "(ManufacturingOrder='" + sValue.split('/')[0] + "',Item='" + sValue.split('/')[1] + "')");
+            } else if (sODataPath === "/I_StorageLocationStdVH") {
+                var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+                oContextBinding = this.getModel().bindContext(sODataPath + "(Plant='" + sPlant + "',StorageLocation='" + sValue + "')");
+            } else {
+                oContextBinding = this.getModel().bindContext(sODataPath + "('" + sValue + "')");
+            }
+            if (sInputBindingPath.includes("/")) {
+                // head bind
+                if (sInputBindingPath.split("/")[2] === "Type") {
+                    aFieldName.push("Zvalue2");
+                } else {
+                    aFieldName.push(sInputBindingPath.split("/")[2] + "Name");
+                }
                 aFieldName.forEach(field => {
-                    this.getModel("local").setProperty("/headSet/" + field, context[field]);
+                    this.getModel("local").setProperty("/headSet/" + field, "");
                 });
-            }.bind(this));
+                oContextBinding.requestObject().then(function (context) {
+                    this._oControl.setValueState("None");
+                    aFieldName.forEach(field => {
+                        this.getModel("local").setProperty("/headSet/" + field, context[field]);
+                    });
+                }.bind(this));
+            } else {
+                // table item bind
+                var sBindFieldName = sInputBindingPath;
+                var sItemPath = this._oControl.getParent().oBindingContexts.local.sPath + "/";
+                sInputBindingPath = sItemPath + sBindFieldName;
+                if (sBindFieldName === "ManufacturingOrder") {
+                    aFieldName.push("Product");
+                    aFieldName.push("Material");
+                    aFieldName.push("MaterialDescription");
+                    aFieldName.push("BaseUnit");
+                    aFieldName.push("StandardPrice");
+                    aFieldName.push("OrderIsClosed");
+                } else if (sBindFieldName === "Material") {
+                    aFieldName.push("MaterialDescription");
+                    aFieldName.push("BaseUnit");
+                    aFieldName.push("StandardPrice");
+                    aFieldName.push("TotalAmount");
+                } else {
+                    aFieldName.push("StorageLocationName");
+                }
+                aFieldName.forEach(field => {
+                    this.getModel("local").setProperty(sItemPath + field, "");
+                    if (field === "TotalAmount") {
+                        this.getModel("local").setProperty(sItemPath + field, 0);
+                    }
+                });
+                oContextBinding.requestObject().then(function (context) {
+                    this._oControl.setValueState("None");
+                    for (const key in context) {
+                        if (!key.includes("@odata")) {
+                            this.getModel("local").setProperty(sItemPath + key, context[key]);
+                        }
+                    }
+                    if (sBindFieldName === "Material") {
+                        this.getModel("local").setProperty(sItemPath + "MaterialDescription", context["ProductDescription"]);
+                    }
+                    if (sBindFieldName === "ManufacturingOrder" || sBindFieldName === "Material") {
+                        // Calculate amount
+                        var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
+                        if (sValue && context["StandardPrice"]) {
+                            var iAmount = parseFloat(sValue) * parseFloat(context["StandardPrice"]);
+                            this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
+                        }
+                    }
+                }.bind(this));
+            }
+            if (!sValue) {
+                this._oControl.setValueState("None");
+            }
         },
 
         handleCalculate: function (oEvent) {
             var sPath = oEvent.getSource().getParent().oBindingContexts.local.sPath;
             var sValue = oEvent.getParameter("value");
             var sStandardPrice = this.getModel("local").getProperty(sPath + "/StandardPrice");
-            if (sValue && sStandardPrice) {
-                var iAmount = parseFloat(sValue) * parseFloat(sStandardPrice);
-                this.getModel("local").setProperty(sPath + "/TotalAmount", iAmount);
+            if (sValue && parseFloat(sValue) !== 0) {
+                oEvent.getSource().setValueState("None");
+                if (sStandardPrice) {
+                    var iAmount = parseFloat(sValue) * parseFloat(sStandardPrice);
+                    this.getModel("local").setProperty(sPath + "/TotalAmount", iAmount);
+                } else {
+                    this.getModel("local").setProperty(sPath + "/TotalAmount", 0);
+                }
+            } else {
+                oEvent.getSource().setValueState("Error");
+                this.getModel("local").setProperty(sPath + "/TotalAmount", 0);
             }
         },
 
@@ -249,30 +332,70 @@ sap.ui.define([
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
                         var result = JSON.parse(object.Zzkey);
-                        debugger;
-                        if (bEvent === 'SAVE') {
-                            that.getModel("local").setProperty("/headSet/MaterialRequisitionNo", result.HEADER.MATERIAL_REQUISITION_NO);
-                        }
-                        result.MESSAGEITEMS.forEach(element => {
-                            aMessageItems.push({
-                                type: element.TYPE,
-                                title: element.TITLE,
-                                description: element.DESCRIPTION,
-                                subtitle: element.SUBTITLE
+                        if (bEvent === "QUERY") {
+                            debugger;
+                            that.getModel("local").setProperty("/headSet", {
+                                Plant: result.HEADER.PLANT,
+                                Type: result.HEADER.TYPE,
+                                MaterialRequisitionNo: result.HEADER.MATERIAL_REQUISITION_NO,
+                                HeaderCreatedDate: new Date(result.HEADER.CREATED_DATE),
+                                CostCenter: result.HEADER.COST_CENTER,
+                                CostCenterName: result.HEADER.COST_CENTER_NAME,
+                                Customer: result.HEADER.CUSTOMER,
+                                CustomerName: result.HEADER.CUSTOMER_NAME,
+                                Receiver: result.HEADER.RECEIVER,
+                                RequisitionDate: new Date(result.HEADER.REQUISITION_DATE),
+                                LineWarehouseStatus: result.HEADER.LINE_WAREHOUSE_STATUS === "X" ? true : false,
+                                LocalLastChangedAtS: result.HEADER.LOCAL_LAST_CHANGED_AT_S,
                             });
-                        });
+                            var items = [];
+                            result.ITEMS.forEach(element => {
+                                items.push({
+                                    ItemNo: element.ITEM_NO,
+                                    ManufacturingOrder: element.MANUFACTURING_ORDER,
+                                    Product: element.PRODUCT,
+                                    Material: element.MATERIAL,
+                                    MaterialDescription: element.MATERIAL_DESCRIPTION,
+                                    Quantity: element.QUANTITY,
+                                    BaseUnit: element.BASE_UNIT,
+                                    StorageLocation: element.STORAGE_LOCATION,
+                                    StorageLocationName: element.STORAGE_LOCATION_NAME,
+                                    Remark: element.REMARK,
+                                    StandardPrice: element.STANDARD_PRICE,
+                                    TotalAmount: parseFloat(element.STANDARD_PRICE) * parseFloat(element.QUANTITY),
+                                    Currency: element.CURRENCY,
+                                    OrderIsClosed: element.ORDER_IS_CLOSED,
+                                    LocalLastChangedAtS: element.LOCAL_LAST_CHANGED_AT_S,
+                                });
+                            });
+                            that.getModel("local").setProperty("/itemSet", items);
+                        } else if (bEvent === "SAVE") {
+                            that.getModel("local").setProperty("/headSet/MaterialRequisitionNo", result.HEADER.MATERIAL_REQUISITION_NO);
+                            result.MESSAGEITEMS.forEach(element => {
+                                aMessageItems.push({
+                                    type: element.TYPE,
+                                    title: element.TITLE,
+                                    description: element.DESCRIPTION,
+                                    subtitle: element.SUBTITLE
+                                });
+                            });
+                        }
                     }
-                    that.getModel("local").setProperty("/MessageItems", aMessageItems);
+                    if (bEvent === "SAVE") {
+                        that.getModel("local").setProperty("/MessageItems", aMessageItems);
+                    }
                     _myMessageView.setModel(that.getModel("local"));
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
                     _myBusyDialog.close();
-                    var aMessageItems = that.getModel("local").getProperty("/MessageItems");
-                    if (aMessageItems.length > 0) {
-                        _myMessageView.navigateBack();
-                        that._view.addDependent(_myMessageDialog);
-                        _myMessageDialog.open();
+                    if (bEvent === "SAVE") {
+                        var aMessageItems = that.getModel("local").getProperty("/MessageItems");
+                        if (aMessageItems && aMessageItems.length > 0) {
+                            _myMessageView.navigateBack();
+                            that.routing.getView().addDependent(_myMessageDialog);
+                            _myMessageDialog.open();
+                        }
                     }
                 });
             } catch (error) {
@@ -295,7 +418,7 @@ sap.ui.define([
             });
         },
 
-        _requiredFields: function () {
+        _requiredFields: function (oTable) {
             var bFlag = false;
             var aIdListOfRequiredFields = [
                 "idPlant",
@@ -303,9 +426,18 @@ sap.ui.define([
                 "idCostCenter",
                 "idCustomer",
                 "idReceiver",
-                "idRequisitionDate",
-                "idManufacturingOrder"
+                "idRequisitionDate"
             ];
+            oTable.getRows().forEach(oRow => {
+                if (oRow.oBindingContexts.local) {
+                    var oCells = oRow.getCells();
+                    oCells.forEach(cell => {
+                        if (cell.sId.includes("input")) {
+                            aIdListOfRequiredFields.push(cell.sId);
+                        }
+                    });
+                }
+            });
             aIdListOfRequiredFields.forEach(sId => {
                 var sValue = "";
                 var oControl = sap.ui.getCore().byId(sId);
@@ -324,9 +456,9 @@ sap.ui.define([
                             break;
                     }
                     if (sValue) {
-                        oControl.setValueState("None");
+                        // oControl.setValueState("None");
                     } else {
-                        // bFlag = true;
+                        bFlag = true;
                         oControl.setValueState("Error");
                     }
                 };

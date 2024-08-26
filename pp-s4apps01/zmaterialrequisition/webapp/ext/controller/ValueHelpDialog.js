@@ -23,14 +23,12 @@ sap.ui.define([
                 that._oVHD = oDialog;
                 that.routing.getView().addDependent(oDialog);
 
-                // Set key fields for filtering in the Define Conditions Tab
-                // oDialog.setRangeKeyFields([{
-                //     label: "{i18n>" + that._aVHFields[0] + "}",
-                //     key: that._aVHFields[0],
-                //     type: "string"
-                // }]);
                 oDialog.setKey(that._aVHFields[0]);
-                oDialog.setDescriptionKey(that._aVHFields[1]);
+                if (that._aVHFields[0] === "ManufacturingOrder") {
+                    oDialog.setDescriptionKey("Item");
+                } else {
+                    oDialog.setDescriptionKey(that._aVHFields[1]);
+                }
 
                 // Set filter group items
                 that._aVHFields.forEach(fieldName => {
@@ -71,6 +69,7 @@ sap.ui.define([
                         });
                         that._aVHFields.forEach(fieldName => {
                             var oColumn = new UIColumn({
+                                width: "10rem",
                                 label: new Label({ text: "{i18n>" + fieldName + "}" }),
                                 template: new Text({ wrapping: false, text: "{" + fieldName + "}" })
                             });
@@ -123,20 +122,54 @@ sap.ui.define([
         },
 
         onValueHelpOkPress: function (oEvent) {
-            var sFieldName;
             var aTokens = oEvent.getParameter("tokens");
+            //--------------------------------------------------------------------------------
             var sInputPath = this._oInput.mBindingInfos.value.parts[0].path;
-            this.getModel("local").setProperty(sInputPath, aTokens[0].getProperty("key"));
-            if (sInputPath.split("/")[2] === "ManufacturingOrder") {
-                sFieldName = "Product";
+            if (sInputPath.includes("/")) {
+                // head bind
+                this.getModel("local").setProperty(sInputPath, aTokens[0].getProperty("key"));
+                var sFieldName = sInputPath.split("/")[2] + "Name";
+                if (aTokens[0].getProperty("text").includes("(")) {
+                    this.getModel("local").setProperty("/headSet/" + sFieldName, aTokens[0].getProperty("text").split("(")[0]);
+                } else {
+                    this.getModel("local").setProperty("/headSet/" + sFieldName, "");
+                }
             } else {
-                sFieldName = sInputPath.split("/")[2] + "Name";
+                // table item bind
+                var sBindFieldName = sInputPath;
+                var sItemPath = this._oInput.getParent().oBindingContexts.local.sPath + "/";
+                sInputPath = sItemPath + sBindFieldName;
+                this.getModel("local").setProperty(sInputPath, aTokens[0].getProperty("key"));
+                if (sBindFieldName === "ManufacturingOrder") {
+                    var oContextBinding = this.getModel().bindContext("/ZC_ManufacturingOrderProductVH" + "(ManufacturingOrder='" + aTokens[0].getProperty("key").replace(/\s/g, "") + "',Item='" + aTokens[0].getProperty("text").split("(")[0].replace(/\s/g, "") + "')");
+                    oContextBinding.requestObject().then(function (context) {
+                        for (const key in context) {
+                            if (!key.includes("@odata")) {
+                                this.getModel("local").setProperty(sItemPath + key, context[key]);
+                            }
+                        }
+                    }.bind(this));
+                } else if (sBindFieldName === "Material") {
+                    var oContextBinding = this.getModel().bindContext("/ZC_ProductVH" + "('" + aTokens[0].getProperty("key").replace(/\s/g, "") + "')");
+                    oContextBinding.requestObject().then(function (context) {
+                        for (const key in context) {
+                            if (!key.includes("@odata")) {
+                                this.getModel("local").setProperty(sItemPath + key, context[key]);
+                            }
+                        }
+                        this.getModel("local").setProperty(sItemPath + "MaterialDescription", context["ProductDescription"]);
+                        // Calculate amount
+                        var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
+                        if (sValue && context["StandardPrice"]) {
+                            var iAmount = parseFloat(sValue) * parseFloat(context["StandardPrice"]);
+                            this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
+                        }
+                    }.bind(this));
+                } else {
+                    this.getModel("local").setProperty(sInputPath + "Name", aTokens[0].getProperty("text").split("(")[0]);
+                }
             }
-            if (aTokens[0].getProperty("text").includes("(")) {
-                this.getModel("local").setProperty("/headSet/" + sFieldName, aTokens[0].getProperty("text").split("(")[0]);
-            } else {
-                this.getModel("local").setProperty("/headSet/" + sFieldName, "");
-            }
+            //--------------------------------------------------------------------------------
             this._oVHD.close();
         },
 

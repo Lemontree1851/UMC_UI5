@@ -41,6 +41,7 @@
           "semanticObject": "zmaterialrequisition",
           "action": "display",
           "title": "{{flpTitle}}",
+          "icon": "sap-icon://request",
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
@@ -145,11 +146,11 @@
                   },
                   "actions": {
                     "create": {
-                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.openCreateDialog",
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.openOperationDialog",
                       "visible": true,
                       "enabled": true,
                       "requiresSelection": false,
-                      "text": "{@i18n>create}"
+                      "text": "{@i18n>operation}"
                     },
                     "print": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onPrint",
