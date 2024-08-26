@@ -42,6 +42,9 @@
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
     </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
     </edmx:Reference>
@@ -65,7 +68,7 @@
                 <Property Name="MrpSourcingControl" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="Xflag" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <Property Name="Message" Type="Edm.String" Nullable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="220"/>
                 <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
@@ -76,6 +79,7 @@
             </EntityType>
             <ComplexType Name="ZR_UPLOAD_PARAMETER">
                 <Property Name="Event" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
                 <Property Name="Zzkey" Type="Edm.String" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="EntityControl">
@@ -95,11 +99,17 @@
                 <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_purchasingsourcelist_o4.v0001.SourceListType)" Nullable="false"/>
                 <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
                 <ReturnType Type="com.sap.gateway.srvd.zui_purchasingsourcelist_o4.v0001.ZR_UPLOAD_PARAMETER" Nullable="false"/>
             </Action>
             <EntityContainer Name="Container">
                 <EntitySet Name="SourceList" EntityType="com.sap.gateway.srvd.zui_purchasingsourcelist_o4.v0001.SourceListType"/>
             </EntityContainer>
+            <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
             <Annotations Target="SAP__self.SourceListType/UUID">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.Label" String="UUID"/>
@@ -113,8 +123,6 @@
             </Annotations>
             <Annotations Target="SAP__self.SourceListType/Message">
                 <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__common.Label" String="Zzkey"/>
-                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
             </Annotations>
             <Annotations Target="SAP__self.SourceListType/CreatedBy">
                 <Annotation Term="SAP__core.Computed"/>
@@ -148,6 +156,16 @@
                 <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
+            <Annotations Target="SAP__self.processLogic(Collection(SAP__self.SourceListType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.processLogic(Collection(SAP__self.SourceListType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
             <Annotations Target="SAP__self.SourceListType">
                 <Annotation Term="SAP__common.Label" String="Purchasing Source List"/>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
@@ -160,15 +178,6 @@
                 </Annotation>
                 <Annotation Term="SAP__capabilities.FilterRestrictions">
                     <Record>
-                        <PropertyValue Property="Filterable" Bool="true"/>
-                        <PropertyValue Property="FilterExpressionRestrictions">
-                            <Collection>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="Message"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
                         <PropertyValue Property="NonFilterableProperties">
                             <Collection>
                                 <PropertyPath>__EntityControl</PropertyPath>
@@ -180,7 +189,6 @@
                     <Record>
                         <PropertyValue Property="NonSortableProperties">
                             <Collection>
-                                <PropertyPath>Message</PropertyPath>
                                 <PropertyPath>__EntityControl</PropertyPath>
                             </Collection>
                         </PropertyValue>
@@ -290,10 +298,6 @@
                 <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
-            </Annotations>
-            <Annotations Target="SAP__self.UploadData(Collection(SAP__self.SourceListType))/Zzkey">
-                <Annotation Term="SAP__common.Label" String="Zzkey"/>
-                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

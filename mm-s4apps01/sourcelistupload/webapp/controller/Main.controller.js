@@ -140,6 +140,7 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, Spreadsheet) {
                 var uploadProcess = this.getModel().bindContext("/SourceList/com.sap.gateway.srvd.zui_purchasingsourcelist_o4.v0001.processLogic(...)");
                 uploadProcess.setParameter("Event", bEvent);
                 uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
+                uploadProcess.setParameter("RecordUUID", '');
                 uploadProcess.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     resolve(uploadProcess);
                 }).catch((error) => {
