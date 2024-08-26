@@ -51,6 +51,10 @@ modules:
       - mmpurinforecordupload.zip
       name: mmpurinforecordupload
       target-path: resources/
+    - artifacts:
+      - mmpurinforecordchange.zip
+      name: mmpurinforecordchange
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -67,6 +71,16 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpurinforecordchange
+  type: html5
+  path: purinforecordchange
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
