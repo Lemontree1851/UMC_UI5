@@ -153,8 +153,8 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, Spreadsheet) {
                 oHeader.INCOTERMSCLASSIFICATION = excelSet.IncotermsClassification;
                 oHeader.INCOTERMSLOCATION1 = excelSet.IncotermsLocation1;
                 oHeader.INCOTERMSLOCATION2 = excelSet.IncotermsLocation2;
-                oHeader.CONDITIONVALIDITYSTARTDATE = excelSet.ConditionValidityStartDate;
-                oHeader.PRICEVALIDITYENDDATE = excelSet.PriceValidityEndDate;
+                oHeader.CONDITIONVALIDITYSTARTDATE = formatter.odataDate(excelSet.ConditionValidityStartDate);
+                oHeader.PRICEVALIDITYENDDATE = formatter.odataDate(excelSet.PriceValidityEndDate);
                 oHeader.XFLAG = excelSet.Xflag;
                 oHeader.ROW = excelSet.Row;
 
@@ -174,8 +174,8 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, Spreadsheet) {
                         pushItem.PURCHASINGORGANIZATION = item.PurchasingOrganization;
                         pushItem.PLANT = item.Plant;
                         pushItem.PURCHASINGINFORECORDCATEGORY = item.PurchasingInfoRecordCategory;
-                        pushItem.CONDITIONVALIDITYSTARTDATE = item.ConditionValidityStartDate;
-                        pushItem.CONDITIONVALIDITYENDDATE = item.ConditionValidityEndDate;
+                        pushItem.CONDITIONVALIDITYSTARTDATE = item.Cformatter.odataDate(nditionValidityStartDate);
+                        pushItem.CONDITIONVALIDITYENDDATE = formatter.odataDate(item.ConditionValidityEndDate);
                         pushItem.CONDITIONSCALEQUANTITY = item.ConditionScaleQuantity;
                         pushItem.CONDITIONSCALEAMOUNT = item.ConditionScaleAmount;
 
@@ -260,6 +260,7 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, Spreadsheet) {
                 var uploadProcess = this.getModel().bindContext("/PurInfoRecordUpdate/com.sap.gateway.srvd.zui_purinforecordupdate_o4.v0001.processLogic(...)");
                 uploadProcess.setParameter("Event", bEvent);
                 uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
+                uploadProcess.setParameter("RecordUUID", '');
                 uploadProcess.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     resolve(uploadProcess);
                 }).catch((error) => {
