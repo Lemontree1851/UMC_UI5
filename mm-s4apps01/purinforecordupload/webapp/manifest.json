@@ -107,6 +107,16 @@
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
+      },
+      "Attach": {
+        "dataSource": "zui_dtimp_conf_o4",
+        "preload": true,
+        "settings": {
+        "synchronizationMode": "None",
+        "operationMode": "Server",
+        "autoExpandSelect": true,
+        "earlyRequests": true
+        }
       }
     },
     "resources": {

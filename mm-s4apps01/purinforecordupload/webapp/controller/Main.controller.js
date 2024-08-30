@@ -152,8 +152,8 @@ sap.ui.define([
                 oHeader.INCOTERMSCLASSIFICATION = excelSet.IncotermsClassification;
                 oHeader.INCOTERMSLOCATION1 = excelSet.IncotermsLocation1;
                 oHeader.INCOTERMSLOCATION2 = excelSet.IncotermsLocation2;
-                oHeader.CONDITIONVALIDITYSTARTDATE = excelSet.ConditionValidityStartDate;
-                oHeader.PRICEVALIDITYENDDATE = excelSet.PriceValidityEndDate;
+                oHeader.CONDITIONVALIDITYSTARTDATE = formatter.odataDate(excelSet.ConditionValidityStartDate);
+                oHeader.PRICEVALIDITYENDDATE = formatter.odataDate(excelSet.PriceValidityEndDate);
                 oHeader.XFLAG = excelSet.Xflag;
                 oHeader.ROW = excelSet.Row;
 
@@ -173,8 +173,8 @@ sap.ui.define([
                         pushItem.PURCHASINGORGANIZATION = item.PurchasingOrganization;
                         pushItem.PLANT = item.Plant;
                         pushItem.PURCHASINGINFORECORDCATEGORY = item.PurchasingInfoRecordCategory;
-                        pushItem.CONDITIONVALIDITYSTARTDATE = item.ConditionValidityStartDate;
-                        pushItem.CONDITIONVALIDITYENDDATE = item.ConditionValidityEndDate;
+                        pushItem.CONDITIONVALIDITYSTARTDATE = formatter.odataDate(item.ConditionValidityStartDate);
+                        pushItem.CONDITIONVALIDITYENDDATE = formatter.odataDate(item.ConditionValidityEndDate);
                         pushItem.CONDITIONSCALEQUANTITY = item.ConditionScaleQuantity;
                         pushItem.CONDITIONSCALEAMOUNT = item.ConditionScaleAmount;
 

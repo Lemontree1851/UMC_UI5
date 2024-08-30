@@ -254,6 +254,16 @@
                                 <Text text="{local>PurchasingInfoRecordCategory}" wrapping="false"/>
                             </table:template>
                         </table:Column>
+                        <table:Column width="6rem" label="{i18n>ConditionValidityStartDate}">
+                            <table:template>
+                                <Text text="{ path:'local>ConditionValidityStartDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>ConditionValidityEndDate}">
+                            <table:template>
+                                <Text text="{ path:'local>ConditionValidityEndDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>     
                         <table:Column width="10rem" label="{i18n>ConditionScaleQuantity}">
                             <table:template>
                                 <Text text="{local>ConditionScaleQuantity}" wrapping="false"/>
