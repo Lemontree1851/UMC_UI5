@@ -33,6 +33,29 @@ modules:
         existing_destinations_policy: update
   build-parameters:
     no-source: true
+- name: sd-s4apps01-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: sd-s4apps01-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - sdsalesacceptance.zip
+      name: sdsalesacceptance
+      target-path: resources/
+- name: sdsalesacceptance
+  type: html5
+  path: salesacceptance
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: sd-s4apps01-uaa
   type: org.cloudfoundry.managed-service
