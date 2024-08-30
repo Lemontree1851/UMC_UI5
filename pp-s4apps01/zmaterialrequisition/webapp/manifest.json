@@ -33,6 +33,15 @@
         "settings": {
           "localUri": "annotations/annotation.xml"
         }
+      },
+      "PrintService": {
+        "uri": "/sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -97,6 +106,16 @@
           "earlyRequests": true
         }
       },
+      "Print": {
+        "dataSource": "PrintService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
@@ -150,42 +169,56 @@
                       "visible": true,
                       "enabled": true,
                       "requiresSelection": false,
-                      "text": "{@i18n>operation}"
+                      "text": "{@i18n>Operation}"
+                    },
+                    "delete": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onDelete",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{@i18n>Delete}"
+                    },
+                    "resent": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onResent",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{@i18n>Resent}"
                     },
                     "print": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onPrint",
                       "visible": true,
                       "enabled": true,
                       "requiresSelection": true,
-                      "text": "{@i18n>print}"
+                      "text": "{@i18n>Print}"
                     },
-                    "approve": {
-                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onApprove",
+                    "approval": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onApproval",
                       "visible": true,
                       "enabled": true,
                       "requiresSelection": true,
-                      "text": "{@i18n>approve}"
+                      "text": "{@i18n>Approval}"
                     },
-                    "approvecancel": {
-                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onApproveCancel",
+                    "cancelapproval": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onCancelApproval",
                       "visible": true,
                       "enabled": true,
                       "requiresSelection": true,
-                      "text": "{@i18n>approveCancel}"
+                      "text": "{@i18n>CancelApproval}"
                     },
                     "posting": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onPosting",
                       "visible": true,
                       "enabled": true,
                       "requiresSelection": true,
-                      "text": "{@i18n>posting}"
+                      "text": "{@i18n>Posting}"
                     },
-                    "postingcancel": {
-                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onPostingCancel",
+                    "cancelposting": {
+                      "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onCancelPosting",
                       "visible": true,
                       "enabled": true,
                       "requiresSelection": true,
-                      "text": "{@i18n>postingCancel}"
+                      "text": "{@i18n>CancelPosting}"
                     }
                   }
                 }

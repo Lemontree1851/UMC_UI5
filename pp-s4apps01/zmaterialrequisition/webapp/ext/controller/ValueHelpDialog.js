@@ -157,12 +157,14 @@ sap.ui.define([
                                 this.getModel("local").setProperty(sItemPath + key, context[key]);
                             }
                         }
-                        this.getModel("local").setProperty(sItemPath + "MaterialDescription", context["ProductDescription"]);
                         // Calculate amount
                         var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
                         if (sValue && context["StandardPrice"]) {
                             var iAmount = parseFloat(sValue) * parseFloat(context["StandardPrice"]);
                             this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
+                            if (iAmount >= 100000) {
+                                this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                            }
                         }
                     }.bind(this));
                 } else {

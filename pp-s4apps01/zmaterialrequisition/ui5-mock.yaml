@@ -34,8 +34,12 @@ server:
             metadataXmlPath: ./webapp/localService/metadata.xml
             mockdataRootPath: ./webapp/localService/data
           - urlPath: /sap/opu/odata4/sap/zui_materialrequisition_o4/srvd/sap/zui_materialrequisition_o4/0001/
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/mockdata
+            generateMockData: true
+            metadataXmlPath: ./webapp/localService/metadata.xml
+            mockdataRootPath: ./webapp/localService/mockdata
+          - urlPath: /sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/
+            metadataPath: ./webapp/localService/ZUI_PRT_RECORD_O4/metadata.xml
+            mockdataPath: ./webapp/localService/ZUI_PRT_RECORD_O4/mockdata
             generateMockData: true
         annotations:
           - localPath: ./webapp/annotations/annotation.xml

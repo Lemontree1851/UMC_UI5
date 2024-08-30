@@ -58,12 +58,64 @@
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="PlantName" Type="Edm.String" Nullable="false" MaxLength="30"/>
             </EntityType>
+            <EntityType Name="I_StorageLocationStdVHType">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="StorageLocation"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="StorageLocation" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="StorageLocationName" Type="Edm.String" Nullable="false" MaxLength="16"/>
+                <Property Name="ConfigDeprecationCode" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ConfignDeprecationCodeName" Type="Edm.String" Nullable="false" MaxLength="60"/>
+                <Property Name="PlantName" Type="Edm.String" Nullable="false" MaxLength="30"/>
+            </EntityType>
+            <EntityType Name="ZC_MaterialRequisitionVHType">
+                <Key>
+                    <PropertyRef Name="MaterialRequisitionNo"/>
+                </Key>
+                <Property Name="MaterialRequisitionNo" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="CreatedDate" Type="Edm.Date"/>
+                <Property Name="CostCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CreatedByUserName" Type="Edm.String" Nullable="false" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="ZC_ApplicationReceiverVHType">
+                <Key>
+                    <PropertyRef Name="Zvalue1"/>
+                </Key>
+                <Property Name="Zvalue1" Type="Edm.String" Nullable="false" MaxLength="60"/>
+            </EntityType>
             <EntityType Name="ZC_ApplicationTypeVHType">
                 <Key>
                     <PropertyRef Name="Zvalue1"/>
                 </Key>
                 <Property Name="Zvalue1" Type="Edm.String" Nullable="false" MaxLength="60"/>
                 <Property Name="Zvalue2" Type="Edm.String" Nullable="false" MaxLength="60"/>
+            </EntityType>
+            <EntityType Name="ZC_CostCenterVHType">
+                <Key>
+                    <PropertyRef Name="CostCenter"/>
+                </Key>
+                <Property Name="CostCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CostCenterName" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="ControllingArea" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ValidityEndDate" Type="Edm.Date"/>
+                <Property Name="ValidityStartDate" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="ZC_ProductVHType">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="MaterialDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ProductType" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="StandardPrice" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="variable"/>
+                <Property Name="PriceUnitQty" Type="Edm.Decimal" Nullable="false" Precision="5"/>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="BaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
             </EntityType>
             <EntityType Name="MaterialRequisitionType">
                 <Key>
@@ -76,8 +128,6 @@
                 <Property Name="MRStatus" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="CostCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="ManufacturingOrder" Type="Edm.String" Nullable="false" MaxLength="12"/>
-                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18"/>
                 <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="Receiver" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="GoodsMovementType" Type="Edm.String" Nullable="false" MaxLength="3"/>
@@ -106,12 +156,15 @@
                 <Property Name="HeaderLastChangedTime" Type="Edm.TimeOfDay" Nullable="false"/>
                 <Property Name="HeaderLastChangedByUser" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="HeaderLastChangedByUserName" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="ManufacturingOrder" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18"/>
                 <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18"/>
                 <Property Name="StorageLocation" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="BaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="Quantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="Location" Type="Edm.String" Nullable="false" MaxLength="50"/>
                 <Property Name="Remark" Type="Edm.String" Nullable="false" MaxLength="220"/>
-                <Property Name="ItemDeleteFlag" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ItemDeleteFlag" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="OrderIsClosed" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="StandardPrice" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="variable"/>
                 <Property Name="PriceUnitQty" Type="Edm.Decimal" Nullable="false" Precision="5"/>
@@ -125,7 +178,8 @@
                 <Property Name="ItemLastChangedTime" Type="Edm.TimeOfDay" Nullable="false"/>
                 <Property Name="ItemLastChangedByUser" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="ItemLastChangedByUserName" Type="Edm.String" Nullable="false" MaxLength="20"/>
-                <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="HeaderLocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="ItemLocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="PlantName" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="CostCenterName" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
@@ -137,17 +191,70 @@
                 <Property Name="OrderStatusText" Type="Edm.String" Nullable="false" MaxLength="60"/>
                 <Property Name="PostingStatusText" Type="Edm.String" Nullable="false" MaxLength="60"/>
                 <Property Name="LineWarehouseStatusText" Type="Edm.String" Nullable="false" MaxLength="60"/>
-                <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.EntityControl"/>
+                <Property Name="DeleteFlagText" Type="Edm.String" Nullable="false" MaxLength="60"/>
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.SAP__Message)" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="I_Customer_VHType">
+                <Key>
+                    <PropertyRef Name="Customer"/>
+                </Key>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="OrganizationBPName1" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="BusinessPartnerName1" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="OrganizationBPName2" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="BusinessPartnerName2" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Country" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="CityName" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="BPAddrCityName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="StreetName" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="BPAddrStreetName" Type="Edm.String" Nullable="false" MaxLength="60"/>
+                <Property Name="PostalCode" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CustomerName" Type="Edm.String" Nullable="false" MaxLength="80"/>
+                <Property Name="BPCustomerName" Type="Edm.String" Nullable="false" MaxLength="81"/>
+                <Property Name="CustomerAccountGroup" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="AuthorizationGroup" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="IsBusinessPurposeCompleted" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="IsCompetitor" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="BusinessPartner" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="BusinessPartnerType" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="DataControllerSet" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="DataController1" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DataController2" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DataController3" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DataController4" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DataController5" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DataController6" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DataController7" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DataController8" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DataController9" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DataController10" Type="Edm.String" Nullable="false" MaxLength="30"/>
+            </EntityType>
+            <EntityType Name="ZC_ManufacturingOrderProductVHType">
+                <Key>
+                    <PropertyRef Name="ManufacturingOrder"/>
+                    <PropertyRef Name="Item"/>
+                </Key>
+                <Property Name="ManufacturingOrder" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="Item" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="MaterialDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ProductionPlant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ManufacturingOrderType" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="MfgOrderPlannedStartDate" Type="Edm.Date"/>
+                <Property Name="MfgOrderPlannedEndDate" Type="Edm.Date"/>
+                <Property Name="MRPController" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StandardPrice" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="variable"/>
+                <Property Name="PriceUnitQty" Type="Edm.Decimal" Nullable="false" Precision="5"/>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="BaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="OrderIsClosed" Type="Edm.String" Nullable="false" MaxLength="1"/>
             </EntityType>
             <ComplexType Name="ZR_UPLOAD_PARAMETER">
                 <Property Name="Event" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
                 <Property Name="Zzkey" Type="Edm.String" Nullable="false"/>
-            </ComplexType>
-            <ComplexType Name="EntityControl">
-                <Property Name="Deletable" Type="Edm.Boolean" Nullable="false"/>
-                <Property Name="Updatable" Type="Edm.Boolean" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="SAP__Message">
                 <Property Name="code" Type="Edm.String" Nullable="false"/>
@@ -166,9 +273,16 @@
                 <ReturnType Type="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.ZR_UPLOAD_PARAMETER" Nullable="false"/>
             </Action>
             <EntityContainer Name="Container">
+                <EntitySet Name="I_Customer_VH" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.I_Customer_VHType"/>
+                <EntitySet Name="I_StorageLocationStdVH" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.I_StorageLocationStdVHType"/>
                 <EntitySet Name="MaterialRequisition" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.MaterialRequisitionType"/>
+                <EntitySet Name="ZC_ApplicationReceiverVH" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.ZC_ApplicationReceiverVHType"/>
                 <EntitySet Name="ZC_ApplicationTypeVH" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.ZC_ApplicationTypeVHType"/>
+                <EntitySet Name="ZC_CostCenterVH" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.ZC_CostCenterVHType"/>
+                <EntitySet Name="ZC_ManufacturingOrderProductVH" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.ZC_ManufacturingOrderProductVHType"/>
+                <EntitySet Name="ZC_MaterialRequisitionVH" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.ZC_MaterialRequisitionVHType"/>
                 <EntitySet Name="ZC_PlantVH" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.ZC_PlantVHType"/>
+                <EntitySet Name="ZC_ProductVH" EntityType="com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.ZC_ProductVHType"/>
             </EntityContainer>
             <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/RecordUUID">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -185,6 +299,176 @@
                 <Annotation Term="SAP__common.Label" String="Plant Value Help - Down List"/>
             </Annotations>
             <Annotations Target="SAP__self.Container/ZC_PlantVH">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.I_StorageLocationStdVHType/Plant">
+                <Annotation Term="SAP__common.Text" Path="PlantName"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plantstdvh/0001;ps='srvd-zui_materialrequisition_o4-0001';va='com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.et-i_storagelocationstdvh.plant'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Label" String="Plant"/>
+                <Annotation Term="SAP__common.Heading" String="Plnt"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_StorageLocationStdVHType/StorageLocation">
+                <Annotation Term="SAP__common.Text" Path="StorageLocationName"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Storage Location"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_StorageLocationStdVHType/ConfigDeprecationCode">
+                <Annotation Term="SAP__common.Text" Path="ConfignDeprecationCodeName"/>
+                <Annotation Term="SAP__CodeList.IsConfigurationDeprecationCode"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_configndeprecationcode/0001;ps='srvd-zui_materialrequisition_o4-0001';va='com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.et-i_storagelocationstdvh.configdeprecationcode'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+                <Annotation Term="SAP__common.Label" String="Validity"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Deprecated Entries"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_StorageLocationStdVHType">
+                <Annotation Term="SAP__common.Label" String="Storage Location"/>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StorageLocation"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StorageLocationName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/I_StorageLocationStdVH">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="true"/>
+                        <PropertyValue Property="UnsupportedExpressions" EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/OR SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group SAP__capabilities.SearchExpressions/phrase"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_MaterialRequisitionVHType/MaterialRequisitionNo">
+                <Annotation Term="SAP__common.Label" String="Requisition No."/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_MaterialRequisitionVHType/Plant">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Plant"/>
+                <Annotation Term="SAP__common.Heading" String="Plnt"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_MaterialRequisitionVHType/Type">
+                <Annotation Term="SAP__common.Label" String="Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_MaterialRequisitionVHType/CreatedDate">
+                <Annotation Term="SAP__common.Label" String="Created Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_MaterialRequisitionVHType/CostCenter">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Cost Center"/>
+                <Annotation Term="SAP__common.Heading" String="Cost Ctr"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_MaterialRequisitionVHType/Customer">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Customer"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Customer Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_MaterialRequisitionVHType/CreatedByUserName">
+                <Annotation Term="SAP__common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_MaterialRequisitionVHType">
+                <Annotation Term="SAP__common.Label" String="Material Requisition Value Help"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZC_MaterialRequisitionVH">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="true"/>
+                        <PropertyValue Property="UnsupportedExpressions" EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/OR SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group SAP__capabilities.SearchExpressions/phrase"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ApplicationReceiverVHType">
+                <Annotation Term="SAP__common.Label" String="MR Application Receiver Value Help"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZC_ApplicationReceiverVH">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
                     <Record>
                         <PropertyValue Property="Searchable" Bool="false"/>
@@ -250,6 +534,203 @@
                     <Collection/>
                 </Annotation>
             </Annotations>
+            <Annotations Target="SAP__self.ZC_CostCenterVHType/CostCenter">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Cost Center"/>
+                <Annotation Term="SAP__common.Heading" String="Cost Ctr"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_CostCenterVHType/ControllingArea">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Controlling Area"/>
+                <Annotation Term="SAP__common.Heading" String="COAr"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_CostCenterVHType">
+                <Annotation Term="SAP__common.Label" String="Cost Center Value Help"/>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCenter"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZC_CostCenterVH">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="true"/>
+                        <PropertyValue Property="UnsupportedExpressions" EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/OR SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group SAP__capabilities.SearchExpressions/phrase"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ProductVHType/Material">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Product"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Product Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ProductVHType/ProductType">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Product Type"/>
+                <Annotation Term="SAP__common.Heading" String="PTyp"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ProductVHType/StandardPrice">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
+                <Annotation Term="SAP__common.Label" String="Standard price"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ProductVHType/Currency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Currency"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Currency Key"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ProductVHType/BaseUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ProductVHType">
+                <Annotation Term="SAP__common.Label" String="Product Value Help"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZC_ProductVH">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="true"/>
+                        <PropertyValue Property="UnsupportedExpressions" EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/OR SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group SAP__capabilities.SearchExpressions/phrase"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="StandardPrice"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/MaterialRequisitionNo">
                 <Annotation Term="SAP__common.Label" String="Requisition No."/>
                 <Annotation Term="SAP__core.Computed"/>
@@ -309,29 +790,6 @@
                 <Annotation Term="SAP__common.Heading" String="Cost Ctr"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Cost Center"/>
             </Annotations>
-            <Annotations Target="SAP__self.MaterialRequisitionType/ManufacturingOrder">
-                <Annotation Term="SAP__common.Label" String="Manufacturing Order"/>
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.ValueListReferences">
-                    <Collection>
-                        <String>../../../../srvd_f4/sap/zc_manufacturingorderproductvh/0001;ps='srvd-zui_materialrequisition_o4-0001';va='com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.et-zc_materialrequisition.manufacturingorder'/$metadata</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__common.Heading" String="Order"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Order Number"/>
-            </Annotations>
-            <Annotations Target="SAP__self.MaterialRequisitionType/Product">
-                <Annotation Term="SAP__common.Label" String="ManufOrder Product"/>
-                <Annotation Term="SAP__common.Text" Path="ProductDescription"/>
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.ValueListReferences">
-                    <Collection>
-                        <String>../../../../srvd_f4/sap/zc_manufacturingorderproductvh/0001;ps='srvd-zui_materialrequisition_o4-0001';va='com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.et-zc_materialrequisition.product'/$metadata</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__common.Heading" String="Material"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
-            </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/Customer">
                 <Annotation Term="SAP__common.Label" String="Customer"/>
                 <Annotation Term="SAP__common.Text" Path="CustomerName"/>
@@ -346,6 +804,11 @@
             </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/Receiver">
                 <Annotation Term="SAP__common.Label" String="Receiver"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_applicationreceivervh/0001;ps='srvd-zui_materialrequisition_o4-0001';va='com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.et-zc_materialrequisition.receiver'/$metadata</String>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/GoodsMovementType">
                 <Annotation Term="SAP__common.Label" String="Goods Movement Type"/>
@@ -378,6 +841,7 @@
             </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/CancelReason">
                 <Annotation Term="SAP__common.Label" String="Cancel Reason"/>
+                <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/PostingStatus">
                 <Annotation Term="SAP__common.Label" String="Posting Status"/>
@@ -455,6 +919,29 @@
             <Annotations Target="SAP__self.MaterialRequisitionType/HeaderLastChangedByUserName">
                 <Annotation Term="SAP__common.Label" String="Header Last Changed By User Name"/>
             </Annotations>
+            <Annotations Target="SAP__self.MaterialRequisitionType/ManufacturingOrder">
+                <Annotation Term="SAP__common.Label" String="Manufacturing Order"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_manufacturingorderproductvh/0001;ps='srvd-zui_materialrequisition_o4-0001';va='com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.et-zc_materialrequisition.manufacturingorder'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Heading" String="Order"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Order Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MaterialRequisitionType/Product">
+                <Annotation Term="SAP__common.Label" String="ManufOrder Product"/>
+                <Annotation Term="SAP__common.Text" Path="ProductDescription"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_manufacturingorderproductvh/0001;ps='srvd-zui_materialrequisition_o4-0001';va='com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.et-zc_materialrequisition.product'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Heading" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+            </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/Material">
                 <Annotation Term="SAP__common.Label" String="Material"/>
                 <Annotation Term="SAP__common.Text" Path="MaterialDescription"/>
@@ -491,13 +978,21 @@
                 <Annotation Term="SAP__common.Heading" String="Quantity"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Quantity"/>
             </Annotations>
+            <Annotations Target="SAP__self.MaterialRequisitionType/Location">
+                <Annotation Term="SAP__common.Label" String="Location"/>
+            </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/Remark">
                 <Annotation Term="SAP__common.Label" String="Remark"/>
             </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/ItemDeleteFlag">
-                <Annotation Term="SAP__common.Label" String="Item Delete Flag"/>
-                <Annotation Term="SAP__common.Heading" String="Flag"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Xflag"/>
+                <Annotation Term="SAP__common.Label" String="Delete Flag"/>
+                <Annotation Term="SAP__common.Text" Path="DeleteFlagText"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_deleteflagvh/0001;ps='srvd-zui_materialrequisition_o4-0001';va='com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.et-zc_materialrequisition.itemdeleteflag'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/OrderIsClosed">
                 <Annotation Term="SAP__common.Label" String="Order Is Closed"/>
@@ -605,9 +1100,8 @@
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
-            <Annotations Target="SAP__self.MaterialRequisitionType/__EntityControl">
+            <Annotations Target="SAP__self.MaterialRequisitionType/DeleteFlagText">
                 <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
             <Annotations Target="SAP__self.processLogic(Collection(SAP__self.MaterialRequisitionType))/Zzkey">
@@ -655,13 +1149,9 @@
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
                             <Annotation Term="SAP__HTML5.CssDefaults">
                                 <Record>
-                                    <PropertyValue Property="width" String="8rem"/>
+                                    <PropertyValue Property="width" String="10rem"/>
                                 </Record>
                             </Annotation>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="CostCenterName"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="MRStatus"/>
@@ -762,6 +1252,14 @@
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Location"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Remark"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="MaterialDocument"/>
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
                         </Record>
@@ -777,6 +1275,11 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="ItemCreatedByUser"/>
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="ItemCreatedDate"/>
@@ -785,6 +1288,11 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="ItemLastChangedByUser"/>
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="ItemLastChangedDate"/>
@@ -798,6 +1306,11 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="LastApprovedByUser"/>
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="LastApprovedDate"/>
@@ -806,6 +1319,11 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="PostingByUser"/>
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="PostingDate"/>
@@ -827,6 +1345,20 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="CancelledByUser"/>
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ItemDeleteFlag"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -857,6 +1389,7 @@
                         <PropertyPath>PostingByUser</PropertyPath>
                         <PropertyPath>PostingDate</PropertyPath>
                         <PropertyPath>GoodsMovementType</PropertyPath>
+                        <PropertyPath>ItemDeleteFlag</PropertyPath>
                     </Collection>
                 </Annotation>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
@@ -894,20 +1427,6 @@
                                 </Record>
                             </Collection>
                         </PropertyValue>
-                        <PropertyValue Property="NonFilterableProperties">
-                            <Collection>
-                                <PropertyPath>__EntityControl</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.SortRestrictions">
-                    <Record>
-                        <PropertyValue Property="NonSortableProperties">
-                            <Collection>
-                                <PropertyPath>__EntityControl</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.InsertRestrictions">
@@ -917,12 +1436,12 @@
                 </Annotation>
                 <Annotation Term="SAP__capabilities.DeleteRestrictions">
                     <Record>
-                        <PropertyValue Property="Deletable" Path="__EntityControl/Deletable"/>
+                        <PropertyValue Property="Deletable" Bool="false"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.UpdateRestrictions">
                     <Record>
-                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
+                        <PropertyValue Property="Updatable" Bool="false"/>
                         <PropertyValue Property="QueryOptions">
                             <Record>
                                 <PropertyValue Property="SelectSupported" Bool="true"/>
@@ -932,83 +1451,346 @@
                 </Annotation>
                 <Annotation Term="SAP__core.OptimisticConcurrency">
                     <Collection>
-                        <PropertyPath>LocalLastChangedAt</PropertyPath>
+                        <PropertyPath>ItemLocalLastChangedAt</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
-            <Annotations Target="SAP__self.Container">
-                <Annotation Term="SAP__CodeList.CurrencyCodes">
+            <Annotations Target="SAP__self.I_Customer_VHType/Customer">
+                <Annotation Term="SAP__common.Text" Path="BPCustomerName"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Customer"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Customer Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/OrganizationBPName1">
+                <Annotation Term="SAP__common.Label" String="Customer Name 1"/>
+                <Annotation Term="SAP__common.Heading" String="Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/BusinessPartnerName1">
+                <Annotation Term="SAP__common.Label" String="Business Partner Name 1"/>
+                <Annotation Term="SAP__common.Heading" String="Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name 1"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/OrganizationBPName2">
+                <Annotation Term="SAP__common.Label" String="Customer Name 2"/>
+                <Annotation Term="SAP__common.Heading" String="Name 2"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name 2"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/BusinessPartnerName2">
+                <Annotation Term="SAP__common.Label" String="Business Partner Name 2"/>
+                <Annotation Term="SAP__common.Heading" String="Name 2"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name 2"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/Country">
+                <Annotation Term="SAP__common.Label" String="Country/Region"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Country/Region Key"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Country/Region Key"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/CityName">
+                <Annotation Term="SAP__common.Label" String="City"/>
+                <Annotation Term="SAP__common.Heading" String="City"/>
+                <Annotation Term="SAP__common.QuickInfo" String="City"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/BPAddrCityName">
+                <Annotation Term="SAP__common.Label" String="Business Partner Address City"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Heading" String="City"/>
+                <Annotation Term="SAP__common.QuickInfo" String="City"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/StreetName">
+                <Annotation Term="SAP__common.Label" String="Street"/>
+                <Annotation Term="SAP__common.Heading" String="Street"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Street and House Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/BPAddrStreetName">
+                <Annotation Term="SAP__common.Label" String="Business Partner Address Street"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Heading" String="Street"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Street"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/PostalCode">
+                <Annotation Term="SAP__common.Label" String="Postal Code"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="PostalCode"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Postal Code"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/CustomerName">
+                <Annotation Term="SAP__common.Label" String="Customer Name"/>
+                <Annotation Term="SAP__common.Heading" String="Customer"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name of Customer"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/BPCustomerName">
+                <Annotation Term="SAP__common.Label" String="Business Partner Customer Name"/>
+                <Annotation Term="SAP__common.Heading" String="Customer"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Customer Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/CustomerAccountGroup">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Account Group"/>
+                <Annotation Term="SAP__common.Heading" String="Group"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Customer Account Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/AuthorizationGroup">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Authorization"/>
+                <Annotation Term="SAP__common.Heading" String="AuGr"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Authorization Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/IsBusinessPurposeCompleted">
+                <Annotation Term="SAP__common.Label" String="Purpose Complete Flag"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Heading" String="Business Purpose Completed Flag"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Business Purpose Completed Flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/BusinessPartner">
+                <Annotation Term="SAP__common.Label" String="Business Partner"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Business Partner"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Business Partner Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/BusinessPartnerType">
+                <Annotation Term="SAP__common.Label" String="Business Partner Type"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Heading" String="Type"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Business Partner Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataControllerSet">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Ctrlr. Set"/>
+                <Annotation Term="SAP__common.Heading" String="Data Controller Set Flag"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller Set Flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController1">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController2">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController3">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController4">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController5">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController6">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController7">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController8">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController9">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/DataController10">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Data Controller"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BP: Data Controller (Internal Use Only)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType">
+                <Annotation Term="SAP__common.Label" String="Customer"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/I_Customer_VH">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
                     <Record>
-                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
-                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                        <PropertyValue Property="Searchable" Bool="true"/>
+                        <PropertyValue Property="UnsupportedExpressions" EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/OR SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group SAP__capabilities.SearchExpressions/phrase"/>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
                     <Record>
-                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
-                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                        <PropertyValue Property="Insertable" Bool="false"/>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__aggregation.ApplySupported">
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
                     <Record>
-                        <PropertyValue Property="Transformations">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/ManufacturingOrder">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Manufacturing Order"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Manufacturing Order ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/Item">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Reservation Item"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/Product">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Product"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Product Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/Material">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/ProductionPlant">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Production Plant"/>
+                <Annotation Term="SAP__common.Heading" String="PrPl."/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/ManufacturingOrderType">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Order Type"/>
+                <Annotation Term="SAP__common.Heading" String="Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/MRPController">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="MRP Controller"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/StandardPrice">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Standard price"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/Currency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Currency"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Currency Key"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/BaseUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType">
+                <Annotation Term="SAP__common.Label" String="Manufacturing Order Product Value Help"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZC_ManufacturingOrderProductVH">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="true"/>
+                        <PropertyValue Property="UnsupportedExpressions" EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/OR SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group SAP__capabilities.SearchExpressions/phrase"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
                             <Collection>
-                                <String>aggregate</String>
-                                <String>groupby</String>
-                                <String>filter</String>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="StandardPrice"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
                             </Collection>
                         </PropertyValue>
-                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
-                <Annotation Term="SAP__capabilities.FilterFunctions">
-                    <Collection>
-                        <String>eq</String>
-                        <String>ne</String>
-                        <String>gt</String>
-                        <String>ge</String>
-                        <String>lt</String>
-                        <String>le</String>
-                        <String>and</String>
-                        <String>or</String>
-                        <String>contains</String>
-                        <String>startswith</String>
-                        <String>endswith</String>
-                        <String>any</String>
-                        <String>all</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.SupportedFormats">
-                    <Collection>
-                        <String>application/json</String>
-                        <String>application/pdf</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__PDF.Features">
-                    <Record>
-                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
-                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
-                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
-                        <PropertyValue Property="Border" Bool="true"/>
-                        <PropertyValue Property="CoverPage" Bool="true"/>
-                        <PropertyValue Property="FitToPage" Bool="true"/>
-                        <PropertyValue Property="FontName" Bool="true"/>
-                        <PropertyValue Property="FontSize" Bool="true"/>
-                        <PropertyValue Property="Margin" Bool="true"/>
-                        <PropertyValue Property="Padding" Bool="true"/>
-                        <PropertyValue Property="Signature" Bool="true"/>
-                        <PropertyValue Property="HeaderFooter" Bool="true"/>
-                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
-                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
-                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
-                        <PropertyValue Property="Treeview" Bool="true"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
-                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_Customer_VHType/IsCompetitor">
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Competitors"/>
+                <Annotation Term="SAP__common.Heading" String="C"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Indicator: Competitor"/>
             </Annotations>
             <Annotations Target="SAP__self.ZC_ApplicationTypeVHType/Zvalue2">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/PriceUnitQty">
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Price unit"/>
+                <Annotation Term="SAP__common.Heading" String="per"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/OrderIsClosed">
                 <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
             <Annotations Target="SAP__self.MaterialRequisitionType/LastApprovedByUserName">
@@ -1026,7 +1808,12 @@
             <Annotations Target="SAP__self.MaterialRequisitionType/ItemLastChangedByUserName">
                 <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
-            <Annotations Target="SAP__self.MaterialRequisitionType/LocalLastChangedAt">
+            <Annotations Target="SAP__self.MaterialRequisitionType/HeaderLocalLastChangedAt">
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Changed On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MaterialRequisitionType/ItemLocalLastChangedAt">
                 <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Changed On"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
@@ -1035,29 +1822,54 @@
                 <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Plant Name"/>
             </Annotations>
-            <Annotations Target="SAP__self.MaterialRequisitionType/__EntityControl/Deletable">
-                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
-                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            <Annotations Target="SAP__self.I_StorageLocationStdVHType/StorageLocationName">
+                <Annotation Term="SAP__common.Label" String="Storage Loc. Name"/>
+                <Annotation Term="SAP__common.Heading" String="Storage Location Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Storage Location Name"/>
             </Annotations>
-            <Annotations Target="SAP__self.MaterialRequisitionType/__EntityControl/Updatable">
-                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
-                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            <Annotations Target="SAP__self.I_StorageLocationStdVHType/ConfignDeprecationCodeName">
+                <Annotation Term="SAP__common.Label" String="Validity Text"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Value Help: Flag Obsolete Entries"/>
+            </Annotations>
+            <Annotations Target="SAP__self.I_StorageLocationStdVHType/PlantName">
+                <Annotation Term="SAP__common.Label" String="Plant Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_CostCenterVHType/CostCenterName">
+                <Annotation Term="SAP__common.Label" String="Cost Center Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_CostCenterVHType/ValidityEndDate">
+                <Annotation Term="SAP__common.Label" String="Valid To"/>
+                <Annotation Term="SAP__common.Heading" String="to"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Valid To Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_CostCenterVHType/ValidityStartDate">
+                <Annotation Term="SAP__common.Label" String="Valid From"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Valid-From Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ProductVHType/MaterialDescription">
+                <Annotation Term="SAP__common.Label" String="Product Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ProductVHType/PriceUnitQty">
+                <Annotation Term="SAP__common.Label" String="Price unit"/>
+                <Annotation Term="SAP__common.Heading" String="per"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/ProductDescription">
+                <Annotation Term="SAP__common.Label" String="Product Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/MaterialDescription">
+                <Annotation Term="SAP__common.Label" String="Product Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/MfgOrderPlannedStartDate">
+                <Annotation Term="SAP__common.Label" String="Planned Start Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Manufacturing Order Planned Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ManufacturingOrderProductVHType/MfgOrderPlannedEndDate">
+                <Annotation Term="SAP__common.Label" String="Planned End Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Manufacturing Order Planned End Date"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/Zzkey">
                 <Annotation Term="SAP__common.Label" String="Zzkey"/>
                 <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
-            </Annotations>
-            <Annotations Target="SAP__self.EntityControl/Deletable">
-                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
-                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
-            </Annotations>
-            <Annotations Target="SAP__self.EntityControl/Updatable">
-                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
-                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

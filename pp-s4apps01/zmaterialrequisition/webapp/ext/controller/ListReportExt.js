@@ -48,7 +48,7 @@ sap.ui.define([
                     press: function () {
                         _myMessageDialog.close();
                     },
-                    text: "{i18n>closeBtn}"
+                    text: "{i18n>CloseBtn}"
                 }),
                 customHeader: new sap.m.Bar({
                     contentLeft: [oBackButton],
@@ -83,9 +83,12 @@ sap.ui.define([
             });
             this.getModel("local").setProperty("/itemSet", []);
             MessageBox.information(this.getModel("i18n").getResourceBundle().getText("selectOperation"), {
-                actions: ["{i18n>create}", "{i18n>update}"],
+                actions: ["{i18n>Create}", "{i18n>Update}", MessageBox.Action.CLOSE],
                 onClose: function (sAction) {
-                    if (sAction === "{i18n>create}") {
+                    if (sAction === MessageBox.Action.CLOSE) {
+                        return;
+                    }
+                    if (sAction === "{i18n>Create}") {
                         that.getModel("local").setProperty("/mode", "create");
                     } else {
                         that.getModel("local").setProperty("/mode", "update");
@@ -100,7 +103,7 @@ sap.ui.define([
                         //ダイアログからモデルを使用できるようにする
                         that.routing.getView().addDependent(that._oOperationDialog);
                         that._oOperationDialog.addButton(new sap.m.Button({
-                            text: "{i18n>closeBtn}",
+                            text: "{i18n>CloseBtn}",
                             press: function () {
                                 that.getModel("local").setProperty("/headSet", {});
                                 that.getModel("local").setProperty("/itemSet", []);
@@ -136,6 +139,10 @@ sap.ui.define([
             var oTable = oEvent.getSource().getParent().getParent();
             var header = this.getModel("local").getProperty("/headSet");
             var items = this.getModel("local").getProperty("/itemSet");
+            items.forEach(item => {
+                var iAmount = parseFloat(item.StandardPrice) * parseFloat(item.Quantity);
+                item.DeleteFlag = iAmount >= 100000 ? "W" : "";
+            });
             var oRequestData = {
                 header: header,
                 items: items,
@@ -144,7 +151,7 @@ sap.ui.define([
                 datetime: _myFunction._getCurrentDateTime()
             }
             if (!_myFunction._requiredFields(oTable)) {
-                MessageBox.warning("The quantity you have reported exceeds the quantity planned.", {
+                MessageBox.confirm(this.getModel("i18n").getResourceBundle().getText("confirmMessage", [this.getModel("i18n").getResourceBundle().getText("SaveBtn")]), {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                     emphasizedAction: MessageBox.Action.OK,
                     onClose: function (sAction) {
@@ -169,11 +176,13 @@ sap.ui.define([
                 BaseUnit: "",
                 StorageLocation: "",
                 StorageLocationName: "",
+                Location: "",
                 Remark: "",
                 StandardPrice: "",
                 TotalAmount: 0,
                 Currency: "",
-                OrderIsClosed: ""
+                OrderIsClosed: "",
+                DeleteFlag: ""
             };
             items.push(item);
             items.forEach((line, index) => {
@@ -284,15 +293,15 @@ sap.ui.define([
                             this.getModel("local").setProperty(sItemPath + key, context[key]);
                         }
                     }
-                    if (sBindFieldName === "Material") {
-                        this.getModel("local").setProperty(sItemPath + "MaterialDescription", context["ProductDescription"]);
-                    }
                     if (sBindFieldName === "ManufacturingOrder" || sBindFieldName === "Material") {
                         // Calculate amount
                         var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
                         if (sValue && context["StandardPrice"]) {
                             var iAmount = parseFloat(sValue) * parseFloat(context["StandardPrice"]);
                             this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
+                            if (iAmount >= 100000) {
+                                this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                            }
                         }
                     }
                 }.bind(this));
@@ -320,20 +329,121 @@ sap.ui.define([
             }
         },
 
+        onDelete: function () {
+            var that = this;
+            _myFunction._processRequest("DELETE", that);
+        },
+
+        onResent: function () {
+            var that = this;
+            _myFunction._processRequest("RESENT", that);
+        },
+
+        onPrint: function () {
+            var that = this;
+            _myFunction._processRequest("PRINT", that);
+        },
+
+        onApproval: function () {
+            var that = this;
+            _myFunction._processRequest("APPROVAL", that);
+        },
+
+        onCancelApproval: function () {
+            var that = this;
+            _myFunction._processRequest("CANCELAPPROVAL", that);
+        },
+
+        onPosting: function () {
+            var that = this;
+            _myFunction._processRequest("POSTING", that);
+        },
+
+        onCancelPosting: function () {
+            var that = this;
+            _myFunction._processRequest("CANCELPOSTING", that);
+        },
+
+        _processRequest: function (bEvent, that) {
+            var sTitle, items = [];
+            var aContexts = that._controller.extensionAPI.getSelectedContexts();
+            aContexts.forEach(element => {
+                // "/MaterialRequisition(MaterialRequisitionNo='TEST20240821000',ItemNo='20')"
+                let aSplitArray = element.getPath().split("'");
+                items.push({
+                    MaterialRequisitionNo: aSplitArray[1],
+                    ItemNo: aSplitArray[3]
+                });
+            });
+            var oRequestData = {
+                items: items,
+                user: "P00001",
+                username: "Xinlei Xu",
+                datetime: _myFunction._getCurrentDateTime()
+            }
+            switch (bEvent) {
+                case "DELETE":
+                    sTitle = that.getModel("i18n").getResourceBundle().getText("Delete");
+                    break;
+                case "RESENT":
+                    sTitle = that.getModel("i18n").getResourceBundle().getText("Resent");
+                    break;
+                case "PRINT":
+                    sTitle = that.getModel("i18n").getResourceBundle().getText("Print");
+                    break;
+                case "APPROVAL":
+                    sTitle = that.getModel("i18n").getResourceBundle().getText("Approval");
+                    break;
+                case "CANCELAPPROVAL":
+                    sTitle = that.getModel("i18n").getResourceBundle().getText("CancelApproval");
+                    break;
+                case "POSTING":
+                    sTitle = that.getModel("i18n").getResourceBundle().getText("Posting");
+                    break;
+                case "CANCELPOSTING":
+                    sTitle = that.getModel("i18n").getResourceBundle().getText("CancelPosting");
+                    break;
+                default:
+                    break;
+            }
+            MessageBox.confirm(that.getModel("i18n").getResourceBundle().getText("confirmMessage", [sTitle]), {
+                actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                emphasizedAction: MessageBox.Action.OK,
+                onClose: function (sAction) {
+                    if (sAction === MessageBox.Action.OK) {
+                        _myFunction._callOData(bEvent, oRequestData, that);
+                    }
+                },
+                dependentOn: that.routing.getView()
+            });
+        },
+
         _callOData: function (bEvent, oRequestData, that) {
             var aPromise = [];
-            aPromise.push(_myFunction._callODataAction(bEvent, oRequestData, that));
+            if (bEvent === "POSTING" || bEvent === "POSTING") {
+                var items = _myFunction._removeDuplicates(oRequestData.items, ["MaterialRequisitionNo"]);
+                items.forEach(item => {
+                    aPromise.push(_myFunction._callODataAction(bEvent, {
+                        header: { MaterialRequisitionNo: item.MaterialRequisitionNo },
+                        user: oRequestData.user,
+                        username: oRequestData.username,
+                        datetime: oRequestData.datetime
+                    }, that));
+                });
+            } else {
+                aPromise.push(_myFunction._callODataAction(bEvent, oRequestData, that));
+            }
             try {
                 _myBusyDialog.open();
                 Promise.all(aPromise).then((aContext) => {
                     _myBusyDialog.close();
                     var aMessageItems = [];
+                    var aPrintRecords = [];
                     for (const activeContext of aContext) {
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
                         var result = JSON.parse(object.Zzkey);
-                        if (bEvent === "QUERY") {
-                            debugger;
+                        if (bEvent === "QUERY" && result.MESSAGEITEMS.length === 0) {
                             that.getModel("local").setProperty("/headSet", {
                                 Plant: result.HEADER.PLANT,
                                 Type: result.HEADER.TYPE,
@@ -350,6 +460,7 @@ sap.ui.define([
                             });
                             var items = [];
                             result.ITEMS.forEach(element => {
+                                var iAmount = parseFloat(element.STANDARD_PRICE) * parseFloat(element.QUANTITY);
                                 items.push({
                                     ItemNo: element.ITEM_NO,
                                     ManufacturingOrder: element.MANUFACTURING_ORDER,
@@ -360,42 +471,61 @@ sap.ui.define([
                                     BaseUnit: element.BASE_UNIT,
                                     StorageLocation: element.STORAGE_LOCATION,
                                     StorageLocationName: element.STORAGE_LOCATION_NAME,
+                                    Location: element.LOCATION,
                                     Remark: element.REMARK,
                                     StandardPrice: element.STANDARD_PRICE,
-                                    TotalAmount: parseFloat(element.STANDARD_PRICE) * parseFloat(element.QUANTITY),
+                                    TotalAmount: iAmount,
                                     Currency: element.CURRENCY,
                                     OrderIsClosed: element.ORDER_IS_CLOSED,
                                     LocalLastChangedAtS: element.LOCAL_LAST_CHANGED_AT_S,
+                                    DeleteFlag: iAmount >= 100000 ? "W" : ""
                                 });
                             });
                             that.getModel("local").setProperty("/itemSet", items);
+                            sap.ui.getCore().byId("idMaterialRequisitionNo").setEditable(false);
+                            sap.ui.getCore().byId("idSaveBtn").setVisible(true);
+                        } else if (bEvent === "QUERY") {
+                            // has error message
+                            sap.ui.getCore().byId("idSaveBtn").setVisible(false);
                         } else if (bEvent === "SAVE") {
                             that.getModel("local").setProperty("/headSet/MaterialRequisitionNo", result.HEADER.MATERIAL_REQUISITION_NO);
-                            result.MESSAGEITEMS.forEach(element => {
-                                aMessageItems.push({
-                                    type: element.TYPE,
-                                    title: element.TITLE,
-                                    description: element.DESCRIPTION,
-                                    subtitle: element.SUBTITLE
-                                });
+                        } else if (bEvent === "PRINT") {
+                            result.ITEMS.forEach(element => {
+                                aPrintRecords.push({ RecordUUID: element.RECORDUUID });
                             });
+                            aPrintRecords = _myFunction._removeDuplicates(aPrintRecords, ["RecordUUID"]);
                         }
+                        result.MESSAGEITEMS.forEach(element => {
+                            aMessageItems.push({
+                                type: element.TYPE,
+                                title: element.TITLE,
+                                description: element.DESCRIPTION,
+                                subtitle: element.SUBTITLE
+                            });
+                        });
                     }
-                    if (bEvent === "SAVE") {
-                        that.getModel("local").setProperty("/MessageItems", aMessageItems);
-                    }
+                    that.getModel("local").setProperty("/MessageItems", aMessageItems);
                     _myMessageView.setModel(that.getModel("local"));
+                    // bEvent = "PRINT"
+                    aPrintRecords.forEach(element => {
+                        // 'PrintRecord(RecordUUID=2d218e58-501b-1eef-99b5-8604583014eb,IsActiveEntity=true)'
+                        var sPath = "PrintRecord(RecordUUID=" + element.RecordUUID + ",IsActiveEntity=true)";
+                        var sURL = that.getModel("Print").getServiceUrl() + sPath + '/PDFContent';
+                        sap.m.URLHelper.redirect(sURL, true);
+                    });
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
                     _myBusyDialog.close();
-                    if (bEvent === "SAVE") {
-                        var aMessageItems = that.getModel("local").getProperty("/MessageItems");
-                        if (aMessageItems && aMessageItems.length > 0) {
-                            _myMessageView.navigateBack();
-                            that.routing.getView().addDependent(_myMessageDialog);
-                            _myMessageDialog.open();
-                        }
+                    var aMessageItems = that.getModel("local").getProperty("/MessageItems");
+                    if (aMessageItems.length > 0) {
+                        _myMessageView.navigateBack();
+                        that.routing.getView().addDependent(_myMessageDialog);
+                        _myMessageDialog.open();
+                    }
+                    if (bEvent !== "SAVE" && bEvent !== "QUERY") {
+                        // refresh
+                        that.getModel().refresh();
                     }
                 });
             } catch (error) {
@@ -441,6 +571,7 @@ sap.ui.define([
             aIdListOfRequiredFields.forEach(sId => {
                 var sValue = "";
                 var oControl = sap.ui.getCore().byId(sId);
+                var sValueState = oControl.getValueState();
                 if (oControl.getRequired()) {
                     switch (oControl.getMetadata().getName()) {
                         case "sap.m.Input":
@@ -455,7 +586,9 @@ sap.ui.define([
                         default:
                             break;
                     }
-                    if (sValue) {
+                    if (sValue && sValueState === "Error") {
+                        bFlag = true;
+                    } else if (sValue) {
                         // oControl.setValueState("None");
                     } else {
                         bFlag = true;
