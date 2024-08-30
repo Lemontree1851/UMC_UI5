@@ -89,6 +89,8 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, Spreadsheet) {
                 aGroupItems = [];
                 for (var n = 0; n < aExcelSet.length; n++) {
                     if (aExcelSet[n].Material === sMaterial && aExcelSet[n].Plant === sPlant) {
+                        aExcelSet[n].ValidityStartDate = formatter.odataDate(aExcelSet[n].ValidityStartDate);
+                        aExcelSet[n].ValidityEndDate = formatter.odataDate(aExcelSet[n].ValidityEndDate);
                         aGroupItems.push(aExcelSet[n]);
                     }
                 }
