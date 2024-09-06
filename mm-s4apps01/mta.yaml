@@ -55,6 +55,10 @@ modules:
       - mmpurinforecordchange.zip
       name: mmpurinforecordchange
       target-path: resources/
+    - artifacts:
+      - mmpochange.zip
+      name: mmpochange
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -76,6 +80,15 @@ modules:
 - name: mmpurinforecordchange
   type: html5
   path: purinforecordchange
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpochange
+  type: html5
+  path: pochange
   build-parameters:
     build-result: dist
     builder: custom
