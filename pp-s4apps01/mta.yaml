@@ -67,6 +67,10 @@ modules:
       - ppzbom.zip
       name: ppzbom
       target-path: resources/
+    - artifacts:
+      - ppzemailmasterupload.zip
+      name: ppzemailmasterupload
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -115,6 +119,15 @@ modules:
 - name: ppzbom
   type: html5
   path: zbom
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzemailmasterupload
+  type: html5
+  path: zemailmasterupload
   build-parameters:
     build-result: dist
     builder: custom
