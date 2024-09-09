@@ -63,6 +63,10 @@ modules:
       - ppzmaterialrequisition.zip
       name: ppzmaterialrequisition
       target-path: resources/
+    - artifacts:
+      - ppzbom.zip
+      name: ppzbom
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -102,6 +106,15 @@ modules:
 - name: ppzmaterialrequisition
   type: html5
   path: zmaterialrequisition
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzbom
+  type: html5
+  path: zbom
   build-parameters:
     build-result: dist
     builder: custom

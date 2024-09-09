@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="com.sap.gateway.srvd.zui_bom_o4.v0001" Alias="SAP__self">
+            <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
+            <EntityType Name="BOMType">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="HeaderMaterial"/>
+                    <PropertyRef Name="ExplodeBOMLevelValue"/>
+                    <PropertyRef Name="BillOfMaterialItemNumber"/>
+                </Key>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="HeaderMaterial" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="ExplodeBOMLevelValue" Type="Edm.Decimal" Nullable="false" Precision="2"/>
+                <Property Name="BillOfMaterialItemNumber" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="BillOfMaterialItemCategory" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="BillOfMaterialComponent" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="ComponentDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="BOMExplosionApplication" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="BillOfMaterialVariant" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="HeaderValidityStartDate" Type="Edm.Date"/>
+                <Property Name="RequiredQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="BOMExplosionIsAlternatePrio" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="BOMExplosionIsMultilevel" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ShowSubParts" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="LocationHorizontal" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="LocationVertical" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="AlternativeItemGroup" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="AlternativeItemPriority" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="AlternativeItemStrategy" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="UsageProbabilityPercent" Type="Edm.Decimal" Nullable="false" Precision="3"/>
+                <Property Name="DiscontinuationFollowUpGroup" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="BOMItemIsDiscontinued" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="DiscontinuationGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="FollowUpGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProductManufacturerNumber" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ManufacturerNumber" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="BillOfMaterialItemUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ComponentQuantityInCompUoM" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="BOMHeaderText" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="BOMItemSorter" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="IsMaterialProvision" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ChangeNumber" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="BOMItemText2" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="BOMItemDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="IsBulkMaterial" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="BOMItemIsCostingRelevant" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="RevisionLevel" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="IsPurConditionRecord" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="NetWeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="WeightUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="MaterialGroup" Type="Edm.String" Nullable="false" MaxLength="9"/>
+                <Property Name="ProductGroupName" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="BillOfMaterialItemBaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ComponentQuantityInBaseUoM" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="CrossPlantStatus" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="MRPResponsible" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="BOMItemIsSparePart" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ProdOrderIssueLocation" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="BillOfMaterialSubItemQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="BOM" EntityType="com.sap.gateway.srvd.zui_bom_o4.v0001.BOMType"/>
+            </EntityContainer>
+            <Annotations Target="SAP__self.BOMType/Material">
+                <Annotation Term="SAP__common.Label" String="品目コード"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/Plant">
+                <Annotation Term="SAP__common.Label" String="プラント"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Plnt"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Plant"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/HeaderMaterial">
+                <Annotation Term="SAP__common.Label" String="品目2"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ExplodeBOMLevelValue">
+                <Annotation Term="SAP__common.Label" String="レベル"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BillOfMaterialItemNumber">
+                <Annotation Term="SAP__common.Label" String="BOM明細番号"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BillOfMaterialItemCategory">
+                <Annotation Term="SAP__common.Label" String="明細カテゴリ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BillOfMaterialComponent">
+                <Annotation Term="SAP__common.Label" String="構成品目"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ComponentDescription">
+                <Annotation Term="SAP__common.Label" String="構成品目テキスト"/>
+                <Annotation Term="SAP__common.Heading" String="Material Description"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMExplosionApplication">
+                <Annotation Term="SAP__common.Label" String="BOMアプリケーション"/>
+                <Annotation Term="SAP__common.FilterDefaultValue" String="PP01"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BillOfMaterialVariant">
+                <Annotation Term="SAP__common.Label" String="代替BOM"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/HeaderValidityStartDate">
+                <Annotation Term="SAP__common.Label" String="有効開始日"/>
+                <Annotation Term="SAP__common.Heading" String="Valid From"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Valid-From Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/RequiredQuantity">
+                <Annotation Term="SAP__common.Label" String="所要量"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMExplosionIsAlternatePrio">
+                <Annotation Term="SAP__common.Label" String="代替優先度"/>
+                <Annotation Term="SAP__common.FilterDefaultValue" Bool="true"/>
+                <Annotation Term="SAP__common.Heading" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMExplosionIsMultilevel">
+                <Annotation Term="SAP__common.Label" String="多層展開"/>
+                <Annotation Term="SAP__common.FilterDefaultValue" Bool="true"/>
+                <Annotation Term="SAP__common.Heading" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ShowSubParts">
+                <Annotation Term="SAP__common.Label" String="サブパーツ表示"/>
+                <Annotation Term="SAP__common.FilterDefaultValue" Bool="true"/>
+                <Annotation Term="SAP__common.Heading" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/LocationHorizontal">
+                <Annotation Term="SAP__common.Label" String="位置（水平）"/>
+                <Annotation Term="SAP__common.FilterDefaultValue" Bool="false"/>
+                <Annotation Term="SAP__common.Heading" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/LocationVertical">
+                <Annotation Term="SAP__common.Label" String="位置（垂直）"/>
+                <Annotation Term="SAP__common.FilterDefaultValue" Bool="false"/>
+                <Annotation Term="SAP__common.Heading" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/AlternativeItemGroup">
+                <Annotation Term="SAP__common.Label" String="代替明細グループ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/AlternativeItemPriority">
+                <Annotation Term="SAP__common.Label" String="優先度"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/AlternativeItemStrategy">
+                <Annotation Term="SAP__common.Label" String="方針"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/UsageProbabilityPercent">
+                <Annotation Term="SAP__common.Label" String="使用頻度"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/DiscontinuationFollowUpGroup">
+                <Annotation Term="SAP__common.Label" String="打切-フォローアップ区分"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMItemIsDiscontinued">
+                <Annotation Term="SAP__common.Label" String="打切区分"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/DiscontinuationGroup">
+                <Annotation Term="SAP__common.Label" String="打切グループ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/FollowUpGroup">
+                <Annotation Term="SAP__common.Label" String="フォローアップ Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ProductManufacturerNumber">
+                <Annotation Term="SAP__common.Label" String="MPN"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ManufacturerNumber">
+                <Annotation Term="SAP__common.Label" String="メーカー"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BillOfMaterialItemUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="BOM構成品目単位"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ComponentQuantityInCompUoM">
+                <Annotation Term="SAP__common.Label" String="BOM構成品目単位数量"/>
+                <Annotation Term="SAP__measures.Unit" Path="BillOfMaterialItemUnit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMHeaderText">
+                <Annotation Term="SAP__common.Label" String="BOMテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMItemSorter">
+                <Annotation Term="SAP__common.Label" String="取付位置"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/IsMaterialProvision">
+                <Annotation Term="SAP__common.Label" String="支給区分"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ChangeNumber">
+                <Annotation Term="SAP__common.Label" String="ECO NO"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMItemText2">
+                <Annotation Term="SAP__common.Label" String="備考"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMItemDescription">
+                <Annotation Term="SAP__common.Label" String="得意先品目"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/IsBulkMaterial">
+                <Annotation Term="SAP__common.Label" String="バルク区分"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMItemIsCostingRelevant">
+                <Annotation Term="SAP__common.Label" String="原価計算関連"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/RevisionLevel">
+                <Annotation Term="SAP__common.Label" String="改訂レベル"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/IsPurConditionRecord">
+                <Annotation Term="SAP__common.Label" String="オファー"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/NetWeight">
+                <Annotation Term="SAP__common.Label" String="正味重量"/>
+                <Annotation Term="SAP__measures.Unit" Path="WeightUnit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/WeightUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="重量単位"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/MaterialGroup">
+                <Annotation Term="SAP__common.Label" String="品目グループ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ProductGroupName">
+                <Annotation Term="SAP__common.Label" String="グループテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BillOfMaterialItemBaseUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="BOM構成品目単位"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ComponentQuantityInBaseUoM">
+                <Annotation Term="SAP__common.Label" String="BOM構成品目単位数量"/>
+                <Annotation Term="SAP__measures.Unit" Path="BillOfMaterialItemBaseUnit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/CrossPlantStatus">
+                <Annotation Term="SAP__common.Label" String="発注可否"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/MRPResponsible">
+                <Annotation Term="SAP__common.Label" String="MRP管理者"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMItemIsSparePart">
+                <Annotation Term="SAP__common.Label" String="予備部品区分"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/ProdOrderIssueLocation">
+                <Annotation Term="SAP__common.Label" String="生産場所"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BOMSubItemInstallationPoint">
+                <Annotation Term="SAP__common.Label" String="設置ポイント"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType/BillOfMaterialSubItemQuantity">
+                <Annotation Term="SAP__common.Label" String="副明細数量"/>
+                <Annotation Term="SAP__measures.Unit" Path="BillOfMaterialItemUnit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.BOMType">
+                <Annotation Term="SAP__common.Label" String="BOMのレポート"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="BOMのレポート"/>
+                        <PropertyValue Property="TypeNamePlural" String="BOMのレポート"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="Material"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="品目"/>
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="プラント"/>
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="品目2"/>
+                            <PropertyValue Property="Value" Path="HeaderMaterial"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="レベル"/>
+                            <PropertyValue Property="Value" Path="ExplodeBOMLevelValue"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="BOM明細番号"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialItemNumber"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="明細カテゴリ"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialItemCategory"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="構成品目"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialComponent"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="構成品目テキスト"/>
+                            <PropertyValue Property="Value" Path="ComponentDescription"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="代替BOM"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialVariant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="代替明細グループ"/>
+                            <PropertyValue Property="Value" Path="AlternativeItemGroup"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="優先度"/>
+                            <PropertyValue Property="Value" Path="AlternativeItemPriority"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="方針"/>
+                            <PropertyValue Property="Value" Path="AlternativeItemStrategy"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="使用頻度"/>
+                            <PropertyValue Property="Value" Path="UsageProbabilityPercent"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="打切-フォローアップ区分"/>
+                            <PropertyValue Property="Value" Path="DiscontinuationFollowUpGroup"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="打切区分"/>
+                            <PropertyValue Property="Value" Path="BOMItemIsDiscontinued"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="打切グループ"/>
+                            <PropertyValue Property="Value" Path="DiscontinuationGroup"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="フォローアップ Group"/>
+                            <PropertyValue Property="Value" Path="FollowUpGroup"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="MPN"/>
+                            <PropertyValue Property="Value" Path="ProductManufacturerNumber"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="メーカー"/>
+                            <PropertyValue Property="Value" Path="ManufacturerNumber"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="BOM構成品目単位"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialItemUnit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="BOM構成品目単位数量"/>
+                            <PropertyValue Property="Value" Path="ComponentQuantityInCompUoM"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="BOMテキスト"/>
+                            <PropertyValue Property="Value" Path="BOMHeaderText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="取付位置"/>
+                            <PropertyValue Property="Value" Path="BOMItemSorter"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="支給区分"/>
+                            <PropertyValue Property="Value" Path="IsMaterialProvision"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="ECO NO"/>
+                            <PropertyValue Property="Value" Path="ChangeNumber"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="備考"/>
+                            <PropertyValue Property="Value" Path="BOMItemText2"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="得意先品目"/>
+                            <PropertyValue Property="Value" Path="BOMItemDescription"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="バルク区分"/>
+                            <PropertyValue Property="Value" Path="IsBulkMaterial"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="原価計算関連"/>
+                            <PropertyValue Property="Value" Path="BOMItemIsCostingRelevant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="改訂レベル"/>
+                            <PropertyValue Property="Value" Path="RevisionLevel"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="オファー"/>
+                            <PropertyValue Property="Value" Path="IsPurConditionRecord"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="正味重量"/>
+                            <PropertyValue Property="Value" Path="NetWeight"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="重量単位"/>
+                            <PropertyValue Property="Value" Path="WeightUnit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="品目グループ"/>
+                            <PropertyValue Property="Value" Path="MaterialGroup"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="グループテキスト"/>
+                            <PropertyValue Property="Value" Path="ProductGroupName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="BOM構成品目基本単位"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialItemBaseUnit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="BOM構成品目基本単位数量"/>
+                            <PropertyValue Property="Value" Path="ComponentQuantityInBaseUoM"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="発注可否"/>
+                            <PropertyValue Property="Value" Path="CrossPlantStatus"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="MRP管理者"/>
+                            <PropertyValue Property="Value" Path="MRPResponsible"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="予備部品区分"/>
+                            <PropertyValue Property="Value" Path="BOMItemIsSparePart"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="生産場所"/>
+                            <PropertyValue Property="Value" Path="ProdOrderIssueLocation"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="設置ポイント"/>
+                            <PropertyValue Property="Value" Path="BOMSubItemInstallationPoint"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="副明細数量"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialSubItemQuantity"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>Material</PropertyPath>
+                        <PropertyPath>MRPResponsible</PropertyPath>
+                        <PropertyPath>BOMExplosionApplication</PropertyPath>
+                        <PropertyPath>BillOfMaterialVariant</PropertyPath>
+                        <PropertyPath>HeaderValidityStartDate</PropertyPath>
+                        <PropertyPath>RequiredQuantity</PropertyPath>
+                        <PropertyPath>BOMExplosionIsAlternatePrio</PropertyPath>
+                        <PropertyPath>BOMExplosionIsMultilevel</PropertyPath>
+                        <PropertyPath>ShowSubParts</PropertyPath>
+                        <PropertyPath>LocationHorizontal</PropertyPath>
+                        <PropertyPath>LocationVertical</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/BOM">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>Material</PropertyPath>
+                                <PropertyPath>Plant</PropertyPath>
+                                <PropertyPath>BOMExplosionApplication</PropertyPath>
+                                <PropertyPath>HeaderValidityStartDate</PropertyPath>
+                                <PropertyPath>RequiredQuantity</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Plant"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BOMExplosionApplication"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="HeaderValidityStartDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="RequiredQuantity"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BOMExplosionIsAlternatePrio"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BOMExplosionIsMultilevel"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ShowSubParts"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="LocationHorizontal"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="LocationVertical"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
