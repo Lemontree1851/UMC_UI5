@@ -44,27 +44,16 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - sdshipmentstorageloc.zip
-      name: sdshipmentstorageloc
+      - sdsalesacceptance.zip
+      name: sdsalesacceptance
       target-path: resources/
-- name: sdbatchcreationdn
+- name: sdsalesacceptance
   type: html5
-  path: batchcreationdn
+  path: salesacceptance
   build-parameters:
     build-result: dist
     builder: custom
     commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: sdshipmentstorageloc
-  type: html5
-  path: shipmentstorageloc
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:

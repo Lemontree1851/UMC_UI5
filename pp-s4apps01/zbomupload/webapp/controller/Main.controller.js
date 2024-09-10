@@ -47,7 +47,7 @@ sap.ui.define([
                         "Plant": aSheetData[i]["Plant"],
                         "BillOfMaterialVariantUsage": aSheetData[i]["BillOfMaterialVariantUsage"],
                         "IsMultipleBOMAlt": aSheetData[i]["IsMultipleBOMAlt"],
-                        "HeaderValidityStartDate": aSheetData[i]["HeaderValidityStartDate"],
+                        "HeaderValidityStartDate": new Date(aSheetData[i]["HeaderValidityStartDate"]),
                         "BOMHeaderQuantityInBaseUnit": aSheetData[i]["BOMHeaderQuantityInBaseUnit"],
                         "BOMHeaderText": aSheetData[i]["BOMHeaderText"],
                         "BOMAlternativeText": aSheetData[i]["BOMAlternativeText"],
@@ -120,14 +120,21 @@ sap.ui.define([
                     for (const activeContext of aContext) {
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
-                        JSON.parse(object.Zzkey).forEach(element => {
-                            for (var index = 0; index < aExcelSet.length; index++) {
-                                if (aExcelSet[index].Row === element.ROW) {
-                                    aExcelSet[index].Status = element.STATUS;
-                                    aExcelSet[index].Message = element.MESSAGE;
-                                }
+                        if (bEvent === "EXPORT") {
+                            if (object.RecordUUID) {
+                                var sURL = this.getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + object.RecordUUID + ",IsActiveEntity=true)/PDFContent";
+                                sap.m.URLHelper.redirect(sURL, true);
                             }
-                        });
+                        } else {
+                            JSON.parse(object.Zzkey).forEach(element => {
+                                for (var index = 0; index < aExcelSet.length; index++) {
+                                    if (aExcelSet[index].Row === element.ROW) {
+                                        aExcelSet[index].Status = element.STATUS;
+                                        aExcelSet[index].Message = element.MESSAGE;
+                                    }
+                                }
+                            });
+                        }
                     }
                     this.getModel("local").setProperty("/excelSet", aExcelSet);
                 }).catch((error) => {
@@ -146,6 +153,7 @@ sap.ui.define([
                 var uploadProcess = this.getModel().bindContext("/BomUpload/com.sap.gateway.srvd.zui_bomupload_o4.v0001.processLogic(...)");
                 uploadProcess.setParameter("Event", bEvent);
                 uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
+                uploadProcess.setParameter("RecordUUID", '');
                 uploadProcess.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     resolve(uploadProcess);
                 }).catch((error) => {

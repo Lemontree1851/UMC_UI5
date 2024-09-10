@@ -1,0 +1,193 @@
+<mvc:View controllerName="sd.salesacceptance.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">
+    <Page>
+        <content>      
+            <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_ACCEPTANCE' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                    <upload:items>
+                        <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+                    </upload:items>
+                </upload:UploadSet>
+            </Panel>
+            <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto" >
+                <l:VerticalLayout>
+                    <l:HorizontalLayout class="sapUiContentPadding">
+                    <l:VerticalLayout>
+                        <Label text="{i18n>periodTypeT}" labelFor="periodType"/>
+                        <ComboBox id="periodType" width="15rem" required="true" selectionChange="onChange" showButton="true"
+                                items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zvalue1' },filters: { path: 'ZID',operator:'EQ',value1:'SD011'} }" >
+                            <core:Item key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" />
+                        </ComboBox>  
+                    </l:VerticalLayout>
+                    <l:VerticalLayout>
+                        <Label text="{i18n>acceptPeriodT}" labelFor="acceptPeriod"/>
+                        <ComboBox id="acceptPeriod" width="10rem" required="true" selectionChange="onChange" showButton="true">
+                            <core:Item key="01" text="{i18n>acceptPeriod01}"/>
+                            <core:Item key="02" text="{i18n>acceptPeriod02}"/>
+                            <core:Item key="03" text="{i18n>acceptPeriod03}"/>
+                            <core:Item key="04" text="{i18n>acceptPeriod04}"/>
+                            <core:Item key="05" text="{i18n>acceptPeriod05}"/>
+                            <core:Item key="06" text="{i18n>acceptPeriod06}"/>
+                            <core:Item key="07" text="{i18n>acceptPeriod07}"/>
+                            <core:Item key="08" text="{i18n>acceptPeriod08}"/>
+                            <core:Item key="09" text="{i18n>acceptPeriod09}"/>
+                            <core:Item key="10" text="{i18n>acceptPeriod10}"/>
+                            <core:Item key="11" text="{i18n>acceptPeriod11}"/>
+                            <core:Item key="12" text="{i18n>acceptPeriod12}"/>
+                        </ComboBox>
+                    </l:VerticalLayout>
+                    <l:VerticalLayout>
+                        <Label text="{i18n>finishStatusT}" labelFor="finishStatus"/>
+                        <ComboBox id="finishStatus" width="10rem" required="true" selectionChange="onChange" showButton="true" >
+                            <core:Item key="0" text="{i18n>finish01}" />
+                            <core:Item key="1" text="{i18n>finish02}" />
+                        </ComboBox>  
+                    </l:VerticalLayout>
+                    </l:HorizontalLayout>
+                </l:VerticalLayout>
+                <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>            
+            </Panel>
+            <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+                <table:Table id="tableSalesAcceptance" rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                    <table:extension>
+                        <OverflowToolbar>
+                            <Text text="{local>/logInfo}"/>
+                            <ToolbarSpacer/>
+                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idInsertButton" icon="sap-icon://document" type="Transparent" text="{i18n>insertBtn}" press="onInsert" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idUpdateButton" icon="sap-icon://document" type="Transparent" text="{i18n>updateBtn}" press="onUpdate" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idDeleteButton" icon="sap-icon://document" type="Transparent" text="{i18n>deleteBtn}" press="onDelete" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idAppendButton" icon="sap-icon://document" type="Transparent" text="{i18n>appendBtn}" press="onAppend" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                    <table:columns>
+                        <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                            <table:template>
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
+						    <Label text="{i18n>Type}"/>
+							<table:template>
+								<Text text="{parts:['local>Status'], formatter:'.formatter.formatResult'}"/>
+							</table:template>
+                        </table:Column>   
+                        <table:Column width="15rem" label="{i18n>Message}">
+                            <table:template>
+                                <Text text="{local>Message}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>SalesOrganization}">
+                            <table:template>
+                                <Text text="{local>SalesOrganization}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Customer}">
+                            <table:template>
+                                <Text text="{local>Customer}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>PeriodType}">
+                            <table:template>
+                                <Text text="{local>PeriodType}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>AcceptPeriod}">
+                            <table:template>
+                                <Text text="{local>AcceptPeriod}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>CustomerPO}">
+                            <table:template>
+                                <Text text="{local>CustomerPO}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>ItemNo}">
+                            <table:template>
+                                <Text text="{local>ItemNo}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>UMCProductCode}">
+                            <table:template>
+                                <Text text="{local>UMCProductCode}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>CustomerMaterial}">
+                            <table:template>
+                                <Text text="{local>CustomerMaterial}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>CustomerMaterialText}">
+                            <table:template>
+                                <Text text="{local>CustomerMaterialText}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>ReceiptDate}">
+                            <table:template>
+                                <Text text="{ path:'local>ReceiptDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>AcceptDate}">
+                            <table:template>
+                                <Text text="{ path:'local>AcceptDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>AcceptQty}">
+                            <table:template>
+                                <Text text="{ path:'local>AcceptQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>AcceptQty}">
+                            <table:template>
+                                <Text text="{ path:'local>AcceptQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>      
+                        <table:Column width="6rem" label="{i18n>ReceiptQty}">
+                            <table:template>
+                                <Text text="{ path:'local>ReceiptQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>      
+                        <table:Column width="6rem" label="{i18n>UnqualifiedQty}">
+                            <table:template>
+                                <Text text="{ path:'local>UnqualifiedQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>UndersupplyQty}">
+                            <table:template>
+                                <Text text="{ path:'local>UndersupplyQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>AcceptPrice}">
+                            <table:template>
+                                <Text text="{local>AcceptPrice}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Currency}">
+                            <table:template>
+                                <Text text="{local>Currency}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>TaxRate}">
+                            <table:template>
+                                <Text text="{local>TaxRate}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>OutsideData}">
+                            <table:template>
+                                <Text text="{local>OutsideData}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>         
+                    </table:columns>
+                </table:Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

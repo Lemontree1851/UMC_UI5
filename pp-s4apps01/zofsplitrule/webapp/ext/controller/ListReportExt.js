@@ -3,8 +3,9 @@ sap.ui.define([
     "../lib/xlsx",
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
+    "sap/m/MessageToast",
     "sap/ui/core/Fragment"
-], function (formatter, xlsx, BusyDialog, MessageBox, Fragment) {
+], function (formatter, xlsx, BusyDialog, MessageBox, MessageToast, Fragment) {
     'use strict';
 
     return {
@@ -12,6 +13,7 @@ sap.ui.define([
 
         openUploadDialog: function () {
             var that = this;
+            this._Function = sap.ui.require("pp/zofsplitrule/ext/controller/ListReportExt");
             this._BusyDialog = new BusyDialog();
             this._BusyDialog.open();
             Fragment.load({
@@ -25,6 +27,8 @@ sap.ui.define([
                 this._UploadDialog.addButton(new sap.m.Button({
                     text: "{i18n>closeBtn}",
                     press: function () {
+                        that.getModel("local").setProperty("/excelSet", []);
+                        that.getModel("local").setProperty("/logInfo", "");
                         that._UploadDialog.destroy();
                     }
                 }));
@@ -50,8 +54,8 @@ sap.ui.define([
                 });
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
-                // read valid data starting from line 5
-                for (var i = 3; i < aSheetData.length; i++) {
+                // read valid data starting from line 7
+                for (var i = 5; i < aSheetData.length; i++) {
                     var item = {
                         "Status": "",
                         "Message": "",
@@ -77,21 +81,24 @@ sap.ui.define([
         },
 
         onCheck: function () {
-            this._callOData("CHECK");
+            var that = this;
+            that._Function._callOData("CHECK", that);
         },
 
         onExcute: function () {
-            this._callOData("EXCUTE");
+            var that = this;
+            that._Function._callOData("EXCUTE", that);
         },
 
         onExport: function () {
-            this._callOData("EXPORT");
+            var that = this;
+            that._Function._callOData("EXPORT", that);
         },
 
-        _callOData: function (bEvent) {
+        _callOData: function (bEvent, that) {
             var aPromise = [];
-            var aExcelSet = this.getModel("local").getProperty("/excelSet");
-            var aGroupKey = this.removeDuplicates(aExcelSet, ["SplitMaterial", "Plant"]);
+            var aExcelSet = that.getModel("local").getProperty("/excelSet");
+            var aGroupKey = that._Function._removeDuplicates(aExcelSet, ["SplitMaterial", "Plant"]);
             var aGroupItems;
             for (var m = 0; m < aGroupKey.length; m++) {
                 const sSplitMaterial = aGroupKey[m].SplitMaterial;
@@ -102,13 +109,17 @@ sap.ui.define([
                         aGroupItems.push(aExcelSet[n]);
                     }
                 }
-                aPromise.push(this._callODataAction(bEvent, aGroupItems));
+                aPromise.push(that._Function._callODataAction(bEvent, aGroupItems, that));
             }
             try {
-                this._BusyDialog.open();
+                that._BusyDialog.open();
                 Promise.all(aPromise).then((aContext) => {
-                    this._BusyDialog.close();
-                    var aExcelSet = this.getModel("local").getProperty("/excelSet");
+                    var oResult = {
+                        iSuccess: 0,
+                        iFailed: 0
+                    };
+                    that._BusyDialog.close();
+                    var aExcelSet = that.getModel("local").getProperty("/excelSet");
                     for (const activeContext of aContext) {
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
@@ -117,25 +128,32 @@ sap.ui.define([
                                 if (aExcelSet[index].Row === element.ROW) {
                                     aExcelSet[index].Status = element.STATUS;
                                     aExcelSet[index].Message = element.MESSAGE;
+                                    if (element.STATUS === 'S') {
+                                        oResult.iSuccess += 1;
+                                    } else {
+                                        oResult.iFailed += 1;
+                                    }
                                 }
                             }
                         });
                     }
-                    this.getModel("local").setProperty("/excelSet", aExcelSet);
+                    that.getModel("local").setProperty("/excelSet", aExcelSet);
+                    that.getModel("local").setProperty("/logInfo", that.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    MessageToast.show(that.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
-                    this._BusyDialog.close();
+                    that._BusyDialog.close();
                 });
             } catch (error) {
                 MessageBox.error(error);
-                this._BusyDialog.close();
+                that._BusyDialog.close();
             }
         },
 
-        _callODataAction: function (bEvent, aRequestData) {
+        _callODataAction: function (bEvent, aRequestData, that) {
             return new Promise((resolve, reject) => {
-                var uploadProcess = this.getModel().bindContext("/SplitRule/com.sap.gateway.srvd.zui_ofsplitrule_o4.v0001.processLogic(...)");
+                var uploadProcess = that.getModel().bindContext("/SplitRule/com.sap.gateway.srvd.zui_ofsplitrule_o4.v0001.processLogic(...)");
                 uploadProcess.setParameter("Event", bEvent);
                 uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
                 uploadProcess.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
@@ -144,6 +162,20 @@ sap.ui.define([
                     reject(error);
                 });
             });
+        },
+
+        _removeDuplicates: function (arr, keys) {
+            return arr.reduce((result, obj) => {
+                const index = result.findIndex(item => {
+                    return keys.every(key => item[key] === obj[key]);
+                });
+                if (index !== -1) {
+                    result[index] = obj;
+                } else {
+                    result.push(obj);
+                }
+                return result;
+            }, []);
         }
     };
 });

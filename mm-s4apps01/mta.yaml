@@ -48,8 +48,16 @@ modules:
       name: mmsourcelistupload
       target-path: resources/
     - artifacts:
-      - mmuploadpurchasereq.zip
-      name: mmuploadpurchasereq
+      - mmpurinforecordupload.zip
+      name: mmpurinforecordupload
+      target-path: resources/
+    - artifacts:
+      - mmpurinforecordchange.zip
+      name: mmpurinforecordchange
+      target-path: resources/
+    - artifacts:
+      - mmpochange.zip
+      name: mmpochange
       target-path: resources/
 - name: mmsourcelistupload
   type: html5
@@ -60,14 +68,31 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
-- name: mmuploadpurchasereq
+- name: mmpurinforecordupload
   type: html5
-  path: uploadpurchasereq
+  path: purinforecordupload
   build-parameters:
     build-result: dist
     builder: custom
     commands:
-    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpurinforecordchange
+  type: html5
+  path: purinforecordchange
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpochange
+  type: html5
+  path: pochange
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
     - npm run build:cf
     supported-platforms: []
 resources:

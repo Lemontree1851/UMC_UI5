@@ -1,0 +1,282 @@
+<mvc:View controllerName="mm.purinforecordupload.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">    
+    <Page>
+        <content>
+            <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_PURINFORECORD_CREATE' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                    <upload:items>
+                        <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+                    </upload:items>
+                </upload:UploadSet>
+            </Panel>
+            <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+                <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
+            </Panel>
+            <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+                <table:Table id="table1" rows="{local>/excelHeadSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                    <table:extension>
+                        <OverflowToolbar>
+                            <Text text="{local>/logInfo}"/>
+                            <ToolbarSpacer/>
+                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelHeadSet}.length > 0}"/>
+                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelHeadSet}.length > 0}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelHeadSet}.length > 0}"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                    <table:columns>
+                        <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                            <table:template>
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
+						    <Label text="{i18n>Type}"/>
+							<table:template>
+								<Text text="{parts:['local>Status'], formatter:'.formatter.formatResult'}"/>
+							</table:template>
+                        </table:Column>   
+                        <table:Column width="15rem" label="{i18n>Message}">
+                            <table:template>
+                                <Text text="{local>Message}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>PurchasingInfoRecord}">
+                            <table:template>
+                                <Text text="{local>PurchasingInfoRecord}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Supplier}">
+                            <table:template>
+                                <Text text="{local>Supplier}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Material}">
+                            <table:template>
+                                <Text text="{local>Material}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>PurchasingOrganization}">
+                            <table:template>
+                                <Text text="{local>PurchasingOrganization}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>Plant}">
+                            <table:template>
+                                <Text text="{local>Plant}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>PurchasingInfoRecordCategory}">
+                            <table:template>
+                                <Text text="{local>PurchasingInfoRecordCategory}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>SupplierMaterialNumber}">
+                            <table:template>
+                                <Text text="{local>SupplierMaterialNumber}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>SupplierSubrange}">
+                            <table:template>
+                                <Text text="{local>SupplierSubrange}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>SupplierMaterialGroup}">
+                            <table:template>
+                                <Text text="{local>SupplierMaterialGroup}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>SupplierCertOriginCountry}">
+                            <table:template>
+                                <Text text="{local>SupplierCertOriginCountry}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>SupplierCertOriginRegion}">
+                            <table:template>
+                                <Text text="{local>SupplierCertOriginRegion}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>SuplrCertOriginClassfctnNumber}">
+                            <table:template>
+                                <Text text="{local>SuplrCertOriginClassfctnNumber}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>PurgDocOrderQuantityUnit}">
+                            <table:template>
+                                <Text text="{local>PurgDocOrderQuantityUnit}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>OrderItemQtyToBaseQtyDnmntr}">
+                            <table:template>
+                                <Text text="{local>OrderItemQtyToBaseQtyDnmntr}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>OrderItemQtyToBaseQtyNmrtr}">
+                            <table:template>
+                                <Text text="{local>OrderItemQtyToBaseQtyNmrtr}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>MaterialPlannedDeliveryDurn}">
+                            <table:template>
+                                <Text text="{local>MaterialPlannedDeliveryDurn}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>StandardPurchaseOrderQuantity}">
+                            <table:template>
+                                <Text text="{local>StandardPurchaseOrderQuantity}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>MinimumPurchaseOrderQuantity}">
+                            <table:template>
+                                <Text text="{local>MinimumPurchaseOrderQuantity}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>ShippingInstruction}">
+                            <table:template>
+                                <Text text="{local>ShippingInstruction}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>UnlimitedOverdeliveryIsAllowed}">
+                            <table:template>
+                                <Text text="{local>UnlimitedOverdeliveryIsAllowed}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>InvoiceIsGoodsReceiptBased}">
+                            <table:template>
+                                <Text text="{local>InvoiceIsGoodsReceiptBased}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>SupplierConfirmationControlKey}">
+                            <table:template>
+                                <Text text="{local>SupplierConfirmationControlKey}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>TaxCode}">
+                            <table:template>
+                                <Text text="{local>TaxCode}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>        
+                        <table:Column width="4rem" label="{i18n>Currency}">
+                            <table:template>
+                                <Text text="{local>Currency}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>        
+                        <table:Column width="6rem" label="{i18n>NetPriceAmount}">
+                            <table:template>
+                                <Text text="{local>NetPriceAmount}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>        
+                        <table:Column width="6rem" label="{i18n>MaterialPriceUnitQty}">
+                            <table:template>
+                                <Text text="{local>MaterialPriceUnitQty}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>        
+                        <table:Column width="4rem" label="{i18n>PurchaseOrderPriceUnit}">
+                            <table:template>
+                                <Text text="{local>PurchaseOrderPriceUnit}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>        
+                        <table:Column width="4rem" label="{i18n>OrdPriceUnitToOrderUnitDnmntr}">
+                            <table:template>
+                                <Text text="{local>OrdPriceUnitToOrderUnitDnmntr}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>        
+                        <table:Column width="4rem" label="{i18n>OrderPriceUnitToOrderUnitNmrtr}">
+                            <table:template>
+                                <Text text="{local>OrderPriceUnitToOrderUnitNmrtr}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>PricingDateControl}">
+                            <table:template>
+                                <Text text="{local>PricingDateControl}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>             
+                        <table:Column width="4rem" label="{i18n>IncotermsClassification}">
+                            <table:template>
+                                <Text text="{local>IncotermsClassification}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>             
+                        <table:Column width="6rem" label="{i18n>IncotermsLocation1}">
+                            <table:template>
+                                <Text text="{local>IncotermsLocation1}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>             
+                        <table:Column width="6rem" label="{i18n>IncotermsLocation2}">
+                            <table:template>
+                                <Text text="{local>IncotermsLocation2}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>             
+                        <table:Column width="6rem" label="{i18n>ConditionValidityStartDate}">
+                            <table:template>
+                                <Text text="{ path:'local>ConditionValidityStartDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>             
+                        <table:Column width="6rem" label="{i18n>PriceValidityEndDate}">
+                            <table:template>
+                                <Text text="{ path:'local>PriceValidityEndDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>             
+                        <table:Column width="4rem" label="{i18n>Xflag}">
+                            <table:template>
+                                <Text text="{local>Xflag}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>                     
+                    </table:columns>
+                </table:Table>
+
+                <table:Table id="table2" rows="{local>/excelItemSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                    <table:columns>
+                        <table:Column width="6rem" label="{i18n>Supplier}">
+                            <table:template>
+                                <Text text="{local>Supplier}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Material}">
+                            <table:template>
+                                <Text text="{local>Material}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>PurchasingOrganization}">
+                            <table:template>
+                                <Text text="{local>PurchasingOrganization}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Plant}">
+                            <table:template>
+                                <Text text="{local>Plant}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>PurchasingInfoRecordCategory}">
+                            <table:template>
+                                <Text text="{local>PurchasingInfoRecordCategory}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>ConditionValidityStartDate}">
+                            <table:template>
+                                <Text text="{ path:'local>ConditionValidityStartDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>ConditionValidityEndDate}">
+                            <table:template>
+                                <Text text="{ path:'local>ConditionValidityEndDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                            </table:template>
+                        </table:Column>     
+                        <table:Column width="10rem" label="{i18n>ConditionScaleQuantity}">
+                            <table:template>
+                                <Text text="{local>ConditionScaleQuantity}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ConditionScaleAmount}">
+                            <table:template>
+                                <Text text="{local>ConditionScaleAmount}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                </table:Table>
+            </Panel>
+        </content>        
+    </Page>
+</mvc:View>
