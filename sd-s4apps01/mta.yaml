@@ -33,6 +33,40 @@ modules:
         existing_destinations_policy: update
   build-parameters:
     no-source: true
+- name: sd-s4apps01-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: sd-s4apps01-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - sdshipmentstorageloc.zip
+      name: sdshipmentstorageloc
+      target-path: resources/
+- name: sdbatchcreationdn
+  type: html5
+  path: batchcreationdn
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: sdshipmentstorageloc
+  type: html5
+  path: shipmentstorageloc
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: sd-s4apps01-uaa
   type: org.cloudfoundry.managed-service
@@ -45,7 +79,7 @@ resources:
   type: org.cloudfoundry.managed-service
   parameters:
     config:
-      HTML5Runtime_enabled: true
+      HTML5Runtime_enabled: false
       init_data:
         instance:
           destinations:
