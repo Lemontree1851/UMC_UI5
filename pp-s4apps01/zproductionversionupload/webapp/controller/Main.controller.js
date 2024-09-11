@@ -4,8 +4,9 @@ sap.ui.define([
     "../model/formatter",
     "../lib/xlsx",
     "sap/m/BusyDialog",
-    "sap/m/MessageBox"
-], function (Base, formatter, xlsx, BusyDialog, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/m/MessageToast"
+], function (Base, formatter, xlsx, BusyDialog, MessageBox, MessageToast) {
     "use strict";
 
     return Base.extend("pp.zproductionversionupload.controller.Main", {
@@ -37,8 +38,8 @@ sap.ui.define([
                 });
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
-                // read valid data starting from line 3 
-                for (var i = 3; i < aSheetData.length; i++) {
+                // read valid data starting from line 7
+                for (var i = 5; i < aSheetData.length; i++) {
                     var item = {
                         "Status": "",
                         "Message": "",
@@ -104,21 +105,39 @@ sap.ui.define([
             try {
                 this._BusyDialog.open();
                 Promise.all(aPromise).then((aContext) => {
+                    var oResult = {
+                        iSuccess: 0,
+                        iFailed: 0
+                    };
                     this._BusyDialog.close();
                     var aExcelSet = this.getModel("local").getProperty("/excelSet");
                     for (const activeContext of aContext) {
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
-                        JSON.parse(object.Zzkey).forEach(element => {
-                            for (var index = 0; index < aExcelSet.length; index++) {
-                                if (aExcelSet[index].Row === element.ROW) {
-                                    aExcelSet[index].Status = element.STATUS;
-                                    aExcelSet[index].Message = element.MESSAGE;
-                                }
+                        if (bEvent === "EXPORT") {
+                            if (object.RecordUUID) {
+                                var sURL = this.getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + object.RecordUUID + ",IsActiveEntity=true)/PDFContent";
+                                sap.m.URLHelper.redirect(sURL, true);
                             }
-                        });
+                        } else {
+                            JSON.parse(object.Zzkey).forEach(element => {
+                                for (var index = 0; index < aExcelSet.length; index++) {
+                                    if (aExcelSet[index].Row === element.ROW) {
+                                        aExcelSet[index].Status = element.STATUS;
+                                        aExcelSet[index].Message = element.MESSAGE;
+                                    }
+                                }
+                                if (element.STATUS === 'S') {
+                                    oResult.iSuccess += 1;
+                                } else {
+                                    oResult.iFailed += 1;
+                                }
+                            });
+                        }
                     }
                     this.getModel("local").setProperty("/excelSet", aExcelSet);
+                    this.getModel("local").setProperty("/logInfo", this.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    MessageToast.show(this.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
@@ -135,6 +154,7 @@ sap.ui.define([
                 var uploadProcess = this.getModel().bindContext("/ProductionVersion/com.sap.gateway.srvd.zui_productionversion_o4.v0001.processLogic(...)");
                 uploadProcess.setParameter("Event", bEvent);
                 uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
+                uploadProcess.setParameter("RecordUUID", '');
                 uploadProcess.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     resolve(uploadProcess);
                 }).catch((error) => {
