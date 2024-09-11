@@ -4,8 +4,9 @@ sap.ui.define([
     "../model/formatter",
     "../lib/xlsx",
     "sap/m/BusyDialog",
-    "sap/m/MessageBox"
-], function (Base, formatter, xlsx, BusyDialog, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/m/MessageToast"
+], function (Base, formatter, xlsx, BusyDialog, MessageBox, MessageToast) {
     "use strict";
 
     return Base.extend("pp.zbomupload.controller.Main", {
@@ -115,6 +116,10 @@ sap.ui.define([
             try {
                 this._BusyDialog.open();
                 Promise.all(aPromise).then((aContext) => {
+                    var oResult = {
+                        iSuccess: 0,
+                        iFailed: 0
+                    };
                     this._BusyDialog.close();
                     var aExcelSet = this.getModel("local").getProperty("/excelSet");
                     for (const activeContext of aContext) {
@@ -133,10 +138,17 @@ sap.ui.define([
                                         aExcelSet[index].Message = element.MESSAGE;
                                     }
                                 }
+                                if (element.STATUS === 'S') {
+                                    oResult.iSuccess += 1;
+                                } else {
+                                    oResult.iFailed += 1;
+                                }
                             });
                         }
                     }
                     this.getModel("local").setProperty("/excelSet", aExcelSet);
+                    this.getModel("local").setProperty("/logInfo", this.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    MessageToast.show(this.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
