@@ -51,12 +51,17 @@
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>ValidityStartDate}">
                             <table:template>
-                                <Text text="{ path:'local>ValidityStartDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                                <Text text="{ path:'local>ValidityStartDate1',formatter:'.formatter.formatDate' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>BillOfOperationsDesc}">
                             <table:template>
                                 <Text text="{local>BillOfOperationsDesc}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>ProductionRouting}">
+                            <table:template>
+                                <Text text="{local>ProductionRouting}" wrapping="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="8rem" label="{i18n>BillOfOperationsUsage}">
@@ -79,9 +84,9 @@
                                 <Text text="{local>Operation}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="10rem" label="{i18n>WorkCenterInternalID}">
+                        <table:Column width="10rem" label="{i18n>WorkCenter}">
                             <table:template>
-                                <Text text="{local>WorkCenterInternalID}" wrapping="false"/>
+                                <Text text="{local>WorkCenter}" wrapping="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="8rem" label="{i18n>OperationControlProfile}">
