@@ -1,0 +1,174 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "pp.zroutinglist",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.14.5",
+      "toolsId": "9ce349fd-2a90-4752-9ea0-8c56fc29fb6e"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zui_routinglist_o4/srvd/sap/zui_routinglist_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zroutinglist-display": {
+          "semanticObject": "zroutinglist",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "icon": "sap-icon://documents",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.18",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "pp.zroutinglist.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ZC_ROUTINGLISTList",
+          "target": "ZC_ROUTINGLISTList"
+        },
+        {
+          "pattern": "ZC_ROUTINGLIST({key}):?query:",
+          "name": "ZC_ROUTINGLISTObjectPage",
+          "target": "ZC_ROUTINGLISTObjectPage"
+        }
+      ],
+      "targets": {
+        "ZC_ROUTINGLISTList": {
+          "type": "Component",
+          "id": "ZC_ROUTINGLISTList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/ZC_ROUTINGLIST",
+              "variantManagement": "Page",
+              "navigation": {
+                "ZC_ROUTINGLIST": {
+                  "detail": {
+                    "route": "ZC_ROUTINGLISTObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable",
+                    "selectionMode": "Multi",
+                    "selectAll": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ZC_ROUTINGLISTObjectPage": {
+          "type": "Component",
+          "id": "ZC_ROUTINGLISTObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ZC_ROUTINGLIST"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "pp-s4apps01"
+  },
+  "sap.platform.cf": {
+    "ui5VersionNumber": "1.120.18"
+  }
+}

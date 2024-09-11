@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="com.sap.gateway.srvd.zui_routinglist_o4.v0001" Alias="SAP__self">
+            <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
+            <EntityType Name="ZC_ROUTINGLISTType">
+                <Key>
+                    <PropertyRef Name="Product"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="BillOfOperationsGroup"/>
+                    <PropertyRef Name="BillOfOperationsVariant"/>
+                    <PropertyRef Name="Operation"/>
+                </Key>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="BillOfOperationsGroup" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="BillOfOperationsVariant" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Operation" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="MRPResponsible" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ProcurementType" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="SpecialProcurementType" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProductionSupervisor" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ProductionInvtryManagedLoc" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="BillOfOperationsType" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="OperationControlProfile" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="WorkCenter" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="OperationText" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="CostingLotSize" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="StandardWorkQuantity1" Type="Edm.Decimal" Nullable="false" Precision="9" Scale="3"/>
+                <Property Name="CostCtrActivityType1" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="StandardWorkQuantity2" Type="Edm.Decimal" Nullable="false" Precision="9" Scale="3"/>
+                <Property Name="CostCtrActivityType2" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="StandardWorkQuantity3" Type="Edm.Decimal" Nullable="false" Precision="9" Scale="3"/>
+                <Property Name="CostCtrActivityType3" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="StandardWorkQuantity4" Type="Edm.Decimal" Nullable="false" Precision="9" Scale="3"/>
+                <Property Name="CostCtrActivityType4" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="StandardWorkQuantity5" Type="Edm.Decimal" Nullable="false" Precision="9" Scale="3"/>
+                <Property Name="CostCtrActivityType5" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="StandardWorkQuantity6" Type="Edm.Decimal" Nullable="false" Precision="9" Scale="3"/>
+                <Property Name="CostCtrActivityType6" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="NumberOfTimeTickets" Type="Edm.Decimal" Nullable="false" Precision="3"/>
+                <Property Name="IsMarkedForDeletion" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ValidityStartDate" Type="Edm.Date"/>
+                <Property Name="ValidityEndDate" Type="Edm.Date"/>
+                <Property Name="BOOToMaterialInternalID" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="WorkCenterInternalID" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="StandardWorkQuantityUnit1" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StandardWorkQuantityUnit2" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StandardWorkQuantityUnit3" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StandardWorkQuantityUnit4" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StandardWorkQuantityUnit5" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StandardWorkQuantityUnit6" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="BaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="ZC_ROUTINGLIST" EntityType="com.sap.gateway.srvd.zui_routinglist_o4.v0001.ZC_ROUTINGLISTType"/>
+            </EntityContainer>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/Product">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_productstdvh/0001;ps='srvd-zui_routinglist_o4-0001';va='com.sap.gateway.srvd.zui_routinglist_o4.v0001.et-zc_routinglist.product'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Label" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/Plant">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plant/0001;ps='srvd-zui_routinglist_o4-0001';va='com.sap.gateway.srvd.zui_routinglist_o4.v0001.et-zc_routinglist.plant'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Label" String="Plant"/>
+                <Annotation Term="SAP__common.Heading" String="Plnt"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/BillOfOperationsGroup">
+                <Annotation Term="SAP__common.Label" String="Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/BillOfOperationsVariant">
+                <Annotation Term="SAP__common.Label" String="Group Counter"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/Operation">
+                <Annotation Term="SAP__common.Label" String="Operation"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/MRPResponsible">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_mrpcontrollervh/0001;ps='srvd-zui_routinglist_o4-0001';va='com.sap.gateway.srvd.zui_routinglist_o4.v0001.et-zc_routinglist.mrpresponsible'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Label" String="MRP Controller"/>
+                <Annotation Term="SAP__common.Heading" String="MRPCn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/ProcurementType">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Procurement Type"/>
+                <Annotation Term="SAP__common.Heading" String="ProcType"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/SpecialProcurementType">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Special Procurement"/>
+                <Annotation Term="SAP__common.Heading" String="Special Procurement Type"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Special Procurement Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/ProductionSupervisor">
+                <Annotation Term="SAP__common.Label" String="Production Supervisor"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_productionsupervisorvh/0001;ps='srvd-zui_routinglist_o4-0001';va='com.sap.gateway.srvd.zui_routinglist_o4.v0001.et-zc_routinglist.productionsupervisor'/$metadata</String>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/ProductionInvtryManagedLoc">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Storage Location"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/BillOfOperationsType">
+                <Annotation Term="SAP__common.Label" String="Task List Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/OperationControlProfile">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Control Key"/>
+                <Annotation Term="SAP__common.Heading" String="Ctrl"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/WorkCenter">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_workcenter/0001;ps='srvd-zui_routinglist_o4-0001';va='com.sap.gateway.srvd.zui_routinglist_o4.v0001.et-zc_routinglist.workcenter'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Label" String="Work Center"/>
+                <Annotation Term="SAP__common.Heading" String="Work Ctr"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/CostingLotSize">
+                <Annotation Term="SAP__common.Label" String="Costing Lot Size"/>
+                <Annotation Term="SAP__measures.Unit" Path="BaseUnit"/>
+                <Annotation Term="SAP__common.Heading" String="Quantity"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Quantity"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantity1">
+                <Annotation Term="SAP__common.Label" String="Standard Work Quantity1"/>
+                <Annotation Term="SAP__measures.Unit" Path="StandardWorkQuantityUnit1"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/CostCtrActivityType1">
+                <Annotation Term="SAP__common.Label" String="Activity Type1"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="ActTyp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Activity Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantity2">
+                <Annotation Term="SAP__common.Label" String="Standard Work Quantity2"/>
+                <Annotation Term="SAP__measures.Unit" Path="StandardWorkQuantityUnit2"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/CostCtrActivityType2">
+                <Annotation Term="SAP__common.Label" String="Activity Type2"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="ActTyp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Activity Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantity3">
+                <Annotation Term="SAP__common.Label" String="Standard Work Quantity3"/>
+                <Annotation Term="SAP__measures.Unit" Path="StandardWorkQuantityUnit3"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/CostCtrActivityType3">
+                <Annotation Term="SAP__common.Label" String="Activity Type3"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="ActTyp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Activity Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantity4">
+                <Annotation Term="SAP__common.Label" String="Standard Work Quantity4"/>
+                <Annotation Term="SAP__measures.Unit" Path="StandardWorkQuantityUnit4"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/CostCtrActivityType4">
+                <Annotation Term="SAP__common.Label" String="Activity Type4"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="ActTyp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Activity Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantity5">
+                <Annotation Term="SAP__common.Label" String="Standard Work Quantity5"/>
+                <Annotation Term="SAP__measures.Unit" Path="StandardWorkQuantityUnit5"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/CostCtrActivityType5">
+                <Annotation Term="SAP__common.Label" String="Activity Type5"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="ActTyp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Activity Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantity6">
+                <Annotation Term="SAP__common.Label" String="Standard Work Quantity6"/>
+                <Annotation Term="SAP__measures.Unit" Path="StandardWorkQuantityUnit6"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/CostCtrActivityType6">
+                <Annotation Term="SAP__common.Label" String="Activity Type6"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="ActTyp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Activity Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/NumberOfTimeTickets">
+                <Annotation Term="SAP__common.Label" String="No. of Time Tickets"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/ValidityStartDate">
+                <Annotation Term="SAP__common.Label" String="Validity Start Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/ValidityEndDate">
+                <Annotation Term="SAP__common.Label" String="Validity End Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/BOOToMaterialInternalID">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/WorkCenterInternalID">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantityUnit1">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantityUnit2">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantityUnit3">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantityUnit4">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantityUnit5">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/StandardWorkQuantityUnit6">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/BaseUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType">
+                <Annotation Term="SAP__common.Label" String="Routing List"/>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Product"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Plant"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MRPResponsible"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ProcurementType"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="SpecialProcurementType"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductionSupervisor"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductionInvtryManagedLoc"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BillOfOperationsType"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BillOfOperationsGroup"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BillOfOperationsVariant"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Operation"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="OperationControlProfile"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="WorkCenter"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="OperationText"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostingLotSize"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StandardWorkQuantity1"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCtrActivityType1"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StandardWorkQuantity2"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCtrActivityType2"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StandardWorkQuantity3"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCtrActivityType3"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StandardWorkQuantity4"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCtrActivityType4"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StandardWorkQuantity5"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCtrActivityType5"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StandardWorkQuantity6"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCtrActivityType6"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="NumberOfTimeTickets"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="IsMarkedForDeletion"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ValidityStartDate"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ValidityEndDate"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>Product</PropertyPath>
+                        <PropertyPath>MRPResponsible</PropertyPath>
+                        <PropertyPath>ProductionSupervisor</PropertyPath>
+                        <PropertyPath>WorkCenter</PropertyPath>
+                        <PropertyPath>IsMarkedForDeletion</PropertyPath>
+                        <PropertyPath>ValidityStartDate</PropertyPath>
+                        <PropertyPath>ValidityEndDate</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZC_ROUTINGLIST">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ValidityStartDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ValidityEndDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/OperationText">
+                <Annotation Term="SAP__common.Label" String="Operation Short Text"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ROUTINGLISTType/IsMarkedForDeletion">
+                <Annotation Term="SAP__common.Label" String="Deletion Indicator"/>
+                <Annotation Term="SAP__common.Heading" String="DeID"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

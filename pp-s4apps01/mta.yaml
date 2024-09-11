@@ -3,168 +3,181 @@ ID: pp-s4apps01
 description: PP - Fiori Apps
 version: 0.0.1
 modules:
-- name: pp-s4apps01-dest-content
-  type: com.sap.application.content
-  requires:
-  - name: pp-s4apps01-destination-service
-    parameters:
-      content-target: true
-  - name: pp-s4apps01-repo-host
-    parameters:
-      service-key:
-        name: pp-s4apps01-repo-host-key
-  - name: pp-s4apps01-uaa
-    parameters:
-      service-key:
-        name: pp-s4apps01-uaa-key
-  parameters:
-    content:
-      instance:
-        destinations:
-        - Name: pp-s4apps01_repo_host
-          ServiceInstanceName: pp-s4apps01-html5-srv
-          ServiceKeyName: pp-s4apps01-repo-host-key
-          sap.cloud.service: pp-s4apps01
-        - Authentication: OAuth2UserTokenExchange
-          Name: pp-s4apps01_uaa
-          ServiceInstanceName: pp-s4apps01-xsuaa-srv
-          ServiceKeyName: pp-s4apps01-uaa-key
-          sap.cloud.service: pp-s4apps01
-        existing_destinations_policy: update
-  build-parameters:
-    no-source: true
-- name: pp-s4apps01-app-content
-  type: com.sap.application.content
-  path: .
-  requires:
-  - name: pp-s4apps01-repo-host
-    parameters:
-      content-target: true
-  build-parameters:
-    build-result: resources
+  - name: pp-s4apps01-dest-content
+    type: com.sap.application.content
     requires:
-    - artifacts:
-      - ppzbomupload.zip
-      name: ppzbomupload
-      target-path: resources/
-    - artifacts:
-      - ppzproductionversionupload.zip
-      name: ppzproductionversionupload
-      target-path: resources/
-    - artifacts:
-      - ppzroutingupload.zip
-      name: ppzroutingupload
-      target-path: resources/
-    - artifacts:
-      - ppzofsplitrule.zip
-      name: ppzofsplitrule
-      target-path: resources/
-    - artifacts:
-      - ppzmaterialrequisition.zip
-      name: ppzmaterialrequisition
-      target-path: resources/
-    - artifacts:
-      - ppzbom.zip
-      name: ppzbom
-      target-path: resources/
-    - artifacts:
-      - ppzemailmasterupload.zip
-      name: ppzemailmasterupload
-      target-path: resources/
-- name: ppzbomupload
-  type: html5
-  path: zbomupload
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ppzproductionversionupload
-  type: html5
-  path: zproductionversionupload
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ppzroutingupload
-  type: html5
-  path: zroutingupload
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ppzofsplitrule
-  type: html5
-  path: zofsplitrule
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ppzmaterialrequisition
-  type: html5
-  path: zmaterialrequisition
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ppzbom
-  type: html5
-  path: zbom
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ppzemailmasterupload
-  type: html5
-  path: zemailmasterupload
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-resources:
-- name: pp-s4apps01-uaa
-  type: org.cloudfoundry.managed-service
-  parameters:
-    path: ./xs-security.json
-    service: xsuaa
-    service-name: pp-s4apps01-xsuaa-srv
-    service-plan: application
-- name: pp-s4apps01-destination-service
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      HTML5Runtime_enabled: true
-      init_data:
+      - name: pp-s4apps01-destination-service
+        parameters:
+          content-target: true
+      - name: pp-s4apps01-repo-host
+        parameters:
+          service-key:
+            name: pp-s4apps01-repo-host-key
+      - name: pp-s4apps01-uaa
+        parameters:
+          service-key:
+            name: pp-s4apps01-uaa-key
+    parameters:
+      content:
         instance:
           destinations:
-          - Authentication: NoAuthentication
-            Name: ui5
-            ProxyType: Internet
-            Type: HTTP
-            URL: https://ui5.sap.com
+            - Name: pp-s4apps01_repo_host
+              ServiceInstanceName: pp-s4apps01-html5-srv
+              ServiceKeyName: pp-s4apps01-repo-host-key
+              sap.cloud.service: pp-s4apps01
+            - Authentication: OAuth2UserTokenExchange
+              Name: pp-s4apps01_uaa
+              ServiceInstanceName: pp-s4apps01-xsuaa-srv
+              ServiceKeyName: pp-s4apps01-uaa-key
+              sap.cloud.service: pp-s4apps01
           existing_destinations_policy: update
-      version: 1.0.0
-    service: destination
-    service-name: pp-s4apps01-destination-service
-    service-plan: lite
-- name: pp-s4apps01-repo-host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-name: pp-s4apps01-html5-srv
-    service-plan: app-host
+    build-parameters:
+      no-source: true
+  - name: pp-s4apps01-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: pp-s4apps01-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - ppzbomupload.zip
+          name: ppzbomupload
+          target-path: resources/
+        - artifacts:
+            - ppzproductionversionupload.zip
+          name: ppzproductionversionupload
+          target-path: resources/
+        - artifacts:
+            - ppzroutingupload.zip
+          name: ppzroutingupload
+          target-path: resources/
+        - artifacts:
+            - ppzofsplitrule.zip
+          name: ppzofsplitrule
+          target-path: resources/
+        - artifacts:
+            - ppzmaterialrequisition.zip
+          name: ppzmaterialrequisition
+          target-path: resources/
+        - artifacts:
+            - ppzbom.zip
+          name: ppzbom
+          target-path: resources/
+        - artifacts:
+            - ppzemailmasterupload.zip
+          name: ppzemailmasterupload
+          target-path: resources/
+        - artifacts:
+            - ppzroutinglist.zip
+          name: ppzroutinglist
+          target-path: resources/
+  - name: ppzbomupload
+    type: html5
+    path: zbomupload
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ppzproductionversionupload
+    type: html5
+    path: zproductionversionupload
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ppzroutingupload
+    type: html5
+    path: zroutingupload
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ppzofsplitrule
+    type: html5
+    path: zofsplitrule
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ppzmaterialrequisition
+    type: html5
+    path: zmaterialrequisition
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ppzbom
+    type: html5
+    path: zbom
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ppzemailmasterupload
+    type: html5
+    path: zemailmasterupload
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ppzroutinglist
+    type: html5
+    path: zroutinglist
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+resources:
+  - name: pp-s4apps01-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: pp-s4apps01-xsuaa-srv
+      service-plan: application
+  - name: pp-s4apps01-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: pp-s4apps01-destination-service
+      service-plan: lite
+  - name: pp-s4apps01-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: pp-s4apps01-html5-srv
+      service-plan: app-host
 parameters:
   deploy_mode: html5-repo
