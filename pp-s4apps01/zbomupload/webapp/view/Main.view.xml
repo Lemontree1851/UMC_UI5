@@ -61,7 +61,7 @@
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>HeaderValidityStartDate}">
                             <table:template>
-                                <Text text="{ path:'local>HeaderValidityStartDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                                <Text text="{ path:'local>HeaderValidityStartDate1',formatter:'.formatter.formatDate' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>BOMHeaderQuantityInBaseUnit}" hAlign="End">

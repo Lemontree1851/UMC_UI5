@@ -38,8 +38,8 @@ sap.ui.define([
                 });
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
-                // read valid data starting from line 3 
-                for (var i = 3; i < aSheetData.length; i++) {
+                // read valid data starting from line 14
+                for (var i = 12; i < aSheetData.length; i++) {
                     var item = {
                         "Status": "",
                         "Message": "",
@@ -48,7 +48,8 @@ sap.ui.define([
                         "Plant": aSheetData[i]["Plant"],
                         "BillOfMaterialVariantUsage": aSheetData[i]["BillOfMaterialVariantUsage"],
                         "IsMultipleBOMAlt": aSheetData[i]["IsMultipleBOMAlt"],
-                        "HeaderValidityStartDate": new Date(aSheetData[i]["HeaderValidityStartDate"]),
+                        "HeaderValidityStartDate": aSheetData[i]["HeaderValidityStartDate"] === undefined ? "" : this.conversionDate(aSheetData[i]["HeaderValidityStartDate"]),
+                        "HeaderValidityStartDate1": aSheetData[i]["HeaderValidityStartDate"] === undefined ? "" : new Date(aSheetData[i]["HeaderValidityStartDate"]),
                         "BOMHeaderQuantityInBaseUnit": aSheetData[i]["BOMHeaderQuantityInBaseUnit"],
                         "BOMHeaderText": aSheetData[i]["BOMHeaderText"],
                         "BOMAlternativeText": aSheetData[i]["BOMAlternativeText"],
