@@ -134,7 +134,16 @@ sap.ui.define([
             return sTime;
         },
         _pad2: function (n) {
-            return n < 10 ? "0" + n : n;
+            return parseInt(n) < 10 ? "0" + parseInt(n) : n;
+        },
+        conversionDate: function (sDataStr) {
+            var aDateStr = [];
+            if (sDataStr.includes("/")) {
+                aDateStr = sDataStr.split('/');
+            } else {
+                aDateStr = sDataStr.split('-');
+            }
+            return aDateStr[0] + this._pad2(aDateStr[1]) + this._pad2(aDateStr[2]);
         },
 
         /**

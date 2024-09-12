@@ -61,12 +61,12 @@
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>ValidityStartDate}">
                             <table:template>
-                                <Text text="{ path:'local>ValidityStartDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                                <Text text="{ path:'local>ValidityStartDate1',formatter:'.formatter.formatDate' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>ValidityEndDate}">
                             <table:template>
-                                <Text text="{ path:'local>ValidityEndDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                                <Text text="{ path:'local>ValidityEndDate1',formatter:'.formatter.formatDate' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>BillOfOperationsType}">
