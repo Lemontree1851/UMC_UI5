@@ -420,7 +420,7 @@ sap.ui.define([
 
         _callOData: function (bEvent, oRequestData, that) {
             var aPromise = [];
-            if (bEvent === "POSTING" || bEvent === "POSTING") {
+            if (bEvent === "POSTING" || bEvent === "CANCELPOSTING") {
                 var items = _myFunction._removeDuplicates(oRequestData.items, ["MaterialRequisitionNo"]);
                 items.forEach(item => {
                     aPromise.push(_myFunction._callODataAction(bEvent, {
@@ -624,7 +624,7 @@ sap.ui.define([
             return sTime;
         },
         _pad2: function (n) {
-            return n < 10 ? "0" + n : n;
+            return parseInt(n) < 10 ? "0" + parseInt(n) : n;
         }
     };
 });
