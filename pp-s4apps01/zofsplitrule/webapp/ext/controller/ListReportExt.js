@@ -123,19 +123,26 @@ sap.ui.define([
                     for (const activeContext of aContext) {
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
-                        JSON.parse(object.Zzkey).forEach(element => {
-                            for (var index = 0; index < aExcelSet.length; index++) {
-                                if (aExcelSet[index].Row === element.ROW) {
-                                    aExcelSet[index].Status = element.STATUS;
-                                    aExcelSet[index].Message = element.MESSAGE;
-                                    if (element.STATUS === 'S') {
-                                        oResult.iSuccess += 1;
-                                    } else {
-                                        oResult.iFailed += 1;
+                        if (bEvent === "EXPORT") {
+                            if (object.RecordUUID) {
+                                var sURL = that.getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + object.RecordUUID + ",IsActiveEntity=true)/PDFContent";
+                                sap.m.URLHelper.redirect(sURL, true);
+                            }
+                        } else {
+                            JSON.parse(object.Zzkey).forEach(element => {
+                                for (var index = 0; index < aExcelSet.length; index++) {
+                                    if (aExcelSet[index].Row === element.ROW) {
+                                        aExcelSet[index].Status = element.STATUS;
+                                        aExcelSet[index].Message = element.MESSAGE;
                                     }
                                 }
-                            }
-                        });
+                                if (element.STATUS === 'S') {
+                                    oResult.iSuccess += 1;
+                                } else {
+                                    oResult.iFailed += 1;
+                                }
+                            });
+                        }
                     }
                     that.getModel("local").setProperty("/excelSet", aExcelSet);
                     that.getModel("local").setProperty("/logInfo", that.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
@@ -156,6 +163,7 @@ sap.ui.define([
                 var uploadProcess = that.getModel().bindContext("/SplitRule/com.sap.gateway.srvd.zui_ofsplitrule_o4.v0001.processLogic(...)");
                 uploadProcess.setParameter("Event", bEvent);
                 uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
+                uploadProcess.setParameter("RecordUUID", '');
                 uploadProcess.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     resolve(uploadProcess);
                 }).catch((error) => {

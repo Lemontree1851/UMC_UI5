@@ -7,7 +7,7 @@
     xmlns:table="sap.ui.table" core:require="{ handler: 'pp/zofsplitrule/ext/controller/ListReportExt' }">
     <Dialog title="{i18n>upload}">
         <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
-            <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_OFSPLIT' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+            <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_OFSPLITRULE' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
                 <upload:items>
                     <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
                 </upload:items>
