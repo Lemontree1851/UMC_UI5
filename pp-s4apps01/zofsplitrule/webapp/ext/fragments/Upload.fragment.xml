@@ -39,6 +39,11 @@
                             <Text text="{local>Message}" wrapping="false"/>
                         </table:template>
                     </table:Column>
+                    <table:Column width="10rem" label="{i18n>Customer}">
+                        <table:template>
+                            <Text text="{local>Customer}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
                     <table:Column width="15rem" label="{i18n>SplitMaterial}">
                         <table:template>
                             <Text text="{local>SplitMaterial}" wrapping="false"/>
@@ -57,6 +62,11 @@
                     <table:Column autoResizable="true" label="{i18n>SplitUnit}">
                         <table:template>
                             <Text text="{local>SplitUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column autoResizable="true" label="{i18n>ValidEnd}">
+                        <table:template>
+                            <Text text="{local>ValidEnd}" wrapping="false"/>
                         </table:template>
                     </table:Column>
                     <table:Column autoResizable="true" label="{i18n>DeleteFlag}">

@@ -60,10 +60,12 @@ sap.ui.define([
                         "Status": "",
                         "Message": "",
                         "Row": i - 2,
+                        "Customer": aSheetData[i]["Customer"],
                         "SplitMaterial": aSheetData[i]["SplitMaterial"],
                         "Plant": aSheetData[i]["Plant"],
                         "ShipUnit": aSheetData[i]["ShipUnit"],
                         "SplitUnit": aSheetData[i]["SplitUnit"],
+                        "ValidEnd": aSheetData[i]["ValidEnd"],
                         "DeleteFlag": aSheetData[i]["DeleteFlag"] === undefined ? "" : aSheetData[i]["DeleteFlag"]
                     };
                     aExcelSet.push(item);
@@ -98,14 +100,15 @@ sap.ui.define([
         _callOData: function (bEvent, that) {
             var aPromise = [];
             var aExcelSet = that.getModel("local").getProperty("/excelSet");
-            var aGroupKey = that._Function._removeDuplicates(aExcelSet, ["SplitMaterial", "Plant"]);
+            var aGroupKey = that._Function._removeDuplicates(aExcelSet, ["Customer", "SplitMaterial", "Plant"]);
             var aGroupItems;
             for (var m = 0; m < aGroupKey.length; m++) {
+                const sCustomer = aGroupKey[m].Customer;
                 const sSplitMaterial = aGroupKey[m].SplitMaterial;
                 const sPlant = aGroupKey[m].Plant;
                 aGroupItems = [];
                 for (var n = 0; n < aExcelSet.length; n++) {
-                    if (aExcelSet[n].SplitMaterial === sSplitMaterial && aExcelSet[n].Plant === sPlant) {
+                    if (aExcelSet[n].Customer === sCustomer && aExcelSet[n].SplitMaterial === sSplitMaterial && aExcelSet[n].Plant === sPlant) {
                         aGroupItems.push(aExcelSet[n]);
                     }
                 }
