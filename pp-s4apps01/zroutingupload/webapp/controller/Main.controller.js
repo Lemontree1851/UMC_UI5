@@ -56,7 +56,7 @@ sap.ui.define([
                         "Operation": aSheetData[i]["Operation"],
                         "WorkCenter": aSheetData[i]["WorkCenter"],
                         "OperationControlProfile": aSheetData[i]["OperationControlProfile"],
-                        "OperationStandardTextCode": aSheetData[i]["OperationStandardTextCode"],
+                        "OperationText": aSheetData[i]["OperationText"],
                         "StandardWorkQuantity1": aSheetData[i]["StandardWorkQuantity1"],
                         "StandardWorkQuantityUnit1": aSheetData[i]["StandardWorkQuantityUnit1"],
                         "StandardWorkQuantity2": aSheetData[i]["StandardWorkQuantity2"],
