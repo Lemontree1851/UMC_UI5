@@ -30,6 +30,7 @@ sap.ui.define([
                 return;
             }
             var oReader = new FileReader();
+            var sFileName = oFile.name;
             oReader.readAsArrayBuffer(oFile);
             this._BusyDialog.open();
             oReader.onload = function (e) {
@@ -38,30 +39,57 @@ sap.ui.define([
                 });
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
-                // read valid data starting from line 7
-                for (var i = 5; i < aSheetData.length; i++) {
-                    var item = {
-                        "Status": "",
-                        "Message": "",
-                        "Row": i - 2,
-                        "Material": aSheetData[i]["Material"],
-                        "Plant": aSheetData[i]["Plant"],
-                        "ProductionVersion": aSheetData[i]["ProductionVersion"],
-                        "ProductionVersionText": aSheetData[i]["ProductionVersionText"],
-                        "ValidityStartDate": aSheetData[i]["ValidityStartDate"] === undefined ? "" : this.conversionDate(aSheetData[i]["ValidityStartDate"]),
-                        "ValidityStartDate1": aSheetData[i]["ValidityStartDate"] === undefined ? "" : new Date(aSheetData[i]["ValidityStartDate"]),
-                        "ValidityEndDate": aSheetData[i]["ValidityEndDate"] === undefined ? "" : this.conversionDate(aSheetData[i]["ValidityEndDate"]),
-                        "ValidityEndDate1": aSheetData[i]["ValidityEndDate"] === undefined ? "" : new Date(aSheetData[i]["ValidityEndDate"]),
-                        "ExecBillOfOperationsType": aSheetData[i]["ExecBillOfOperationsType"],
-                        "ExecBillOfOperationsGroup": aSheetData[i]["ExecBillOfOperationsGroup"],
-                        "ExecBillOfOperationsVariant": aSheetData[i]["ExecBillOfOperationsVariant"],
-                        "BillOfMaterialVariantUsage": aSheetData[i]["BillOfMaterialVariantUsage"],
-                        "BillOfMaterialVariant": aSheetData[i]["BillOfMaterialVariant"],
-                        "ProductionLine": aSheetData[i]["ProductionLine"],
-                        "IssuingStorageLocation": aSheetData[i]["IssuingStorageLocation"],
-                        "ReceivingStorageLocation": aSheetData[i]["ReceivingStorageLocation"]
-                    };
-                    aExcelSet.push(item);
+                if (sFileName.includes("横")) {
+                    // read valid data starting from line 7
+                    for (var i = 5; i < aSheetData.length; i++) {
+                        debugger;
+                        var item = {
+                            "Status": "",
+                            "Message": "",
+                            "Row": i - 2,
+                            "Customer": aSheetData[i]["Customer"] === undefined ? "" : aSheetData[i]["Customer"],
+                            "MaterialByCustomer": aSheetData[i]["MaterialByCustomer"] === undefined ? "" : aSheetData[i]["MaterialByCustomer"],
+                            "Material": aSheetData[i]["Material"] === undefined ? "" : aSheetData[i]["Material"],
+                            "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
+                            "RequirementDate": "",
+                            "RequirementDate1": "",
+                            "RequirementQty": "",
+                            "Remark": "",
+                            "MaterialStr": ""
+                        };
+                        for (const key in aSheetData[i]) {
+                            if (key.includes("EMPTY")) {
+                                var row = this._deepClone(item);
+                                row.RequirementQty = aSheetData[i][key];
+                                row.RequirementDate = aSheetData[1][key] === undefined ? "" : this.conversionDate(aSheetData[1][key]);
+                                row.RequirementDate1 = aSheetData[1][key] === undefined ? "" : new Date(aSheetData[1][key]);
+                                row.MaterialStr = row.MaterialByCustomer + row.Material;
+                                aExcelSet.push(row);
+                            }
+                        }
+                    }
+                } else if (sFileName.includes("縦")) {
+                    for (var i = 5; i < aSheetData.length; i++) {
+                        var item = {
+                            "Status": "",
+                            "Message": "",
+                            "Row": i - 2,
+                            "Customer": aSheetData[i]["Customer"] === undefined ? "" : aSheetData[i]["Customer"],
+                            "MaterialByCustomer": aSheetData[i]["MaterialByCustomer"] === undefined ? "" : aSheetData[i]["MaterialByCustomer"],
+                            "Material": aSheetData[i]["Material"] === undefined ? "" : aSheetData[i]["Material"],
+                            "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
+                            "RequirementDate": aSheetData[i]["RequirementDate"] === undefined ? "" : this.conversionDate(aSheetData[i]["RequirementDate"]),
+                            "RequirementDate1": aSheetData[i]["RequirementDate"] === undefined ? "" : new Date(aSheetData[i]["RequirementDate"]),
+                            "RequirementQty": aSheetData[i]["RequirementQty"] === undefined ? "" : aSheetData[i]["RequirementQty"],
+                            "Remark": aSheetData[i]["Remark"] === undefined ? "" : aSheetData[i]["Remark"],
+                            "MaterialStr": ""
+                        };
+                        var row = this._deepClone(item);
+                        row.MaterialStr = row.MaterialByCustomer + row.Material;
+                        aExcelSet.push(row);
+                    }
+                } else {
+                    MessageBox.error(this.getResourceBundle().getText("InvalidFileName"));
                 }
                 this.getModel("local").setProperty("/excelSet", aExcelSet);
                 this.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", [aExcelSet.length, 0, 0]));
@@ -90,15 +118,15 @@ sap.ui.define([
         _callOData: function (bEvent) {
             var aPromise = [];
             var aExcelSet = this.getModel("local").getProperty("/excelSet");
-            var aGroupKey = this.removeDuplicates(aExcelSet, ["Material", "Plant", "ProductionVersion"]);
+            var aGroupKey = this.removeDuplicates(aExcelSet, ["Customer", "MaterialStr", "Plant"]);
             var aGroupItems;
             for (var m = 0; m < aGroupKey.length; m++) {
-                const sMaterial = aGroupKey[m].Material;
+                const sCustomer = aGroupKey[m].Customer;
+                const sMaterialStr = aGroupKey[m].MaterialStr;
                 const sPlant = aGroupKey[m].Plant;
-                const sProductionVersion = aGroupKey[m].ProductionVersion;
                 aGroupItems = [];
                 for (var n = 0; n < aExcelSet.length; n++) {
-                    if (aExcelSet[n].Material === sMaterial && aExcelSet[n].Plant === sPlant && aExcelSet[n].ProductionVersion === sProductionVersion) {
+                    if (aExcelSet[n].Customer === sCustomer && aExcelSet[n].MaterialStr === sMaterialStr && aExcelSet[n].Plant === sPlant) {
                         aGroupItems.push(aExcelSet[n]);
                     }
                 }
@@ -127,6 +155,7 @@ sap.ui.define([
                                     if (aExcelSet[index].Row === element.ROW) {
                                         aExcelSet[index].Status = element.STATUS;
                                         aExcelSet[index].Message = element.MESSAGE;
+                                        aExcelSet[index].RequirementDate1 = new Date(element.REQUIREMENTDATE);
                                     }
                                 }
                                 if (element.STATUS === 'S') {
@@ -153,7 +182,7 @@ sap.ui.define([
 
         _callODataAction: function (bEvent, aRequestData) {
             return new Promise((resolve, reject) => {
-                var uploadProcess = this.getModel().bindContext("/ProductionVersion/com.sap.gateway.srvd.zui_productionversion_o4.v0001.processLogic(...)");
+                var uploadProcess = this.getModel().bindContext("/ZC_ORDERFORECAST/com.sap.gateway.srvd.zui_orderforecast_o4.v0001.processLogic(...)");
                 uploadProcess.setParameter("Event", bEvent);
                 uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
                 uploadProcess.setParameter("RecordUUID", '');

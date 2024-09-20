@@ -243,6 +243,10 @@ sap.ui.define([
                     }
                 }.bind(this)
             });
+        },
+
+        _deepClone(obj) {
+            return JSON.parse(JSON.stringify(obj));
         }
     })
 });

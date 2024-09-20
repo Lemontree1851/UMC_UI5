@@ -7,7 +7,7 @@
     <Page >
         <content>
             <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
-                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'StartsWith', value1 : 'ZUPLOAD_OF' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'StartsWith', value1 : 'ZUPLOAD_OF_' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
                     <upload:items>
                         <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
                     </upload:items>
@@ -34,12 +34,22 @@
                                 <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="15rem" label="{i18n>Message}">
+                        <table:Column width="14rem" label="{i18n>Message}">
                             <table:template>
                                 <Text text="{local>Message}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="15rem" label="{i18n>Material}">
+                        <table:Column width="8rem" label="{i18n>Customer}">
+                            <table:template>
+                                <Text text="{local>Customer}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="14rem" label="{i18n>MaterialByCustomer}">
+                            <table:template>
+                                <Text text="{local>MaterialByCustomer}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="14rem" label="{i18n>Material}">
                             <table:template>
                                 <Text text="{local>Material}" wrapping="false"/>
                             </table:template>
@@ -49,64 +59,19 @@
                                 <Text text="{local>Plant}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="10rem" label="{i18n>ProductionVersion}">
+                        <table:Column width="10rem" label="{i18n>RequirementDate}">
                             <table:template>
-                                <Text text="{local>ProductionVersion}" wrapping="false"/>
+                                <Text text="{ path:'local>RequirementDate1',formatter:'.formatter.formatDate' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="15rem" label="{i18n>ProductionVersionText}">
+                        <table:Column autoResizable="true" label="{i18n>RequirementQty}" hAlign="End">
                             <table:template>
-                                <Text text="{local>ProductionVersionText}" wrapping="false"/>
+                                <Text text="{ parts:[ 'local>RequirementQty','3'] ,formatter:'.formatter.formatFloat' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="10rem" label="{i18n>ValidityStartDate}">
+                        <table:Column autoResizable="true" label="{i18n>Remark}">
                             <table:template>
-                                <Text text="{ path:'local>ValidityStartDate1',formatter:'.formatter.formatDate' }" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="10rem" label="{i18n>ValidityEndDate}">
-                            <table:template>
-                                <Text text="{ path:'local>ValidityEndDate1',formatter:'.formatter.formatDate' }" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="10rem" label="{i18n>ExecBillOfOperationsType}">
-                            <table:template>
-                                <Text text="{local>ExecBillOfOperationsType}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="10rem" label="{i18n>ExecBillOfOperationsGroup}">
-                            <table:template>
-                                <Text text="{local>ExecBillOfOperationsGroup}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="10rem" label="{i18n>ExecBillOfOperationsVariant}">
-                            <table:template>
-                                <Text text="{local>ExecBillOfOperationsVariant}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="10rem" label="{i18n>BillOfMaterialVariantUsage}">
-                            <table:template>
-                                <Text text="{local>BillOfMaterialVariantUsage}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="10rem" label="{i18n>BillOfMaterialVariant}">
-                            <table:template>
-                                <Text text="{local>BillOfMaterialVariant}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="10rem" label="{i18n>ProductionLine}">
-                            <table:template>
-                                <Text text="{local>ProductionLine}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="10rem" label="{i18n>IssuingStorageLocation}">
-                            <table:template>
-                                <Text text="{local>IssuingStorageLocation}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="10rem" label="{i18n>ReceivingStorageLocation}">
-                            <table:template>
-                                <Text text="{local>ReceivingStorageLocation}" wrapping="false"/>
+                                <Text text="{local>Remark}" wrapping="false"/>
                             </table:template>
                         </table:Column>
                     </table:columns>
