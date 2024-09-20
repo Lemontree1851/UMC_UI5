@@ -75,6 +75,10 @@ modules:
       - ppzroutinglist.zip
       name: ppzroutinglist
       target-path: resources/
+    - artifacts:
+      - ppzorderforecastupload.zip
+      name: ppzorderforecastupload
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -145,6 +149,16 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzorderforecastupload
+  type: html5
+  path: zorderforecastupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
