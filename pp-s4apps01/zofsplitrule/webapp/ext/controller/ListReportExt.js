@@ -60,12 +60,12 @@ sap.ui.define([
                         "Status": "",
                         "Message": "",
                         "Row": i - 2,
-                        "Customer": aSheetData[i]["Customer"],
-                        "SplitMaterial": aSheetData[i]["SplitMaterial"],
-                        "Plant": aSheetData[i]["Plant"],
-                        "ShipUnit": aSheetData[i]["ShipUnit"],
-                        "SplitUnit": aSheetData[i]["SplitUnit"],
-                        "ValidEnd": aSheetData[i]["ValidEnd"],
+                        "Customer": aSheetData[i]["Customer"] === undefined ? "" : aSheetData[i]["Customer"],
+                        "SplitMaterial": aSheetData[i]["SplitMaterial"] === undefined ? "" : aSheetData[i]["SplitMaterial"],
+                        "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
+                        "ShipUnit": aSheetData[i]["ShipUnit"] === undefined ? "" : aSheetData[i]["ShipUnit"],
+                        "SplitUnit": aSheetData[i]["SplitUnit"] === undefined ? "" : aSheetData[i]["SplitUnit"],
+                        "ValidEnd": aSheetData[i]["ValidEnd"] === undefined ? "" : aSheetData[i]["ValidEnd"],
                         "DeleteFlag": aSheetData[i]["DeleteFlag"] === undefined ? "" : aSheetData[i]["DeleteFlag"]
                     };
                     aExcelSet.push(item);
