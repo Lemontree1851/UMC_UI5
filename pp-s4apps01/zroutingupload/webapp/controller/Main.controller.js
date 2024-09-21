@@ -43,7 +43,7 @@ sap.ui.define([
                     var item = {
                         "Status": "",
                         "Message": "",
-                        "Row": i - 2,
+                        "Row": i - 4,
                         "Product": aSheetData[i]["Product"] === undefined ? "" : aSheetData[i]["Product"],
                         "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
                         "ValidityStartDate": aSheetData[i]["ValidityStartDate"] === undefined ? "" : this.conversionDate(aSheetData[i]["ValidityStartDate"]),

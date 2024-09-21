@@ -43,7 +43,7 @@ sap.ui.define([
                     var item = {
                         "Status": "",
                         "Message": "",
-                        "Row": i - 2,
+                        "Row": i - 11,
                         "Material": aSheetData[i]["Material"] === undefined ? "" : aSheetData[i]["Material"],
                         "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
                         "BillOfMaterialVariantUsage": aSheetData[i]["BillOfMaterialVariantUsage"] === undefined ? "" : aSheetData[i]["BillOfMaterialVariantUsage"],
