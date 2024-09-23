@@ -1,0 +1,111 @@
+<mvc:View controllerName="fico.paidpay.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">
+    <Page>
+        <content>
+            <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'BT', value1 : 'ZUPLOAD_PAIDPAY1', value2 : 'ZUPLOAD_PAIDPAY2' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                    <upload:items>
+                        <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+                    </upload:items>
+                </upload:UploadSet>
+            </Panel>
+            <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+                <RadioButtonGroup id="rbg1" width="18rem">
+			       <RadioButton id="RB1-1" text="{i18n>RadioButton01}" selected="{local>/paidPay1}"/>
+			       <RadioButton id="RB1-2" text="{i18n>RadioButton02}" selected="{local>/paidPay2}"/>
+		        </RadioButtonGroup> 
+                <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
+            </Panel>
+            <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+                <table:Table id="tableSourceList" rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                    <table:extension>
+                        <OverflowToolbar>
+                            <Text text="{local>/logInfo}"/>
+                            <ToolbarSpacer/>
+                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExcuteButton" icon="sap-icon://save" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                    <table:columns>
+                        <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                            <table:template>
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
+						    <Label text="{i18n>Type}"/>
+							<table:template>
+								<Text text="{parts:['local>Status'], formatter:'.formatter.formatResult'}"/>
+							</table:template>
+                        </table:Column>   
+                        <table:Column width="15rem" label="{i18n>Message}">
+                            <table:template>
+                                <Text text="{local>Message}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>CompanyCode}">
+                            <table:template>
+                                <Text text="{local>CompanyCode}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>FiscalYear}">
+                            <table:template>
+                                <Text text="{local>FiscalYear}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>Period}">
+                            <table:template>
+                                <Text text="{local>Period}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>ProfitCenter}">
+                            <table:template>
+                                <Text text="{local>ProfitCenter}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BusinessPartner}">
+                            <table:template>
+                                <Text text="{local>BusinessPartner}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>PurchasingGroup}">
+                            <table:template>
+                                <Text text="{local>PurchasingGroup}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column visible="{= ${local>/paidPay1} === true }" width="10rem" label="{i18n>PreStockAmt}">
+                            <table:template>
+                                <Text text="{local>PreStockAmt}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column visible="{= ${local>/paidPay2} === true }" width="10rem" label="{i18n>BegPurGrpAmt}">
+                            <table:template>
+                                <Text text="{local>BegPurGrpAmt}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column visible="{= ${local>/paidPay2} === true }" width="10rem" label="{i18n>BegChgMaterialAmt}">
+                            <table:template>
+                                <Text text="{local>BegChgMaterialAmt}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column visible="{= ${local>/paidPay2} === true }" width="10rem" label="{i18n>BegCustomerRev}">
+                            <table:template>
+                                <Text text="{local>BegCustomerRev}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column visible="{= ${local>/paidPay2} === true }" width="10rem" label="{i18n>BegRev}">
+                            <table:template>
+                                <Text text="{local>BegRev}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>                     
+                    </table:columns>
+                </table:Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>
