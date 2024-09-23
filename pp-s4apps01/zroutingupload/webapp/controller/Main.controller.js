@@ -138,10 +138,10 @@ sap.ui.define([
                                         aExcelSet[index].Message = element.MESSAGE;
                                     }
                                 }
-                                if (element.STATUS === 'S') {
-                                    oResult.iSuccess += 1;
-                                } else {
+                                if (element.STATUS === 'E') {
                                     oResult.iFailed += 1;
+                                } else {
+                                    oResult.iSuccess += 1;
                                 }
                             });
                         }
