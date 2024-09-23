@@ -162,10 +162,10 @@ sap.ui.define([
                                         aExcelSet[index].RequirementDate1 = new Date(element.REQUIREMENTDATE);
                                     }
                                 }
-                                if (element.STATUS === 'S') {
-                                    oResult.iSuccess += 1;
-                                } else {
+                                if (element.STATUS === 'E') {
                                     oResult.iFailed += 1;
+                                } else {
+                                    oResult.iSuccess += 1;
                                 }
                             });
                         }
