@@ -138,12 +138,29 @@ sap.ui.define([
         },
         conversionDate: function (sDataStr) {
             var aDateStr = [];
+            if (typeof sDataStr === 'number') {
+                sDataStr = this.formatDateString(sDataStr);
+            }
             if (sDataStr.includes("/")) {
                 aDateStr = sDataStr.split('/');
             } else {
                 aDateStr = sDataStr.split('-');
             }
             return aDateStr[0] + this._pad2(aDateStr[1]) + this._pad2(aDateStr[2]);
+        },
+        formatDateString(numb, format) {
+            if (numb) {
+                const old = numb - 1;
+                const t = Math.round((old - Math.floor(old)) * 24 * 60 * 60);
+                const time = new Date(1900, 0, old, 0, 0, t)
+                const year = time.getFullYear();
+                const month = time.getMonth() + 1;
+                const date = time.getDate();
+                if (format === undefined) {
+                    format = "/";
+                }
+                return year + format + this._pad2(month) + format + this._pad2(date);
+            }
         },
 
         /**

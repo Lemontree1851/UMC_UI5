@@ -47,7 +47,7 @@ sap.ui.define([
                         "Product": aSheetData[i]["Product"] === undefined ? "" : aSheetData[i]["Product"],
                         "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
                         "ValidityStartDate": aSheetData[i]["ValidityStartDate"] === undefined ? "" : this.conversionDate(aSheetData[i]["ValidityStartDate"]),
-                        "ValidityStartDate1": aSheetData[i]["ValidityStartDate"] === undefined ? "" : new Date(aSheetData[i]["ValidityStartDate"]),
+                        "ValidityStartDate1": aSheetData[i]["ValidityStartDate"] === undefined ? "" : new Date(this.formatDateString(aSheetData[i]["ValidityStartDate"])),
                         "BillOfOperationsDesc": aSheetData[i]["BillOfOperationsDesc"] === undefined ? "" : aSheetData[i]["BillOfOperationsDesc"],
                         "ProductionRouting": aSheetData[i]["ProductionRouting"] === undefined ? "" : aSheetData[i]["ProductionRouting"],
                         "BillOfOperationsUsage": aSheetData[i]["BillOfOperationsUsage"] === undefined ? "" : aSheetData[i]["BillOfOperationsUsage"],

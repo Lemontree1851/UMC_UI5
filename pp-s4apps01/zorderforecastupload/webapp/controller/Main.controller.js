@@ -65,7 +65,7 @@ sap.ui.define([
                                 row.Row = num;
                                 row.RequirementQty = aSheetData[i][key];
                                 row.RequirementDate = aSheetData[1][key] === undefined ? "" : this.conversionDate(aSheetData[1][key]);
-                                row.RequirementDate1 = aSheetData[1][key] === undefined ? "" : new Date(aSheetData[1][key]);
+                                row.RequirementDate1 = aSheetData[1][key] === undefined ? "" : new Date(this.formatDateString(aSheetData[1][key]));
                                 row.MaterialStr = row.MaterialByCustomer + row.Material;
                                 aExcelSet.push(row);
                             }
@@ -82,7 +82,7 @@ sap.ui.define([
                             "Material": aSheetData[i]["Material"] === undefined ? "" : aSheetData[i]["Material"],
                             "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
                             "RequirementDate": aSheetData[i]["RequirementDate"] === undefined ? "" : this.conversionDate(aSheetData[i]["RequirementDate"]),
-                            "RequirementDate1": aSheetData[i]["RequirementDate"] === undefined ? "" : new Date(aSheetData[i]["RequirementDate"]),
+                            "RequirementDate1": aSheetData[i]["RequirementDate"] === undefined ? "" : new Date(this.formatDateString(aSheetData[i]["RequirementDate"])),
                             "RequirementQty": aSheetData[i]["RequirementQty"] === undefined ? "" : aSheetData[i]["RequirementQty"],
                             "Remark": aSheetData[i]["Remark"] === undefined ? "" : aSheetData[i]["Remark"],
                             "MaterialStr": ""
@@ -159,7 +159,7 @@ sap.ui.define([
                                         aExcelSet[index].Status = element.STATUS;
                                         aExcelSet[index].Message = element.MESSAGE;
                                         aExcelSet[index].RequirementDate = this.conversionDate(element.REQUIREMENTDATE);
-                                        aExcelSet[index].RequirementDate1 = new Date(element.REQUIREMENTDATE);
+                                        aExcelSet[index].RequirementDate1 = new Date(this.formatDateString(element.REQUIREMENTDATE));
                                     }
                                 }
                                 if (element.STATUS === 'E') {
