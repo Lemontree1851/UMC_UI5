@@ -149,7 +149,7 @@ sap.ui.define([
             return aDateStr[0] + this._pad2(aDateStr[1]) + this._pad2(aDateStr[2]);
         },
         formatDateString(numb, format) {
-            if (numb) {
+            if (typeof numb === 'number') {
                 const old = numb - 1;
                 const t = Math.round((old - Math.floor(old)) * 24 * 60 * 60);
                 const time = new Date(1900, 0, old, 0, 0, t)
@@ -160,6 +160,8 @@ sap.ui.define([
                     format = "/";
                 }
                 return year + format + this._pad2(month) + format + this._pad2(date);
+            } else {
+                return numb;
             }
         },
 
