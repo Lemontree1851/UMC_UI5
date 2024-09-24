@@ -79,6 +79,10 @@ modules:
       - ppzorderforecastupload.zip
       name: ppzorderforecastupload
       target-path: resources/
+    - artifacts:
+      - ppzproductionorderrelease.zip
+      name: ppzproductionorderrelease
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -154,6 +158,16 @@ modules:
 - name: ppzorderforecastupload
   type: html5
   path: zorderforecastupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzproductionorderrelease
+  type: html5
+  path: zproductionorderrelease
   build-parameters:
     build-result: dist
     builder: custom
