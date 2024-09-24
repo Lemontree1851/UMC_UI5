@@ -47,7 +47,7 @@ sap.ui.define([
                         "Material": aSheetData[i]["Material"] === undefined ? "" : aSheetData[i]["Material"],
                         "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
                         "BillOfMaterialVariantUsage": aSheetData[i]["BillOfMaterialVariantUsage"] === undefined ? "" : aSheetData[i]["BillOfMaterialVariantUsage"],
-                        "IsMultipleBOMAlt": aSheetData[i]["IsMultipleBOMAlt"] === undefined ? "" : aSheetData[i]["IsMultipleBOMAlt"],
+                        "BillOfMaterialVariant": aSheetData[i]["BillOfMaterialVariant"] === undefined ? "" : aSheetData[i]["BillOfMaterialVariant"],
                         "HeaderValidityStartDate": aSheetData[i]["HeaderValidityStartDate"] === undefined ? "" : this.conversionDate(aSheetData[i]["HeaderValidityStartDate"]),
                         "HeaderValidityStartDate1": aSheetData[i]["HeaderValidityStartDate"] === undefined ? "" : new Date(this.formatDateString(aSheetData[i]["HeaderValidityStartDate"])),
                         "BOMHeaderQuantityInBaseUnit": aSheetData[i]["BOMHeaderQuantityInBaseUnit"] === undefined ? "" : aSheetData[i]["BOMHeaderQuantityInBaseUnit"],
