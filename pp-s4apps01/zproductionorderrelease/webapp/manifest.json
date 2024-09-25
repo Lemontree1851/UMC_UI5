@@ -109,28 +109,6 @@
             "config": {},
             "routes": [],
             "targets": {}
-        },
-        "extends": {
-            "extensions": {
-                "sap.ui.controllerExtensions": {
-                    "sap.suite.ui.generic.template.ListReport.view.ListReport": {
-                        "controllerName": "pp.zproductionorderrelease.ext.controller.ListReportExt",
-                        "sap.ui.generic.app": {
-                            "ProductionOrder": {
-                                "EntitySet": "ProductionOrder",
-                                "Actions": {
-                                    "Release": {
-                                        "id": "ReleaseButton",
-                                        "text": "製造指図発行",
-                                        "press": "onRelease",
-                                        "requiresSelection": true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     },
     "sap.ui.generic.app": {
