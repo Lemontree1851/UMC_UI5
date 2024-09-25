@@ -34,7 +34,11 @@ server:
             metadataXmlPath: ./webapp/localService/metadata.xml
             mockdataRootPath: ./webapp/localService/data
           - urlPath: /sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/
-            metadataPath: ./webapp/localService/zui_dtimp_conf_o4/metadata.xml
-            mockdataPath: ./webapp/localService/zui_dtimp_conf_o4/mockdata
+            generateMockData: true
+            metadataXmlPath: ./webapp/localService/zui_dtimp_conf_o4/metadata.xml
+            mockdataRootPath: ./webapp/localService/zui_dtimp_conf_o4/mockdata
+          - urlPath: /sap/opu/odata4/sap/zui_productionversion_o4/srvd/sap/zui_productionversion_o4/0001/
+            metadataPath: ./webapp/localService/metadata.xml
+            mockdataPath: ./webapp/localService/mockdata
             generateMockData: true
         annotations: []

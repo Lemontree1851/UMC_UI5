@@ -42,6 +42,9 @@
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
     </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
     </edmx:Reference>
@@ -78,7 +81,8 @@
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_productionversion_o4.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
             <ComplexType Name="ZR_UPLOAD_PARAMETER">
-                <Property Name="Event" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
                 <Property Name="Zzkey" Type="Edm.String" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="EntityControl">
@@ -96,31 +100,43 @@
             </ComplexType>
             <Action Name="processLogic" IsBound="true">
                 <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_productionversion_o4.v0001.ProductionVersionType)" Nullable="false"/>
-                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
                 <ReturnType Type="com.sap.gateway.srvd.zui_productionversion_o4.v0001.ZR_UPLOAD_PARAMETER" Nullable="false"/>
             </Action>
             <EntityContainer Name="Container">
                 <EntitySet Name="ProductionVersion" EntityType="com.sap.gateway.srvd.zui_productionversion_o4.v0001.ProductionVersionType"/>
             </EntityContainer>
+            <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
             <Annotations Target="SAP__self.ProductionVersionType/UUID">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.Label" String="UUID"/>
                 <Annotation Term="SAP__common.QuickInfo" String="16 Byte UUID in 16 Bytes (Raw Format)"/>
             </Annotations>
             <Annotations Target="SAP__self.ProductionVersionType/Status">
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ProductionVersionType/Message">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__common.Label" String="Zzkey"/>
-                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Message Type"/>
+                <Annotation Term="SAP__common.Heading" String="Type"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Message type: S Success, E Error, W Warning, I Info, A Abort"/>
             </Annotations>
             <Annotations Target="SAP__self.ProductionVersionType/CreatedBy">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Created By"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Created By User"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProductionVersionType">
+                <Annotation Term="SAP__common.CreatedBy" Path="CreatedBy"/>
+                <Annotation Term="SAP__common.CreatedAt" Path="CreatedAt"/>
+                <Annotation Term="SAP__common.ChangedBy" Path="LastChangedBy"/>
+                <Annotation Term="SAP__common.ChangedAt" Path="LastChangedAt"/>
+                <Annotation Term="SAP__common.Label" String="Production Version Upload"/>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
             <Annotations Target="SAP__self.ProductionVersionType/CreatedAt">
                 <Annotation Term="SAP__core.Computed"/>
@@ -148,9 +164,15 @@
                 <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
-            <Annotations Target="SAP__self.ProductionVersionType">
-                <Annotation Term="SAP__common.Label" String="Production Version Upload"/>
-                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            <Annotations Target="SAP__self.processLogic(Collection(SAP__self.ProductionVersionType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.processLogic(Collection(SAP__self.ProductionVersionType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
             </Annotations>
             <Annotations Target="SAP__self.Container/ProductionVersion">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
@@ -267,6 +289,10 @@
                 <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
                 <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
             </Annotations>
+            <Annotations Target="SAP__self.ProductionVersionType/Message">
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
             <Annotations Target="SAP__self.ProductionVersionType/__EntityControl/Deletable">
                 <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
@@ -290,10 +316,6 @@
                 <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
-            </Annotations>
-            <Annotations Target="SAP__self.processLogic(Collection(SAP__self.ProductionVersionType))/Zzkey">
-                <Annotation Term="SAP__common.Label" String="Zzkey"/>
-                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

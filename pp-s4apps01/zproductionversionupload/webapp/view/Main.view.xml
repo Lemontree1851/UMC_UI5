@@ -69,19 +69,19 @@
                                 <Text text="{ path:'local>ValidityEndDate1',formatter:'.formatter.formatDate' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="10rem" label="{i18n>ExecBillOfOperationsType}">
+                        <table:Column width="10rem" label="{i18n>BillOfOperationsType}">
                             <table:template>
-                                <Text text="{local>ExecBillOfOperationsType}" wrapping="false"/>
+                                <Text text="{local>BillOfOperationsType}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="10rem" label="{i18n>ExecBillOfOperationsGroup}">
+                        <table:Column width="10rem" label="{i18n>BillOfOperationsGroup}">
                             <table:template>
-                                <Text text="{local>ExecBillOfOperationsGroup}" wrapping="false"/>
+                                <Text text="{local>BillOfOperationsGroup}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="10rem" label="{i18n>ExecBillOfOperationsVariant}">
+                        <table:Column width="10rem" label="{i18n>BillOfOperationsVariant}">
                             <table:template>
-                                <Text text="{local>ExecBillOfOperationsVariant}" wrapping="false"/>
+                                <Text text="{local>BillOfOperationsVariant}" wrapping="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>BillOfMaterialVariantUsage}">
