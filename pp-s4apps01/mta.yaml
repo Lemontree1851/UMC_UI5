@@ -83,6 +83,10 @@ modules:
       - ppzproductionorderrelease.zip
       name: ppzproductionorderrelease
       target-path: resources/
+    - artifacts:
+      - ppzpickinglist.zip
+      name: ppzpickinglist
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -168,6 +172,16 @@ modules:
 - name: ppzproductionorderrelease
   type: html5
   path: zproductionorderrelease
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzpickinglist
+  type: html5
+  path: zpickinglist
   build-parameters:
     build-result: dist
     builder: custom
