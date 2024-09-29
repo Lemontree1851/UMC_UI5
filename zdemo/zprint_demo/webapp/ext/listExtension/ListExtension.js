@@ -35,13 +35,35 @@ sap.ui.define([
                 Promise.all(aRecordCreated).then((aContext) => {
                     oBusyDialog.close();
                     var sURL;
+                    var aDocuments = [];
                     for (const activeContext of aContext) {
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
                         var sPath = that.getModel("Print").getKeyPredicate("/PrintRecord", object);
                         sURL = activeContext.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
                         sap.m.URLHelper.redirect(sURL, true);
+
+                        aDocuments.push({
+                            uuid: object.RecordUUID
+                        });
                     }
+                    
+                    // Merger PDF Begin
+                    var mergerPDF = that.getModel("Print").bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.mergerPDF(...)");
+                    mergerPDF.setParameter("TemplateID", "YY1_DEMO_001");
+                    mergerPDF.setParameter("Zzkey", JSON.stringify(aDocuments));
+                    mergerPDF.setParameter("RecordUUID", "");
+                    mergerPDF.setParameter("ResultIsActiveEntity", true);
+                    mergerPDF.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
+                        var object = mergerPDF.getBoundContext().getObject();
+                        var sPath = "(RecordUUID=" + object.RecordUUID + ",IsActiveEntity=true)";
+                        sURL = mergerPDF.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
+                        sap.m.URLHelper.redirect(sURL, true);
+                    }).catch((oError) => {
+                        reject(oError);
+                    });
+                    // Merger PDF End
+
                     MessageToast.show("Print Success");
                 }).finally(() => {
                     oBusyDialog.close();
