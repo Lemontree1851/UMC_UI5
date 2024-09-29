@@ -1,0 +1,89 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table">
+    <Dialog title="{i18n>ShowDetails}">
+        <Panel expandable="false" expanded="true" width="auto">
+            <table:Table rows="{local>/detailSet}" selectionMode="Multi" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:columns>
+                    <table:Column width="6rem" label="{i18n>Plant}">
+                        <table:template>
+                            <Text text="{local>Plant}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>Material}">
+                        <table:template>
+                            <Text text="{local>MaterialName}({local>Material})" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>TotalRequiredQuantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>TotalRequiredQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>StorageLocationToStock}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>StorageLocationToStock',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>TotalShortFallQuantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>TotalShortFallQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>StorageLocationTo}">
+                        <table:template>
+                            <Text text="{local>StorageLocationToName}({local>StorageLocationTo})" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>ManufacturingOrder}">
+                        <table:template>
+                            <Text text="{local>ManufacturingOrder}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>Product}">
+                        <table:template>
+                            <Text text="{local>ProductName}({local>Product})" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>OrderRequiredQuantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>OrderRequiredQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>ResidueStockQuantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>ResidueStockQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>ShortQuantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>ShortQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>ConfirmedAvailableQuantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>ConfirmedAvailableQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>RequisitionDate}">
+                        <table:template>
+                            <Text text="{ path:'local>RequisitionDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>MRPController}">
+                        <table:template>
+                            <Text text="{local>MRPController}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>ProductionSupervisor}">
+                        <table:template>
+                            <Text text="{local>ProductionSupervisor}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>

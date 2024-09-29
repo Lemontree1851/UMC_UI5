@@ -1,7 +1,133 @@
-<mvc:View controllerName="pp.zpickinglist.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page>
-        <Button text="text"></Button>
-    </Page>
+<mvc:View controllerName="pp.zpickinglist.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="PickingListSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <RadioButtonGroup columns="2" selectedIndex="{local>/selectIndex}">
+                        <RadioButton text="{i18n>StandardList}" selected="true"/>
+                        <RadioButton text="{i18n>CustomList}"/>
+                    </RadioButtonGroup>
+                </f:content>
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <!--欠品一覧-->
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar1" entitySet="ZC_PICKINGLIST_STD" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" visible="{= ${local>/selectIndex} === 0}" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <!-- mandatory="mandatory" -->
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" filterType="single" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="RequisitionDate" label="{i18n>RequisitionDate}" visibleInAdvancedArea="true">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" value="{
+                                            'path':'local>/std_dateValue',
+                                            'type':'sap.ui.model.type.Date',
+                                            'formatOptions': {
+                                                'UTC': true
+                                            }
+                                        }"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='30' key="StorageLocationTo" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationTo}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="StorageLocationFrom" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationFrom}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="MRPController" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="ProductionSupervisor" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="MaterialGroup" visibleInAdvancedArea="true" label="{i18n>MaterialGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="LaboratoryOrDesignOffice" visibleInAdvancedArea="true" label="{i18n>LaboratoryOrDesignOffice}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="ExternalProductGroup" visibleInAdvancedArea="true" label="{i18n>ExternalProductGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="SizeOrDimensionText" visibleInAdvancedArea="true" label="{i18n>SizeOrDimensionText}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StorageLocationToName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalRequiredQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalShortFallQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StorageLocationToStock" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="M_CARD_Quantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalTransferQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StorageLocationFromName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StorageLocationFromStock" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GR_SlipsQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="M_CARD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LaboratoryOrDesignOfficeName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DetailsJson" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                        <!--入出庫一覧-->
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar2" entitySet="ZC_PICKINGLIST_TAB" useToolbar="false" smartVariant="__SVM01" persistencyKey="CustomListSFB" visible="{= ${local>/selectIndex} === 1}" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="RequisitionDate" label="{i18n>RequisitionDate}" visibleInAdvancedArea="true">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" value="{
+                                            'path':'local>/tab_dateValue',
+                                            'type':'sap.ui.model.type.Date',
+                                            'formatOptions': {
+                                                'UTC': true
+                                            }
+                                        }"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='30' key="StorageLocationTo" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationTo}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="StorageLocationFrom" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationFrom}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="MaterialGroup" visibleInAdvancedArea="true" label="{i18n>MaterialGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="LaboratoryOrDesignOffice" visibleInAdvancedArea="true" label="{i18n>LaboratoryOrDesignOffice}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="ExternalProductGroup" visibleInAdvancedArea="true" label="{i18n>ExternalProductGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="Reservation" visibleInAdvancedArea="true" label="{i18n>Reservation}"/>
+                                <smartFilterBar:ControlConfiguration index='110' key="CreatedDate" visibleInAdvancedArea="true" label="{i18n>CreatedDate}"/>
+                                <smartFilterBar:ControlConfiguration index='120' key="CreatedByUser" visibleInAdvancedArea="true" label="{i18n>CreatedByUser}"/>
+                                <smartFilterBar:ControlConfiguration index='130' key="LastChangedDate" visibleInAdvancedArea="true" label="{i18n>LastChangedDate}"/>
+                                <smartFilterBar:ControlConfiguration index='140' key="LastChangedByUser" visibleInAdvancedArea="true" label="{i18n>LastChangedByUser}"/>
+                                <smartFilterBar:ControlConfiguration index='150' key="SizeOrDimensionText" visibleInAdvancedArea="true" label="{i18n>SizeOrDimensionText}"/>
+                                <smartFilterBar:ControlConfiguration index='160' key="DeleteFlag" visibleInAdvancedArea="true" label="{i18n>DeleteFlag}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StorageLocationToName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalRequiredQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalShortFallQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StorageLocationToStock" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="M_CARD_Quantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalTransferQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StorageLocationFromName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StorageLocationFromStock" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GR_SlipsQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="M_CARD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreatedTime" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreatedByUserName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LastChangedTime" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LastChangedByUserName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LocalLastChangedAt" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PostingStatus" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PostingStatusText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PostingQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LaboratoryOrDesignOfficeName" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <!--欠品一覧-->
+                <core:Fragment fragmentName="pp.zpickinglist.fragments.StandardList" type="XML"/>
+                <!--入出庫一覧-->
+                <core:Fragment fragmentName="pp.zpickinglist.fragments.CustomList" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>

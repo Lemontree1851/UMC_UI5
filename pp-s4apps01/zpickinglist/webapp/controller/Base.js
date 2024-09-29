@@ -133,6 +133,16 @@ sap.ui.define([
                 this._pad2(date.getSeconds());
             return sTime;
         },
+        getCurrentUTCDateTime: function () {
+            var date = new Date();
+            var sTime = date.getUTCFullYear().toString() +
+                this._pad2(date.getUTCMonth() + 1) +
+                this._pad2(date.getUTCDate()) +
+                this._pad2(date.getUTCHours()) +
+                this._pad2(date.getUTCMinutes()) +
+                this._pad2(date.getUTCSeconds());
+            return sTime;
+        },
         _pad2: function (n) {
             return parseInt(n) < 10 ? "0" + parseInt(n) : n;
         },
@@ -261,6 +271,53 @@ sap.ui.define([
                         fnNO(this);
                     }
                 }.bind(this)
+            });
+        },
+
+        _CallODataV2: function (sMethod, sPath, aFilters, mUrlParameter, oRequestData) {
+            var that = this;
+            var oBusyDialog = new sap.m.BusyDialog();
+            oBusyDialog.open();
+            return new Promise(function (resolve, reject) {
+                var mParameters = {
+                    filters: aFilters,
+                    urlParameters: mUrlParameter,
+                    success: function (oResponse) {
+                        oBusyDialog.close();
+                        resolve(oResponse);
+                    },
+                    error: function (oErr) {
+                        oBusyDialog.close();
+                        // var oError = JSON.parse(oErr.responseText);
+                        // var sMsg;
+                        // if (oError.error.innererror.errordetails.length > 0) {
+                        //     sMsg = oError.error.innererror.errordetails[0].message;
+                        // } else {
+                        //     sMsg = oError.error.message.value;
+                        // }
+                        // MessageBox.error(sMsg);
+                        reject(JSON.parse(oErr.responseText));
+                    }
+                };
+                switch (sMethod) {
+                    case "READ":
+                        that.getModel().read(sPath, mParameters);
+                        break;
+                    case "CREATE":
+                        that.getModel().create(sPath, oRequestData, mParameters);
+                        break;
+                    case "UPDATE":
+                        that.getModel().update(sPath, oRequestData, mParameters);
+                        break;
+                    case "DELETE":
+                        that.getModel().remove(sPath, mParameters);
+                        break;
+                    case "ACTION":
+                        that.getModel().callFunction(sPath, mParameters);
+                        break;
+                    default:
+                        break;
+                }
             });
         }
     })
