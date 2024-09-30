@@ -115,7 +115,8 @@ sap.ui.define([
                 }
                 var aSelectedItems = this._oTable.getSelectedIndices();
                 var iLen = aSelectedItems.length;
-                var aItems = [];
+                var aItems = [],
+                    aDetails = [];
                 if (!iLen) {
                     MessageBox.error(this.getResourceBundle().getText("NoneSelected"));
                     return;
@@ -124,6 +125,7 @@ sap.ui.define([
                     var sPath = this._oTable.getContextByIndex(aSelectedItems[iLen]).getPath();
                     var oRow = this.getModel().getObject(sPath);
                     aItems.push(oRow);
+                    aDetails.push(JSON.parse(oRow.DetailsJson));
                 }
                 var oRequestData = {
                     items: aItems,
@@ -135,15 +137,14 @@ sap.ui.define([
                 switch (event) {
                     case "STD_CREATE":
                         break;
-                    case "STD_DETAIL":
-                        this.showDetailsDialog();
-                        break;
                     case "TAB_SAVE":
                         this.getModel("local").setProperty("/tab_mode", "display");
                         break;
                     case "TAB_DELETE":
                         break;
+                    case "STD_DETAIL":
                     case "TAB_DETAIL":
+                        this.getModel("local").setProperty("/detailSet", aDetails.flat());
                         this.showDetailsDialog();
                         break;
                     default:

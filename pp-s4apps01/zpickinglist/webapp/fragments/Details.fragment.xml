@@ -49,7 +49,7 @@
                     </table:Column>
                     <table:Column width="12rem" label="{i18n>OrderRequiredQuantity}" hAlign="End">
                         <table:template>
-                            <Text text="{ path:'local>OrderRequiredQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                            <Text text="{ path:'local>RequiredQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="12rem" label="{i18n>ResidueStockQuantity}" hAlign="End">
@@ -59,7 +59,11 @@
                     </table:Column>
                     <table:Column width="12rem" label="{i18n>ShortQuantity}" hAlign="End">
                         <table:template>
-                            <Text text="{ path:'local>ShortQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                            <Text text="{ path:'local>ShortQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false">
+                                <customData>
+                                    <core:CustomData xmlns:core="sap.ui.core" key="background" value="{local>ShortQuantityColor}" writeToDom="true" />
+                                </customData>
+                            </Text>
                         </table:template>
                     </table:Column>
                     <table:Column width="12rem" label="{i18n>ConfirmedAvailableQuantity}" hAlign="End">
