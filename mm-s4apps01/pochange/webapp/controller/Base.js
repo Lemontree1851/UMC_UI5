@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Controller, UIComponent, History, MessageBox, Fragment, Filter, FilterOperator) {
     "use strict";
 
-    return Controller.extend("mm.purinforecordchange.controller.Base", {
+    return Controller.extend("mm.pochange.controller.Base", {
 
         /**
          * Convenience method for accessing the router in every controller of the application.
