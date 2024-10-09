@@ -62,6 +62,13 @@ modules:
     - artifacts:
       - mmpoacceptance.zip
       name: mmpoacceptance
+    - artifacts:
+      - mmpodataanalysis.zip
+      name: mmpodataanalysis
+      target-path: resources/
+    - artifacts:
+      - mmpodataanalysis.zip
+      name: mmpodataanalysis
       target-path: resources/
 - name: mmsourcelistupload
   type: html5
@@ -99,6 +106,7 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+
 - name: mmpoacceptance
   type: html5
   path: poacceptance
@@ -106,6 +114,17 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+    
+- name: mmpodataanalysis
+  type: html5
+  path: podataanalysis
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
