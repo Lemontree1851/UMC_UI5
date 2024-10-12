@@ -3,119 +3,142 @@ ID: bc-s4apps01
 description: BC Fiori Apps
 version: 0.0.1
 modules:
-  - name: bc-s4apps01-dest-content
-    type: com.sap.application.content
-    requires:
-      - name: bc-s4apps01-destination-service
-        parameters:
-          content-target: true
-      - name: bc-s4apps01-repo-host
-        parameters:
-          service-key:
-            name: bc-s4apps01-repo-host-key
-      - name: bc-s4apps01-uaa
-        parameters:
-          service-key:
-            name: bc-s4apps01-uaa-key
+- name: bc-s4apps01-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: bc-s4apps01-destination-service
     parameters:
-      content:
+      content-target: true
+  - name: bc-s4apps01-repo-host
+    parameters:
+      service-key:
+        name: bc-s4apps01-repo-host-key
+  - name: bc-s4apps01-uaa
+    parameters:
+      service-key:
+        name: bc-s4apps01-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: bc-s4apps01_repo_host
+          ServiceInstanceName: bc-s4apps01-html5-srv
+          ServiceKeyName: bc-s4apps01-repo-host-key
+          sap.cloud.service: bc-s4apps01
+        - Authentication: OAuth2UserTokenExchange
+          Name: bc-s4apps01_uaa
+          ServiceInstanceName: bc-s4apps01-xsuaa-srv
+          ServiceKeyName: bc-s4apps01-uaa-key
+          sap.cloud.service: bc-s4apps01
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: bc-s4apps01-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: bc-s4apps01-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - bczdtimpconf.zip
+      name: bczdtimpconf
+      target-path: resources/
+    - artifacts:
+      - bczdtimpfiles.zip
+      name: bczdtimpfiles
+      target-path: resources/
+    - artifacts:
+      - bczcommonconf.zip
+      name: bczcommonconf
+      target-path: resources/
+    - artifacts:
+      - bczauthorityuserlist.zip
+      name: bczauthorityuserlist
+      target-path: resources/
+    - artifacts:
+      - bczauthorityrolelist.zip
+      name: bczauthorityrolelist
+      target-path: resources/
+- name: bczdtimpconf
+  type: html5
+  path: zdtimpconf
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bczdtimpfiles
+  type: html5
+  path: zdtimpfiles
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bczcommonconf
+  type: html5
+  path: zcommonconf
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bczauthorityuserlist
+  type: html5
+  path: zauthorityuserlist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bczauthorityrolelist
+  type: html5
+  path: zauthorityrolelist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: bc-s4apps01-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: bc-s4apps01-xsuaa-srv
+    service-plan: application
+- name: bc-s4apps01-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
         instance:
           destinations:
-            - Name: bc-s4apps01_repo_host
-              ServiceInstanceName: bc-s4apps01-html5-srv
-              ServiceKeyName: bc-s4apps01-repo-host-key
-              sap.cloud.service: bc-s4apps01
-            - Authentication: OAuth2UserTokenExchange
-              Name: bc-s4apps01_uaa
-              ServiceInstanceName: bc-s4apps01-xsuaa-srv
-              ServiceKeyName: bc-s4apps01-uaa-key
-              sap.cloud.service: bc-s4apps01
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
           existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-  - name: bc-s4apps01-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: bc-s4apps01-repo-host
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources
-      requires:
-        - artifacts:
-            - bczdtimpconf.zip
-          name: bczdtimpconf
-          target-path: resources/
-        - artifacts:
-            - bczdtimpfiles.zip
-          name: bczdtimpfiles
-          target-path: resources/
-        - artifacts:
-            - bczcommonconf.zip
-          name: bczcommonconf
-          target-path: resources/
-  - name: bczdtimpconf
-    type: html5
-    path: zdtimpconf
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        # - npm install
-        - npm run build:cf
-      supported-platforms: []
-  - name: bczdtimpfiles
-    type: html5
-    path: zdtimpfiles
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        # - npm install
-        - npm run build:cf
-      supported-platforms: []
-  - name: bczcommonconf
-    type: html5
-    path: zcommonconf
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        # - npm install
-        - npm run build:cf
-      supported-platforms: []
-resources:
-  - name: bc-s4apps01-uaa
-    type: org.cloudfoundry.managed-service
-    parameters:
-      path: ./xs-security.json
-      service: xsuaa
-      service-name: bc-s4apps01-xsuaa-srv
-      service-plan: application
-  - name: bc-s4apps01-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      config:
-        HTML5Runtime_enabled: true
-        init_data:
-          instance:
-            destinations:
-              - Authentication: NoAuthentication
-                Name: ui5
-                ProxyType: Internet
-                Type: HTTP
-                URL: https://ui5.sap.com
-            existing_destinations_policy: update
-        version: 1.0.0
-      service: destination
-      service-name: bc-s4apps01-destination-service
-      service-plan: lite
-  - name: bc-s4apps01-repo-host
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-name: bc-s4apps01-html5-srv
-      service-plan: app-host
+      version: 1.0.0
+    service: destination
+    service-name: bc-s4apps01-destination-service
+    service-plan: lite
+- name: bc-s4apps01-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: bc-s4apps01-html5-srv
+    service-plan: app-host
 parameters:
   deploy_mode: html5-repo
