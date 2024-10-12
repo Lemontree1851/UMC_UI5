@@ -101,6 +101,9 @@
                 <Property Name="MessageType" Type="Edm.String" MaxLength="1" sap:label="ステータス"/>
                 <Property Name="Message" Type="Edm.String" MaxLength="220" sap:label="メッセージ"/>
                 <Property Name="ProductionUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="Criticality" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative"/>
+                <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
+                <Property Name="ReleaseIndicator" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
             </EntityType>
             <EntityType Name="ZC_ProductionSupervisorVHType" sap:label="Production Supervisor Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -113,20 +116,20 @@
                 <Key>
                     <PropertyRef Name="CurrencyCode"/>
                 </Key>
-                <Property Name="CurrencyCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="通貨" sap:semantics="currency-code"/>
-                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO コード"/>
-                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="15" sap:label="内容説明"/>
-                <Property Name="DecimalPlaces" Type="Edm.Byte" Nullable="false" sap:label="小数点以下"/>
+                <Property Name="CurrencyCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO Code"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="15" sap:label="Short Text"/>
+                <Property Name="DecimalPlaces" Type="Edm.Byte" Nullable="false" sap:label="Decimals"/>
             </EntityType>
             <EntityType Name="SAP__UnitOfMeasure" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="UnitCode"/>
                 </Key>
-                <Property Name="UnitCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="内部数量単位" sap:semantics="unit-of-measure"/>
-                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO コード"/>
-                <Property Name="ExternalCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="通商単位"/>
-                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="数量単位 Text"/>
-                <Property Name="DecimalPlaces" Type="Edm.Int16" sap:label="小数点以下桁数"/>
+                <Property Name="UnitCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Internal UoM" sap:semantics="unit-of-measure"/>
+                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO Code"/>
+                <Property Name="ExternalCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Commercial"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Meas. Unit Text"/>
+                <Property Name="DecimalPlaces" Type="Edm.Int16" sap:label="Decimal Places"/>
             </EntityType>
             <EntityType Name="SAP__DocumentDescription" sap:content-version="1">
                 <Key>
@@ -134,7 +137,7 @@
                 </Key>
                 <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID"/>
                 <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
-                <Property Name="CreatedAt" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="タイムスタンプ"/>
+                <Property Name="CreatedAt" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Time Stamp"/>
                 <Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="256"/>
                 <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256"/>
                 <NavigationProperty Name="Format" Relationship="cds_zui_productionorder_o2.to_format" FromRole="FromRole_to_format" ToRole="ToRole_to_format"/>
@@ -166,7 +169,7 @@
                 </Key>
                 <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="UsePDFAConformance" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DoEnableAccessibility" Type="Edm.Boolean" Nullable="false" sap:label="フラグ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DoEnableAccessibility" Type="Edm.Boolean" Nullable="false" sap:label="Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__TableColumns" sap:content-version="1">
                 <Key>
@@ -196,7 +199,7 @@
                     <PropertyRef Name="Id"/>
                 </Key>
                 <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DoSign" Type="Edm.Boolean" Nullable="false" sap:label="フラグ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DoSign" Type="Edm.Boolean" Nullable="false" sap:label="Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Reason" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__Hierarchy" sap:content-version="1">
@@ -233,6 +236,11 @@
                 <Property Name="FIELD_VALUE" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="DESCRIPTION" Type="Edm.String"/>
             </EntityType>
+            <ComplexType Name="ZR_UPLOAD_PARAMETER">
+                <Property Name="Event" Type="Edm.String" MaxLength="20"/>
+                <Property Name="RecordUUID" Type="Edm.String" MaxLength="36" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                <Property Name="Zzkey" Type="Edm.String" sap:label="Zzkey" sap:quickinfo="String Type"/>
+            </ComplexType>
             <ComplexType Name="SAP__FitToPage">
                 <Property Name="ErrorRecoveryBehavior" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Error behavior" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="IsEnabled" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -394,6 +402,11 @@
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage"/>
                     <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage"/>
                 </AssociationSet>
+                <FunctionImport Name="processLogic" ReturnType="cds_zui_productionorder_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
             <Annotations Target="cds_zui_productionorder_o2.ProductionOrderType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">

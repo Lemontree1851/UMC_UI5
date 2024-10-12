@@ -35,6 +35,15 @@
             <Annotations Target="cds_zui_productionorder_o2.ProductionOrderType/ProductionUnit">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
+            <Annotations Target="cds_zui_productionorder_o2.ProductionOrderType/Criticality">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_productionorder_o2.ProductionOrderType/LocalLastChangedAt">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_productionorder_o2.ProductionOrderType/ReleaseIndicator">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="cds_zui_productionorder_o2.ProductionOrderType">
                 <Annotation Term="UI.HeaderInfo">
                     <Record>
@@ -46,6 +55,7 @@
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="ステータス"/>
+                            <PropertyValue Property="Criticality" Path="Criticality"/>
                             <PropertyValue Property="Value" Path="MessageType"/>
                         </Record>
                         <Record Type="UI.DataField">
