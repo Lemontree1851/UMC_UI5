@@ -17,6 +17,7 @@ sap.ui.define([
         formatter: formatter,
 
         onInit: function () {
+            var that = this;
             this._myBusyDialog = new BusyDialog();
             // *************************************************
             var oMessageTemplate = new sap.m.MessageItem({
@@ -40,7 +41,7 @@ sap.ui.define([
                 icon: sap.ui.core.IconPool.getIconURI("nav-back"),
                 visible: false,
                 press: function () {
-                    this._myMessageView.navigateBack();
+                    that._myMessageView.navigateBack();
                     oBackButton.setVisible(false);
                 }
             });
@@ -49,7 +50,7 @@ sap.ui.define([
                 content: this._myMessageView,
                 beginButton: new sap.m.Button({
                     press: function () {
-                        this._myMessageDialog.close();
+                        that._myMessageDialog.close();
                     },
                     text: "{i18n>CloseBtn}"
                 }),
@@ -94,29 +95,32 @@ sap.ui.define([
             this.getModel().resetChanges();
         },
 
-        onPressBtn: function (event) {
-            if (event === "STD_EDIT") {
+        onPressBtn: function (sEvent) {
+            if (sEvent === "STD_EDIT") {
                 this.getModel("local").setProperty("/std_mode", "edit");
                 return;
-            } else if (event === "STD_DISPLAY") {
+            } else if (sEvent === "STD_DISPLAY") {
                 this.getModel("local").setProperty("/std_mode", "display");
                 return;
-            } else if (event === "TAB_EDIT") {
+            } else if (sEvent === "TAB_EDIT") {
                 this.getModel("local").setProperty("/tab_mode", "edit");
                 return;
-            } else if (event === "TAB_DISPLAY") {
+            } else if (sEvent === "TAB_DISPLAY") {
                 this.getModel("local").setProperty("/tab_mode", "display");
                 return;
             } else {
-                if (event.includes("STD")) {
+                var that = this;
+                if (sEvent.includes("STD")) {
                     this._oTable = this.byId("idStandardListTable");
-                } else if (event.includes("TAB")) {
+                } else if (sEvent.includes("TAB")) {
                     this._oTable = this.byId("idCustomListTable");
                 }
                 var aSelectedItems = this._oTable.getSelectedIndices();
                 var iLen = aSelectedItems.length;
+                var sTitle;
                 var aItems = [],
                     aDetails = [];
+                var aMessageItems = [];
                 if (!iLen) {
                     MessageBox.error(this.getResourceBundle().getText("NoneSelected"));
                     return;
@@ -127,30 +131,116 @@ sap.ui.define([
                     aItems.push(oRow);
                     aDetails.push(JSON.parse(oRow.DetailsJson));
                 }
+                if (sEvent === "STD_DETAIL" || sEvent === "TAB_DETAIL") {
+                    this.getModel("local").setProperty("/detailSet", aDetails.flat());
+                    this.showDetailsDialog();
+                    return;
+                }
+                aItems.sort(function (a, b) {
+                    return a.RowNo - b.RowNo;
+                });
+                switch (sEvent) {
+                    case "STD_CREATE":
+                        sTitle = this.getModel("i18n").getResourceBundle().getText("Create");
+                        for (let index = 0; index < aItems.length; index++) {
+                            const element = aItems[index];
+                            // 移動数量は在庫数量を超えるかをチェックする
+                            if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.StorageLocationFromStock)) {
+                                aMessageItems.push({
+                                    type: "Error",
+                                    title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                    description: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo]),
+                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo])
+                                });
+                            }
+                            // 移動数量は欠品数量を超えるかをチェックする
+                            if (parseFloat(element.TotalTransferQuantity) < parseFloat(element.TotalShortFallQuantity)) {
+                                aMessageItems.push({
+                                    type: "Warning",
+                                    title: this.getModel("i18n").getResourceBundle().getText("Warning"),
+                                    description: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo]),
+                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo])
+                                });
+                            } else {
+                                if (element.SizeOrDimensionText === "X") {
+                                    if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
+                                        aMessageItems.push({
+                                            type: "Error",
+                                            title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                            description: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo]),
+                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo])
+                                        });
+                                    }
+                                } else {
+                                    if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
+                                        aMessageItems.push({
+                                            type: "Warning",
+                                            title: this.getModel("i18n").getResourceBundle().getText("Warning"),
+                                            description: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo]),
+                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo])
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case "TAB_SAVE":
+                        sTitle = this.getModel("i18n").getResourceBundle().getText("Save");
+                        this.getModel("local").setProperty("/tab_mode", "display");
+                        break;
+                    case "TAB_DELETE":
+                        sTitle = this.getModel("i18n").getResourceBundle().getText("Delete");
+                        break;
+                    default:
+                        break;
+                }
+                var obj = aMessageItems.find(item => item.type === "Error");
+                if (obj) {
+                    this.showMessageDialog(aMessageItems);
+                    return;
+                }
                 var oRequestData = {
                     items: aItems,
                     user: "P00001",
                     username: "Xinlei Xu",
                     datetime: this.getCurrentUTCDateTime()
                 }
-                this._myBusyDialog.open();
-                switch (event) {
-                    case "STD_CREATE":
-                        break;
-                    case "TAB_SAVE":
-                        this.getModel("local").setProperty("/tab_mode", "display");
-                        break;
-                    case "TAB_DELETE":
-                        break;
-                    case "STD_DETAIL":
-                    case "TAB_DETAIL":
-                        this.getModel("local").setProperty("/detailSet", aDetails.flat());
-                        this.showDetailsDialog();
-                        break;
-                    default:
-                        break;
-                }
-                this._myBusyDialog.close();
+                MessageBox.confirm(this.getModel("i18n").getResourceBundle().getText("ConfirmMessage", [sTitle]), {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
+                    onClose: function (sAction) {
+                        if (sAction === MessageBox.Action.OK) {
+                            that._CallODataV2("ACTION", "/processLogic", [], {
+                                "Event": sEvent,
+                                "Zzkey": JSON.stringify(oRequestData),
+                                "RecordUUID": ""
+                            }, {}).then(function (oResponse) {
+                                var result = JSON.parse(oResponse.processLogic.Zzkey);
+                                result.MESSAGEITEMS.forEach(element => {
+                                    aMessageItems.push({
+                                        type: element.TYPE,
+                                        title: element.TITLE,
+                                        description: element.DESCRIPTION,
+                                        subtitle: element.SUBTITLE
+                                    });
+                                });
+                                that.showMessageDialog(aMessageItems);
+                                that._oTable.clearSelection();
+                                that.getModel().refresh();
+                            }, function (oError) {
+                                var sMsg;
+                                if (oError.error.innererror.errordetails.length > 0) {
+                                    sMsg = oError.error.innererror.errordetails[0].message;
+                                } else {
+                                    sMsg = oError.error.message.value;
+                                }
+                                MessageBox.error(sMsg);
+                            });
+                        }
+                    },
+                    dependentOn: this.getView()
+                });
+                this.showMessageDialog(aMessageItems);
             }
         },
 
@@ -177,6 +267,16 @@ sap.ui.define([
             }.bind(this));
         },
 
+        showMessageDialog: function (aMessageItems) {
+            if (aMessageItems.length > 0) {
+                this.getModel("local").setProperty("/MessageItems", aMessageItems);
+                this._myMessageView.setModel(this.getModel("local"));
+                this._myMessageView.navigateBack();
+                this.getView().addDependent(this._myMessageDialog);
+                this._myMessageDialog.open();
+            }
+        },
+
         handleChange: function (oEvent) {
             var sValue, sInputBindingPath, sODataPath, sPath;
             this._oControl = oEvent.getSource();
@@ -199,20 +299,23 @@ sap.ui.define([
             sPath = sODataPath + "('" + sValue + "')";
 
             //----------------------------Custom Logic----------------------------------------
-            if (sODataPath === "/I_StorageLocationStdVH") {
+            if (sODataPath === "/ZC_MaterialStockVH") {
+                var sMaterial = this.getModel().getProperty(sRowBindingPath + "/Material");
                 var sPlant = this.getModel().getProperty(sRowBindingPath + "/Plant");
-                sPath = sODataPath + "(Plant='" + sPlant + "',StorageLocation='" + sValue + "')";
+                sPath = sODataPath + "(Material='" + sMaterial + "',Plant='" + sPlant + "',StorageLocation='" + sValue + "')";
             }
             var sBindFieldName = sInputBindingPath;
             this._CallODataV2("READ", sPath, [], {}, {}).then(function (oResponse) {
                 this._oControl.setValueState("None");
-                if (sODataPath === "/I_StorageLocationStdVH") {
+                if (sODataPath === "/ZC_MaterialStockVH") {
                     this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName, oResponse["StorageLocation"]);
                     this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Name", oResponse["StorageLocationName"]);
+                    this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Stock", oResponse["StockQuantity"]);
                 }
             }.bind(this), function (oError) {
-                if (sODataPath === "/I_StorageLocationStdVH") {
+                if (sODataPath === "/ZC_MaterialStockVH") {
                     this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Name", "");
+                    this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Stock", 0);
                 }
             }.bind(this));
             //----------------------------Custom Logic----------------------------------------
@@ -221,5 +324,13 @@ sap.ui.define([
                 this._oControl.setValueState("None");
             }
         },
+
+        handleSuggest: function (oEvent) {
+            var aFilters = [];
+            var oRowData = this.getModel().getProperty(oEvent.getSource().getParent().getBindingContext().getPath());
+            aFilters.push(new sap.ui.model.Filter("Plant", sap.ui.model.FilterOperator.EQ, oRowData.Plant));
+            aFilters.push(new sap.ui.model.Filter("Material", sap.ui.model.FilterOperator.EQ, oRowData.Material));
+            oEvent.getSource().getBinding("suggestionRows").filter(aFilters);
+        }
     });
 });

@@ -280,6 +280,7 @@ sap.ui.define([
             oBusyDialog.open();
             return new Promise(function (resolve, reject) {
                 var mParameters = {
+                    method: sMethod === "READ" ? "GET" : "POST",
                     filters: aFilters,
                     urlParameters: mUrlParameter,
                     success: function (oResponse) {

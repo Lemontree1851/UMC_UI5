@@ -26,13 +26,18 @@ sap.ui.define([
                 // Custom Logic Begin
                 var oBindRow = that.getModel().getProperty(oEvent.getSource().getParent().getBindingContext().getPath());
                 var aFilters = [];
-                if (sPath === "/I_StorageLocationStdVH") {
+                if (sPath === "/ZC_MaterialStockVH") {
                     oDialog.setKey(that._aVHFields[1]);
                     oDialog.setDescriptionKey(that._aVHFields[2]);
                     aFilters.push(new Filter({
                         path: "Plant",
                         operator: FilterOperator.EQ,
                         value1: oBindRow.Plant
+                    }));
+                    aFilters.push(new Filter({
+                        path: "Material",
+                        operator: FilterOperator.EQ,
+                        value1: oBindRow.Material
                     }));
                 } else {
                     oDialog.setKey(that._aVHFields[0]);
@@ -50,9 +55,9 @@ sap.ui.define([
                     });
                     var oControl = new Input({ name: fieldName });
                     // Custom Logic Begin
-                    if (sPath === "/I_StorageLocationStdVH" && fieldName === "Plant") {
-                        oControl = new Input({ name: fieldName, value: oBindRow.Plant });
-                    }
+                    // if (sPath === "/ZC_MaterialStockVH") {
+                    //     oControl = new Input({ name: fieldName, value: oBindRow[fieldName] });
+                    // }
                     // Custom Logic End
                     oFilterGroupItem.setControl(oControl);
                     oFilterBar.addFilterGroupItem(oFilterGroupItem);
@@ -150,6 +155,7 @@ sap.ui.define([
                 sInputPath = sItemPath + sBindFieldName;
                 this.getModel().setProperty(sInputPath, aTokens[0].getProperty("key"));
                 this.getModel().setProperty(sInputPath + "Name", aTokens[0].getProperty("text").split("(")[0]);
+                // this.getModel().setProperty(sInputPath + "Stock", oResponse["StockQuantity"]);
             }
             //----------------------------Custom Logic----------------------------------------
             this._oVHD.close();

@@ -112,7 +112,7 @@
                     </table:customData>
                     <table:template>
                         <Input value="{StorageLocationFrom}" change="handleChange" editable="{= ${local>/std_mode} === 'edit'}" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/I_StorageLocationStdVH', ['Plant','StorageLocation','StorageLocationName'])" showSuggestion="true" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
+                        $event, $controller, '/ZC_MaterialStockVH', ['Plant','StorageLocation','StorageLocationName','StockQuantity'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_MaterialStockVH', length: 4 }">
                             <suggestionColumns>
                                 <Column>
                                     <Label text="{i18n>StorageLocation}"/>
@@ -120,11 +120,15 @@
                                 <Column>
                                     <Label text="{i18n>StorageLocationName}"/>
                                 </Column>
+                                <Column>
+                                    <Label text="{i18n>StockQuantity}"/>
+                                </Column>
                             </suggestionColumns>
                             <suggestionRows>
                                 <ColumnListItem>
                                     <Label text="{StorageLocation}" />
                                     <Label text="{StorageLocationName}" />
+                                    <Label text="{StockQuantity}" />
                                 </ColumnListItem>
                             </suggestionRows>
                         </Input>
