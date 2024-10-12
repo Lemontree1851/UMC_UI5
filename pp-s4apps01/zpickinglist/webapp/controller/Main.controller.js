@@ -145,7 +145,7 @@ sap.ui.define([
                         for (let index = 0; index < aItems.length; index++) {
                             const element = aItems[index];
                             // 移動数量は在庫数量を超えるかをチェックする
-                            if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.StorageLocationFromStock)) {
+                            if (element.StorageLocationFrom === element.StorageLocationTo) {
                                 aMessageItems.push({
                                     type: "Error",
                                     title: this.getModel("i18n").getResourceBundle().getText("Error"),
@@ -153,13 +153,22 @@ sap.ui.define([
                                     subtitle: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo])
                                 });
                             }
+                            // 移動数量は在庫数量を超えるかをチェックする
+                            if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.StorageLocationFromStock)) {
+                                aMessageItems.push({
+                                    type: "Error",
+                                    title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                    description: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo]),
+                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo])
+                                });
+                            }
                             // 移動数量は欠品数量を超えるかをチェックする
                             if (parseFloat(element.TotalTransferQuantity) < parseFloat(element.TotalShortFallQuantity)) {
                                 aMessageItems.push({
                                     type: "Warning",
                                     title: this.getModel("i18n").getResourceBundle().getText("Warning"),
-                                    description: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo]),
-                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo])
+                                    description: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo]),
+                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo])
                                 });
                             } else {
                                 if (element.SizeOrDimensionText === "X") {
@@ -167,8 +176,8 @@ sap.ui.define([
                                         aMessageItems.push({
                                             type: "Error",
                                             title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                            description: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo]),
-                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo])
+                                            description: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo]),
+                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo])
                                         });
                                     }
                                 } else {
@@ -176,8 +185,8 @@ sap.ui.define([
                                         aMessageItems.push({
                                             type: "Warning",
                                             title: this.getModel("i18n").getResourceBundle().getText("Warning"),
-                                            description: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo]),
-                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo])
+                                            description: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo]),
+                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo])
                                         });
                                     }
                                 }
