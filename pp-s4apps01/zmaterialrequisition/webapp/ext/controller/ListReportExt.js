@@ -7,7 +7,7 @@ sap.ui.define([
 ], function (ValueHelpDialog, formatter, BusyDialog, MessageBox, Fragment) {
     'use strict';
 
-    var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog;
+    var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog, _UserInfo;
     return {
         ValueHelpDialog: ValueHelpDialog,
         formatter: formatter,
@@ -15,6 +15,7 @@ sap.ui.define([
         init: function () {
             _myFunction = sap.ui.require("pp/zmaterialrequisition/ext/controller/ListReportExt");
             _myBusyDialog = new BusyDialog();
+            _UserInfo = sap.ushell.Container.getService("UserInfo");
             // *************************************************
             var oMessageTemplate = new sap.m.MessageItem({
                 type: '{type}',
@@ -146,8 +147,8 @@ sap.ui.define([
             var oRequestData = {
                 header: header,
                 items: items,
-                user: "P00001",
-                username: "Xinlei Xu",
+                user: _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail(),
+                username: _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName(),
                 datetime: _myFunction._getCurrentDateTime()
             }
             if (!_myFunction._requiredFields(oTable)) {
@@ -377,8 +378,8 @@ sap.ui.define([
             });
             var oRequestData = {
                 items: items,
-                user: "P00001",
-                username: "Xinlei Xu",
+                user: _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail(),
+                username: _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName(),
                 datetime: _myFunction._getCurrentDateTime()
             }
             switch (bEvent) {
