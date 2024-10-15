@@ -1,0 +1,81 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table" core:require="{ handler: 'pp/zledversioninfo/ext/controller/ListReportExt' }">
+    <Dialog title="{i18n>upload}">
+        <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+            <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_OFSPLITRULE' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                <upload:items>
+                    <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+                </upload:items>
+            </upload:UploadSet>
+        </Panel>
+        <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+            <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="handler.onFileChange" width="40%" class="sapUiSmallMargin"/>
+        </Panel>
+        <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+            <table:Table rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:extension>
+                    <OverflowToolbar>
+                        <Text text="{local>/logInfo}"/>
+                        <ToolbarSpacer/>
+                        <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="handler.onClear" visible="{= ${local>/excelSet}.length > 0}"/>
+                        <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="handler.onCheck" visible="{= ${local>/excelSet}.length > 0}"/>
+                        <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="handler.onExcute" visible="{= ${local>/excelSet}.length > 0}"/>
+                        <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="handler.onExport" visible="{= ${local>/excelSet}.length > 0}"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                        <table:template>
+                            <ObjectStatus state="{ path:'local>Status',formatter:'handler.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>Message}">
+                        <table:template>
+                            <Text text="{local>Message}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>Customer}">
+                        <table:template>
+                            <Text text="{local>Customer}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>SplitMaterial}">
+                        <table:template>
+                            <Text text="{local>SplitMaterial}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column autoResizable="true" label="{i18n>Plant}">
+                        <table:template>
+                            <Text text="{local>Plant}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column autoResizable="true" label="{i18n>ShipUnit}">
+                        <table:template>
+                            <Text text="{local>ShipUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column autoResizable="true" label="{i18n>SplitUnit}">
+                        <table:template>
+                            <Text text="{local>SplitUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column autoResizable="true" label="{i18n>ValidEnd}">
+                        <table:template>
+                            <Text text="{local>ValidEnd}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column autoResizable="true" label="{i18n>DeleteFlag}">
+                        <table:template>
+                            <Text text="{local>DeleteFlag}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>
