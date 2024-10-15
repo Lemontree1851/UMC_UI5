@@ -31,7 +31,7 @@
                                 <smartFilterBar:ControlConfiguration index='20' key="RequisitionDate" label="{i18n>RequisitionDate}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" value="{
-                                            'path':'local>/std_dateValue',
+                                            'path':'local>/dateValue',
                                             'type':'sap.ui.model.type.Date',
                                             'formatOptions': {
                                                 'UTC': true
@@ -69,17 +69,6 @@
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar2" entitySet="ZC_PICKINGLIST_TAB" useToolbar="false" smartVariant="__SVM01" persistencyKey="CustomListSFB" visible="{= ${local>/selectIndex} === 1}" search="onSearch">
                             <smartFilterBar:controlConfiguration>
                                 <smartFilterBar:ControlConfiguration index='10' key="Plant" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
-                                <smartFilterBar:ControlConfiguration index='20' key="RequisitionDate" label="{i18n>RequisitionDate}" visibleInAdvancedArea="true">
-                                    <smartFilterBar:customControl>
-                                        <DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" value="{
-                                            'path':'local>/tab_dateValue',
-                                            'type':'sap.ui.model.type.Date',
-                                            'formatOptions': {
-                                                'UTC': true
-                                            }
-                                        }"/>
-                                    </smartFilterBar:customControl>
-                                </smartFilterBar:ControlConfiguration>
                                 <smartFilterBar:ControlConfiguration index='30' key="StorageLocationTo" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationTo}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="StorageLocationFrom" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationFrom}"/>
                                 <smartFilterBar:ControlConfiguration index='70' key="MaterialGroup" visibleInAdvancedArea="true" label="{i18n>MaterialGroup}"/>
@@ -106,15 +95,17 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="StorageLocationFromStock" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="GR_SlipsQuantity" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="M_CARD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ReservationItem" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="CreatedTime" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="CreatedByUserName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="LastChangedTime" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="LastChangedByUserName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="LocalLastChangedAt" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PostingStatus" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="PostingStatusText" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PostingQuantity" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="LaboratoryOrDesignOfficeName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DetailsJson" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DeleteFlagText" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

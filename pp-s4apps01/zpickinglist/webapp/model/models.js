@@ -20,8 +20,7 @@ sap.ui.define([
                 selectIndex: 0,
                 std_mode: "display",
                 tab_mode: "display",
-                std_dateValue: new Date(),
-                tab_dateValue: new Date(),
+                dateValue: new Date(),
                 detailSet: []
             });
             return oModel;

@@ -99,5 +99,19 @@ sap.ui.define([
                 return "未完了";
             }
         },
+
+        formatDescription: function (key, text) {
+            var sDesc;
+            if (key && text) {
+                sDesc = text + "(" + key + ")";
+            } else if (key) {
+                sDesc = key;
+            } else if (text) {
+                sDesc = text;
+            } else {
+                sDesc = "";
+            }
+            return sDesc;
+        }
     };
 });

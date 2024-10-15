@@ -161,8 +161,6 @@
                     <PropertyRef Name="Reservation"/>
                     <PropertyRef Name="ReservationItem"/>
                 </Key>
-                <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Reservation" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Reservation" sap:quickinfo="Number of reservation/dependent requirements" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="ReservationItem" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Item no." sap:quickinfo="Item Number of Reservation / Dependent Requirements" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:value-list="standard"/>
@@ -180,27 +178,27 @@
                 <Property Name="TotalRequiredQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
                 <Property Name="TotalShortFallQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
                 <Property Name="TotalTransferQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
-                <Property Name="RequisitionDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="single-value"/>
                 <Property Name="M_CARD_Quantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
                 <Property Name="M_CARD" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
                 <Property Name="DeleteFlag" Type="Edm.Boolean" sap:label="Flag" sap:quickinfo="Xflag"/>
                 <Property Name="CreatedDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval"/>
                 <Property Name="CreatedTime" Type="Edm.Time" Precision="0"/>
-                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="50"/>
                 <Property Name="CreatedByUserName" Type="Edm.String" MaxLength="20"/>
                 <Property Name="LastChangedDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval"/>
                 <Property Name="LastChangedTime" Type="Edm.Time" Precision="0"/>
-                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="10"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="50"/>
                 <Property Name="LastChangedByUserName" Type="Edm.String" MaxLength="20"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
                 <Property Name="RowNo" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PostingStatus" Type="Edm.String" MaxLength="1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PostingStatusText" Type="Edm.String" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PostingStatus" Type="Edm.String" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="PostingQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DetailsJson" Type="Edm.String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="LaboratoryOrDesignOfficeName" Type="Edm.String" MaxLength="30" sap:label="Document Structure Lab Office Name" sap:quickinfo="Description of the laboratory/engineering office" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="MaterialName" Type="Edm.String" MaxLength="40" sap:label="Product Description" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="StorageLocationFromName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="StorageLocationToName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DeleteFlagText" Type="Edm.String" MaxLength="60" sap:creatable="false" sap:updatable="false"/>
             </EntityType>
             <EntityType Name="ZC_ProductionSupervisorVHType" sap:label="Production Supervisor Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -457,7 +455,7 @@
                 <EntitySet Name="ZC_MaterialStockVH" EntityType="cds_zui_pickinglist_o2.ZC_MaterialStockVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_MRPControllerVH" EntityType="cds_zui_pickinglist_o2.ZC_MRPControllerVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_PICKINGLIST_STD" EntityType="cds_zui_pickinglist_o2.ZC_PICKINGLIST_STDType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
-                <EntitySet Name="ZC_PICKINGLIST_TAB" EntityType="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType" sap:content-version="1" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc"/>
+                <EntitySet Name="ZC_PICKINGLIST_TAB" EntityType="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_ProductionSupervisorVH" EntityType="cds_zui_pickinglist_o2.ZC_ProductionSupervisorVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_pickinglist_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_pickinglist_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -814,7 +812,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -838,7 +835,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/MaterialGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -859,7 +855,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/LaboratoryOrDesignOffice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -880,7 +875,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/ExternalProductGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -901,7 +895,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/StorageLocationFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -934,7 +927,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/StorageLocationTo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -967,7 +959,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.cds_zui_pickinglist_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
@@ -1153,27 +1144,13 @@
             <Annotations Target="cds_zui_pickinglist_o2.cds_zui_pickinglist_o2_Entities/ZC_PICKINGLIST_TAB" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
-                        <PropertyValue Property="Deletable" Path="Delete_mc"/>
+                        <PropertyValue Property="Deletable" Bool="false"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.FilterRestrictions">
                     <Record>
-                        <PropertyValue Property="NonFilterableProperties">
-                            <Collection>
-                                <PropertyPath>Delete_mc</PropertyPath>
-                                <PropertyPath>Update_mc</PropertyPath>
-                                <PropertyPath>RowNo</PropertyPath>
-                                <PropertyPath>PostingStatus</PropertyPath>
-                                <PropertyPath>PostingStatusText</PropertyPath>
-                                <PropertyPath>PostingQuantity</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
                         <PropertyValue Property="FilterExpressionRestrictions">
                             <Collection>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="RequisitionDate"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
-                                </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="CreatedDate"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
@@ -1182,13 +1159,25 @@
                                     <PropertyValue Property="Property" PropertyPath="LastChangedDate"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
                                 </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DetailsJson"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>RowNo</PropertyPath>
+                                <PropertyPath>PostingStatus</PropertyPath>
+                                <PropertyPath>PostingQuantity</PropertyPath>
+                                <PropertyPath>DetailsJson</PropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.InsertRestrictions">
                     <Record>
-                        <PropertyValue Property="Insertable" Bool="true"/>
+                        <PropertyValue Property="Insertable" Bool="false"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__core.OptimisticConcurrency">
@@ -1198,19 +1187,18 @@
                     <Record>
                         <PropertyValue Property="NonSortableProperties">
                             <Collection>
-                                <PropertyPath>Delete_mc</PropertyPath>
-                                <PropertyPath>Update_mc</PropertyPath>
                                 <PropertyPath>RowNo</PropertyPath>
                                 <PropertyPath>PostingStatus</PropertyPath>
-                                <PropertyPath>PostingStatusText</PropertyPath>
                                 <PropertyPath>PostingQuantity</PropertyPath>
+                                <PropertyPath>DetailsJson</PropertyPath>
+                                <PropertyPath>DetailsJson</PropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.UpdateRestrictions">
                     <Record>
-                        <PropertyValue Property="Updatable" Path="Update_mc"/>
+                        <PropertyValue Property="Updatable" Bool="false"/>
                     </Record>
                 </Annotation>
             </Annotations>
@@ -1230,69 +1218,6 @@
                         <PropertyValue Property="Updatable" Bool="false"/>
                     </Record>
                 </Annotation>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/BaseUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/CreatedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/CreatedByUserName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/CreatedDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/CreatedTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/DeleteFlag" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/GR_SlipsQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/LastChangedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/LastChangedByUserName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/LastChangedDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/LastChangedTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/LocalLastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/M_CARD" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/M_CARD_Quantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/RequisitionDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/SizeOrDimensionText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/StorageLocationFromStock" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/StorageLocationToStock" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/TotalRequiredQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/TotalShortFallQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/TotalTransferQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.I_StorageLocationStdVHType/ConfigDeprecationCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__CodeList.IsConfigurationDeprecationCode"/>

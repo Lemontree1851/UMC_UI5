@@ -320,6 +320,20 @@ sap.ui.define([
                         break;
                 }
             });
+        },
+
+        _removeDuplicates: function (arr, keys) {
+            return arr.reduce((result, obj) => {
+                const index = result.findIndex(item => {
+                    return keys.every(key => item[key] === obj[key]);
+                });
+                if (index !== -1) {
+                    result[index] = obj;
+                } else {
+                    result.push(obj);
+                }
+                return result;
+            }, []);
         }
     })
 });

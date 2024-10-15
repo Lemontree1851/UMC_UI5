@@ -19,6 +19,7 @@ sap.ui.define([
         onInit: function () {
             var that = this;
             this._myBusyDialog = new BusyDialog();
+            this._UserInfo = sap.ushell.Container.getService("UserInfo");
             // *************************************************
             var oMessageTemplate = new sap.m.MessageItem({
                 type: '{type}',
@@ -77,17 +78,15 @@ sap.ui.define([
                 aNewFilters = [];
             var sEntitySet = oEvent.getSource().getProperty("entitySet");
             if (sEntitySet === "ZC_PICKINGLIST_STD") {
-                sRequisitionDate = this.getModel("local").getProperty("/std_dateValue");
-            } else if (sEntitySet === "ZC_PICKINGLIST_TAB") {
-                sRequisitionDate = this.getModel("local").getProperty("/tab_dateValue");
-            }
-            aNewFilters.push(new Filter("RequisitionDate", FilterOperator.EQ, sRequisitionDate));
-            if (aNewFilters.length) {
-                oNewFilter = new Filter({
-                    filters: aNewFilters,
-                    and: false
-                });
-                aFilters.push(oNewFilter);
+                sRequisitionDate = this.getModel("local").getProperty("/dateValue");
+                aNewFilters.push(new Filter("RequisitionDate", FilterOperator.EQ, sRequisitionDate));
+                if (aNewFilters.length) {
+                    oNewFilter = new Filter({
+                        filters: aNewFilters,
+                        and: false
+                    });
+                    aFilters.push(oNewFilter);
+                }
             }
         },
 
@@ -129,7 +128,9 @@ sap.ui.define([
                     var sPath = this._oTable.getContextByIndex(aSelectedItems[iLen]).getPath();
                     var oRow = this.getModel().getObject(sPath);
                     aItems.push(oRow);
-                    aDetails.push(JSON.parse(oRow.DetailsJson));
+                    if (oRow.DetailsJson) {
+                        aDetails.push(JSON.parse(oRow.DetailsJson));
+                    }
                 }
                 if (sEvent === "STD_DETAIL" || sEvent === "TAB_DETAIL") {
                     this.getModel("local").setProperty("/detailSet", aDetails.flat());
@@ -145,49 +146,75 @@ sap.ui.define([
                         for (let index = 0; index < aItems.length; index++) {
                             const element = aItems[index];
                             // 移動数量は在庫数量を超えるかをチェックする
-                            if (element.StorageLocationFrom === element.StorageLocationTo) {
+                            if (element.StorageLocationFrom) {
+                                if (element.StorageLocationFrom === element.StorageLocationTo) {
+                                    // 行 {0} の保管場所(From)と(TO)が同じです。チェックしてください。
+                                    aMessageItems.push({
+                                        type: "Error",
+                                        title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                        description: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo]),
+                                        subtitle: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo])
+                                    });
+                                }
+                            } else {
+                                // 行 {0} {1}を入力してください。
                                 aMessageItems.push({
                                     type: "Error",
                                     title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                    description: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo]),
-                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo])
+                                    description: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("StorageLocationFrom")]),
+                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("StorageLocationFrom")])
                                 });
                             }
-                            // 移動数量は在庫数量を超えるかをチェックする
-                            if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.StorageLocationFromStock)) {
+
+                            if (element.TotalTransferQuantity === '' || parseInt(element.TotalTransferQuantity) === 0) {
+                                // 行 {0} {1}を入力してください。
                                 aMessageItems.push({
                                     type: "Error",
                                     title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                    description: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo]),
-                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo])
-                                });
-                            }
-                            // 移動数量は欠品数量を超えるかをチェックする
-                            if (parseFloat(element.TotalTransferQuantity) < parseFloat(element.TotalShortFallQuantity)) {
-                                aMessageItems.push({
-                                    type: "Warning",
-                                    title: this.getModel("i18n").getResourceBundle().getText("Warning"),
-                                    description: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo]),
-                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo])
+                                    description: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("TotalTransferQuantity")]),
+                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("TotalTransferQuantity")])
                                 });
                             } else {
-                                if (element.SizeOrDimensionText === "X") {
-                                    if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
-                                        aMessageItems.push({
-                                            type: "Error",
-                                            title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                            description: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo]),
-                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo])
-                                        });
-                                    }
+                                // 移動数量は在庫数量を超えるかをチェックする
+                                if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.StorageLocationFromStock)) {
+                                    // 行 {0} の移動数量は在庫数量を超えました。
+                                    aMessageItems.push({
+                                        type: "Error",
+                                        title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                        description: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo]),
+                                        subtitle: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo])
+                                    });
+                                }
+                                // 移動数量は欠品数量を超えるかをチェックする
+                                if (parseFloat(element.TotalTransferQuantity) < parseFloat(element.TotalShortFallQuantity)) {
+                                    // 行 {0} の移動数量は欠品数量より少ないです。
+                                    aMessageItems.push({
+                                        type: "Warning",
+                                        title: this.getModel("i18n").getResourceBundle().getText("Warning"),
+                                        description: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo]),
+                                        subtitle: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo])
+                                    });
                                 } else {
-                                    if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
-                                        aMessageItems.push({
-                                            type: "Warning",
-                                            title: this.getModel("i18n").getResourceBundle().getText("Warning"),
-                                            description: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo]),
-                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo])
-                                        });
+                                    if (element.SizeOrDimensionText === "X") {
+                                        if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
+                                            // 行 {0} の移動数量は欠品数量を超えることはできません。
+                                            aMessageItems.push({
+                                                type: "Error",
+                                                title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                                description: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo]),
+                                                subtitle: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo])
+                                            });
+                                        }
+                                    } else {
+                                        if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
+                                            // 行 {0} の移動数量は欠品数量を超えました。
+                                            aMessageItems.push({
+                                                type: "Warning",
+                                                title: this.getModel("i18n").getResourceBundle().getText("Warning"),
+                                                description: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo]),
+                                                subtitle: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo])
+                                            });
+                                        }
                                     }
                                 }
                             }
@@ -199,6 +226,16 @@ sap.ui.define([
                         break;
                     case "TAB_DELETE":
                         sTitle = this.getModel("i18n").getResourceBundle().getText("Delete");
+                        var aReservation = this._removeDuplicates(aItems, ["Reservation"]);
+                        if (aReservation.length > 1) {
+                            // 入出庫予定処理件数は1件しか処理できません。
+                            aMessageItems.push({
+                                type: "Error",
+                                title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                description: this.getModel("i18n").getResourceBundle().getText("Message7"),
+                                subtitle: this.getModel("i18n").getResourceBundle().getText("Message7")
+                            });
+                        }
                         break;
                     default:
                         break;
@@ -210,8 +247,8 @@ sap.ui.define([
                 }
                 var oRequestData = {
                     items: aItems,
-                    user: "P00001",
-                    username: "Xinlei Xu",
+                    user: this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(),
+                    username: this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName(),
                     datetime: this.getCurrentUTCDateTime()
                 }
                 MessageBox.confirm(this.getModel("i18n").getResourceBundle().getText("ConfirmMessage", [sTitle]), {

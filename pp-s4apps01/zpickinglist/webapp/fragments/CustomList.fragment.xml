@@ -6,7 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_TAB" smartFilterId="idSmartFilterBar2" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="CustomListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 1}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="BaseUnit,PostingStatusText,CreatedByUserName,LastChangedByUserName,CreatedTime,LastChangedTime,LocalLastChangedAt" ignoredFields="BaseUnit,PostingStatusText,CreatedByUserName,LastChangedByUserName,CreatedTime,LastChangedTime,LocalLastChangedAt">
+    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_TAB" smartFilterId="idSmartFilterBar2" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="CustomListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 1}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="BaseUnit,CreatedByUserName,LastChangedByUserName,CreatedTime,LastChangedTime,LocalLastChangedAt,DetailsJson,LaboratoryOrDesignOfficeName,DeleteFlagText" ignoredFields="BaseUnit,CreatedByUserName,LastChangedByUserName,CreatedTime,LastChangedTime,LocalLastChangedAt,DetailsJson,LaboratoryOrDesignOfficeName,DeleteFlagText">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -180,7 +180,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"LaboratoryOrDesignOffice", "leadingProperty":"LaboratoryOrDesignOffice"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{LaboratoryOrDesignOffice}" wrapping="false"/>
+                        <Text text="{ parts:['LaboratoryOrDesignOffice','LaboratoryOrDesignOfficeName'], formatter:'.formatter.formatDescription' }" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>ExternalProductGroup}" sortProperty="ExternalProductGroup" filterProperty="ExternalProductGroup">
@@ -197,14 +197,6 @@
                     </table:customData>
                     <table:template>
                         <Text text="{MaterialGroup}" wrapping="false"/>
-                    </table:template>
-                </table:Column>
-                <table:Column width="8rem" label="{i18n>RequisitionDate}" sortProperty="RequisitionDate" filterProperty="RequisitionDate" hAlign="End">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"RequisitionDate", "leadingProperty":"RequisitionDate"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{ path:'RequisitionDate', formatter:'.formatter.formatDate' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>Reservation}" sortProperty="Reservation" filterProperty="Reservation">
@@ -239,20 +231,20 @@
                         <Text text="{ parts:[ 'PostingQuantity','3'], formatter:'.formatter.formatFloat' } {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>DeleteFlag}" sortProperty="DeleteFlag" filterProperty="DeleteFlag">
+                <table:Column width="10rem" label="{i18n>DeleteFlag}" sortProperty="DeleteFlagText" filterProperty="DeleteFlagText">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"DeleteFlag", "leadingProperty":"DeleteFlag"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DeleteFlagText", "leadingProperty":"DeleteFlagText"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{DeleteFlag}" wrapping="false"/>
+                        <Text text="{DeleteFlagText}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>CreatedByUser}" sortProperty="CreatedByUser" filterProperty="CreatedByUser">
+                <table:Column width="20rem" label="{i18n>CreatedByUser}" sortProperty="CreatedByUser" filterProperty="CreatedByUser">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"CreatedByUser", "leadingProperty":"CreatedByUser"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{CreatedByUser}" wrapping="false"/>
+                        <Text text="{ parts:['CreatedByUser','CreatedByUserName'], formatter:'.formatter.formatDescription' }" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>CreatedDate}" sortProperty="CreatedDate" filterProperty="CreatedDate" hAlign="End">
@@ -263,12 +255,12 @@
                         <Text text="{ path:'CreatedDate', formatter:'.formatter.formatDate' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>LastChangedByUser}" sortProperty="LastChangedByUser" filterProperty="LastChangedByUser">
+                <table:Column width="20rem" label="{i18n>LastChangedByUser}" sortProperty="LastChangedByUser" filterProperty="LastChangedByUser">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"LastChangedByUser", "leadingProperty":"LastChangedByUser"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{LastChangedByUser}" wrapping="false"/>
+                        <Text text="{ parts:['LastChangedByUser','LastChangedByUserName'], formatter:'.formatter.formatDescription' }" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>LastChangedDate}" sortProperty="LastChangedDate" filterProperty="LastChangedDate" hAlign="End">
