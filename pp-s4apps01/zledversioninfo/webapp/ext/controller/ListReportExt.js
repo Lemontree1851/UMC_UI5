@@ -60,12 +60,10 @@ sap.ui.define([
                         "Status": "",
                         "Message": "",
                         "Row": i - 4,
-                        "Customer": aSheetData[i]["Customer"] === undefined ? "" : aSheetData[i]["Customer"],
-                        "SplitMaterial": aSheetData[i]["SplitMaterial"] === undefined ? "" : aSheetData[i]["SplitMaterial"],
+                        "Material": aSheetData[i]["Material"] === undefined ? "" : aSheetData[i]["Material"],
                         "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
-                        "ShipUnit": aSheetData[i]["ShipUnit"] === undefined ? "" : aSheetData[i]["ShipUnit"],
-                        "SplitUnit": aSheetData[i]["SplitUnit"] === undefined ? "" : aSheetData[i]["SplitUnit"],
-                        "ValidEnd": aSheetData[i]["ValidEnd"] === undefined ? "" : aSheetData[i]["ValidEnd"],
+                        "VersionInfo": aSheetData[i]["VersionInfo"] === undefined ? "" : aSheetData[i]["VersionInfo"],
+                        "Component": aSheetData[i]["Component"] === undefined ? "" : aSheetData[i]["Component"],
                         "DeleteFlag": aSheetData[i]["DeleteFlag"] === undefined ? "" : aSheetData[i]["DeleteFlag"]
                     };
                     aExcelSet.push(item);
@@ -100,15 +98,16 @@ sap.ui.define([
         _callOData: function (bEvent, that) {
             var aPromise = [];
             var aExcelSet = that.getModel("local").getProperty("/excelSet");
-            var aGroupKey = that._Function._removeDuplicates(aExcelSet, ["Customer", "SplitMaterial", "Plant"]);
+            var aGroupKey = that._Function._removeDuplicates(aExcelSet, ["Material", "Plant", "VersionInfo", "Component"]);
             var aGroupItems;
             for (var m = 0; m < aGroupKey.length; m++) {
-                const sCustomer = aGroupKey[m].Customer;
-                const sSplitMaterial = aGroupKey[m].SplitMaterial;
+                const sMaterial = aGroupKey[m].Material;
                 const sPlant = aGroupKey[m].Plant;
+                const sVersionInfo = aGroupKey[m].VersionInfo;
+                const sComponent = aGroupKey[m].Component;
                 aGroupItems = [];
                 for (var n = 0; n < aExcelSet.length; n++) {
-                    if (aExcelSet[n].Customer === sCustomer && aExcelSet[n].SplitMaterial === sSplitMaterial && aExcelSet[n].Plant === sPlant) {
+                    if (aExcelSet[n].Material === sMaterial && aExcelSet[n].Plant === sPlant && aExcelSet[n].VersionInfo === sVersionInfo && aExcelSet[n].Component === sComponent) {
                         aGroupItems.push(aExcelSet[n]);
                     }
                 }
