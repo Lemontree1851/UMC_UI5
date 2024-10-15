@@ -143,102 +143,105 @@ sap.ui.define([
                 switch (sEvent) {
                     case "STD_CREATE":
                         sTitle = this.getModel("i18n").getResourceBundle().getText("Create");
-                        for (let index = 0; index < aItems.length; index++) {
-                            const element = aItems[index];
-                            // 移動数量は在庫数量を超えるかをチェックする
-                            if (element.StorageLocationFrom) {
-                                if (element.StorageLocationFrom === element.StorageLocationTo) {
-                                    // 行 {0} の保管場所(From)と(TO)が同じです。チェックしてください。
-                                    aMessageItems.push({
-                                        type: "Error",
-                                        title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                        description: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo]),
-                                        subtitle: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo])
-                                    });
-                                }
-                            } else {
-                                // 行 {0} {1}を入力してください。
+                        break;
+                    case "TAB_SAVE":
+                        sTitle = this.getModel("i18n").getResourceBundle().getText("Save");
+                        break;
+                    case "TAB_DELETE":
+                        sTitle = this.getModel("i18n").getResourceBundle().getText("Delete");
+                        break;
+                    default:
+                        break;
+                }
+                if (sEvent === "TAB_SAVE" || sEvent === "TAB_DELETE") {
+                    var aReservation = this._removeDuplicates(aItems, ["Reservation"]);
+                    if (aReservation.length > 1) {
+                        // 入出庫予定処理件数は1件しか処理できません。
+                        aMessageItems.push({
+                            type: "Error",
+                            title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                            description: this.getModel("i18n").getResourceBundle().getText("Message7"),
+                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message7")
+                        });
+                    }
+                }
+                if (sEvent === "STD_CREATE" || sEvent === "TAB_SAVE") {
+                    for (let index = 0; index < aItems.length; index++) {
+                        const element = aItems[index];
+                        // 移動数量は在庫数量を超えるかをチェックする
+                        if (element.StorageLocationFrom) {
+                            if (element.StorageLocationFrom === element.StorageLocationTo) {
+                                // 行 {0} の保管場所(From)と(TO)が同じです。チェックしてください。
                                 aMessageItems.push({
                                     type: "Error",
                                     title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                    description: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("StorageLocationFrom")]),
-                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("StorageLocationFrom")])
+                                    description: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo]),
+                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message1", [element.RowNo])
                                 });
                             }
+                        } else {
+                            // 行 {0} {1}を入力してください。
+                            aMessageItems.push({
+                                type: "Error",
+                                title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                description: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("StorageLocationFrom")]),
+                                subtitle: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("StorageLocationFrom")])
+                            });
+                        }
 
-                            if (element.TotalTransferQuantity === '' || parseInt(element.TotalTransferQuantity) === 0) {
-                                // 行 {0} {1}を入力してください。
+                        if (element.TotalTransferQuantity === '' || parseInt(element.TotalTransferQuantity) === 0) {
+                            // 行 {0} {1}を入力してください。
+                            aMessageItems.push({
+                                type: "Error",
+                                title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                description: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("TotalTransferQuantity")]),
+                                subtitle: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("TotalTransferQuantity")])
+                            });
+                        } else {
+                            // 移動数量は在庫数量を超えるかをチェックする
+                            if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.StorageLocationFromStock)) {
+                                // 行 {0} の移動数量は在庫数量を超えました。
                                 aMessageItems.push({
                                     type: "Error",
                                     title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                    description: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("TotalTransferQuantity")]),
-                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message6", [element.RowNo, this.getModel("i18n").getResourceBundle().getText("TotalTransferQuantity")])
+                                    description: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo]),
+                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo])
+                                });
+                            }
+                            // 移動数量は欠品数量を超えるかをチェックする
+                            if (parseFloat(element.TotalTransferQuantity) < parseFloat(element.TotalShortFallQuantity)) {
+                                // 行 {0} の移動数量は欠品数量より少ないです。
+                                aMessageItems.push({
+                                    type: "Warning",
+                                    title: this.getModel("i18n").getResourceBundle().getText("Warning"),
+                                    description: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo]),
+                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo])
                                 });
                             } else {
-                                // 移動数量は在庫数量を超えるかをチェックする
-                                if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.StorageLocationFromStock)) {
-                                    // 行 {0} の移動数量は在庫数量を超えました。
-                                    aMessageItems.push({
-                                        type: "Error",
-                                        title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                        description: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo]),
-                                        subtitle: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo])
-                                    });
-                                }
-                                // 移動数量は欠品数量を超えるかをチェックする
-                                if (parseFloat(element.TotalTransferQuantity) < parseFloat(element.TotalShortFallQuantity)) {
-                                    // 行 {0} の移動数量は欠品数量より少ないです。
-                                    aMessageItems.push({
-                                        type: "Warning",
-                                        title: this.getModel("i18n").getResourceBundle().getText("Warning"),
-                                        description: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo]),
-                                        subtitle: this.getModel("i18n").getResourceBundle().getText("Message4", [element.RowNo])
-                                    });
+                                if (element.SizeOrDimensionText === "X") {
+                                    if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
+                                        // 行 {0} の移動数量は欠品数量を超えることはできません。
+                                        aMessageItems.push({
+                                            type: "Error",
+                                            title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                            description: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo]),
+                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo])
+                                        });
+                                    }
                                 } else {
-                                    if (element.SizeOrDimensionText === "X") {
-                                        if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
-                                            // 行 {0} の移動数量は欠品数量を超えることはできません。
-                                            aMessageItems.push({
-                                                type: "Error",
-                                                title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                                description: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo]),
-                                                subtitle: this.getModel("i18n").getResourceBundle().getText("Message3", [element.RowNo])
-                                            });
-                                        }
-                                    } else {
-                                        if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
-                                            // 行 {0} の移動数量は欠品数量を超えました。
-                                            aMessageItems.push({
-                                                type: "Warning",
-                                                title: this.getModel("i18n").getResourceBundle().getText("Warning"),
-                                                description: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo]),
-                                                subtitle: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo])
-                                            });
-                                        }
+                                    if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
+                                        // 行 {0} の移動数量は欠品数量を超えました。
+                                        aMessageItems.push({
+                                            type: "Warning",
+                                            title: this.getModel("i18n").getResourceBundle().getText("Warning"),
+                                            description: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo]),
+                                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message5", [element.RowNo])
+                                        });
                                     }
                                 }
                             }
                         }
-                        break;
-                    case "TAB_SAVE":
-                        sTitle = this.getModel("i18n").getResourceBundle().getText("Save");
-                        this.getModel("local").setProperty("/tab_mode", "display");
-                        break;
-                    case "TAB_DELETE":
-                        sTitle = this.getModel("i18n").getResourceBundle().getText("Delete");
-                        var aReservation = this._removeDuplicates(aItems, ["Reservation"]);
-                        if (aReservation.length > 1) {
-                            // 入出庫予定処理件数は1件しか処理できません。
-                            aMessageItems.push({
-                                type: "Error",
-                                title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                description: this.getModel("i18n").getResourceBundle().getText("Message7"),
-                                subtitle: this.getModel("i18n").getResourceBundle().getText("Message7")
-                            });
-                        }
-                        break;
-                    default:
-                        break;
+                    }
                 }
                 var obj = aMessageItems.find(item => item.type === "Error");
                 if (obj) {
@@ -270,8 +273,12 @@ sap.ui.define([
                                         subtitle: element.SUBTITLE
                                     });
                                 });
+                                if (sEvent === "TAB_SAVE") {
+                                    that.getModel("local").setProperty("/tab_mode", "display");
+                                }
                                 that.showMessageDialog(aMessageItems);
                                 that._oTable.clearSelection();
+                                that.getModel().resetChanges();
                                 that.getModel().refresh();
                             }, function (oError) {
                                 var sMsg;

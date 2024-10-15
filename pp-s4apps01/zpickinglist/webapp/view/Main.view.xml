@@ -26,9 +26,8 @@
                         <!--欠品一覧-->
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar1" entitySet="ZC_PICKINGLIST_STD" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" visible="{= ${local>/selectIndex} === 0}" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <!-- mandatory="mandatory" -->
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" filterType="single" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
-                                <smartFilterBar:ControlConfiguration index='20' key="RequisitionDate" label="{i18n>RequisitionDate}" visibleInAdvancedArea="true">
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="RequisitionDate" mandatory="mandatory" label="{i18n>RequisitionDate}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" value="{
                                             'path':'local>/dateValue',
@@ -39,7 +38,7 @@
                                         }"/>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='30' key="StorageLocationTo" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationTo}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="StorageLocationTo" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationTo}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="StorageLocationFrom" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationFrom}"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="MRPController" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
                                 <smartFilterBar:ControlConfiguration index='60' key="ProductionSupervisor" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"/>
@@ -68,7 +67,7 @@
                         <!--入出庫一覧-->
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar2" entitySet="ZC_PICKINGLIST_TAB" useToolbar="false" smartVariant="__SVM01" persistencyKey="CustomListSFB" visible="{= ${local>/selectIndex} === 1}" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="StorageLocationTo" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationTo}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="StorageLocationFrom" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>LocationFrom}"/>
                                 <smartFilterBar:ControlConfiguration index='70' key="MaterialGroup" visibleInAdvancedArea="true" label="{i18n>MaterialGroup}"/>
