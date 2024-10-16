@@ -41,7 +41,7 @@
         <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
-        <Schema Namespace="cds_zui_paipaycalculation_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <Schema Namespace="cds_zui_paidpaydocument_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
             <EntityType Name="I_CompanyCodeStdVHType" sap:label="Company Code" sap:value-list="true" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="CompanyCode"/>
@@ -49,36 +49,15 @@
                 <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="CompanyCodeName" sap:label="Company Code"/>
                 <Property Name="CompanyCodeName" Type="Edm.String" MaxLength="25" sap:label="Company Name" sap:quickinfo="Name of Company Code or Company"/>
             </EntityType>
-            <EntityType Name="PaidPayCalculationType" sap:label="有償支給品の純額計算" sap:content-version="1">
+            <EntityType Name="PaidPayDocumentType" sap:label="PaidPay Journal Entry" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="CompanyCode"/>
                     <PropertyRef Name="FiscalYear"/>
                     <PropertyRef Name="Period"/>
                     <PropertyRef Name="Customer"/>
                     <PropertyRef Name="Supplier"/>
-                    <PropertyRef Name="Product"/>
                     <PropertyRef Name="ProfitCenter"/>
                     <PropertyRef Name="PurchasingGroup"/>
-                    <PropertyRef Name="UpperProduct01"/>
-                    <PropertyRef Name="ValuationClass01"/>
-                    <PropertyRef Name="UpperProduct02"/>
-                    <PropertyRef Name="ValuationClass02"/>
-                    <PropertyRef Name="UpperProduct03"/>
-                    <PropertyRef Name="ValuationClass03"/>
-                    <PropertyRef Name="UpperProduct04"/>
-                    <PropertyRef Name="ValuationClass04"/>
-                    <PropertyRef Name="UpperProduct05"/>
-                    <PropertyRef Name="ValuationClass05"/>
-                    <PropertyRef Name="UpperProduct06"/>
-                    <PropertyRef Name="ValuationClass06"/>
-                    <PropertyRef Name="UpperProduct07"/>
-                    <PropertyRef Name="ValuationClass07"/>
-                    <PropertyRef Name="UpperProduct08"/>
-                    <PropertyRef Name="ValuationClass08"/>
-                    <PropertyRef Name="UpperProduct09"/>
-                    <PropertyRef Name="ValuationClass09"/>
-                    <PropertyRef Name="UpperProduct10"/>
-                    <PropertyRef Name="ValuationClass10"/>
                 </Key>
                 <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -87,60 +66,46 @@
                 <Property Name="Period" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="NonNegative" sap:label="Posting Period" sap:quickinfo="Fiscal Period" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="ProfitCenter" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Profit Center" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="PurchasingGroup" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Purchasing Group" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct01" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass01" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct02" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass02" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct03" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass03" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct04" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass04" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct05" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass05" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct06" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass06" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct07" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass07" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct08" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass08" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct09" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass09" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="UpperProduct10" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ValuationClass10" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Ztype" Type="Edm.String" MaxLength="1"/>
                 <Property Name="CustomerName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="SupplierName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="ProfitCenterName" Type="Edm.String" MaxLength="20" sap:label="Name" sap:quickinfo="General Name"/>
-                <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
-                <Property Name="Cost01" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Cost02" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Cost03" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Cost04" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Cost05" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Cost06" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Cost07" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Cost08" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Cost09" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Cost10" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="MaterialCost2000" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="MaterialCost3000" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="PurGrpAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ChargeableAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ChargeableRate" Type="Edm.Decimal" Precision="9" Scale="5"/>
                 <Property Name="PreviousStockAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="CurrentStockAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="CustomerRevenue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Revenue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="ChargeableRate" Type="Edm.Decimal" Precision="9" Scale="5"/>
                 <Property Name="CurrentStockSemi" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="CurrentStockFin" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="CurrentStockTotal" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="StockChangeAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="PaidMaterialCost" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="CustomerRevenue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Revenue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="RevenueRate" Type="Edm.Decimal" Precision="9" Scale="5"/>
+                <Property Name="AP" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="AR" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
+                <Property Name="Gjahr1" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Belnr1" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
+                <Property Name="Gjahr2" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Belnr2" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
+                <Property Name="Gjahr3" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Belnr3" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
+                <Property Name="Gjahr4" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Belnr4" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
+                <Property Name="Gjahr5" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Belnr5" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
+                <Property Name="Gjahr6" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Belnr6" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
+                <Property Name="Gjahr7" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Belnr7" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
+                <Property Name="Gjahr8" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Belnr8" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Message" Type="Edm.String" MaxLength="220"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -170,20 +135,20 @@
                 <Property Name="CreatedAt" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Time Stamp"/>
                 <Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="256"/>
                 <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256"/>
-                <NavigationProperty Name="Format" Relationship="cds_zui_paipaycalculation_o2.to_format" FromRole="FromRole_to_format" ToRole="ToRole_to_format"/>
-                <NavigationProperty Name="TableColumns" Relationship="cds_zui_paipaycalculation_o2.to_tablecolumns" FromRole="FromRole_to_tablecolumns" ToRole="ToRole_to_tablecolumns"/>
-                <NavigationProperty Name="CoverPage" Relationship="cds_zui_paipaycalculation_o2.to_coverpage" FromRole="FromRole_to_coverpage" ToRole="ToRole_to_coverpage"/>
-                <NavigationProperty Name="Signature" Relationship="cds_zui_paipaycalculation_o2.to_signature" FromRole="FromRole_to_signature" ToRole="ToRole_to_signature"/>
-                <NavigationProperty Name="PDFStandard" Relationship="cds_zui_paipaycalculation_o2.to_pdfstandard" FromRole="FromRole_to_pdfstandard" ToRole="ToRole_to_pdfstandard"/>
-                <NavigationProperty Name="Hierarchy" Relationship="cds_zui_paipaycalculation_o2.to_Hierarchy" FromRole="FromRole_to_Hierarchy" ToRole="ToRole_to_Hierarchy"/>
-                <NavigationProperty Name="Header" Relationship="cds_zui_paipaycalculation_o2.to_header" FromRole="FromRole_to_header" ToRole="ToRole_to_header"/>
-                <NavigationProperty Name="Footer" Relationship="cds_zui_paipaycalculation_o2.to_Footer" FromRole="FromRole_to_Footer" ToRole="ToRole_to_Footer"/>
+                <NavigationProperty Name="Format" Relationship="cds_zui_paidpaydocument_o2.to_format" FromRole="FromRole_to_format" ToRole="ToRole_to_format"/>
+                <NavigationProperty Name="TableColumns" Relationship="cds_zui_paidpaydocument_o2.to_tablecolumns" FromRole="FromRole_to_tablecolumns" ToRole="ToRole_to_tablecolumns"/>
+                <NavigationProperty Name="CoverPage" Relationship="cds_zui_paidpaydocument_o2.to_coverpage" FromRole="FromRole_to_coverpage" ToRole="ToRole_to_coverpage"/>
+                <NavigationProperty Name="Signature" Relationship="cds_zui_paidpaydocument_o2.to_signature" FromRole="FromRole_to_signature" ToRole="ToRole_to_signature"/>
+                <NavigationProperty Name="PDFStandard" Relationship="cds_zui_paidpaydocument_o2.to_pdfstandard" FromRole="FromRole_to_pdfstandard" ToRole="ToRole_to_pdfstandard"/>
+                <NavigationProperty Name="Hierarchy" Relationship="cds_zui_paidpaydocument_o2.to_Hierarchy" FromRole="FromRole_to_Hierarchy" ToRole="ToRole_to_Hierarchy"/>
+                <NavigationProperty Name="Header" Relationship="cds_zui_paidpaydocument_o2.to_header" FromRole="FromRole_to_header" ToRole="ToRole_to_header"/>
+                <NavigationProperty Name="Footer" Relationship="cds_zui_paidpaydocument_o2.to_Footer" FromRole="FromRole_to_Footer" ToRole="ToRole_to_Footer"/>
             </EntityType>
             <EntityType Name="SAP__Format" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Id"/>
                 </Key>
-                <Property Name="FitToPage" Type="cds_zui_paipaycalculation_o2.SAP__FitToPage" Nullable="false"/>
+                <Property Name="FitToPage" Type="cds_zui_paidpaydocument_o2.SAP__FitToPage" Nullable="false"/>
                 <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="FontSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Orientation" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -207,7 +172,7 @@
                     <PropertyRef Name="Name"/>
                     <PropertyRef Name="Header"/>
                 </Key>
-                <Property Name="Format" Type="cds_zui_paipaycalculation_o2.SAP__TableColumnFormat" Nullable="false"/>
+                <Property Name="Format" Type="cds_zui_paidpaydocument_o2.SAP__TableColumnFormat" Nullable="false"/>
                 <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Header" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -244,18 +209,18 @@
                 <Key>
                     <PropertyRef Name="Id"/>
                 </Key>
-                <Property Name="Right" Type="cds_zui_paipaycalculation_o2.SAP__HeaderFooterField" Nullable="false"/>
-                <Property Name="Left" Type="cds_zui_paipaycalculation_o2.SAP__HeaderFooterField" Nullable="false"/>
-                <Property Name="Center" Type="cds_zui_paipaycalculation_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Right" Type="cds_zui_paidpaydocument_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Left" Type="cds_zui_paidpaydocument_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Center" Type="cds_zui_paidpaydocument_o2.SAP__HeaderFooterField" Nullable="false"/>
                 <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__PDFFooter" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Id"/>
                 </Key>
-                <Property Name="Right" Type="cds_zui_paipaycalculation_o2.SAP__HeaderFooterField" Nullable="false"/>
-                <Property Name="Left" Type="cds_zui_paipaycalculation_o2.SAP__HeaderFooterField" Nullable="false"/>
-                <Property Name="Center" Type="cds_zui_paipaycalculation_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Right" Type="cds_zui_paidpaydocument_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Left" Type="cds_zui_paidpaydocument_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Center" Type="cds_zui_paidpaydocument_o2.SAP__HeaderFooterField" Nullable="false"/>
                 <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__ValueHelp" sap:content-version="1">
@@ -266,8 +231,8 @@
                 <Property Name="FIELD_VALUE" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="DESCRIPTION" Type="Edm.String"/>
             </EntityType>
-            <ComplexType Name="ZD_PARAFORPAIDPAYCALCU">
-                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code"/>
+            <ComplexType Name="ZD_PARAFORPAIDPAYDOC">
+                <Property Name="Event" Type="Edm.String" MaxLength="20"/>
                 <Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year"/>
                 <Property Name="Period" Type="Edm.String" MaxLength="2" sap:label="Posting Period" sap:quickinfo="Fiscal Period"/>
                 <Property Name="Ztype" Type="Edm.String" MaxLength="1"/>
@@ -287,8 +252,8 @@
                 <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </ComplexType>
             <Association Name="to_format" sap:content-version="1">
-                <End Type="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_format"/>
-                <End Type="cds_zui_paipaycalculation_o2.SAP__Format" Multiplicity="1" Role="ToRole_to_format"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_format"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__Format" Multiplicity="1" Role="ToRole_to_format"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_to_format">
                         <PropertyRef Name="Id"/>
@@ -299,8 +264,8 @@
                 </ReferentialConstraint>
             </Association>
             <Association Name="to_tablecolumns" sap:content-version="1">
-                <End Type="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_tablecolumns"/>
-                <End Type="cds_zui_paipaycalculation_o2.SAP__TableColumns" Multiplicity="*" Role="ToRole_to_tablecolumns"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_tablecolumns"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__TableColumns" Multiplicity="*" Role="ToRole_to_tablecolumns"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_to_tablecolumns">
                         <PropertyRef Name="Id"/>
@@ -311,8 +276,8 @@
                 </ReferentialConstraint>
             </Association>
             <Association Name="to_coverpage" sap:content-version="1">
-                <End Type="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_coverpage"/>
-                <End Type="cds_zui_paipaycalculation_o2.SAP__CoverPage" Multiplicity="*" Role="ToRole_to_coverpage"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_coverpage"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__CoverPage" Multiplicity="*" Role="ToRole_to_coverpage"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_to_coverpage">
                         <PropertyRef Name="Id"/>
@@ -323,8 +288,8 @@
                 </ReferentialConstraint>
             </Association>
             <Association Name="to_signature" sap:content-version="1">
-                <End Type="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_signature"/>
-                <End Type="cds_zui_paipaycalculation_o2.SAP__Signature" Multiplicity="1" Role="ToRole_to_signature"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_signature"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__Signature" Multiplicity="1" Role="ToRole_to_signature"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_to_signature">
                         <PropertyRef Name="Id"/>
@@ -335,8 +300,8 @@
                 </ReferentialConstraint>
             </Association>
             <Association Name="to_pdfstandard" sap:content-version="1">
-                <End Type="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_pdfstandard"/>
-                <End Type="cds_zui_paipaycalculation_o2.SAP__PDFStandard" Multiplicity="1" Role="ToRole_to_pdfstandard"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_pdfstandard"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__PDFStandard" Multiplicity="1" Role="ToRole_to_pdfstandard"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_to_pdfstandard">
                         <PropertyRef Name="Id"/>
@@ -347,8 +312,8 @@
                 </ReferentialConstraint>
             </Association>
             <Association Name="to_Hierarchy" sap:content-version="1">
-                <End Type="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_Hierarchy"/>
-                <End Type="cds_zui_paipaycalculation_o2.SAP__Hierarchy" Multiplicity="1" Role="ToRole_to_Hierarchy"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_Hierarchy"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__Hierarchy" Multiplicity="1" Role="ToRole_to_Hierarchy"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_to_Hierarchy">
                         <PropertyRef Name="Id"/>
@@ -359,8 +324,8 @@
                 </ReferentialConstraint>
             </Association>
             <Association Name="to_header" sap:content-version="1">
-                <End Type="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_header"/>
-                <End Type="cds_zui_paipaycalculation_o2.SAP__PDFHeader" Multiplicity="1" Role="ToRole_to_header"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_header"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__PDFHeader" Multiplicity="1" Role="ToRole_to_header"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_to_header">
                         <PropertyRef Name="Id"/>
@@ -371,8 +336,8 @@
                 </ReferentialConstraint>
             </Association>
             <Association Name="to_Footer" sap:content-version="1">
-                <End Type="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_Footer"/>
-                <End Type="cds_zui_paipaycalculation_o2.SAP__PDFFooter" Multiplicity="1" Role="ToRole_to_Footer"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_Footer"/>
+                <End Type="cds_zui_paidpaydocument_o2.SAP__PDFFooter" Multiplicity="1" Role="ToRole_to_Footer"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_to_Footer">
                         <PropertyRef Name="Id"/>
@@ -382,63 +347,63 @@
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
-            <EntityContainer Name="cds_zui_paipaycalculation_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
-                <EntitySet Name="I_CompanyCodeStdVH" EntityType="cds_zui_paipaycalculation_o2.I_CompanyCodeStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="PaidPayCalculation" EntityType="cds_zui_paipaycalculation_o2.PaidPayCalculationType" sap:content-version="1" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc"/>
-                <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_paipaycalculation_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_paipaycalculation_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_paipaycalculation_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="SAP__CoverPageSet" EntityType="cds_zui_paipaycalculation_o2.SAP__CoverPage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="SAP__SignatureSet" EntityType="cds_zui_paipaycalculation_o2.SAP__Signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="SAP__HierarchySet" EntityType="cds_zui_paipaycalculation_o2.SAP__Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="SAP__PDFHeaderSet" EntityType="cds_zui_paipaycalculation_o2.SAP__PDFHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="SAP__PDFFooterSet" EntityType="cds_zui_paipaycalculation_o2.SAP__PDFFooter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="SAP__ValueHelpSet" EntityType="cds_zui_paipaycalculation_o2.SAP__ValueHelp" sap:content-version="1"/>
-                <EntitySet Name="SAP__Currencies" EntityType="cds_zui_paipaycalculation_o2.SAP__Currency" sap:content-version="1"/>
-                <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zui_paipaycalculation_o2.SAP__UnitOfMeasure" sap:content-version="1"/>
-                <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" sap:content-version="1"/>
-                <AssociationSet Name="to_HierarchySet" Association="cds_zui_paipaycalculation_o2.to_Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+            <EntityContainer Name="cds_zui_paidpaydocument_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="I_CompanyCodeStdVH" EntityType="cds_zui_paidpaydocument_o2.I_CompanyCodeStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="PaidPayDocument" EntityType="cds_zui_paidpaydocument_o2.PaidPayDocumentType" sap:content-version="1" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc"/>
+                <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_paidpaydocument_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_paidpaydocument_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_paidpaydocument_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__CoverPageSet" EntityType="cds_zui_paidpaydocument_o2.SAP__CoverPage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__SignatureSet" EntityType="cds_zui_paidpaydocument_o2.SAP__Signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__HierarchySet" EntityType="cds_zui_paidpaydocument_o2.SAP__Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFHeaderSet" EntityType="cds_zui_paidpaydocument_o2.SAP__PDFHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFFooterSet" EntityType="cds_zui_paidpaydocument_o2.SAP__PDFFooter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__ValueHelpSet" EntityType="cds_zui_paidpaydocument_o2.SAP__ValueHelp" sap:content-version="1"/>
+                <EntitySet Name="SAP__Currencies" EntityType="cds_zui_paidpaydocument_o2.SAP__Currency" sap:content-version="1"/>
+                <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zui_paidpaydocument_o2.SAP__UnitOfMeasure" sap:content-version="1"/>
+                <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" sap:content-version="1"/>
+                <AssociationSet Name="to_HierarchySet" Association="cds_zui_paidpaydocument_o2.to_Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Hierarchy"/>
                     <End EntitySet="SAP__HierarchySet" Role="ToRole_to_Hierarchy"/>
                 </AssociationSet>
-                <AssociationSet Name="to_tablecolumnsSet" Association="cds_zui_paipaycalculation_o2.to_tablecolumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                <AssociationSet Name="to_tablecolumnsSet" Association="cds_zui_paidpaydocument_o2.to_tablecolumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_tablecolumns"/>
                     <End EntitySet="SAP__TableColumnsSet" Role="ToRole_to_tablecolumns"/>
                 </AssociationSet>
-                <AssociationSet Name="to_headerSet" Association="cds_zui_paipaycalculation_o2.to_header" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                <AssociationSet Name="to_headerSet" Association="cds_zui_paidpaydocument_o2.to_header" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_header"/>
                     <End EntitySet="SAP__PDFHeaderSet" Role="ToRole_to_header"/>
                 </AssociationSet>
-                <AssociationSet Name="to_FooterSet" Association="cds_zui_paipaycalculation_o2.to_Footer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                <AssociationSet Name="to_FooterSet" Association="cds_zui_paidpaydocument_o2.to_Footer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Footer"/>
                     <End EntitySet="SAP__PDFFooterSet" Role="ToRole_to_Footer"/>
                 </AssociationSet>
-                <AssociationSet Name="to_formatSet" Association="cds_zui_paipaycalculation_o2.to_format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                <AssociationSet Name="to_formatSet" Association="cds_zui_paidpaydocument_o2.to_format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_format"/>
                     <End EntitySet="SAP__FormatSet" Role="ToRole_to_format"/>
                 </AssociationSet>
-                <AssociationSet Name="to_pdfstandardSet" Association="cds_zui_paipaycalculation_o2.to_pdfstandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                <AssociationSet Name="to_pdfstandardSet" Association="cds_zui_paidpaydocument_o2.to_pdfstandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_pdfstandard"/>
                     <End EntitySet="SAP__PDFStandardSet" Role="ToRole_to_pdfstandard"/>
                 </AssociationSet>
-                <AssociationSet Name="to_signatureSet" Association="cds_zui_paipaycalculation_o2.to_signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                <AssociationSet Name="to_signatureSet" Association="cds_zui_paidpaydocument_o2.to_signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_signature"/>
                     <End EntitySet="SAP__SignatureSet" Role="ToRole_to_signature"/>
                 </AssociationSet>
-                <AssociationSet Name="to_coverpageSet" Association="cds_zui_paipaycalculation_o2.to_coverpage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                <AssociationSet Name="to_coverpageSet" Association="cds_zui_paidpaydocument_o2.to_coverpage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage"/>
                     <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage"/>
                 </AssociationSet>
-                <FunctionImport Name="processLogic" ReturnType="cds_zui_paipaycalculation_o2.ZD_PARAFORPAIDPAYCALCU" m:HttpMethod="POST">
+                <FunctionImport Name="processLogic" ReturnType="cds_zui_paidpaydocument_o2.ZD_PARAFORPAIDPAYDOC" m:HttpMethod="POST">
                     <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
-                    <Parameter Name="CompanyCode" Type="Edm.String" Mode="In" MaxLength="4" Nullable="true" sap:label="Company Code" sap:quickinfo="Company Code"/>
                     <Parameter Name="FiscalYear" Type="Edm.String" Mode="In" MaxLength="4" Nullable="true" sap:label="Fiscal Year" sap:quickinfo="Fiscal Year"/>
                     <Parameter Name="Period" Type="Edm.String" Mode="In" MaxLength="2" Nullable="true" sap:label="Posting Period" sap:quickinfo="Fiscal Period"/>
                     <Parameter Name="Ztype" Type="Edm.String" Mode="In" MaxLength="1" Nullable="true"/>
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
                 </FunctionImport>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
                     <Record>
                         <PropertyValue Property="Label" String="Company Code"/>
@@ -458,10 +423,10 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.cds_zui_paipaycalculation_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.cds_zui_paidpaydocument_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.cds_zui_paipaycalculation_o2_Entities/I_CompanyCodeStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.cds_zui_paidpaydocument_o2_Entities/I_CompanyCodeStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Bool="false"/>
@@ -478,7 +443,7 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.cds_zui_paipaycalculation_o2_Entities/PaidPayCalculation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.cds_zui_paidpaydocument_o2_Entities/PaidPayDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Path="Delete_mc"/>
@@ -518,100 +483,121 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ChargeableAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/AP" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ChargeableRate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/AR" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost01" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Belnr1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost02" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Belnr2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost03" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Belnr3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost04" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Belnr4" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost05" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Belnr5" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost06" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Belnr6" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost07" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Belnr7" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost08" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Belnr8" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost09" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/ChargeableAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Cost10" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/ChargeableRate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CurrentStockAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/CurrentStockAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CurrentStockFin" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/CurrentStockFin" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CurrentStockSemi" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/CurrentStockSemi" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CurrentStockTotal" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/CurrentStockTotal" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CustomerName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/CustomerName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CustomerRevenue" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/CustomerRevenue" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/MaterialCost2000" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Gjahr1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/MaterialCost3000" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Gjahr2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/PaidMaterialCost" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Gjahr3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/PreviousStockAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Gjahr4" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ProductDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Gjahr5" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ProfitCenterName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Gjahr6" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/PurGrpAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Gjahr7" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Revenue" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Gjahr8" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/RevenueRate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Message" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/StockChangeAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/PaidMaterialCost" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/SupplierName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/PreviousStockAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Ztype" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/ProfitCenterName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.cds_zui_paipaycalculation_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/PurGrpAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Revenue" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/RevenueRate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/StockChangeAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/SupplierName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paidpaydocument_o2.PaidPayDocumentType/Ztype" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paidpaydocument_o2.cds_zui_paidpaydocument_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
                     <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
                         <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
@@ -656,18 +642,18 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.Text" Path="Text"/>
                 <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces"/>
                 <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__UnitOfMeasure/UnitCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__UnitOfMeasure/UnitCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.Text" Path="Text"/>
                 <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces"/>
                 <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode"/>
                 <Annotation Term="SAP__CodeList.ExternalCode" Path="ExternalCode"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__UnitOfMeasure" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__UnitOfMeasure" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.AlternateKeys">
                     <Collection>
                         <Record>
@@ -683,13 +669,13 @@
                     </Collection>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__DocumentDescription/CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__DocumentDescription/CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.Computed"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__DocumentDescription/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__DocumentDescription/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.Computed"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__DocumentDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__capabilties.InsertRestrictions">
                     <Record>
                         <PropertyValue Property="Insertable" Bool="false"/>
@@ -727,7 +713,7 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__Format/FitToPage/ErrorRecoveryBehavior" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__Format/FitToPage/ErrorRecoveryBehavior" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -736,7 +722,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__Format/FontName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__Format/FontName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -745,7 +731,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__Format/PaperSize" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__Format/PaperSize" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -754,7 +740,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__PDFHeader/Left" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__PDFHeader/Left" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -763,7 +749,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__PDFHeader/Right" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__PDFHeader/Right" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -772,7 +758,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__PDFHeader/Center" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__PDFHeader/Center" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -781,7 +767,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__PDFFooter/Left" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__PDFFooter/Left" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -790,7 +776,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__PDFFooter/Right" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__PDFFooter/Right" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -799,7 +785,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__PDFFooter/Center" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__PDFFooter/Center" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -808,7 +794,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__TableColumns/Format/Display_Format" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__TableColumns/Format/Display_Format" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -817,7 +803,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__Format/Orientation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__Format/Orientation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -826,7 +812,7 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__TableColumns/HorizontalAlignment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_paidpaydocument_o2.SAP__TableColumns/HorizontalAlignment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
@@ -835,8 +821,8 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <atom:link rel="self" href="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_PAIDPAYCALCULATION_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
-            <atom:link rel="latest-version" href="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_PAIDPAYCALCULATION_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="self" href="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_PAIDPAYDOCUMENT_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_PAIDPAYDOCUMENT_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

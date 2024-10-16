@@ -15,6 +15,7 @@ sap.ui.define([
 			onInit: function () {
 				this._LocalData = this.getOwnerComponent().getModel("local");
 				this._oDataModel = this.getOwnerComponent().getModel();
+				this._BusyDialog = new BusyDialog();
 			},
 
 			onButtonSelect: function (oEvent) {
@@ -157,7 +158,7 @@ sap.ui.define([
 					return;
 				}
 
-				this.setBusy(true);
+				this._BusyDialog.open();
 
 				var oModel = this._oDataModel;
 				oModel.callFunction("/processLogic", {
@@ -185,7 +186,7 @@ sap.ui.define([
 						MessageBox.error((oError.message));;
 					}.bind(this)
 				});
-
+                this._BusyDialog.close();
 			},
 		});
 	});

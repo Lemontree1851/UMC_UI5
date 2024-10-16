@@ -51,6 +51,10 @@ modules:
       - ficopaidpaycalculation.zip
       name: ficopaidpaycalculation
       target-path: resources/
+    - artifacts:
+      - ficopaidpaydocument.zip
+      name: ficopaidpaydocument
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -63,6 +67,15 @@ modules:
 - name: ficopaidpaycalculation
   type: html5
   path: paidpaycalculation
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficopaidpaydocument
+  type: html5
+  path: paidpaydocument
   build-parameters:
     build-result: dist
     builder: custom
