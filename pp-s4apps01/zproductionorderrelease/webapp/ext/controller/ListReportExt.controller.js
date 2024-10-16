@@ -70,13 +70,15 @@ sap.ui.define([
             aContexts.forEach(element => {
                 let aSplitArray = element.getPath().split("'");
                 var sPath = element.getPath();
-                that.getView().getModel().setProperty(sPath + "/Message", '1111');
-                that.getView().getModel().setProperty(sPath + "/Criticality", '1');
-                var OriErrorIndicator = that.getView().getModel().getProperty(sPath + "/Message");
+                var MfgOrderPlannedTotalQty = that.getView().getModel().getProperty(sPath + "/MfgOrderPlannedTotalQty");
+                var ProductType = that.getView().getModel().getProperty(sPath + "/ProductType");
+                var Material = that.getView().getModel().getProperty(sPath + "/Material"); 
                 items.push({
                     Plant: aSplitArray[1],
-                    ManufacturingOrder: aSplitArray[3]
-                    // OriErrorIndicator: OriErrorIndicator
+                    ManufacturingOrder: aSplitArray[3],
+                    MfgOrderPlannedTotalQty: MfgOrderPlannedTotalQty,
+                    ProductType: ProductType,
+                    Material: Material
                 });
             });
             var oRequestData = {
@@ -118,25 +120,27 @@ sap.ui.define([
 
                     var aMessageItems = [];
                     for (const activeContext of aContext) {
-                        // that.getView().getModel("local").setProperty("/headSet/MaterialRequisitionNo", result.HEADER.MATERIAL_REQUISITION_NO);
                         // var boundContext = activeContext.getBoundContext();
                         // var object = boundContext.getObject();
                         // var result = JSON.parse(object.Zzkey);
                         var object = activeContext.processLogic;
                         var result = JSON.parse(object.Zzkey);
-                        // result.MESSAGEITEMS.forEach(element => {
 
-                        //     aMessageItems.push({
-                        //         type: element.TYPE,
-                        //         title: element.TITLE,
-                        //         description: element.DESCRIPTION,
-                        //         subtitle: element.SUBTITLE
-                        //     });
-                        // });
+                        // 获取选中的上下文
+                        var aContexts = this.extensionAPI.getSelectedContexts();
 
-                        result.ITEMS.forEach(element => {
-                            var sPath = element.getPath();
-                            
+                        // 遍历 ITEMS 和选中的 aContexts 进行匹配
+                        result.ITEMS.forEach((element, index) => {
+                            if (aContexts[index]) { // 确保索引不越界
+                                var sPath = aContexts[index].getPath(); // 获取选中条目的路径
+                                // 设置对应的 Message 和 Criticality
+                                that.getView().getModel().setProperty(sPath + "/Message", element.MESSAGE); 
+                                that.getView().getModel().setProperty(sPath + "/Criticality", element.CRITICALITY);
+                            }
+                        });
+
+                        // 将其添加到 MessageItems 列表中，供 MessageView 使用
+                        result.MESSAGEITEMS.forEach(element => {
                             aMessageItems.push({
                                 type: element.TYPE,
                                 title: element.TITLE,
@@ -145,24 +149,6 @@ sap.ui.define([
                             });
                         });
                     }
-
-                    // for (const activeContext of aContext) {
-                    //     var object = activeContext.processLogic;
-                    //     JSON.parse(object.Zzkey).forEach(element => {
-                    //         for (var index = 0; index < aExcelSet.length; index++) {
-                    //             if (aExcelSet[index].Row === element.ROW) {
-                    //                 aExcelSet[index].Status = element.STATUS;
-                    //                 aExcelSet[index].Message = element.MESSAGE;
-                    //             }
-                    //         }
-                    //         if (element.STATUS === 'E') {
-                    //             oResult.iFailed += 1;
-                    //         } else {
-                    //             oResult.iSuccess += 1;
-                    //         }
-                    //     });
-                    // }
-
 
                     that.getView().getModel("local").setProperty("/MessageItems", aMessageItems);
                     that._myMessageView.setModel(that.getView().getModel("local"));
