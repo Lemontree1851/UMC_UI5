@@ -72,6 +72,10 @@ modules:
       name: ppzemailmasterupload
       target-path: resources/
     - artifacts:
+      - ppofpartition.zip
+      name: ppofpartition
+      target-path: resources/
+    - artifacts:
       - ppzroutinglist.zip
       name: ppzroutinglist
       target-path: resources/
@@ -225,6 +229,16 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+- name: ppofpartition
+  type: html5
+  path: ofpartition
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+    
 resources:
 - name: pp-s4apps01-uaa
   type: org.cloudfoundry.managed-service
