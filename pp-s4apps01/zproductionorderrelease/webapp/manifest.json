@@ -100,7 +100,14 @@
             "@i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "uri": "i18n/i18n.properties"
-            }
+            },
+            "local": {
+                "type": "sap.ui.model.json.JSONModel",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "OneWay"
+                }
+              }
         },
         "resources": {
             "css": []

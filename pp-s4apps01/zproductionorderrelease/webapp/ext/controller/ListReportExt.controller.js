@@ -1,124 +1,142 @@
 sap.ui.define([
-    "sap/m/MessageToast"
-], function(MessageToast) {
+    "sap/m/MessageBox"
+], function (MessageBox) {
     'use strict';
 
-    var _myFunction;
     return {
-        init: function () {
-            _myFunction = sap.ui.require("pp/zproductionorderrelease/ext/controller/ListReportExt.controller");
+
+        onInit: function () {
+            var that = this;
+            // *************************************************
+            var oMessageTemplate = new sap.m.MessageItem({
+                type: '{type}',
+                title: '{title}',
+                description: '{description}',
+                subtitle: '{subtitle}',
+                counter: 1
+            });
+             this._myMessageView = new sap.m.MessageView({
+                showDetailsPageHeader: false,
+                itemSelect: function () {
+                    oBackButton.setVisible(true);
+                },
+                items: {
+                    path: "/MessageItems",
+                    template: oMessageTemplate
+                }
+            });
+            var oBackButton = new sap.m.Button({
+                icon: sap.ui.core.IconPool.getIconURI("nav-back"),
+                visible: false,
+                press: function () {
+                    that._myMessageView.navigateBack();
+                    oBackButton.setVisible(false);
+                }
+            });
+            this._myMessageDialog = new sap.m.Dialog({
+                resizable: true,
+                content: this._myMessageView,
+                beginButton: new sap.m.Button({
+                    press: function () {
+                        that._myMessageDialog.close();
+                    },
+                    text: "{i18n>CloseBtn}"
+                }),
+                customHeader: new sap.m.Bar({
+                    contentLeft: [oBackButton],
+                    contentMiddle: [
+                        new sap.m.Title({
+                            text: "{i18n>Results}",
+                            level: "H1"
+                        })
+                    ]
+                }),
+                contentHeight: "50%",
+                contentWidth: "30%",
+                verticalScrolling: false
+            });
+            // *************************************************
         },
 
         onRelease: function () {
-            var that = this;
-            _myFunction._processRequest("RELEASE", that);
+            this.getView().getModel("local").setProperty("/MessageItems", []);
+            this._processRequest("RELEASE");
         },
-        
-        _processRequest: function (bEvent, that) {
+
+        _processRequest: function (bEvent) {
+            var that = this;
             var sTitle, items = [];
-            var aContexts = that._controller.extensionAPI.getSelectedContexts();
+            var aContexts = this.extensionAPI.getSelectedContexts();
             aContexts.forEach(element => {
-                // "/MaterialRequisition(MaterialRequisitionNo='TEST20240821000',ItemNo='20')"
                 let aSplitArray = element.getPath().split("'");
+                var sPath = element.getPath();
+                that.getView().getModel().setProperty(sPath + "/Message", '1111');
+                that.getView().getModel().setProperty(sPath + "/Criticality", '1');
+                var OriErrorIndicator = that.getView().getModel().getProperty(sPath + "/Message");
                 items.push({
                     Plant: aSplitArray[1],
                     ManufacturingOrder: aSplitArray[3]
+                    // OriErrorIndicator: OriErrorIndicator
                 });
             });
             var oRequestData = {
                 items: items,
                 user: "P00001",
                 username: "Xinlei Xu",
-                datetime: _myFunction._getCurrentDateTime()
+                datetime: this._getCurrentDateTime()
             }
             switch (bEvent) {
                 case "RELEASE":
-                    sTitle = that.getModel("i18n").getResourceBundle().getText("Release");
+                    sTitle = this.getView().getModel("i18n").getResourceBundle().getText("Release");
                     break;
                 default:
                     break;
             }
-
-            _myFunction._callOData(bEvent, oRequestData, that);
-
-            MessageBox.confirm(that.getModel("i18n").getResourceBundle().getText("confirmMessage", [sTitle]), {
+            MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("confirmMessage", [sTitle]), {
                 actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                 emphasizedAction: MessageBox.Action.OK,
                 onClose: function (sAction) {
                     if (sAction === MessageBox.Action.OK) {
-                        _myFunction._callOData(bEvent, oRequestData, that);
+                        that._callOData(bEvent, oRequestData);
                     }
                 },
-                dependentOn: that.routing.getView()
+                dependentOn: this.getView()
             });
         },
 
-        _callOData: function (bEvent, oRequestData, that) {
+        _callOData: function (bEvent, oRequestData) {
+            var that = this;
             var aPromise = [];
-            aPromise.push(_myFunction._callODataAction(bEvent, oRequestData, that));
+            aPromise.push(this._CallODataV2("ACTION", "/processLogic", [], {
+                "Event": bEvent,
+                "Zzkey": JSON.stringify(oRequestData),
+                "RecordUUID": ""
+            }, {}));
+
             try {
-                _myBusyDialog.open();
                 Promise.all(aPromise).then((aContext) => {
-                    _myBusyDialog.close();
+
                     var aMessageItems = [];
-                    var aPrintRecords = [];
                     for (const activeContext of aContext) {
-                        var boundContext = activeContext.getBoundContext();
-                        var object = boundContext.getObject();
+                        // that.getView().getModel("local").setProperty("/headSet/MaterialRequisitionNo", result.HEADER.MATERIAL_REQUISITION_NO);
+                        // var boundContext = activeContext.getBoundContext();
+                        // var object = boundContext.getObject();
+                        // var result = JSON.parse(object.Zzkey);
+                        var object = activeContext.processLogic;
                         var result = JSON.parse(object.Zzkey);
-                        if (bEvent === "QUERY" && result.MESSAGEITEMS.length === 0) {
-                            that.getModel("local").setProperty("/headSet", {
-                                Plant: result.HEADER.PLANT,
-                                Type: result.HEADER.TYPE,
-                                MaterialRequisitionNo: result.HEADER.MATERIAL_REQUISITION_NO,
-                                HeaderCreatedDate: new Date(result.HEADER.CREATED_DATE),
-                                CostCenter: result.HEADER.COST_CENTER,
-                                CostCenterName: result.HEADER.COST_CENTER_NAME,
-                                Customer: result.HEADER.CUSTOMER,
-                                CustomerName: result.HEADER.CUSTOMER_NAME,
-                                Receiver: result.HEADER.RECEIVER,
-                                RequisitionDate: new Date(result.HEADER.REQUISITION_DATE),
-                                LineWarehouseStatus: result.HEADER.LINE_WAREHOUSE_STATUS === "X" ? true : false,
-                                LocalLastChangedAtS: result.HEADER.LOCAL_LAST_CHANGED_AT_S,
-                            });
-                            var items = [];
-                            result.ITEMS.forEach(element => {
-                                var iAmount = parseFloat(element.STANDARD_PRICE) * parseFloat(element.QUANTITY);
-                                items.push({
-                                    ItemNo: element.ITEM_NO,
-                                    ManufacturingOrder: element.MANUFACTURING_ORDER,
-                                    Product: element.PRODUCT,
-                                    Material: element.MATERIAL,
-                                    MaterialDescription: element.MATERIAL_DESCRIPTION,
-                                    Quantity: element.QUANTITY,
-                                    BaseUnit: element.BASE_UNIT,
-                                    StorageLocation: element.STORAGE_LOCATION,
-                                    StorageLocationName: element.STORAGE_LOCATION_NAME,
-                                    Location: element.LOCATION,
-                                    Remark: element.REMARK,
-                                    StandardPrice: element.STANDARD_PRICE,
-                                    TotalAmount: iAmount,
-                                    Currency: element.CURRENCY,
-                                    OrderIsClosed: element.ORDER_IS_CLOSED,
-                                    LocalLastChangedAtS: element.LOCAL_LAST_CHANGED_AT_S,
-                                    DeleteFlag: iAmount >= 100000 ? "W" : ""
-                                });
-                            });
-                            that.getModel("local").setProperty("/itemSet", items);
-                            sap.ui.getCore().byId("idMaterialRequisitionNo").setEditable(false);
-                            sap.ui.getCore().byId("idSaveBtn").setVisible(true);
-                        } else if (bEvent === "QUERY") {
-                            // has error message
-                            sap.ui.getCore().byId("idSaveBtn").setVisible(false);
-                        } else if (bEvent === "SAVE") {
-                            that.getModel("local").setProperty("/headSet/MaterialRequisitionNo", result.HEADER.MATERIAL_REQUISITION_NO);
-                        } else if (bEvent === "PRINT") {
-                            result.ITEMS.forEach(element => {
-                                aPrintRecords.push({ RecordUUID: element.RECORDUUID });
-                            });
-                            aPrintRecords = _myFunction._removeDuplicates(aPrintRecords, ["RecordUUID"]);
-                        }
-                        result.MESSAGEITEMS.forEach(element => {
+                        // result.MESSAGEITEMS.forEach(element => {
+
+                        //     aMessageItems.push({
+                        //         type: element.TYPE,
+                        //         title: element.TITLE,
+                        //         description: element.DESCRIPTION,
+                        //         subtitle: element.SUBTITLE
+                        //     });
+                        // });
+
+                        result.ITEMS.forEach(element => {
+                            var sPath = element.getPath();
+                            
                             aMessageItems.push({
                                 type: element.TYPE,
                                 title: element.TITLE,
@@ -127,51 +145,119 @@ sap.ui.define([
                             });
                         });
                     }
-                    that.getModel("local").setProperty("/MessageItems", aMessageItems);
-                    _myMessageView.setModel(that.getModel("local"));
-                    // bEvent = "PRINT"
-                    aPrintRecords.forEach(element => {
-                        // 'PrintRecord(RecordUUID=2d218e58-501b-1eef-99b5-8604583014eb,IsActiveEntity=true)'
-                        var sPath = "PrintRecord(RecordUUID=" + element.RecordUUID + ",IsActiveEntity=true)";
-                        var sURL = that.getModel("Print").getServiceUrl() + sPath + '/PDFContent';
-                        sap.m.URLHelper.redirect(sURL, true);
-                    });
+
+                    // for (const activeContext of aContext) {
+                    //     var object = activeContext.processLogic;
+                    //     JSON.parse(object.Zzkey).forEach(element => {
+                    //         for (var index = 0; index < aExcelSet.length; index++) {
+                    //             if (aExcelSet[index].Row === element.ROW) {
+                    //                 aExcelSet[index].Status = element.STATUS;
+                    //                 aExcelSet[index].Message = element.MESSAGE;
+                    //             }
+                    //         }
+                    //         if (element.STATUS === 'E') {
+                    //             oResult.iFailed += 1;
+                    //         } else {
+                    //             oResult.iSuccess += 1;
+                    //         }
+                    //     });
+                    // }
+
+
+                    that.getView().getModel("local").setProperty("/MessageItems", aMessageItems);
+                    that._myMessageView.setModel(that.getView().getModel("local"));
+
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
-                    _myBusyDialog.close();
-                    var aMessageItems = that.getModel("local").getProperty("/MessageItems");
+                    var aMessageItems = that.getView().getModel("local").getProperty("/MessageItems");
                     if (aMessageItems.length > 0) {
-                        _myMessageView.navigateBack();
-                        that.routing.getView().addDependent(_myMessageDialog);
-                        _myMessageDialog.open();
+                        that._myMessageView.navigateBack();
+                        that.getView().addDependent(that._myMessageDialog);
+                        that._myMessageDialog.open();
                     }
-                    if (bEvent !== "SAVE" && bEvent !== "QUERY") {
-                        // refresh
-                        that.getModel().refresh();
-                    }
+                    // refresh
+                    // that.getView().getModel().refresh();
                 });
             } catch (error) {
                 MessageBox.error(error);
-                _myBusyDialog.close();
             }
         },
 
-        _callODataAction: function (bEvent, aRequestData, that) {
-            return new Promise((resolve, reject) => {
-                var processLogic = that.getModel().bindContext("/MaterialRequisition/com.sap.gateway.srvd.zui_materialrequisition_o4.v0001.processLogic(...)");
-                processLogic.setParameter("Event", bEvent);
-                processLogic.setParameter("Zzkey", JSON.stringify(aRequestData));
-                processLogic.setParameter("RecordUUID", "");
-                processLogic.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
-                    resolve(processLogic);
-                }).catch((error) => {
-                    reject(error);
-                });
+        _CallODataV2: function (sMethod, sPath, aFilters, mUrlParameter, oRequestData) {
+            var that = this;
+            var oBusyDialog = new sap.m.BusyDialog();
+            oBusyDialog.open();
+            return new Promise(function (resolve, reject) {
+                var mParameters = {
+                    method: sMethod === "READ" ? "GET" : "POST",
+                    filters: aFilters,
+                    urlParameters: mUrlParameter,
+                    success: function (oResponse) {
+                        oBusyDialog.close();
+                        resolve(oResponse);
+                    },
+                    error: function (oErr) {
+                        oBusyDialog.close();
+                        // var oError = JSON.parse(oErr.responseText);
+                        // var sMsg;
+                        // if (oError.error.innererror.errordetails.length > 0) {
+                        //     sMsg = oError.error.innererror.errordetails[0].message;
+                        // } else {
+                        //     sMsg = oError.error.message.value;
+                        // }
+                        // MessageBox.error(sMsg);
+                        reject(JSON.parse(oErr.responseText));
+                    }
+                };
+                switch (sMethod) {
+                    case "READ":
+                        that.getView().getModel().read(sPath, mParameters);
+                        break;
+                    case "CREATE":
+                        that.getView().getModel().create(sPath, oRequestData, mParameters);
+                        break;
+                    case "UPDATE":
+                        that.getView().getModel().update(sPath, oRequestData, mParameters);
+                        break;
+                    case "DELETE":
+                        that.getView().getModel().remove(sPath, mParameters);
+                        break;
+                    case "ACTION":
+                        that.getView().getModel().callFunction(sPath, mParameters);
+                        break;
+                    default:
+                        break;
+                }
             });
+        },
+
+        _removeDuplicates: function (arr, keys) {
+            return arr.reduce((result, obj) => {
+                const index = result.findIndex(item => {
+                    return keys.every(key => item[key] === obj[key]);
+                });
+                if (index !== -1) {
+                    result[index] = obj;
+                } else {
+                    result.push(obj);
+                }
+                return result;
+            }, []);
+        },
+
+        _getCurrentDateTime: function () {
+            var date = new Date();
+            var sTime = date.getUTCFullYear().toString() +
+                this._pad2(date.getUTCMonth() + 1) +
+                this._pad2(date.getUTCDate()) +
+                this._pad2(date.getUTCHours()) +
+                this._pad2(date.getUTCMinutes()) +
+                this._pad2(date.getUTCSeconds());
+            return sTime;
+        },
+        _pad2: function (n) {
+            return parseInt(n) < 10 ? "0" + parseInt(n) : n;
         }
     };
-        //onRelease: function(oEvent) {
-        //    MessageToast.show("Custom handler invoked.");
-        //}
 });
