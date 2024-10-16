@@ -91,6 +91,10 @@ modules:
       - ppzledversioninfo.zip
       name: ppzledversioninfo
       target-path: resources/
+    - artifacts:
+      - ppzmfgorderassignso.zip
+      name: ppzmfgorderassignso
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -193,6 +197,16 @@ modules:
 - name: ppzledversioninfo
   type: html5
   path: zledversioninfo
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzmfgorderassignso
+  type: html5
+  path: zmfgorderassignso
   build-parameters:
     build-result: dist
     builder: custom
