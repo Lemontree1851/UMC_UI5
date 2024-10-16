@@ -103,7 +103,6 @@
                 <Property Name="ProductionUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="Criticality" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
-                <Property Name="OriErrorIndicator" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
             </EntityType>
             <EntityType Name="ZC_ProductionSupervisorVHType" sap:label="Production Supervisor Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
