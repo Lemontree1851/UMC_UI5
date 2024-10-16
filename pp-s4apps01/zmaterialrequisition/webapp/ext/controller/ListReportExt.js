@@ -83,13 +83,15 @@ sap.ui.define([
                 LineWarehouseStatus: false
             });
             this.getModel("local").setProperty("/itemSet", []);
+            var sActionTitle1 = this.getModel("i18n").getResourceBundle().getText("Create");
+            var sActionTitle2 = this.getModel("i18n").getResourceBundle().getText("Update");
             MessageBox.information(this.getModel("i18n").getResourceBundle().getText("selectOperation"), {
-                actions: ["{i18n>Create}", "{i18n>Update}", MessageBox.Action.CLOSE],
+                actions: [sActionTitle1, sActionTitle2, MessageBox.Action.CLOSE],
                 onClose: function (sAction) {
                     if (sAction === MessageBox.Action.CLOSE) {
                         return;
                     }
-                    if (sAction === "{i18n>Create}") {
+                    if (sAction === sActionTitle1) {
                         that.getModel("local").setProperty("/mode", "create");
                     } else {
                         that.getModel("local").setProperty("/mode", "update");
