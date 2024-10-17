@@ -47,10 +47,19 @@
     "crossNavigation": {
       "inbounds": {
         "sourcelistupload-display": {
-          "semanticObject": "sourcrlistupload",
+          "semanticObject": "salesacceptance",
           "action": "display",
           "title": "{{flpTitle}}",
           "icon": "sap-icon://upload",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        },
+        "salesacceptance-display": {
+          "semanticObject": "salesacceptance",
+          "action": "display",
+          "title": "{{flpTitle}}",
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
