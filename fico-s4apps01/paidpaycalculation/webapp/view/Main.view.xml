@@ -222,7 +222,7 @@
 						<Label text="{i18n>Cost01}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost01}"/>
+						<Label text="{path:'Cost01', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="UpperProduct02" width="6rem" visible="true" autoResizable="true" sortProperty="UpperProduct02" filterProperty="UpperProduct02">
@@ -258,7 +258,7 @@
 						<Label text="{i18n>Cost02}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost02}"/>
+						<Label text="{path:'Cost02', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="UpperProduct03" width="6rem" visible="true" autoResizable="true" sortProperty="UpperProduct03" filterProperty="UpperProduct03">
@@ -294,7 +294,7 @@
 						<Label text="{i18n>Cost03}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost03}"/>
+						<Label text="{path:'Cost03', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="UpperProduct04" width="6rem" visible="true" autoResizable="true" sortProperty="UpperProduct04" filterProperty="UpperProduct04">
@@ -330,7 +330,7 @@
 						<Label text="{i18n>Cost04}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost04}"/>
+						<Label text="{path:'Cost04', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="UpperProduct05" width="6rem" visible="true" autoResizable="true" sortProperty="UpperProduct05" filterProperty="UpperProduct05">
@@ -366,7 +366,7 @@
 						<Label text="{i18n>Cost05}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost05}"/>
+						<Label text="{path:'Cost05', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="UpperProduct06" width="6rem" visible="true" autoResizable="true" sortProperty="UpperProduct06" filterProperty="UpperProduct06">
@@ -402,7 +402,7 @@
 						<Label text="{i18n>Cost06}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost06}"/>
+						<Label text="{path:'Cost06', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="UpperProduct07" width="6rem" visible="true" autoResizable="true" sortProperty="UpperProduct07" filterProperty="UpperProduct07">
@@ -438,7 +438,7 @@
 						<Label text="{i18n>Cost07}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost07}"/>
+						<Label text="{path:'Cost07', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="UpperProduct08" width="6rem" visible="true" autoResizable="true" sortProperty="UpperProduct08" filterProperty="UpperProduct08">
@@ -474,7 +474,7 @@
 						<Label text="{i18n>Cost08}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost08}"/>
+						<Label text="{path:'Cost08', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="UpperProduct09" width="6rem" visible="true" autoResizable="true" sortProperty="UpperProduct09" filterProperty="UpperProduct09">
@@ -510,7 +510,7 @@
 						<Label text="{i18n>Cost09}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost09}"/>
+						<Label text="{path:'Cost09', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="UpperProduct10" width="6rem" visible="true" autoResizable="true" sortProperty="UpperProduct10" filterProperty="UpperProduct10">
@@ -546,7 +546,7 @@
 						<Label text="{i18n>Cost10}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Cost10}"/>
+						<Label text="{path:'Cost10', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="MaterialCost2000" width="6rem" visible="true" autoResizable="true" sortProperty="MaterialCost2000" filterProperty="MaterialCost2000">
@@ -558,7 +558,7 @@
 						<Label text="{i18n>MaterialCost2000}"/>
 					</table:label>
 					<table:template>
-						<Label text="{MaterialCost2000}"/>
+						<Label text="{path:'MaterialCost2000', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="MaterialCost3000" width="6rem" visible="true" autoResizable="true" sortProperty="MaterialCost3000" filterProperty="MaterialCost3000">
@@ -570,7 +570,7 @@
 						<Label text="{i18n>MaterialCost3000}"/>
 					</table:label>
 					<table:template>
-						<Label text="{MaterialCost3000}"/>
+						<Label text="{path:'MaterialCost3000', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="PurchasingGroup" width="6rem" visible="true" autoResizable="true" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup">
@@ -594,7 +594,7 @@
 						<Label text="{i18n>PurGrpAmount}"/>
 					</table:label>
 					<table:template>
-						<Label text="{PurGrpAmount}"/>
+						<Label text="{path:'PurGrpAmount', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="ChargeableAmount" width="6rem" visible="true" autoResizable="true" sortProperty="ChargeableAmount"
@@ -607,7 +607,7 @@
 						<Label text="{i18n>ChargeableAmount}"/>
 					</table:label>
 					<table:template>
-						<Label text="{ChargeableAmount}"/>
+						<Label text="{path:'ChargeableAmount', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="ChargeableRate" width="6rem" visible="false" autoResizable="true" sortProperty="ChargeableRate" filterProperty="ChargeableRate">
@@ -619,7 +619,7 @@
 						<Label text="{i18n>ChargeableRate}"/>
 					</table:label>
 					<table:template>
-						<Label text="{ChargeableRate}"/>
+						<Label text="{path:'ChargeableRate', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="PreviousStockAmount" width="6rem" visible="true" autoResizable="true" sortProperty="PreviousStockAmount" filterProperty="PreviousStockAmount">
@@ -631,7 +631,7 @@
 						<Label text="{i18n>PreviousStockAmount}"/>
 					</table:label>
 					<table:template>
-						<Label text="{PreviousStockAmount}"/>
+						<Label text="{path:'PreviousStockAmount', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="CurrentStockAmount" width="6rem" visible="true" autoResizable="true" sortProperty="CurrentStockAmount"
@@ -644,7 +644,7 @@
 						<Label text="{i18n>CurrentStockAmount}"/>
 					</table:label>
 					<table:template>
-						<Label text="{CurrentStockAmount}"/>
+						<Label text="{path:'CurrentStockAmount', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="CustomerRevenue" width="6rem" visible="true" autoResizable="true" sortProperty="CustomerRevenue"
@@ -657,7 +657,7 @@
 						<Label text="{i18n>CustomerRevenue}"/>
 					</table:label>
 					<table:template>
-						<Label text="{CustomerRevenue}"/>
+						<Label text="{path:'CustomerRevenue', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="Revenue" width="6rem" visible="true" autoResizable="true" sortProperty="Revenue"
@@ -670,7 +670,7 @@
 						<Label text="{i18n>Revenue}"/>
 					</table:label>
 					<table:template>
-						<Label text="{Revenue}"/>
+						<Label text="{path:'Revenue', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="CurrentStockSemi" width="6rem" visible="false" autoResizable="true" sortProperty="CurrentStockSemi" filterProperty="CurrentStockSemi">
@@ -682,7 +682,7 @@
 						<Label text="{i18n>CurrentStockSemi}"/>
 					</table:label>
 					<table:template>
-						<Label text="{CurrentStockSemi}"/>
+						<Label text="{path:'CurrentStockSemi', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="CurrentStockFin" width="6rem" visible="false" autoResizable="true" sortProperty="CurrentStockFin"
@@ -695,7 +695,7 @@
 						<Label text="{i18n>CurrentStockFin}"/>
 					</table:label>
 					<table:template>
-						<Label text="{CurrentStockFin}"/>
+						<Label text="{path:'CurrentStockFin', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="CurrentStockTotal" width="6rem" visible="false" autoResizable="true" sortProperty="CurrentStockTotal" filterProperty="CurrentStockTotal">
@@ -707,7 +707,7 @@
 						<Label text="{i18n>CurrentStockTotal}"/>
 					</table:label>
 					<table:template>
-						<Label text="{CurrentStockTotal}"/>
+						<Label text="{path:'CurrentStockTotal', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="StockChangeAmount" width="6rem" visible="false" autoResizable="true" sortProperty="StockChangeAmount" filterProperty="StockChangeAmount">
@@ -719,7 +719,7 @@
 						<Label text="{i18n>StockChangeAmount}"/>
 					</table:label>
 					<table:template>
-						<Label text="{StockChangeAmount}"/>
+						<Label text="{path:'StockChangeAmount', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="PaidMaterialCost" width="6rem" visible="false" autoResizable="true" sortProperty="PaidMaterialCost" filterProperty="PaidMaterialCost">
@@ -731,7 +731,7 @@
 						<Label text="{i18n>PaidMaterialCost}"/>
 					</table:label>
 					<table:template>
-						<Label text="{PaidMaterialCost}"/>
+						<Label text="{path:'PaidMaterialCost', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="RevenueRate" width="10rem" visible="false" autoResizable="true" sortProperty="RevenueRate"
@@ -744,7 +744,7 @@
 						<Label text="{i18n>RevenueRate}"/>
 					</table:label>
 					<table:template>
-						<Label text="{RevenueRate}"/>
+						<Label text="{path:'RevenueRate', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="Currency" width="4rem" visible="false" autoResizable="true" sortProperty="Currency"
