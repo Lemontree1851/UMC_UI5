@@ -3,90 +3,116 @@ ID: sd-s4apps01
 description: SD - Fiori Apps
 version: 0.0.1
 modules:
-- name: sd-s4apps01-dest-content
-  type: com.sap.application.content
-  requires:
-  - name: sd-s4apps01-destination-service
-    parameters:
-      content-target: true
-  - name: sd-s4apps01-repo-host
-    parameters:
-      service-key:
-        name: sd-s4apps01-repo-host-key
-  - name: sd-s4apps01-uaa
-    parameters:
-      service-key:
-        name: sd-s4apps01-uaa-key
-  parameters:
-    content:
-      instance:
-        destinations:
-        - Name: sd-s4apps01_repo_host
-          ServiceInstanceName: sd-s4apps01-html5-srv
-          ServiceKeyName: sd-s4apps01-repo-host-key
-          sap.cloud.service: sd-s4apps01
-        - Authentication: OAuth2UserTokenExchange
-          Name: sd-s4apps01_uaa
-          ServiceInstanceName: sd-s4apps01-xsuaa-srv
-          ServiceKeyName: sd-s4apps01-uaa-key
-          sap.cloud.service: sd-s4apps01
-        existing_destinations_policy: update
-  build-parameters:
-    no-source: true
-- name: sd-s4apps01-app-content
-  type: com.sap.application.content
-  path: .
-  requires:
-  - name: sd-s4apps01-repo-host
-    parameters:
-      content-target: true
-  build-parameters:
-    build-result: resources
+  - name: sd-s4apps01-dest-content
+    type: com.sap.application.content
     requires:
-    - artifacts:
-      - sdsalesacceptance.zip
-      name: sdsalesacceptance
-      target-path: resources/
-- name: sdsalesacceptance
-  type: html5
-  path: salesacceptance
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-resources:
-- name: sd-s4apps01-uaa
-  type: org.cloudfoundry.managed-service
-  parameters:
-    path: ./xs-security.json
-    service: xsuaa
-    service-name: sd-s4apps01-xsuaa-srv
-    service-plan: application
-- name: sd-s4apps01-destination-service
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      HTML5Runtime_enabled: false
-      init_data:
+      - name: sd-s4apps01-destination-service
+        parameters:
+          content-target: true
+      - name: sd-s4apps01-repo-host
+        parameters:
+          service-key:
+            name: sd-s4apps01-repo-host-key
+      - name: sd-s4apps01-uaa
+        parameters:
+          service-key:
+            name: sd-s4apps01-uaa-key
+    parameters:
+      content:
         instance:
           destinations:
-          - Authentication: NoAuthentication
-            Name: ui5
-            ProxyType: Internet
-            Type: HTTP
-            URL: https://ui5.sap.com
+            - Name: sd-s4apps01_repo_host
+              ServiceInstanceName: sd-s4apps01-html5-srv
+              ServiceKeyName: sd-s4apps01-repo-host-key
+              sap.cloud.service: sd-s4apps01
+            - Authentication: OAuth2UserTokenExchange
+              Name: sd-s4apps01_uaa
+              ServiceInstanceName: sd-s4apps01-xsuaa-srv
+              ServiceKeyName: sd-s4apps01-uaa-key
+              sap.cloud.service: sd-s4apps01
           existing_destinations_policy: update
-      version: 1.0.0
-    service: destination
-    service-name: sd-s4apps01-destination-service
-    service-plan: lite
-- name: sd-s4apps01-repo-host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-name: sd-s4apps01-html5-srv
-    service-plan: app-host
+    build-parameters:
+      no-source: true
+  - name: sd-s4apps01-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: sd-s4apps01-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - sdsalesacceptance.zip
+          name: sdsalesacceptance
+          target-path: resources/
+        - artifacts:
+            - sdbatchcreationdn.zip
+          name: sdbatchcreationdn
+          target-path: resources/
+        - artifacts:
+            - sdshipmentstorageloc.zip
+          name: sdshipmentstorageloc
+          target-path: resources/
+  - name: sdsalesacceptance
+    type: html5
+    path: salesacceptance
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: sdbatchcreationdn
+    type: html5
+    path: batchcreationdn
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: sdshipmentstorageloc
+    type: html5
+    path: shipmentstorageloc
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+resources:
+  - name: sd-s4apps01-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: sd-s4apps01-xsuaa-srv
+      service-plan: application
+  - name: sd-s4apps01-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: false
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: sd-s4apps01-destination-service
+      service-plan: lite
+  - name: sd-s4apps01-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: sd-s4apps01-html5-srv
+      service-plan: app-host
 parameters:
   deploy_mode: html5-repo

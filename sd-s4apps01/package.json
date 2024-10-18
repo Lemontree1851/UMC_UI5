@@ -7,5 +7,9 @@
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "undeploy": "cf undeploy sd-s4apps01 --delete-services --delete-service-keys --delete-service-brokers"
+  },
+  "devDependencies": {
+    "mbt": "^1.2.27",
+    "rimraf": "^5.0.5"
   }
 }
