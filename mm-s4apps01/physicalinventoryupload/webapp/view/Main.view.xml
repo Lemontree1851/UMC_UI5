@@ -1,0 +1,98 @@
+<mvc:View controllerName="mm.physicalinventoryupload.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">    
+    <Page id="_IDGenPage">
+        <content>
+            <Panel id="_IDGenPanel" expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_PURINFORECORD_CREATE' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                    <upload:items>
+                        <upload:UploadSetItem id="_IDGenUploadSetItem" fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+                    </upload:items>
+                </upload:UploadSet>
+            </Panel>
+            <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+                <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
+            </Panel>
+            <Panel id="_IDGenPanel1" expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+                <table:Table id="table1" rows="{local>/excelSet}" selectionMode="None" fixedColumnCount="0" rowMode="Interactive" class="sapUiSizeCompact">
+                    <table:extension>
+                        <OverflowToolbar id="_IDGenOverflowToolbar">
+                            <Text id="_IDGenText" text="{local>/logInfo}"/>
+                            <ToolbarSpacer id="_IDGenToolbarSpacer"/>
+                            <Button id="idSummaryButton" icon="sap-icon://sum" type="Transparent" text="{i18n>summaryBtn}" press="onSummary" visible="{= ${local>/excelHeadSet}.length > 0}"/>
+                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelHeadSet}.length > 0}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelHeadSet}.length > 0}"/>
+                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                    <table:columns>
+                        <table:Column id="_IDGenColumn1" width="15rem" sortProperty="Status" filterProperty="Status">
+						    <Label id="_IDGenLabel" text="{i18n>Status}"/>
+							<table:template>
+								<Text id="_IDGenText1" text="{parts:['local>Status'], formatter:'.formatter.formatResult'}"/>
+							</table:template>
+                        </table:Column>   
+                        <table:Column id="_IDGenColumn2" width="15rem" label="{i18n>Message}">
+                            <table:template>
+                                <Text id="_IDGenText2" text="{local>Message}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="_IDGenColumn3" width="15rem" label="{i18n>Plant}">
+                            <table:template>
+                                <Text id="_IDGenText3" text="{local>Plant}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="_IDGenColumn4" width="20rem" label="{i18n>StorageLocation}">
+                            <table:template>
+                                <Text id="_IDGenText4" text="{local>StorageLocation}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="_IDGenColumn5" width="20rem" label="{i18n>InventorySpecialStockType}">
+                            <table:template>
+                                <Text id="_IDGenText5" text="{local>InventorySpecialStockType}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="_IDGenColumn6" width="20rem" label="{i18n>Material}">
+                            <table:template>
+                                <Text id="_IDGenText6" text="{local>Material}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="_IDGenColumn7" width="20rem" label="{i18n>Supplier}">
+                            <table:template>
+                                <Text id="_IDGenText7" text="{local>Supplier}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="_IDGenColumn8" width="20rem" label="{i18n>Quantity}">
+                            <table:template>
+                                <Text id="_IDGenText8" text="{local>Quantity}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="_IDGenColumn9" width="20rem" label="{i18n>UnitOfEntry}">
+                            <table:template>
+                                <Text id="_IDGenText9" text="{local>UnitOfEntry}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="_IDGenColumn10" width="20rem" label="{i18n>PhysicalInventoryItemIsZero}">
+                            <table:template>
+                                <Text id="_IDGenText10" text="{local>PhysicalInventoryItemIsZero}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="_IDGenColumn11" width="20rem" label="{i18n>Batch}">
+                            <table:template>
+                                <Text id="_IDGenText11" text="{local>Batch}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>   
+                        <table:Column id="_IDGenColumn12" width="20rem" label="{i18n>ReasonForPhysInvtryDifference}">
+                            <table:template>
+                                <Text id="_IDGenText12" text="{local>ReasonForPhysInvtryDifference}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>                 
+                    </table:columns>
+                </table:Table>
+            </Panel>
+        </content>        
+    </Page>
+</mvc:View>

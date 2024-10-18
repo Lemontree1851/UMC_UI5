@@ -70,6 +70,10 @@ modules:
       - mmpodataanalysis.zip
       name: mmpodataanalysis
       target-path: resources/
+    - artifacts:
+      - mmphysicalinventoryupload.zip
+      name: mmphysicalinventoryupload
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -118,6 +122,15 @@ modules:
 - name: mmpodataanalysis
   type: html5
   path: podataanalysis
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmphysicalinventoryupload
+  type: html5
+  path: physicalinventoryupload
   build-parameters:
     build-result: dist
     builder: custom
