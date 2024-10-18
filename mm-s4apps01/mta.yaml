@@ -106,7 +106,6 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
-
 - name: mmpoacceptance
   type: html5
   path: poacceptance
@@ -116,7 +115,6 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
-    
 - name: mmpodataanalysis
   type: html5
   path: podataanalysis
@@ -124,7 +122,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
