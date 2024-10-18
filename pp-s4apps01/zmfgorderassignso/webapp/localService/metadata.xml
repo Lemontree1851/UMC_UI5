@@ -83,11 +83,15 @@
                 <Key>
                     <PropertyRef Name="ProductionPlant"/>
                     <PropertyRef Name="ManufacturingOrder"/>
+                    <PropertyRef Name="SalesOrder"/>
+                    <PropertyRef Name="SalesOrderItem"/>
                     <PropertyRef Name="Sequence"/>
                 </Key>
-                <Property Name="ProductionPlant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:quickinfo="Production Plant" sap:value-list="standard"/>
-                <Property Name="ManufacturingOrder" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Manufacturing Order" sap:quickinfo="Manufacturing Order ID" sap:value-list="standard"/>
-                <Property Name="Sequence" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative"/>
+                <Property Name="ProductionPlant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:quickinfo="Production Plant" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="ManufacturingOrder" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Manufacturing Order" sap:quickinfo="Manufacturing Order ID" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="SalesOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Sales Order" sap:quickinfo="Sales and Distribution Document Number" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="SalesOrderItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="SO Item" sap:quickinfo="Item number of the SD document" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Sequence" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="MRPController" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="MRP Controller" sap:value-list="standard"/>
                 <Property Name="ProductionSupervisor" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Production Supervisor" sap:value-list="standard"/>
                 <Property Name="Material" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number for Order" sap:value-list="standard"/>
@@ -96,13 +100,10 @@
                 <Property Name="MfgOrderPlannedTotalQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Production Planned Quantity" sap:quickinfo="Total Order Quantity"/>
                 <Property Name="ProductionUnit" Type="Edm.String" MaxLength="3" sap:label="Production Unit" sap:quickinfo="Production Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="OrderIsReleased" Type="Edm.Boolean" sap:label="Is Released" sap:quickinfo="Indicator: Order is Released"/>
-                <Property Name="AllocationQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Allocation Quantity" sap:quickinfo="Quantity"/>
-                <Property Name="SalesOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sales Order" sap:quickinfo="Sales and Distribution Document Number" sap:value-list="standard"/>
-                <Property Name="SalesOrderItem" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="SO Item" sap:quickinfo="Item number of the SD document"/>
+                <Property Name="AssignQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Assign Quantity" sap:quickinfo="Quantity"/>
                 <Property Name="PurchaseOrderByCustomer" Type="Edm.String" MaxLength="35" sap:label="Customer PO." sap:quickinfo="Customer Reference"/>
-                <Property Name="RequestedQuantityInBaseUnit" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="BaseUnit" sap:label="SO Item Quantity" sap:quickinfo="Requested Order Quantity in Base Unit"/>
-                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
-                <Property Name="PossibleAllocationQty" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="ProductionUnit" sap:label="Possible Allocation Quantity"/>
+                <Property Name="RequestedQuantityInBaseUnit" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="ProductionUnit" sap:label="SO Item Quantity"/>
+                <Property Name="AvailableAssignQty" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="ProductionUnit" sap:label="Available Assign Quantity"/>
                 <NavigationProperty Name="to_AssignSOItem" Relationship="cds_zui_mfgorderassignso_o2.assoc_11806B06D35BF2D139DC54FBB6DE0A29" FromRole="FromRole_assoc_11806B06D35BF2D139DC54FBB6DE0A29" ToRole="ToRole_assoc_11806B06D35BF2D139DC54FBB6DE0A29"/>
             </EntityType>
             <EntityType Name="AssignSOItemType" sap:label="Manufacturing Order Assign SO Item" sap:content-version="1">
@@ -124,7 +125,7 @@
                 <Property Name="MfgOrderPlannedStartDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="MfgOrderPlannedTotalQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Quantity"/>
                 <Property Name="ProductionUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
-                <Property Name="AllocationQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Allocation Quantity" sap:quickinfo="Quantity"/>
+                <Property Name="AssignQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Assign Quantity" sap:quickinfo="Quantity"/>
                 <Property Name="Remark" Type="Edm.String" MaxLength="50"/>
                 <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time"/>
                 <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
@@ -134,8 +135,8 @@
                 <Property Name="PurchaseOrderByCustomer" Type="Edm.String" MaxLength="35" sap:label="Customer PO." sap:quickinfo="Customer Reference"/>
                 <Property Name="RequestedQuantityInBaseUnit" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="BaseUnit" sap:label="Item Quantity" sap:quickinfo="Requested Order Quantity in Base Unit"/>
                 <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
-                <Property Name="UnAllocationQty" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ProductionUnit" sap:label="Unallocated quantity"/>
-                <Property Name="TotalAllocationQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Total Allocation Quantity"/>
+                <Property Name="UnAssignQty" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ProductionUnit" sap:label="Unassign Quantity"/>
+                <Property Name="TotalAssignQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Total Assign Quantity"/>
                 <Property Name="RequestedDeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Delivery Date" sap:quickinfo="Requested Delivery Date"/>
             </EntityType>
             <EntityType Name="ZC_ProductionSupervisorVHType" sap:label="Production Supervisor Value Help" sap:value-list="true" sap:content-version="1">
@@ -269,6 +270,11 @@
                 <Property Name="FIELD_VALUE" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="DESCRIPTION" Type="Edm.String"/>
             </EntityType>
+            <ComplexType Name="ZR_UPLOAD_PARAMETER">
+                <Property Name="Event" Type="Edm.String" MaxLength="20"/>
+                <Property Name="RecordUUID" Type="Edm.String" MaxLength="36" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                <Property Name="Zzkey" Type="Edm.String" sap:label="Zzkey" sap:quickinfo="String Type"/>
+            </ComplexType>
             <ComplexType Name="SAP__FitToPage">
                 <Property Name="ErrorRecoveryBehavior" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Error behavior" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="IsEnabled" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -439,6 +445,16 @@
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage"/>
                     <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage"/>
                 </AssociationSet>
+                <FunctionImport Name="getSalesOrderList" ReturnType="cds_zui_mfgorderassignso_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
+                <FunctionImport Name="saveAssignSalesOrder" ReturnType="cds_zui_mfgorderassignso_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
             <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/ProductionPlant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -475,6 +491,23 @@
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="ManufacturingOrderText"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/SalesOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="SD Document"/>
+                        <PropertyValue Property="CollectionPath" String="I_SalesDocumentStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="SalesOrder"/>
+                                    <PropertyValue Property="ValueListProperty" String="SalesDocument"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -541,23 +574,6 @@
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="ProductExternalID"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/SalesOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.ValueList">
-                    <Record>
-                        <PropertyValue Property="Label" String="SD Document"/>
-                        <PropertyValue Property="CollectionPath" String="I_SalesDocumentStdVH"/>
-                        <PropertyValue Property="SearchSupported" Bool="true"/>
-                        <PropertyValue Property="Parameters">
-                            <Collection>
-                                <Record Type="Common.ValueListParameterInOut">
-                                    <PropertyValue Property="LocalDataProperty" PropertyPath="SalesOrder"/>
-                                    <PropertyValue Property="ValueListProperty" String="SalesDocument"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -707,6 +723,9 @@
                             </Collection>
                         </PropertyValue>
                     </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
                 </Annotation>
                 <Annotation Term="Capabilities.UpdateRestrictions">
                     <Record>

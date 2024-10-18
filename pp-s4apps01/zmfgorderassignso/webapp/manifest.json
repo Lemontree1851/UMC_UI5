@@ -75,7 +75,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.120.18",
       "libs": {
@@ -114,6 +114,10 @@
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
+      },
+      "local": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
       }
     },
     "resources": {
@@ -123,6 +127,57 @@
       "config": {},
       "routes": [],
       "targets": {}
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.suite.ui.generic.template.ObjectPage.view.Details": {
+            "controllerName": "pp.zmfgorderassignso.ext.controller.ObjectPageExt",
+            "sap.ui.generic.app": {
+              "MfgOrder": {
+                "EntitySet": "MfgOrder",
+                "Sections": {
+                  "idLineSOItem": {
+                    "id": "idLineSOItem",
+                    "Actions": {
+                      "AssignSalesOrder": {
+                        "id": "AssignSalesOrderButton",
+                        "text": "{i18n>AssignSalesOrder}",
+                        "press": "onAssignSalesOrder",
+                        "requiresSelection": false
+                      },
+                      "ChangeAssignQty": {
+                        "id": "ChangeAssignQtyButton",
+                        "text": "{i18n>ChangeAssignQty}",
+                        "press": "onChangeAssignQty",
+                        "requiresSelection": true
+                      },
+                      "ChangeAssignMaterial": {
+                        "id": "ChangeAssignMaterialButton",
+                        "text": "{i18n>ChangeAssignMaterial}",
+                        "press": "onChangeAssignMaterial",
+                        "requiresSelection": true
+                      },
+                      "ChangeAssignSalesOrder": {
+                        "id": "ChangeAssignSalesOrderButton",
+                        "text": "{i18n>ChangeAssignSalesOrder}",
+                        "press": "onChangeAssignSalesOrder",
+                        "requiresSelection": true
+                      },
+                      "DeleteSOItem": {
+                        "id": "DeleteSOItemButton",
+                        "text": "{i18n>DeleteSOItem}",
+                        "press": "onDeleteSOItem",
+                        "requiresSelection": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "sap.ui.generic.app": {
@@ -158,15 +213,10 @@
             "entitySet": "MfgOrder",
             "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
             "component": {
-              "name": "sap.suite.ui.generic.template.ObjectPage"
-            },
-            "pages": {
-              "ObjectPage|to_AssignSOItem": {
-                "navigationProperty": "to_AssignSOItem",
-                "entitySet": "AssignSOItem",
-                "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
-                "component": {
-                  "name": "sap.suite.ui.generic.template.ObjectPage"
+              "name": "sap.suite.ui.generic.template.ObjectPage",
+              "settings": {
+                "tableSettings": {
+                  "variantManagement": false
                 }
               }
             }

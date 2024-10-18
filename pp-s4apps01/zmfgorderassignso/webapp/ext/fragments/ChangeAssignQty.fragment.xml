@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table">
+    <Dialog title="{i18n>ChangeAssignQty}">
+        <Panel expandable="false" expanded="true" width="auto">
+            <VBox >
+                <Text text="{i18n>AssignQty}"/>
+                <Input value="{local>/SelectedItem/AssignQty}" type="Number"/>
+            </VBox>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>

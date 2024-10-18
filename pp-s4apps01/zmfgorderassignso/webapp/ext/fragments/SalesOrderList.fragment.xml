@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table">
+    <Dialog title="{i18n>AssignSalesOrder}">
+        <Panel expandable="false" expanded="true" width="auto">
+            <table:Table id="idSalesOrderList" rows="{local>/SalesOrderList}" selectionMode="None" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:columns>
+                    <table:Column width="8rem" label="{i18n>RequestedDeliveryDate}">
+                        <table:template>
+                            <Text text="{ path:'local>RequestedDeliveryDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>SalesOrder}">
+                        <table:template>
+                            <Text text="{local>SalesOrder}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>SalesOrderItem}">
+                        <table:template>
+                            <Text text="{local>SalesOrderItem}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>RequestedQuantityInBaseUnit}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>RequestedQuantityInBaseUnit',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column autoResizable="true" label="{i18n>PurchaseOrderByCustomer}">
+                        <table:template>
+                            <Text text="{local>PurchaseOrderByCustomer}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column autoResizable="true" label="{i18n>AssignQty}" hAlign="End">
+                        <table:template>
+                            <Input value="{local>AssignQty}" type="Number" description="{local>BaseUnit}" width="150%"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>UnAssignQty}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>UnAssignQty',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>TotalAssignQty}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>TotalAssignQty',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>

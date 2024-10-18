@@ -29,16 +29,16 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="zui_mfgorderassignso_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/SalesOrderItem">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
             <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/ProductionVersion">
                 <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/MfgOrderPlannedTotalQty">
                 <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
-            <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/AllocationQty">
-                <Annotation Term="UI.HiddenFilter"/>
-            </Annotations>
-            <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/SalesOrderItem">
+            <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/AssignQty">
                 <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/PurchaseOrderByCustomer">
@@ -47,7 +47,7 @@
             <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/RequestedQuantityInBaseUnit">
                 <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
-            <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/PossibleAllocationQty">
+            <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/AvailableAssignQty">
                 <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/Sequence">
@@ -56,49 +56,20 @@
             <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/ProductionUnit">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType/BaseUnit">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
             <Annotations Target="cds_zui_mfgorderassignso_o2.MfgOrderType">
-                <Annotation Term="UI.HeaderFacets">
-                    <Collection>
-                        <Record Type="UI.ReferenceFacet">
-                            <PropertyValue Property="ID" String="idHeader"/>
-                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GroupHeader"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
                 <Annotation Term="UI.Facets">
                     <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="ID" String="GeneralInfo"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+                        </Record>
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="Label" String="Assign SO Item"/>
                             <PropertyValue Property="ID" String="idLineSOItem"/>
                             <PropertyValue Property="Target" AnnotationPath="to_AssignSOItem/@UI.LineItem"/>
                         </Record>
                     </Collection>
-                </Annotation>
-                <Annotation Term="UI.FieldGroup" Qualifier="GroupHeader">
-                    <Record>
-                        <PropertyValue Property="Data">
-                            <Collection>
-                                <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="Material"/>
-                                </Record>
-                                <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="MfgOrderPlannedTotalQty"/>
-                                </Record>
-                                <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="MfgOrderPlannedStartDate"/>
-                                </Record>
-                                <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="PossibleAllocationQty"/>
-                                </Record>
-                                <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="OrderIsReleased"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
                 </Annotation>
                 <Annotation Term="UI.HeaderInfo">
                     <Record>
@@ -116,6 +87,25 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MfgOrderPlannedTotalQty"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MfgOrderPlannedStartDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="AvailableAssignQty"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="OrderIsReleased"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
@@ -125,7 +115,7 @@
                             <PropertyValue Property="Value" Path="MRPController"/>
                             <Annotation Term="HTML5.CssDefaults">
                                 <Record>
-                                    <PropertyValue Property="width" String="10rem"/>
+                                    <PropertyValue Property="width" String="8rem"/>
                                 </Record>
                             </Annotation>
                         </Record>
@@ -158,10 +148,13 @@
                             <PropertyValue Property="Value" Path="MfgOrderPlannedTotalQty"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="AvailableAssignQty"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="OrderIsReleased"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="AllocationQty"/>
+                            <PropertyValue Property="Value" Path="AssignQty"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SalesOrder"/>
@@ -210,6 +203,39 @@
                     </Collection>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/Plant">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/ManufacturingOrder">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/Sequence">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/ProductionSupervisor">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/MRPController">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/MfgOrderPlannedStartDate">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/MfgOrderPlannedTotalQty">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/ProductionUnit">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/Remark">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/LocalLastChangedAt">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType/BaseUnit">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="cds_zui_mfgorderassignso_o2.AssignSOItemType">
                 <Annotation Term="UI.LineItem">
                     <Collection>
@@ -252,7 +278,7 @@
                             </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="AllocationQty"/>
+                            <PropertyValue Property="Value" Path="AssignQty"/>
                             <Annotation Term="HTML5.CssDefaults">
                                 <Record>
                                     <PropertyValue Property="width" String="10rem"/>
@@ -260,7 +286,7 @@
                             </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="UnAllocationQty"/>
+                            <PropertyValue Property="Value" Path="UnAssignQty"/>
                             <Annotation Term="HTML5.CssDefaults">
                                 <Record>
                                     <PropertyValue Property="width" String="10rem"/>
@@ -268,7 +294,7 @@
                             </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="TotalAllocationQty"/>
+                            <PropertyValue Property="Value" Path="TotalAssignQty"/>
                             <Annotation Term="HTML5.CssDefaults">
                                 <Record>
                                     <PropertyValue Property="width" String="12rem"/>
