@@ -95,6 +95,10 @@ modules:
       - ppzmfgorderassignso.zip
       name: ppzmfgorderassignso
       target-path: resources/
+    - artifacts:
+      - ppzcomponentusagelist.zip
+      name: ppzcomponentusagelist
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -206,6 +210,15 @@ modules:
 - name: ppzmfgorderassignso
   type: html5
   path: zmfgorderassignso
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzcomponentusagelist
+  type: html5
+  path: zcomponentusagelist
   build-parameters:
     build-result: dist
     builder: custom

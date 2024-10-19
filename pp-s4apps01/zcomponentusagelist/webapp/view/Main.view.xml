@@ -1,0 +1,56 @@
+<mvc:View controllerName="pp.zcomponentusagelist.controller.Main" displayBlock="true" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core" 
+    xmlns="sap.m"
+	xmlns:f="sap.f" 
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+	xmlns:sv="sap.ui.comp.smartvariants" 
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="UsageListSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content> 
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ComponentUsageList" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="BillOfMaterialComponent" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialComponent}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="NoDisplayNonProduct" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>NoDisplayNonProduct}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="NoDisplayColMfrpn" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>NoDisplayColMfrpn}"/>
+
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="Matererial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Product" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComponentDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialByCustomer" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MRPResponsible" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="HighLevelMatValidityStartDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemStrategy" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemPriority" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="pp.zcomponentusagelist.fragments.UsageList" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
