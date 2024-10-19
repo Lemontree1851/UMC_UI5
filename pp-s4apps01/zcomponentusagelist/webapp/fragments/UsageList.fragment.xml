@@ -16,7 +16,7 @@
                 <ToolbarSpacer/>
             </OverflowToolbar>
         </smartTable:customToolbar>
-       <table:Table id="idTable" selectionMode="None">
+       <table:Table id="idTable" selectionMode="None" rowMode="Auto">
             <table:columns>
                 <table:Column width="4rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                     <table:customData>
