@@ -7,7 +7,7 @@
         <Panel expandable="false" expanded="true" width="auto">
             <VBox >
                 <Text text="{i18n>AssignQty}"/>
-                <Input value="{local>/SelectedItem/AssignQty}" type="Number"/>
+                <Input value="{ path: 'local>/SelectedItem/AssignQty', type: 'sap.ui.model.type.Integer', constraints: { minimum:0 } }" liveChange="handleChange" type="Number"/>
             </VBox>
         </Panel>
     </Dialog>

@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table">
+    <Dialog title="{i18n>ChangeAssignMaterial}">
+        <Panel expandable="false" expanded="true" width="auto">
+            <VBox >
+                <Text text="{i18n>AssignMaterial}"/>
+                <Input value="{local>/SelectedItem/Material}" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
+                    $event, $controller, '/ZC_ProductVH',
+                    ['Material','MaterialDescription'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="true">
+                    <suggestionColumns>
+                        <Column>
+                            <Label text="{i18n>Material}"/>
+                        </Column>
+                        <Column>
+                            <Label text="{i18n>MaterialDescription}"/>
+                        </Column>
+                    </suggestionColumns>
+                    <suggestionRows>
+                        <ColumnListItem>
+                            <Label text="{Material}" />
+                            <Label text="{MaterialDescription}" />
+                        </ColumnListItem>
+                    </suggestionRows>
+                </Input>
+            </VBox>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>

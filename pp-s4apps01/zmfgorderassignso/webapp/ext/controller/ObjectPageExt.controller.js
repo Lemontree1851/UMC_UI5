@@ -1,17 +1,19 @@
 sap.ui.define([
+    "sap/ui/core/routing/History",
+    "./ValueHelpDialog",
     "./formatter",
     "sap/m/BusyDialog",
     "sap/ui/core/Fragment",
     "sap/m/MessageBox",
     "sap/m/MessageToast"
-], function (formatter, BusyDialog, Fragment, MessageBox, MessageToast) {
+], function (History, ValueHelpDialog, formatter, BusyDialog, Fragment, MessageBox, MessageToast) {
     'use strict';
 
     return {
-
+        ValueHelpDialog: ValueHelpDialog,
         formatter: formatter,
 
-        onInit: function (oEvent) {
+        onInit: function () {
             var that = this;
             this._myBusyDialog = new BusyDialog();
             // *************************************************
@@ -65,6 +67,7 @@ sap.ui.define([
             // *************************************************
         },
 
+        // 受注割当
         onAssignSalesOrder: function (oEvent) {
             // Button -> ToolBar -> Table
             var sBindingPath = oEvent.getSource().getParent().getParent().getBindingContext().getPath();
@@ -72,11 +75,92 @@ sap.ui.define([
             if (parseFloat(this._oBindingData.AvailableAssignQty) === 0) {
                 MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("Message1"));
             } else {
-                this._getSalesOrderList();
+                this._getSalesOrderList("AssignSalesOrder", "SalesOrderList", this._oBindingData.Material, this._oBindingData.AvailableAssignQty);
             }
         },
 
+        // 割当数変更
         onChangeAssignQty: function (oEvent) {
+            this._getSelectedRowData(oEvent);
+            this._showDialog("ChangeAssignQty", "ChangeAssignQty");
+        },
+
+        // 割当品目変更
+        onChangeAssignMaterial: function (oEvent) {
+            this._getSelectedRowData(oEvent);
+            this._showDialog("ChangeAssignMaterial", "ChangeAssignMaterial");
+        },
+
+        // 割当受注変更
+        onChangeAssignSalesOrder: function (oEvent) {
+            this._getSelectedRowData(oEvent);
+            var sMaterial = this.getView().getModel("local").getProperty("/SelectedItem/Material");
+            this._getSalesOrderList("ChangeAssignSalesOrder", "SalesOrderList", sMaterial, this._iMaxQuantity);
+        },
+
+        // 削除
+        onDeleteSOItem: function (oEvent) {
+            var that = this;
+            var sTitle = this.getView().getModel("i18n").getResourceBundle().getText("DeleteSOItem");
+            this._getSelectedRowData(oEvent);
+            MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("confirmMessage", [sTitle]), {
+                actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                emphasizedAction: MessageBox.Action.OK,
+                onClose: function (sAction) {
+                    if (sAction === MessageBox.Action.OK) {
+                        var oRow = that.getView().getModel("local").getProperty("/SelectedItem");
+                        var oRequestData = {
+                            Items: [{
+                                Plant: oRow.Plant,
+                                ManufacturingOrder: oRow.ManufacturingOrder,
+                                SalesOrder: oRow.SalesOrder,
+                                SalesOrderItem: oRow.SalesOrderItem,
+                                Sequence: oRow.Sequence
+                            }]
+                        };
+                        that._CallODataV2("ACTION", "/deleteSOItem", [], {
+                            "Event": "",
+                            "Zzkey": JSON.stringify(oRequestData),
+                            "RecordUUID": ""
+                        }, {}).then(function (oResponse) {
+                            var aMessageItems = [];
+                            var result = JSON.parse(oResponse.deleteSOItem.Zzkey);
+                            result.MessageItems.forEach(element => {
+                                aMessageItems.push({
+                                    type: element.Type,
+                                    title: element.Title,
+                                    description: element.Description,
+                                    subtitle: element.Subtitle
+                                });
+                            });
+                            if (aMessageItems.length > 0) {
+                                that._showMessageDialog(aMessageItems);
+                            } else {
+                                that.getView().getModel().refresh();
+                                that._navBackMain();
+                                MessageToast.show(that.getView().getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
+                            }
+                        }.bind(that));
+                    }
+                },
+                dependentOn: this.getView()
+            });
+        },
+
+        handleChange: function (oEvent) {
+            var sValue = oEvent.getParameter("value");
+            if (sValue) {
+                if (parseFloat(sValue) < 0) {
+                    this.getView().getModel("local").setProperty("/visibleSave", false);
+                } else {
+                    this.getView().getModel("local").setProperty("/visibleSave", true);
+                }
+            } else {
+                oEvent.getSource().setValue(0);
+            }
+        },
+
+        _getSelectedRowData: function (oEvent) {
             var sBindingPath = oEvent.getSource().getParent().getParent().getBindingContext().getPath();
             var oBindingData = this.getView().getModel().getProperty(sBindingPath);
             var aSelectedContextPaths = oEvent.getSource().getParent().getParent().getSelectedContextPaths();
@@ -85,40 +169,27 @@ sap.ui.define([
             var oRowCopy = JSON.parse(JSON.stringify(oRow))
             this.getView().getModel("local").setProperty("/SelectedItem", oRowCopy);
             this._iMaxQuantity = parseFloat(oBindingData.AvailableAssignQty) + parseFloat(oRow.AssignQty);
-            this._showDialog("ChangeAssignQty");
         },
 
-        onChangeAssignMaterial: function (oEvent) {
-            MessageToast.show("Custom handler invoked.");
-        },
-
-        onChangeAssignSalesOrder: function (oEvent) {
-            MessageToast.show("Custom handler invoked.");
-        },
-
-        onDeleteSOItem: function (oEvent) {
-            MessageToast.show("Custom handler invoked.");
-        },
-
-        _getSalesOrderList: function () {
+        _getSalesOrderList: function (sEvent, sFragmentName, sMaterial, iAvailableAssignQty) {
             this._CallODataV2("ACTION", "/getSalesOrderList", [], {
                 "Event": "",
                 "Zzkey": JSON.stringify({
-                    Material: this._oBindingData.Material,
-                    AvailableAssignQty: this._oBindingData.AvailableAssignQty
+                    Material: sMaterial,
+                    AvailableAssignQty: iAvailableAssignQty
                 }),
                 "RecordUUID": ""
             }, {}).then(function (oResponse) {
                 var result = JSON.parse(oResponse.getSalesOrderList.Zzkey);
                 this.getView().getModel("local").setProperty("/SalesOrderList", result);
-                // this.showSalesOrderListDialog();
-                this._showDialog("SalesOrderList");
+                this._showDialog(sEvent, sFragmentName);
             }.bind(this));
         },
 
-        _showDialog: function (sFragmentName) {
+        _showDialog: function (sEvent, sFragmentName) {
             var that = this;
             this._myBusyDialog.open();
+            this.getView().getModel("local").setProperty("/visibleSave", true);
             Fragment.load({
                 name: "pp.zmfgorderassignso.ext.fragments." + sFragmentName,
                 controller: this
@@ -129,12 +200,20 @@ sap.ui.define([
                 this.getView().addDependent(this._oDialog);
                 this._oDialog.addButton(new sap.m.Button({
                     text: "{i18n>SaveBtn}",
+                    visible: "{local>/visibleSave}",
                     press: function () {
-                        switch (sFragmentName) {
-                            case "SalesOrderList":
+                        switch (sEvent) {
+                            case "AssignSalesOrder":
                                 that._saveAssignSalesOrder();
+                                break;
                             case "ChangeAssignQty":
-                                that._saveChangeAssignQty();
+                                that._saveChange(sEvent);
+                                break;
+                            case "ChangeAssignMaterial":
+                                that._saveChange(sEvent);
+                                break;
+                            case "ChangeAssignSalesOrder":
+                                that._saveChangeAssignSalesOrder();
                                 break;
                             default:
                                 break;
@@ -185,8 +264,8 @@ sap.ui.define([
                     subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [iSumAssignQty, parseFloat(this._oBindingData.AvailableAssignQty)])
                 });
             }
-            if (aMessageItems.length > 0) {
-                this.showMessageDialog(aMessageItems);
+            if (aMessageItems.length > 0 || aRequestData.length === 0) {
+                this._showMessageDialog(aMessageItems);
                 return;
             }
             var oRequestData = {
@@ -209,37 +288,40 @@ sap.ui.define([
                     });
                 });
                 if (aMessageItems.length > 0) {
-                    this.showMessageDialog(aMessageItems);
+                    this._showMessageDialog(aMessageItems);
                 } else {
                     this._oDialog.destroy();
                     this.getView().getModel().refresh();
+                    this._navBackMain();
                     MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                 }
             }.bind(this));
         },
 
-        _saveChangeAssignQty: function () {
+        _saveChange: function (sEvent) {
             var aMessageItems = [];
             var oRow = this.getView().getModel("local").getProperty("/SelectedItem");
-            if (parseInt(oRow.AssignQty) > parseInt(oRow.RequestedQuantityInBaseUnit)) {
-                aMessageItems.push({
-                    type: "Error",
-                    title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
-                    description: this.getView().getModel("i18n").getResourceBundle().getText("Message4", [oRow.SalesOrder, oRow.SalesOrderItem]),
-                    subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message4", [oRow.SalesOrder, oRow.SalesOrderItem])
-                });
-            }
-            if (parseInt(oRow.AssignQty) > this._iMaxQuantity) {
-                aMessageItems.push({
-                    type: "Error",
-                    title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
-                    description: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [parseInt(oRow.AssignQty), this._iMaxQuantity]),
-                    subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [parseInt(oRow.AssignQty), this._iMaxQuantity])
-                });
-            }
-            if (aMessageItems.length > 0) {
-                this.showMessageDialog(aMessageItems);
-                return;
+            if (sEvent === "ChangeAssignQty") {
+                if (parseInt(oRow.AssignQty) > parseInt(oRow.RequestedQuantityInBaseUnit)) {
+                    aMessageItems.push({
+                        type: "Error",
+                        title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
+                        description: this.getView().getModel("i18n").getResourceBundle().getText("Message4", [oRow.SalesOrder, oRow.SalesOrderItem]),
+                        subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message4", [oRow.SalesOrder, oRow.SalesOrderItem])
+                    });
+                }
+                if (parseInt(oRow.AssignQty) > this._iMaxQuantity) {
+                    aMessageItems.push({
+                        type: "Error",
+                        title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
+                        description: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [parseInt(oRow.AssignQty), this._iMaxQuantity]),
+                        subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [parseInt(oRow.AssignQty), this._iMaxQuantity])
+                    });
+                }
+                if (aMessageItems.length > 0) {
+                    this._showMessageDialog(aMessageItems);
+                    return;
+                }
             }
             var oRequestData = {
                 Items: [{
@@ -247,16 +329,17 @@ sap.ui.define([
                     ManufacturingOrder: oRow.ManufacturingOrder,
                     SalesOrder: oRow.SalesOrder,
                     SalesOrderItem: oRow.SalesOrderItem,
+                    Sequence: oRow.Sequence,
                     Material: oRow.Material,
-                    AssignQty: oRow.AssignQty,
+                    AssignQty: oRow.AssignQty
                 }]
             };
-            this._CallODataV2("ACTION", "/saveChangeAssignQty", [], {
-                "Event": "",
+            this._CallODataV2("ACTION", "/saveChangeRow", [], {
+                "Event": sEvent,
                 "Zzkey": JSON.stringify(oRequestData),
                 "RecordUUID": ""
             }, {}).then(function (oResponse) {
-                var result = JSON.parse(oResponse.saveChangeAssignQty.Zzkey);
+                var result = JSON.parse(oResponse.saveChangeRow.Zzkey);
                 result.MessageItems.forEach(element => {
                     aMessageItems.push({
                         type: element.Type,
@@ -266,21 +349,101 @@ sap.ui.define([
                     });
                 });
                 if (aMessageItems.length > 0) {
-                    this.showMessageDialog(aMessageItems);
+                    this._showMessageDialog(aMessageItems);
                 } else {
                     this._oDialog.destroy();
                     this.getView().getModel().refresh();
+                    if (sEvent === "ChangeAssignMaterial") {
+                        this._navBackMain();
+                    }
                     MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                 }
             }.bind(this));
         },
 
-        showMessageDialog: function (aMessageItems) {
-            this.getView().getModel("local").setProperty("/MessageItems", aMessageItems);
-            this._myMessageView.setModel(this.getView().getModel("local"));
-            this._myMessageView.navigateBack();
-            this.getView().addDependent(this._myMessageDialog);
-            this._myMessageDialog.open();
+        _saveChangeAssignSalesOrder: function () {
+            var aMessageItems = [];
+            var aRequestData = [];
+            var iSumAssignQty = 0;
+            var oRow = this.getView().getModel("local").getProperty("/SelectedItem");
+            var aSalesOrderList = this.getView().getModel("local").getProperty("/SalesOrderList");
+            aRequestData.push({
+                Plant: oRow.Plant,
+                ManufacturingOrder: oRow.ManufacturingOrder,
+                SalesOrder: oRow.SalesOrder,
+                SalesOrderItem: oRow.SalesOrderItem, // string
+                SalesOrderItemI: parseFloat(oRow.SalesOrderItem), // numc
+                Sequence: oRow.Sequence,
+                AssignQty: oRow.AssignQty
+            });
+            aSalesOrderList.forEach(element => {
+                if (parseFloat(element.AssignQty) > 0) {
+                    aRequestData.push({
+                        SalesOrder: element.SalesOrder,
+                        SalesOrderItem: element.SalesOrderItem, // string
+                        SalesOrderItemI: element.SalesOrderItemI, // numc
+                        AssignQty: element.AssignQty
+                    });
+                    iSumAssignQty += parseFloat(element.AssignQty);
+
+                    if (parseFloat(element.AssignQty) > parseFloat(element.UnAssignQty)) {
+                        aMessageItems.push({
+                            type: "Error",
+                            title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
+                            description: this.getView().getModel("i18n").getResourceBundle().getText("Message2", [element.SalesOrder, element.SalesOrderItem]),
+                            subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message2", [element.SalesOrder, element.SalesOrderItem])
+                        });
+                    }
+                }
+            });
+            if (iSumAssignQty > parseFloat(this._iMaxQuantity)) {
+                aMessageItems.push({
+                    type: "Error",
+                    title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
+                    description: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [iSumAssignQty, parseFloat(this._iMaxQuantity)]),
+                    subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [iSumAssignQty, parseFloat(this._iMaxQuantity)])
+                });
+            }
+            if (aMessageItems.length > 0 || aRequestData.length === 1) {
+                this._showMessageDialog(aMessageItems);
+                return;
+            }
+            var oRequestData = {
+                Items: aRequestData
+            };
+            this._CallODataV2("ACTION", "/saveChangeAssignSalesOrder", [], {
+                "Event": "",
+                "Zzkey": JSON.stringify(oRequestData),
+                "RecordUUID": ""
+            }, {}).then(function (oResponse) {
+                var result = JSON.parse(oResponse.saveChangeAssignSalesOrder.Zzkey);
+                result.MessageItems.forEach(element => {
+                    aMessageItems.push({
+                        type: element.Type,
+                        title: element.Title,
+                        description: element.Description,
+                        subtitle: element.Subtitle
+                    });
+                });
+                if (aMessageItems.length > 0) {
+                    this._showMessageDialog(aMessageItems);
+                } else {
+                    this._oDialog.destroy();
+                    this.getView().getModel().refresh();
+                    this._navBackMain();
+                    MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
+                }
+            }.bind(this));
+        },
+
+        _showMessageDialog: function (aMessageItems) {
+            if (aMessageItems.length > 0) {
+                this.getView().getModel("local").setProperty("/MessageItems", aMessageItems);
+                this._myMessageView.setModel(this.getView().getModel("local"));
+                this._myMessageView.navigateBack();
+                this.getView().addDependent(this._myMessageDialog);
+                this._myMessageDialog.open();
+            }
         },
 
         _CallODataV2: function (sMethod, sPath, aFilters, mUrlParameter, oRequestData) {
@@ -328,6 +491,22 @@ sap.ui.define([
                         break;
                 }
             });
+        },
+
+        /**
+         * Convenience method for routing back and history
+         * @public
+         * @param {string} psTarget Parameter containing the string for the target navigation
+         * @param {mapping} pmParameters? Parameters for navigation
+         */
+        _navBackMain() {
+            const oHistory = History.getInstance();
+            const sPreviousHash = oHistory.getPreviousHash();
+            if (sPreviousHash !== undefined) {
+                window.history.go(-1);
+            } else {
+                this.getRouter().navTo("Main", /*pmParameters*/{}, false);
+            }
         }
     };
 });

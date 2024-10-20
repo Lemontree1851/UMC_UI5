@@ -34,7 +34,7 @@
                     </table:Column>
                     <table:Column autoResizable="true" label="{i18n>AssignQty}" hAlign="End">
                         <table:template>
-                            <Input value="{local>AssignQty}" type="Number" description="{local>BaseUnit}" width="150%"/>
+                            <Input value="{ path: 'local>AssignQty', type: 'sap.ui.model.type.Integer', constraints: { minimum:0 } }" type="Number" description="{local>BaseUnit}" liveChange="handleChange" width="150%"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="10rem" label="{i18n>UnAssignQty}" hAlign="End">
