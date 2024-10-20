@@ -1,6 +1,9 @@
 <mvc:View controllerName="sd.creditmantable.controller.View1"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">
     <Page id="page" title="{i18n>title}">
         <content />
     </Page>
