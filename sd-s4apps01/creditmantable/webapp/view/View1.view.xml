@@ -4,7 +4,70 @@
     xmlns:unified="sap.ui.unified"
     xmlns:upload="sap.m.upload"
     xmlns:table="sap.ui.table">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+    <!-- <Page id="page" title="{i18n>title}">
+        <content>
+        
+        </content>
+    </Page> -->
+
+	<Table
+		headerText="検索結果"
+		items="{
+			path:'/ProductCollection',
+			sorter: {
+				path: 'SupplierName',
+				descending: false
+			}
+		}" >
+		<columns>
+			<Column mergeDuplicates="true" minScreenWidth="Tablet">
+				<header>
+					<Text text="得意先" />
+				</header>
+			</Column>
+			<Column mergeDuplicates="true" minScreenWidth="Tablet">
+				<header>
+					<Text text="得意先名" />
+				</header>
+			</Column>
+			<Column mergeDuplicates="true" minScreenWidth="Tablet">
+				<header>
+					<Text text="与信限度額" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet">
+				<header>
+					<Text text="回収条件" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet">
+				<header>
+					<Text text="項目" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet">
+				<header>
+					<Text text="年度" />
+				</header>
+			</Column>
+		</columns>
+		<ColumnListItem vAlign="Middle">
+			<Text text="1" />
+			<ObjectIdentifier title="{Name}" text="{ProductId}" />
+			<Text text="{Width} x {Depth} x {Height} {DimUnit}" />
+			<ObjectNumber
+				number="{WeightMeasure}" unit="{WeightUnit}"
+				state="{
+					path: 'WeightMeasure',
+					formatter: 'sap.m.sample.TableMergeCells.Formatter.weightState'
+				}" />
+			<ObjectNumber
+					number="{
+						parts:[{path:'Price'},{path:'CurrencyCode'}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {showMeasure: false}
+					}"
+					unit="{CurrencyCode}" />
+		</ColumnListItem>
+	</Table>
 </mvc:View>
