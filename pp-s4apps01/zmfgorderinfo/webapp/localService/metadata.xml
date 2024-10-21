@@ -77,6 +77,11 @@
             </EntityContainer>
             <Annotations Target="SAP__self.MfgOrderInfoType/ManufacturingOrder">
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_mfgorderstdvh/0001;ps='srvd-zui_mfgorderinfo_o4-0001';va='com.sap.gateway.srvd.zui_mfgorderinfo_o4.v0001.et-zc_mfgorderinfo.manufacturingorder'/$metadata</String>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="SAP__common.Label" String="Manufacturing Order"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Manufacturing Order ID"/>
             </Annotations>
@@ -124,6 +129,7 @@
                         <String>../../../../srvd_f4/sap/i_productionversionstdvh/0001;ps='srvd-zui_mfgorderinfo_o4-0001';va='com.sap.gateway.srvd.zui_mfgorderinfo_o4.v0001.et-zc_mfgorderinfo.productionversion'/$metadata</String>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Production Version"/>
                 <Annotation Term="SAP__common.Heading" String="Ver."/>
             </Annotations>
@@ -134,12 +140,11 @@
                         <String>../../../../srvd_f4/sap/i_mrpcontrollervh/0001;ps='srvd-zui_mfgorderinfo_o4-0001';va='com.sap.gateway.srvd.zui_mfgorderinfo_o4.v0001.et-zc_mfgorderinfo.mrpcontroller'/$metadata</String>
                     </Collection>
                 </Annotation>
-                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="MRP Controller"/>
             </Annotations>
             <Annotations Target="SAP__self.MfgOrderInfoType/MfgOrderPlannedTotalQty">
+                <Annotation Term="SAP__common.Label" String="Order Quantity"/>
                 <Annotation Term="SAP__measures.Unit" Path="ProductionUnit"/>
-                <Annotation Term="SAP__common.Label" String="Total Quantity"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Manufacturing Order Planned Total Quantity"/>
             </Annotations>
             <Annotations Target="SAP__self.MfgOrderInfoType/Batch">
@@ -160,6 +165,7 @@
             </Annotations>
             <Annotations Target="SAP__self.MfgOrderInfoType/ProductionUnit">
                 <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Production Unit"/>
                 <Annotation Term="SAP__common.Heading" String="UoM"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Production Unit of Measure"/>
@@ -173,6 +179,9 @@
                 </Annotation>
                 <Annotation Term="SAP__common.Label" String="Sales Order"/>
                 <Annotation Term="SAP__common.Heading" String="SO No."/>
+            </Annotations>
+            <Annotations Target="SAP__self.MfgOrderInfoType/StatusName">
+                <Annotation Term="SAP__common.Label" String="Status"/>
             </Annotations>
             <Annotations Target="SAP__self.MfgOrderInfoType/FinalVersion">
                 <Annotation Term="SAP__common.Label" String="Version"/>
@@ -220,29 +229,34 @@
                             <PropertyValue Property="Value" Path="MfgOrderPlannedTotalQty"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Batch"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MfgOrderConfirmedYieldQty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="StatusName"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="SalesOrder"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="MfgOrderPlannedEndDate"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="MfgOrderPlannedStartDate"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="MfgOrderConfirmedYieldQty"/>
+                            <PropertyValue Property="Value" Path="MfgOrderPlannedEndDate"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="SalesOrder"/>
                         </Record>
                     </Collection>
                 </Annotation>
                 <Annotation Term="SAP__UI.SelectionFields">
                     <Collection>
                         <PropertyPath>ProductionPlant</PropertyPath>
-                        <PropertyPath>MRPController</PropertyPath>
                         <PropertyPath>ManufacturingOrder</PropertyPath>
-                        <PropertyPath>ProductionSupervisor</PropertyPath>
                         <PropertyPath>Material</PropertyPath>
+                        <PropertyPath>ProductionSupervisor</PropertyPath>
+                        <PropertyPath>MRPController</PropertyPath>
+                        <PropertyPath>MfgOrderPlannedStartDate</PropertyPath>
+                        <PropertyPath>MfgOrderPlannedEndDate</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -257,6 +271,14 @@
                         <PropertyValue Property="Filterable" Bool="true"/>
                         <PropertyValue Property="FilterExpressionRestrictions">
                             <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="MfgOrderPlannedStartDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="MfgOrderPlannedEndDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="StatusName"/>
                                     <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
