@@ -107,6 +107,10 @@ modules:
       - ppzmfgorderinfo.zip
       name: ppzmfgorderinfo
       target-path: resources/
+    - artifacts:
+      - ppzledplannedordercomponent.zip
+      name: ppzledplannedordercomponent
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -249,6 +253,34 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppofpartition
+  type: html5
+  path: ofpartition
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzmfgorderinfo
+  type: html5
+  path: zmfgorderinfo
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzledplannedordercomponent
+  type: html5
+  path: zledplannedordercomponent
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
