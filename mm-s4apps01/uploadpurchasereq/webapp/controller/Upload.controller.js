@@ -155,10 +155,12 @@ sap.ui.define([
             for (let i = 1; i < aExcelSet.length; i++) {
                 const obj = aExcelSet[i];
                 if (
+                    // obj.ApplyDepart !== ApplyDepart ||
+                    // obj.PrType !== PrType ||
+                    // obj.OrderType !== OrderType ||
+                    // obj.Kyoten !== Kyoten
                     obj.ApplyDepart !== ApplyDepart ||
-                    obj.PrType !== PrType ||
-                    obj.OrderType !== OrderType ||
-                    obj.Kyoten !== Kyoten
+                    obj.OrderType !== OrderType
                 ) {
                     aExcelSet[i].Type = "E";
                     aExcelSet[i].Message = this._ResourceBundle.getText("msgDuplicate");
