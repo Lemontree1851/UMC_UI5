@@ -11,7 +11,6 @@ sap.ui.define([
             _oFunctions = this;
         },
         onPrint: function(oEvent) {
-            debugger;
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
@@ -25,7 +24,6 @@ sap.ui.define([
         },
 
         onReprint: function () {
-            debugger;
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
@@ -38,7 +36,6 @@ sap.ui.define([
         },
 
         onDelete: function () {
-            debugger;
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
