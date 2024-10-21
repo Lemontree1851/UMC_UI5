@@ -101,7 +101,6 @@ modules:
       build-result: dist
       builder: custom
       commands:
-      - npm install
       - npm run build:cf
       supported-platforms: []
   - name: sdinvoiceprint
@@ -111,7 +110,6 @@ modules:
       build-result: dist
       builder: custom
       commands:
-      - npm install
       - npm run build:cf
       supported-platforms: []
   - name: sdcreditmantable
@@ -121,7 +119,6 @@ modules:
       build-result: dist
       builder: custom
       commands:
-      - npm install
       - npm run build:cf
       supported-platforms: []    
 resources:
