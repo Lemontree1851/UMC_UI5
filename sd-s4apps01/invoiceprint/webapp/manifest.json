@@ -80,7 +80,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.120.17",
+      "minUI5Version": "1.120",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -132,11 +132,6 @@
           "pattern": ":?query:",
           "name": "InvoiceReportList",
           "target": "InvoiceReportList"
-        },
-        {
-          "pattern": "InvoiceReport({key}):?query:",
-          "name": "InvoiceReportObjectPage",
-          "target": "InvoiceReportObjectPage"
         }
       ],
       "targets": {
@@ -148,40 +143,39 @@
             "settings": {
               "contextPath": "/InvoiceReport",
               "variantManagement": "Page",
-              "navigation": {
-                "InvoiceReport": {
-                  "detail": {
-                    "route": "InvoiceReportObjectPage"
-                  }
-                }
-              },
+              "navigation": {},
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "GridTable"
+                    "type": "GridTable",
+                    "selectionMode": "Multi"
                   },
                   "actions": {
                     "ListReportExt": {
                       "press": "sd.invoiceprint.ext.listReportExt.ListReportExt.onPrint",
                       "visible": true,
                       "enabled": true,
-                      "requiresSelection": false,
-                      "text": "印刷"
+                      "requiresSelection": true,
+                      "text": "{i18n>print}"
+                    },
+                    "reprint": {
+                      "press": "sd.invoiceprint.ext.listReportExt.ListReportExt.onReprint",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{i18n>reprint}"
+                    },
+                    "delete": {
+                      "press": "sd.invoiceprint.ext.listReportExt.ListReportExt.onDelete",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{i18n>delete}"
                     }
+
                   }
                 }
               }
-            }
-          }
-        },
-        "InvoiceReportObjectPage": {
-          "type": "Component",
-          "id": "InvoiceReportObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/InvoiceReport"
             }
           }
         }

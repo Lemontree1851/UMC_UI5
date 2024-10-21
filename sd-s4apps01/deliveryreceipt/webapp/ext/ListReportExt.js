@@ -1,106 +1,140 @@
 sap.ui.define([
     "sap/m/MessageToast",
     "sap/m/BusyDialog",
-    "./messages"
-], function(MessageToast, BusyDialog, messages) {
+    "./messages",
+    "../lib/xml-js",
+], function(MessageToast, BusyDialog, messages, xml) {
     'use strict';
-    var _oFunctions, _ResourceBundle, _oDataModel;
+    var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel;
     return {
         init: function (oEvent) {
             _oFunctions = this;
         },
         // 印刷和订正印刷， 订正印刷取当前选定的值，印刷需要按打印维度key取自建表已经存储的上次打印的条目的
         onPrint: function(oEvent) {
-            debugger;
             _oDataModel = this.getModel();
+            _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
 
-            var that = this;
-            var aSelectedContexts = [];
-            var oBusyDialog = new BusyDialog();
-            
             // 获取选择的行项目
             if (this.getSelectedContexts) {
-                aSelectedContexts = that.getSelectedContexts();
+                var aSelectedContexts = this.getSelectedContexts();
             }
-            var aPromise = [];
-            aSelectedContexts.forEach( function (item, index) {
-                aPromise.push(_oFunctions.printDeliveryReceiptNo(item, index));
-            } );
-            // aPromise.push(_oFunctions.printDeliveryReceiptNo(aSelectedContexts, 1));
-            // _oDataModel.submitChanges({ groupId: "myId" });
-
-            Promise.all(aPromise).then(function (printRecords) {
-                // var pdfContent = _oFunctions.porcessPrintContent(aSelectedContexts);
-                // _oFunctions.getPDF(pdfContent);
-            });
-            // aSelectedContexts应该只是key值，具体的数据还要再取一次 item.getObject()
-            // var pdfContent = _oFunctions.porcessPrintContent(aSelectedContexts);
+            _oFunctions.onCustomAction(aSelectedContexts,"printDeliveryReceiptNo");
         },
 
-        printDeliveryReceiptNo: function (item, i) {
-            // var oModel = _oDataModel;
-            //     aDeferredGroups = oModel.getDeferredGroups();
-            // aDeferredGroups = aDeferredGroups.concat(["myId"]);
-            // oModel.setDeferredGroups(aDeferredGroups);
+        onReprint: function () {
+            debugger;
+            _oDataModel = this.getModel();
+            _oPrintModel = this.getModel("Print");
+            _ResourceBundle = this.getModel("i18n").getResourceBundle();
 
+            // 获取选择的行项目
+            if (this.getSelectedContexts) {
+                var aSelectedContexts = this.getSelectedContexts();
+            }
+            _oFunctions.onCustomAction(aSelectedContexts,"reprintDeliveryReceiptNo");
+        },
+
+        onDelete: function () {
+            debugger;
+            _oDataModel = this.getModel();
+            _oPrintModel = this.getModel("Print");
+            _ResourceBundle = this.getModel("i18n").getResourceBundle();
+
+            // 获取选择的行项目
+            if (this.getSelectedContexts) {
+                var aSelectedContexts = this.getSelectedContexts();
+            }
+            _oFunctions.onCustomAction(aSelectedContexts,"deleteDeliveryReceiptNo");
+        },
+
+        onCustomAction: function (aSelectedContexts,sActionName) {
+            var aSelectedItem = [];
+            var aPromise = [];
+            var aItems = [];
+            aSelectedContexts.forEach( function (item) {
+                var itemObject = item.getObject();
+                aSelectedItem.push(item.getObject());
+                aItems.push({
+                    DeliveryDocument: itemObject.DeliveryDocument,
+                    DeliveryDocumentItem: itemObject.DeliveryDocumentItem,
+                });
+            } );
+            if(_oFunctions.checkInconsistencies(aSelectedItem)) {
+                messages.showError(_ResourceBundle.getText("msgInconsistencies"));
+                return;
+            }
+
+            aPromise.push(_oFunctions.printAction(aItems,sActionName));
+
+            Promise.all(aPromise).then(function (records) {
+                records.forEach(record => {
+                    if (sActionName !== "deleteDeliveryReceiptNo" ) {
+                        var pdfContent = _oFunctions.porcessPrintContent(record);
+                        _oFunctions.getPDF(pdfContent);
+                    } else {
+                        messages.showSuccess(_ResourceBundle.getText("msgDeleteSuccessed"));
+                    }
+                });
+            });
+        },
+
+        printAction: function (items,sActionName) {
             var promise = new Promise(function (resolve,reject) {
-                var printRecords = _oDataModel.bindContext("/DeliveryReceipt/com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.printDeliveryReceiptNo(...)",item);
-                // var printRecords = _oDataModel.bindContext("com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.printDeliveryReceiptNo(...)",item);
+                var oAction = _oDataModel.bindContext("/DeliveryReceipt/com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001." + sActionName + "(...)");
+                oAction.setParameter("Zzkey", JSON.stringify(items));
+                oAction.setParameter("Event","");
+                oAction.setParameter("RecordUUID","");
                 
-                printRecords.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(( ) => {
-                    resolve(printRecords);
-                    var object = printRecords.getBoundContext().getObject(); //获取返回的数据
+                oAction.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(( ) => {
+                    try {
+                        var records = oAction.getBoundContext().getObject().value; //获取返回的数据
+                    } catch (e) {}
+                    resolve(records);
                     
                 }).catch((oError) => {
-                    console.log(oError.error);
+                    messages.showError(oError.message);
                     reject(oError);
                 });
             });
             return promise;
-
-            // var promise = new Promise(function (resolve,reject) {
-            //     oModel.callFunction("/printDeliveryReceiptNo", {
-            //         method: "POST",
-            //         groupId: "myId",//如果设置groupid，会多条一起进入action
-            //         changeSetId: i,
-            //         //建议只传输前端修改的参数，其他字段从后端获取
-            //         urlParameters: {
-            //             DeliveryDocument: item.DeliveryDocument,
-            //             DeliveryDocumentItem: item.DeliveryDocumentItem
-            //         },
-            //         success: function (oData) {
-            //             let result = JSON.parse(oData["printDeliveryReceiptNo"]);
-            //         }.bind(this),
-            //         error: function (oError) {
-            //             this._LocalData.setProperty("/recordCheckSuccessed", false);
-            //             messages.showError(messages.parseErrors(oError));
-            //         }.bind(this)
-            //     });
-            // }.bind(this));
-            // return promise;
         },
 
         porcessPrintContent: function (aSelectedItem) {
             // 检查选择的数据打印的维度是否一致，如果不一致则报错
             if (this.checkInconsistencies(aSelectedItem)) {
-                messages.showError(this._ResourceBundle.getText("msgInconsistencies"));
+                messages.showError(_ResourceBundle.getText("msgInconsistencies"));
                 return;
             }
-            // 将数据整理成打印需要的格式
-            let pdfContent = {
-                DELIVERYDOCUMENT: aSelectedItem[0].DeliveryDocument,
+
+            var pdfContent = {
+                PrintData:{
+                    results: []
+                }
+            };
+            // 纳品书抬头
+            var _DELIVERYITEM = {
+                DELIVERYRECEIPTNO: aSelectedItem[0].DeliveryReceiptNo,
                 SHIPTOPARTY: aSelectedItem[0].ShipToParty,
                 POSTALCODE: aSelectedItem[0].PostalCode,
                 CITYNAME: aSelectedItem[0].CityName,
                 CUSTOMERNAME: aSelectedItem[0].CustomerName,
-                _DELIVERYITEM: [],
-                _RECEIPTITEM: []
-            }
-            let deliveryItems = [];
-            let receiptItems = [];
-            aSelectedItem.forEach(item => {
-                deliveryItems.push({
+                DeliveryItem: {results:[]}
+            };
+            //受领书抬头
+            var _RECEIPTITEM = {
+                DELIVERYRECEIPTNO: aSelectedItem[0].DeliveryReceiptNo,
+                SHIPTOPARTY: aSelectedItem[0].ShipToParty,
+                POSTALCODE: aSelectedItem[0].PostalCode,
+                CITYNAME: aSelectedItem[0].CityName,
+                CUSTOMERNAME: aSelectedItem[0].CustomerName,
+                ReceiptItem: {results:[]}
+            };
+
+            aSelectedItem.forEach(function(item, index) {
+                // 纳品书
+                _DELIVERYITEM.DeliveryItem.results.push({
                     REFERENCESDDOCUMENT: item.ReferenceSDDocument,
                     MATERIALBYCUSTOMER: item.MaterialByCustomer,
                     DELIVERYDOCUMENTITEMTEXT: item.DeliveryDocumentItemText,
@@ -109,17 +143,24 @@ sap.ui.define([
                     CONDITIONRATEVALUE: item.ConditionRateValue,
                     CONDITIONAMOUNT: item.ConditionAmount,
                 });
-
-                receiptItems.push({
+                //受领书
+                _RECEIPTITEM.ReceiptItem.results.push({
                     REFERENCESDDOCUMENT: item.ReferenceSDDocument,
                     MATERIALBYCUSTOMER: item.MaterialByCustomer,
                     DELIVERYDOCUMENTITEMTEXT: item.DeliveryDocumentItemText,
                     ACTUALDELIVERYQUANTITY: item.ActualDeliveryQuantity,
                     DELIVERYQUANTITYUNIT: item.DeliveryQuantityUnit
                 });
+                // pdf每页固定显示5行，在pdf中不好控制，所以在此处将数据分页
+                if ((index + 1) % 5 === 0 || index + 1 === aSelectedItem.length ) {
+                    pdfContent.PrintData.results.push({
+                        _DELIVERYITEM: JSON.parse(JSON.stringify(_DELIVERYITEM)),
+                        _RECEIPTITEM: JSON.parse(JSON.stringify(_RECEIPTITEM)),
+                    });
+                    _DELIVERYITEM.DeliveryItem = {results:[]};
+                    _RECEIPTITEM.ReceiptItem = {results:[]};
+                }
             });
-            pdfContent._DELIVERYITEM = deliveryItems;
-            pdfContent._RECEIPTITEM = receiptItems;
 
             return pdfContent;
         },
@@ -128,13 +169,20 @@ sap.ui.define([
             var oBusyDialog = new BusyDialog();
             var aRecordCreated = [];
             var promise = new Promise((resolve, reject) => {
-                var createPrintRecord = that.getModel("Print").bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
-                createPrintRecord.setParameter("TemplateID", "YY1_DEMO_001");
+                var createPrintRecord = _oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
+                createPrintRecord.setParameter("TemplateID", "YY1_SD018");
                 createPrintRecord.setParameter("IsExternalProvidedData", true);
-                createPrintRecord.setParameter("ExternalProvidedData", atob(JSON.stringify(pdfContent)));
+                var oXMLData = json2xml(pdfContent, {
+                    compact: true,
+                    ignoreComment: true,
+                    spaces: 4
+                });
+                // var pdfData =  btoa(unescape(encodeURIComponent(oXMLData)));
+                var pdfData = btoa(unescape(encodeURIComponent("<?xml version=\"1.0\" encoding=\"UTF-8\"?><form>" + oXMLData + "</form>")));
+                createPrintRecord.setParameter("ExternalProvidedData", pdfData);
                 // var uuidx16 = context.getObject().Uuid.replace(/-/g, '');
-                // createPrintRecord.setParameter("ProvidedKeys", JSON.stringify({ Uuid: uuidx16.toUpperCase() }));
-                // createPrintRecord.setParameter("ResultIsActiveEntity", true);
+                createPrintRecord.setParameter("ProvidedKeys", "");
+                createPrintRecord.setParameter("ResultIsActiveEntity", true);
                 createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     resolve(createPrintRecord);
                 }).catch((oError) => {
@@ -151,7 +199,7 @@ sap.ui.define([
                     for (const activeContext of aContext) {
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
-                        var sPath = that.getModel("Print").getKeyPredicate("/PrintRecord", object);
+                        var sPath = _oPrintModel.getKeyPredicate("/PrintRecord", object);
                         sURL = activeContext.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
                         sap.m.URLHelper.redirect(sURL, true);
                     }
@@ -179,11 +227,13 @@ sap.ui.define([
                     obj.SoldToParty !== SoldToParty ||
                     obj.ShippingPoint !== ShippingPoint
                 ) {
-                    aExcelSet[i].Type = "E";
-                    aExcelSet[i].Message = this._ResourceBundle.getText("msgDuplicate");
+                    // aExcelSet[i].Type = "E";
+                    // aExcelSet[i].Message = _ResourceBundle.getText("msgInconsistencies");
+                    
                     isInconsistencies = true; // 发现不一致，返回 true
                 }
             }
+
         
             return isInconsistencies; // 所有对象都一致，返回 false
         },

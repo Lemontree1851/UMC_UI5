@@ -59,7 +59,7 @@
     }
   },
   "sap.platform.cf": {
-      "uisVersionNumber": "1.120"
+    "uisVersionNumber": "1.120"
   },
   "sap.ui": {
     "technology": "UI5",
@@ -77,7 +77,6 @@
       "phone": true
     }
   },
-  
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
@@ -133,11 +132,6 @@
           "pattern": ":?query:",
           "name": "DeliveryReceiptList",
           "target": "DeliveryReceiptList"
-        },
-        {
-          "pattern": "DeliveryReceipt({key}):?query:",
-          "name": "DeliveryReceiptObjectPage",
-          "target": "DeliveryReceiptObjectPage"
         }
       ],
       "targets": {
@@ -149,13 +143,7 @@
             "settings": {
               "contextPath": "/DeliveryReceipt",
               "variantManagement": "Page",
-              "navigation": {
-                "DeliveryReceipt": {
-                  "detail": {
-                    "route": "DeliveryReceiptObjectPage"
-                  }
-                }
-              },
+              "navigation": {},
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
@@ -169,21 +157,24 @@
                       "enabled": true,
                       "requiresSelection": true,
                       "text": "{@i18n>print}"
+                    },
+                    "reprint": {
+                      "press": "sd.deliveryreceipt.ext.ListReportExt.onReprint",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{i18n>reprint}"
+                    },
+                    "delete": {
+                      "press": "sd.deliveryreceipt.ext.ListReportExt.onDelete",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{i18n>delete}"
                     }
                   }
                 }
               }
-            }
-          }
-        },
-        "DeliveryReceiptObjectPage": {
-          "type": "Component",
-          "id": "DeliveryReceiptObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/DeliveryReceipt"
             }
           }
         }
