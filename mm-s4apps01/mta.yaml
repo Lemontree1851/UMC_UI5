@@ -67,8 +67,8 @@ modules:
       name: mmpodataanalysis
       target-path: resources/
     - artifacts:
-      - mmpodataanalysis.zip
-      name: mmpodataanalysis
+      - mmuploadpurchasereq.zip
+      name: mmuploadpurchasereq
       target-path: resources/
     - artifacts:
       - mmphysicalinventoryupload.zip
@@ -135,6 +135,16 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmuploadpurchasereq
+  type: html5
+  path: uploadpurchasereq
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
