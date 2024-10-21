@@ -1,0 +1,61 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable entitySet="CREDITMANTABLE" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" 
+    useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" 
+    enableAutoBinding="false" placeToolbarInTable="true" visible="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" 
+    showFullScreenButton="true" requestAtLeastFields="SalesOrganization,Customer,zyear">
+
+        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
+            <table:columns>
+                <table:Column width="4rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Customer}" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="4rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CustomerName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="6rem" label="{i18n>LimitAmount}" sortProperty="LimitAmount" filterProperty="LimitAmount">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"LimitAmount", "leadingProperty":"LimitAmount"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{LimitAmount}" />
+                    </table:template>
+                </table:Column>       
+                <table:Column width="6rem" label="{i18n>Termstext}" sortProperty="Termstext" filterProperty="Termstext">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Termstext", "leadingProperty":"Termstext"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Termstext}" />
+                    </table:template>
+                </table:Column>  
+                <table:Column width="6rem" label="{i18n>zmonth1}" sortProperty="zmonth1" filterProperty="zmonth1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"zmonth1", "leadingProperty":"zmonth1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{zmonth1}" />
+                    </table:template>
+                </table:Column>  
+
+                
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>
