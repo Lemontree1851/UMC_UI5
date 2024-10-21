@@ -153,36 +153,5 @@ resources:
     service: html5-apps-repo
     service-name: sd-s4apps01-html5-srv
     service-plan: app-host
-- name: sd-s4apps01-uaa
-  type: org.cloudfoundry.managed-service
-  parameters:
-    path: ./xs-security.json
-    service: xsuaa
-    service-name: sd-s4apps01-xsuaa-srv
-    service-plan: application
-- name: sd-s4apps01-destination-service
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      HTML5Runtime_enabled: true
-      init_data:
-        instance:
-          destinations:
-          - Authentication: NoAuthentication
-            Name: ui5
-            ProxyType: Internet
-            Type: HTTP
-            URL: https://ui5.sap.com
-          existing_destinations_policy: update
-      version: 1.0.0
-    service: destination
-    service-name: sd-s4apps01-destination-service
-    service-plan: lite
-- name: sd-s4apps01-repo-host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-name: sd-s4apps01-html5-srv
-    service-plan: app-host
 parameters:
   deploy_mode: html5-repo
