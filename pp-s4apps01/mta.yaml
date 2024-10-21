@@ -255,24 +255,6 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
-- name: ppofpartition
-  type: html5
-  path: ofpartition
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ppzmfgorderinfo
-  type: html5
-  path: zmfgorderinfo
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
 - name: ppzledplannedordercomponent
   type: html5
   path: zledplannedordercomponent
