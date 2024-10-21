@@ -103,6 +103,10 @@ modules:
       - ppzcomponentusagelist.zip
       name: ppzcomponentusagelist
       target-path: resources/
+    - artifacts:
+      - ppzmfgorderinfo.zip
+      name: ppzmfgorderinfo
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -238,7 +242,15 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
-    
+- name: ppzmfgorderinfo
+  type: html5
+  path: zmfgorderinfo
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: pp-s4apps01-uaa
   type: org.cloudfoundry.managed-service
