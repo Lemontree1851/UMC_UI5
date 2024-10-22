@@ -6,14 +6,15 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="CREDITMANTABLE" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" 
-    useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" 
-    enableAutoBinding="false" placeToolbarInTable="true" visible="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" 
-    showFullScreenButton="true" requestAtLeastFields="SalesOrganization,Customer,zyear,CustomerName,LimitAmount,Termstext,zmonth1,zmonth2,zmonth3,
-    zmonth4,zmonth5,zmonth6,zmonth7,zmonth8,zmonth9,zmonth10,zmonth11,zmonth12,text1,text2,text3">
-
-        <Table headerText="Products">
-          <columns>
+	
+	<smartTable:SmartTable entitySet="CREDITMANTABLE" smartFilterId="idSmartFilterBar1" tableType="Table" width="300em" showRowCount="true" 
+	useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}"  
+	placeToolbarInTable="true" visible="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" 
+	showFullScreenButton="true" requestAtLeastFields="SalesOrganization,Customer,zyear,CustomerName,LimitAmount,Termstext,zmonth1,zmonth2,zmonth3,
+	zmonth4,zmonth5,zmonth6,zmonth7,zmonth8,zmonth9,zmonth10,zmonth11,zmonth12,text1,text2,text3" >
+<!-- enableAutoColumnWidth="true" class="sapUiResponsiveContentPadding" enableAutoBinding="true"  -->
+		<Table headerText="Products" >
+		<columns>
 			<Column mergeDuplicates="true">
 				<header>
 					<Text text="{i18n>Customer}" />
@@ -112,9 +113,9 @@
 				</header>
 			</Column>  
 
-          </columns>
-        
-            <items>
+		</columns>
+		
+			<items>
 				<ColumnListItem>
 					<cells>
 						<Text text="{Customer}" />
@@ -175,70 +176,71 @@
 					</cells>
 				</ColumnListItem>
 			</items>
-        
-          <!-- <ColumnListItem vAlign="Middle">
-              <Text text="{Customer}" />
-              <Text text="{CustomerName}" />
-              <Text text="{LimitAmount}" />
-              <Text text="{Termstext}" />
-              <Text text="{zmonth1}" />
+		
+		<!-- <ColumnListItem vAlign="Middle">
+			<Text text="{Customer}" />
+			<Text text="{CustomerName}" />
+			<Text text="{LimitAmount}" />
+			<Text text="{Termstext}" />
+			<Text text="{zmonth1}" />
 
 
 
-          </ColumnListItem> -->
-        
-        
-        
-        
-        </Table>
+		</ColumnListItem> -->
+		
+		
+		
+		
+		</Table>
 
-        <!-- <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
-            <table:columns>
-                <table:Column width="4rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{Customer}" />
-                    </table:template>
-                </table:Column>
-                <table:Column width="4rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{CustomerName}" wrapping="false" />
-                    </table:template>
-                </table:Column>
-                <table:Column width="6rem" label="{i18n>LimitAmount}" sortProperty="LimitAmount" filterProperty="LimitAmount">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"LimitAmount", "leadingProperty":"LimitAmount"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{LimitAmount}" />
-                    </table:template>
-                </table:Column>       
-                <table:Column width="6rem" label="{i18n>Termstext}" sortProperty="Termstext" filterProperty="Termstext">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"Termstext", "leadingProperty":"Termstext"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{Termstext}" />
-                    </table:template>
-                </table:Column>  
-                <table:Column width="6rem" label="{i18n>zmonth1}" sortProperty="zmonth1" filterProperty="zmonth1">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"zmonth1", "leadingProperty":"zmonth1"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{zmonth1}" />
-                    </table:template>
-                </table:Column>  
+		<!-- <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
+			<table:columns>
+				<table:Column width="4rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
+					</table:customData>
+					<table:template>
+						<Text text="{Customer}" />
+					</table:template>
+				</table:Column>
+				<table:Column width="4rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
+					</table:customData>
+					<table:template>
+						<Text text="{CustomerName}" wrapping="false" />
+					</table:template>
+				</table:Column>
+				<table:Column width="6rem" label="{i18n>LimitAmount}" sortProperty="LimitAmount" filterProperty="LimitAmount">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey":"LimitAmount", "leadingProperty":"LimitAmount"}'/>
+					</table:customData>
+					<table:template>
+						<Text text="{LimitAmount}" />
+					</table:template>
+				</table:Column>       
+				<table:Column width="6rem" label="{i18n>Termstext}" sortProperty="Termstext" filterProperty="Termstext">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey":"Termstext", "leadingProperty":"Termstext"}'/>
+					</table:customData>
+					<table:template>
+						<Text text="{Termstext}" />
+					</table:template>
+				</table:Column>  
+				<table:Column width="6rem" label="{i18n>zmonth1}" sortProperty="zmonth1" filterProperty="zmonth1">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey":"zmonth1", "leadingProperty":"zmonth1"}'/>
+					</table:customData>
+					<table:template>
+						<Text text="{zmonth1}" />
+					</table:template>
+				</table:Column>  
 
-                
-            </table:columns>
-        </table:Table> -->
+				
+			</table:columns>
+		</table:Table> -->
 
 
-    </smartTable:SmartTable>
+	</smartTable:SmartTable>
+
 </core:FragmentDefinition>
