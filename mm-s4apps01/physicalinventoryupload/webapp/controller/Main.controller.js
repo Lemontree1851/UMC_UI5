@@ -166,13 +166,14 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, MessageToast, Spreadshe
                     this.getModel("local").setProperty("/logInfo", this.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
                     MessageToast.show(this.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                 }).catch((error) => {
-                    MessageBox.error(error);
+                    console.log(error);
+                    MessageBox.error((error.message));
                 }).finally(() => {
-                    this._BusyDialog.close();
+                    that._BusyDialog.close();
                 });
             } catch (error) {
-                MessageBox.error(error);
-                this._BusyDialog.close();
+                MessageBox.error(error.message);
+                that._BusyDialog.close();
             }
 
         },
