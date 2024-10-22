@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="com.sap.gateway.srvd.zui_accountingdoc.v0001" Alias="SAP__self">
+            <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
+            <EntityType Name="ZC_ACCOUNTINGDOCType">
+                <Key>
+                    <PropertyRef Name="Companycode"/>
+                    <PropertyRef Name="fiscalyear"/>
+                    <PropertyRef Name="accountingdocument"/>
+                </Key>
+                <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="fiscalyear" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="accountingdocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="documentdate" Type="Edm.Date"/>
+                <Property Name="postingdate" Type="Edm.Date"/>
+                <Property Name="accountingdocumentheadertext" Type="Edm.String" Nullable="false" MaxLength="25"/>
+                <Property Name="accountingdoccreatedbyuser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="creationtime" Type="Edm.TimeOfDay" Nullable="false"/>
+                <Property Name="accountingdocumentcreationdate" Type="Edm.Date"/>
+                <Property Name="lastchangedate" Type="Edm.Date"/>
+                <Property Name="LedgerGroup" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="accountingdocumenttype" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="AccountingDocumentCategory" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="CompanycodeText" Type="Edm.String" Nullable="false" MaxLength="25"/>
+                <Property Name="companycodecurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="amountincompanycodecurrency" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="variable"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="ZC_ACCOUNTINGDOC" EntityType="com.sap.gateway.srvd.zui_accountingdoc.v0001.ZC_ACCOUNTINGDOCType"/>
+            </EntityContainer>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/Companycode">
+                <Annotation Term="SAP__common.Label" String="会社コード"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_accountingdoc-0001';va='com.sap.gateway.srvd.zui_accountingdoc.v0001.et-zc_accountingdoc.companycode'/$metadata</String>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/fiscalyear">
+                <Annotation Term="SAP__common.Label" String="会計年度"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Heading" String="Year"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Fiscal Year"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/accountingdocument">
+                <Annotation Term="SAP__common.Label" String="仕訳"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_accountingdoc-0001';va='com.sap.gateway.srvd.zui_accountingdoc.v0001.et-zc_accountingdoc.accountingdocument'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Heading" String="Doc. No."/>
+                <Annotation Term="SAP__common.QuickInfo" String="Document Number of an Accounting Document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/documentdate">
+                <Annotation Term="SAP__common.Label" String="仕訳日付"/>
+                <Annotation Term="SAP__common.Heading" String="Doc. Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Document Date in Document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/postingdate">
+                <Annotation Term="SAP__common.Label" String="転記日付"/>
+                <Annotation Term="SAP__common.Heading" String="Doc. Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Document Date in Document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/accountingdocumentheadertext">
+                <Annotation Term="SAP__common.Label" String="伝票ヘッダテキスト"/>
+                <Annotation Term="SAP__common.Heading" String="Company Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name of Company Code or Company"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/accountingdoccreatedbyuser">
+                <Annotation Term="SAP__common.Label" String="仕訳登録者"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="User Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="User Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/LedgerGroup">
+                <Annotation Term="SAP__common.Label" String="元帳グループ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/FiscalPeriod">
+                <Annotation Term="SAP__common.Label" String="会計期間"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Fiscal Period"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/accountingdocumenttype">
+                <Annotation Term="SAP__common.Label" String="仕訳タイプ"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Doc. Type"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Document Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/AccountingDocumentCategory">
+                <Annotation Term="SAP__common.Label" String="仕訳カテゴリ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/CompanycodeText">
+                <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/companycodecurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.Label" String="会社コード通貨"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/amountincompanycodecurrency">
+                <Annotation Term="SAP__common.Label" String="金額"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="companycodecurrency"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType">
+                <Annotation Term="SAP__common.Label" String="Query CDS"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Items"/>
+                        <PropertyValue Property="TypeNamePlural" String="Items"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="仕訳"/>
+                            <PropertyValue Property="Value" Path="accountingdocument"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="仕訳タイプ"/>
+                            <PropertyValue Property="Value" Path="accountingdocumenttype"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード"/>
+                            <PropertyValue Property="Value" Path="Companycode"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="会社コードテキスト"/>
+                            <PropertyValue Property="Value" Path="CompanycodeText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="仕訳日付"/>
+                            <PropertyValue Property="Value" Path="documentdate"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="転記日付"/>
+                            <PropertyValue Property="Value" Path="postingdate"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="金額"/>
+                            <PropertyValue Property="Value" Path="amountincompanycodecurrency"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード通貨"/>
+                            <PropertyValue Property="Value" Path="companycodecurrency"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="伝票ヘッダテキスト"/>
+                            <PropertyValue Property="Value" Path="accountingdocumentheadertext"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="仕訳登録者"/>
+                            <PropertyValue Property="Value" Path="accountingdoccreatedbyuser"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Companycode</PropertyPath>
+                        <PropertyPath>LedgerGroup</PropertyPath>
+                        <PropertyPath>accountingdocument</PropertyPath>
+                        <PropertyPath>documentdate</PropertyPath>
+                        <PropertyPath>postingdate</PropertyPath>
+                        <PropertyPath>fiscalyear</PropertyPath>
+                        <PropertyPath>FiscalPeriod</PropertyPath>
+                        <PropertyPath>accountingdoccreatedbyuser</PropertyPath>
+                        <PropertyPath>accountingdocumenttype</PropertyPath>
+                        <PropertyPath>AccountingDocumentCategory</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZC_ACCOUNTINGDOC">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="amountincompanycodecurrency"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/creationtime">
+                <Annotation Term="SAP__common.Label" String="Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/accountingdocumentcreationdate">
+                <Annotation Term="SAP__common.Label" String="Document Date"/>
+                <Annotation Term="SAP__common.Heading" String="Doc. Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Document Date in Document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_ACCOUNTINGDOCType/lastchangedate">
+                <Annotation Term="SAP__common.Label" String="Document Date"/>
+                <Annotation Term="SAP__common.Heading" String="Doc. Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Document Date in Document"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

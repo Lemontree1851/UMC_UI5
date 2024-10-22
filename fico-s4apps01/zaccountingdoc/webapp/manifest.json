@@ -1,0 +1,201 @@
+{
+  "_version": "1.64.0",
+  "sap.app": {
+    "id": "fico.zaccountingdoc",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.15.0",
+      "toolsId": "f9e43ad6-6248-43b9-9b62-ba2ea2de1ffa"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zui_accountingdoc_o4/srvd/sap/zui_accountingdoc/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "PrintService": {
+        "uri": "/sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "PrintService1": {
+        "uri": "/sap/opu/odata4/sap/zapi_tfi_1012_o4/srvd_a2x/sap/zapi_tfi_1012_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAPI_TFI_1012_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.124.6",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "fico.zaccountingdoc.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "Print": {
+        "dataSource": "PrintService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },      "Print1": {
+        "dataSource": "PrintService1",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ZC_ACCOUNTINGDOCList",
+          "target": "ZC_ACCOUNTINGDOCList"
+        },
+        {
+          "pattern": "ZC_ACCOUNTINGDOC({key}):?query:",
+          "name": "ZC_ACCOUNTINGDOCObjectPage",
+          "target": "ZC_ACCOUNTINGDOCObjectPage"
+        }
+      ],
+      "targets": {
+        "ZC_ACCOUNTINGDOCList": {
+          "type": "Component",
+          "id": "ZC_ACCOUNTINGDOCList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/ZC_ACCOUNTINGDOC",
+              "variantManagement": "Page",
+              "navigation": {
+                "ZC_ACCOUNTINGDOC": {
+                  "detail": {
+                    "route": "ZC_ACCOUNTINGDOCObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  },
+                  "actions": {
+                    "Action1": {
+                      "press": "fico.zaccountingdoc.ext.listExtension.ListExtension.onPrint1",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{i18n>i18nprint}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ZC_ACCOUNTINGDOCObjectPage": {
+          "type": "Component",
+          "id": "ZC_ACCOUNTINGDOCObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ZC_ACCOUNTINGDOC"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "fico-s4apps01"
+  }
+}
