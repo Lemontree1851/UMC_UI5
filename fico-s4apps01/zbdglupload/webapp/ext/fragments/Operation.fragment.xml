@@ -1,0 +1,256 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table" core:require="{ handler: 'fico/zbdglupload/ext/controller/ListReportExt' }">
+    <Dialog title="{i18n>OperationScreen}">
+        <Panel expandable="true" expanded="true" width="auto">
+            <HBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>Plant}:" required="true"/>
+                    <ComboBox id="idPlant" items="{ path: '/ZC_PlantVH' }" selectedKey="{local>/headSet/Plant}" filterSecondaryValues= "true" required="true" change="handler.handleChange" editable="{= ${local>/mode} === 'create'}" width="13rem">
+                        <core:ListItem key="{Plant}" text="{PlantName}({Plant})" additionalText="{Plant}"/>
+                    </ComboBox>
+                    <Label text="{i18n>Type}:" required="true"/>
+                    <ComboBox id="idType" items="{ path: '/ZC_ApplicationTypeVH' }" selectedKey="{local>/headSet/Type}" filterSecondaryValues= "true" required="true" change="handler.handleChange" editable="{= ${local>/mode} === 'create'}" width="13rem">
+                        <core:ListItem key="{Zvalue1}" text="{Zvalue2}({Zvalue1})" additionalText="{Zvalue1}"/>
+                    </ComboBox>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>MaterialRequisitionNo}:"/>
+                    <Input id="idMaterialRequisitionNo" value="{local>/headSet/MaterialRequisitionNo}" change="handler.handleChange" editable="{= ${local>/mode} === 'update'}" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/ZC_MaterialRequisitionVH', ['MaterialRequisitionNo','Plant','Type','CreatedDate','CreatedByUserName'])" showSuggestion="true" suggestionRows="{ path: '/ZC_MaterialRequisitionVH', length: 15 }" required="true" width="13rem">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>MaterialRequisitionNo}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>Type}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{MaterialRequisitionNo}" />
+                                <Label text="{Type}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
+                    <Label text="{i18n>HeaderCreatedDate}:"/>
+                    <DatePicker width="13rem" editable="false" value="{
+						'path':'local>/headSet/HeaderCreatedDate',
+						'type':'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy/MM/dd',
+                            'UTC':true
+						} 
+                    }"/>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>CostCenter}:" required="true"/>
+                    <Input id="idCostCenter" value="{local>/headSet/CostCenter}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/ZC_CostCenterVH',
+                        ['CostCenter','CostCenterName'])" showSuggestion="true" suggestionRows="{ path: '/ZC_CostCenterVH', length: 10 }" required="true" width="13rem">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>CostCenter}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>CostCenterName}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{CostCenter}" />
+                                <Label text="{CostCenterName}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
+                    <Label text="{i18n>CostCenterName}:"/>
+                    <Input value="{local>/headSet/CostCenterName}" editable="false" width="13rem"/>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>Customer}:" required="true"/>
+                    <Input id="idCustomer" value="{local>/headSet/Customer}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/I_Customer_VH', ['Customer','CustomerName'])" showSuggestion="true" suggestionRows="{ path: '/I_Customer_VH', length: 10 }" required="true" width="13rem">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>Customer}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>CustomerName}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{Customer}" />
+                                <Label text="{CustomerName}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
+                    <Label text="{i18n>CustomerName}:"/>
+                    <Input value="{local>/headSet/CustomerName}" editable="false" width="13rem"/>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>Receiver}:" required="{= ${local>/headSet/Type} !== '31'}"/>
+                    <Input id="idReceiver" value="{local>/headSet/Receiver}" change="handler.handleChange" showValueHelp="true" required="{= ${local>/headSet/Type} !== '31'}" width="13rem"/>
+                    <Label text="{i18n>RequisitionDate}:" required="true"/>
+                    <DatePicker id="idRequisitionDate" required="true" width="13rem" value="{
+						'path':'local>/headSet/RequisitionDate',
+						'type':'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy/MM/dd',
+                            'UTC':true
+						} }"/>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>LineWarehouseStatus}:"/>
+                    <CheckBox selected="{local>/headSet/LineWarehouseStatus}"/>
+                </VBox>
+            </HBox>
+        </Panel>
+        <Panel expandable="false" expanded="true" width="auto">
+            <table:Table rows="{local>/itemSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:extension>
+                    <OverflowToolbar>
+                        <ToolbarSpacer/>
+                        <Button id="idSearchBtn" icon="sap-icon://search" type="Transparent" text="{i18n>SearchBtn}" visible="{= ${local>/mode} === 'update'}" press="handler.onSearch"/>
+                        <Button id="idSaveBtn" icon="sap-icon://save" type="Transparent" text="{i18n>SaveBtn}" press="handler.onSave"/>
+                        <Button id="idAddBtn" icon="sap-icon://add" type="Transparent" text="{i18n>AddBtn}" visible="{= ${local>/mode} === 'create'}" press="handler.onAddLine" />
+                        <Button id="idDelBtn" icon="sap-icon://delete" type="Transparent" text="{i18n>DelBtn}" visible="{= ${local>/mode} === 'create'}" press="handler.onDelLine"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column width="5rem" label="{i18n>ItemNo}">
+                        <table:template>
+                            <Text text="{local>ItemNo}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem">
+                        <Label text="{i18n>ManufacturingOrder}" required="{= ${local>/headSet/Type} !== '31' &amp;&amp; ${local>/headSet/Type} !== '50' }"/>
+                        <table:template>
+                            <Input value="{local>ManufacturingOrder}" suggestionItemSelected="true" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                                $event, $controller, '/ZC_ManufacturingOrderProductVH', 
+                                ['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MfgOrderPlannedStartDate','MfgOrderPlannedEndDate','MRPController'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ManufacturingOrderProductVH', length: 12 }" required="{= ${local>/headSet/Type} !== '31' &amp;&amp; ${local>/headSet/Type} !== '50' }">
+                                <suggestionColumns>
+                                    <Column>
+                                        <Label text="{i18n>ManufacturingOrder}"/>
+                                    </Column>
+                                    <Column>
+                                        <Label text="{i18n>ItemNo}"/>
+                                    </Column>
+                                    <Column>
+                                        <Label text="{i18n>Material}"/>
+                                    </Column>
+                                </suggestionColumns>
+                                <suggestionRows>
+                                    <ColumnListItem>
+                                        <Label text="{ManufacturingOrder}/{Item}" />
+                                        <Label text="{Item}"/>
+                                        <Label text="{Material}" />
+                                    </ColumnListItem>
+                                </suggestionRows>
+                            </Input>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>ManufOrderProduct}">
+                        <table:template>
+                            <Text text="{local>Product}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem">
+                        <Label text="{i18n>Material}" required="{= ${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '50' }"/>
+                        <table:template>
+                            <Input value="{local>Material}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                                $event, $controller, '/ZC_ProductVH',
+                                ['Material','MaterialDescription','ProductType','StandardPrice','PriceUnitQty','Currency'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="true" editable="{= ${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '50' }">
+                                <suggestionColumns>
+                                    <Column>
+                                        <Label text="{i18n>Product}"/>
+                                    </Column>
+                                    <Column>
+                                        <Label text="{i18n>ProductDescription}"/>
+                                    </Column>
+                                </suggestionColumns>
+                                <suggestionRows>
+                                    <ColumnListItem>
+                                        <Label text="{Material}" />
+                                        <Label text="{MaterialDescription}" />
+                                    </ColumnListItem>
+                                </suggestionRows>
+                            </Input>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>MaterialDescription}">
+                        <table:template>
+                            <Text text="{local>MaterialDescription}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem">
+                        <Label text="{i18n>Quantity}" required="true"/>
+                        <table:template>
+                            <Input type="Number" value="{local>Quantity}" change="handler.handleCalculate" required="true"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="4rem" label="{i18n>BaseUnit}">
+                        <table:template>
+                            <Text text="{local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem">
+                        <Label text="{i18n>StorageLocation}" required="true"/>
+                        <table:template>
+                            <Input value="{local>StorageLocation}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                                $event, $controller, '/I_StorageLocationStdVH',
+                                ['StorageLocation','StorageLocationName'])" showSuggestion="true" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }" required="true">
+                                <suggestionColumns>
+                                    <Column>
+                                        <Label text="{i18n>StorageLocation}"/>
+                                    </Column>
+                                    <Column>
+                                        <Label text="{i18n>StorageLocationName}"/>
+                                    </Column>
+                                </suggestionColumns>
+                                <suggestionRows>
+                                    <ColumnListItem>
+                                        <Label text="{StorageLocation}" />
+                                        <Label text="{StorageLocationName}" />
+                                    </ColumnListItem>
+                                </suggestionRows>
+                            </Input>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>StorageLocationName}">
+                        <table:template>
+                            <Text text="{local>StorageLocationName}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>Location}">
+                        <table:template>
+                            <Input value="{local>Location}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>Remark}">
+                        <table:template>
+                            <Input value="{local>Remark}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>StandardPrice}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>StandardPrice',formatter:'handler.formatter.formatNumber' } {local>Currency}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>TotalAmount}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>TotalAmount',formatter:'handler.formatter.formatNumber' } {local>Currency}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>OrderIsClosed}">
+                        <table:template>
+                            <Text text="{ path:'local>OrderIsClosed',formatter:'handler.formatter.formatOrderStatus' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>
