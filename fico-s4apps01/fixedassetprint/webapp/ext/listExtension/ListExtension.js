@@ -50,6 +50,7 @@ sap.ui.define([
                         var object = boundContext.getObject();
                         var sPath = that.getModel("Print").getKeyPredicate("/PrintRecord", object);
                         sURL = activeContext.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
+                        //console.log("sURL"+sURL)
                         sap.m.URLHelper.redirect(sURL, true);
                     }
                     MessageToast.show("Print Success");
