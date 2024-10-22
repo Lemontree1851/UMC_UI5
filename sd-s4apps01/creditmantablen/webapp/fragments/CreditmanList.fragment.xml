@@ -9,9 +9,190 @@
     <smartTable:SmartTable entitySet="CREDITMANTABLE" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" 
     useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" 
     enableAutoBinding="false" placeToolbarInTable="true" visible="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" 
-    showFullScreenButton="true" requestAtLeastFields="SalesOrganization,Customer,zyear">
+    showFullScreenButton="true" requestAtLeastFields="SalesOrganization,Customer,zyear,CustomerName,LimitAmount,Termstext,zmonth1,zmonth2,zmonth3,
+    zmonth4,zmonth5,zmonth6,zmonth7,zmonth8,zmonth9,zmonth10,zmonth11,zmonth12,text1,text2,text3">
 
-        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
+        <Table headerText="Products">
+          <columns>
+			<Column mergeDuplicates="true">
+				<header>
+					<Text text="{i18n>Customer}" />
+				</header>
+			</Column>
+			<Column mergeDuplicates="true">
+				<header>
+					<Text text="{i18n>CustomerName}" />
+				</header>
+			</Column>     
+			<Column mergeDuplicates="true">
+				<header>
+					<Text text="{i18n>LimitAmount}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="true">
+				<header>
+					<Text text="{i18n>Termstext}" />
+				</header>
+			</Column>  
+
+			<Column mergeDuplicates="true">
+				<header>
+					<Text text="{i18n>text1}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="true">
+				<header>
+					<Text text="{i18n>text2}" />
+				</header>
+			</Column>    
+			<Column mergeDuplicates="true">
+				<header>
+					<Text text="{i18n>text3}" />
+				</header>
+			</Column>    
+
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth1}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth2}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth3}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth4}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth5}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth6}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth7}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth8}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth9}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth10}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth11}" />
+				</header>
+			</Column>  
+			<Column mergeDuplicates="false">
+				<header>
+					<Text text="{i18n>zmonth12}" />
+				</header>
+			</Column>  
+
+          </columns>
+        
+            <items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{Customer}" />
+					</cells>
+					<cells>
+						<Text text="{CustomerName}" />
+					</cells>
+					<cells>
+						<Text text="{LimitAmount}" />
+					</cells>
+					<cells>
+						<Text text="{Termstext}" />
+					</cells>
+					<cells>
+						<Text text="{text1}" />
+					</cells>
+					<cells>
+						<Text text="{text2}" />
+					</cells>
+					<cells>
+						<Text text="{text3}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth1}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth2}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth3}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth4}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth5}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth6}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth7}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth8}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth9}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth10}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth11}" />
+					</cells>
+					<cells>
+						<Text text="{zmonth12}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+        
+          <!-- <ColumnListItem vAlign="Middle">
+              <Text text="{Customer}" />
+              <Text text="{CustomerName}" />
+              <Text text="{LimitAmount}" />
+              <Text text="{Termstext}" />
+              <Text text="{zmonth1}" />
+
+
+
+          </ColumnListItem> -->
+        
+        
+        
+        
+        </Table>
+
+        <!-- <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
             <table:columns>
                 <table:Column width="4rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
                     <table:customData>
@@ -56,6 +237,8 @@
 
                 
             </table:columns>
-        </table:Table>
+        </table:Table> -->
+
+
     </smartTable:SmartTable>
 </core:FragmentDefinition>
