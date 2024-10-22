@@ -1,0 +1,192 @@
+{
+  "_version": "1.64.0",
+  "sap.app": {
+    "id": "fico.zpaymentmethod",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.14.5",
+      "toolsId": "c1e7d355-c358-4d42-94ac-0f2cfd737cd1"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zui_paymethod_o4/srvd/sap/zui_paymethod_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "zui_dtimp_conf_o4": {
+          "uri": "/sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/",
+          "type": "OData",
+          "settings": {
+              "annotations": [],
+              "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
+              "odataVersion": "4.0"
+          }
+      },
+      "PrintService": {
+          "uri": "/sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/",
+          "type": "OData",
+          "settings": {
+              "annotations": [],
+              "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
+              "odataVersion": "4.0"
+          }
+      }
+    },
+    "crossNavigation": {
+        "inbounds": {
+            "zpaymentmethod-display": {
+                "semanticObject": "zpaymentmethod",
+                "action": "display",
+                "title": "{{flpTitle}}",
+                "icon": "sap-icon://upload",
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                }
+            }
+        }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.124.6",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "fico.zpaymentmethod.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+          "type": "sap.ui.model.resource.ResourceModel",
+          "uri": "i18n/i18n.properties"
+      },
+      "Attach": {
+          "dataSource": "zui_dtimp_conf_o4",
+          "preload": true,
+          "settings": {
+              "synchronizationMode": "None",
+              "operationMode": "Server",
+              "autoExpandSelect": true,
+              "earlyRequests": true
+          }
+      },
+      "Print": {
+          "dataSource": "PrintService",
+          "preload": true,
+          "settings": {
+              "synchronizationMode": "None",
+              "operationMode": "Server",
+              "autoExpandSelect": true,
+              "earlyRequests": true
+          }
+      },
+      "local": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+          "routerClass": "sap.m.routing.Router",
+          "viewType": "XML",
+          "async": true,
+          "viewPath": "fico.zpaymentmethod.view",
+          "controlAggregation": "pages",
+          "controlId": "app",
+          "clearControlAggregation": false
+      },
+      "routes": [
+          {
+              "name": "Main",
+              "pattern": "",
+              "target": [
+                  "Main"
+              ]
+          }
+      ],
+      "targets": {
+          "Main": {
+              "viewType": "XML",
+              "transition": "slide",
+              "clearControlAggregation": false,
+              "viewId": "Main",
+              "viewName": "Main"
+          }
+      }
+  },
+    "rootView": {
+      "viewName": "fico.zpaymentmethod.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "fico-s4apps01"
+  },
+  "sap.platform.cf": {
+      "ui5VersionNumber": "1.120.18"
+  }
+}

@@ -1,0 +1,29 @@
+<mvc:View
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
+	xmlns:mdc="sap.ui.mdc"
+	xmlns:mdct="sap.ui.mdc.table"
+	xmlns:vm="sap.ui.fl.variants"
+	xmlns:mdcv="sap.ui.mdc.valuehelp"
+	xmlns:mdcvc="sap.ui.mdc.valuehelp.content"
+	xmlns:ce="sap.ui.codeeditor"
+	controllerName="fico.zpaymentmethod.controller.FilterbarTypes"
+	>
+
+
+
+
+						<!-- Height - Integer -->
+						<mdc:FilterField
+							label="Height (Integer)"
+							propertyKey="height"
+							dataType="sap.ui.model.type.Integer"
+							conditions="{$filters>/conditions/height}"
+							delegate='\{"name": "sap/ui/mdc/field/FieldBaseDelegate"\}' >
+						</mdc:FilterField>
+
+		
+</mvc:View>

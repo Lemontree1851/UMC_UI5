@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core" core:require="{ handler: 'fico/zpaymentmethod/ext/controller/ValueHelpDialog' }">
+    <ValueHelpDialog ok="handler.onValueHelpOkPress" cancel="handler.onValueHelpCancelPress" afterClose="handler.onValueHelpAfterClose" supportRanges="false">
+        <filterBar>
+            <fb:FilterBar advancedMode="true" search="handler.onFilterBarSearch" isRunningInValueHelpDialog="true">
+                <fb:filterGroupItems/>
+            </fb:FilterBar>
+        </filterBar>
+    </ValueHelpDialog>
+</core:FragmentDefinition>

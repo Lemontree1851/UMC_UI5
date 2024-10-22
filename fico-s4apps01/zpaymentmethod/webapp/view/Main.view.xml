@@ -1,0 +1,208 @@
+<mvc:View controllerName="fico.zpaymentmethod.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:mdc="sap.ui.mdc"
+    xmlns:ce="sap.ui.codeeditor"
+    xmlns:table="sap.ui.table" 
+    xmlns:core="sap.ui.core"
+    core:require="{ handler: 'fico/zpaymentmethod/ext/controller/ListReportExt' }">
+    <Page >
+        <content>
+        <Panel expandable="true" expanded="true" width="auto">
+            <HBox>
+
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>CompanyCode}:" required="true"/>
+                    <MultiInput id="idCompanyCode" value="{local>/headSet/CompanyCode}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/I_CompanyCodeVH', ['CompanyCode','CompanyCodeName'])" showSuggestion="true" suggestionRows="{ path: '/I_CompanyCodeVH', length: 10 }" required="true" width="13rem">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>CompanyCode}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>CompanyCodeName}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{CompanyCode}" />
+                                <Label text="{CompanyCodeName}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </MultiInput>
+                    <Label text="{i18n>CompanyCodeName}:" visible = "false"/>
+                    <Input value="{local>/headSet/CompanyCodeName}"  visible = "false" width="13rem"/>
+                </VBox>
+                                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>Receiver}:" required="{= ${local>/headSet/Type} !== '31'}"  visible = "false"/>
+                    <Input id="idReceiver1" value="{local>/headSet/Receiver}"   width="13rem"  visible = "false"/>
+                    <Label text="{i18n>Date}:" required="true"/>
+
+			<DateRangeSelection
+                id="idReceiver"
+				width="100%"
+displayFormat="yyyy/MM/dd"
+				valueState="{valueState}"
+				valueStateText="{valueStateText}"/>
+
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>Customer}:" required="false"/>
+                    <MultiInput id="idCustomer" value="{local>/headSet/Customer}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/I_BusinessPartnerVH', ['BusinessPartner','OrganizationBPName1'])" showSuggestion="true" suggestionRows="{ path: '/I_Customer_VH', length: 10 }" required="false" width="13rem">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>Customer}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>CustomerName}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{Customer}" />
+                                <Label text="{CustomerName}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </MultiInput>
+                    <Label text="{i18n>CustomerName}:"  visible = "false"/>
+                    <Input value="{local>/headSet/CustomerName}" editable="false" width="13rem" visible = "false"/>
+                </VBox>
+                 <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>PaymentMethod1}:" required="false"/>
+                    <MultiInput id="idPaymentMethod" value="{local>/headSet/PaymentMethod}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/ZC_PaymentMethodVH', ['PaymentMethod','PaymentMethodName','Country'])" showSuggestion="true" suggestionRows="{ path: '/ZC_PaymentMethodVH', length: 10 }" required="false" width="13rem">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>PaymentMethod1}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>PaymentMethodName}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{PaymentMethod1}" />
+                                <Label text="{PaymentMethodName}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </MultiInput>
+                    <Label text="{i18n>PaymentMethodName1}:" visible = "false"/>
+                    <Input value="{local>/headSet/PaymentMethodName}"  width="13rem"  visible = "false"/>
+                </VBox>
+
+            </HBox>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button id="idSearchBtn1"  type="Emphasized" text="{i18n>SearchBtn}"  press="onSearch"></Button>
+            </OverflowToolbar>
+        </Panel>
+
+
+
+            <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+
+                <table:Table id="idTable" rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="2" rowMode="Interactive" class="sapUiSizeCompact">
+                    <table:extension>
+                        <OverflowToolbar>
+                            
+                            <ToolbarSpacer/>
+                            <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idJobButton" icon="sap-icon://pending" type="Transparent" text="{i18n>jobBtn}" press="onJob" visible="{= ${local>/excelSet}.length > 0}"/>
+                        </OverflowToolbar>
+                    </table:extension>
+                    <table:columns>
+                        <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                            <table:template>
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="15rem" label="{i18n>Message}">
+                            <table:template>
+                                <Text text="{local>Message}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>CompanyCode}">
+                            <table:template>
+                                <Text text="{local>CompanyCode}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>     
+                        <table:Column width="6rem" label="{i18n>Supplier}">
+                            <table:template>
+                                <Text text="{local>Supplier}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+                        <table:Column width="6rem" label="{i18n>OrganizationBPName1}">
+                            <table:template>
+                                <Text text="{local>OrganizationBPName1}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+                        <table:Column width="6rem" label="{i18n>AmountInCompanyCodeCurrency}">
+                            <table:template>
+                                <Text text="{local>AmountInCompanyCodeCurrency}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+                        <table:Column width="6rem" label="{i18n>CompanyCodeCurrency}">
+                            <table:template>
+                                <Text text="{local>CompanyCodeCurrency}" wrapping="false"/>
+                            </table:template>
+                        </table:Column> 
+                        <table:Column width="6rem" label="{i18n>Counts}">
+                            <table:template>
+                                <Text text="{local>Counts}" wrapping="false"/>
+                            </table:template>
+                        </table:Column> 
+
+
+                        <table:Column width="6rem" label="{i18n>LastDate}">
+                            <table:template>
+                                <Text text="{local>LastDate}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+
+                        <table:Column width="7rem" label="{i18n>NetdueDate}">
+                            <table:template>
+                                <Text text="{local>NetdueDate}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+                        <table:Column width="7rem" label="{i18n>PaymentMethod}">
+                            <table:template>
+                                <Text text="{local>PaymentMethod}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+                        <table:Column width="6rem" label="{i18n>PaymentTerms}">
+                            <table:template>
+                                <Text text="{local>PaymentTerms}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+                         <table:Column width="7rem" label="{i18n>ConditionDate}">
+                         <table:template>
+                                <Text text="{local>ConditionDate}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+                        <table:Column width="6rem" label="{i18n>PaymentMethod_a}">
+                         <table:template>
+                                <Text text="{local>PaymentMethod_a}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+                        <table:Column width="6rem" label="{i18n>AccountingClerkPhoneNumber}">
+                            <table:template>
+                                <Text text="{local>AccountingClerkPhoneNumber}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+                        <table:Column width="6rem" label="{i18n>AccountingClerkFaxNumber}">
+                         <table:template>
+                                <Text text="{local>AccountingClerkFaxNumber}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>  
+
+                    </table:columns>
+                </table:Table>
+            </Panel>
+
+        </content>
+    </Page>
+</mvc:View>
