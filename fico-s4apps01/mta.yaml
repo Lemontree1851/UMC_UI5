@@ -59,6 +59,22 @@ modules:
       - ficoagencypurchasingn.zip
       name: ficoagencypurchasingn
       target-path: resources/
+    - artifacts:
+      - ficofixedassetprint.zip
+      name: ficofixedassetprint
+      target-path: resources/
+    - artifacts:
+      - ficozmfgorder.zip
+      name: ficozmfgorder
+      target-path: resources/
+    - artifacts:
+      - ficozaccountingdoc.zip
+      name: ficozaccountingdoc
+      target-path: resources/      
+    - artifacts:
+      - ficozpaymentmethod.zip
+      name: ficozpaymentmethod
+      target-path: resources/       
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -93,9 +109,44 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
+- name: ficofixedassetprint
+  type: html5
+  path: fixedassetprint
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozmfgorder
+  type: html5
+  path: zmfgorder
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozaccountingdoc
+  type: html5
+  path: zaccountingdoc
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []    
+- name: ficozpaymentmethod
+  type: html5
+  path: zpaymentmethod
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []  
 resources:
 - name: fico-s4apps01-uaa
   type: org.cloudfoundry.managed-service
