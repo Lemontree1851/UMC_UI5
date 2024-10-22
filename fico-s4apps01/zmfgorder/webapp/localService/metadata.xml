@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="com.sap.gateway.srvd.zui_mfgorder.v0001" Alias="SAP__self">
+            <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
+            <EntityType Name="MFGORDER2Type">
+                <Key>
+                    <PropertyRef Name="YearMonth"/>
+                    <PropertyRef Name="Companycode"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Product"/>
+                    <PropertyRef Name="SoldToParty"/>
+                    <PropertyRef Name="orderid"/>
+                    <PropertyRef Name="orderitem"/>
+                </Key>
+                <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="SoldToParty" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="orderid" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="orderitem" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CompanycodeText" Type="Edm.String" Nullable="false" MaxLength="25"/>
+                <Property Name="PlantText" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="BusinessPartnerName" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="SalesPerformanceActualQuantity" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="SalesPerfActualQuantityUnit" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="SalesPerfActlAmtInDspCurrency" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DisplayCurrency" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
+            </EntityType>
+            <EntityType Name="MFGORDER3Type">
+                <Key>
+                    <PropertyRef Name="YearMonth"/>
+                    <PropertyRef Name="Companycode"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Product"/>
+                    <PropertyRef Name="SoldToParty"/>
+                </Key>
+                <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="SoldToParty" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CompanycodeText" Type="Edm.String" Nullable="false" MaxLength="25"/>
+                <Property Name="PlantText" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="BusinessPartnerName" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="ProfitCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="ProfitCenterLongName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Zamount1" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="Zamount2" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DisplayCurrency" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
+            </EntityType>
+            <EntityType Name="MFGORDER1Type">
+                <Key>
+                    <PropertyRef Name="YearMonth"/>
+                    <PropertyRef Name="Companycode"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Product"/>
+                    <PropertyRef Name="BusinessPartner"/>
+                    <PropertyRef Name="ProfitCenter"/>
+                    <PropertyRef Name="CostCenter"/>
+                    <PropertyRef Name="ActivityType"/>
+                </Key>
+                <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="BusinessPartner" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="ProfitCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CostCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="ActivityType" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="CompanycodeText" Type="Edm.String" Nullable="false" MaxLength="25"/>
+                <Property Name="PlantText" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="MfgOrderConfirmedYieldQty" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="BusinessPartnerName" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="ProfitCenterLongName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="CostCenterDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="CostCtrActivityTypeName" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="ProductionSupervisor" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="PlanQtyInCostSourceUnit" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="ActualQtyInCostSourceUnit" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="UnitOfMeasure" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="PlanCostRate" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="ActualCostRate" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="TotalActualCost" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="ActualCost1PC" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="orderid" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="producedproduct" Type="Edm.String" Nullable="false" MaxLength="40"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="MFGORDER1" EntityType="com.sap.gateway.srvd.zui_mfgorder.v0001.MFGORDER1Type"/>
+                <EntitySet Name="MFGORDER2" EntityType="com.sap.gateway.srvd.zui_mfgorder.v0001.MFGORDER2Type"/>
+                <EntitySet Name="MFGORDER3" EntityType="com.sap.gateway.srvd.zui_mfgorder.v0001.MFGORDER3Type"/>
+            </EntityContainer>
+            <Annotations Target="SAP__self.MFGORDER2Type/YearMonth">
+                <Annotation Term="SAP__common.Label" String="TEST年月"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/Companycode">
+                <Annotation Term="SAP__common.Label" String="会社コード"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/Plant">
+                <Annotation Term="SAP__common.Label" String="プラント"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/Product">
+                <Annotation Term="SAP__common.Label" String="製品"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/SoldToParty">
+                <Annotation Term="SAP__common.Label" String="得意先"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/orderid">
+                <Annotation Term="SAP__common.Label" String="OrderID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/orderitem">
+                <Annotation Term="SAP__common.Label" String="Orderitem"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/CompanycodeText">
+                <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/PlantText">
+                <Annotation Term="SAP__common.Label" String="プラントテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/ProductDescription">
+                <Annotation Term="SAP__common.Label" String="製品テキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/BusinessPartnerName">
+                <Annotation Term="SAP__common.Label" String="得意先テキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/SalesPerformanceActualQuantity">
+                <Annotation Term="SAP__common.Label" String="実績数量"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/SalesPerfActualQuantityUnit">
+                <Annotation Term="SAP__common.Label" String="販売単位"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/SalesPerfActlAmtInDspCurrency">
+                <Annotation Term="SAP__common.Label" String="実績値"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/DisplayCurrency">
+                <Annotation Term="SAP__common.Label" String="照会通貨"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/calendaryear">
+                <Annotation Term="SAP__common.Label" String="会計年度"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Calendar Year"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type/calendarMonth">
+                <Annotation Term="SAP__common.Label" String="会計期間"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Calendar Month"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER2Type">
+                <Annotation Term="SAP__common.Label" String="Query CDS2"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Items"/>
+                        <PropertyValue Property="TypeNamePlural" String="Items"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="年月"/>
+                            <PropertyValue Property="Value" Path="YearMonth"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="会社コードテキスト"/>
+                            <PropertyValue Property="Value" Path="CompanycodeText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード"/>
+                            <PropertyValue Property="Value" Path="Companycode"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="プラント"/>
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="プラントテキスト"/>
+                            <PropertyValue Property="Value" Path="PlantText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="製品"/>
+                            <PropertyValue Property="Value" Path="Product"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="製品テキスト"/>
+                            <PropertyValue Property="Value" Path="ProductDescription"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="得意先"/>
+                            <PropertyValue Property="Value" Path="SoldToParty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="得意先テキスト"/>
+                            <PropertyValue Property="Value" Path="BusinessPartnerName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="実績数量"/>
+                            <PropertyValue Property="Value" Path="SalesPerformanceActualQuantity"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="販売単位"/>
+                            <PropertyValue Property="Value" Path="SalesPerfActualQuantityUnit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="実績値"/>
+                            <PropertyValue Property="Value" Path="SalesPerfActlAmtInDspCurrency"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="照会通貨"/>
+                            <PropertyValue Property="Value" Path="DisplayCurrency"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Companycode</PropertyPath>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>calendaryear</PropertyPath>
+                        <PropertyPath>calendarMonth</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/MFGORDER2">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="calendaryear"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="calendarMonth"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>calendaryear</PropertyPath>
+                                <PropertyPath>calendarMonth</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/YearMonth">
+                <Annotation Term="SAP__common.Label" String="年月"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/Companycode">
+                <Annotation Term="SAP__common.Label" String="会社コード"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/Plant">
+                <Annotation Term="SAP__common.Label" String="プラント"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/Product">
+                <Annotation Term="SAP__common.Label" String="製品"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/SoldToParty">
+                <Annotation Term="SAP__common.Label" String="得意先"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/CompanycodeText">
+                <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/PlantText">
+                <Annotation Term="SAP__common.Label" String="プラントテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/ProductDescription">
+                <Annotation Term="SAP__common.Label" String="製品テキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/BusinessPartnerName">
+                <Annotation Term="SAP__common.Label" String="得意先テキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/ProfitCenter">
+                <Annotation Term="SAP__common.Label" String="利益センタ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/ProfitCenterLongName">
+                <Annotation Term="SAP__common.Label" String="利益センタテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/Zamount1">
+                <Annotation Term="SAP__common.Label" String="主材費"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/Zamount2">
+                <Annotation Term="SAP__common.Label" String="副資材費"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/DisplayCurrency">
+                <Annotation Term="SAP__common.Label" String="照会通貨"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/calendaryear">
+                <Annotation Term="SAP__common.Label" String="会計年度"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Calendar Year"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/calendarMonth">
+                <Annotation Term="SAP__common.Label" String="会計期間"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Calendar Month"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type">
+                <Annotation Term="SAP__common.Label" String="Query CDS3"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Items"/>
+                        <PropertyValue Property="TypeNamePlural" String="Items"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="年月"/>
+                            <PropertyValue Property="Value" Path="YearMonth"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード"/>
+                            <PropertyValue Property="Value" Path="Companycode"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="会社コードテキスト"/>
+                            <PropertyValue Property="Value" Path="CompanycodeText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="プラント"/>
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="プラントテキスト"/>
+                            <PropertyValue Property="Value" Path="PlantText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="製品"/>
+                            <PropertyValue Property="Value" Path="Product"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="製品テキスト"/>
+                            <PropertyValue Property="Value" Path="ProductDescription"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="利益センタ"/>
+                            <PropertyValue Property="Value" Path="ProfitCenter"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="利益センタテキスト"/>
+                            <PropertyValue Property="Value" Path="ProfitCenterLongName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="得意先"/>
+                            <PropertyValue Property="Value" Path="SoldToParty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="得意先テキスト"/>
+                            <PropertyValue Property="Value" Path="BusinessPartnerName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="主材費"/>
+                            <PropertyValue Property="Value" Path="Zamount1"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="副資材費"/>
+                            <PropertyValue Property="Value" Path="Zamount2"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="照会通貨"/>
+                            <PropertyValue Property="Value" Path="DisplayCurrency"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Companycode</PropertyPath>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>calendaryear</PropertyPath>
+                        <PropertyPath>calendarMonth</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/MFGORDER3">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="calendaryear"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="calendarMonth"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>calendaryear</PropertyPath>
+                                <PropertyPath>calendarMonth</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/YearMonth">
+                <Annotation Term="SAP__common.Label" String="年月"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Companycode">
+                <Annotation Term="SAP__common.Label" String="会社コード"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_mfgorder-0001';va='com.sap.gateway.srvd.zui_mfgorder.v0001.et-zc_mfgorder_001.companycode'/$metadata</String>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Plant">
+                <Annotation Term="SAP__common.Label" String="プラント"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plantstdvh/0001;ps='srvd-zui_mfgorder-0001';va='com.sap.gateway.srvd.zui_mfgorder.v0001.et-zc_mfgorder_001.plant'/$metadata</String>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Product">
+                <Annotation Term="SAP__common.Label" String="製品"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/BusinessPartner">
+                <Annotation Term="SAP__common.Label" String="得意先"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/ProfitCenter">
+                <Annotation Term="SAP__common.Label" String="利益センタ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/CostCenter">
+                <Annotation Term="SAP__common.Label" String="原価センタ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/ActivityType">
+                <Annotation Term="SAP__common.Label" String="活動タイプ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/CompanycodeText">
+                <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/PlantText">
+                <Annotation Term="SAP__common.Label" String="プラントテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/ProductDescription">
+                <Annotation Term="SAP__common.Label" String="製品テキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/MfgOrderConfirmedYieldQty">
+                <Annotation Term="SAP__common.Label" String="入庫数量"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/BusinessPartnerName">
+                <Annotation Term="SAP__common.Label" String="得意先テキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/ProfitCenterLongName">
+                <Annotation Term="SAP__common.Label" String="利益センタテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/CostCenterDescription">
+                <Annotation Term="SAP__common.Label" String="原価センタテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/CostCtrActivityTypeName">
+                <Annotation Term="SAP__common.Label" String="活動タイプテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Department">
+                <Annotation Term="SAP__common.Label" String="部署（工程）"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/ProductionSupervisor">
+                <Annotation Term="SAP__common.Label" String="製造責任者（工程情報）"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/PlanQtyInCostSourceUnit">
+                <Annotation Term="SAP__common.Label" String="計画工数"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/ActualQtyInCostSourceUnit">
+                <Annotation Term="SAP__common.Label" String="実績工数"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/UnitOfMeasure">
+                <Annotation Term="SAP__common.Label" String="工数単位"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/PlanCostRate">
+                <Annotation Term="SAP__common.Label" String="計画賃率"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/ActualCostRate">
+                <Annotation Term="SAP__common.Label" String="実際賃率"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/TotalActualCost">
+                <Annotation Term="SAP__common.Label" String="加工費実績合計"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/ActualCost1PC">
+                <Annotation Term="SAP__common.Label" String="加工費実績（1単位）"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/calendaryear">
+                <Annotation Term="SAP__common.Label" String="会計年度"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Calendar Year"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/calendarMonth">
+                <Annotation Term="SAP__common.Label" String="会計期間"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Calendar Month"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/orderid">
+                <Annotation Term="SAP__common.Label" String="OrderID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/producedproduct">
+                <Annotation Term="SAP__common.Label" String="構成品目"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type">
+                <Annotation Term="SAP__common.Label" String="Query CDS"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Items"/>
+                        <PropertyValue Property="TypeNamePlural" String="Items"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="年月"/>
+                            <PropertyValue Property="Value" Path="YearMonth"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="会社コードテキスト"/>
+                            <PropertyValue Property="Value" Path="CompanycodeText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード"/>
+                            <PropertyValue Property="Value" Path="Companycode"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="プラント"/>
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="プラントテキスト"/>
+                            <PropertyValue Property="Value" Path="PlantText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="製品"/>
+                            <PropertyValue Property="Value" Path="Product"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="製品テキスト"/>
+                            <PropertyValue Property="Value" Path="ProductDescription"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="入庫数量"/>
+                            <PropertyValue Property="Value" Path="MfgOrderConfirmedYieldQty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="得意先"/>
+                            <PropertyValue Property="Value" Path="BusinessPartner"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="得意先テキスト"/>
+                            <PropertyValue Property="Value" Path="BusinessPartnerName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="利益センタ"/>
+                            <PropertyValue Property="Value" Path="ProfitCenter"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="利益センタテキスト"/>
+                            <PropertyValue Property="Value" Path="ProfitCenterLongName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="原価センタ"/>
+                            <PropertyValue Property="Value" Path="CostCenter"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="原価センタテキスト"/>
+                            <PropertyValue Property="Value" Path="CostCenterDescription"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="活動タイプ"/>
+                            <PropertyValue Property="Value" Path="ActivityType"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="活動タイプテキスト"/>
+                            <PropertyValue Property="Value" Path="CostCtrActivityTypeName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="部署（工程）"/>
+                            <PropertyValue Property="Value" Path="Department"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="製造責任者（工程情報）"/>
+                            <PropertyValue Property="Value" Path="ProductionSupervisor"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="計画工数"/>
+                            <PropertyValue Property="Value" Path="PlanQtyInCostSourceUnit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="実績工数"/>
+                            <PropertyValue Property="Value" Path="ActualQtyInCostSourceUnit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="工数単位"/>
+                            <PropertyValue Property="Value" Path="UnitOfMeasure"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="計画賃率"/>
+                            <PropertyValue Property="Value" Path="PlanCostRate"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="実際賃率"/>
+                            <PropertyValue Property="Value" Path="ActualCostRate"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="加工費実績合計"/>
+                            <PropertyValue Property="Value" Path="TotalActualCost"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="加工費実績（1単位）"/>
+                            <PropertyValue Property="Value" Path="ActualCost1PC"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Companycode</PropertyPath>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>calendaryear</PropertyPath>
+                        <PropertyPath>calendarMonth</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/MFGORDER1">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="calendaryear"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="calendarMonth"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>calendaryear</PropertyPath>
+                                <PropertyPath>calendarMonth</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,217 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "fico.zmfgorder",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{key3}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.14.2",
+      "toolsId": "b4a9f51d-8884-4eec-afe3-201daee5198f"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zui_mfgorder/srvd/sap/zui_mfgorder/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zmfgorder-display": {
+          "semanticObject": "zmfgorder",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.17",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "fico.zmfgorder.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "MFGORDER1List",
+          "target": "MFGORDER1List"
+        },
+        {
+          "pattern": "MFGORDER1({key}):?query:",
+          "name": "MFGORDER1ObjectPage",
+          "target": "MFGORDER1ObjectPage"
+        }
+      ],
+      "targets": {
+        "MFGORDER1List": {
+          "type": "Component",
+          "id": "MFGORDER1List",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/MFGORDER1",
+              "variantManagement": "Page",
+              "navigation": {
+                "MFGORDER1": {
+                  "detail": {
+                    "route": "MFGORDER1ObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable",
+                    "quickVariantSelection": {
+                      "showCounts": true
+                    }
+                  }
+                },
+                "/MFGORDER1/@com.sap.vocabularies.UI.v1.LineItem#tableView44": {
+                  "tableSettings": {
+                    "type": "GridTable",
+                    "quickVariantSelection": {
+                      "showCounts": false
+                    }
+                  }
+                },
+                "/MFGORDER2/@com.sap.vocabularies.UI.v1.LineItem#tableView": {
+                  "tableSettings": {
+                    "type": "GridTable",
+                    "quickVariantSelection": {
+                      "showCounts": false
+                    }
+                  }
+                },
+                "/MFGORDER3/@com.sap.vocabularies.UI.v1.LineItem#tableView": {
+                  "tableSettings": {
+                    "type": "GridTable",
+                    "quickVariantSelection": {
+                      "showCounts": false
+                    }
+                  }
+                }
+              },
+              "views": {
+                "paths": [
+                  {
+                    "key": "tableView",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView44",
+                    "entitySet": "MFGORDER1"
+                  },
+                  {
+                    "key": "tableView1",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView",
+                    "entitySet": "MFGORDER2"
+                  },
+                  {
+                    "key": "tableView12",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView",
+                    "entitySet": "MFGORDER3"
+                  }
+                ],
+                "showCounts": false
+              },
+              "initialLoad": "Enabled"
+            }
+          }
+        },
+        "MFGORDER1ObjectPage": {
+          "type": "Component",
+          "id": "MFGORDER1ObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/MFGORDER1"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "fico-s4apps01"
+  }
+}
