@@ -18,7 +18,7 @@ sap.ui.define([
             // Create local Model
             createLocalModel: function () {
                 var oModel = new JSONModel({
-                    NoCompletelyDelivered: false
+                    ExcludeDeliveredPO: false
                 });
                 return oModel;
             }

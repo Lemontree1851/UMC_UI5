@@ -18,13 +18,9 @@ sap.ui.define([
             var aFilters = oEvent.getParameter("bindingParams").filters;
             var oNewFilter,
                 aNewFilters = [];
-            var bNoCompletelyDelivered = this.getModel("local").getProperty("/NoCompletelyDelivered");
-            if (bNoCompletelyDelivered) {
-                aNewFilters.push(new Filter("NoCompletelyDelivered", FilterOperator.EQ, "X"));
-            } else {
-                aNewFilters.push(new Filter("NoCompletelyDelivered", FilterOperator.EQ, ""));
-            }
-            if (aNewFilters.length) {
+            var bExcludeDeliveredPO = this.getModel("local").getProperty("/ExcludeDeliveredPO");
+            if (bExcludeDeliveredPO) {
+                aNewFilters.push(new Filter("IsCompletelyDelivered", FilterOperator.EQ, false));
                 oNewFilter = new Filter({
                     filters: aNewFilters,
                     and: false

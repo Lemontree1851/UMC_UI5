@@ -73,163 +73,107 @@
                 <Annotation Term="UI.HiddenFilter"/>
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType">
-                <Annotation Term="UI.LineItem">
-                    <Collection>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PurchaseOrder"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                            <Annotation Term="HTML5.CssDefaults">
-                                <Record>
-                                    <PropertyValue Property="width" String="10rem"/>
-                                </Record>
-                            </Annotation>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PurchasingGroup"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                            <Annotation Term="HTML5.CssDefaults">
-                                <Record>
-                                    <PropertyValue Property="width" String="10rem"/>
-                                </Record>
-                            </Annotation>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PurchasingGroupName"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Supplier"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="OrganizationBPName1"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="DocumentCurrency"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Material"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PurchaseOrderItemText"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="SupplierMaterialNumber"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="OrderQuantity"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ScheduleLineDeliveryDate"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NetPriceQuantity"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Plant"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="StorageLocation"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="StorageLocationName"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PricingDateControl"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PricingDateControlText"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="CurrentPrice"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PurgDocPriceDate"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PricingDateControl2"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PricingDateControl2Text"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Currency"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ConditionValidityStartDate"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ConditionValidityEndDate"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ConditionQuantity"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="NewPrice"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="DeliveryDate"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PostingDate"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="YY1_CUSTOMERMATERIAL_PRD"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Difference"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PurchaseOrderStr"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="PriceDate"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="UI.SelectionFields">
-                    <Collection>
-                        <PropertyPath>PurchaseOrder</PropertyPath>
-                        <PropertyPath>Supplier</PropertyPath>
-                        <PropertyPath>PurchasingGroup</PropertyPath>
-                        <PropertyPath>Material</PropertyPath>
-                        <PropertyPath>Plant</PropertyPath>
-                        <PropertyPath>PurgDocPriceDate</PropertyPath>
-                    </Collection>
-                </Annotation>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderItem">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/CompanyCode">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchasingOrganization">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/DocumentCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderItemCategory">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderItemText">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/SupplierMaterialNumber">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/OrderQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderQuantityUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/NetPriceAmount">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/NetPriceQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/StorageLocation">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchasingInfoRecord">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PricingDateControl">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/CurrentPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PricingDateControl2">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/Currency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderStr">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PriceDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/ScheduleLineDeliveryDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchasingGroupName">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/OrganizationBPName1">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/StorageLocationName">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/YY1_CUSTOMERMATERIAL_PRD">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PricingDateControlText">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PricingDateControl2Text">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/DeliveryDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PostingDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/ConditionValidityStartDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/ConditionValidityEndDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/ConditionQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/NewPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/Difference">
+                <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="_Entities"/>
         </Schema>

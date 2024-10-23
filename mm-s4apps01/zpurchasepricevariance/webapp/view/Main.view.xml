@@ -25,9 +25,9 @@
                                 <smartFilterBar:ControlConfiguration index='40' key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='60' key="PurgDocPriceDate" visibleInAdvancedArea="true" label="{i18n>PurgDocPriceDate}"/>
-                                <smartFilterBar:ControlConfiguration index='70' key="NoCompletelyDelivered" label="{i18n>NoCompletelyDelivered}" visibleInAdvancedArea="true">
+                                <smartFilterBar:ControlConfiguration index='70' key="IsCompletelyDelivered" label="{i18n>ExcludeDeliveredPO}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
-                                        <CheckBox selected="{local>/NoCompletelyDelivered}"/>
+                                        <CheckBox selected="{local>/ExcludeDeliveredPO}"/>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
                             </smartFilterBar:controlConfiguration>

@@ -302,7 +302,7 @@
                 <Property Name="PurchaseOrderDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Purchase Order Date"/>
                 <Property Name="PurchaseOrderItemCategory" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Item Category" sap:quickinfo="Item category in purchasing document"/>
                 <Property Name="Material" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:value-list="standard"/>
-                <Property Name="PurchaseOrderItemText" Type="Edm.String" MaxLength="40" sap:label="Material Text" sap:quickinfo="Short Text"/>
+                <Property Name="PurchaseOrderItemText" Type="Edm.String" MaxLength="40" sap:label="Short Text"/>
                 <Property Name="SupplierMaterialNumber" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Supplier Mat. No." sap:quickinfo="Material Number Used by Supplier"/>
                 <Property Name="OrderQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="PurchaseOrderQuantityUnit" sap:label="Order Quantity" sap:quickinfo="Purchase Order Quantity"/>
                 <Property Name="PurchaseOrderQuantityUnit" Type="Edm.String" MaxLength="3" sap:label="Order Unit" sap:quickinfo="Purchase Order Unit of Measure" sap:semantics="unit-of-measure"/>
@@ -311,30 +311,29 @@
                 <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:value-list="standard"/>
                 <Property Name="StorageLocation" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location"/>
                 <Property Name="PurchasingInfoRecord" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Info Rec." sap:quickinfo="Purchasing Info Record Number"/>
-                <Property Name="PricingDateControl" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="PO Pricing Date Control" sap:quickinfo="Price Determination (Pricing) Date Control"/>
-                <Property Name="PurgDocPriceDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:label="PO Price Date" sap:quickinfo="Date of Price Determination"/>
+                <Property Name="PricingDateControl" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Pricing Date Control" sap:quickinfo="Price Determination (Pricing) Date Control"/>
+                <Property Name="PurgDocPriceDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:label="Price Date" sap:quickinfo="Date of Price Determination"/>
                 <Property Name="IsCompletelyDelivered" Type="Edm.Boolean" sap:label="Delivery Completed" sap:quickinfo="&quot;Delivery Completed&quot; Indicator"/>
-                <Property Name="NoCompletelyDelivered" Type="Edm.String" MaxLength="1"/>
-                <Property Name="CurrentPrice" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true" sap:label="Current Price"/>
-                <Property Name="PricingDateControl2" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Master Pricing Date Control" sap:quickinfo="Price Determination (Pricing) Date Control"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="New PO Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="PurchaseOrderStr" Type="Edm.String" MaxLength="15" sap:label="PO Item"/>
-                <Property Name="PriceDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Price Date" sap:quickinfo="Purchase Order Date"/>
+                <Property Name="CurrentPrice" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true"/>
+                <Property Name="PricingDateControl2" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Pricing Date Control" sap:quickinfo="Price Determination (Pricing) Date Control"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="PurchaseOrderStr" Type="Edm.String" MaxLength="15"/>
+                <Property Name="PriceDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Purchase Order Date"/>
                 <Property Name="ScheduleLineDeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Delivery Date" sap:quickinfo="Item Delivery Date"/>
                 <Property Name="PurchasingGroupName" Type="Edm.String" MaxLength="18" sap:label="Purchasing Grp. Name" sap:quickinfo="Purchasing Group Name"/>
                 <Property Name="OrganizationBPName1" Type="Edm.String" MaxLength="40" sap:label="Organization Name 1" sap:quickinfo="Name 1 of organization"/>
                 <Property Name="StorageLocationName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name"/>
-                <Property Name="YY1_CUSTOMERMATERIAL_PRD" Type="Edm.String" MaxLength="40" sap:label="Customer Mat. No." sap:quickinfo="得意先品目コード"/>
-                <Property Name="PricingDateControlText" Type="Edm.String" MaxLength="60" sap:label="PO Pricing Date Control Text" sap:quickinfo="Short Text for Fixed Values"/>
-                <Property Name="PricingDateControl2Text" Type="Edm.String" MaxLength="60" sap:label="Master Pricing Date Control Text" sap:quickinfo="Short Text for Fixed Values"/>
-                <Property Name="DeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Reply Deadline" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Posting Date" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ConditionValidityStartDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Validity Start Date" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ConditionValidityEndDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Validity End Date" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ConditionQuantity" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Info Record Price Unit" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YY1_CUSTOMERMATERIAL_PRD" Type="Edm.String" MaxLength="40" sap:label="得意先品目コード"/>
+                <Property Name="PricingDateControlText" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+                <Property Name="PricingDateControl2Text" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+                <Property Name="DeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ConditionValidityStartDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ConditionValidityEndDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ConditionQuantity" Type="Edm.Decimal" Precision="5" Scale="0" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ConditionQuantityUnit" Type="Edm.String" MaxLength="3" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
-                <Property Name="NewPrice" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true" sap:label="New PO Price" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Difference" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true" sap:label="Price Difference" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NewPrice" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Difference" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
