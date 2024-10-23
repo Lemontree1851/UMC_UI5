@@ -1,0 +1,141 @@
+<mvc:View controllerName="sd.zsalesdocumentlist.controller.Main" displayBlock="true" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core" 
+    xmlns="sap.m"
+	xmlns:f="sap.f" 
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+	xmlns:sv="sap.ui.comp.smartvariants" 
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SalesDocumentListSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content> 
+                    <CheckBox id = 'idCB1' text="{i18n>Indicator1}" width="11rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB2' text="{i18n>Indicator2}" width="11rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB3' text="{i18n>Indicator3}" width="11rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB4' text="{i18n>Indicator4}" width="11rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB5' text="{i18n>Indicator5}" width="11rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB6' text="{i18n>Indicator6}" width="11rem" select="onSelect"/> 
+                </f:content>  
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="SalesDocumentList" useToolbar="false" smartVariant="__SVM01" persistencyKey="SalesDocumentListSFB" initialized="onsMrilterBarInitialized" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="SalesOrganization" filterType="multiple" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="SalesDocument" visibleInAdvancedArea="true" label="{i18n>SalesDocument}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="SoldToParty" visibleInAdvancedArea="true" label="{i18n>SoldToParty}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="YY1_SalesDocType_SDH" visibleInAdvancedArea="true" label="{i18n>YY1_SalesDocType_SDH}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="PurchaseOrderByCustomer" visibleInAdvancedArea="true" label="{i18n>PurchaseOrderByCustomer}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="Product" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="Plant" filterType="multiple" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="RequestedDeliveryDate" visibleInAdvancedArea="true" label="{i18n>RequestedDeliveryDate}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="SalesDocumentDate" visibleInAdvancedArea="true" label="{i18n>SalesDocumentDate}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="ConfirmedDeliveryDate" visibleInAdvancedArea="true" label="{i18n>ConfirmedDeliveryDate}"/>
+
+                                <!-- visible -->
+                                <!-- <smartFilterBar:ControlConfiguration index='999' key="Indicator1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Indicator2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Indicator3" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Indicator4" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Indicator5" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Indicator5" visible="false"/> -->
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ScheduleLine" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentTypeName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocApprovalStatus" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocApprovalStatusDesc" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IncotermsClassification" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IncotermsLocation1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SoldToPartyName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SoldToPartySearchTerm1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SoldToPartySearchTerm2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillToParty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillToPartyName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillToPartySearchTerm1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillToPartySearchTerm2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShipToParty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShipToPartyName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShipToPartySearchTerm1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShipToPartySearchTerm2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItemText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialByCustomer" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderByCustomerItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UnderlyingPurchaseOrderItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OrderQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OrderQuantityUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_CustomerLotNo_SDI" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderByShipToParty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProfitCenter" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProfitCenterLongName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CustomerPaymentTerms" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PaymentTermsName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShippingType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShippingTypeName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsConfirmedDelivSchedLine" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ScheduleLineCategory" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ScheduleLineCategoryName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DeliveryDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TransactionCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PriceDetnExchangeRate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ExchangeRateDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValuePPR0" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionAmountPPR0" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValueTTX1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionAmountTTX1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValueZPFC" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionAmountZPFC" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValueZPST" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionAmountZPST" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValueZPIN" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionAmountZPIN" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValueZPSB" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionAmountZPSB" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValueZPSS" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionAmountZPSS" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValueZPCM" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionAmountZPCM" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValueZPGP" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionAmountZPGP" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_ItemRemarks_1_SDI" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DeliveredQtyInOrderQtyUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OpenReqdDelivQtyInOrdQtyUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComplDeliveredQtyInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NoComplDeliveredQtyInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="InternalTansferQtyInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NoInternalTansferQtyInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="EnternalTansferQtyInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NoEnternalTansferQtyInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NoBillingQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreationDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreationDateItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LastChangeDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreatedByUser" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentRjcnReason" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentRjcnReasonName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_ManagementNo_SDI" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConditionCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantityUnit" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="sd.zsalesdocumentlist.fragments.SalesDocumentList" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

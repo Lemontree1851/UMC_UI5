@@ -1,0 +1,704 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable entitySet="SalesDocumentList" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
+        showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
+        persistencyKey="SalesDocumentListST" header="{i18n>Results}" enableAutoBinding="false" 
+        placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="">
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer/>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+       <table:Table id="idTable" selectionMode="None" rowMode="Auto">
+            <table:columns>
+                <table:Column width="5rem" label="{i18n>SalesOrganization}" sortProperty="SalesOrganization" filterProperty="SalesOrganization">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrganization", "leadingProperty":"SalesOrganization"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesOrganization}" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="6rem" label="{i18n>SalesDocument}" sortProperty="SalesDocument" filterProperty="SalesDocument">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocument", "leadingProperty":"SalesDocument"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesDocument}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>SalesDocumentType}" sortProperty="SalesDocumentType" filterProperty="SalesDocumentType">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentType", "leadingProperty":"SalesDocumentType"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesDocumentType}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="13rem" label="{i18n>SalesDocumentTypeName}" sortProperty="SalesDocumentTypeName" filterProperty="SalesDocumentTypeName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentTypeName", "leadingProperty":"SalesDocumentTypeName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesDocumentTypeName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>SalesDocApprovalStatus}" sortProperty="SalesDocApprovalStatus" filterProperty="SalesDocApprovalStatus">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocApprovalStatus", "leadingProperty":"SalesDocApprovalStatus"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesDocApprovalStatus}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SalesDocApprovalStatusDesc}" sortProperty="SalesDocApprovalStatusDesc" filterProperty="SalesDocApprovalStatusDesc">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocApprovalStatusDesc", "leadingProperty":"SalesDocApprovalStatusDesc"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesDocApprovalStatusDesc}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>PurchaseOrderByCustomer}" sortProperty="PurchaseOrderByCustomer" filterProperty="PurchaseOrderByCustomer">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderByCustomer", "leadingProperty":"PurchaseOrderByCustomer"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchaseOrderByCustomer}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>IncotermsClassification}" sortProperty="IncotermsClassification" filterProperty="IncotermsClassification">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IncotermsClassification", "leadingProperty":"IncotermsClassification"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IncotermsClassification}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>IncotermsLocation1}" sortProperty="IncotermsLocation1" filterProperty="IncotermsLocation1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IncotermsLocation1", "leadingProperty":"IncotermsLocation1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IncotermsLocation1}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SoldToParty}" sortProperty="SoldToParty" filterProperty="SoldToParty">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SoldToParty", "leadingProperty":"SoldToParty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SoldToParty}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SoldToPartyName}" sortProperty="SoldToPartyName" filterProperty="SoldToPartyName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SoldToPartyName", "leadingProperty":"SoldToPartyName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SoldToPartyName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SoldToPartySearchTerm1}" sortProperty="SoldToPartySearchTerm1" filterProperty="SoldToPartySearchTerm1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SoldToPartySearchTerm1", "leadingProperty":"SoldToPartySearchTerm1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SoldToPartySearchTerm1}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SoldToPartySearchTerm2}" sortProperty="SoldToPartySearchTerm2" filterProperty="SoldToPartySearchTerm2">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SoldToPartySearchTerm2", "leadingProperty":"SoldToPartySearchTerm2"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SoldToPartySearchTerm2}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BillToParty}" sortProperty="BillToParty" filterProperty="BillToParty">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillToParty", "leadingProperty":"BillToParty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillToParty}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BillToPartyName}" sortProperty="BillToPartyName" filterProperty="BillToPartyName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillToPartyName", "leadingProperty":"BillToPartyName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillToPartyName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BillToPartySearchTerm1}" sortProperty="BillToPartySearchTerm1" filterProperty="BillToPartySearchTerm1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillToPartySearchTerm1", "leadingProperty":"BillToPartySearchTerm1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillToPartySearchTerm1}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>BillToPartySearchTerm2}" sortProperty="BillToPartySearchTerm2" filterProperty="BillToPartySearchTerm2">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillToPartySearchTerm2", "leadingProperty":"BillToPartySearchTerm2"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillToPartySearchTerm2}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ShipToParty}" sortProperty="ShipToParty" filterProperty="ShipToParty">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShipToParty", "leadingProperty":"ShipToParty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShipToParty}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ShipToPartyName}" sortProperty="ShipToPartyName" filterProperty="ShipToPartyName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShipToPartyName", "leadingProperty":"ShipToPartyName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShipToPartyName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ShipToPartySearchTerm1}" sortProperty="ShipToPartySearchTerm1" filterProperty="ShipToPartySearchTerm1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShipToPartySearchTerm1", "leadingProperty":"ShipToPartySearchTerm1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShipToPartySearchTerm1}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ShipToPartySearchTerm2}" sortProperty="ShipToPartySearchTerm2" filterProperty="ShipToPartySearchTerm2">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShipToPartySearchTerm2", "leadingProperty":"ShipToPartySearchTerm2"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShipToPartySearchTerm2}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SalesDocumentItem}" sortProperty="SalesDocumentItem" filterProperty="SalesDocumentItem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentItem", "leadingProperty":"SalesDocumentItem"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesDocumentItem}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>Product}" sortProperty="Product" filterProperty="Product">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Product}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SalesDocumentItemText}" sortProperty="SalesDocumentItemText" filterProperty="SalesDocumentItemText">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentItemText", "leadingProperty":"SalesDocumentItemText"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesDocumentItemText}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>MaterialByCustomer}" sortProperty="MaterialByCustomer" filterProperty="MaterialByCustomer">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MaterialByCustomer", "leadingProperty":"MaterialByCustomer"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{MaterialByCustomer}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>PurchaseOrderByCustomerItem}" sortProperty="PurchaseOrderByCustomerItem" filterProperty="PurchaseOrderByCustomerItem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderByCustomerItem", "leadingProperty":"PurchaseOrderByCustomerItem"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchaseOrderByCustomerItem}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>UnderlyingPurchaseOrderItem}" sortProperty="UnderlyingPurchaseOrderItem" filterProperty="UnderlyingPurchaseOrderItem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"UnderlyingPurchaseOrderItem", "leadingProperty":"UnderlyingPurchaseOrderItem"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{UnderlyingPurchaseOrderItem}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>OrderQuantity}" sortProperty="OrderQuantity" filterProperty="OrderQuantity">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OrderQuantity", "leadingProperty":"OrderQuantity"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{OrderQuantity} {OrderQuantityUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>OrderQuantityUnit}" sortProperty="OrderQuantityUnit" filterProperty="OrderQuantityUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OrderQuantityUnit", "leadingProperty":"OrderQuantityUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{OrderQuantityUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BaseUnit}" sortProperty="BaseUnit" filterProperty="BaseUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit", "leadingProperty":"BaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Plant}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>YY1_CustomerLotNo_SDI}" sortProperty="YY1_CustomerLotNo_SDI" filterProperty="YY1_CustomerLotNo_SDI">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_CustomerLotNo_SDI", "leadingProperty":"YY1_CustomerLotNo_SDI"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_CustomerLotNo_SDI}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>PurchaseOrderByShipToParty}" sortProperty="PurchaseOrderByShipToParty" filterProperty="PurchaseOrderByShipToParty">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderByShipToParty", "leadingProperty":"PurchaseOrderByShipToParty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchaseOrderByShipToParty}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ProfitCenter}" sortProperty="ProfitCenter" filterProperty="ProfitCenter">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProfitCenter}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ProfitCenterLongName}" sortProperty="ProfitCenterLongName" filterProperty="ProfitCenterLongName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenterLongName", "leadingProperty":"ProfitCenterLongName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProfitCenterLongName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>CustomerPaymentTerms}" sortProperty="CustomerPaymentTerms" filterProperty="CustomerPaymentTerms">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CustomerPaymentTerms", "leadingProperty":"CustomerPaymentTerms"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CustomerPaymentTerms}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>PaymentTermsName}" sortProperty="PaymentTermsName" filterProperty="PaymentTermsName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PaymentTermsName", "leadingProperty":"PaymentTermsName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PaymentTermsName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ShippingType}" sortProperty="ShippingType" filterProperty="ShippingType">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShippingType", "leadingProperty":"ShippingType"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShippingType}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ShippingTypeName}" sortProperty="ShippingTypeName" filterProperty="ShippingTypeName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShippingTypeName", "leadingProperty":"ShippingTypeName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShippingTypeName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ScheduleLine}" sortProperty="ScheduleLine" filterProperty="ScheduleLine">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ScheduleLine", "leadingProperty":"ScheduleLine"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ScheduleLine}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>IsConfirmedDelivSchedLine}" sortProperty="IsConfirmedDelivSchedLine" filterProperty="IsConfirmedDelivSchedLine">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IsConfirmedDelivSchedLine", "leadingProperty":"IsConfirmedDelivSchedLine"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IsConfirmedDelivSchedLine}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ScheduleLineCategory}" sortProperty="ScheduleLineCategory" filterProperty="ScheduleLineCategory">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ScheduleLineCategory", "leadingProperty":"ScheduleLineCategory"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ScheduleLineCategory}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ScheduleLineCategoryName}" sortProperty="ScheduleLineCategoryName" filterProperty="ScheduleLineCategoryName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ScheduleLineCategoryName", "leadingProperty":"ScheduleLineCategoryName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ScheduleLineCategoryName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>DeliveryDate}" sortProperty="DeliveryDate" filterProperty="DeliveryDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DeliveryDate", "leadingProperty":"DeliveryDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{DeliveryDate}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConfirmedDeliveryDate}" sortProperty="ConfirmedDeliveryDate" filterProperty="ConfirmedDeliveryDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConfirmedDeliveryDate", "leadingProperty":"ConfirmedDeliveryDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConfirmedDeliveryDate}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>TransactionCurrency}" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency", "leadingProperty":"TransactionCurrency"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>PriceDetnExchangeRate}" sortProperty="PriceDetnExchangeRate" filterProperty="PriceDetnExchangeRate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PriceDetnExchangeRate", "leadingProperty":"PriceDetnExchangeRate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PriceDetnExchangeRate}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ExchangeRateDate}" sortProperty="ExchangeRateDate" filterProperty="ExchangeRateDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ExchangeRateDate", "leadingProperty":"ExchangeRateDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ExchangeRateDate}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionRateValuePPR0}" sortProperty="ConditionRateValuePPR0" filterProperty="ConditionRateValuePPR0">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValuePPR0", "leadingProperty":"ConditionRateValuePPR0"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionRateValuePPR0} {ConditionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionAmountPPR0}" sortProperty="ConditionAmountPPR0" filterProperty="ConditionAmountPPR0">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountPPR0", "leadingProperty":"ConditionAmountPPR0"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionAmountPPR0} {TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionRateValueTTX1}" sortProperty="ConditionRateValueTTX1" filterProperty="ConditionRateValueTTX1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueTTX1", "leadingProperty":"ConditionRateValueTTX1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionRateValueTTX1} {ConditionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionAmountTTX1}" sortProperty="ConditionAmountTTX1" filterProperty="ConditionAmountTTX1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountTTX1", "leadingProperty":"ConditionAmountTTX1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionAmountTTX1} {TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ConditionRateValueZPFC}" sortProperty="ConditionRateValueZPFC" filterProperty="ConditionRateValueZPFC">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPFC", "leadingProperty":"ConditionRateValueZPFC"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionRateValueZPFC} {ConditionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPFC}" sortProperty="ConditionAmountZPFC" filterProperty="ConditionAmountZPFC">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPFC", "leadingProperty":"ConditionAmountZPFC"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionAmountZPFC} {TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPST}" sortProperty="ConditionRateValueZPST" filterProperty="ConditionRateValueZPST">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPST", "leadingProperty":"ConditionRateValueZPST"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionRateValueZPST} {ConditionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPST}" sortProperty="ConditionAmountZPST" filterProperty="ConditionAmountZPST">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPST", "leadingProperty":"ConditionAmountZPST"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionAmountZPST} {TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPIN}" sortProperty="ConditionRateValueZPIN" filterProperty="ConditionRateValueZPIN">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPIN", "leadingProperty":"ConditionRateValueZPIN"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionRateValueZPIN} {ConditionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPIN}" sortProperty="ConditionAmountZPIN" filterProperty="ConditionAmountZPIN">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPIN", "leadingProperty":"ConditionAmountZPIN"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionAmountZPIN} {TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPSB}" sortProperty="ConditionRateValueZPSB" filterProperty="ConditionRateValueZPSB">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPSB", "leadingProperty":"ConditionRateValueZPSB"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionRateValueZPSB} {ConditionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPSB}" sortProperty="ConditionAmountZPSB" filterProperty="ConditionAmountZPSB">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPSB", "leadingProperty":"ConditionAmountZPSB"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionAmountZPSB} {TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPSS}" sortProperty="ConditionRateValueZPSS" filterProperty="ConditionRateValueZPSS">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPSS", "leadingProperty":"ConditionRateValueZPSS"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionRateValueZPSS} {ConditionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPSS}" sortProperty="ConditionAmountZPSS" filterProperty="ConditionAmountZPSS">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPSS", "leadingProperty":"ConditionAmountZPSS"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionAmountZPSS} {TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPCM}" sortProperty="ConditionRateValueZPCM" filterProperty="ConditionRateValueZPCM">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPCM", "leadingProperty":"ConditionRateValueZPCM"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionRateValueZPCM} {ConditionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPCM}" sortProperty="ConditionAmountZPCM" filterProperty="ConditionAmountZPCM">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPCM", "leadingProperty":"ConditionAmountZPCM"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionAmountZPCM} {TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ConditionRateValueZPGP}" sortProperty="ConditionRateValueZPGP" filterProperty="ConditionRateValueZPGP">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPGP", "leadingProperty":"ConditionRateValueZPGP"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionRateValueZPGP} {ConditionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPGP}" sortProperty="ConditionAmountZPGP" filterProperty="ConditionAmountZPGP">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPGP", "leadingProperty":"ConditionAmountZPGP"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ConditionAmountZPGP} {TransactionCurrency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>YY1_ItemRemarks_1_SDI}" sortProperty="YY1_ItemRemarks_1_SDI" filterProperty="YY1_ItemRemarks_1_SDI">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ItemRemarks_1_SDI", "leadingProperty":"YY1_ItemRemarks_1_SDI"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_ItemRemarks_1_SDI}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>DeliveredQtyInOrderQtyUnit}" sortProperty="DeliveredQtyInOrderQtyUnit" filterProperty="DeliveredQtyInOrderQtyUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DeliveredQtyInOrderQtyUnit", "leadingProperty":"DeliveredQtyInOrderQtyUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{DeliveredQtyInOrderQtyUnit} {OrderQuantityUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>OpenReqdDelivQtyInOrdQtyUnit}" sortProperty="OpenReqdDelivQtyInOrdQtyUnit" filterProperty="OpenReqdDelivQtyInOrdQtyUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OpenReqdDelivQtyInOrdQtyUnit", "leadingProperty":"OpenReqdDelivQtyInOrdQtyUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{OpenReqdDelivQtyInOrdQtyUnit} {OrderQuantityUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ComplDeliveredQtyInBaseUnit}" sortProperty="ComplDeliveredQtyInBaseUnit" filterProperty="ComplDeliveredQtyInBaseUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ComplDeliveredQtyInBaseUnit", "leadingProperty":"ComplDeliveredQtyInBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ComplDeliveredQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>NoComplDeliveredQtyInBaseUnit}" sortProperty="NoComplDeliveredQtyInBaseUnit" filterProperty="NoComplDeliveredQtyInBaseUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NoComplDeliveredQtyInBaseUnit", "leadingProperty":"NoComplDeliveredQtyInBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{NoComplDeliveredQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>InternalTansferQtyInBaseUnit}" sortProperty="InternalTansferQtyInBaseUnit" filterProperty="InternalTansferQtyInBaseUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"InternalTansferQtyInBaseUnit", "leadingProperty":"InternalTansferQtyInBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{InternalTansferQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>NoInternalTansferQtyInBaseUnit}" sortProperty="NoInternalTansferQtyInBaseUnit" filterProperty="NoInternalTansferQtyInBaseUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NoInternalTansferQtyInBaseUnit", "leadingProperty":"NoInternalTansferQtyInBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{NoInternalTansferQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>EnternalTansferQtyInBaseUnit}" sortProperty="EnternalTansferQtyInBaseUnit" filterProperty="EnternalTansferQtyInBaseUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"EnternalTansferQtyInBaseUnit", "leadingProperty":"EnternalTansferQtyInBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{EnternalTansferQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>NoEnternalTansferQtyInBaseUnit}" sortProperty="NoEnternalTansferQtyInBaseUnit" filterProperty="NoEnternalTansferQtyInBaseUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NoEnternalTansferQtyInBaseUnit", "leadingProperty":"NoEnternalTansferQtyInBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{NoEnternalTansferQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BillingQuantity}" sortProperty="BillingQuantity" filterProperty="BillingQuantity">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantity", "leadingProperty":"BillingQuantity"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillingQuantity} {BillingQuantityUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>NoBillingQuantity}" sortProperty="NoBillingQuantity" filterProperty="NoBillingQuantity">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NoBillingQuantity", "leadingProperty":"NoBillingQuantity"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{NoBillingQuantity} {BillingQuantityUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>CreationDate}" sortProperty="CreationDate" filterProperty="CreationDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CreationDate", "leadingProperty":"CreationDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CreationDate}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>CreationDateItem}" sortProperty="CreationDateItem" filterProperty="CreationDateItem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CreationDateItem", "leadingProperty":"CreationDateItem"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CreationDateItem}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>LastChangeDate}" sortProperty="LastChangeDate" filterProperty="LastChangeDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"LastChangeDate", "leadingProperty":"LastChangeDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{LastChangeDate}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>CreatedByUser}" sortProperty="CreatedByUser" filterProperty="CreatedByUser">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CreatedByUser", "leadingProperty":"CreatedByUser"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CreatedByUser}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SalesDocumentRjcnReason}" sortProperty="SalesDocumentRjcnReason" filterProperty="SalesDocumentRjcnReason">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentRjcnReason", "leadingProperty":"SalesDocumentRjcnReason"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesDocumentRjcnReason}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SalesDocumentRjcnReasonName}" sortProperty="SalesDocumentRjcnReasonName" filterProperty="SalesDocumentRjcnReasonName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentRjcnReasonName", "leadingProperty":"SalesDocumentRjcnReasonName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesDocumentRjcnReasonName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>YY1_SalesDocType_SDH}" sortProperty="YY1_SalesDocType_SDH" filterProperty="YY1_SalesDocType_SDH">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_SalesDocType_SDH", "leadingProperty":"YY1_SalesDocType_SDH"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_SalesDocType_SDH}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>YY1_ManagementNo_SDI}" sortProperty="YY1_ManagementNo_SDI" filterProperty="YY1_ManagementNo_SDI">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ManagementNo_SDI", "leadingProperty":"YY1_ManagementNo_SDI"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_ManagementNo_SDI}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>
