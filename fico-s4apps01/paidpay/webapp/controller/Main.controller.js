@@ -30,6 +30,7 @@ sap.ui.define([
                     this.getModel("local").setProperty("/logInfo", "");
                     return;
                 }
+
                 var oReader = new FileReader();
                 oReader.readAsArrayBuffer(oFile);
                 this._BusyDialog.open();
@@ -40,28 +41,30 @@ sap.ui.define([
                     var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                     var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
                     // read valid data starting from line 2
-                    for (var i = 2; i < aSheetData.length; i++) {
+
+                    for (var i = 1; i < aSheetData.length; i++) {
                         var item = {
                             "Status": "",
                             "Message": "",
-                            "Row": i - 1,
-                            "CompanyCode": aSheetData[i]["CompanyCode"],  //会社コード
-                            "FiscalYear": aSheetData[i]["FiscalYear"],   //会計年度
-                            "Period": aSheetData[i]["Period"],       //会計期間
-                            "ProfitCenter": aSheetData[i]["ProfitCenter"], //利益センタ
-                            "BusinessPartner": aSheetData[i]["BusinessPartner"], //得意先コード
-                            "PurchasingGroup": aSheetData[i]["PurchasingGroup"], //購買グループ
-                            "PreStockAmt": aSheetData[i]["PreviousStockAmount"], //前期末在庫金額
-                            "BegPurGrpAmt": aSheetData[i]["BeginningPurchasingGroupAmount"], //期首購買グループ仕入れ金額
-                            "BegChgMaterialAmt": aSheetData[i]["BeginningChargeableMaterialAmount"], //期首有償支給品仕入れ金額
-                            "BegCustomerRev": aSheetData[i]["BeginningCustomerRevenue"],    //期首得意先の総売上高
-                            "BegRev": aSheetData[i]["BeginningRevenue"] //期首会社レベルの総売上高
+                            "Row": i,
+                            "CompanyCode": aSheetData[i]["CompanyCode"] === undefined ? "" : aSheetData[i]["CompanyCode"],  //会社コード
+                            "FiscalYear": aSheetData[i]["FiscalYear"] === undefined ? "" : aSheetData[i]["FiscalYear"],   //会計年度
+                            "Period": aSheetData[i]["Period"] === undefined ? "" : aSheetData[i]["Period"],       //会計期間
+                            "ProfitCenter": aSheetData[i]["ProfitCenter"] === undefined ? "" : aSheetData[i]["ProfitCenter"], //利益センタ
+                            "BusinessPartner": aSheetData[i]["BusinessPartner"] === undefined ? "" : aSheetData[i]["BusinessPartner"], //得意先コード
+                            "PurchasingGroup": aSheetData[i]["PurchasingGroup"] === undefined ? "" : aSheetData[i]["PurchasingGroup"], //購買グループ
+                            "PreStockAmt": aSheetData[i]["PreviousStockAmount"] === undefined ? "" : aSheetData[i]["PreviousStockAmount"], //前期末在庫金額
+                            "BegPurGrpAmt": aSheetData[i]["BeginningPurchasingGroupAmount"] === undefined ? "" : aSheetData[i]["BeginningPurchasingGroupAmount"], //期首購買グループ仕入れ金額
+                            "BegChgMaterialAmt": aSheetData[i]["BeginningChargeableMaterialAmount"] === undefined ? "" : aSheetData[i]["BeginningCustomerRevenue"], //期首有償支給品仕入れ金額
+                            "BegCustomerRev": aSheetData[i]["BeginningCustomerRevenue"] === undefined ? "" : aSheetData[i],    //期首得意先の総売上高
+                            "BegRev": aSheetData[i]["BeginningRevenue"] === undefined ? "" : aSheetData[i]["BeginningRevenue"] //期首会社レベルの総売上高
+
                         };
                         aExcelSet.push(item);
                     }
+
                     this.getModel("local").setProperty("/excelSet", aExcelSet);
                     this.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", [aExcelSet.length, 0, 0]));
-                    this.byId("idFileUploader").clear();
                     this._BusyDialog.close();
                 }.bind(this);
             },
@@ -83,9 +86,9 @@ sap.ui.define([
                 var aExcelSet = this.getModel("local").getProperty("/excelSet");
                 var aGroupItems = [];
                 var sRadio = "";
-                if (this.getModel("local").getProperty("/paidPay1")){
+                if (this.getModel("local").getProperty("/paidPay1")) {
                     sRadio = '1';
-                } else{
+                } else {
                     sRadio = '2';
                 }
                 for (var n = 0; n < aExcelSet.length; n++) {
@@ -160,8 +163,51 @@ sap.ui.define([
                         reject(error.message);
                     });
                 });
-            }
+            },
 
+            onExport: function () {
+                var oTable = this.getView().byId("tablePaidpay");
+                var sPath = oTable.getBindingPath("rows");
+                var aExcelSet = this.getModel("local").getProperty(sPath);
+
+                if (aExcelSet.length === 0) {
+                    MessageBox.error(this.getI18nBundle().getText("msgNoDataExport"));
+                    return;
+                }
+                var aExcelCol = [];
+                var aTableCol = oTable.getColumns();
+                for (var i = 1; i < aTableCol.length; i++) {
+                    if (aTableCol[i].getVisible()) {
+                        var sLabelText = aTableCol[i].getAggregation("label").getText();
+                        var sTemplatePath = aTableCol[i].getAggregation("template").getBindingPath("text");
+                        var oExcelCol = {
+                            // 获取表格的列名，即设置excel的抬头
+                            label: sLabelText,
+
+                            // 获取数据的绑定路径，即设置excel该列的字段路径
+                            property: sTemplatePath,
+                            // 获取表格的width属性，即设置excel该列的长度
+                            width: parseFloat(aTableCol[i].getWidth())
+                        };
+                        aExcelCol.push(oExcelCol);
+                    }
+                }
+                // 设置excel的相关属性
+                var oSettings = {
+                    workbook: {
+                        columns: aExcelCol,
+                        context: {
+                            version: "1.54",
+                            hierarchyLevel: "level"
+                        }
+                    },
+                    dataSource: aExcelSet, // 传入参数，数据源
+                    fileName: "Export_" + this.getResourceBundle().getText("title") + formatter.formatDate(new Date()) + formatter.formatTime(new Date()) + ".xlsx" // 文件名，需要加上后缀
+                };
+
+                // 导出excel
+                new Spreadsheet(oSettings).build();
+            }
 
         });
     });

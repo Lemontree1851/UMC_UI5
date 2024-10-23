@@ -21,12 +21,13 @@
                 <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
             </Panel>
             <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
-                <table:Table id="tableSourceList" rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:Table id="tablePaidpay" rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
                     <table:extension>
                         <OverflowToolbar>
                             <Text text="{local>/logInfo}"/>
                             <ToolbarSpacer/>
                             <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}"/>
                             <Button id="idExcuteButton" icon="sap-icon://save" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelSet}.length > 0}"/>
                             <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}"/>
                         </OverflowToolbar>
@@ -34,7 +35,7 @@
                     <table:columns>
                         <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
                             <table:template>
-                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                                <!-- <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/> -->
                             </table:template>
                         </table:Column>
                         <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
