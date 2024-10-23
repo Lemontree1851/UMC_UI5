@@ -55,8 +55,8 @@ sap.ui.define([
                             "PurchasingGroup": aSheetData[i]["PurchasingGroup"] === undefined ? "" : aSheetData[i]["PurchasingGroup"], //購買グループ
                             "PreStockAmt": aSheetData[i]["PreviousStockAmount"] === undefined ? "" : aSheetData[i]["PreviousStockAmount"], //前期末在庫金額
                             "BegPurGrpAmt": aSheetData[i]["BeginningPurchasingGroupAmount"] === undefined ? "" : aSheetData[i]["BeginningPurchasingGroupAmount"], //期首購買グループ仕入れ金額
-                            "BegChgMaterialAmt": aSheetData[i]["BeginningChargeableMaterialAmount"] === undefined ? "" : aSheetData[i]["BeginningCustomerRevenue"], //期首有償支給品仕入れ金額
-                            "BegCustomerRev": aSheetData[i]["BeginningCustomerRevenue"] === undefined ? "" : aSheetData[i],    //期首得意先の総売上高
+                            "BegChgMaterialAmt": aSheetData[i]["BeginningChargeableMaterialAmount"] === undefined ? "" : aSheetData[i]["BeginningChargeableMaterialAmount"], //期首有償支給品仕入れ金額
+                            "BegCustomerRev": aSheetData[i]["BeginningCustomerRevenue"] === undefined ? "" : aSheetData[i]["BeginningCustomerRevenue"],    //期首得意先の総売上高
                             "BegRev": aSheetData[i]["BeginningRevenue"] === undefined ? "" : aSheetData[i]["BeginningRevenue"] //期首会社レベルの総売上高
 
                         };
