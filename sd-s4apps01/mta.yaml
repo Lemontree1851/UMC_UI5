@@ -64,10 +64,6 @@ modules:
       name: sdinvoiceprint
       target-path: resources/
     - artifacts:
-      - sdcreditmantable.zip
-      name: sdcreditmantable
-      target-path: resources/
-    - artifacts:
       - sdcreditmantablen.zip
       name: sdcreditmantablen
       target-path: resources/
@@ -112,15 +108,6 @@ modules:
     - npm run build:cf
     supported-platforms: []
 - name: sdinvoiceprint
-  type: html5
-  path: invoiceprint
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: sdcreditmantable
   type: html5
   path: invoiceprint
   build-parameters:
