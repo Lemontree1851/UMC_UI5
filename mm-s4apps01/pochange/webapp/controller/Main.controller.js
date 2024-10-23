@@ -146,7 +146,7 @@ sap.ui.define([
                         this.getModel("local").setProperty("/excelSet", aExcelSet);
                         this.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
                     }).catch((error) => {
-                        MessageBox.error(error);
+                        MessageBox.error(error.message);
                     }).finally(() => {
                         this._BusyDialog.close();
                     });
