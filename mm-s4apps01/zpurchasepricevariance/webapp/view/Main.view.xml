@@ -1,0 +1,45 @@
+<mvc:View controllerName="mm.zpurchasepricevariance.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="PurchasePriceVarianceSVM" showShare="true" showExecuteOnSelection="true" entitySet="ZC_PURCHASEPRICEVARIANCE"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_PURCHASEPRICEVARIANCE" useToolbar="false" smartVariant="__SVM01" persistencyKey="PurchasePriceVarianceSFB">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="PurchaseOrder" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="PurgDocPriceDate" visibleInAdvancedArea="true" label="{i18n>PurgDocPriceDate}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="NoCompletelyDelivered" label="{i18n>NoCompletelyDelivered}" visibleInAdvancedArea="true">
+                                    <smartFilterBar:customControl>
+                                        <CheckBox selected="{local>/NoCompletelyDelivered}"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="mm.zpurchasepricevariance.fragments.List" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
