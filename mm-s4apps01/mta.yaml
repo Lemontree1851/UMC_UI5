@@ -74,6 +74,10 @@ modules:
       - mmphysicalinventoryupload.zip
       name: mmphysicalinventoryupload
       target-path: resources/
+    - artifacts:
+      - mmzpurchasepricevariance.zip
+      name: mmzpurchasepricevariance
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -140,6 +144,15 @@ modules:
 - name: mmuploadpurchasereq
   type: html5
   path: uploadpurchasereq
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmzpurchasepricevariance
+  type: html5
+  path: zpurchasepricevariance
   build-parameters:
     build-result: dist
     builder: custom
