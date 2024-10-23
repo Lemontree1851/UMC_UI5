@@ -1,4 +1,5 @@
 <mvc:View controllerName="sd.creditmantablen.controller.Main" displayBlock="true"
+    xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
@@ -61,13 +62,26 @@
             </f:DynamicPageHeader>
         </f:header>
 
-        <f:content>
+        <!-- <f:content>
             <FlexBox fitContainer="true">
                 <core:Fragment fragmentName="sd.creditmantablen.fragments.CreditmanList" type="XML"/>
             </FlexBox>
-        </f:content>
+        </f:content> -->
 
+		<f:content>
+			<table:Table rows="{path:'local>/data'}" id="tablelist" visibleRowCountMode="Auto" rowsUpdated="onUITableRowsUpdated" 
+            selectionMode="None">
 
+            <!-- fixedColumnCount="6" -->
+				<table:toolbar>
+					<!-- <OverflowToolbar>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button icon="sap-icon://excel-attachment" press="onDataExport" />
+					</OverflowToolbar> -->
+				</table:toolbar>
+			</table:Table>
+
+		</f:content>
 
     </f:DynamicPage>
 </mvc:View> 
