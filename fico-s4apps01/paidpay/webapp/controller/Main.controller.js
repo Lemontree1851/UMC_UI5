@@ -10,6 +10,8 @@ sap.ui.define([
         "use strict";
 
         return Base.extend("fico.paidpay.controller.Main", {
+            formatter: formatter,
+            
             onInit: function () {
 
                 //this.getOwnerComponent().getModel("local").setProperty("/paidPay1", true);
