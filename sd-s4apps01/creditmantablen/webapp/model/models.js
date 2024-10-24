@@ -1,8 +1,7 @@
 sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/Device"
-], 
-function (JSONModel, Device) {
+], function (JSONModel, Device) {
     "use strict";
 
     return {
@@ -18,14 +17,10 @@ function (JSONModel, Device) {
         // Create local Model
         createLocalModel: function () {
             var oModel = new JSONModel({
-                selectIndex: 0,
-                std_mode: "display",
-                tab_mode: "display",
-                dateValue: [],
-                detailSet: []
+                dateValue: new Date(),
+                data: []
             });
             return oModel;
         },
     };
-
 });

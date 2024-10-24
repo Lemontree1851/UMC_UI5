@@ -1,95 +1,51 @@
 sap.ui.define([
-    "./Base",
-    "sap/ui/table/Column",
-    "sap/m/Text",
-    "sap/m/MessageToast",
-    "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
-    "sd/creditmantablen/model/formatter",
-],
-function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
-    "use strict";
+	"./Base",
+	"sap/ui/table/Column",
+	"sap/m/Text",
+	"sap/m/MessageToast",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	"sd/creditmantablen/model/formatter",
+], function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter) {
+	"use strict";
 
-    return Base.extend("sd.creditmantablen.controller.Main", {
+	return Base.extend("sd.creditmantablen.controller.Main", {
 
-        formatter: formatter,
+		formatter: formatter,
 
-        onInit: function () {
+		onInit: function () {
 
-        },
-        onBeforeRebindTable: function (oEvent) {
-            var aFilters = oEvent.getParameter("bindingParams").filters;
-            var oNewFilter,
-                sRequisitionDate,
-                aNewFilters = [];
-            var sEntitySet = oEvent.getSource().getProperty("entitySet");
-            if (sEntitySet === "CREDITMANTABLE") {
-                sRequisitionDate = this.getModel("local").getProperty("/dateValue");
-                aNewFilters.push(new Filter("zyear", FilterOperator.EQ, sRequisitionDate));
-                if (aNewFilters.length) {
-                    oNewFilter = new Filter({
-                        filters: aNewFilters,
-                        and: false
-                    });
-                    aFilters.push(oNewFilter);
-                }
-            }
-        },
-        onSearch: function () {
-            this.getModel().resetChanges();
+		},
 
+		onSearch: function () {
+			this.getModel().resetChanges();
 			var oSearchBar = this.byId("idSmartFilterBar1");
 			var oTable = this.byId("tablelist");
 			var aFilters = oSearchBar.getFilters();
+
+			var sYear = this.getModel("local").getProperty("/dateValue");
+			if (sYear) {
+				aFilters.push(new Filter("zyear", FilterOperator.EQ, sYear.getFullYear()));
+			}
+
 			var oFilterData = oSearchBar.getFilterData();
-
 			this.getTableContent(aFilters, oFilterData, oTable);
+		},
 
-        },
 		getTableContent: function (aFilters, oFilterData, oTable) {
 			var that = this;
 			if (oFilterData.Material) {
 				var b = this.readProductOldID(oFilterData.Material);
 			}
-            
-			// var aFilters = oEvent.getParameter("bindingParams").filters;
-            // var oNewFilter,
-            //     sRequisitionDate,
-            //     aNewFilters = [];
-            // var sEntitySet = oEvent.getSource().getProperty("entitySet");
-            // if (sEntitySet === "CREDITMANTABLE") {
-            //     sRequisitionDate = this.getModel("local").getProperty("/dateValue");
-            //     aNewFilters.push(new Filter("zyear", FilterOperator.EQ, sRequisitionDate));
-            //     if (aNewFilters.length) {
-            //         oNewFilter = new Filter({
-            //             filters: aNewFilters,
-            //             and: false
-            //         });
-            //         aFilters.push(oNewFilter);
-            //     }
-            // }
-
 			Promise.all([this.readData(aFilters), b]).then((results) => {
-				// for (var result of results[0].results) {
-				// 	for (var subDateRt of result.toResults.results) {
-				// 		result[subDateRt.Date] = that.formatter.formatFloatWithoutDig(subDateRt.Quantity);
-				// 	}
-				// 	result.KukrKs = that.formatter.formatFloatWithoutDig(result.KukrKs);
-				// 	result.Sum = that.formatter.formatFloatWithoutDig(result.Sum);
-				// }
 				that.getModel("local").setProperty("/data", results[0].results);
 				that.buildListResultUITable(oTable, results[0].results[0]);
-			})
-
-			// this.readData(aFilters).then((data) => {
-
-			// })
-			.catch(() => {
-
+			}).catch(() => {
 			}).finally(() => {
 				that.setBusy(false);
 			});
 		},
+
 		readData(aFilters) {
 			var that = this;
 			return new Promise((resolve, reject) => {
@@ -107,9 +63,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				});
 			});
 		},
-		buildListResultUITable: function (oTable, titleVariable) {
-			// var oTable = this.byId("tablelist");
 
+		buildListResultUITable: function (oTable, titleVariable) {
 			oTable.removeAllColumns();
 			oTable.addColumn(new Column({
 				label: "{i18n>Customer}",
@@ -118,9 +73,6 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				}),
 				width: "10rem"
 			}));
-
-			// var Title = this.getModel("i18n").getResourceBundle().getText("Column_Title") + titleVariable;
-
 			oTable.addColumn(new Column({
 				label: "{i18n>CustomerName}",
 				template: new Text({
@@ -128,23 +80,21 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				}),
 				width: "10rem"
 			}));
-
 			oTable.addColumn(new Column({
 				label: "{i18n>LimitAmount}",
 				template: new Text({
 					text: "{local>LimitAmount}"
 				}),
-				width: "10rem"
-			}));	
-
+				width: "10rem",
+				hAlign: "End"
+			}));
 			oTable.addColumn(new Column({
 				label: "{i18n>Termstext1}",
 				template: new Text({
 					text: "{local>Termstext1}"
 				}),
 				width: "10rem"
-			}));	
-
+			}));
 			oTable.addColumn(new Column({
 				label: "{i18n>Termstext2}",
 				template: new Text({
@@ -157,18 +107,18 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>text1}"
 				}),
-				width: "10rem"
-			}));			
-			
+				width: "20rem"
+			}));
+
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth1}",
 				label: titleVariable.zymonth1,
-
 				template: new Text({
 					text: "{local>zmonth1}"
 				}),
-				width: "10rem"
-			}));		
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth2}",
@@ -176,8 +126,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth2}"
 				}),
-				width: "10rem"
-			}));	
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth3}",
@@ -185,8 +136,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth3}"
 				}),
-				width: "10rem"
-			}));	
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth4}",
@@ -194,8 +146,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth4}"
 				}),
-				width: "10rem"
-			}));	
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth5}",
@@ -203,9 +156,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth5}"
 				}),
-				width: "10rem"
-			}));	
-
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth6}",
@@ -213,9 +166,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth6}"
 				}),
-				width: "10rem"
-			}));	
-
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth7}",
@@ -223,9 +176,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth7}"
 				}),
-				width: "10rem"
-			}));	
-
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth8}",
@@ -233,8 +186,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth8}"
 				}),
-				width: "10rem"
-			}));	
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth9}",
@@ -242,8 +196,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth9}"
 				}),
-				width: "10rem"
-			}));	
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth10}",
@@ -251,8 +206,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth10}"
 				}),
-				width: "10rem"
-			}));	
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth11}",
@@ -260,8 +216,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth11}"
 				}),
-				width: "10rem"
-			}));	
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			oTable.addColumn(new Column({
 				// label: "{i18n>zmonth12}",
@@ -269,18 +226,9 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 				template: new Text({
 					text: "{local>zmonth12}"
 				}),
-				width: "10rem"
-			}));	
-
-
-
-
-
-
-
-
-
-
+				width: "10rem",
+				hAlign: "End"
+			}));
 
 			// oTable.addColumn(new Column({
 			// 	label: "{i18n>Type}",
@@ -314,6 +262,7 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			// }));
 
 		},
+
 		buildMonthlyColumnsOfUITable: function (oTable) {
 			var oSearchBar = this.byId("smartFilterBarlist");
 			// 获取Date构建Column
@@ -399,8 +348,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 						// 	c1Cell = aRows[i].getCells()[1];
 
 						var pCell = pRow.getCells()[0],
-						    cCell = aRows[i].getCells()[0],
-							c1Cell = aRows[i].getCells()[1];			
+							cCell = aRows[i].getCells()[0],
+							c1Cell = aRows[i].getCells()[1];
 						if (pCell && cCell) {
 							if (cCell.getText() === pCell.getText()) {
 								$("#" + cCell.getId()).css("visibility", "hidden");
@@ -418,8 +367,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 							}
 						}
 						var pCell = pRow.getCells()[1],
-						    cCell = aRows[i].getCells()[1],
-							c1Cell = aRows[i].getCells()[2];			
+							cCell = aRows[i].getCells()[1],
+							c1Cell = aRows[i].getCells()[2];
 						if (pCell && cCell) {
 							if (cCell.getText() === pCell.getText()) {
 								$("#" + cCell.getId()).css("visibility", "hidden");
@@ -437,8 +386,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 							}
 						}
 						var pCell = pRow.getCells()[2],
-						    cCell = aRows[i].getCells()[2],
-							c1Cell = aRows[i].getCells()[3];			
+							cCell = aRows[i].getCells()[2],
+							c1Cell = aRows[i].getCells()[3];
 						if (pCell && cCell) {
 							if (cCell.getText() === pCell.getText()) {
 								$("#" + cCell.getId()).css("visibility", "hidden");
@@ -456,8 +405,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 							}
 						}
 						var pCell = pRow.getCells()[3],
-						    cCell = aRows[i].getCells()[3],
-							c1Cell = aRows[i].getCells()[4];			
+							cCell = aRows[i].getCells()[3],
+							c1Cell = aRows[i].getCells()[4];
 						if (pCell && cCell) {
 							if (cCell.getText() === pCell.getText()) {
 								$("#" + cCell.getId()).css("visibility", "hidden");
@@ -475,8 +424,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 							}
 						}
 						var pCell = pRow.getCells()[4],
-						    cCell = aRows[i].getCells()[4],
-							c1Cell = aRows[i].getCells()[5];			
+							cCell = aRows[i].getCells()[4],
+							c1Cell = aRows[i].getCells()[5];
 						if (pCell && cCell) {
 							if (cCell.getText() === pCell.getText()) {
 								$("#" + cCell.getId()).css("visibility", "hidden");
@@ -493,53 +442,10 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 								$("#" + pRow.getId() + "-col5").css("border-bottom-style", "");
 							}
 						}
-
-
-
 					}
 					pRow = aRows[i];
 				}
 			}
-		},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    });
+		}
+	});
 });
