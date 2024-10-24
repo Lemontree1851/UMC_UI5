@@ -77,12 +77,18 @@
                 <Property Name="accountingdocument1" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="accountingdocument2" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="message" Type="Edm.String" Nullable="false" MaxLength="220"/>
+                <Property Name="uuid1" Type="Edm.Guid"/>
+                <Property Name="uuid2" Type="Edm.Guid"/>
+                <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.EntityControl"/>
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
             <ComplexType Name="ZR_UPLOAD_PARAMETER">
                 <Property Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
                 <Property Name="Zzkey" Type="Edm.String" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="EntityControl">
+                <Property Name="Updatable" Type="Edm.Boolean" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="SAP__Message">
                 <Property Name="code" Type="Edm.String" Nullable="false"/>
@@ -186,6 +192,11 @@
             <Annotations Target="SAP__self.ItemdataType/Currency3">
                 <Annotation Term="SAP__measures.ISOCurrency" Path="CompanyCodeCurrency"/>
             </Annotations>
+            <Annotations Target="SAP__self.ItemdataType/__EntityControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
             <Annotations Target="SAP__self.processLogic(Collection(SAP__self.ItemdataType))/Zzkey">
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Zzkey"/>
@@ -276,16 +287,20 @@
                                 </Record>
                             </Collection>
                         </PropertyValue>
-                        <PropertyValue Property="RequiredProperties">
+                        <PropertyValue Property="NonFilterableProperties">
                             <Collection>
-                                <PropertyPath>PostingDate</PropertyPath>
+                                <PropertyPath>__EntityControl</PropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                <Annotation Term="SAP__capabilities.SortRestrictions">
                     <Record>
-                        <PropertyValue Property="Insertable" Bool="false"/>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.DeleteRestrictions">
@@ -295,7 +310,7 @@
                 </Annotation>
                 <Annotation Term="SAP__capabilities.UpdateRestrictions">
                     <Record>
-                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
                         <PropertyValue Property="QueryOptions">
                             <Record>
                                 <PropertyValue Property="SelectSupported" Bool="true"/>
@@ -373,9 +388,27 @@
                 <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
                 <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
             </Annotations>
+            <Annotations Target="SAP__self.ItemdataType/uuid1">
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 Byte UUID in 16 Bytes (Raw Format)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ItemdataType/uuid2">
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 Byte UUID in 16 Bytes (Raw Format)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ItemdataType/__EntityControl/Updatable">
+                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            </Annotations>
             <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/Zzkey">
                 <Annotation Term="SAP__common.Label" String="Zzkey"/>
                 <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EntityControl/Updatable">
+                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
