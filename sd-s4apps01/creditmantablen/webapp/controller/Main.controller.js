@@ -51,6 +51,24 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			if (oFilterData.Material) {
 				var b = this.readProductOldID(oFilterData.Material);
 			}
+            
+			// var aFilters = oEvent.getParameter("bindingParams").filters;
+            // var oNewFilter,
+            //     sRequisitionDate,
+            //     aNewFilters = [];
+            // var sEntitySet = oEvent.getSource().getProperty("entitySet");
+            // if (sEntitySet === "CREDITMANTABLE") {
+            //     sRequisitionDate = this.getModel("local").getProperty("/dateValue");
+            //     aNewFilters.push(new Filter("zyear", FilterOperator.EQ, sRequisitionDate));
+            //     if (aNewFilters.length) {
+            //         oNewFilter = new Filter({
+            //             filters: aNewFilters,
+            //             and: false
+            //         });
+            //         aFilters.push(oNewFilter);
+            //     }
+            // }
+
 			Promise.all([this.readData(aFilters), b]).then((results) => {
 				// for (var result of results[0].results) {
 				// 	for (var subDateRt of result.toResults.results) {
@@ -143,8 +161,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			}));			
 			
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth1}",
-				// label: titleVariable.zmonth1,
+				// label: "{i18n>zmonth1}",
+				label: titleVariable.zymonth1,
 
 				template: new Text({
 					text: "{local>zmonth1}"
@@ -153,7 +171,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			}));		
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth2}",
+				// label: "{i18n>zmonth2}",
+				label: titleVariable.zymonth2,
 				template: new Text({
 					text: "{local>zmonth2}"
 				}),
@@ -161,7 +180,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			}));	
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth3}",
+				// label: "{i18n>zmonth3}",
+				label: titleVariable.zymonth3,
 				template: new Text({
 					text: "{local>zmonth3}"
 				}),
@@ -169,7 +189,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			}));	
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth4}",
+				// label: "{i18n>zmonth4}",
+				label: titleVariable.zymonth4,
 				template: new Text({
 					text: "{local>zmonth4}"
 				}),
@@ -177,7 +198,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			}));	
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth5}",
+				// label: "{i18n>zmonth5}",
+				label: titleVariable.zymonth5,
 				template: new Text({
 					text: "{local>zmonth5}"
 				}),
@@ -186,7 +208,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth6}",
+				// label: "{i18n>zmonth6}",
+				label: titleVariable.zymonth6,
 				template: new Text({
 					text: "{local>zmonth6}"
 				}),
@@ -195,7 +218,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth7}",
+				// label: "{i18n>zmonth7}",
+				label: titleVariable.zymonth7,
 				template: new Text({
 					text: "{local>zmonth7}"
 				}),
@@ -204,7 +228,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth8}",
+				// label: "{i18n>zmonth8}",
+				label: titleVariable.zymonth8,
 				template: new Text({
 					text: "{local>zmonth8}"
 				}),
@@ -212,7 +237,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			}));	
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth9}",
+				// label: "{i18n>zmonth9}",
+				label: titleVariable.zymonth9,
 				template: new Text({
 					text: "{local>zmonth9}"
 				}),
@@ -220,7 +246,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			}));	
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth10}",
+				// label: "{i18n>zmonth10}",
+				label: titleVariable.zymonth10,
 				template: new Text({
 					text: "{local>zmonth10}"
 				}),
@@ -228,7 +255,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			}));	
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth11}",
+				// label: "{i18n>zmonth11}",
+				label: titleVariable.zymonth11,
 				template: new Text({
 					text: "{local>zmonth11}"
 				}),
@@ -236,7 +264,8 @@ function (Base,Column,Text, MessageToast, Filter, FilterOperator, formatter) {
 			}));	
 
 			oTable.addColumn(new Column({
-				label: "{i18n>zmonth12}",
+				// label: "{i18n>zmonth12}",
+				label: titleVariable.zymonth12,
 				template: new Text({
 					text: "{local>zmonth12}"
 				}),

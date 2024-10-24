@@ -24,9 +24,11 @@
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar1" entitySet="CREDITMANTABLE" useToolbar="false" smartVariant="__SVM01" persistencyKey="creditmantable" visible="true" search="onSearch">
                             <smartFilterBar:controlConfiguration>
                                 <!-- <smartFilterBar:ControlConfiguration index='10' key="SalesOrganization" mandatory="mandatory" filterType="single" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}"/> -->
-                                <smartFilterBar:ControlConfiguration index='10' key="SalesOrganization" filterType="single" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}"/>
+                                <!-- <smartFilterBar:ControlConfiguration index='10' key="SalesOrganization" filterType="single" controlType="dropDownList" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}"/> -->
+                                <smartFilterBar:ControlConfiguration index='10' key="SalesOrganization" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="Customer" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
-                                <smartFilterBar:ControlConfiguration index='30' key="zyear" label="{i18n>zyear}" visibleInAdvancedArea="true">
+                                <smartFilterBar:ControlConfiguration index='30' key="zyear" visibleInAdvancedArea="true" label="{i18n>zyear}"/>
+                                <!-- <smartFilterBar:ControlConfiguration index='30' key="zyear" label="{i18n>zyear}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <DatePicker valueFormat="yyyy" displayFormat="yyyy" value="{
                                             'path':'local>/dateValue',
@@ -36,7 +38,7 @@
                                             }
                                         }"/>
                                     </smartFilterBar:customControl>
-                                </smartFilterBar:ControlConfiguration>
+                                </smartFilterBar:ControlConfiguration> -->
 
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="Customer"/>
