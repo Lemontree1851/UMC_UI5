@@ -12,9 +12,14 @@ sap.ui.define([
 
     return {
 
-        onValueHelpRequested: function (oEvent, that, sPath, aVHFields) {
+        onValueHelpRequested: function (oEvent, that, sPath, aVHFields, aFilterFields) {
             that._oInput = oEvent.getSource();
             that._aVHFields = aVHFields;
+            if (aFilterFields) {
+                that._aFilterFields = aFilterFields;
+            } else {
+                that._aFilterFields = aVHFields;
+            }
             that._oBasicSearchField = new SearchField();
             that.loadFragment({
                 name: "pp.zmaterialrequisition.ext.fragments.ValueHelpDialog"
@@ -31,7 +36,7 @@ sap.ui.define([
                 }
 
                 // Set filter group items
-                that._aVHFields.forEach(fieldName => {
+                that._aFilterFields.forEach(fieldName => {
                     var oFilterGroupItem = new FilterGroupItem({
                         groupName: "__$INTERNAL$",
                         visibleInFilterBar: true,
@@ -45,7 +50,7 @@ sap.ui.define([
 
                 // Set Basic Search for FilterBar
                 oFilterBar.setFilterBarExpanded(false);
-                oFilterBar.setBasicSearch(that._oBasicSearchField);
+                // oFilterBar.setBasicSearch(that._oBasicSearchField);
 
                 // Trigger filter bar search when the basic search is fired
                 that._oBasicSearchField.attachSearch(function () {

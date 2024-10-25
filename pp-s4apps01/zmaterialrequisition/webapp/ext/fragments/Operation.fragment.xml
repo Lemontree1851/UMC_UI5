@@ -130,7 +130,7 @@
                         <table:template>
                             <Input value="{local>ManufacturingOrder}" suggestionItemSelected="true" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                                 $event, $controller, '/ZC_ManufacturingOrderProductVH', 
-                                ['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MfgOrderPlannedStartDate','MfgOrderPlannedEndDate','MRPController'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ManufacturingOrderProductVH', length: 12 }" required="{= ${local>/headSet/Type} !== '31' &amp;&amp; ${local>/headSet/Type} !== '50' }">
+                                ['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MfgOrderPlannedStartDate','MfgOrderPlannedEndDate','MRPController'],['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MRPController'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ManufacturingOrderProductVH', length: 12 }" required="{= ${local>/headSet/Type} !== '31' &amp;&amp; ${local>/headSet/Type} !== '50' }">
                                 <suggestionColumns>
                                     <Column>
                                         <Label text="{i18n>ManufacturingOrder}"/>
@@ -162,7 +162,7 @@
                         <table:template>
                             <Input value="{local>Material}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                                 $event, $controller, '/ZC_ProductVH',
-                                ['Material','MaterialDescription','ProductType','StandardPrice','PriceUnitQty','Currency'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="true" editable="{= ${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '50' }">
+                                ['Material','MaterialDescription','ProductType','StandardPrice','PriceUnitQty','Currency'],['Material','MaterialDescription','ProductType'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="true" editable="{= ${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '50' }">
                                 <suggestionColumns>
                                     <Column>
                                         <Label text="{i18n>Product}"/>
