@@ -6,13 +6,13 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_STD" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="BaseUnit,LaboratoryOrDesignOfficeName,DetailsJson" ignoredFields="BaseUnit,LaboratoryOrDesignOfficeName,RequisitionDate,MRPController,ProductionSupervisor,DetailsJson">
+    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_STD" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="BaseUnit,LaboratoryOrDesignOfficeName,DetailsJson" ignoredFields="BaseUnit,LaboratoryOrDesignOfficeName,RequisitionDate,MRPController,ProductionSupervisor,DetailsJson,ExternalProductGroup">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
                 <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('STD_CREATE')"/>
-                <Button icon="sap-icon://edit" text="{i18n>Edit}" type="Transparent" press="onPressBtn('STD_EDIT')" visible="{= ${local>/std_mode} === 'display'}"/>
-                <Button icon="sap-icon://display" text="{i18n>Display}" type="Transparent" press="onPressBtn('STD_DISPLAY')" visible="{= ${local>/std_mode} === 'edit'}"/>
+                <!-- <Button icon="sap-icon://edit" text="{i18n>Edit}" type="Transparent" press="onPressBtn('STD_EDIT')" visible="{= ${local>/std_mode} === 'display'}"/>
+                <Button icon="sap-icon://display" text="{i18n>Display}" type="Transparent" press="onPressBtn('STD_DISPLAY')" visible="{= ${local>/std_mode} === 'edit'}"/> -->
                 <Button icon="sap-icon://browse-folder" text="{i18n>ShowDetails}" type="Transparent" press="onPressBtn('STD_DETAIL')"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
@@ -103,7 +103,8 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"TotalTransferQuantity", "leadingProperty":"TotalTransferQuantity"}'/>
                     </table:customData>
                     <table:template>
-                        <Input value="{TotalTransferQuantity}" description="{BaseUnit}" width="150%" editable="{= ${local>/std_mode} === 'edit'}"/>
+                        <!-- editable="{= ${local>/std_mode} === 'edit'}" -->
+                        <Input value="{TotalTransferQuantity}" description="{BaseUnit}" width="150%"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>StorageLocationFrom}" sortProperty="StorageLocationFrom" filterProperty="StorageLocationFrom">
@@ -111,7 +112,8 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"StorageLocationFrom", "leadingProperty":"StorageLocationFrom"}'/>
                     </table:customData>
                     <table:template>
-                        <Input value="{StorageLocationFrom}" change="handleChange" editable="{= ${local>/std_mode} === 'edit'}" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
+                        <!-- editable="{= ${local>/std_mode} === 'edit'}" -->
+                        <Input value="{StorageLocationFrom}" change="handleChange" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
                         $event, $controller, '/ZC_MaterialStockVH', ['Plant','StorageLocation','StorageLocationName','StockQuantity'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_MaterialStockVH', length: 4 }">
                             <suggestionColumns>
                                 <Column>
@@ -182,14 +184,14 @@
                         <Text text="{LaboratoryOrDesignOffice}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ExternalProductGroup}" sortProperty="ExternalProductGroup" filterProperty="ExternalProductGroup">
+                <!-- <table:Column width="10rem" label="{i18n>ExternalProductGroup}" sortProperty="ExternalProductGroup" filterProperty="ExternalProductGroup">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ExternalProductGroup", "leadingProperty":"ExternalProductGroup"}'/>
                     </table:customData>
                     <table:template>
                         <Text text="{ExternalProductGroup}" wrapping="false"/>
                     </table:template>
-                </table:Column>
+                </table:Column> -->
                 <table:Column width="10rem" label="{i18n>MaterialGroup}" sortProperty="MaterialGroup" filterProperty="MaterialGroup">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MaterialGroup", "leadingProperty":"MaterialGroup"}'/>
