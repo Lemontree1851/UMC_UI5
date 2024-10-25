@@ -81,8 +81,6 @@ sap.ui.define([
             // }
 
             aPromise.push(_myFunction._callODataAction(bEvent, oRequestData, that));
-
-
             try {
                 //     _myBusyDialog.open();
                 Promise.all(aPromise).then((aContext) => {
@@ -93,8 +91,24 @@ sap.ui.define([
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
                         var result = JSON.parse(object.Zzkey);
+
+                        // 获取选中的上下文
+                        var aContexts = that._controller.extensionAPI.getSelectedContexts();
+
+                        // 遍历 ITEMS 和选中的 aContexts 进行匹配
+                        result.ITEMS.forEach((element, index) => {
+                            if (aContexts[index]) { // 确保索引不越界
+                                var sPath = aContexts[index].getPath(); // 获取选中条目的路径
+                                // 设置对应的 Message 和 Status
+                                aContexts[index].setProperty(sPath + "/message", element.MESSAGE)
+                                // aContexts[index].setProperty(sPath + "/Status", element.STATUS)
+                            }
+                        });
+
+
+                        
                         //             if (bEvent === "QUERY" && result.MESSAGEITEMS.length === 0) {
-                        //                 that.getModel("local").setProperty("/headSet", {
+                        //                 that.getModel("local").setProperty("/ItemdataSet", {
                         //                     Plant: result.HEADER.PLANT,
                         //                     Type: result.HEADER.TYPE,
                         //                     MaterialRequisitionNo: result.HEADER.MATERIAL_REQUISITION_NO,
