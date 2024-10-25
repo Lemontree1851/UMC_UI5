@@ -1,11 +1,3 @@
-<!-- <mvc:View controllerName="pp.ofsocomparison.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
-</mvc:View> -->
-
 <mvc:View controllerName="pp.ofsocomparison.controller.Main" displayBlock="true"
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
@@ -52,10 +44,26 @@
                                     />
                                    </smartFilterBar:customControl>
                                  </smartFilterBar:ControlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='70' key="LatestOF" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>LatestOF}"/>
-                                <smartFilterBar:ControlConfiguration index='80' key="Contents" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Contents}"/>
+                                <!-- <smartFilterBar:ControlConfiguration index='70' key="LatestOF" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>LatestOF}"/> -->
+                                <!-- <smartFilterBar:ControlConfiguration index='80' key="Contents" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Contents}"/> -->
+                                <smartFilterBar:ControlConfiguration index="70" key="LatestOF" visibleInAdvancedArea="true" label="{i18n>LatestOF}">
+                                    <smartFilterBar:customControl>
+                                        <Select id="idZfunctionmode1" selectedKey="{local>/LatestOF}" change="onSelectModeChange">
+                                            <core:Item key="01" text="{i18n>LatestOF2}"/>
+                                            <core:Item key="02" text="{i18n>LatestOF1}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
 
-
+                                <smartFilterBar:ControlConfiguration index="80" key="Contents" visibleInAdvancedArea="true" label="{i18n>Contents}">
+                                    <smartFilterBar:customControl>
+                                        <Select id="idZfunctionmode2" selectedKey="{local>/Contents}" change="onSelectModeChange">
+                                            <core:Item key="01" text="{i18n>Contents1}"/>
+                                            <core:Item key="02" text="{i18n>Contents2}"/>
+                                            <core:Item key="03" text="{i18n>Contents3}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
 
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
