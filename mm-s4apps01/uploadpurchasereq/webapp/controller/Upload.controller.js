@@ -106,6 +106,7 @@ sap.ui.define([
                         Unit: aSheet1[i]["Unit"] || "",
                         Price: aSheet1[i]["Price"] || "0",
                         UnitPrice: aSheet1[i]["UnitPrice"] || "0",
+                        // DeliveryDate: formatter.convertISOString(aSheet1[i]["DeliveryDate"]) || "",
                         DeliveryDate: aSheet1[i]["DeliveryDate"] || "",
                         Location: aSheet1[i]["Location"] || "",
                         ReturnItem: aSheet1[i]["ReturnItem"] || "",
@@ -128,8 +129,11 @@ sap.ui.define([
                         IsLink: aSheet1[i]["IsLink"] || "",
                         Kyoten: aSheet1[i]["Kyoten"] || "",
                     };
-                    
-                    aExcelSet.push(this.convertObjectValuesToString(oItem));
+                    //因为有些数据读出来是数值类型，但odta要求字符类型，通过此种方式将所有值转换成字符类型
+                    oItem = JSON.parse(JSON.stringify(oItem));
+                    //同时这种方式会将日期类型转换成ISO类型的字符，我们只截取日期部分
+                    oItem.DeliveryDate = oItem.DeliveryDate.slice(0,10);
+                    aExcelSet.push(oItem);
                     if(this.checkInconsistencies(aExcelSet)) {
                         this.byId("idCheckButton").setEnabled(false);
                     } else {
@@ -238,7 +242,13 @@ sap.ui.define([
         },
         preparePostBatchBody: function () {
             let aExcelSet = this._LocalData.getProperty("/excelSet");
-            let postDocs = [JSON.stringify(aExcelSet)];
+            let copyExcelSet = [];
+            aExcelSet.forEach(item => {
+                let postDoc = JSON.parse(JSON.stringify(item));
+                postDoc.DeliveryDate = postDoc.DeliveryDate.replace(/-/g, "");
+                copyExcelSet.push(postDoc);
+            }, this)
+            let postDocs = [JSON.stringify(copyExcelSet)];
             return postDocs;
         },
         postAction: function (sAction, postData,i) {

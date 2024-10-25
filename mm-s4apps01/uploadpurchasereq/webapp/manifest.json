@@ -17,19 +17,19 @@
         },
         "dataSources": {
             "API_CV_ATTACHMENT_SRV": {
-				"uri": "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/",
-				"type": "OData",
-				"settings": {
-					"localUri": "localService/S4/API_CV_ATTACHMENT_SRV/metadata.xml"
-				}
-			},
+                "uri": "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/",
+                "type": "OData",
+                "settings": {
+                    "localUri": "localService/S4/API_CV_ATTACHMENT_SRV/metadata.xml"
+                }
+            },
             "API_DMS_PROCESS_SRV": {
-				"uri": "/sap/opu/odata/sap/API_DMS_PROCESS_SRV/",
-				"type": "OData",
-				"settings": {
-					"localUri": "localService/S4/API_DMS_PROCESS_SRV/metadata.xml"
-				}
-			},
+                "uri": "/sap/opu/odata/sap/API_DMS_PROCESS_SRV/",
+                "type": "OData",
+                "settings": {
+                    "localUri": "localService/S4/API_DMS_PROCESS_SRV/metadata.xml"
+                }
+            },
             "mainService": {
                 "uri": "/sap/opu/odata/sap/ZUI_UPLOADPR_O2/",
                 "type": "OData",
@@ -39,6 +39,15 @@
                     ],
                     "localUri": "localService/metadata.xml",
                     "odataVersion": "2.0"
+                }
+            },
+            "PurchaseOrder": {
+                "uri": "/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
                 }
             },
             "annotation": {
@@ -83,7 +92,7 @@
         }
     },
     "sap.ui5": {
-        "flexEnabled": true,
+        "flexEnabled": false,
         "dependencies": {
             "minUI5Version": "1.120.17",
             "libs": {
@@ -109,25 +118,25 @@
                 }
             },
             "Attach": {
-				"type": "sap.ui.model.odata.v2.ODataModel",
-				"settings": {
-					"defaultOperationMode": "Server",
-					"defaultBindingMode": "OneWay",
-					"defaultCountMode": "Request"
-				},
-				"dataSource": "API_CV_ATTACHMENT_SRV",
-				"preload": true
-			},
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "OneWay",
+                    "defaultCountMode": "Request"
+                },
+                "dataSource": "API_CV_ATTACHMENT_SRV",
+                "preload": true
+            },
             "InfoRecord": {
-				"type": "sap.ui.model.odata.v2.ODataModel",
-				"settings": {
-					"defaultOperationMode": "Server",
-					"defaultBindingMode": "OneWay",
-					"defaultCountMode": "Request"
-				},
-				"dataSource": "API_DMS_PROCESS_SRV",
-				"preload": true
-			},
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "OneWay",
+                    "defaultCountMode": "Request"
+                },
+                "dataSource": "API_DMS_PROCESS_SRV",
+                "preload": true
+            },
             "": {
                 "dataSource": "mainService",
                 "preload": true,
@@ -135,6 +144,15 @@
                     "defaultOperationMode": "Server",
                     "defaultBindingMode": "TwoWay",
                     "defaultCountMode": "Inline"
+                }
+            },
+            "PurchaseOrder":{
+                "dataSource": "PurchaseOrder",
+                "preload": true,
+                "settings": {
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
                 }
             }
         },

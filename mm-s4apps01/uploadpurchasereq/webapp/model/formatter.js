@@ -1,6 +1,7 @@
 sap.ui.define([
-    "sap/ui/core/format/DateFormat"
-], function (DateFormat) {
+    "sap/ui/core/format/DateFormat",
+], function (DateFormat,
+	) {
     "use strict";
     return {
         setState: function (v) {
@@ -39,12 +40,16 @@ sap.ui.define([
 
         // 0000/00/00
         date: function (value) {
-            if (value) {
+            let localDate = new Date(value);
+            if (!isNaN(localDate.getTime())) {
                 var oDateFormat = DateFormat.getDateTimeInstance({
                     pattern: "yyyy/MM/dd"
                 });
                 return oDateFormat.format(new Date(value));
             } else {
+                if (value.length === 8){
+                    return value.substring(0, 4) + "/" + value.substring(4, 6) + "/" + value.substring(6);
+                }
                 return value;
             }
         },
@@ -66,11 +71,14 @@ sap.ui.define([
 
         odataDate: function (v) {
             var deliveryDate = new Date(v);
+            if ( isNaN(date.getTime()) ) {
+                return "";
+            }
             var oDateFormat = DateFormat.getDateTimeInstance({
                 pattern: "yyyy-MM-dd"
             });
             var deliveryDateString = oDateFormat.format(deliveryDate, false);
-            return new Date(deliveryDateString);
+            return new deliveryDateString;
         },
 
         stringToDate: function (value) {
@@ -100,6 +108,14 @@ sap.ui.define([
             // 调整时区偏移，将本地时间转换为 UTC 时间（时间不变）
             let utcDate = new Date(localDate.getTime() - timezoneOffset * 60000);
             return utcDate;
+        },
+        convertISOString: function (v) {
+            let localDate = new Date(v);
+            if(!isNaN(localDate.getTime)){
+                return localDate.toISOString().slice(0,10);
+            } else {
+                return v;
+            }
         }
 
     };

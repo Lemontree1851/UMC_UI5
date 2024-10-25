@@ -154,8 +154,19 @@
                 requestAtLeastFields="UUID"
                 beforeRebindTable="onBeforeRebindTable"
             >
+                <smartTable:customToolbar>
+                    <OverflowToolbar >
+                        <ToolbarSpacer />
+                        <Button
+                            icon="sap-icon://document"
+                            type="Transparent"
+                            text="{i18n>DisplayView.CreateBtn}"
+                            press="createPurchseOrder"
+                        />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
                 <t:Table
-                    id="idTable"
+                    id="idPurchaseReqTable"
                     rowActionCount="1"
                 >
                     <t:rowMode>
@@ -177,6 +188,51 @@
                     </t:rowActionTemplate>
                     <t:columns>
                         <t:Column
+                            width="4rem"
+                            label="{i18n>Type}"
+                            sortProperty="Type"
+                            filterProperty="Type"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"Type", "leadingProperty":"Type", "sortProperty":"Type", "filterProperty": "Type"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <ObjectStatus state="{path:'Type', formatter:'.formatter.setState'}" icon="sap-icon://status-negative"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="5rem" label="{i18n>Result}" sortProperty="ResultText">
+							<t:customData>
+								<core:CustomData key="p13nData"
+									value='\{"columnKey":"ResultText", "leadingProperty":"ResultText", "sortProperty":"ResultText", "filterProperty": "ResultText"}'/>
+							</t:customData>
+							<t:template>
+								<Text text="{path:'Type', formatter:'.formatter.setResult'}"/>
+							</t:template>
+						</t:Column>
+                        <t:Column
+                            width="12rem"
+                            label="{i18n>Message}"
+                            sortProperty="Message"
+                            filterProperty="Message"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"Message", "leadingProperty":"Message", "sortProperty":"Message", "filterProperty": "Message"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{Message}"
+                                    tooltip="{Message}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
                             id="idColumn"
                             width="8rem"
                             label="{i18n>PrNo}"
@@ -194,6 +250,7 @@
                                 <Text
                                     id="idPrNoText"
                                     text="{PrNo}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>
@@ -467,6 +524,8 @@
                                 <Text
                                     id="idMatDescText"
                                     text="{MatDesc}"
+                                    tooltip="{MatDesc}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>
@@ -592,7 +651,7 @@
                             <t:template>
                                 <Text
                                     id="idDeliveryDateText"
-                                    text="{DeliveryDate}"
+                                    text="{path:'DeliveryDate', formatter:'.formatter.date'}"
                                 />
                             </t:template>
                         </t:Column>
@@ -782,6 +841,8 @@
                                 <Text
                                     id="idItemTextText"
                                     text="{ItemText}"
+                                    tooltip="{ItemText}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>
@@ -908,6 +969,8 @@
                                 <Text
                                     id="idMemoTextText"
                                     text="{MemoText}"
+                                    tooltip="{MemoText}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>

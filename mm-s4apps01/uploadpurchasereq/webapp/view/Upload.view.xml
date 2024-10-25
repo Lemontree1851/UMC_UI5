@@ -150,7 +150,7 @@
                     </t:Column>
                     <t:Column
                         id="id38Column"
-                        width="12rem"
+                        width="14rem"
                         sortProperty="Message"
                         label="{i18n>Message}"
                     >
@@ -340,6 +340,8 @@
                             <Text
                                 id="idMatDescText"
                                 text="{local>MatDesc}"
+                                tooltip="{local>MatDesc}"
+                                wrapping="false"
                             />
                         </t:template>
                     </t:Column>
@@ -411,7 +413,7 @@
                         <t:template>
                             <Text
                                 id="idDeliveryDateText"
-                                text="{local>DeliveryDate}"
+                                text="{path:'local>DeliveryDate', formatter:'.formatter.date'}"
                             />
                         </t:template>
                     </t:Column>
@@ -585,13 +587,15 @@
                     </t:Column>
                     <t:Column
                         id="id32Column"
-                        width="8rem"
+                        width="16rem"
                         label="{i18n>MemoText}"
                     >
                         <t:template>
                             <Text
                                 id="idMemoTextText"
                                 text="{local>MemoText}"
+                                tooltip="{local>MemoText}"
+                                wrapping="false"
                             />
                         </t:template>
                     </t:Column>
