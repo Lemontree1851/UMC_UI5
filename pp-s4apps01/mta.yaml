@@ -111,6 +111,10 @@ modules:
       - ppzledplannedordercomponent.zip
       name: ppzledplannedordercomponent
       target-path: resources/
+    - artifacts:
+      - ppofsocomparison.zip
+      name: ppofsocomparison
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -262,6 +266,16 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppofsocomparison
+  type: html5
+  path: ofsocomparison
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
