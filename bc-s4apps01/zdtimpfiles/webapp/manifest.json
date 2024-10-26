@@ -152,7 +152,15 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "entitySet": "Files"
+              "entitySet": "Files",
+              "controlConfiguration": {
+                "_ApplicationLog/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "enableFullScreen": true
+                  }
+                }
+              }
             }
           }
         }

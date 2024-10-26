@@ -42,6 +42,9 @@
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
     </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
     </edmx:Reference>
@@ -90,6 +93,7 @@
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.SAP__Message)" Nullable="false"/>
                 <NavigationProperty Name="DraftAdministrativeData" Type="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.I_DraftAdministrativeDataType"/>
                 <NavigationProperty Name="SiblingEntity" Type="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.FilesType"/>
+                <NavigationProperty Name="_ApplicationLog" Type="Collection(com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.LogsType)"/>
                 <NavigationProperty Name="_Configuration" Type="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.ConfigurationType"/>
             </EntityType>
             <EntityType Name="ConfigurationType">
@@ -125,6 +129,21 @@
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.SAP__Message)" Nullable="false"/>
                 <NavigationProperty Name="DraftAdministrativeData" Type="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.I_DraftAdministrativeDataType"/>
                 <NavigationProperty Name="SiblingEntity" Type="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.ConfigurationType"/>
+            </EntityType>
+            <EntityType Name="LogsType">
+                <Key>
+                    <PropertyRef Name="LogHandle"/>
+                    <PropertyRef Name="LogItemNumber"/>
+                </Key>
+                <Property Name="LogHandle" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="LogItemNumber" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="Severity" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="SeverityText" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Category" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Criticality" Type="Edm.Byte" Nullable="false"/>
+                <Property Name="DetailLevel" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Timestamp" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="MessageText" Type="Edm.String" Nullable="false" MaxLength="512"/>
             </EntityType>
             <EntityType Name="I_DraftAdministrativeDataType">
                 <Key>
@@ -217,9 +236,11 @@
                 <EntitySet Name="Files" EntityType="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.FilesType">
                     <NavigationPropertyBinding Path="DraftAdministrativeData" Target="I_DraftAdministrativeData"/>
                     <NavigationPropertyBinding Path="SiblingEntity" Target="Files"/>
+                    <NavigationPropertyBinding Path="_ApplicationLog" Target="Logs"/>
                     <NavigationPropertyBinding Path="_Configuration" Target="Configuration"/>
                 </EntitySet>
                 <EntitySet Name="I_DraftAdministrativeData" EntityType="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.I_DraftAdministrativeDataType"/>
+                <EntitySet Name="Logs" EntityType="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.LogsType"/>
             </EntityContainer>
             <Annotations Target="SAP__self.FilesType/UuidFile">
                 <Annotation Term="SAP__common.Label" String="File UUID"/>
@@ -232,7 +253,7 @@
                 <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/zzc_dtimp_conf/0001;ps='srvd-zui_dtimp_files_o4-0001';va='com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.et-zzc_dtimp_files.uuidconf'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/zzc_dtimp_conf_vh/0001;ps='srvd-zui_dtimp_files_o4-0001';va='com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.et-zzc_dtimp_files.uuidconf'/$metadata</String>
                     </Collection>
                 </Annotation>
                 <Annotation Term="SAP__common.Heading" String="UUID"/>
@@ -310,230 +331,11 @@
                 <Annotation Term="SAP__common.Label" String="Created By"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Created By User"/>
             </Annotations>
-            <Annotations Target="SAP__self.FilesType/CreatedAt">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__common.Label" String="Created On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Creation Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/LastChangedBy">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Changed By"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Last Changed By User"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/LastChangedAt">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Last Change Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/LocalLastChangedAt">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/CreateUserName">
-                <Annotation Term="SAP__common.Label" String="Full Name"/>
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.QuickInfo" String="User Description"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/JobStatus">
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/JobStatusText">
-                <Annotation Term="SAP__common.Label" String="Job Status"/>
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/JobStatusCriticality">
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/LogStatus">
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/LogStatusText">
-                <Annotation Term="SAP__common.Label" String="Log Status"/>
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/LogStatusCriticality">
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/ApplicationLogUrl">
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/HasDraftEntity">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Has Draft"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has draft document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/DraftEntityCreationDateTime">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Draft Created On"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/DraftEntityLastChangeDateTime">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Draft Last Changed On"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/HasActiveEntity">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Has active"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has active document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/IsActiveEntity">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Is active"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/__EntityControl">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/__FieldControl">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FilesType/__OperationControl">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="SAP__self.Container/Files">
-                <Annotation Term="SAP__capabilities.NavigationRestrictions">
-                    <Record>
-                        <PropertyValue Property="RestrictedProperties">
-                            <Collection>
-                                <Record>
-                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Configuration"/>
-                                    <PropertyValue Property="InsertRestrictions">
-                                        <Record>
-                                            <PropertyValue Property="Insertable" Bool="false"/>
-                                        </Record>
-                                    </PropertyValue>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__common.DraftRoot">
-                    <Record>
-                        <PropertyValue Property="PreparationAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Prepare"/>
-                        <PropertyValue Property="ActivationAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Activate"/>
-                        <PropertyValue Property="EditAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Edit"/>
-                        <PropertyValue Property="DiscardAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Discard"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.SearchRestrictions">
-                    <Record>
-                        <PropertyValue Property="Searchable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.FilterRestrictions">
-                    <Record>
-                        <PropertyValue Property="Filterable" Bool="true"/>
-                        <PropertyValue Property="FilterExpressionRestrictions">
-                            <Collection>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="JobCount"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="JobName"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="ApplicationLogUrl"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="DraftEntityLastChangeDateTime"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="NonFilterableProperties">
-                            <Collection>
-                                <PropertyPath>JobStatus</PropertyPath>
-                                <PropertyPath>JobStatusText</PropertyPath>
-                                <PropertyPath>JobStatusCriticality</PropertyPath>
-                                <PropertyPath>LogStatus</PropertyPath>
-                                <PropertyPath>LogStatusText</PropertyPath>
-                                <PropertyPath>LogStatusCriticality</PropertyPath>
-                                <PropertyPath>ApplicationLogUrl</PropertyPath>
-                                <PropertyPath>__EntityControl</PropertyPath>
-                                <PropertyPath>__FieldControl</PropertyPath>
-                                <PropertyPath>__OperationControl</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.SortRestrictions">
-                    <Record>
-                        <PropertyValue Property="NonSortableProperties">
-                            <Collection>
-                                <PropertyPath>JobCount</PropertyPath>
-                                <PropertyPath>JobName</PropertyPath>
-                                <PropertyPath>JobStatus</PropertyPath>
-                                <PropertyPath>JobStatusText</PropertyPath>
-                                <PropertyPath>JobStatusCriticality</PropertyPath>
-                                <PropertyPath>LogStatus</PropertyPath>
-                                <PropertyPath>LogStatusText</PropertyPath>
-                                <PropertyPath>LogStatusCriticality</PropertyPath>
-                                <PropertyPath>ApplicationLogUrl</PropertyPath>
-                                <PropertyPath>__EntityControl</PropertyPath>
-                                <PropertyPath>__FieldControl</PropertyPath>
-                                <PropertyPath>__OperationControl</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.DeleteRestrictions">
-                    <Record>
-                        <PropertyValue Property="Deletable" Path="__EntityControl/Deletable"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.UpdateRestrictions">
-                    <Record>
-                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
-                        <PropertyValue Property="NonUpdatableNavigationProperties">
-                            <Collection>
-                                <PropertyPath>DraftAdministrativeData</PropertyPath>
-                                <PropertyPath>SiblingEntity</PropertyPath>
-                                <PropertyPath>_Configuration</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="QueryOptions">
-                            <Record>
-                                <PropertyValue Property="SelectSupported" Bool="true"/>
-                            </Record>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__core.OptimisticConcurrency">
-                    <Collection>
-                        <PropertyPath>LocalLastChangedAt</PropertyPath>
-                    </Collection>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="SAP__self.Edit(SAP__self.FilesType)">
-                <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/Edit"/>
-            </Annotations>
             <Annotations Target="SAP__self.FilesType">
+                <Annotation Term="SAP__common.CreatedBy" Path="CreatedBy"/>
+                <Annotation Term="SAP__common.CreatedAt" Path="CreatedAt"/>
+                <Annotation Term="SAP__common.ChangedBy" Path="LastChangedBy"/>
+                <Annotation Term="SAP__common.ChangedAt" Path="LastChangedAt"/>
                 <Annotation Term="SAP__common.Label" String="Projection View for ZZR_DTIMP_FILES"/>
                 <Annotation Term="SAP__UI.Facets">
                     <Collection>
@@ -572,6 +374,11 @@
                                     </Record>
                                 </Collection>
                             </PropertyValue>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Application Log"/>
+                            <PropertyValue Property="ID" String="idApplicationLogItem"/>
+                            <PropertyValue Property="Target" AnnotationPath="_ApplicationLog/@SAP__UI.LineItem"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -739,6 +546,243 @@
                 </Annotation>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
+            <Annotations Target="SAP__self.FilesType/CreatedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Created On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Creation Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/LastChangedBy">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Changed By"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Last Changed By User"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/LastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Changed On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Last Change Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/LocalLastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Changed On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/CreateUserName">
+                <Annotation Term="SAP__common.Label" String="Full Name"/>
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.QuickInfo" String="User Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/JobStatus">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/JobStatusText">
+                <Annotation Term="SAP__common.Label" String="Job Status"/>
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/JobStatusCriticality">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/LogStatus">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/LogStatusText">
+                <Annotation Term="SAP__common.Label" String="Log Status"/>
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/LogStatusCriticality">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/ApplicationLogUrl">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/HasDraftEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Has Draft"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has draft document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/DraftEntityCreationDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/DraftEntityLastChangeDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/HasActiveEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Has active"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has active document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/IsActiveEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Is active"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/__EntityControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/__FieldControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FilesType/__OperationControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/Files">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_ApplicationLog"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Configuration"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.DraftRoot">
+                    <Record>
+                        <PropertyValue Property="PreparationAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Prepare"/>
+                        <PropertyValue Property="ActivationAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Activate"/>
+                        <PropertyValue Property="EditAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Edit"/>
+                        <PropertyValue Property="DiscardAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Discard"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="JobCount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="JobName"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ApplicationLogUrl"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DraftEntityLastChangeDateTime"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>JobStatus</PropertyPath>
+                                <PropertyPath>JobStatusText</PropertyPath>
+                                <PropertyPath>JobStatusCriticality</PropertyPath>
+                                <PropertyPath>LogStatus</PropertyPath>
+                                <PropertyPath>LogStatusText</PropertyPath>
+                                <PropertyPath>LogStatusCriticality</PropertyPath>
+                                <PropertyPath>ApplicationLogUrl</PropertyPath>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                                <PropertyPath>__FieldControl</PropertyPath>
+                                <PropertyPath>__OperationControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>JobCount</PropertyPath>
+                                <PropertyPath>JobName</PropertyPath>
+                                <PropertyPath>JobStatus</PropertyPath>
+                                <PropertyPath>JobStatusText</PropertyPath>
+                                <PropertyPath>JobStatusCriticality</PropertyPath>
+                                <PropertyPath>LogStatus</PropertyPath>
+                                <PropertyPath>LogStatusText</PropertyPath>
+                                <PropertyPath>LogStatusCriticality</PropertyPath>
+                                <PropertyPath>ApplicationLogUrl</PropertyPath>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                                <PropertyPath>__FieldControl</PropertyPath>
+                                <PropertyPath>__OperationControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Path="__EntityControl/Deletable"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
+                        <PropertyValue Property="NonUpdatableNavigationProperties">
+                            <Collection>
+                                <PropertyPath>DraftAdministrativeData</PropertyPath>
+                                <PropertyPath>SiblingEntity</PropertyPath>
+                                <PropertyPath>_ApplicationLog</PropertyPath>
+                                <PropertyPath>_Configuration</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection>
+                        <PropertyPath>LocalLastChangedAt</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Edit(SAP__self.FilesType)/PreserveChanges">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="TRUE"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Edit(SAP__self.FilesType)">
+                <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/Edit"/>
+            </Annotations>
             <Annotations Target="SAP__self.ConfigurationType/UuidConf">
                 <Annotation Term="SAP__common.Label" String="Configuration UUID"/>
                 <Annotation Term="SAP__core.Computed"/>
@@ -821,162 +865,11 @@
                 <Annotation Term="SAP__common.Label" String="Created By"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Created By User"/>
             </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/CreatedAt">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__common.Label" String="Created On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Creation Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/LastChangedBy">
-                <Annotation Term="SAP__common.Text" Path="UpdateUserName"/>
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Changed By"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Last Changed By User"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/LastChangedAt">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Last Change Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/LocalLastChangedAt">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/CreateUserName">
-                <Annotation Term="SAP__common.Label" String="Full Name"/>
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.QuickInfo" String="User Description"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/UpdateUserName">
-                <Annotation Term="SAP__common.Label" String="Full Name"/>
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.QuickInfo" String="User Description"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/HasDraftEntity">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Has Draft"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has draft document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/DraftEntityCreationDateTime">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Draft Created On"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/DraftEntityLastChangeDateTime">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Draft Last Changed On"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/HasActiveEntity">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Has active"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has active document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/IsActiveEntity">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Label" String="Is active"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/__EntityControl">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ConfigurationType/__OperationControl">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
-                <Annotation Term="SAP__UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="SAP__self.Container/Configuration">
-                <Annotation Term="SAP__common.DraftRoot">
-                    <Record>
-                        <PropertyValue Property="EditAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Edit"/>
-                        <PropertyValue Property="ActivationAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Activate"/>
-                        <PropertyValue Property="PreparationAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Prepare"/>
-                        <PropertyValue Property="DiscardAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Discard"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.SearchRestrictions">
-                    <Record>
-                        <PropertyValue Property="Searchable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.FilterRestrictions">
-                    <Record>
-                        <PropertyValue Property="Filterable" Bool="true"/>
-                        <PropertyValue Property="FilterExpressionRestrictions">
-                            <Collection>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="DraftEntityLastChangeDateTime"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="NonFilterableProperties">
-                            <Collection>
-                                <PropertyPath>__EntityControl</PropertyPath>
-                                <PropertyPath>__OperationControl</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.SortRestrictions">
-                    <Record>
-                        <PropertyValue Property="NonSortableProperties">
-                            <Collection>
-                                <PropertyPath>__EntityControl</PropertyPath>
-                                <PropertyPath>__OperationControl</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.DeleteRestrictions">
-                    <Record>
-                        <PropertyValue Property="Deletable" Path="__EntityControl/Deletable"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.UpdateRestrictions">
-                    <Record>
-                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
-                        <PropertyValue Property="NonUpdatableNavigationProperties">
-                            <Collection>
-                                <PropertyPath>DraftAdministrativeData</PropertyPath>
-                                <PropertyPath>SiblingEntity</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="QueryOptions">
-                            <Record>
-                                <PropertyValue Property="SelectSupported" Bool="true"/>
-                            </Record>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__core.OptimisticConcurrency">
-                    <Collection>
-                        <PropertyPath>LocalLastChangedAt</PropertyPath>
-                    </Collection>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="SAP__self.Edit(SAP__self.ConfigurationType)">
-                <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/Edit"/>
-            </Annotations>
             <Annotations Target="SAP__self.ConfigurationType">
+                <Annotation Term="SAP__common.CreatedBy" Path="CreatedBy"/>
+                <Annotation Term="SAP__common.CreatedAt" Path="CreatedAt"/>
+                <Annotation Term="SAP__common.ChangedBy" Path="LastChangedBy"/>
+                <Annotation Term="SAP__common.ChangedAt" Path="LastChangedAt"/>
                 <Annotation Term="SAP__common.Label" String="Projection View for ZZR_DTIMP_CONF"/>
                 <Annotation Term="SAP__UI.Facets">
                     <Collection>
@@ -1139,7 +1032,7 @@
                             <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
                             <Annotation Term="SAP__HTML5.CssDefaults">
                                 <Record>
-                                    <PropertyValue Property="width" String="20rem"/>
+                                    <PropertyValue Property="width" String="25rem"/>
                                 </Record>
                             </Annotation>
                         </Record>
@@ -1158,6 +1051,23 @@
                         </Record>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__UI.PresentationVariant">
+                    <Record>
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="SAP__common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="Object"/>
+                                    <PropertyValue Property="Descending" Bool="false"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@SAP__UI.LineItem</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
                 <Annotation Term="SAP__UI.SelectionFields">
                     <Collection>
                         <PropertyPath>Object</PropertyPath>
@@ -1166,6 +1076,304 @@
                     </Collection>
                 </Annotation>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/CreatedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Created On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Creation Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/LastChangedBy">
+                <Annotation Term="SAP__common.Text" Path="UpdateUserName"/>
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Changed By"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Last Changed By User"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/LastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Changed On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Last Change Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/LocalLastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Changed On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/CreateUserName">
+                <Annotation Term="SAP__common.Label" String="Full Name"/>
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.QuickInfo" String="User Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/UpdateUserName">
+                <Annotation Term="SAP__common.Label" String="Full Name"/>
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.QuickInfo" String="User Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/HasDraftEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Has Draft"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has draft document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/DraftEntityCreationDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/DraftEntityLastChangeDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/HasActiveEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Has active"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has active document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/IsActiveEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Is active"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/__EntityControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ConfigurationType/__OperationControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/Configuration">
+                <Annotation Term="SAP__common.DraftRoot">
+                    <Record>
+                        <PropertyValue Property="EditAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Edit"/>
+                        <PropertyValue Property="ActivationAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Activate"/>
+                        <PropertyValue Property="PreparationAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Prepare"/>
+                        <PropertyValue Property="DiscardAction" String="com.sap.gateway.srvd.zui_dtimp_files_o4.v0001.Discard"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DraftEntityLastChangeDateTime"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                                <PropertyPath>__OperationControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                                <PropertyPath>__OperationControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Path="__EntityControl/Deletable"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
+                        <PropertyValue Property="NonUpdatableNavigationProperties">
+                            <Collection>
+                                <PropertyPath>DraftAdministrativeData</PropertyPath>
+                                <PropertyPath>SiblingEntity</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection>
+                        <PropertyPath>LocalLastChangedAt</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Edit(SAP__self.ConfigurationType)/PreserveChanges">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="TRUE"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Edit(SAP__self.ConfigurationType)">
+                <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/Edit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.LogsType/LogHandle">
+                <Annotation Term="SAP__common.Label" String="Log Handle"/>
+                <Annotation Term="SAP__common.Heading" String="Handle"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Application Log: Log Handle"/>
+            </Annotations>
+            <Annotations Target="SAP__self.LogsType/LogItemNumber">
+                <Annotation Term="SAP__common.Label" String="Item No."/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Heading" String="Msg.No"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Application Log: Internal Message Serial Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.LogsType/Severity">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Message Type"/>
+                <Annotation Term="SAP__common.Heading" String="Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.LogsType/SeverityText">
+                <Annotation Term="SAP__common.Label" String="Severity"/>
+            </Annotations>
+            <Annotations Target="SAP__self.LogsType/DetailLevel">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Level of Detail"/>
+                <Annotation Term="SAP__common.Heading" String="L"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Application Log: Level of Detail"/>
+            </Annotations>
+            <Annotations Target="SAP__self.LogsType/Timestamp">
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+            </Annotations>
+            <Annotations Target="SAP__self.LogsType/MessageText">
+                <Annotation Term="SAP__common.Label" String="Message text"/>
+            </Annotations>
+            <Annotations Target="SAP__self.LogsType">
+                <Annotation Term="SAP__common.Label" String="Data Import Logs"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Data Import Logs"/>
+                        <PropertyValue Property="TypeNamePlural" String="Log Entries"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="LogItemNumber"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MessageText"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Criticality" Path="Criticality"/>
+                            <PropertyValue Property="Value" Path="SeverityText"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="LogItemNumber"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MessageText"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="60rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.PresentationVariant">
+                    <Record>
+                        <PropertyValue Property="MaxItems" Int="20"/>
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@SAP__UI.LineItem</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/Logs">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="MessageText"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>MessageText</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftEntityType">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -1354,6 +1562,12 @@
                 <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Draft In Process By (Description)"/>
             </Annotations>
+            <Annotations Target="SAP__self.LogsType/Category">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.LogsType/Criticality">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
             <Annotations Target="SAP__self.FilesType/FileName">
                 <Annotation Term="SAP__common.Label" String="File Name"/>
             </Annotations>
@@ -1445,14 +1659,6 @@
                 <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
-            </Annotations>
-            <Annotations Target="SAP__self.Edit(SAP__self.ConfigurationType)/PreserveChanges">
-                <Annotation Term="SAP__common.Label" String="TRUE"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"/>
-            </Annotations>
-            <Annotations Target="SAP__self.Edit(SAP__self.FilesType)/PreserveChanges">
-                <Annotation Term="SAP__common.Label" String="TRUE"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
