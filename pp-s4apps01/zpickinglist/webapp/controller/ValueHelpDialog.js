@@ -27,6 +27,7 @@ sap.ui.define([
                 var oBindRow = that.getModel().getProperty(oEvent.getSource().getParent().getBindingContext().getPath());
                 var aFilters = [];
                 if (sPath === "/ZC_MaterialStockVH") {
+                    oDialog.setTitle(that.getModel("i18n").getResourceBundle().getText("StorageLocationFrom"));
                     oDialog.setKey(that._aVHFields[1]);
                     oDialog.setDescriptionKey(that._aVHFields[2]);
                     aFilters.push(new Filter({
