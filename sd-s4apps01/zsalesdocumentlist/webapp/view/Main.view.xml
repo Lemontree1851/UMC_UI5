@@ -32,26 +32,26 @@
                                 <smartFilterBar:ControlConfiguration index='10' key="SalesOrganization" filterType="multiple" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="SalesDocument" visibleInAdvancedArea="true" label="{i18n>SalesDocument}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="SoldToParty" visibleInAdvancedArea="true" label="{i18n>SoldToParty}"/>
-                                <smartFilterBar:ControlConfiguration index='40' key="YY1_SalesDocType_SDH" visibleInAdvancedArea="true" label="{i18n>YY1_SalesDocType_SDH}"/>
-                                <smartFilterBar:ControlConfiguration index='50' key="PurchaseOrderByCustomer" visibleInAdvancedArea="true" label="{i18n>PurchaseOrderByCustomer}"/>
-                                <smartFilterBar:ControlConfiguration index='60' key="Product" visibleInAdvancedArea="true" label="{i18n>Product}"/>
-                                <smartFilterBar:ControlConfiguration index='70' key="Plant" filterType="multiple" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
-                                <smartFilterBar:ControlConfiguration index='80' key="RequestedDeliveryDate" visibleInAdvancedArea="true" label="{i18n>RequestedDeliveryDate}"/>
-                                <smartFilterBar:ControlConfiguration index='90' key="SalesDocumentDate" visibleInAdvancedArea="true" label="{i18n>SalesDocumentDate}"/>
-                                <smartFilterBar:ControlConfiguration index='100' key="ConfirmedDeliveryDate" visibleInAdvancedArea="true" label="{i18n>ConfirmedDeliveryDate}"/>
-
+                                <smartFilterBar:ControlConfiguration index='40' key="SalesDocumentType" filterType="multiple" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>SalesDocumentType}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="SalesDocApprovalStatus" filterType="multiple" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>SalesDocApprovalStatus}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="YY1_SalesDocType_SDH" visibleInAdvancedArea="true" label="{i18n>YY1_SalesDocType_SDH}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="PurchaseOrderByCustomer" visibleInAdvancedArea="true" label="{i18n>PurchaseOrderByCustomer}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="Product" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="Plant" filterType="multiple" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="RequestedDeliveryDate" visibleInAdvancedArea="true" label="{i18n>RequestedDeliveryDate}"/>
+                                <smartFilterBar:ControlConfiguration index='110' key="SalesDocumentDate" visibleInAdvancedArea="true" label="{i18n>SalesDocumentDate}"/>
+                                <smartFilterBar:ControlConfiguration index='120' key="ConfirmedDeliveryDate" visibleInAdvancedArea="true" label="{i18n>ConfirmedDeliveryDate}"/>
+                                <smartFilterBar:ControlConfiguration index='130' key="CreationDateItem" visibleInAdvancedArea="true" label="{i18n>CreationDateItem}"/>
                                 <!-- visible -->
-                                <!-- <smartFilterBar:ControlConfiguration index='999' key="Indicator1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Indicator1" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Indicator2" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Indicator3" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Indicator4" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Indicator5" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="Indicator5" visible="false"/> -->
+                                <smartFilterBar:ControlConfiguration index='999' key="Indicator6" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItem" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ScheduleLine" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentType" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentTypeName" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="SalesDocApprovalStatus" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SalesDocApprovalStatusDesc" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="IncotermsClassification" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="IncotermsLocation1" visible="false"/>
@@ -118,7 +118,6 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="BillingQuantity" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="NoBillingQuantity" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="CreationDate" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="CreationDateItem" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="LastChangeDate" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="CreatedByUser" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentRjcnReason" visible="false"/>

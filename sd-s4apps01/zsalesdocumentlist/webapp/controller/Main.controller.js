@@ -29,8 +29,22 @@ sap.ui.define([
         // 点执行按钮后的响应
         onBeforeRebindTable: function (oEvent) {
             // 获取表格对象
-            // var oTable = this.byId("idTable");
-            // var oBinding = oEvent.getParameter("bindingParams");
+            var oBinding = oEvent.getParameter("bindingParams");
+
+            oBinding.events = {
+                "dataReceived": function (oEvent) {
+                    var oReceivedData = oEvent.getParameter('data');
+                    // 提取 SalesDocument 字段的值，并使用Set去除重复
+                    var setSalesDocuments = new Set(oReceivedData.results.map(item => item.SalesDocument));
+                    // 获取不重复的条目数
+                    var iSoCount = setSalesDocuments.size;
+                    var iSoItemCount = oReceivedData.results.length;
+                    var headerText = this.getModel("i18n").getResourceBundle().getText("Results",[iSoCount,iSoItemCount]);
+                    // 更新 SmartTable 的 header 文本
+                    this.setHeader(headerText);
+                },
+                    //More event handling can be done here
+              };
 
             // // 获取 NoDisplayColMfrpn 的值
             // var oSmartFilterBar = this.byId("idSmartFilterBar");
@@ -46,6 +60,7 @@ sap.ui.define([
             //     }
             // });
 
+            // 根据选择框，添加过滤条件传值到后端
             var filters = oEvent.getParameters().bindingParams.filters;
             if(!filters){
                 filters =[];
@@ -111,7 +126,26 @@ sap.ui.define([
                 });
                 filters.push(oIndicator6Filter);
             }
-        }
+        },
+
+        // 点导出按钮后的响应
+        onBeforeExport: function (oEvent) {
+            var oSettings = oEvent.getParameter("exportSettings");
+            var columns = oSettings.workbook.columns;
+
+            oSettings.fileName = this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("fileName");
+
+            try {
+                columns.find(cloumn => cloumn.property === "DeliveryDate").type = "Date";
+                columns.find(cloumn => cloumn.property === "ConfirmedDeliveryDate").type = "Date";
+                columns.find(cloumn => cloumn.property === "ExchangeRateDate").type = "Date";
+                columns.find(cloumn => cloumn.property === "CreationDate").type = "Date";
+                columns.find(cloumn => cloumn.property === "CreationDateItem").type = "Date";
+                columns.find(cloumn => cloumn.property === "LastChangeDate").type = "Date";
+            } catch (error) {
+                
+            }
+        },
     });
 });
 

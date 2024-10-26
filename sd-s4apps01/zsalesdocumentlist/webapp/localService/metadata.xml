@@ -109,6 +109,13 @@
                 <Property Name="IntercompanyBillingCustomer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer Interc. Bl." sap:quickinfo="Customer Number for Intercompany Billing" sap:value-list="standard"/>
                 <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address"/>
             </EntityType>
+            <EntityType Name="ZC_SalesDocApprovalStatusVHType" sap:label="Approval Sts Value Help for Sales Doc" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesDocApprovalStatus"/>
+                </Key>
+                <Property Name="SalesDocApprovalStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:text="SalesDocApprovalStatusDesc"/>
+                <Property Name="SalesDocApprovalStatusDesc" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+            </EntityType>
             <EntityType Name="SalesDocumentListType" sap:label="Sales Document List" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="SalesDocument"/>
@@ -119,9 +126,9 @@
                 <Property Name="SalesDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="Sales Document Item"/>
                 <Property Name="ScheduleLine" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Schedule Line Number"/>
                 <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Organization" sap:value-list="standard"/>
-                <Property Name="SalesDocumentType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Document Type"/>
+                <Property Name="SalesDocumentType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Document Type" sap:value-list="fixed-values"/>
                 <Property Name="SalesDocumentTypeName" Type="Edm.String" MaxLength="20"/>
-                <Property Name="SalesDocApprovalStatus" Type="Edm.String" MaxLength="1"/>
+                <Property Name="SalesDocApprovalStatus" Type="Edm.String" MaxLength="1" sap:value-list="fixed-values"/>
                 <Property Name="SalesDocApprovalStatusDesc" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
                 <Property Name="PurchaseOrderByCustomer" Type="Edm.String" MaxLength="35" sap:label="Customer Reference"/>
                 <Property Name="IncotermsClassification" Type="Edm.String" MaxLength="3"/>
@@ -163,23 +170,31 @@
                 <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Document Currency" sap:quickinfo="SD Document Currency" sap:semantics="currency-code"/>
                 <Property Name="PriceDetnExchangeRate" Type="Edm.Decimal" Precision="9" Scale="5"/>
                 <Property Name="ExchangeRateDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Translation Date"/>
-                <Property Name="ConditionRateValuePPR0" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValuePPR0" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyPPR0" sap:variable-scale="true"/>
+                <Property Name="ConditionCurrencyPPR0" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="ConditionAmountPPR0" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueTTX1" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValueTTX1" Type="Edm.Decimal" Precision="24" Scale="9"/>
                 <Property Name="ConditionAmountTTX1" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPFC" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValueZPFC" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPFC" sap:variable-scale="true"/>
+                <Property Name="ConditionCurrencyZPFC" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="ConditionAmountZPFC" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPST" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValueZPST" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPST" sap:variable-scale="true"/>
+                <Property Name="ConditionCurrencyZPST" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="ConditionAmountZPST" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPIN" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValueZPIN" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPIN" sap:variable-scale="true"/>
+                <Property Name="ConditionCurrencyZPIN" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="ConditionAmountZPIN" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPSB" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValueZPSB" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPSB" sap:variable-scale="true"/>
+                <Property Name="ConditionCurrencyZPSB" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="ConditionAmountZPSB" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPSS" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValueZPSS" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPSS" sap:variable-scale="true"/>
+                <Property Name="ConditionCurrencyZPSS" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="ConditionAmountZPSS" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPCM" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValueZPCM" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPCM" sap:variable-scale="true"/>
+                <Property Name="ConditionCurrencyZPCM" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="ConditionAmountZPCM" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPGP" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValueZPGP" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPGP" sap:variable-scale="true"/>
+                <Property Name="ConditionCurrencyZPGP" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="ConditionAmountZPGP" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
                 <Property Name="YY1_ItemRemarks_1_SDI" Type="Edm.String" MaxLength="70"/>
                 <Property Name="DeliveredQtyInOrderQtyUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="OrderQuantityUnit" sap:label="Quantity"/>
@@ -208,8 +223,14 @@
                 <Property Name="Indicator4" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="Indicator5" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="Indicator6" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
-                <Property Name="ConditionCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="BillingQuantityUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+            </EntityType>
+            <EntityType Name="ZC_SalesDocumentTypeVHType" sap:label="Sales Document Type Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesDocumentType"/>
+                </Key>
+                <Property Name="SalesDocumentType" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="SalesDocumentTypeName" sap:label="Sales Document Type"/>
+                <Property Name="SalesDocumentTypeName" Type="Edm.String" MaxLength="20" sap:label="Description" sap:quickinfo="Sales Document Type Description"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -450,7 +471,9 @@
                 <EntitySet Name="I_ProductStdVH" EntityType="cds_zui_salesdocumentlist_o2.I_ProductStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_SalesDocumentStdVH" EntityType="cds_zui_salesdocumentlist_o2.I_SalesDocumentStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_SalesOrganization" EntityType="cds_zui_salesdocumentlist_o2.I_SalesOrganizationType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZC_SalesDocApprovalStatusVH" EntityType="cds_zui_salesdocumentlist_o2.ZC_SalesDocApprovalStatusVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="SalesDocumentList" EntityType="cds_zui_salesdocumentlist_o2.SalesDocumentListType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_SalesDocumentTypeVH" EntityType="cds_zui_salesdocumentlist_o2.ZC_SalesDocumentTypeVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_salesdocumentlist_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_salesdocumentlist_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_salesdocumentlist_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -595,6 +618,48 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_salesdocumentlist_o2.SalesDocumentListType/SalesDocumentType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Sales Document Type"/>
+                        <PropertyValue Property="CollectionPath" String="ZC_SalesDocumentTypeVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="SalesDocumentType"/>
+                                    <PropertyValue Property="ValueListProperty" String="SalesDocumentType"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SalesDocumentTypeName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_salesdocumentlist_o2.SalesDocumentListType/SalesDocApprovalStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String=""/>
+                        <PropertyValue Property="CollectionPath" String="ZC_SalesDocApprovalStatusVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="SalesDocApprovalStatus"/>
+                                    <PropertyValue Property="ValueListProperty" String="SalesDocApprovalStatus"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SalesDocApprovalStatusDesc"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues"/>
             </Annotations>
             <Annotations Target="cds_zui_salesdocumentlist_o2.SalesDocumentListType/SoldToParty" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -813,6 +878,40 @@
                                 </Record>
                             </Collection>
                         </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_salesdocumentlist_o2.cds_zui_salesdocumentlist_o2_Entities/ZC_SalesDocApprovalStatusVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_salesdocumentlist_o2.cds_zui_salesdocumentlist_o2_Entities/ZC_SalesDocumentTypeVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.InsertRestrictions">
