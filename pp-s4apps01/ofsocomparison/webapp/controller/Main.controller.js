@@ -38,17 +38,21 @@ function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter) {
 			}    
 
 			var oDateRange1 = that.byId("idDateRangeSelection1");
-			var splitStart1 = `${oDateRange1.getFrom().getFullYear()}${(oDateRange1.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
-			var splitEnd1 = `${oDateRange1.getTo().getFullYear()}${(oDateRange1.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
+			if(oDateRange1.getFrom().getFullYear()){
+				var splitStart1 = `${oDateRange1.getFrom().getFullYear()}${(oDateRange1.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
+				var splitEnd1 = `${oDateRange1.getTo().getFullYear()}${(oDateRange1.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
+			}
 
 			if (splitStart1) {
 				aFilters.push(new Filter("Duration", FilterOperator.BT,splitStart1,splitEnd1));
 			}  
 
 			var oDateRange2 = that.byId("idDateRangeSelection2");
-			var splitStart2 = `${oDateRange2.getFrom().getFullYear()}${(oDateRange2.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
-			var splitEnd2 = `${oDateRange2.getTo().getFullYear()}${(oDateRange2.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
-
+			if(oDateRange2.getFrom().getFullYear()){
+				var splitStart2 = `${oDateRange2.getFrom().getFullYear()}${(oDateRange2.getFrom().getMonth() + 1).toString().padStart(2,"0")}${oDateRange2.getFrom().getDate().toString().padStart(2,"0")}`;
+				var splitEnd2 = `${oDateRange2.getTo().getFullYear()}${(oDateRange2.getTo().getMonth() + 1).toString().padStart(2,"0")}${oDateRange2.getTo().getDate().toString().padStart(2,"0")}`;			
+			}
+			
 			if (splitStart2) {
 				aFilters.push(new Filter("CREATED_AT", FilterOperator.BT,splitStart2,splitEnd2));
 			}   
@@ -91,6 +95,14 @@ function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter) {
 
 		buildListResultUITable: function (oTable, titleVariable) {
 			oTable.removeAllColumns();
+
+			oTable.addColumn(new Column({
+				label: "{i18n>Plant}",
+				template: new Text({
+					text: "{local>Plant}"
+				}),
+				width: "10rem"
+			}));
 			oTable.addColumn(new Column({
 				label: "{i18n>Customer}",
 				template: new Text({
@@ -98,162 +110,294 @@ function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter) {
 				}),
 				width: "10rem"
 			}));
-			// oTable.addColumn(new Column({
-			// 	label: "{i18n>CustomerName}",
-			// 	template: new Text({
-			// 		text: "{local>CustomerName}"
-			// 	}),
-			// 	width: "10rem"
-			// }));
-			// oTable.addColumn(new Column({
-			// 	label: "{i18n>LimitAmount}",
-			// 	template: new Text({
-			// 		text: "{local>LimitAmount}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
-			// oTable.addColumn(new Column({
-			// 	label: "{i18n>Termstext1}",
-			// 	template: new Text({
-			// 		text: "{local>Termstext1}"
-			// 	}),
-			// 	width: "10rem"
-			// }));
-			// oTable.addColumn(new Column({
-			// 	label: "{i18n>Termstext2}",
-			// 	template: new Text({
-			// 		text: "{local>Termstext2}"
-			// 	}),
-			// 	width: "10rem"
-			// }));
-			// oTable.addColumn(new Column({
-			// 	label: "{i18n>text}",
-			// 	template: new Text({
-			// 		text: "{local>text1}"
-			// 	}),
-			// 	width: "20rem"
-			// }));
+			oTable.addColumn(new Column({
+				label: "{i18n>Material}",
+				template: new Text({
+					text: "{local>Material}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: "{i18n>MaterialName}",
+				template: new Text({
+					text: "{local>MaterialName}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: "{i18n>MATERIALBYCUSTOMER}",
+				template: new Text({
+					text: "{local>MATERIALBYCUSTOMER}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: "{i18n>CREATED_AT}",
+				template: new Text({
+					text: "{local>CREATED_AT}"
+				}),
+				width: "10rem"
+			}));
 
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth1}",
-			// 	label: titleVariable.zymonth1,
-			// 	template: new Text({
-			// 		text: "{local>zmonth1}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT1,
+				template: new Text({
+					text: "{local>Period1}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT2,
+				template: new Text({
+					text: "{local>Period2}"
+				}),
+				width: "10rem"
+			}));		
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT3,
+				template: new Text({
+					text: "{local>Period3}"
+				}),
+				width: "10rem"
+			}));		
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT4,
+				template: new Text({
+					text: "{local>Period4}"
+				}),
+				width: "10rem"
+			}));	
+		
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT5,
+				template: new Text({
+					text: "{local>Period5}"
+				}),
+				width: "10rem"
+			}));
 
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth2}",
-			// 	label: titleVariable.zymonth2,
-			// 	template: new Text({
-			// 		text: "{local>zmonth2}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT6,
+				template: new Text({
+					text: "{local>Period6}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT7,
+				template: new Text({
+					text: "{local>Period7}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT8,
+				template: new Text({
+					text: "{local>Period8}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT9,
+				template: new Text({
+					text: "{local>Period9}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT10,
+				template: new Text({
+					text: "{local>Period10}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT11,
+				template: new Text({
+					text: "{local>Period11}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT12,
+				template: new Text({
+					text: "{local>Period12}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT13,
+				template: new Text({
+					text: "{local>Period13}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT14,
+				template: new Text({
+					text: "{local>Period14}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT15,
+				template: new Text({
+					text: "{local>Period15}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT16,
+				template: new Text({
+					text: "{local>Period16}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT17,
+				template: new Text({
+					text: "{local>Period17}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT18,
+				template: new Text({
+					text: "{local>Period18}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT19,
+				template: new Text({
+					text: "{local>Period19}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT20,
+				template: new Text({
+					text: "{local>Period20}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT21,
+				template: new Text({
+					text: "{local>Period21}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT22,
+				template: new Text({
+					text: "{local>Period22}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT23,
+				template: new Text({
+					text: "{local>Period23}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT24,
+				template: new Text({
+					text: "{local>Period24}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT25,
+				template: new Text({
+					text: "{local>Period25}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT26,
+				template: new Text({
+					text: "{local>Period26}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT27,
+				template: new Text({
+					text: "{local>Period27}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT28,
+				template: new Text({
+					text: "{local>Period28}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT29,
+				template: new Text({
+					text: "{local>Period29}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT30,
+				template: new Text({
+					text: "{local>Period30}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT31,
+				template: new Text({
+					text: "{local>Period31}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT32,
+				template: new Text({
+					text: "{local>Period32}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT33,
+				template: new Text({
+					text: "{local>Period33}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT34,
+				template: new Text({
+					text: "{local>Period34}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT35,
+				template: new Text({
+					text: "{local>Period35}"
+				}),
+				width: "10rem"
+			}));
+			oTable.addColumn(new Column({
+				label: titleVariable.PeriodT36,
+				template: new Text({
+					text: "{local>Period36}"
+				}),
+				width: "10rem"
+			}));
 
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth3}",
-			// 	label: titleVariable.zymonth3,
-			// 	template: new Text({
-			// 		text: "{local>zmonth3}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
 
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth4}",
-			// 	label: titleVariable.zymonth4,
-			// 	template: new Text({
-			// 		text: "{local>zmonth4}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
 
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth5}",
-			// 	label: titleVariable.zymonth5,
-			// 	template: new Text({
-			// 		text: "{local>zmonth5}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
 
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth6}",
-			// 	label: titleVariable.zymonth6,
-			// 	template: new Text({
-			// 		text: "{local>zmonth6}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
 
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth7}",
-			// 	label: titleVariable.zymonth7,
-			// 	template: new Text({
-			// 		text: "{local>zmonth7}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
-
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth8}",
-			// 	label: titleVariable.zymonth8,
-			// 	template: new Text({
-			// 		text: "{local>zmonth8}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
-
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth9}",
-			// 	label: titleVariable.zymonth9,
-			// 	template: new Text({
-			// 		text: "{local>zmonth9}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
-
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth10}",
-			// 	label: titleVariable.zymonth10,
-			// 	template: new Text({
-			// 		text: "{local>zmonth10}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
-
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth11}",
-			// 	label: titleVariable.zymonth11,
-			// 	template: new Text({
-			// 		text: "{local>zmonth11}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
-
-			// oTable.addColumn(new Column({
-			// 	// label: "{i18n>zmonth12}",
-			// 	label: titleVariable.zymonth12,
-			// 	template: new Text({
-			// 		text: "{local>zmonth12}"
-			// 	}),
-			// 	width: "10rem",
-			// 	hAlign: "End"
-			// }));
 
 
 		},
