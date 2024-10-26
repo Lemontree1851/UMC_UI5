@@ -3,8 +3,10 @@ sap.ui.define([
     "../model/formatter",
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
-    "sap/ui/core/Fragment"
-], function (ValueHelpDialog, formatter, BusyDialog, MessageBox, Fragment) {
+    "sap/ui/core/Fragment",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], function (ValueHelpDialog, formatter, BusyDialog, MessageBox, Fragment, Filter, FilterOperator) {
     'use strict';
 
     var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog, _UserInfo;
@@ -97,24 +99,45 @@ sap.ui.define([
                         that.getModel("local").setProperty("/mode", "update");
                     }
                     _myBusyDialog.open();
-                    Fragment.load({
-                        name: "pp.zmaterialrequisition.ext.fragments.Operation",
-                        controller: that
-                    }).then(function (oDialog) {
-                        //ダイアログがロードされたら
-                        that._oOperationDialog = oDialog;
-                        //ダイアログからモデルを使用できるようにする
-                        that.routing.getView().addDependent(that._oOperationDialog);
-                        that._oOperationDialog.addButton(new sap.m.Button({
-                            text: "{i18n>CloseBtn}",
-                            press: function () {
-                                that.getModel("local").setProperty("/headSet", {});
-                                that.getModel("local").setProperty("/itemSet", []);
-                                that._oOperationDialog.destroy();
-                            }
-                        }));
-                        _myBusyDialog.close();
-                        that._oOperationDialog.open();
+
+                    var aFilters = [];
+                    aFilters.push(new Filter({
+                        path: "ZID",
+                        operator: FilterOperator.EQ,
+                        value1: "ZPP010"
+                    }));
+                    var oContextBinding = that.getModel().bindList("/ZC_TBC1001", undefined, undefined, aFilters, {});
+                    oContextBinding.requestContexts().then(function (aContext) {
+                        var aConfig = [];
+                        for (const boundContext of aContext) {
+                            var object = boundContext.getObject();
+                            aConfig.push({
+                                Plant: object.Zvalue1,
+                                Amount: object.Zvalue2
+                            });
+                        }
+                        that.getModel("local").setProperty("/Config", aConfig);
+
+                        Fragment.load({
+                            name: "pp.zmaterialrequisition.ext.fragments.Operation",
+                            controller: that
+                        }).then(function (oDialog) {
+                            //ダイアログがロードされたら
+                            that._oOperationDialog = oDialog;
+                            //ダイアログからモデルを使用できるようにする
+                            that.routing.getView().addDependent(that._oOperationDialog);
+                            that._oOperationDialog.addButton(new sap.m.Button({
+                                text: "{i18n>CloseBtn}",
+                                press: function () {
+                                    that.getModel("local").setProperty("/headSet", {});
+                                    that.getModel("local").setProperty("/itemSet", []);
+                                    that._oOperationDialog.destroy();
+                                }
+                            }));
+                            _myBusyDialog.close();
+                            that._oOperationDialog.open();
+                        }.bind(that));
+
                     }.bind(that));
                 },
                 dependentOn: this.routing.getView()
@@ -142,9 +165,11 @@ sap.ui.define([
             var oTable = oEvent.getSource().getParent().getParent();
             var header = this.getModel("local").getProperty("/headSet");
             var items = this.getModel("local").getProperty("/itemSet");
+            var aConfig = this.getModel("local").getProperty("/Config");
+            var config = aConfig.find(element => element.Plant === header.Plant);
             items.forEach(item => {
                 var iAmount = parseFloat(item.StandardPrice) * parseFloat(item.Quantity);
-                item.DeleteFlag = iAmount >= 100000 ? "W" : "";
+                item.DeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
             });
             var oRequestData = {
                 header: header,
@@ -239,14 +264,80 @@ sap.ui.define([
                     break;
             }
             this._oControl.setValueState("Error");
-            if (sODataPath === "/ZC_ManufacturingOrderProductVH") {
-                oContextBinding = this.getModel().bindContext(sODataPath + "(ManufacturingOrder='" + sValue.split('/')[0] + "',Item='" + sValue.split('/')[1] + "')");
-            } else if (sODataPath === "/I_StorageLocationStdVH") {
-                var sPlant = this.getModel("local").getProperty("/headSet/Plant");
-                oContextBinding = this.getModel().bindContext(sODataPath + "(Plant='" + sPlant + "',StorageLocation='" + sValue + "')");
-            } else {
-                oContextBinding = this.getModel().bindContext(sODataPath + "('" + sValue + "')");
+
+            var aFilters = [];
+            var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+            // if (sODataPath === "/ZC_ManufacturingOrderProductVH") {
+            //     oContextBinding = this.getModel().bindContext(sODataPath + "(ManufacturingOrder='" + sValue.split('/')[0] + "',Item='" + sValue.split('/')[1] + "',ProductionPlant='" + sPlant + "')");
+            // } else if (sODataPath === "/I_StorageLocationStdVH") {
+            //     oContextBinding = this.getModel().bindContext(sODataPath + "(Plant='" + sPlant + "',StorageLocation='" + sValue + "')");
+            // } else if (sODataPath === "/ZC_ApplicationReceiverVH" || sODataPath === "/ZC_ProductVH") {
+            //     if (sODataPath === "/ZC_ApplicationReceiverVH") {
+            //         aFilters.push(new Filter({
+            //             path: "Receiver",
+            //             operator: FilterOperator.EQ,
+            //             value1: sValue
+            //         }));
+            //     }
+            //     if (sODataPath === "/ZC_ProductVH") {
+            //         aFilters.push(new Filter({
+            //             path: "Material",
+            //             operator: FilterOperator.EQ,
+            //             value1: sValue
+            //         }));
+            //     }
+            //     oContextBinding = this.getModel().bindList(sODataPath, undefined, undefined, aFilters, {});
+            // } else {
+            //     oContextBinding = this.getModel().bindContext(sODataPath + "('" + sValue + "')");
+            // }
+            switch (sODataPath) {
+                // Query
+                case "/ZC_ApplicationReceiverVH":
+                    aFilters.push(new Filter({
+                        path: "Receiver",
+                        operator: FilterOperator.EQ,
+                        value1: sValue
+                    }));
+                    break;
+                case "/ZC_ManufacturingOrderProductVH":
+                    aFilters.push(new Filter({
+                        path: "ProductionPlant",
+                        operator: FilterOperator.EQ,
+                        value1: sPlant
+                    }));
+                    aFilters.push(new Filter({
+                        path: "ManufacturingOrder",
+                        operator: FilterOperator.EQ,
+                        value1: sValue
+                    }));
+                    break;
+                case "/ZC_ProductVH":
+                    aFilters.push(new Filter({
+                        path: "Material",
+                        operator: FilterOperator.EQ,
+                        value1: sValue
+                    }));
+                    break;
+                case "/I_StorageLocationStdVH":
+                    aFilters.push(new Filter({
+                        path: "Plant",
+                        operator: FilterOperator.EQ,
+                        value1: sPlant
+                    }));
+                    aFilters.push(new Filter({
+                        path: "StorageLocation",
+                        operator: FilterOperator.EQ,
+                        value1: sValue
+                    }));
+                    break;
+                default:
+                    oContextBinding = this.getModel().bindContext(sODataPath + "('" + sValue + "')");
+                    break;
             }
+            if (oContextBinding === undefined) {
+                oContextBinding = this.getModel().bindList(sODataPath, undefined, undefined, aFilters, {});
+            }
+
             if (sInputBindingPath.includes("/")) {
                 // head bind
                 if (sInputBindingPath.split("/")[2] === "Type") {
@@ -257,12 +348,23 @@ sap.ui.define([
                 aFieldName.forEach(field => {
                     this.getModel("local").setProperty("/headSet/" + field, "");
                 });
-                oContextBinding.requestObject().then(function (context) {
-                    this._oControl.setValueState("None");
-                    aFieldName.forEach(field => {
-                        this.getModel("local").setProperty("/headSet/" + field, context[field]);
-                    });
-                }.bind(this));
+                if (sODataPath === "/ZC_ApplicationReceiverVH") {
+                    oContextBinding.requestContexts().then(function (aContext) {
+                        for (const boundContext of aContext) {
+                            var object = boundContext.getObject();
+                            if (object["Receiver"] === sValue) {
+                                this._oControl.setValueState("None");
+                            }
+                        }
+                    }.bind(this));
+                } else {
+                    oContextBinding.requestObject().then(function (context) {
+                        this._oControl.setValueState("None");
+                        aFieldName.forEach(field => {
+                            this.getModel("local").setProperty("/headSet/" + field, context[field]);
+                        });
+                    }.bind(this));
+                }
             } else {
                 // table item bind
                 var sBindFieldName = sInputBindingPath;
@@ -289,21 +391,28 @@ sap.ui.define([
                         this.getModel("local").setProperty(sItemPath + field, 0);
                     }
                 });
-                oContextBinding.requestObject().then(function (context) {
-                    this._oControl.setValueState("None");
-                    for (const key in context) {
-                        if (!key.includes("@odata")) {
-                            this.getModel("local").setProperty(sItemPath + key, context[key]);
-                        }
-                    }
-                    if (sBindFieldName === "ManufacturingOrder" || sBindFieldName === "Material") {
-                        // Calculate amount
-                        var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
-                        if (sValue && context["StandardPrice"]) {
-                            var iAmount = parseFloat(sValue) * parseFloat(context["StandardPrice"]);
-                            this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
-                            if (iAmount >= 100000) {
-                                this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                oContextBinding.requestContexts().then(function (aContext) {
+                    if (aContext.length > 0) {
+                        this._oControl.setValueState("None");
+                        for (const boundContext of aContext) {
+                            var object = boundContext.getObject();
+                            for (const key in object) {
+                                if (!key.includes("@odata")) {
+                                    this.getModel("local").setProperty(sItemPath + key, object[key]);
+                                }
+                            }
+                            // Calculate amount
+                            if (sBindFieldName === "ManufacturingOrder" || sBindFieldName === "Material") {
+                                var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
+                                if (sValue && object["StandardPrice"]) {
+                                    var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
+                                    this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
+                                    var aConfig = this.getModel("local").getProperty("/Config");
+                                    var config = aConfig.find(element => element.Plant === header.Plant);
+                                    if (iAmount >= parseFloat(config.Amount)) {
+                                        this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                                    }
+                                }
                             }
                         }
                     }
@@ -481,7 +590,7 @@ sap.ui.define([
                                     Currency: element.CURRENCY,
                                     OrderIsClosed: element.ORDER_IS_CLOSED,
                                     LocalLastChangedAtS: element.LOCAL_LAST_CHANGED_AT_S,
-                                    DeleteFlag: iAmount >= 100000 ? "W" : ""
+                                    DeleteFlag: element.DELETE_FLAG //iAmount >= 100000 ? "W" : ""
                                 });
                             });
                             that.getModel("local").setProperty("/itemSet", items);
@@ -597,7 +706,9 @@ sap.ui.define([
                         bFlag = true;
                         oControl.setValueState("Error");
                     }
-                };
+                } else {
+                    oControl.setValueState("None");
+                }
             });
             return bFlag;
         },

@@ -28,6 +28,7 @@ sap.ui.define([
                 that._oVHD = oDialog;
                 that.routing.getView().addDependent(oDialog);
 
+                oDialog.setTitle(that.getModel("i18n").getResourceBundle().getText(that._aVHFields[0]));
                 oDialog.setKey(that._aVHFields[0]);
                 if (that._aVHFields[0] === "ManufacturingOrder") {
                     oDialog.setDescriptionKey("Item");
@@ -35,17 +36,47 @@ sap.ui.define([
                     oDialog.setDescriptionKey(that._aVHFields[1]);
                 }
 
+                var aFilters = [];
+                var headSet = that.getModel("local").getProperty("/headSet");
+                if (sPath === "/ZC_ApplicationReceiverVH") {
+                    if (headSet.Plant) {
+                        aFilters.push(new Filter({
+                            path: "Plant",
+                            operator: FilterOperator.EQ,
+                            value1: headSet.Plant
+                        }));
+                    }
+                    if (headSet.Customer) {
+                        aFilters.push(new Filter({
+                            path: "Customer",
+                            operator: FilterOperator.EQ,
+                            value1: headSet.Customer
+                        }));
+                    }
+                }
+                if (sPath === "/ZC_ManufacturingOrderProductVH") {
+                    if (headSet.Plant) {
+                        aFilters.push(new Filter({
+                            path: "ProductionPlant",
+                            operator: FilterOperator.EQ,
+                            value1: headSet.Plant
+                        }));
+                    }
+                }
+
                 // Set filter group items
                 that._aFilterFields.forEach(fieldName => {
-                    var oFilterGroupItem = new FilterGroupItem({
-                        groupName: "__$INTERNAL$",
-                        visibleInFilterBar: true,
-                        name: fieldName,
-                        label: "{i18n>" + fieldName + "}"
-                    });
-                    var oControl = new Input({ name: fieldName });
-                    oFilterGroupItem.setControl(oControl);
-                    oFilterBar.addFilterGroupItem(oFilterGroupItem);
+                    if (fieldName !== "UUID") {
+                        var oFilterGroupItem = new FilterGroupItem({
+                            groupName: "__$INTERNAL$",
+                            visibleInFilterBar: true,
+                            name: fieldName,
+                            label: "{i18n>" + fieldName + "}"
+                        });
+                        var oControl = new Input({ name: fieldName });
+                        oFilterGroupItem.setControl(oControl);
+                        oFilterBar.addFilterGroupItem(oFilterGroupItem);
+                    }
                 });
 
                 // Set Basic Search for FilterBar
@@ -66,6 +97,7 @@ sap.ui.define([
                         // Bind rows to the ODataModel and add columns
                         oTable.bindAggregation("rows", {
                             path: sPath,
+                            filters: aFilters,
                             events: {
                                 dataReceived: function () {
                                     oDialog.update();
@@ -73,15 +105,17 @@ sap.ui.define([
                             }
                         });
                         that._aVHFields.forEach(fieldName => {
-                            var oColumn = new UIColumn({
-                                width: "10rem",
-                                label: new Label({ text: "{i18n>" + fieldName + "}" }),
-                                template: new Text({ wrapping: false, text: "{" + fieldName + "}" })
-                            });
-                            oColumn.data({
-                                fieldName: fieldName
-                            });
-                            oTable.addColumn(oColumn);
+                            if (fieldName !== "UUID") {
+                                var oColumn = new UIColumn({
+                                    width: fieldName === "MailAddress" ? "15rem" : "10rem",
+                                    label: new Label({ text: "{i18n>" + fieldName + "}" }),
+                                    template: new Text({ wrapping: false, text: "{" + fieldName + "}" })
+                                });
+                                oColumn.data({
+                                    fieldName: fieldName
+                                });
+                                oTable.addColumn(oColumn);
+                            }
                         });
                     }
                     oDialog.update();
@@ -128,25 +162,35 @@ sap.ui.define([
 
         onValueHelpOkPress: function (oEvent) {
             var aTokens = oEvent.getParameter("tokens");
+            var sKey = aTokens[0].getProperty("key").trim();
+            var sText = "";
+            if (aTokens[0].getProperty("text").includes("(")) {
+                sText = aTokens[0].getProperty("text").split("(")[0].trim();
+            }
             //--------------------------------------------------------------------------------
             var sInputPath = this._oInput.mBindingInfos.value.parts[0].path;
             if (sInputPath.includes("/")) {
                 // head bind
-                this.getModel("local").setProperty(sInputPath, aTokens[0].getProperty("key"));
-                var sFieldName = sInputPath.split("/")[2] + "Name";
-                if (aTokens[0].getProperty("text").includes("(")) {
-                    this.getModel("local").setProperty("/headSet/" + sFieldName, aTokens[0].getProperty("text").split("(")[0]);
+                if (sInputPath === "/headSet/Receiver") {
+                    this.getModel("local").setProperty(sInputPath, sText);
+                    this.getModel("local").setProperty("/headSet/ReceiverUUID", sKey);
                 } else {
-                    this.getModel("local").setProperty("/headSet/" + sFieldName, "");
+                    this.getModel("local").setProperty(sInputPath, sKey);
+                    if (aTokens[0].getProperty("text").includes("(")) {
+                        this.getModel("local").setProperty(sInputPath + "Name", sText);
+                    } else {
+                        this.getModel("local").setProperty(sInputPath + "Name", "");
+                    }
                 }
             } else {
                 // table item bind
                 var sBindFieldName = sInputPath;
                 var sItemPath = this._oInput.getParent().oBindingContexts.local.sPath + "/";
                 sInputPath = sItemPath + sBindFieldName;
-                this.getModel("local").setProperty(sInputPath, aTokens[0].getProperty("key"));
+                this.getModel("local").setProperty(sInputPath, sKey);
+                var sPlant = this.getModel("local").getProperty("/headSet/Plant");
                 if (sBindFieldName === "ManufacturingOrder") {
-                    var oContextBinding = this.getModel().bindContext("/ZC_ManufacturingOrderProductVH" + "(ManufacturingOrder='" + aTokens[0].getProperty("key").replace(/\s/g, "") + "',Item='" + aTokens[0].getProperty("text").split("(")[0].replace(/\s/g, "") + "')");
+                    var oContextBinding = this.getModel().bindContext("/ZC_ManufacturingOrderProductVH" + "(ManufacturingOrder='" + sKey + "',Item='" + sText + "',ProductionPlant='" + sPlant + "')");
                     oContextBinding.requestObject().then(function (context) {
                         for (const key in context) {
                             if (!key.includes("@odata")) {
@@ -155,25 +199,39 @@ sap.ui.define([
                         }
                     }.bind(this));
                 } else if (sBindFieldName === "Material") {
-                    var oContextBinding = this.getModel().bindContext("/ZC_ProductVH" + "('" + aTokens[0].getProperty("key").replace(/\s/g, "") + "')");
-                    oContextBinding.requestObject().then(function (context) {
-                        for (const key in context) {
-                            if (!key.includes("@odata")) {
-                                this.getModel("local").setProperty(sItemPath + key, context[key]);
-                            }
-                        }
-                        // Calculate amount
-                        var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
-                        if (sValue && context["StandardPrice"]) {
-                            var iAmount = parseFloat(sValue) * parseFloat(context["StandardPrice"]);
-                            this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
-                            if (iAmount >= 100000) {
-                                this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                    // var oContextBinding = this.getModel().bindContext("/ZC_ProductVH" + "('" + sKey + "')");
+                    var aFilters = [];
+                    aFilters.push(new Filter({
+                        path: "Material",
+                        operator: FilterOperator.EQ,
+                        value1: sKey
+                    }));
+                    var oContextBinding = this.getModel().bindList("/ZC_ProductVH", undefined, undefined, aFilters, {});
+                    oContextBinding.requestContexts().then(function (aContext) {
+                        if (aContext.length > 0) {
+                            for (const boundContext of aContext) {
+                                var object = boundContext.getObject();
+                                for (const key in object) {
+                                    if (!key.includes("@odata")) {
+                                        this.getModel("local").setProperty(sItemPath + key, object[key]);
+                                    }
+                                }
+                                // Calculate amount
+                                var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
+                                if (sValue && object["StandardPrice"]) {
+                                    var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
+                                    this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
+                                    var aConfig = this.getModel("local").getProperty("/Config");
+                                    var config = aConfig.find(element => element.Plant === header.Plant);
+                                    if (iAmount >= parseFloat(config.Amount)) {
+                                        this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                                    }
+                                }
                             }
                         }
                     }.bind(this));
                 } else {
-                    this.getModel("local").setProperty(sInputPath + "Name", aTokens[0].getProperty("text").split("(")[0]);
+                    this.getModel("local").setProperty(sInputPath + "Name", sText);
                 }
             }
             //--------------------------------------------------------------------------------

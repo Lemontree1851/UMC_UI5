@@ -12,7 +12,7 @@
                         <core:ListItem key="{Plant}" text="{PlantName}({Plant})" additionalText="{Plant}"/>
                     </ComboBox>
                     <Label text="{i18n>Type}:" required="true"/>
-                    <ComboBox id="idType" items="{ path: '/ZC_ApplicationTypeVH' }" selectedKey="{local>/headSet/Type}" filterSecondaryValues= "true" required="true" change="handler.handleChange" editable="{= ${local>/mode} === 'create'}" width="13rem">
+                    <ComboBox id="idType" items="{ path: '/ZC_ApplicationTypeVH' }" selectedKey="{local>/headSet/Type}" filterSecondaryValues= "true" required="true" change="handler.handleChange" editable="{= ${local>/mode} === 'create' &amp;&amp; ${local>/headSet/Plant} !== ''}" width="13rem">
                         <core:ListItem key="{Zvalue1}" text="{Zvalue2}({Zvalue1})" additionalText="{Zvalue1}"/>
                     </ComboBox>
                 </VBox>
@@ -92,7 +92,23 @@
                 </VBox>
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>Receiver}:" required="{= ${local>/headSet/Type} !== '31'}"/>
-                    <Input id="idReceiver" value="{local>/headSet/Receiver}" change="handler.handleChange" showValueHelp="true" required="{= ${local>/headSet/Type} !== '31'}" width="13rem"/>
+                    <Input id="idReceiver" value="{local>/headSet/Receiver}" editable="{= ${local>/headSet/Plant} !== ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/ZC_ApplicationReceiverVH', ['UUID','Receiver','Plant','Customer','MailAddress'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ApplicationReceiverVH', length: 10 }" required="{= ${local>/headSet/Type} !== '31'}" width="13rem">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>Receiver}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>MailAddress}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{Receiver}" />
+                                <Label text="{MailAddress}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
                     <Label text="{i18n>RequisitionDate}:" required="true"/>
                     <DatePicker id="idRequisitionDate" required="true" width="13rem" value="{
 						'path':'local>/headSet/RequisitionDate',
@@ -109,7 +125,7 @@
             </HBox>
         </Panel>
         <Panel expandable="false" expanded="true" width="auto">
-            <table:Table rows="{local>/itemSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+            <table:Table id="idItemTable" rows="{local>/itemSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
                 <table:extension>
                     <OverflowToolbar>
                         <ToolbarSpacer/>
@@ -128,9 +144,9 @@
                     <table:Column width="10rem">
                         <Label text="{i18n>ManufacturingOrder}" required="{= ${local>/headSet/Type} !== '31' &amp;&amp; ${local>/headSet/Type} !== '50' }"/>
                         <table:template>
-                            <Input value="{local>ManufacturingOrder}" suggestionItemSelected="true" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                            <Input value="{local>ManufacturingOrder}" editable="{= ${local>/headSet/Plant} !== ''}" suggestionItemSelected="true" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                                 $event, $controller, '/ZC_ManufacturingOrderProductVH', 
-                                ['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MfgOrderPlannedStartDate','MfgOrderPlannedEndDate','MRPController'],['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MRPController'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ManufacturingOrderProductVH', length: 12 }" required="{= ${local>/headSet/Type} !== '31' &amp;&amp; ${local>/headSet/Type} !== '50' }">
+                                ['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MfgOrderPlannedStartDate','MfgOrderPlannedEndDate','MRPController'],['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MRPController'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ManufacturingOrderProductVH', length: 12 }" required="{= ${local>/headSet/Type} !== '31' &amp;&amp; ${local>/headSet/Type} !== '50'}">
                                 <suggestionColumns>
                                     <Column>
                                         <Label text="{i18n>ManufacturingOrder}"/>
@@ -199,7 +215,7 @@
                     <table:Column width="8rem">
                         <Label text="{i18n>StorageLocation}" required="true"/>
                         <table:template>
-                            <Input value="{local>StorageLocation}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                            <Input value="{local>StorageLocation}" change="handler.handleChange" editable="{= ${local>/headSet/Plant} !== ''}" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                                 $event, $controller, '/I_StorageLocationStdVH',
                                 ['StorageLocation','StorageLocationName'])" showSuggestion="true" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }" required="true">
                                 <suggestionColumns>
