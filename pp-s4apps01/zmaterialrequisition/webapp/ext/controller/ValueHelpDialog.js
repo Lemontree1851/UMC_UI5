@@ -6,8 +6,9 @@ sap.ui.define([
     "sap/m/Text",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/m/Input"
-], function (Label, FilterGroupItem, SearchField, UIColumn, Text, Filter, FilterOperator, Input) {
+    "sap/m/Input",
+    "sap/m/BusyDialog"
+], function (Label, FilterGroupItem, SearchField, UIColumn, Text, Filter, FilterOperator, Input, BusyDialog) {
     "use strict";
 
     return {
@@ -169,6 +170,8 @@ sap.ui.define([
             }
             //--------------------------------------------------------------------------------
             var sInputPath = this._oInput.mBindingInfos.value.parts[0].path;
+            var _myBusyDialog = new BusyDialog();
+            _myBusyDialog.open();
             if (sInputPath.includes("/")) {
                 // head bind
                 if (sInputPath === "/headSet/Receiver") {
@@ -182,6 +185,8 @@ sap.ui.define([
                         this.getModel("local").setProperty(sInputPath + "Name", "");
                     }
                 }
+                _myBusyDialog.close();
+                this._oInput.setValueState("None");
             } else {
                 // table item bind
                 var sBindFieldName = sInputPath;
@@ -192,11 +197,15 @@ sap.ui.define([
                 if (sBindFieldName === "ManufacturingOrder") {
                     var oContextBinding = this.getModel().bindContext("/ZC_ManufacturingOrderProductVH" + "(ManufacturingOrder='" + sKey + "',Item='" + sText + "',ProductionPlant='" + sPlant + "')");
                     oContextBinding.requestObject().then(function (context) {
+                        _myBusyDialog.close();
+                        this._oInput.setValueState("None");
                         for (const key in context) {
                             if (!key.includes("@odata")) {
                                 this.getModel("local").setProperty(sItemPath + key, context[key]);
                             }
                         }
+                    }.bind(this), function (oError) {
+                        _myBusyDialog.close();
                     }.bind(this));
                 } else if (sBindFieldName === "Material") {
                     // var oContextBinding = this.getModel().bindContext("/ZC_ProductVH" + "('" + sKey + "')");
@@ -208,6 +217,8 @@ sap.ui.define([
                     }));
                     var oContextBinding = this.getModel().bindList("/ZC_ProductVH", undefined, undefined, aFilters, {});
                     oContextBinding.requestContexts().then(function (aContext) {
+                        _myBusyDialog.close();
+                        this._oInput.setValueState("None");
                         if (aContext.length > 0) {
                             for (const boundContext of aContext) {
                                 var object = boundContext.getObject();
@@ -229,8 +240,11 @@ sap.ui.define([
                                 }
                             }
                         }
+                    }.bind(this), function (oError) {
+                        _myBusyDialog.close();
                     }.bind(this));
                 } else {
+                    _myBusyDialog.close();
                     this.getModel("local").setProperty(sInputPath + "Name", sText);
                 }
             }

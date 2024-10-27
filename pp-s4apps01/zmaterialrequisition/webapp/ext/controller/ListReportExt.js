@@ -178,7 +178,7 @@ sap.ui.define([
                 username: _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName(),
                 datetime: _myFunction._getCurrentDateTime()
             }
-            if (!_myFunction._requiredFields(oTable)) {
+            if (!_myFunction._requiredFields(oTable, this)) {
                 MessageBox.confirm(this.getModel("i18n").getResourceBundle().getText("confirmMessage", [this.getModel("i18n").getResourceBundle().getText("SaveBtn")]), {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                     emphasizedAction: MessageBox.Action.OK,
@@ -249,16 +249,42 @@ sap.ui.define([
             var aFieldName = [];
             var sValue, sInputBindingPath, sODataPath, oContextBinding;
             this._oControl = oEvent.getSource();
+            _myBusyDialog.open();
             switch (this._oControl.getMetadata().getName()) {
                 case "sap.m.Input":
                     sValue = this._oControl.getValue();
                     sInputBindingPath = this._oControl.mBindingInfos.value.parts[0].path;
-                    sODataPath = this._oControl.mBindingInfos.suggestionRows.path;
+                    if (sInputBindingPath === 'Remark') {
+                        if (sValue) {
+                            this._oControl.setValueState("None");
+                        } else {
+                            this._oControl.setValueState("Error");
+                        }
+                        _myBusyDialog.close();
+                        return;
+                    } else {
+                        sODataPath = this._oControl.mBindingInfos.suggestionRows.path;
+                    }
                     break;
                 case "sap.m.ComboBox":
-                    sValue = this._oControl.getSelectedKey();
                     sInputBindingPath = this._oControl.mBindingInfos.selectedKey.parts[0].path;
                     sODataPath = this._oControl.mBindingInfos.items.path;
+                    sValue = this._oControl.getSelectedKey();
+                    if (sInputBindingPath === 'Reason') {
+                        if (!sValue) {
+                            sValue = this._oControl.getValue();
+                        } else if (sValue !== '11') {
+                            this.getModel("local").setProperty(this._oControl.getParent().oBindingContexts.local.sPath + "/Remark", "");
+                        }
+                    } else {
+                        // Plant and Type
+                        if (sValue) {
+                            this._oControl.setEditable(false);
+                        } else {
+                            sValue = this._oControl.getValue();
+                            this._oControl.setEditable(true);
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -330,6 +356,18 @@ sap.ui.define([
                         value1: sValue
                     }));
                     break;
+                case "/ZC_TBC1001":
+                    aFilters.push(new Filter({
+                        path: "ZID",
+                        operator: FilterOperator.EQ,
+                        value1: "ZPP011"
+                    }));
+                    aFilters.push(new Filter({
+                        path: "Zvalue1",
+                        operator: FilterOperator.EQ,
+                        value1: sValue
+                    }));
+                    break;
                 default:
                     oContextBinding = this.getModel().bindContext(sODataPath + "('" + sValue + "')");
                     break;
@@ -350,19 +388,25 @@ sap.ui.define([
                 });
                 if (sODataPath === "/ZC_ApplicationReceiverVH") {
                     oContextBinding.requestContexts().then(function (aContext) {
+                        _myBusyDialog.close();
                         for (const boundContext of aContext) {
                             var object = boundContext.getObject();
                             if (object["Receiver"] === sValue) {
                                 this._oControl.setValueState("None");
                             }
                         }
+                    }.bind(this), function (oError) {
+                        _myBusyDialog.close();
                     }.bind(this));
                 } else {
                     oContextBinding.requestObject().then(function (context) {
+                        _myBusyDialog.close();
                         this._oControl.setValueState("None");
                         aFieldName.forEach(field => {
                             this.getModel("local").setProperty("/headSet/" + field, context[field]);
                         });
+                    }.bind(this), function (oError) {
+                        _myBusyDialog.close();
                     }.bind(this));
                 }
             } else {
@@ -382,7 +426,7 @@ sap.ui.define([
                     aFieldName.push("BaseUnit");
                     aFieldName.push("StandardPrice");
                     aFieldName.push("TotalAmount");
-                } else {
+                } else if (sBindFieldName === "StorageLocation") {
                     aFieldName.push("StorageLocationName");
                 }
                 aFieldName.forEach(field => {
@@ -392,8 +436,12 @@ sap.ui.define([
                     }
                 });
                 oContextBinding.requestContexts().then(function (aContext) {
+                    _myBusyDialog.close();
                     if (aContext.length > 0) {
                         this._oControl.setValueState("None");
+                        if (sBindFieldName === "Reason") {
+                            return;
+                        }
                         for (const boundContext of aContext) {
                             var object = boundContext.getObject();
                             for (const key in object) {
@@ -416,6 +464,8 @@ sap.ui.define([
                             }
                         }
                     }
+                }.bind(this), function (oError) {
+                    _myBusyDialog.close();
                 }.bind(this));
             }
             if (!sValue) {
@@ -424,20 +474,36 @@ sap.ui.define([
         },
 
         handleCalculate: function (oEvent) {
-            var sPath = oEvent.getSource().getParent().oBindingContexts.local.sPath;
+            var oRow = oEvent.getSource().getParent();
+            var sPath = oRow.oBindingContexts.local.sPath;
             var sValue = oEvent.getParameter("value");
+            var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+            var aConfig = this.getModel("local").getProperty("/Config");
+            var config = aConfig.find(element => element.Plant === sPlant);
             var sStandardPrice = this.getModel("local").getProperty(sPath + "/StandardPrice");
             if (sValue && parseFloat(sValue) !== 0) {
                 oEvent.getSource().setValueState("None");
                 if (sStandardPrice) {
                     var iAmount = parseFloat(sValue) * parseFloat(sStandardPrice);
+                    var sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
                     this.getModel("local").setProperty(sPath + "/TotalAmount", iAmount);
+                    this.getModel("local").setProperty(sPath + "/DeleteFlag", sDeleteFlag);
+                    if (sDeleteFlag === "W") {
+                        $("#" + oRow.getId()).css("background-color", "#ff3333");
+                        $("#" + oRow.getId() + "-fixed").css("background-color", "#ff3333");
+                    }
                 } else {
                     this.getModel("local").setProperty(sPath + "/TotalAmount", 0);
+                    this.getModel("local").setProperty(sPath + "/DeleteFlag", "");
+                    $("#" + oRow.getId()).css("background-color", "#fff");
+                    $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
                 }
             } else {
                 oEvent.getSource().setValueState("Error");
                 this.getModel("local").setProperty(sPath + "/TotalAmount", 0);
+                this.getModel("local").setProperty(sPath + "/DeleteFlag", "");
+                $("#" + oRow.getId()).css("background-color", "#fff");
+                $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
             }
         },
 
@@ -660,7 +726,7 @@ sap.ui.define([
             });
         },
 
-        _requiredFields: function (oTable) {
+        _requiredFields: function (oTable, that) {
             var bFlag = false;
             var aIdListOfRequiredFields = [
                 "idPlant",
@@ -703,8 +769,22 @@ sap.ui.define([
                     } else if (sValue) {
                         // oControl.setValueState("None");
                     } else {
-                        bFlag = true;
-                        oControl.setValueState("Error");
+                        if (oControl.mBindingInfos.value) {
+                            if (oControl.mBindingInfos.value.parts[0].path === "Remark") {
+                                var sPath = oControl.getParent().oBindingContexts.local.sPath;
+                                var sReason = that.getModel("local").getProperty(sPath + "/Reason");
+                                if (sReason === "11" && !sValue) {
+                                    bFlag = true;
+                                    oControl.setValueState("Error");
+                                }
+                            } else {
+                                bFlag = true;
+                                oControl.setValueState("Error");
+                            }
+                        } else {
+                            bFlag = true;
+                            oControl.setValueState("Error");
+                        }
                     }
                 } else {
                     oControl.setValueState("None");
