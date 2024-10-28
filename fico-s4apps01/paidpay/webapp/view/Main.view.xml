@@ -35,7 +35,7 @@
                     <table:columns>
                         <table:Column width="6rem" label="{i18n>Status}">
                             <table:template>
-                                <!-- <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/> -->
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
