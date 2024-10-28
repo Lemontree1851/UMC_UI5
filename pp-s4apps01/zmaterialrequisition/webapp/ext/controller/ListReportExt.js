@@ -210,7 +210,8 @@ sap.ui.define([
                 TotalAmount: 0,
                 Currency: "",
                 OrderIsClosed: "",
-                DeleteFlag: ""
+                DeleteFlag: "",
+                Status: "None"
             };
             items.push(item);
             items.forEach((line, index) => {
@@ -291,6 +292,10 @@ sap.ui.define([
             }
             this._oControl.setValueState("Error");
 
+            if (sInputBindingPath === "/headSet/Customer") {
+                this.getModel("local").setProperty("/headSet/Receiver", "");
+            }
+
             var aFilters = [];
             var sPlant = this.getModel("local").getProperty("/headSet/Plant");
             // if (sODataPath === "/ZC_ManufacturingOrderProductVH") {
@@ -338,6 +343,11 @@ sap.ui.define([
                     }));
                     break;
                 case "/ZC_ProductVH":
+                    aFilters.push(new Filter({
+                        path: "Plant",
+                        operator: FilterOperator.EQ,
+                        value1: sPlant
+                    }));
                     aFilters.push(new Filter({
                         path: "Material",
                         operator: FilterOperator.EQ,
@@ -418,6 +428,7 @@ sap.ui.define([
                     aFieldName.push("Product");
                     aFieldName.push("Material");
                     aFieldName.push("MaterialDescription");
+                    aFieldName.push("StorageLocation");
                     aFieldName.push("BaseUnit");
                     aFieldName.push("StandardPrice");
                     aFieldName.push("OrderIsClosed");
@@ -456,9 +467,17 @@ sap.ui.define([
                                     var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
                                     this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
                                     var aConfig = this.getModel("local").getProperty("/Config");
-                                    var config = aConfig.find(element => element.Plant === header.Plant);
+                                    var config = aConfig.find(element => element.Plant === sPlant);
+                                    debugger;
                                     if (iAmount >= parseFloat(config.Amount)) {
                                         this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                                        // this.getModel("local").setProperty(sItemPath + "Status", "Error");
+                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#ff3333");
+                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#ff3333");
+                                    } else {
+                                        // this.getModel("local").setProperty(sItemPath + "Status", "None");
+                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
+                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
                                     }
                                 }
                             }
@@ -481,6 +500,11 @@ sap.ui.define([
             var aConfig = this.getModel("local").getProperty("/Config");
             var config = aConfig.find(element => element.Plant === sPlant);
             var sStandardPrice = this.getModel("local").getProperty(sPath + "/StandardPrice");
+            // this.getModel("local").setProperty(sPath + "/Status", "None");
+            this.getModel("local").setProperty(sPath + "/TotalAmount", 0);
+            this.getModel("local").setProperty(sPath + "/DeleteFlag", "");
+            $("#" + oRow.getId()).css("background-color", "#fff");
+            $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
             if (sValue && parseFloat(sValue) !== 0) {
                 oEvent.getSource().setValueState("None");
                 if (sStandardPrice) {
@@ -489,21 +513,13 @@ sap.ui.define([
                     this.getModel("local").setProperty(sPath + "/TotalAmount", iAmount);
                     this.getModel("local").setProperty(sPath + "/DeleteFlag", sDeleteFlag);
                     if (sDeleteFlag === "W") {
+                        // this.getModel("local").setProperty(sPath + "/Status", "Error");
                         $("#" + oRow.getId()).css("background-color", "#ff3333");
                         $("#" + oRow.getId() + "-fixed").css("background-color", "#ff3333");
                     }
-                } else {
-                    this.getModel("local").setProperty(sPath + "/TotalAmount", 0);
-                    this.getModel("local").setProperty(sPath + "/DeleteFlag", "");
-                    $("#" + oRow.getId()).css("background-color", "#fff");
-                    $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
                 }
             } else {
                 oEvent.getSource().setValueState("Error");
-                this.getModel("local").setProperty(sPath + "/TotalAmount", 0);
-                this.getModel("local").setProperty(sPath + "/DeleteFlag", "");
-                $("#" + oRow.getId()).css("background-color", "#fff");
-                $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
             }
         },
 
@@ -656,7 +672,8 @@ sap.ui.define([
                                     Currency: element.CURRENCY,
                                     OrderIsClosed: element.ORDER_IS_CLOSED,
                                     LocalLastChangedAtS: element.LOCAL_LAST_CHANGED_AT_S,
-                                    DeleteFlag: element.DELETE_FLAG //iAmount >= 100000 ? "W" : ""
+                                    DeleteFlag: element.DELETE_FLAG, //iAmount >= 100000 ? "W" : ""
+                                    Status: element.DELETE_FLAG === "W" ? "Error" : "None"
                                 });
                             });
                             that.getModel("local").setProperty("/itemSet", items);

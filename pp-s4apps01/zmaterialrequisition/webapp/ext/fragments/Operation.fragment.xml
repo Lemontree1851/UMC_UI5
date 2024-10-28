@@ -49,7 +49,7 @@
                     <Label text="{i18n>CostCenter}:" required="true"/>
                     <Input id="idCostCenter" value="{local>/headSet/CostCenter}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                         $event, $controller, '/ZC_CostCenterVH',
-                        ['CostCenter','CostCenterName'])" showSuggestion="true" suggestionRows="{ path: '/ZC_CostCenterVH', length: 10 }" required="true" width="13rem">
+                        ['CostCenter','CostCenterName','ControllingArea','ValidityEndDate','ValidityStartDate','CompanyCode'])" showSuggestion="true" suggestionRows="{ path: '/ZC_CostCenterVH', length: 10 }" required="true" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>CostCenter}"/>
@@ -92,8 +92,8 @@
                 </VBox>
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>Receiver}:" required="{= ${local>/headSet/Type} !== '31'}"/>
-                    <Input id="idReceiver" value="{local>/headSet/Receiver}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/ZC_ApplicationReceiverVH', ['UUID','Receiver','Plant','Customer','MailAddress'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ApplicationReceiverVH', length: 10 }" required="{= ${local>/headSet/Type} !== '31'}" width="13rem">
+                    <Input id="idReceiver" value="{local>/headSet/Receiver}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== '' &amp;&amp; ${local>/headSet/Customer} !== ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/ZC_ApplicationReceiverVH', ['UUID','Receiver','Plant','Customer','MailAddress'],['Receiver','MailAddress'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ApplicationReceiverVH', length: 10 }" required="{= ${local>/headSet/Type} !== '31'}" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>Receiver}"/>
@@ -135,6 +135,9 @@
                         <Button id="idDelBtn" icon="sap-icon://delete" type="Transparent" text="{i18n>DelBtn}" visible="{= ${local>/mode} === 'create'}" press="handler.onDelLine"/>
                     </OverflowToolbar>
                 </table:extension>
+                <!-- <table:rowSettingsTemplate>
+                    <table:RowSettings highlight="{local>Status}"/>
+                </table:rowSettingsTemplate> -->
                 <table:columns>
                     <table:Column width="5rem" label="{i18n>ItemNo}">
                         <table:template>
@@ -146,7 +149,7 @@
                         <table:template>
                             <Input value="{local>ManufacturingOrder}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}" suggestionItemSelected="true" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                                 $event, $controller, '/ZC_ManufacturingOrderProductVH', 
-                                ['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MfgOrderPlannedStartDate','MfgOrderPlannedEndDate','MRPController'],['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','MRPController'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ManufacturingOrderProductVH', length: 12 }" required="{= ${local>/headSet/Type} !== '31' &amp;&amp; ${local>/headSet/Type} !== '50'}">
+                                ['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ProductionPlant','ManufacturingOrderType','StorageLocation','StorageLocationName','GoodsMovementType','RequiredQuantity','WithdrawnQuantity','MfgOrderPlannedStartDate','MfgOrderPlannedEndDate','MRPController'],['ManufacturingOrder','Product','ProductDescription','Material','MaterialDescription','ManufacturingOrderType','StorageLocation','StorageLocationName','MRPController'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ManufacturingOrderProductVH', length: 12 }" required="{= ${local>/headSet/Type} !== '31' &amp;&amp; ${local>/headSet/Type} !== '50'}">
                                 <suggestionColumns>
                                     <Column>
                                         <Label text="{i18n>ManufacturingOrder}"/>

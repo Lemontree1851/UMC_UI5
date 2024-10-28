@@ -16,6 +16,7 @@ sap.ui.define([
         onValueHelpRequested: function (oEvent, that, sPath, aVHFields, aFilterFields) {
             that._oInput = oEvent.getSource();
             that._aVHFields = aVHFields;
+            that._sValueHelpPath = sPath;
             if (aFilterFields) {
                 that._aFilterFields = aFilterFields;
             } else {
@@ -148,6 +149,35 @@ sap.ui.define([
                     and: false
                 }));
             }
+            var headSet = this.getModel("local").getProperty("/headSet");
+            if (this._sValueHelpPath === "/ZC_ApplicationReceiverVH" || this._sValueHelpPath === "/ZC_ProductVH") {
+                if (headSet.Plant) {
+                    aFilters.push(new Filter({
+                        path: "Plant",
+                        operator: FilterOperator.EQ,
+                        value1: headSet.Plant
+                    }));
+                }
+            }
+            if (this._sValueHelpPath === "/ZC_ApplicationReceiverVH") {
+                if (headSet.Customer) {
+                    aFilters.push(new Filter({
+                        path: "Customer",
+                        operator: FilterOperator.EQ,
+                        value1: headSet.Customer
+                    }));
+                }
+            }
+            if (this._sValueHelpPath === "/ZC_ManufacturingOrderProductVH") {
+                if (headSet.Plant) {
+                    aFilters.push(new Filter({
+                        path: "ProductionPlant",
+                        operator: FilterOperator.EQ,
+                        value1: headSet.Plant
+                    }));
+                }
+            }
+
             var oFilter = new Filter({
                 filters: aFilters,
                 and: true
@@ -211,6 +241,11 @@ sap.ui.define([
                     // var oContextBinding = this.getModel().bindContext("/ZC_ProductVH" + "('" + sKey + "')");
                     var aFilters = [];
                     aFilters.push(new Filter({
+                        path: "Plant",
+                        operator: FilterOperator.EQ,
+                        value1: sPlant
+                    }));
+                    aFilters.push(new Filter({
                         path: "Material",
                         operator: FilterOperator.EQ,
                         value1: sKey
@@ -232,10 +267,19 @@ sap.ui.define([
                                 if (sValue && object["StandardPrice"]) {
                                     var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
                                     this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
+                                    var sPlant = this.getModel("local").getProperty("/headSet/Plant");
                                     var aConfig = this.getModel("local").getProperty("/Config");
-                                    var config = aConfig.find(element => element.Plant === header.Plant);
+                                    var config = aConfig.find(element => element.Plant === sPlant);
+                                    debugger;
                                     if (iAmount >= parseFloat(config.Amount)) {
                                         this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                                        // this.getModel("local").setProperty(sItemPath + "Status", "Error");
+                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#ff3333");
+                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#ff3333");
+                                    } else {
+                                        // this.getModel("local").setProperty(sItemPath + "Status", "None");
+                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
+                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
                                     }
                                 }
                             }
