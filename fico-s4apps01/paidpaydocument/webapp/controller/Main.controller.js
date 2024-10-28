@@ -146,7 +146,7 @@ sap.ui.define([
                 let postDocs = this.preparePostBody();
                 this._BusyDialog.open();
                 var aPromise = [];
-                aPromise.push(this.postAction(postDocs, sType, bEvent));
+                aPromise.push(this.postAction(postDocs, sType, bEvent, sYear, sMonat));
 
                 Promise.all(aPromise).then((oData) => {
                     if (sType === "A") {
@@ -226,7 +226,7 @@ sap.ui.define([
                 return postDocs;
             },
 
-            postAction: function (postData, sType, bEvent) {
+            postAction: function (postData, sType, bEvent,sYear, sMonat) {
                 var oModel = this._oDataModel;
 
                 return new Promise(
@@ -241,6 +241,8 @@ sap.ui.define([
                             method: "POST",
                             urlParameters: {
                                 Zzkey: postData,
+                                FiscalYear: sYear,
+                                Period: sMonat,
                                 Event: bEvent,
                                 Ztype: sType
                             }

@@ -132,9 +132,9 @@ sap.ui.define([
                                     for (var index = 0; index < aExcelSet.length; index++) {
                                         if (aExcelSet[index].Row === element.ROW) {
                                             if (element.STATUS === 'S') {
-                                                MessageBox.success(element.Message);
+                                                MessageBox.success(element.MESSAGE);
                                             } else {
-                                                MessageBox.error(element.Message);
+                                                MessageBox.error(element.MESSAGE);
                                             }
                                         }
                                         break;

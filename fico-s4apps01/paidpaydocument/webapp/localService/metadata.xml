@@ -88,24 +88,24 @@
                 <Property Name="AP" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="AR" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
-                <Property Name="Gjahr1" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Gjahr1" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Belnr1" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
-                <Property Name="Gjahr2" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Gjahr2" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Belnr2" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
-                <Property Name="Gjahr3" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Gjahr3" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Belnr3" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
-                <Property Name="Gjahr4" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Gjahr4" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Belnr4" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
-                <Property Name="Gjahr5" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Gjahr5" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Belnr5" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
-                <Property Name="Gjahr6" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Gjahr6" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Belnr6" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
-                <Property Name="Gjahr7" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Gjahr7" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Belnr7" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
-                <Property Name="Gjahr8" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="Gjahr8" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Belnr8" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
                 <Property Name="Status" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Message" Type="Edm.String" MaxLength="220"/>
+                <Property Name="Message" Type="Edm.String" sap:display-format="UpperCase" sap:label="Zzkey" sap:quickinfo="String Type"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -457,6 +457,14 @@
                                 <PropertyPath>Update_mc</PropertyPath>
                             </Collection>
                         </PropertyValue>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Message"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.InsertRestrictions">
@@ -473,6 +481,7 @@
                             <Collection>
                                 <PropertyPath>Delete_mc</PropertyPath>
                                 <PropertyPath>Update_mc</PropertyPath>
+                                <PropertyPath>Message</PropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
