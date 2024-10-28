@@ -38,7 +38,7 @@ function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter) {
 			}    
 
 			var oDateRange1 = that.byId("idDateRangeSelection1");
-			if(oDateRange1.getFrom().getFullYear()){
+			if(oDateRange1.getFrom()){
 				var splitStart1 = `${oDateRange1.getFrom().getFullYear()}${(oDateRange1.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
 				var splitEnd1 = `${oDateRange1.getTo().getFullYear()}${(oDateRange1.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
 			}
@@ -48,7 +48,7 @@ function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter) {
 			}  
 
 			var oDateRange2 = that.byId("idDateRangeSelection2");
-			if(oDateRange2.getFrom().getFullYear()){
+			if(oDateRange2.getFrom()){
 				var splitStart2 = `${oDateRange2.getFrom().getFullYear()}${(oDateRange2.getFrom().getMonth() + 1).toString().padStart(2,"0")}${oDateRange2.getFrom().getDate().toString().padStart(2,"0")}`;
 				var splitEnd2 = `${oDateRange2.getTo().getFullYear()}${(oDateRange2.getTo().getMonth() + 1).toString().padStart(2,"0")}${oDateRange2.getTo().getDate().toString().padStart(2,"0")}`;			
 			}

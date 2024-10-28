@@ -25,7 +25,7 @@
                                 <smartFilterBar:ControlConfiguration index='30' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="MATERIALBYCUSTOMER" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MATERIALBYCUSTOMER}"/>
                                 <!-- <smartFilterBar:ControlConfiguration index='50' key="Duration" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Duration}"/> -->
-                                <smartFilterBar:ControlConfiguration index="50" key="Duration" visibleInAdvancedArea="true" label="{i18n>Duration}" visible="true"> 
+                                <smartFilterBar:ControlConfiguration index="50" key="Duration" visibleInAdvancedArea="true" label="{i18n>Duration}" visible="true" mandatory="mandatory"> 
                                    <smartFilterBar:customControl> 
                                     <DateRangeSelection
                                         id="idDateRangeSelection1"
