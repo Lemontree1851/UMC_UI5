@@ -1,0 +1,362 @@
+<mvc:View
+    controllerName="sd.salesacceptdn.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:sf="sap.ui.comp.smartfield"
+    xmlns:form="sap.ui.comp.smartform"
+>
+    <VBox
+        id="idVBox"
+        fitContainer="true"
+    >
+        <Panel
+            id="idPanel"
+            expandable="true"
+            headerText="{i18n>templateText}"
+            width="auto"
+        >
+            <upload:UploadSet
+                id="idUploadSet"
+                items="{Attach>DocumentInfoRecordToAttachmentNavigation}"
+                multiple="false"
+                mode="None"
+                uploadEnabled="false"
+                uploadButtonInvisible="true"
+                instantUpload="false"
+            >
+                <upload:items>
+                    <upload:UploadSetItem
+                        id="idUploadSetItem"
+                        fileName="{Attach>FileName}"
+                        mediaType="{Attach>MimeType}"
+                        url="{
+                    path: 'Attach>__metadata/media_src',
+                    formatter: '.getMediaUrl'
+                }"
+                        visibleEdit="false"
+                        visibleRemove="false"
+                    />
+                </upload:items>
+            </upload:UploadSet>
+        </Panel>
+        <Panel
+            id="idFileUploadPanel"
+            expandable="true"
+            expanded="true"
+            headerText="{i18n>uploadText}"
+            width="auto"
+        >
+            <RadioButtonGroup id="idRBGUpload">
+                <RadioButton text="{i18n>btn1}"></RadioButton>
+                <RadioButton text="{i18n>btn2}"></RadioButton>
+                <RadioButton text="{i18n>btn3}"></RadioButton>
+            </RadioButtonGroup>
+            <unified:FileUploader
+                id="idFileUploader"
+                fileType="xlsx,xls,csv"
+                change="onFileUploaderChange"
+                width="40%"
+                class="sapUiSmallMargin"
+                sameFilenameAllowed="true"
+            />
+            <Label text="{i18n>SoldToParty}:" class="sapUiSmallMarginBegin sapUiTinyMarginTop sapUiTinyMarginEnd"/>
+            <Input id="idSoldToParty" width="20%" showValueHelp="true"  value="{local>/soldToParty}"
+                valueHelpRequest=".onPressValueHelp($event, true, 'SoldToParty')" change=".onValueChange($event,'SoldToParty')" />
+        </Panel>
+        <Panel
+            id="id0Panel"
+            expandable="true"
+            expanded="true"
+            headerText="{i18n>result}"
+            width="auto"
+            height="100%"
+        >
+            <layoutData>
+                <FlexItemData
+                    id="idFlexItemData"
+                    maxHeight="100%"
+                    maxWidth="100%"
+                    growFactor="1"
+                />
+            </layoutData>
+            <t:Table
+                id="idTable"
+                rows="{local>/excelSet}"
+                selectionMode="Multi"
+                class="sapUiSizeCompact"
+            >
+                <t:rowMode>
+                    <rm:Auto id="idAuto" />
+                </t:rowMode>
+                <t:extension>
+                    <OverflowToolbar id="idOverflowToolbar">
+                        <Text
+                            id="idLogInfoText"
+                            text="{local>/logInfo}"
+                        />
+                        <ToolbarSpacer id="idToolbarSpacer" />
+                        <Button
+                            id="idSaveButton"
+                            icon="sap-icon://document"
+                            type="Transparent"
+                            text="{i18n>saveBtn}"
+                            press="onCreateDN"
+                            enabled="{local>/recordCheckSuccessed}"
+                        />
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column
+                        width="6rem"
+                        sortProperty="Type"
+                        hAlign="Center"
+                        label="{i18n>Status}"
+                    >
+                        <t:template>
+                            <ObjectStatus
+                                state="{
+                                    path: 'local>Type',
+                                    formatter: '.formatter.setState'
+                                }"
+                                icon="{
+                                    path: 'local>Type',
+                                    formatter: '.formatter.setStateIcon'
+                                }"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="5rem"
+                        sortProperty="Result"
+                        label="{i18n>Result}"
+                    >
+                        <t:template>
+                            <Text
+                                id="idTypeText"
+                                text="{
+                                    path: 'local>Type',
+                                    formatter: '.formatter.setResult'
+                                }"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="12rem"
+                        sortProperty="Message"
+                        label="{i18n>Message}"
+                    >
+                        <t:template>
+                            <Text
+                                id="idMessageText"
+                                text="{local>Message}"
+                                tooltip="{local>Message}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        label="{i18n>PurchaseFrom}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>PurchaseFrom}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        label="{i18n>SoldTo}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>SoldTo}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="12rem"
+                        label="{i18n>PurchaseOrderByCustomer}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>PurchaseOrderByCustomer}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        label="{i18n>AcceptDate}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>AcceptDate}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        label="{i18n>Product}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>Product}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        label="{i18n>AcceptQuantity}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>AcceptQuantity}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>SalesDocument}">
+                        <t:template>
+                            <Text text="{local>SalesDocument}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>SalesDocumentItem}">
+                        <t:template>
+                            <Text text="{local>SalesDocumentItem}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>SalesOrganization}">
+                        <t:template>
+                            <Text text="{local>SalesOrganization}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>DeliveryDocumentType}">
+                        <t:template>
+                            <Text text="{local>DeliveryDocumentType}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>DeliveryDocumentText}">
+                        <t:template>
+                            <Text text="{local>DeliveryDocumentText}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>SoldToParty}">
+                        <t:template>
+                            <Text text="{local>SoldToParty}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="12rem" label="{i18n>SoldToPartyName}">
+                        <t:template>
+                            <Text text="{local>SoldToPartyName}" tooltip="{local>SoldToPartyName}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>BillToParty}">
+                        <t:template>
+                            <Text text="{local>BillToParty}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="12rem" label="{i18n>BillToPartyName}">
+                        <t:template>
+                            <Text text="{local>BillToPartyName}" tooltip="{local>BillToPartyName}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>PurchaseOrderByCustomer}">
+                        <t:template>
+                            <Text text="{local>PurchaseOrderByCustomer}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>UnderlyingPurchaseOrderItem}">
+                        <t:template>
+                            <Text text="{local>UnderlyingPurchaseOrderItem}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>DeliveryBlockReason}">
+                        <t:template>
+                            <Text text="{local>DeliveryBlockReason}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="12rem" label="{i18n>DeliveryBlockReasonText}">
+                        <t:template>
+                            <Text text="{local>DeliveryBlockReasonText}" tooltip="{local>DeliveryBlockReasonText}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>Product}">
+                        <t:template>
+                            <Text text="{local>Product}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="12rem" label="{i18n>MaterialByCustomer}">
+                        <t:template>
+                            <Text text="{local>MaterialByCustomer}" tooltip="{local>MaterialByCustomer}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>Plant}">
+                        <t:template>
+                            <Text text="{local>Plant}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>ShippingPoint}">
+                        <t:template>
+                            <Text text="{local>ShippingPoint}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>ShipToParty}">
+                        <t:template>
+                            <Text text="{local>ShipToParty}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>ShipToPartyName}">
+                        <t:template>
+                            <Text text="{local>ShipToPartyName}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>StorageLocation}">
+                        <t:template>
+                            <Text text="{local>StorageLocation}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>CommittedDeliveryDate}">
+                        <t:template>
+                            <Text text="{local>CommittedDeliveryDate}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>OrderQuantity}">
+                        <t:template>
+                            <Text text="{local>OrderQuantity}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>OrderQuantityUnit}">
+                        <t:template>
+                            <Text text="{local>OrderQuantityUnit}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>IncotermsClassification}">
+                        <t:template>
+                            <Text text="{local>IncotermsClassification}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>IncotermsLocation1}">
+                        <t:template>
+                            <Text text="{local>IncotermsLocation1}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>DeliveredQtyInOrderQtyUnit}">
+                        <t:template>
+                            <Text text="{parts:['local>DeliveredQtyInOrderQtyUnit','local>OrderQuantityUnit'], type:'sap.ui.model.type.Unit'}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" label="{i18n>UnDeliveredQty}">
+                        <t:template>
+                            <Text text="{parts:['local>UnDeliveredQty','local>OrderQuantityUnit'], type:'sap.ui.model.type.Unit'}" />
+                        </t:template>
+                    </t:Column>
+
+                </t:columns>
+            </t:Table>
+        </Panel>
+    </VBox>
+</mvc:View>

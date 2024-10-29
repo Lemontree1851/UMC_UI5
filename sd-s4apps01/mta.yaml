@@ -68,6 +68,10 @@ modules:
       name: sdcreditmantablen
       target-path: resources/
     - artifacts:
+      - sdsalesacceptdn.zip
+      name: sdsalesacceptdn
+      target-path: resources/
+    - artifacts:
       - sdzsalesdocumentlist.zip
       name: sdzsalesdocumentlist
       target-path: resources/
@@ -128,6 +132,15 @@ modules:
 - name: sdzsalesdocumentlist
   type: html5
   path: zsalesdocumentlist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdsalesacceptdn
+  type: html5
+  path: salesacceptdn
   build-parameters:
     build-result: dist
     builder: custom
