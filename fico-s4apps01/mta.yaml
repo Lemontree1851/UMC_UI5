@@ -70,11 +70,15 @@ modules:
     - artifacts:
       - ficozaccountingdoc.zip
       name: ficozaccountingdoc
-      target-path: resources/      
+      target-path: resources/
     - artifacts:
       - ficozpaymentmethod.zip
       name: ficozpaymentmethod
-      target-path: resources/       
+      target-path: resources/
+    - artifacts:
+      - ficozdaystocktrans.zip
+      name: ficozdaystocktrans
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -137,7 +141,7 @@ modules:
     builder: custom
     commands:
     - npm run build:cf
-    supported-platforms: []    
+    supported-platforms: []
 - name: ficozpaymentmethod
   type: html5
   path: zpaymentmethod
@@ -146,7 +150,16 @@ modules:
     builder: custom
     commands:
     - npm run build:cf
-    supported-platforms: []  
+    supported-platforms: []
+- name: ficozdaystocktrans
+  type: html5
+  path: zdaystocktrans
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: fico-s4apps01-uaa
   type: org.cloudfoundry.managed-service
