@@ -53,23 +53,25 @@
             <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
             <EntityType Name="ZC_DAYSTOCKTRANSType">
                 <Key>
+                    <PropertyRef Name="Uuid"/>
                     <PropertyRef Name="ExcuDate"/>
-                    <PropertyRef Name="Companycode"/>
+                    <PropertyRef Name="CompanyCode"/>
                     <PropertyRef Name="Plant"/>
                     <PropertyRef Name="BusinessPartner"/>
                 </Key>
+                <Property Name="Uuid" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="ExcuDate" Type="Edm.Date" Nullable="false"/>
-                <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="BusinessPartner" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="BusinessPartnerName" Type="Edm.String" Nullable="false" MaxLength="81"/>
-                <Property Name="ProductPrice" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
-                <Property Name="SemiProductPrice" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
-                <Property Name="MaterialPrice" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
+                <Property Name="FinishedGoods" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
+                <Property Name="SemiFinishedGoods" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
+                <Property Name="Material" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
                 <Property Name="Total" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
-                <Property Name="SalesActual" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
-                <Property Name="Salesforcast" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
-                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="SaleActual" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
+                <Property Name="Saleforcast" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
+                <Property Name="DisplayCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
             </EntityType>
             <EntityContainer Name="Container">
                 <EntitySet Name="ZC_DAYSTOCKTRANS" EntityType="com.sap.gateway.srvd.zui_daystocktrans_o4.v0001.ZC_DAYSTOCKTRANSType"/>
@@ -77,14 +79,13 @@
             <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/ExcuDate">
                 <Annotation Term="SAP__common.Label" String="日付"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/Companycode">
+            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/CompanyCode">
                 <Annotation Term="SAP__common.Label" String="会社コード"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
                         <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_daystocktrans_o4-0001';va='com.sap.gateway.srvd.zui_daystocktrans_o4.v0001.et-zc_daystocktrans.companycode'/$metadata</String>
                     </Collection>
                 </Annotation>
-                <Annotation Term="SAP__common.FilterDefaultValue" String="1100"/>
             </Annotations>
             <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/Plant">
                 <Annotation Term="SAP__common.Label" String="プラント"/>
@@ -96,31 +97,26 @@
             </Annotations>
             <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/BusinessPartner">
                 <Annotation Term="SAP__common.Label" String="得意先BPコード"/>
-                <Annotation Term="SAP__common.ValueListReferences">
-                    <Collection>
-                        <String>../../../../srvd_f4/sap/i_customer_vh/0001;ps='srvd-zui_daystocktrans_o4-0001';va='com.sap.gateway.srvd.zui_daystocktrans_o4.v0001.et-zc_daystocktrans.businesspartner'/$metadata</String>
-                    </Collection>
-                </Annotation>
             </Annotations>
-            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/ProductPrice">
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
+            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/FinishedGoods">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="DisplayCurrency"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/SemiProductPrice">
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
+            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/SemiFinishedGoods">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="DisplayCurrency"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/MaterialPrice">
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
+            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/Material">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="DisplayCurrency"/>
             </Annotations>
             <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/Total">
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="DisplayCurrency"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/SalesActual">
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
+            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/SaleActual">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="DisplayCurrency"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/Salesforcast">
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
+            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/Saleforcast">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="DisplayCurrency"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/Currency">
+            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/DisplayCurrency">
                 <Annotation Term="SAP__common.IsCurrency"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Document Currency"/>
@@ -128,13 +124,7 @@
                 <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
             </Annotations>
             <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType">
-                <Annotation Term="SAP__common.Label" String="Query CDS"/>
-                <Annotation Term="SAP__UI.HeaderInfo">
-                    <Record>
-                        <PropertyValue Property="TypeName" String="Items"/>
-                        <PropertyValue Property="TypeNamePlural" String="Items"/>
-                    </Record>
-                </Annotation>
+                <Annotation Term="SAP__common.Label" String="日別在庫推移"/>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
@@ -143,7 +133,7 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="会社コード"/>
-                            <PropertyValue Property="Value" Path="Companycode"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="プラント"/>
@@ -159,15 +149,15 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="製品"/>
-                            <PropertyValue Property="Value" Path="ProductPrice"/>
+                            <PropertyValue Property="Value" Path="FinishedGoods"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="半製品"/>
-                            <PropertyValue Property="Value" Path="SemiProductPrice"/>
+                            <PropertyValue Property="Value" Path="SemiFinishedGoods"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="原材料"/>
-                            <PropertyValue Property="Value" Path="MaterialPrice"/>
+                            <PropertyValue Property="Value" Path="Material"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="合計"/>
@@ -175,22 +165,22 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="売上実績（先月）"/>
-                            <PropertyValue Property="Value" Path="SalesActual"/>
+                            <PropertyValue Property="Value" Path="SaleActual"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="売上予測（翌月）"/>
-                            <PropertyValue Property="Value" Path="Salesforcast"/>
+                            <PropertyValue Property="Value" Path="Saleforcast"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="通貨"/>
-                            <PropertyValue Property="Value" Path="Currency"/>
+                            <PropertyValue Property="Value" Path="DisplayCurrency"/>
                         </Record>
                     </Collection>
                 </Annotation>
                 <Annotation Term="SAP__UI.SelectionFields">
                     <Collection>
                         <PropertyPath>ExcuDate</PropertyPath>
-                        <PropertyPath>Companycode</PropertyPath>
+                        <PropertyPath>CompanyCode</PropertyPath>
                         <PropertyPath>Plant</PropertyPath>
                         <PropertyPath>BusinessPartner</PropertyPath>
                     </Collection>
@@ -209,10 +199,14 @@
                             <Collection>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="ExcuDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Plant"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                                 <Record>
-                                    <PropertyValue Property="Property" PropertyPath="Companycode"/>
+                                    <PropertyValue Property="Property" PropertyPath="BusinessPartner"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                             </Collection>
@@ -313,6 +307,10 @@
                 </Annotation>
                 <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
                 <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_DAYSTOCKTRANSType/Uuid">
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 Byte UUID in 16 Bytes (Raw Format)"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
