@@ -132,8 +132,9 @@ sap.ui.define([
         onBeforeExport: function (oEvent) {
             var oSettings = oEvent.getParameter("exportSettings");
             var columns = oSettings.workbook.columns;
+            // var dataSource = oSettings.dataSource;
 
-            oSettings.fileName = this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("fileName");
+            // oSettings.fileName = this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("fileName");
 
             try {
                 columns.find(cloumn => cloumn.property === "DeliveryDate").type = "Date";
@@ -142,6 +143,15 @@ sap.ui.define([
                 columns.find(cloumn => cloumn.property === "CreationDate").type = "Date";
                 columns.find(cloumn => cloumn.property === "CreationDateItem").type = "Date";
                 columns.find(cloumn => cloumn.property === "LastChangeDate").type = "Date";
+
+                // if (dataSource && Array.isArray(dataSource)) {
+                //     dataSource.forEach(item => {
+                //         if (item[ConditionAmountPPR0]) {
+                //             // 根据需要修改字段值
+                //             item[ConditionAmountPPR0] = item[ConditionAmountPPR0] + item[TransactionCurrency]; 
+                //         }
+                //     });
+                // }
             } catch (error) {
                 
             }
