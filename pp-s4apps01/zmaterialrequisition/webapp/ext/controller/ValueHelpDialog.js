@@ -69,13 +69,29 @@ sap.ui.define([
                 // Set filter group items
                 that._aFilterFields.forEach(fieldName => {
                     if (fieldName !== "UUID") {
+                        var oControl;
                         var oFilterGroupItem = new FilterGroupItem({
                             groupName: "__$INTERNAL$",
                             visibleInFilterBar: true,
                             name: fieldName,
                             label: "{i18n>" + fieldName + "}"
                         });
-                        var oControl = new Input({ name: fieldName });
+                        if (fieldName === "Type") {
+                            oControl = new sap.m.ComboBox({
+                                name: fieldName,
+                                items: {
+                                    path: "/ZC_ApplicationTypeVH",
+                                    template: {
+                                        Type: "sap.ui.core.ListItem",
+                                        key: "{Zvalue1}",
+                                        text: "{Zvalue2}({Zvalue1})",
+                                        additionalText: "{Zvalue1}"
+                                    }
+                                }
+                            });
+                        } else {
+                            oControl = new Input({ name: fieldName });
+                        }
                         oFilterGroupItem.setControl(oControl);
                         oFilterBar.addFilterGroupItem(oFilterGroupItem);
                     }
@@ -131,11 +147,17 @@ sap.ui.define([
             var sSearchQuery = this._oBasicSearchField.getValue(),
                 aSelectionSet = oEvent.getParameter("selectionSet");
             var aFilters = aSelectionSet.reduce(function (aResult, oControl) {
-                if (oControl.getValue()) {
+                var sValue;
+                if (oControl.getName() === "Type") {
+                    sValue = oControl.getSelectedKey();
+                } else {
+                    sValue = oControl.getValue();
+                }
+                if (sValue) {
                     aResult.push(new Filter({
                         path: oControl.getName(),
                         operator: FilterOperator.Contains,
-                        value1: oControl.getValue()
+                        value1: sValue
                     }));
                 }
                 return aResult;
@@ -270,7 +292,6 @@ sap.ui.define([
                                     var sPlant = this.getModel("local").getProperty("/headSet/Plant");
                                     var aConfig = this.getModel("local").getProperty("/Config");
                                     var config = aConfig.find(element => element.Plant === sPlant);
-                                    debugger;
                                     if (iAmount >= parseFloat(config.Amount)) {
                                         this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
                                         // this.getModel("local").setProperty(sItemPath + "Status", "Error");

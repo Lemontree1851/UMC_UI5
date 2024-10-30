@@ -19,7 +19,7 @@
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>MaterialRequisitionNo}:"/>
                     <Input id="idMaterialRequisitionNo" value="{local>/headSet/MaterialRequisitionNo}" change="handler.handleChange" editable="{= ${local>/mode} === 'update'}" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/ZC_MaterialRequisitionVH', ['MaterialRequisitionNo','Plant','Type','CreatedDate','CreatedByUserName'])" showSuggestion="true" suggestionRows="{ path: '/ZC_MaterialRequisitionVH', length: 15 }" required="true" width="13rem">
+                        $event, $controller, '/ZC_MaterialRequisitionVH', ['MaterialRequisitionNo','Plant','Type','CreatedDate','CreatedByUserName'],['MaterialRequisitionNo','Plant','Type','CreatedByUserName'])" showSuggestion="true" suggestionRows="{ path: '/ZC_MaterialRequisitionVH', length: 15 }" required="true" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>MaterialRequisitionNo}"/>
@@ -49,7 +49,7 @@
                     <Label text="{i18n>CostCenter}:" required="true"/>
                     <Input id="idCostCenter" value="{local>/headSet/CostCenter}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                         $event, $controller, '/ZC_CostCenterVH',
-                        ['CostCenter','CostCenterName','ControllingArea','ValidityEndDate','ValidityStartDate','CompanyCode'])" showSuggestion="true" suggestionRows="{ path: '/ZC_CostCenterVH', length: 10 }" required="true" width="13rem">
+                        ['CostCenter','CostCenterName','ControllingArea','ValidityEndDate','ValidityStartDate','CompanyCode'],['CostCenter','CostCenterName','CompanyCode'])" showSuggestion="true" suggestionRows="{ path: '/ZC_CostCenterVH', length: 10 }" required="true" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>CostCenter}"/>

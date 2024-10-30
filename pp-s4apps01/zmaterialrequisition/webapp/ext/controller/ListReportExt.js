@@ -468,7 +468,6 @@ sap.ui.define([
                                     this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
                                     var aConfig = this.getModel("local").getProperty("/Config");
                                     var config = aConfig.find(element => element.Plant === sPlant);
-                                    debugger;
                                     if (iAmount >= parseFloat(config.Amount)) {
                                         this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
                                         // this.getModel("local").setProperty(sItemPath + "Status", "Error");
@@ -686,7 +685,9 @@ sap.ui.define([
                             that.getModel("local").setProperty("/headSet/MaterialRequisitionNo", result.HEADER.MATERIAL_REQUISITION_NO);
                         } else if (bEvent === "PRINT") {
                             result.ITEMS.forEach(element => {
-                                aPrintRecords.push({ RecordUUID: element.RECORDUUID });
+                                if (element.RECORDUUID) {
+                                    aPrintRecords.push({ RecordUUID: element.RECORDUUID });
+                                }
                             });
                             aPrintRecords = _myFunction._removeDuplicates(aPrintRecords, ["RecordUUID"]);
                         }
