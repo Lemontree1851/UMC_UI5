@@ -1,0 +1,793 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable entitySet="InventoryAging" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
+        showRowCount="true" header='{i18n>Results}' useVariantManagement="false" useTablePersonalisation="true" 
+        persistencyKey="InventoryAgingST" enableAutoBinding="false" 
+        placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="Ledger">
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://save" text="{i18n>ReCalculate}" type="Transparent" press="onPressBtn('ReCalculate')"/>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+       <table:Table id="idTable" selectionMode="None" rowMode="Auto">
+            <table:columns>
+                <table:Column width="5rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CompanyCode}" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Plant}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>FiscalYear}" sortProperty="FiscalYear" filterProperty="FiscalYear">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYear", "leadingProperty":"FiscalYear"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{FiscalYear}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>FiscalPeriod}" sortProperty="FiscalPeriod" filterProperty="FiscalPeriod">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"FiscalPeriod", "leadingProperty":"FiscalPeriod"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{FiscalPeriod}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>product}" sortProperty="product" filterProperty="product">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"product", "leadingProperty":"product"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{product}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ProductDescription}" sortProperty="ProductDescription" filterProperty="ProductDescription">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProductDescription", "leadingProperty":"ProductDescription"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProductDescription}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ProductType}" sortProperty="ProductType" filterProperty="ProductType">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProductType", "leadingProperty":"ProductType"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProductType}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ProductTypeName}" sortProperty="ProductTypeName" filterProperty="ProductTypeName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProductTypeName", "leadingProperty":"ProductTypeName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProductTypeName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>MRPResponsible}" sortProperty="MRPResponsible" filterProperty="MRPResponsible">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MRPResponsible", "leadingProperty":"MRPResponsible"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{MRPResponsible}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>MRPControllerName}" sortProperty="MRPControllerName" filterProperty="MRPControllerName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MRPControllerName", "leadingProperty":"MRPControllerName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{MRPControllerName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ChargeableSupplyFlag}" sortProperty="ChargeableSupplyFlag" filterProperty="ChargeableSupplyFlag">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableSupplyFlag", "leadingProperty":"ChargeableSupplyFlag"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ChargeableSupplyFlag}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ProfitCenter}" sortProperty="ProfitCenter" filterProperty="ProfitCenter">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProfitCenter}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ProfitCenterLongName}" sortProperty="ProfitCenterLongName" filterProperty="ProfitCenterLongName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenterLongName", "leadingProperty":"ProfitCenterLongName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProfitCenterLongName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>BusinessPartner}" sortProperty="BusinessPartner" filterProperty="BusinessPartner">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BusinessPartner", "leadingProperty":"BusinessPartner"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BusinessPartner}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>BusinessPartnerName}" sortProperty="BusinessPartnerName" filterProperty="BusinessPartnerName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BusinessPartnerName", "leadingProperty":"BusinessPartnerName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BusinessPartnerName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ValuationQuantity}" sortProperty="ValuationQuantity" filterProperty="ValuationQuantity">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity", "leadingProperty":"ValuationQuantity"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ValuationQuantity}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>BaseUnit}" sortProperty="BaseUnit" filterProperty="BaseUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit", "leadingProperty":"BaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ActualCost}" sortProperty="ActualCost" filterProperty="ActualCost">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ActualCost", "leadingProperty":"ActualCost"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ActualCost}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>InventoryAmount}" sortProperty="InventoryAmount" filterProperty="InventoryAmount">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"InventoryAmount", "leadingProperty":"InventoryAmount"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{InventoryAmount}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ValuationUnitPrice}" sortProperty="ValuationUnitPrice" filterProperty="ValuationUnitPrice">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ValuationUnitPrice", "leadingProperty":"ValuationUnitPrice"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ValuationUnitPrice}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ValuationAmount}" sortProperty="ValuationAmount" filterProperty="ValuationAmount">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ValuationAmount", "leadingProperty":"ValuationAmount"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ValuationAmount}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ValuationAfterAmount}" sortProperty="ValuationAfterAmount" filterProperty="ValuationAfterAmount">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ValuationAfterAmount", "leadingProperty":"ValuationAfterAmount"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ValuationAfterAmount}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ValuationLoss}" sortProperty="ValuationLoss" filterProperty="ValuationLoss">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ValuationLoss", "leadingProperty":"ValuationLoss"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ValuationLoss}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>Currency}" sortProperty="Currency" filterProperty="Currency">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Currency", "leadingProperty":"Currency"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Currency}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth1}" sortProperty="QuantityMonth1" filterProperty="QuantityMonth1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth1", "leadingProperty":"QuantityMonth1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth1}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth1}" sortProperty="AmountMonth1" filterProperty="AmountMonth1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth1", "leadingProperty":"AmountMonth1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth1}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth2}" sortProperty="QuantityMonth2" filterProperty="QuantityMonth2">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth2", "leadingProperty":"QuantityMonth2"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth2}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth2}" sortProperty="AmountMonth2" filterProperty="AmountMonth2">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth2", "leadingProperty":"AmountMonth2"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth2}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth3}" sortProperty="QuantityMonth3" filterProperty="QuantityMonth3">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth3", "leadingProperty":"QuantityMonth3"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth3}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth3}" sortProperty="AmountMonth3" filterProperty="AmountMonth3">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth3", "leadingProperty":"AmountMonth3"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth3}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth4}" sortProperty="QuantityMonth4" filterProperty="QuantityMonth4">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth4", "leadingProperty":"QuantityMonth4"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth4}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth4}" sortProperty="AmountMonth4" filterProperty="AmountMonth4">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth4", "leadingProperty":"AmountMonth4"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth4}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth5}" sortProperty="QuantityMonth5" filterProperty="QuantityMonth5">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth5", "leadingProperty":"QuantityMonth5"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth5}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth5}" sortProperty="AmountMonth5" filterProperty="AmountMonth5">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth5", "leadingProperty":"AmountMonth5"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth5}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth6}" sortProperty="QuantityMonth6" filterProperty="QuantityMonth6">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth6", "leadingProperty":"QuantityMonth6"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth6}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth6}" sortProperty="AmountMonth6" filterProperty="AmountMonth6">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth6", "leadingProperty":"AmountMonth6"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth6}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth7}" sortProperty="QuantityMonth7" filterProperty="QuantityMonth7">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth7", "leadingProperty":"QuantityMonth7"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth7 }" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth7}" sortProperty="AmountMonth7" filterProperty="AmountMonth7">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth7", "leadingProperty":"AmountMonth7"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth7}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth8}" sortProperty="QuantityMonth8" filterProperty="QuantityMonth8">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth8", "leadingProperty":"QuantityMonth8"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth8}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth8}" sortProperty="AmountMonth8" filterProperty="AmountMonth8">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth8", "leadingProperty":"AmountMonth8"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth8}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth9}" sortProperty="QuantityMonth9" filterProperty="QuantityMonth9">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth9", "leadingProperty":"QuantityMonth9"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth9}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth9}" sortProperty="AmountMonth9" filterProperty="AmountMonth9">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth9", "leadingProperty":"AmountMonth9"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth9}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth10}" sortProperty="QuantityMonth10" filterProperty="QuantityMonth10">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth10", "leadingProperty":"QuantityMonth10"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth10}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth10}" sortProperty="AmountMonth10" filterProperty="AmountMonth10">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth10", "leadingProperty":"AmountMonth10"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth10}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth11}" sortProperty="QuantityMonth11" filterProperty="QuantityMonth11">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth11", "leadingProperty":"QuantityMonth11"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth11}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth11}" sortProperty="AmountMonth11" filterProperty="AmountMonth11">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth11", "leadingProperty":"AmountMonth11"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth11}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth12}" sortProperty="QuantityMonth12" filterProperty="QuantityMonth12">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth12", "leadingProperty":"QuantityMonth12"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth12}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth12}" sortProperty="AmountMonth12" filterProperty="AmountMonth12">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth12", "leadingProperty":"AmountMonth12"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth12}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth13}" sortProperty="QuantityMonth13" filterProperty="QuantityMonth13">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth13", "leadingProperty":"QuantityMonth13"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth13}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth13}" sortProperty="AmountMonth13" filterProperty="AmountMonth13">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth13", "leadingProperty":"AmountMonth13"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth13}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth14}" sortProperty="QuantityMonth14" filterProperty="QuantityMonth14">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth14", "leadingProperty":"QuantityMonth14"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth14}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth14}" sortProperty="AmountMonth14" filterProperty="AmountMonth14">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth14", "leadingProperty":"AmountMonth14"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth14}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth15}" sortProperty="QuantityMonth15" filterProperty="QuantityMonth15">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth15", "leadingProperty":"QuantityMonth15"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth15}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth15}" sortProperty="AmountMonth15" filterProperty="AmountMonth15">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth15", "leadingProperty":"AmountMonth15"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth15}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth16}" sortProperty="QuantityMonth16" filterProperty="QuantityMonth16">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth16", "leadingProperty":"QuantityMonth16"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth16}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth16}" sortProperty="AmountMonth16" filterProperty="AmountMonth16">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth16", "leadingProperty":"AmountMonth16"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth16}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth17}" sortProperty="QuantityMonth17" filterProperty="QuantityMonth17">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth17", "leadingProperty":"QuantityMonth17"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth17}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth17}" sortProperty="AmountMonth17" filterProperty="AmountMonth17">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth17", "leadingProperty":"AmountMonth17"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth17}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth18}" sortProperty="QuantityMonth18" filterProperty="QuantityMonth18">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth18", "leadingProperty":"QuantityMonth18"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth18}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth18}" sortProperty="AmountMonth18" filterProperty="AmountMonth18">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth18", "leadingProperty":"AmountMonth18"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth18}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth19}" sortProperty="QuantityMonth19" filterProperty="QuantityMonth19">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth19", "leadingProperty":"QuantityMonth19"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth19}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth19}" sortProperty="AmountMonth19" filterProperty="AmountMonth19">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth19", "leadingProperty":"AmountMonth19"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth19}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth20}" sortProperty="QuantityMonth20" filterProperty="QuantityMonth20">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth20", "leadingProperty":"QuantityMonth20"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth20}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth20}" sortProperty="AmountMonth20" filterProperty="AmountMonth20">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth20", "leadingProperty":"AmountMonth20"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth20}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth21}" sortProperty="QuantityMonth21" filterProperty="QuantityMonth21">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth21", "leadingProperty":"QuantityMonth21"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth21}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth21}" sortProperty="AmountMonth21" filterProperty="AmountMonth21">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth21", "leadingProperty":"AmountMonth21"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth21}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth22}" sortProperty="QuantityMonth22" filterProperty="QuantityMonth22">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth22", "leadingProperty":"QuantityMonth22"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth22}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth22}" sortProperty="AmountMonth22" filterProperty="AmountMonth22">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth22", "leadingProperty":"AmountMonth22"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth22}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth23}" sortProperty="QuantityMonth23" filterProperty="QuantityMonth23">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth23", "leadingProperty":"QuantityMonth23"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth23}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth23}" sortProperty="AmountMonth23" filterProperty="AmountMonth23">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth23", "leadingProperty":"AmountMonth23"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth23}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth24}" sortProperty="QuantityMonth24" filterProperty="QuantityMonth24">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth24", "leadingProperty":"QuantityMonth24"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth24}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth24}" sortProperty="AmountMonth24" filterProperty="AmountMonth24">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth24", "leadingProperty":"AmountMonth24"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth24}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth25}" sortProperty="QuantityMonth25" filterProperty="QuantityMonth25">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth25", "leadingProperty":"QuantityMonth25"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth25}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth25}" sortProperty="AmountMonth25" filterProperty="AmountMonth25">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth25", "leadingProperty":"AmountMonth25"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth25}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth26}" sortProperty="QuantityMonth26" filterProperty="QuantityMonth26">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth26", "leadingProperty":"QuantityMonth26"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth26}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth26}" sortProperty="AmountMonth26" filterProperty="AmountMonth26">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth26", "leadingProperty":"AmountMonth26"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth26}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth27}" sortProperty="QuantityMonth27" filterProperty="QuantityMonth27">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth27", "leadingProperty":"QuantityMonth27"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth27}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth27}" sortProperty="AmountMonth27" filterProperty="AmountMonth27">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth27", "leadingProperty":"AmountMonth27"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth27}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth28}" sortProperty="QuantityMonth28" filterProperty="QuantityMonth28">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth28", "leadingProperty":"QuantityMonth28"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth28}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth28}" sortProperty="AmountMonth28" filterProperty="AmountMonth28">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth28", "leadingProperty":"AmountMonth28"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth28}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth29}" sortProperty="QuantityMonth29" filterProperty="QuantityMonth29">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth29", "leadingProperty":"QuantityMonth29"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth29}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth29}" sortProperty="AmountMonth29" filterProperty="AmountMonth29">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth29", "leadingProperty":"AmountMonth29"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth29}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth30}" sortProperty="QuantityMonth30" filterProperty="QuantityMonth30">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth30", "leadingProperty":"QuantityMonth30"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth30}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth30}" sortProperty="AmountMonth30" filterProperty="AmountMonth30">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth30", "leadingProperty":"AmountMonth30"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth30}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth31}" sortProperty="QuantityMonth31" filterProperty="QuantityMonth31">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth31", "leadingProperty":"QuantityMonth31"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth31}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth31}" sortProperty="AmountMonth31" filterProperty="AmountMonth31">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth31", "leadingProperty":"AmountMonth31"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth31}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth32}" sortProperty="QuantityMonth32" filterProperty="QuantityMonth32">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth32", "leadingProperty":"QuantityMonth32"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth32}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth32}" sortProperty="AmountMonth32" filterProperty="AmountMonth32">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth32", "leadingProperty":"AmountMonth32"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth32}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth33}" sortProperty="QuantityMonth33" filterProperty="QuantityMonth33">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth33", "leadingProperty":"QuantityMonth33"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth33}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth33}" sortProperty="AmountMonth33" filterProperty="AmountMonth33">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth33", "leadingProperty":"AmountMonth33"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth33}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth34}" sortProperty="QuantityMonth34" filterProperty="QuantityMonth34">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth34", "leadingProperty":"QuantityMonth34"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth34}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth34}" sortProperty="AmountMonth34" filterProperty="AmountMonth34">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth34", "leadingProperty":"AmountMonth34"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth34}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth35}" sortProperty="QuantityMonth35" filterProperty="QuantityMonth35">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth35", "leadingProperty":"QuantityMonth35"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth35}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth35}" sortProperty="AmountMonth35" filterProperty="AmountMonth35">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth35", "leadingProperty":"AmountMonth35"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth35}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityMonth36}" sortProperty="QuantityMonth36" filterProperty="QuantityMonth36">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth36", "leadingProperty":"QuantityMonth36"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{QuantityMonth36}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountMonth36}" sortProperty="AmountMonth36" filterProperty="AmountMonth36">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth36", "leadingProperty":"AmountMonth36"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AmountMonth36}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>

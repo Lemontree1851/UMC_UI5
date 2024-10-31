@@ -78,7 +78,11 @@ modules:
     - artifacts:
       - ficozdaystocktrans.zip
       name: ficozdaystocktrans
-      target-path: resources/
+      target-path: resources/    
+    - artifacts:
+      - ficozinventoryaging.zip
+      name: ficozinventoryaging
+      target-path: resources/   
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -154,6 +158,15 @@ modules:
 - name: ficozdaystocktrans
   type: html5
   path: zdaystocktrans
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozinventoryaging
+  type: html5
+  path: zinventoryaging
   build-parameters:
     build-result: dist
     builder: custom
