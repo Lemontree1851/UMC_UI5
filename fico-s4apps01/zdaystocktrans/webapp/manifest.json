@@ -134,9 +134,13 @@
                 },
                 "@com.sap.vocabularies.UI.v1.SelectionFields": {
                   "filterFields": {
-                    "ExcuDate": { 
+                    "ExcuDate": {
                       "settings": {
-                        "defaultValues": [{"operator": "TODAY"}] 
+                        "defaultValues": [
+                          {
+                            "operator": "TODAY"
+                          }
+                        ]
                       }
                     }
                   }
