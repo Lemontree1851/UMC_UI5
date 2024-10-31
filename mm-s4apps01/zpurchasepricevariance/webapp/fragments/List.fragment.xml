@@ -99,7 +99,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"OrderQuantity", "leadingProperty":"OrderQuantity"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'OrderQuantity','3'], formatter:'.formatter.formatFloat' }" wrapping="false" />
+                        <Text text="{ path:'OrderQuantity', formatter:'.formatter.formatQuantity' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="6rem" label="{i18n>PurchaseOrderQuantityUnit}" sortProperty="PurchaseOrderQuantityUnit" filterProperty="PurchaseOrderQuantityUnit">
@@ -123,7 +123,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceQuantity", "leadingProperty":"NetPriceQuantity"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{NetPriceQuantity}" wrapping="false" />
+                        <Text text="{ path:'NetPriceQuantity', formatter:'.formatter.formatNumber' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
@@ -171,7 +171,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"CurrentPrice", "leadingProperty":"CurrentPrice"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'CurrentPrice','3'], formatter:'.formatter.formatFloat' }" wrapping="false" />
+                        <Text text="{ parts:[ 'CurrentPrice','DocumentCurrency' ], formatter:'.formatter.formatFloat' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>PurgDocPriceDate}" sortProperty="PurgDocPriceDate" filterProperty="PurgDocPriceDate">
@@ -227,7 +227,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionQuantity", "leadingProperty":"ConditionQuantity"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'ConditionQuantity','3'], formatter:'.formatter.formatFloat' }" wrapping="false" />
+                        <Text text="{ path:'ConditionQuantity', formatter:'.formatter.formatNumber' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>NewPrice}" sortProperty="NewPrice" filterProperty="NewPrice" hAlign="End">
@@ -235,7 +235,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"NewPrice", "leadingProperty":"NewPrice"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'NewPrice','3'], formatter:'.formatter.formatFloat' }" wrapping="false" />
+                        <Text text="{ parts:[ 'NewPrice','Currency' ], formatter:'.formatter.formatFloat' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>DeliveryDate}" sortProperty="DeliveryDate" filterProperty="DeliveryDate">
@@ -267,7 +267,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"Difference", "leadingProperty":"Difference"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'Difference','3'], formatter:'.formatter.formatFloat' }" wrapping="false" />
+                        <Text text="{ path:'Difference', formatter:'.formatter.formatFloat' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>PurchaseOrderStr}" sortProperty="PurchaseOrderStr" filterProperty="PurchaseOrderStr">
