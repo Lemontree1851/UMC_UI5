@@ -1,7 +1,113 @@
-<mvc:View controllerName="bi.costanalysis.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+<mvc:View controllerName="bi.costanalysis.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+
+
+
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="PickingListSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <RadioButtonGroup columns="2" selectedIndex="{local>/selectIndex}">
+                        <RadioButton text="{i18n>COSTANALYSISCOM}" selected="true"/>
+                        <RadioButton text="{i18n>COSTANALYSISPROCESS}"/>
+                    </RadioButtonGroup>
+                </f:content>
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <!--部品費逆ザヤ防止分析-->
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar1" entitySet="COSTANALYSISCOM" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" visible="{= ${local>/selectIndex} === 0}" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Companycode" label="{i18n>Companycode}" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
+                                <!-- <smartFilterBar:ControlConfiguration index='20' key="zYear" label="{i18n>zYear}" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/> -->
+                                <smartFilterBar:ControlConfiguration index='20' key="zYear" label="{i18n>zYear}" visibleInAdvancedArea="true">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker valueFormat="yyyy" displayFormat="yyyy" value="{
+                                            'path':'local>/zYear',
+                                            'type':'sap.ui.model.type.Date',
+                                            'formatOptions': {
+                                                'pattern': 'yyyy'
+                                            }
+                                        }"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <!-- <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/> -->
+                                <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker valueFormat="MM" displayFormat="MM" value="{
+                                            'path':'local>/zMonth',
+                                            'type':'sap.ui.model.type.Date',
+                                            'formatOptions': {
+                                                'pattern': 'MM'
+                                            }
+                                        }"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='40' key="Material" label="{i18n>Material}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
+        
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
+                            
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                        <!--加工費逆ザヤ防止分析-->
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar2" entitySet="COSTANALYSISPROCESS" useToolbar="false" smartVariant="__SVM01" persistencyKey="CustomListSFB" visible="{= ${local>/selectIndex} === 1}" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Companycode" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>Companycode}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="zYear" label="{i18n>zYear}" visibleInAdvancedArea="true">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker valueFormat="yyyy" displayFormat="yyyy" value="{
+                                            'path':'local>/zYear',
+                                            'type':'sap.ui.model.type.Date',
+                                            'formatOptions': {
+                                                'pattern': 'yyyy'
+                                            }
+                                        }"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker valueFormat="MM" displayFormat="MM" value="{
+                                            'path':'local>/zMonth',
+                                            'type':'sap.ui.model.type.Date',
+                                            'formatOptions': {
+                                                'pattern': 'MM'
+                                            }
+                                        }"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='40' key="Product" label="{i18n>Product}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
+        
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
+                                <!-- <smartFilterBar:Contrd. -->
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <!--部品費逆ザヤ防止分析-->
+                <core:Fragment fragmentName="bi.costanalysis.fragments.COMList" type="XML"/>
+                <!--加工費逆ザヤ防止分析-->
+                <!-- <core:Fragment fragmentName="bi.costanalysis.fragments.PROCESSList" type="XML"/> -->
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>
+
