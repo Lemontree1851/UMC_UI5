@@ -1,0 +1,240 @@
+<mvc:View controllerName="pp.oflist.controller.Main"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <f:DynamicPage id="idDynamicPage">
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idSmartVariantManagement"
+                        showShare="true"
+                        persistencyKey="oflistSVM"
+                        showExecuteOnSelection="true"
+                        entitySet="OFList"
+                    />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader">
+                <f:content>
+                    <!--数据查询-->
+                    <smartFilterBar:SmartFilterBar
+                        id="idSmartFilterBar"
+                        smartVariant="idSmartVariantManagement"
+                        persistencyKey="oflistSFB"
+                        entitySet="OFList"
+                        useToolbar="false"
+                        class="sapUiResponsiveMargin"
+                    >
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}" index="1"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="RequirementPlan" visibleInAdvancedArea="true" label="{i18n>RequirementPlan}" index="3"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="Product" visibleInAdvancedArea="true" label="{i18n>Product}"  index="5"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="PlndIndepRqmtVersion" visibleInAdvancedArea="true" label="{i18n>PlndIndepRqmtVersion}" index="7"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="MaterialByCustomer" visibleInAdvancedArea="true" label="{i18n>MaterialByCustomer}" index="9"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="PlndIndepRqmtIsActive" visibleInAdvancedArea="true" label="{i18n>OnlyIsActive}" index="11" >
+                                <smartFilterBar:customControl>
+                                    <Select id="idOnlyIsActive" selectedKey="2" >
+                                        <core:ListItem key="1" text="{i18n>Yes}"></core:ListItem>
+                                        <core:ListItem key="2" text="{i18n>No}"></core:ListItem>
+                                    </Select>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="RequirementDate" visibleInAdvancedArea="true" label="{i18n>RequirementDate}"  index="13"
+                            >
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection
+                                        id="idDateRangeSelection"
+                                        valueFormat="yyyyMMdd"
+                                        displayFormat="yyyy/MM/dd"
+                                    />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="IntervalDays" visibleInAdvancedArea="true" label="{i18n>IntervalDays}" index="15"
+                            />
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                id="idSmartTable"
+                entitySet="OFList"
+                smartFilterId="idSmartFilterBar"
+                smartVariant="idSmartVariantManagement"
+                persistencyKey="oflistTable"
+                header="{i18n>tableHeaderTitle}"
+                placeToolbarInTable="true"
+                requestAtLeastFields="MRPArea,PlndIndepRqmtType,RequirementSegment,PlndIndepRqmtPeriod,PeriodType"
+                beforeRebindTable="onBeforeRebindTable"
+            >
+                <t:Table
+                    id="idPurchaseReqTable"
+                    rowActionCount="1"
+                >
+                    <t:rowMode>
+                        <rm:Auto id="idAuto" />
+                    </t:rowMode>
+                    <t:columns>
+                        <t:Column width="8rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Plant}" tooltip="{Plant}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>Product}" sortProperty="Product" filterProperty="Product">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"Product", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Product}" tooltip="{Product}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="16rem" label="{i18n>ProductDescription}" sortProperty="ProductDescription" filterProperty="ProductDescription">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"ProductDescription", "leadingProperty":"ProductDescription", "sortProperty":"ProductDescription", "filterProperty": "ProductDescription"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ProductDescription}" tooltip="{ProductDescription}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="12rem" label="{i18n>MaterialByCustomer}" sortProperty="MaterialByCustomer" filterProperty="MaterialByCustomer">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"MaterialByCustomer", "leadingProperty":"MaterialByCustomer", "sortProperty":"MaterialByCustomer", "filterProperty": "MaterialByCustomer"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{MaterialByCustomer}" tooltip="{MaterialByCustomer}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>PlndIndepRqmtVersion}" sortProperty="PlndIndepRqmtVersion" filterProperty="PlndIndepRqmtVersion">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"PlndIndepRqmtVersion", "leadingProperty":"PlndIndepRqmtVersion", "sortProperty":"PlndIndepRqmtVersion", "filterProperty": "PlndIndepRqmtVersion"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PlndIndepRqmtVersion}" tooltip="{PlndIndepRqmtVersion}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>RequirementPlan}" sortProperty="RequirementPlan" filterProperty="RequirementPlan">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"RequirementPlan", "leadingProperty":"RequirementPlan", "sortProperty":"RequirementPlan", "filterProperty": "RequirementPlan"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{RequirementPlan}" tooltip="{RequirementPlan}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="4rem" label="{i18n>PlndIndepRqmtIsActive}" sortProperty="PlndIndepRqmtIsActive" filterProperty="PlndIndepRqmtIsActive">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"PlndIndepRqmtIsActive", "leadingProperty":"PlndIndepRqmtIsActive", "sortProperty":"PlndIndepRqmtIsActive", "filterProperty": "PlndIndepRqmtIsActive"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'PlndIndepRqmtIsActive', formatter:'.formatter.booleanToX'}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>MfgOrderConfirmationEntryDate}" sortProperty="MfgOrderConfirmationEntryDate" filterProperty="MfgOrderConfirmationEntryDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"MfgOrderConfirmationEntryDate", "leadingProperty":"MfgOrderConfirmationEntryDate", "sortProperty":"MfgOrderConfirmationEntryDate", "filterProperty": "MfgOrderConfirmationEntryDate"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'MfgOrderConfirmationEntryDate', formatter:'.formatter.date'}" tooltip="{MfgOrderConfirmationEntryDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>RequirementDate}" sortProperty="RequirementDate" filterProperty="RequirementDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"RequirementDate", "leadingProperty":"RequirementDate", "sortProperty":"RequirementDate", "filterProperty": "RequirementDate"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'RequirementDate', formatter:'.formatter.date'}" tooltip="{RequirementDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>PlannedQuantity}" sortProperty="PlannedQuantity" filterProperty="PlannedQuantity">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"PlannedQuantity", "leadingProperty":"PlannedQuantity", "sortProperty":"PlannedQuantity", "filterProperty": "PlannedQuantity"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PlannedQuantity}" tooltip="{PlannedQuantity}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>LastChangedByUser}" sortProperty="LastChangedByUser" filterProperty="LastChangedByUser">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"LastChangedByUser", "leadingProperty":"LastChangedByUser", "sortProperty":"LastChangedByUser", "filterProperty": "LastChangedByUser"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{LastChangedByUser}" tooltip="{LastChangedByUser}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>LastChangeDate}" sortProperty="LastChangeDate" filterProperty="LastChangeDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"LastChangeDate", "leadingProperty":"LastChangeDate", "sortProperty":"LastChangeDate", "filterProperty": "LastChangeDate"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'LastChangeDate', formatter:'.formatter.date'}" tooltip="{LastChangeDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>ProfitCenter}" sortProperty="ProfitCenter" filterProperty="ProfitCenter">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ProfitCenter}" tooltip="{ProfitCenter}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>Remark}" sortProperty="Remark" filterProperty="Remark">
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"Remark", "leadingProperty":"Remark", "sortProperty":"Remark", "filterProperty": "Remark"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Remark}" tooltip="{Remark}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+
+
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
+                

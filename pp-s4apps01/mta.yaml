@@ -115,6 +115,10 @@ modules:
       - ppofsocomparison.zip
       name: ppofsocomparison
       target-path: resources/
+    - artifacts:
+      - ppoflist.zip
+      name: ppoflist
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -271,6 +275,16 @@ modules:
 - name: ppofsocomparison
   type: html5
   path: ofsocomparison
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: ppoflist
+  type: html5
+  path: oflist
   build-parameters:
     build-result: dist
     builder: custom
