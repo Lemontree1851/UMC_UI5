@@ -47,9 +47,23 @@ modules:
       - recoverymanagement.zip
       name: recoverymanagement
       target-path: resources/
+    - artifacts:
+      - bicostanalysis.zip
+      name: bicostanalysis
+      target-path: resources/
 - name: recoverymanagement
   type: html5
   path: recoverymanagement
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: bicostanalysis
+  type: html5
+  path: costanalysis
   build-parameters:
     build-result: dist
     builder: custom
