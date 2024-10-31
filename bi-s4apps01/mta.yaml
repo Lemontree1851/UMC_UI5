@@ -33,11 +33,35 @@ modules:
         existing_destinations_policy: update
   build-parameters:
     no-source: true
+- name: bi-s4apps01-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: bi-s4apps01-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - recoverymanagement.zip
+      name: recoverymanagement
+      target-path: resources/
+- name: recoverymanagement
+  type: html5
+  path: recoverymanagement
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: bi-s4apps01-uaa
   type: org.cloudfoundry.managed-service
   parameters:
-    path: ./xs-security.json  
+    path: ./xs-security.json
     service: xsuaa
     service-name: bi-s4apps01-xsuaa-srv
     service-plan: application
@@ -46,16 +70,16 @@ resources:
   parameters:
     config:
       HTML5Runtime_enabled: true
-      version: 1.0.0
       init_data:
         instance:
-          existing_destinations_policy: update
           destinations:
-          - Name: ui5
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
             Type: HTTP
             URL: https://ui5.sap.com
-            ProxyType: Internet
-            Authentication: NoAuthentication
+          existing_destinations_policy: update
+      version: 1.0.0
     service: destination
     service-name: bi-s4apps01-destination-service
     service-plan: lite
