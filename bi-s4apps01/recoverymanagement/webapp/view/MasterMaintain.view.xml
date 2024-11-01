@@ -8,11 +8,21 @@
     xmlns:sv="sap.ui.comp.smartvariants"
     xmlns:core="sap.ui.core" displayBlock="true" busyIndicatorDelay="0">
 
-                    <smartfilterbar:SmartFilterBar id="docFilter" smartVariant="__SVM02" persistencyKey="docFilterPersistent" entitySet="ZC_BI003_REPORT_001" useToolbar="false">
+            <smartfilterbar:SmartFilterBar id="docFilter" smartVariant="__SVM01" persistencyKey="docFilterPersistent" entitySet="ZC_BI003_REPORT_001" useToolbar="false">
+                <smartfilterbar:controlConfiguration>
+                    <smartfilterbar:ControlConfiguration id="sfbRep01ConfigRecoveryType" key="RecoveryType" label="{i18n>recoverType}" /> 
+                    <smartfilterbar:ControlConfiguration id="sfbRep01ConfigCompanyCode" key="CompanyCode" label="{i18n>company}" />  
+                    <smartfilterbar:ControlConfiguration id="sfbRep01ConfigCustomer" key="Customer" label="{i18n>customer}" /> 
+                    <smartfilterbar:ControlConfiguration id="sfbRep01ConfigRecoveryManagementNumber" key="RecoveryManagementNumber" label="{i18n>RecoveryManagementNumber}" /> 
+                    <smartfilterbar:ControlConfiguration id="sfbRep01ConfigRecoveryYear" key="RecoveryYear" label="{i18n>year}">
+                        <smartfilterbar:customControl>
+                            <DatePicker id="sfbRep01DPRecoveryYear" displayFormat="yyyy" valueFormat="yyyy" />
+                        </smartfilterbar:customControl>
+                    </smartfilterbar:ControlConfiguration> 
+                </smartfilterbar:controlConfiguration>
+            </smartfilterbar:SmartFilterBar> 
 
-                    </smartfilterbar:SmartFilterBar> 
-
-            <smarttable:SmartTable id="table2" smartVariant="__SVM02" entitySet="ZC_BI003_REPORT_001" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" smartFilterId="docFilter" tableType="Table">
+            <smarttable:SmartTable id="table1" smartVariant="__SVM01" entitySet="ZC_BI003_REPORT_001" beforeRebindTable="onBeforeRebindTable" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" smartFilterId="docFilter" tableType="Table">
                 <smarttable:customToolbar>
                     <OverflowToolbar id="overFlowToolbar">
                         <ToolbarSpacer id="toolbarSpacer" />
@@ -21,7 +31,7 @@
                     </OverflowToolbar>
                 </smarttable:customToolbar>
 
-                <table:Table id="tableMaster" threshold="20" fixedColumnCount="4"> 
+                <table:Table id="tableMaster" threshold="20" fixedColumnCount="4" selectionMode="None"> 
                     <table:rowMode>
                         <rowmodes:Auto id="idAuto" minRowCount="15"></rowmodes:Auto>
                     </table:rowMode>
@@ -51,7 +61,7 @@
                                 <smartfield:SmartField id="sfCompany" value="{CompanyCode}" wrapping="false" editable="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="idYear" width="4rem" label="{i18n>year}" sortProperty="RecoveryYear" filterProperty="RecoveryYear" visible="true">
+                        <table:Column id="idYear" width="6rem" label="{i18n>year}" sortProperty="RecoveryYear" filterProperty="RecoveryYear" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryYear", "leadingProperty":"RecoveryYear", "sortProperty":"RecoveryYear", "filterProperty": "RecoveryYear"}'/>
                             </table:customData>
@@ -75,7 +85,7 @@
                                 <smartfield:SmartField id="sfMachine" value="{Machine}" wrapping="false" editable="true"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="idCreatedDate" width="6rem" label="{i18n>createdDate}" sortProperty="CreatedDate" filterProperty="CreatedDate" visible="true">
+                        <table:Column id="idCreatedDate" width="10rem" label="{i18n>createdDate}" sortProperty="CreatedDate" filterProperty="CreatedDate" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CreatedDate", "leadingProperty":"CreatedDate", "sortProperty":"CreatedDate", "filterProperty": "CreatedDate"}'/>
                             </table:customData>

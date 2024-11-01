@@ -2,9 +2,11 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
     "sap/m/MessageBox",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
     "../formatter/recoveryFormatter"
 ],
-    function (Controller, MessageToast, MessageBox, recoveryFormatter) {
+    function (Controller, MessageToast, MessageBox, Filter, FilterOperator, recoveryFormatter) {
         "use strict";
 
         return Controller.extend("recoverymanagement.controller.MasterMaintain", {
@@ -27,8 +29,6 @@ sap.ui.define([
                 var sYear = oBindingContext.getProperty("RecoveryYear");
                 var sType = oBindingContext.getProperty("RecoveryType");
                 var sCustomer = oBindingContext.getProperty("Customer");
-
-                //var oI18nBundle = this.getView().getModel("i18n").getResourceBundle();
 
                 if (!sCompany || sCompany === '') {
                     MessageBox.error(this._getI18nBundle().getText("companyCodeEmpty"));
@@ -61,6 +61,7 @@ sap.ui.define([
                     success: function (oRes) {
                         MessageToast.show(that._getI18nBundle().getText("dataSavedOK"));
                         that._closeDialog(that, 'idCreateDialog');
+                        that._rebind = true;
                         oModel.refresh();
                     },
                     error: function (oErr) {
@@ -120,6 +121,42 @@ sap.ui.define([
                     oDialog.setBindingContext(oBindingContext);
                     oDialog.open();
                 });
+            },
+
+            onBeforeRebindTable: function (oEvent) {
+                var oParameters = oEvent.getParameter("bindingParams");
+                var oYear = this.byId("sfbRep01DPRecoveryYear");
+
+                //Filter
+                if (oYear) {
+                    var sYear = oYear.getValue();
+                    if (sYear !== '') {
+                        oParameters.filters.push(
+                            new Filter(
+                                "RecoveryYear",
+                                FilterOperator.EQ,
+                                oYear.getValue()
+                            )
+                        );
+                    }
+                }
+
+                //Sort
+
+                if (this._rebind === undefined) {
+                    this._rebind = true;
+                }
+
+                if (!this._rebind) {
+                    return;
+                }
+
+
+                oParameters.sorter = [new sap.ui.model.Sorter("RecoveryType", false),
+                new sap.ui.model.Sorter("RecoveryManagementNumber", false)
+                ];
+
+                this._rebind = false;
             },
 
             _closeDialog: function (oContext, sDialogId) {

@@ -1,0 +1,271 @@
+<mvc:View xmlns:rowmodes="sap.ui.table.rowmodes" xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" controllerName="recoverymanagement.controller.Report002"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:smartfield="sap.ui.comp.smartfield"
+    xmlns:table="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:core="sap.ui.core" displayBlock="true" busyIndicatorDelay="0">
+
+            <smartfilterbar:SmartFilterBar id="report02Filter" smartVariant="__SVM02" persistencyKey="report02FilterPersistent" entitySet="ZC_BI003_REPORT_002" useToolbar="false">
+                <smartfilterbar:controlConfiguration>
+                    <smartfilterbar:ControlConfiguration id="sfbRep02ConfigFiscalYear" key="FiscalYear" label="{i18n>FiscalYear}">
+                        <smartfilterbar:customControl>
+                            <DatePicker id="sfbRep02DPRecoveryYear" displayFormat="yyyy" valueFormat="yyyy" />
+                        </smartfilterbar:customControl>
+                    </smartfilterbar:ControlConfiguration>
+
+                    <smartfilterbar:ControlConfiguration id="sfbRep02ConfigFiscalMonth" key="FiscalMonth" label="{i18n>FiscalMonth}" />  
+                    <smartfilterbar:ControlConfiguration id="sfbRep02ConfigCompanyCode" key="CompanyCode" label="{i18n>company}" /> 
+                    <smartfilterbar:ControlConfiguration id="sfbRep02ConfigRecoveryManagementNumber" key="RecoveryManagementNumber" label="{i18n>RecoveryManagementNumber}" /> 
+                </smartfilterbar:controlConfiguration>
+            </smartfilterbar:SmartFilterBar> 
+
+            <smarttable:SmartTable id="table2" smartVariant="__SVM02" beforeRebindTable="onBeforeRebindTable" entitySet="ZC_BI003_REPORT_002" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" smartFilterId="report02Filter" tableType="Table">
+
+                <table:Table id="tableReport02" threshold="20" selectionMode="None" fixedColumnCount="3" >
+                    <table:rowMode>
+                        <rowmodes:Auto id="idReport02Auto" minRowCount="15"></rowmodes:Auto>
+                    </table:rowMode>
+                   
+                    <table:columns>
+                        <table:Column id="idRep02FiscalYearPeriod" width="6em" label="{i18n>FiscalYearPeriod}" sortProperty="FiscalYearPeriod" filterProperty="FiscalYearPeriod" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYearPeriod",  "leadingProperty":"FiscalYearPeriod", "sortProperty":"FiscalYearPeriod", "filterProperty": "FiscalYearPeriod"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02FiscalYearPeriod" value="{FiscalYearPeriod}" wrapping="false" editable="false" />
+                            </table:template>
+                        </table:Column>
+
+                        <table:Column id="idRep02Company" width="20em" label="{i18n>company}" sortProperty="CompanyCode" filterProperty="CompanyCode" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode",  "additionalProperty":"CompanyCodeName", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02Company" value="{CompanyCode}" wrapping="false" editable="false"/>
+                            </table:template>
+                        </table:Column>
+
+                        <table:Column id="idRep02RecoverManagementNumber" width="10em" label="{i18n>RecoveryManagementNumber}" sortProperty="RecoveryManagementNumber" filterProperty="RecoveryManagementNumber" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryManagementNumber",  "leadingProperty":"RecoveryManagementNumber", "sortProperty":"RecoveryManagementNumber", "filterProperty": "RecoveryManagementNumber"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="idSfRep02ManagementNumber" value="{RecoveryManagementNumber}" wrapping="false" editable="false" />
+                            </table:template>
+                        </table:Column>
+
+                        <table:Column id="idRep02PurchaseOrder" width="10em" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrder",  "leadingProperty":"PurchaseOrder", "sortProperty":"PurchaseOrder", "filterProperty": "PurchaseOrder"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02PurchaseOrder" value="{PurchaseOrder}" wrapping="false" editable="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02PurchaseOrderItem" width="6em" label="{i18n>PurchaseOrderItem}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItem",  "leadingProperty":"PurchaseOrderItem", "sortProperty":"PurchaseOrderItem", "filterProperty": "PurchaseOrderItem"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02PurchaseOrderItem" value="{PurchaseOrderItem}" wrapping="false" editable="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02SpotbuyMaterial" width="20em" label="{i18n>SpotbuyMaterial}" sortProperty="SpotbuyMaterial" filterProperty="SpotbuyMaterial" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SpotbuyMaterial", "additionalProperty": "SpotbuyMaterialText",  "leadingProperty":"SpotbuyMaterial", "sortProperty":"SpotbuyMaterial", "filterProperty": "SpotbuyMaterial"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02SpotbuyMaterial" value="{SpotbuyMaterial}" wrapping="false" editable="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02ProductOldID" width="20em" label="{i18n>ProductOldID}" sortProperty="ProductOldID" filterProperty="ProductOldID" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ProductOldID", "additionalProperty": "ProductOldText",  "leadingProperty":"ProductOldID", "sortProperty":"ProductOldID", "filterProperty": "ProductOldID"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02ProductOldID" value="{ProductOldID}" wrapping="false" editable="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02SpotbuyMaterialPrice" width="13em" label="{i18n>SpotbuyMaterialPrice}" sortProperty="NetPriceAmount" filterProperty="NetPriceAmount" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceAmount","unit":"CompanyCurrency", "leadingProperty":"NetPriceAmount", "sortProperty":"NetPriceAmount", "filterProperty": "NetPriceAmount"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text id="sfRep02SpotbuyMaterialPrice" text="{parts: [{path: 'NetPriceAmount'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02OldMaterialPrice" width="13em" label="{i18n>OldMaterialPrice}" sortProperty="OldMaterialPrice" filterProperty="OldMaterialPrice" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OldMaterialPrice", "unit":"CompanyCurrency",  "leadingProperty":"OldMaterialPrice", "sortProperty":"OldMaterialPrice", "filterProperty": "OldMaterialPrice"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text id="sfRep02OldMaterialPrice" text="{parts: [{path: 'OldMaterialPrice'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02OrderQuantity" width="13em" label="{i18n>OrderQuantity}" sortProperty="OrderQuantity" filterProperty="OrderQuantity" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OrderQuantity", "unit":"BaseUnit",  "leadingProperty":"OrderQuantity", "sortProperty":"OrderQuantity", "filterProperty": "OrderQuantity"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text id="sfRep02OrderQuantity" text="{parts: [{path: 'OrderQuantity'}, {path: 'BaseUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02BaseUnit" width="6em" label="{i18n>BaseUnit}" sortProperty="BaseUnit" filterProperty="BaseUnit" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit",  "leadingProperty":"BaseUnit", "sortProperty":"BaseUnit", "filterProperty": "BaseUnit"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02BaseUnit" value="{BaseUnit}" wrapping="false" editable="false"/>
+                            </table:template>
+                        </table:Column>   
+                        <table:Column id="idRep02NetPriceDiff" width="13em" label="{i18n>NetPriceDiff}" sortProperty="NetPriceDiff" filterProperty="NetPriceDiff" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceDiff","unit":"CompanyCurrency", "leadingProperty":"NetPriceDiff", "sortProperty":"NetPriceDiff", "filterProperty": "NetPriceDiff"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text id="sfRep02NetPriceDiff" text="{parts: [{path: 'NetPriceDiff'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02PriceDiffTotal" width="13em" label="{i18n>PriceDiffTotal}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecessaryAmount", "unit":"CompanyCurrency",  "leadingProperty":"RecoveryNecessaryAmount", "sortProperty":"RecoveryNecessaryAmount", "filterProperty": "RecoveryNecessaryAmount"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text id="sfRep02PriceDiffTotal" text="{parts: [{path: 'RecoveryNecessaryAmount'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column>                     
+                        <table:Column id="idRep02CompanyCurrency" width="6em" label="{i18n>currency}" sortProperty="CompanyCurrency" filterProperty="CompanyCurrency" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCurrency",  "leadingProperty":"CompanyCurrency", "sortProperty":"CompanyCurrency", "filterProperty": "CompanyCurrency"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02CompanyCurrency" value="{CompanyCurrency}" wrapping="false" editable="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02BillingDocument" width="10em" label="{i18n>BillingDocument}" sortProperty="BillingDocument" filterProperty="BillingDocument" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocument", "leadingProperty":"BillingDocument", "sortProperty":"BillingDocument", "filterProperty": "BillingDocument"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02BillingDocument" value="{BillingDocument}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02BillingDocumentItem" width="6em" label="{i18n>BillingDocumentItem}" sortProperty="BillingDocumentItem" filterProperty="BillingDocumentItem" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocumentItem", "leadingProperty":"BillingDocumentItem", "sortProperty":"BillingDocumentItem", "filterProperty": "BillingDocumentItem"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02BillingDocumentItem" value="{BillingDocumentItem}" wrapping="false" editable="true" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02BillingDocumentDate" width="10em" label="{i18n>BillingDocumentDate}" sortProperty="BillingDocumentDate" filterProperty="BillingDocumentDate" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocumentDate", "leadingProperty":"BillingDocumentDate", "sortProperty":"BillingDocumentDate", "filterProperty": "BillingDocumentDate"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02BillingDocumentDate" value="{BillingDocumentDate}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02BillingProduct" width="20em" label="{i18n>BillingProduct}" sortProperty="BillingProduct" filterProperty="BillingProduct" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillingProduct", "additionalProperty":"BillingProductText", "leadingProperty":"BillingProduct", "sortProperty":"BillingProduct", "filterProperty": "BillingProduct"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02BillingProduct" value="{BillingProduct}" wrapping="false" editable="true" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02ProfitCenter" width="10em" label="{i18n>ProfitCenter}" sortProperty="ProfitCenter" filterProperty="ProfitCenter" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "additionalProperty":"ProfitCenterName", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02ProfitCenter" value="{ProfitCenter}" wrapping="false" editable="true" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02ConditionType" width="5em" label="{i18n>ConditionType}" sortProperty="ConditionType" filterProperty="ConditionType" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ConditionType", "leadingProperty":"ConditionType", "sortProperty":"ConditionType", "filterProperty": "ConditionType"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02ConditionType" value="{ConditionType}" wrapping="false" />
+                            </table:template>
+                        </table:Column>    
+                        <table:Column id="idRep02ConditionAmount" width="13em" label="{i18n>ConditionAmount}" sortProperty="ConditionRateAmount" filterProperty="ConditionRateAmount" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateAmount", "leadingProperty":"ConditionRateAmount", "sortProperty":"ConditionRateAmount", "filterProperty": "ConditionRateAmount"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text id="sfRep02ConditionRateAmount" text="{parts: [{path: 'ConditionRateAmount'}, {path: 'BillingCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column> 
+                         <table:Column id="idRep02BillingPrice" width="13em" label="{i18n>BillingPrice}" sortProperty="BillingPrice" filterProperty="BillingPrice" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillingPrice", "leadingProperty":"BillingPrice", "sortProperty":"BillingPrice", "filterProperty": "BillingPrice"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text id="sfRep02BillingPrice" text="{parts: [{path: 'BillingPrice'}, {path: 'BillingCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column> 
+                        <table:Column id="idRep02BillingQuantity" width="13em" label="{i18n>BillingQuantity}" sortProperty="BillingQuantity" filterProperty="BillingQuantity" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantity", "unit":"BillingQuantityUnit",  "leadingProperty":"BillingQuantity", "sortProperty":"BillingQuantity", "filterProperty": "BillingQuantity"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text id="sfRep02BillingQuantity" text="{parts: [{path: 'BillingQuantity'}, {path: 'BillingQuantityUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02BillingQuantityUnit" width="6em" label="{i18n>BillingQuantityUnit}" sortProperty="BillingQuantityUnit" filterProperty="BillingQuantityUnit" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantityUnit",  "leadingProperty":"BillingQuantityUnit", "sortProperty":"BillingQuantityUnit", "filterProperty": "BillingQuantityUnit"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02BillingQuantityUnit" value="{BillingQuantityUnit}" wrapping="false" editable="false"/>
+                            </table:template>
+                        </table:Column>  
+                         <table:Column id="idRep02RecoveryAmount" width="13em" label="{i18n>RecoveryAmount}" sortProperty="RecoveryAmount" filterProperty="RecoveryAmount" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryAmount", "leadingProperty":"RecoveryAmount", "sortProperty":"RecoveryAmount", "filterProperty": "RecoveryAmount"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text id="sfRep02RecoveryAmount" text="{parts: [{path: 'RecoveryAmount'}, {path: 'BillingCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column> 
+                        <table:Column id="idRep02BillingCurrency" width="6em" label="{i18n>BillingCurrency}" sortProperty="BillingCurrency" filterProperty="BillingCurrency" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillingCurrency",  "leadingProperty":"BillingCurrency", "sortProperty":"BillingCurrency", "filterProperty": "BillingCurrency"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02BillingCurrency" value="{BillingCurrency}" wrapping="false" editable="false"/>
+                            </table:template>
+                        </table:Column>  
+                        <table:Column id="idRep02SalesDocument" width="10em" label="{i18n>SalesDocument}" sortProperty="SalesOrderDocument" filterProperty="SalesOrderDocument" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderDocument", "leadingProperty":"SalesOrderDocument", "sortProperty":"SalesOrderDocument", "filterProperty": "SalesOrderDocument"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02SalesDocument" value="{SalesOrderDocument}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRep02SalesDocumentItem" width="6em" label="{i18n>SalesDocumentItem}" sortProperty="SalesOrderDocumentItem" filterProperty="SalesOrderDocumentItem" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderDocumentItem", "leadingProperty":"SalesOrderDocumentItem", "sortProperty":"SalesOrderDocumentItem", "filterProperty": "SalesOrderDocumentItem"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02SalesDocumentItem" value="{SalesOrderDocumentItem}" wrapping="false" editable="true" />
+                            </table:template>
+                        </table:Column>  
+                        <table:Column id="idRep02Customer" width="20rem" label="{i18n>customer}" sortProperty="Customer" filterProperty="Customer" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "additionalProperty":"CustomerName", "leadingProperty":"Customer", "sortProperty":"Customer", "filterProperty": "Customer"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRep02Customer" value="{Customer}" wrapping="false" editable="false"/>
+                            </table:template>
+                        </table:Column>                                                                                                                                                                      
+                    </table:columns>
+                </table:Table>
+            </smarttable:SmartTable> 
+</mvc:View>

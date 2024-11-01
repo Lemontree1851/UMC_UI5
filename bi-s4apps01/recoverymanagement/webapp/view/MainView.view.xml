@@ -9,16 +9,16 @@
                         <mvc:XMLView id="idMasterView" viewName="recoverymanagement.view.MasterMaintain" />
                     </IconTabFilter>
                     <IconTabFilter id="idTabFilter2" text="{i18n>title2}" key="title2">
-                        <Text id="txtFilter2" text="Attachments go here ..." />
+                        <mvc:XMLView id="idReport02View" viewName="recoverymanagement.view.Report002" />
                     </IconTabFilter>
                     <IconTabFilter id="idTabFilter3" text="{i18n>title3}" key="title3">
-                        <Text id="txtFilter3" text="Notes go here ..." />
+                        <mvc:XMLView id="idReport03View" viewName="recoverymanagement.view.Report003" />
                     </IconTabFilter>
                     <IconTabFilter id="idTabFilter4" text="{i18n>title4}" key="title4">
-                        <Text id="txtFilter4" text="People content goes here ..." />
+                        <mvc:XMLView id="idReport04View" viewName="recoverymanagement.view.Report004" />
                     </IconTabFilter>
                     <IconTabFilter id="idTabFilter5" text="{i18n>title5}" key="title5">
-                        <Text id="txtFilter5" text="People content goes here ..." />
+                        <mvc:XMLView id="idReport05View" viewName="recoverymanagement.view.Report005" />
                     </IconTabFilter>
                 </items>
             </IconTabBar>
