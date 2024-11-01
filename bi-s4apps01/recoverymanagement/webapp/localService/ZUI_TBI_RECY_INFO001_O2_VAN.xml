@@ -757,6 +757,10 @@
                                     <PropertyValue Property="Value" Path="BillingPrice"/>
                                 </Record>
                                 <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Transaction Currency"/>
+                                    <PropertyValue Property="Value" Path="TransactionCurrency"/>
+                                </Record>
+                                <Record Type="UI.DataField">
                                     <PropertyValue Property="Label" String="Billing Quantity"/>
                                     <PropertyValue Property="Value" Path="BillingQuantity"/>
                                 </Record>
@@ -988,10 +992,6 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Billing Price"/>
                             <PropertyValue Property="Value" Path="BillingPrice"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Transaction Currency"/>
-                            <PropertyValue Property="Value" Path="TransactionCurrency"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Billing Quantity"/>
@@ -1688,8 +1688,8 @@
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
                         <PropertyPath>FiscalYear</PropertyPath>
-                        <PropertyPath>CompanyCode</PropertyPath>
                         <PropertyPath>FiscalMonth</PropertyPath>
+                        <PropertyPath>CompanyCode</PropertyPath>
                         <PropertyPath>RecoveryManagementNumber</PropertyPath>
                     </Collection>
                 </Annotation>
