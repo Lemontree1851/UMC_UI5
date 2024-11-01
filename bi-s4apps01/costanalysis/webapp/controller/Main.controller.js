@@ -1,12 +1,29 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "./Base",
+    "../model/formatter",
+    "sap/m/BusyDialog",
+    "sap/m/MessageBox",
+    "sap/m/MessageToast",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "sap/ui/core/Fragment"
 ],
-function (Controller) {
+function (Base,formatter, BusyDialog, MessageBox, MessageToast, Filter, FilterOperator, Fragment) {
     "use strict";
 
-    return Controller.extend("bi.costanalysis.controller.Main", {
+    return Base.extend("bi.costanalysis.controller.Main", {
+
+ 
+        formatter: formatter,
         onInit: function () {
 
-        }
+        },
+        onSearch: function () {
+            this.getModel().resetChanges();
+        },
+
+
+
+
     });
 });
