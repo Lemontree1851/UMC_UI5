@@ -1,0 +1,30 @@
+<c:FragmentDefinition xmlns:smartField="sap.ui.comp.smartfield" xmlns:smartForm="sap.ui.comp.smartform" xmlns="sap.m" xmlns:c="sap.ui.core">
+    <Dialog id="idCreateDialog" contentWidth="30%" title="{i18n>create}" afterClose="onDestroy">
+        <beginButton>
+            <Button id="btnSaveNew" text="{i18n>save}" type="Emphasized" press="onCreateNewRecovery" />
+        </beginButton>
+
+        <content>
+ 		<smartForm:SmartForm id="createForm" editable="true">
+			<smartForm:Group id="createGroup">
+				<smartForm:GroupElement id="sfElCompanyCode">
+					<smartField:SmartField id="sfCreateCompanyCode" value="{CompanyCode}" />
+				</smartForm:GroupElement>
+				<smartForm:GroupElement id="sfElRecoveryCode">
+					<smartField:SmartField id="sfCreateRecoveryCode" value="{RecoveryYear}" />
+				</smartForm:GroupElement>
+				<smartForm:GroupElement id = "sfElRecoveryType">
+					<smartField:SmartField id="sfCreateRecoveryType" value="{RecoveryType}" />
+				</smartForm:GroupElement>
+				<smartForm:GroupElement id="sfElCustomer">
+					<smartField:SmartField id="sfCreateCustomer" value="{Customer}" />
+				</smartForm:GroupElement>  
+			</smartForm:Group> 
+		</smartForm:SmartForm>
+        </content>
+
+        <endButton>
+            <Button id="btnCloseAdd" text="{i18n>cancel}" type="Transparent" press="onCloseCreateDialog" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

@@ -73,44 +73,193 @@
                 <Annotation Term="UI.HiddenFilter"/>
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/DraftUUID">
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/Uuid">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/DraftEntityType">
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/RecoveryNum">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/DraftAccessType">
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/CreatedAt">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/ProcessingStartDateTime">
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/LastChangedBy">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/InProcessByUser">
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/LastChangedAt">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/DraftIsKeptByUser">
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/LocalLastChangedAt">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/EnqueueStartDateTime">
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/Delete_mc">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/DraftIsCreatedByMe">
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/Update_mc">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/DraftIsLastChangedByMe">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/DraftIsProcessedByMe">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/CreatedByUserDescription">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/LastChangedByUserDescription">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.I_DraftAdministrativeDataType/InProcessByUserDescription">
-                <Annotation Term="UI.Hidden"/>
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="ID" String="GeneralInfo"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Comsuption View for ZI_BI003_001"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                    <Annotation Term="Core.Messages">
+                        <Collection>
+                            <Record>
+                                <PropertyValue Property="message" String="UI.HEADERINFO: TypeNamePlural is mandatory"/>
+                                <PropertyValue Property="severity" String="error"/>
+                            </Record>
+                        </Collection>
+                    </Annotation>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Management Number"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Type"/>
+                            <PropertyValue Property="Value" Path="RecoveryType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Year"/>
+                            <PropertyValue Property="Value" Path="RecoveryYear"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Machine"/>
+                            <PropertyValue Property="Value" Path="Machine"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created By"/>
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created On"/>
+                            <PropertyValue Property="Value" Path="CreatedDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Already"/>
+                            <PropertyValue Property="Value" Path="RecoveryAlready"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recycle Progress (%)"/>
+                            <PropertyValue Property="Value" Path="RecoveryPercentage"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="RecoveryStatus"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Management Number"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Type"/>
+                            <PropertyValue Property="Value" Path="RecoveryType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Year"/>
+                            <PropertyValue Property="Value" Path="RecoveryYear"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Machine"/>
+                            <PropertyValue Property="Value" Path="Machine"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created By"/>
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created On"/>
+                            <PropertyValue Property="Value" Path="CreatedDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Already"/>
+                            <PropertyValue Property="Value" Path="RecoveryAlready"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recycle Progress (%)"/>
+                            <PropertyValue Property="Value" Path="RecoveryPercentage"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="RecoveryStatus"/>
+                        </Record>
+                        <Record Type="UI.DataFieldForAction">
+                            <PropertyValue Property="Label" String="Create"/>
+                            <PropertyValue Property="Action" String="">
+                                <Annotation Term="Core.Messages">
+                                    <Collection>
+                                        <Record>
+                                            <PropertyValue Property="message" String="ERROR: Mandatory Value for Action not found"/>
+                                            <PropertyValue Property="severity" String="error"/>
+                                        </Record>
+                                    </Collection>
+                                </Annotation>
+                            </PropertyValue>
+                            <PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Currency"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>RecoveryType</PropertyPath>
+                        <PropertyPath>CompanyCode</PropertyPath>
+                        <PropertyPath>Customer</PropertyPath>
+                        <PropertyPath>RecoveryManagementNumber</PropertyPath>
+                        <PropertyPath>RecoveryYear</PropertyPath>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_002Type/DocumentCurrency">
                 <Annotation Term="UI.Hidden"/>
@@ -1638,207 +1787,6 @@
                         <PropertyPath>Description</PropertyPath>
                     </Collection>
                 </Annotation>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/HasDraftEntity">
-                <Annotation Term="UI.HiddenFilter"/>
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/DraftEntityCreationDateTime">
-                <Annotation Term="UI.HiddenFilter"/>
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/DraftEntityLastChangeDateTime">
-                <Annotation Term="UI.HiddenFilter"/>
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/HasActiveEntity">
-                <Annotation Term="UI.HiddenFilter"/>
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/IsActiveEntity">
-                <Annotation Term="UI.HiddenFilter"/>
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/Uuid">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/RecoveryNum">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/Currency">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/CreatedAt">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/LastChangedBy">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/LastChangedAt">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/LocalLastChangedAt">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/Edit_ac">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type/Update_mc">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_TBI_RECY_INFO001Type">
-                <Annotation Term="UI.Facets">
-                    <Collection>
-                        <Record Type="UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="General Information"/>
-                            <PropertyValue Property="ID" String="GeneralInfo"/>
-                            <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="UI.HeaderInfo">
-                    <Record>
-                        <PropertyValue Property="TypeName" String="###GENERATED Core Data Service Entity"/>
-                        <PropertyValue Property="Title">
-                            <Record Type="UI.DataField">
-                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
-                            </Record>
-                        </PropertyValue>
-                        <PropertyValue Property="Description">
-                            <Record Type="UI.DataField">
-                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
-                            </Record>
-                        </PropertyValue>
-                    </Record>
-                    <Annotation Term="Core.Messages">
-                        <Collection>
-                            <Record>
-                                <PropertyValue Property="message" String="UI.HEADERINFO: TypeNamePlural is mandatory"/>
-                                <PropertyValue Property="severity" String="error"/>
-                            </Record>
-                        </Collection>
-                    </Annotation>
-                </Annotation>
-                <Annotation Term="UI.Identification">
-                    <Collection>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Management Number"/>
-                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Company"/>
-                            <PropertyValue Property="Value" Path="CompanyCode"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Type"/>
-                            <PropertyValue Property="Value" Path="RecoveryType"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Customer"/>
-                            <PropertyValue Property="Value" Path="Customer"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Year"/>
-                            <PropertyValue Property="Value" Path="RecoveryYear"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Machine"/>
-                            <PropertyValue Property="Value" Path="Machine"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Created By"/>
-                            <PropertyValue Property="Value" Path="CreatedBy"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Created On"/>
-                            <PropertyValue Property="Value" Path="CreatedDate"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
-                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Already"/>
-                            <PropertyValue Property="Value" Path="RecoveryAlready"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recycle Progress (%)"/>
-                            <PropertyValue Property="Value" Path="RecoveryPercentage"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="RecoveryStatus"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="UI.LineItem">
-                    <Collection>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Management Number"/>
-                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Company"/>
-                            <PropertyValue Property="Value" Path="CompanyCode"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Type"/>
-                            <PropertyValue Property="Value" Path="RecoveryType"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Customer"/>
-                            <PropertyValue Property="Value" Path="Customer"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Year"/>
-                            <PropertyValue Property="Value" Path="RecoveryYear"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Machine"/>
-                            <PropertyValue Property="Value" Path="Machine"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Created By"/>
-                            <PropertyValue Property="Value" Path="CreatedBy"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Created On"/>
-                            <PropertyValue Property="Value" Path="CreatedDate"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
-                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recovery Already"/>
-                            <PropertyValue Property="Value" Path="RecoveryAlready"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Recycle Progress (%)"/>
-                            <PropertyValue Property="Value" Path="RecoveryPercentage"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="RecoveryStatus"/>
-                        </Record>
-                        <Record Type="UI.DataFieldForAction">
-                            <PropertyValue Property="Label" String="Create"/>
-                            <PropertyValue Property="Action" String="cds_zui_tbi_recy_info001_o4.cds_zui_tbi_recy_info001_o4_Entities/create_recycle"/>
-                            <PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="UI.SelectionFields">
-                    <Collection>
-                        <PropertyPath>RecoveryType</PropertyPath>
-                        <PropertyPath>CompanyCode</PropertyPath>
-                        <PropertyPath>Customer</PropertyPath>
-                        <PropertyPath>RecoveryManagementNumber</PropertyPath>
-                        <PropertyPath>RecoveryYear</PropertyPath>
-                    </Collection>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="cds_zui_tbi_recy_info001_o4.cds_zui_tbi_recy_info001_o4_Entities">
-                <Annotation Term="UI.LeadingEntitySet" String="ZC_TBI_RECY_INFO001"/>
             </Annotations>
             <Annotations Target="_Entities"/>
         </Schema>

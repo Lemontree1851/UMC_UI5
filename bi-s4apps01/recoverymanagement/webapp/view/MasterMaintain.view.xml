@@ -8,23 +8,22 @@
     xmlns:sv="sap.ui.comp.smartvariants"
     xmlns:core="sap.ui.core" displayBlock="true" busyIndicatorDelay="0">
 
-                    <smartfilterbar:SmartFilterBar id="docFilter" smartVariant="__SVM02" persistencyKey="docFilterPersistent" entitySet="ZC_TBI_RECY_INFO001" useToolbar="false">
+                    <smartfilterbar:SmartFilterBar id="docFilter" smartVariant="__SVM02" persistencyKey="docFilterPersistent" entitySet="ZC_BI003_REPORT_001" useToolbar="false">
 
                     </smartfilterbar:SmartFilterBar> 
 
-            <smarttable:SmartTable id="table2" smartVariant="__SVM02" entitySet="ZC_TBI_RECY_INFO001" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" smartFilterId="docFilter" tableType="Table">
+            <smarttable:SmartTable id="table2" smartVariant="__SVM02" entitySet="ZC_BI003_REPORT_001" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" smartFilterId="docFilter" tableType="Table">
                 <smarttable:customToolbar>
                     <OverflowToolbar id="overFlowToolbar">
                         <ToolbarSpacer id="toolbarSpacer" />
-                        <Button id="btnCreate" text="{i18n>create}" enabled="true" type="Transparent" press="onCreate" />
-                        <Button id="btnEdit" text="{i18n>edit}" enabled="true" type="Transparent" press="onEdit" />
+                        <Button id="btnCreate" text="{i18n>create}" enabled="true" type="Transparent" press="onCreate" /> 
                         <Button id="btnSave" text="{i18n>save}" enabled="true" type="Transparent" press="onSave" />
                     </OverflowToolbar>
                 </smarttable:customToolbar>
 
-                <table:Table id="tableMaster" threshold="20"> 
+                <table:Table id="tableMaster" threshold="20" fixedColumnCount="4"> 
                     <table:rowMode>
-                        <rowmodes:Auto id="idAuto" minRowCount="25"></rowmodes:Auto>
+                        <rowmodes:Auto id="idAuto" minRowCount="15"></rowmodes:Auto>
                     </table:rowMode>
                     <table:columns>
                         <table:Column id="idrecoverType" width="10rem" label="{i18n>recoverType}" sortProperty="RecoveryType" filterProperty="RecoveryType" visible="true">
@@ -32,7 +31,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryType", "additionalProperty":"RecoverTypeDescription", "leadingProperty":"RecoveryType", "sortProperty":"RecoveryType", "filterProperty": "RecoveryType"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfRecoveryType" value="{RecoveryType}" wrapping="false" />
+                                <smartfield:SmartField id="sfRecoveryType" value="{RecoveryType}" wrapping="false" editable="false" />
                             </table:template>
                         </table:Column>
 
@@ -41,7 +40,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryManagementNumber", "leadingProperty":"RecoveryManagementNumber", "sortProperty":"RecoveryManagementNumber", "filterProperty": "RecoveryManagementNumber"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="idText" value="{RecoveryManagementNumber}" wrapping="false" />
+                                <smartfield:SmartField id="idText" value="{RecoveryManagementNumber}" wrapping="false" editable="false" />
                             </table:template>
                         </table:Column>
                         <table:Column id="idCompany" width="20rem" label="{i18n>company}" sortProperty="CompanyCode" filterProperty="CompanyCode" visible="true">
@@ -49,7 +48,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "additionalProperty":"CompanyName", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfCompany" value="{CompanyCode}" wrapping="false"/>
+                                <smartfield:SmartField id="sfCompany" value="{CompanyCode}" wrapping="false" editable="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column id="idYear" width="4rem" label="{i18n>year}" sortProperty="RecoveryYear" filterProperty="RecoveryYear" visible="true">
@@ -57,7 +56,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryYear", "leadingProperty":"RecoveryYear", "sortProperty":"RecoveryYear", "filterProperty": "RecoveryYear"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfYear" value="{RecoveryYear}" wrapping="false" />
+                                <smartfield:SmartField id="sfYear" value="{RecoveryYear}" wrapping="false" editable="false" />
                             </table:template>
                         </table:Column>
                         <table:Column id="idCustomer" width="20rem" label="{i18n>customer}" sortProperty="Customer" filterProperty="Customer" visible="true">
@@ -65,7 +64,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "additionalProperty":"CustomerName", "leadingProperty":"Customer", "sortProperty":"Customer", "filterProperty": "Customer"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfCustomer" value="{Customer}" wrapping="false"/>
+                                <smartfield:SmartField id="sfCustomer" value="{Customer}" wrapping="false" editable="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column id="idMachine" width="12rem" label="{i18n>machine}" sortProperty="Machine" filterProperty="Machine" visible="true">
@@ -81,7 +80,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CreatedDate", "leadingProperty":"CreatedDate", "sortProperty":"CreatedDate", "filterProperty": "CreatedDate"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfCreatedDate" value="{CreatedDate}" wrapping="false"/>
+                                <smartfield:SmartField id="sfCreatedDate" value="{CreatedDate}" wrapping="false" editable="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column id="idCreatedUser" width="10rem" label="{i18n>createdUser}" sortProperty="CreatedBy" filterProperty="CreatedBy" visible="true">
@@ -89,23 +88,31 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CreatedBy", "leadingProperty":"CreatedBy", "sortProperty":"CreatedBy", "filterProperty": "CreatedBy"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfCreatedUser" value="{CreatedBy}" wrapping="false"/>
+                                <smartfield:SmartField id="sfCreatedUser" value="{CreatedBy}" wrapping="false" editable="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column id="idRecoveryNecessaryAmount" width="10rem" label="{i18n>recoveryNecessaryAmount}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="true">
                             <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecessaryAmount", "additionalProperty":"Currency", "leadingProperty":"RecoveryNecessaryAmount", "sortProperty":"RecoveryNecessaryAmount", "filterProperty": "RecoveryNecessaryAmount"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecessaryAmount", "unit":"Currency", "leadingProperty":"RecoveryNecessaryAmount", "sortProperty":"RecoveryNecessaryAmount", "filterProperty": "RecoveryNecessaryAmount"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfRecoveryNecessaryAmount" value="{RecoveryNecessaryAmount}" wrapping="false"/>
+                                <Text id="sfRecoveryNecessaryAmount" text="{parts: [{path: 'RecoveryNecessaryAmount'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                             </table:template>
                         </table:Column>
                         <table:Column id="idRecoveryAlready" width="10rem" label="{i18n>recoveryAlready}" sortProperty="RecoveryAlready" filterProperty="RecoveryAlready" visible="true">
                             <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryAlready", "additionalProperty":"Currency", "leadingProperty":"RecoveryAlready", "sortProperty":"RecoveryAlready", "filterProperty": "RecoveryAlready"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryAlready", "unit":"Currency", "leadingProperty":"RecoveryAlready", "sortProperty":"RecoveryAlready", "filterProperty": "RecoveryAlready"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfRecoveryAlready" value="{RecoveryAlready}" wrapping="false"/>
+                                <Text id="sfRecoveryAlready" text="{parts: [{path: 'RecoveryAlready'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="idRecoveryCurrency" width="10rem" label="{i18n>currency}" sortProperty="Currency" filterProperty="Currency" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'/>
+                            </table:customData>
+                            <table:template>
+                                <smartfield:SmartField id="sfRecoveryCurrency" value="{Currency}" wrapping="false" editable="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column id="idRecoverProgress" width="6rem" label="{i18n>recoverProgress}" sortProperty="RecoveryPercentage" filterProperty="RecoveryPercentage" visible="true">
@@ -113,7 +120,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryPercentage", "leadingProperty":"RecoveryPercentage", "sortProperty":"RecoveryPercentage", "filterProperty": "RecoveryPercentage"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfRecoveryPercentage" value="{RecoveryPercentage}" wrapping="false"/>
+                                <Text id="idRecoveryPercentage" text="{parts:['RecoveryPercentage'], formatter:'.formatter.formatPercentage'}" wrapping="false" />
                             </table:template>
                         </table:Column>
                         <table:Column id="idrecoverStatus" width="10rem" label="{i18n>recoverStatus}" sortProperty="RecoveryStatus" filterProperty="RecoveryStatus" visible="true">
