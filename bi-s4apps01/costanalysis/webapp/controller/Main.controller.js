@@ -20,6 +20,23 @@ function (Base,formatter, BusyDialog, MessageBox, MessageToast, Filter, FilterOp
         },
         onSearch: function () {
             this.getModel().resetChanges();
+			var oSearchBar = this.byId("idSmartFilterBar1");
+			var oTable = this.byId("tablelist");
+			var aFilters = oSearchBar.getFilters();
+
+			var sYear = this.getModel("local").getProperty("/zYear");
+			if (sYear) {
+				aFilters.push(new Filter("zYear", FilterOperator.EQ, sYear.getFullYear()));
+			}
+			var sMonth = this.getModel("local").getProperty("/zMonth");
+			if (sMonth) {
+				aFilters.push(new Filter("zMonth", FilterOperator.EQ, sMonth.getFullYear()));
+			}
+
+            oSearchBar.getFilters().push(new Filter("zYear", FilterOperator.EQ, sYear.getFullYear()));
+
+            var bFilters = oSearchBar.getFilters();
+			var oFilterData = oSearchBar.getFilterData(); 
         },
 
 
