@@ -14,6 +14,7 @@ function (Controller, Filter, FilterOperator) {
         onBeforeRebindTable: function (oEvent) {
             var oParameters = oEvent.getParameter("bindingParams");
             var oYear = this.byId("sfbRep02DPRecoveryYear");
+            var oMonth = this.byId("sfbRep02SelFiscalMonth");
 
             //Filter
             if (oYear) {
@@ -23,9 +24,22 @@ function (Controller, Filter, FilterOperator) {
                         new Filter(
                             "FiscalYear",
                             FilterOperator.EQ,
-                            oYear.getValue()
+                            sYear
                         )
                     );
+                }
+            }
+
+            if(oMonth){
+                var sMonth = oMonth.getSelectedKey();
+                if(sMonth !== ''){
+                    oParameters.filters.push(
+                        new Filter(
+                            "FiscalMonth",
+                            FilterOperator.EQ,
+                            sMonth
+                        )
+                    );                    
                 }
             }
         }

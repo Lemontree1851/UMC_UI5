@@ -261,6 +261,190 @@
                     </Collection>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001_JOBType/RecoveryNum">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001_JOBType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="ID" String="GeneralInfo"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Comsuption View for ZI_BI003_001 Job Saved Data"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                    <Annotation Term="Core.Messages">
+                        <Collection>
+                            <Record>
+                                <PropertyValue Property="message" String="UI.HEADERINFO: TypeNamePlural is mandatory"/>
+                                <PropertyValue Property="severity" String="error"/>
+                            </Record>
+                        </Collection>
+                    </Annotation>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Management Number"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company Name"/>
+                            <PropertyValue Property="Value" Path="CompanyName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Type"/>
+                            <PropertyValue Property="Value" Path="RecoveryType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer Name"/>
+                            <PropertyValue Property="Value" Path="CustomerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Year"/>
+                            <PropertyValue Property="Value" Path="RecoveryYear"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Machine"/>
+                            <PropertyValue Property="Value" Path="Machine"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created By"/>
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created On"/>
+                            <PropertyValue Property="Value" Path="CreatedDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Already"/>
+                            <PropertyValue Property="Value" Path="RecoveryAlready"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recycle Progress (%)"/>
+                            <PropertyValue Property="Value" Path="RecoveryPercentage"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="RecoveryStatus"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Management Number"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="UUID"/>
+                            <PropertyValue Property="Value" Path="Uuid"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company Name"/>
+                            <PropertyValue Property="Value" Path="CompanyName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Type"/>
+                            <PropertyValue Property="Value" Path="RecoveryType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer Name"/>
+                            <PropertyValue Property="Value" Path="CustomerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Year"/>
+                            <PropertyValue Property="Value" Path="RecoveryYear"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Machine"/>
+                            <PropertyValue Property="Value" Path="Machine"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created By"/>
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created On"/>
+                            <PropertyValue Property="Value" Path="CreatedDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Already"/>
+                            <PropertyValue Property="Value" Path="RecoveryAlready"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recycle Progress (%)"/>
+                            <PropertyValue Property="Value" Path="RecoveryPercentage"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="RecoveryStatus"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran By User"/>
+                            <PropertyValue Property="Value" Path="JobRunBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Date"/>
+                            <PropertyValue Property="Value" Path="JobRunDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Time"/>
+                            <PropertyValue Property="Value" Path="JobRunTime"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Currency"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>CompanyCode</PropertyPath>
+                        <PropertyPath>RecoveryType</PropertyPath>
+                        <PropertyPath>Customer</PropertyPath>
+                        <PropertyPath>RecoveryManagementNumber</PropertyPath>
+                        <PropertyPath>RecoveryYear</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_002Type/DocumentCurrency">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
@@ -615,6 +799,391 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Base Unit"/>
                             <PropertyValue Property="Value" Path="BaseUnit"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Quantity Unit"/>
+                            <PropertyValue Property="Value" Path="BillingQuantityUnit"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>FiscalYear</PropertyPath>
+                        <PropertyPath>FiscalMonth</PropertyPath>
+                        <PropertyPath>CompanyCode</PropertyPath>
+                        <PropertyPath>RecoveryManagementNumber</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_002_JOBType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="ID" String="collInfoFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="recoveryFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#recovery"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Purchase Order"/>
+                            <PropertyValue Property="ID" String="collPoFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="poFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#po"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Billing"/>
+                            <PropertyValue Property="ID" String="collbillingFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="billingFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#billing"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="headerFacet"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#header"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="billing">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document"/>
+                                    <PropertyValue Property="Value" Path="BillingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Item"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Date"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentDate"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Profit Center"/>
+                                    <PropertyValue Property="Value" Path="ProfitCenter"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Condition Type"/>
+                                    <PropertyValue Property="Value" Path="ConditionType"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Condition Rate Amount"/>
+                                    <PropertyValue Property="Value" Path="ConditionRateAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Customer"/>
+                                    <PropertyValue Property="Value" Path="Customer"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Document"/>
+                                    <PropertyValue Property="Value" Path="SalesOrderDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Document Item"/>
+                                    <PropertyValue Property="Value" Path="SalesOrderDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Product"/>
+                                    <PropertyValue Property="Value" Path="BillingProduct"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Unit Price"/>
+                                    <PropertyValue Property="Value" Path="BillingPrice"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Quantity"/>
+                                    <PropertyValue Property="Value" Path="BillingQuantity"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Total Amount"/>
+                                    <PropertyValue Property="Value" Path="RecoveryAmount"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="header">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order Item"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document"/>
+                                    <PropertyValue Property="Value" Path="BillingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Item"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="po">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order Item"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Product"/>
+                                    <PropertyValue Property="Value" Path="SpotbuyMaterial"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Old Product"/>
+                                    <PropertyValue Property="Value" Path="ProductOldId"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Unit Price"/>
+                                    <PropertyValue Property="Value" Path="NetPriceAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="General Unit Price"/>
+                                    <PropertyValue Property="Value" Path="OldMaterialPrice"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Unit Price Diff"/>
+                                    <PropertyValue Property="Value" Path="NetPriceDiff"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="PO Quantity"/>
+                                    <PropertyValue Property="Value" Path="OrderQuantity"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Total Amount Diff"/>
+                                    <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="recovery">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Fiscal Period"/>
+                                    <PropertyValue Property="Value" Path="FiscalYearPeriod"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Company"/>
+                                    <PropertyValue Property="Value" Path="CompanyCode"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Management Number"/>
+                                    <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Comsuption View for ZI_BI003_002 Job Saved Data"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                    <Annotation Term="Core.Messages">
+                        <Collection>
+                            <Record>
+                                <PropertyValue Property="message" String="UI.HEADERINFO: TypeNamePlural is mandatory"/>
+                                <PropertyValue Property="severity" String="error"/>
+                            </Record>
+                        </Collection>
+                    </Annotation>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Period"/>
+                            <PropertyValue Property="Value" Path="FiscalYearPeriod"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company Name"/>
+                            <PropertyValue Property="Value" Path="CompanyCodeName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Management Number"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order Item"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO Product"/>
+                            <PropertyValue Property="Value" Path="SpotbuyMaterial"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Spotbuy Material Text"/>
+                            <PropertyValue Property="Value" Path="SpotbuyMaterialText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="General Material"/>
+                            <PropertyValue Property="Value" Path="ProductOldId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Product Old Text"/>
+                            <PropertyValue Property="Value" Path="ProductOldText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO Unit Price"/>
+                            <PropertyValue Property="Value" Path="NetPriceAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="General Unit Price"/>
+                            <PropertyValue Property="Value" Path="OldMaterialPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Unit Price Diff."/>
+                            <PropertyValue Property="Value" Path="NetPriceDiff"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO Quantity"/>
+                            <PropertyValue Property="Value" Path="OrderQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Total Amount Diff."/>
+                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document"/>
+                            <PropertyValue Property="Value" Path="BillingDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document Item"/>
+                            <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document Date"/>
+                            <PropertyValue Property="Value" Path="BillingDocumentDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Profit Center"/>
+                            <PropertyValue Property="Value" Path="ProfitCenter"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Profit Center Name"/>
+                            <PropertyValue Property="Value" Path="ProfitCenterName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Condition Type"/>
+                            <PropertyValue Property="Value" Path="ConditionType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Condition Rate Amount"/>
+                            <PropertyValue Property="Value" Path="ConditionRateAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Document Currency"/>
+                            <PropertyValue Property="Value" Path="DocumentCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer Name"/>
+                            <PropertyValue Property="Value" Path="CustomerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Document"/>
+                            <PropertyValue Property="Value" Path="SalesOrderDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Document Item"/>
+                            <PropertyValue Property="Value" Path="SalesOrderDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Product"/>
+                            <PropertyValue Property="Value" Path="BillingProduct"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Unit Price"/>
+                            <PropertyValue Property="Value" Path="BillingPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Quantity"/>
+                            <PropertyValue Property="Value" Path="BillingQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Total Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Currency"/>
+                            <PropertyValue Property="Value" Path="BillingCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran By User"/>
+                            <PropertyValue Property="Value" Path="JobRunBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company Currency"/>
+                            <PropertyValue Property="Value" Path="CompanyCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Date"/>
+                            <PropertyValue Property="Value" Path="JobRunDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Base Unit"/>
+                            <PropertyValue Property="Value" Path="BaseUnit"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Time"/>
+                            <PropertyValue Property="Value" Path="JobRunTime"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Billing Quantity Unit"/>
@@ -1032,6 +1601,451 @@
                     </Collection>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_003_JOBType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="ID" String="collInfoFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="recoveryFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#recovery"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Purchase Order"/>
+                            <PropertyValue Property="ID" String="collPoFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="poFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#po"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Accounting"/>
+                            <PropertyValue Property="ID" String="collAccountFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="accountFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#account"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Billing"/>
+                            <PropertyValue Property="ID" String="collbillingFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="billingFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#billing"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="headerFacet"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#header"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="account">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Accounting Document"/>
+                                    <PropertyValue Property="Value" Path="AccountingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Accounting Document Item"/>
+                                    <PropertyValue Property="Value" Path="LedgerGlLineItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="GL Account"/>
+                                    <PropertyValue Property="Value" Path="GlAccount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Fixed Asset"/>
+                                    <PropertyValue Property="Value" Path="FixedAsset"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                                    <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="billing">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document"/>
+                                    <PropertyValue Property="Value" Path="BillingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Item"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Date"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentDate"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Product"/>
+                                    <PropertyValue Property="Value" Path="BillingProduct"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Profit Center"/>
+                                    <PropertyValue Property="Value" Path="ProfitCenter"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Condition Type"/>
+                                    <PropertyValue Property="Value" Path="ConditionType"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Condition Rate Amount"/>
+                                    <PropertyValue Property="Value" Path="ConditionRateAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Price"/>
+                                    <PropertyValue Property="Value" Path="BillingPrice"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Transaction Currency"/>
+                                    <PropertyValue Property="Value" Path="TransactionCurrency"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Quantity"/>
+                                    <PropertyValue Property="Value" Path="BillingQuantity"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Amount"/>
+                                    <PropertyValue Property="Value" Path="RecoveryAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Percentage Of AP"/>
+                                    <PropertyValue Property="Value" Path="PercentageOfAp"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Accounting Posting Amount"/>
+                                    <PropertyValue Property="Value" Path="AccountingPostingAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Document"/>
+                                    <PropertyValue Property="Value" Path="SalesOrderDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Document Item"/>
+                                    <PropertyValue Property="Value" Path="SalesOrderDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Customer"/>
+                                    <PropertyValue Property="Value" Path="Customer"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="header">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order Item"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Accounting Document"/>
+                                    <PropertyValue Property="Value" Path="AccountingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Accounting Document Item"/>
+                                    <PropertyValue Property="Value" Path="LedgerGlLineItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document"/>
+                                    <PropertyValue Property="Value" Path="BillingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Item"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="po">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order Item"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Material"/>
+                                    <PropertyValue Property="Value" Path="Material"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order Quantity"/>
+                                    <PropertyValue Property="Value" Path="OrderQuantity"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Product Group"/>
+                                    <PropertyValue Property="Value" Path="ProductGroup"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order NetPrice"/>
+                                    <PropertyValue Property="Value" Path="NetPriceAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                                    <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="recovery">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Fiscal Period"/>
+                                    <PropertyValue Property="Value" Path="FiscalYearPeriod"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Company"/>
+                                    <PropertyValue Property="Value" Path="CompanyCode"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Management Number"/>
+                                    <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Comsuption View for ZI_BI003_003 Job Saved Data"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                    <Annotation Term="Core.Messages">
+                        <Collection>
+                            <Record>
+                                <PropertyValue Property="message" String="UI.HEADERINFO: TypeNamePlural is mandatory"/>
+                                <PropertyValue Property="severity" String="error"/>
+                            </Record>
+                        </Collection>
+                    </Annotation>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Period"/>
+                            <PropertyValue Property="Value" Path="FiscalYearPeriod"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company Name"/>
+                            <PropertyValue Property="Value" Path="CompanyCodeName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Management Number"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order Item"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Material"/>
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Material Text"/>
+                            <PropertyValue Property="Value" Path="MaterialText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Product Group"/>
+                            <PropertyValue Property="Value" Path="ProductGroup"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Product Group Name"/>
+                            <PropertyValue Property="Value" Path="ProductGroupName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Accounting Document"/>
+                            <PropertyValue Property="Value" Path="AccountingDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Accounting Document Item"/>
+                            <PropertyValue Property="Value" Path="LedgerGlLineItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="GL Account"/>
+                            <PropertyValue Property="Value" Path="GlAccount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="GL Account Name"/>
+                            <PropertyValue Property="Value" Path="GlAccountName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Fixed Asset"/>
+                            <PropertyValue Property="Value" Path="FixedAsset"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Fixed Asset Description"/>
+                            <PropertyValue Property="Value" Path="FixedAssetDescription"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order Quantity"/>
+                            <PropertyValue Property="Value" Path="OrderQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order NetPrice"/>
+                            <PropertyValue Property="Value" Path="NetPriceAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document"/>
+                            <PropertyValue Property="Value" Path="BillingDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document Item"/>
+                            <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document Date"/>
+                            <PropertyValue Property="Value" Path="BillingDocumentDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Product"/>
+                            <PropertyValue Property="Value" Path="BillingProduct"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Product Text"/>
+                            <PropertyValue Property="Value" Path="BillingProductText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Profit Center"/>
+                            <PropertyValue Property="Value" Path="ProfitCenter"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Profit Center Name"/>
+                            <PropertyValue Property="Value" Path="ProfitCenterName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Condition Type"/>
+                            <PropertyValue Property="Value" Path="ConditionType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Condition Rate Amount"/>
+                            <PropertyValue Property="Value" Path="ConditionRateAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Price"/>
+                            <PropertyValue Property="Value" Path="BillingPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Quantity"/>
+                            <PropertyValue Property="Value" Path="BillingQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Percentage Of AP"/>
+                            <PropertyValue Property="Value" Path="PercentageOfAp"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Accounting Posting Amount"/>
+                            <PropertyValue Property="Value" Path="AccountingPostingAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Document"/>
+                            <PropertyValue Property="Value" Path="SalesOrderDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Document Item"/>
+                            <PropertyValue Property="Value" Path="SalesOrderDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer Name"/>
+                            <PropertyValue Property="Value" Path="CustomerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran By User"/>
+                            <PropertyValue Property="Value" Path="JobRunBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Date"/>
+                            <PropertyValue Property="Value" Path="JobRunDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Time"/>
+                            <PropertyValue Property="Value" Path="JobRunTime"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>FiscalYear</PropertyPath>
+                        <PropertyPath>FiscalMonth</PropertyPath>
+                        <PropertyPath>CompanyCode</PropertyPath>
+                        <PropertyPath>RecoveryManagementNumber</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_004Type">
                 <Annotation Term="UI.Facets">
                     <Collection>
@@ -1369,6 +2383,387 @@
                     </Collection>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_004_JOBType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="ID" String="collInfoFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="recoveryFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#recovery"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Purchase Order"/>
+                            <PropertyValue Property="ID" String="collPoFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="poFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#po"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Billing"/>
+                            <PropertyValue Property="ID" String="collbillingFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="billingFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#billing"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="headerFacet"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#header"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="billing">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document"/>
+                                    <PropertyValue Property="Value" Path="BillingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Item"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Date"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentDate"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Product"/>
+                                    <PropertyValue Property="Value" Path="BillingProduct"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Profit Center"/>
+                                    <PropertyValue Property="Value" Path="ProfitCenter"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Condition Type"/>
+                                    <PropertyValue Property="Value" Path="ConditionType"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Condition Rate Amount"/>
+                                    <PropertyValue Property="Value" Path="ConditionRateAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Price"/>
+                                    <PropertyValue Property="Value" Path="BillingPrice"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Transaction Currency"/>
+                                    <PropertyValue Property="Value" Path="TransactionCurrency"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Quantity"/>
+                                    <PropertyValue Property="Value" Path="BillingQuantity"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Amount"/>
+                                    <PropertyValue Property="Value" Path="RecoveryAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Document"/>
+                                    <PropertyValue Property="Value" Path="SalesOrderDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Document Item"/>
+                                    <PropertyValue Property="Value" Path="SalesOrderDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Customer"/>
+                                    <PropertyValue Property="Value" Path="Customer"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="header">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order Item"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document"/>
+                                    <PropertyValue Property="Value" Path="BillingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Accounting Document Item"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="po">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order Item"/>
+                                    <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Material"/>
+                                    <PropertyValue Property="Value" Path="Material"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Product Group"/>
+                                    <PropertyValue Property="Value" Path="ProductGroup"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="GL Account"/>
+                                    <PropertyValue Property="Value" Path="GlAccount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Fixed Asset"/>
+                                    <PropertyValue Property="Value" Path="FixedAsset"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order Quantity"/>
+                                    <PropertyValue Property="Value" Path="OrderQuantity"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Purchase Order NetPrice"/>
+                                    <PropertyValue Property="Value" Path="NetPriceAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                                    <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="recovery">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Fiscal Period"/>
+                                    <PropertyValue Property="Value" Path="FiscalYearPeriod"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Company"/>
+                                    <PropertyValue Property="Value" Path="CompanyCode"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Management Number"/>
+                                    <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Comsuption View for ZI_BI003_004 Job Saved Data"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                    <Annotation Term="Core.Messages">
+                        <Collection>
+                            <Record>
+                                <PropertyValue Property="message" String="UI.HEADERINFO: TypeNamePlural is mandatory"/>
+                                <PropertyValue Property="severity" String="error"/>
+                            </Record>
+                        </Collection>
+                    </Annotation>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Period"/>
+                            <PropertyValue Property="Value" Path="FiscalYearPeriod"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company Name"/>
+                            <PropertyValue Property="Value" Path="CompanyCodeName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Management Number"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order Item"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Material"/>
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Material Text"/>
+                            <PropertyValue Property="Value" Path="MaterialText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Product Group"/>
+                            <PropertyValue Property="Value" Path="ProductGroup"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Product Group Name"/>
+                            <PropertyValue Property="Value" Path="ProductGroupName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="GL Account"/>
+                            <PropertyValue Property="Value" Path="GlAccount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="GL Account Name"/>
+                            <PropertyValue Property="Value" Path="GlAccountName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Fixed Asset"/>
+                            <PropertyValue Property="Value" Path="FixedAsset"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Fixed Asset Description"/>
+                            <PropertyValue Property="Value" Path="FixedAssetDescription"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order Quantity"/>
+                            <PropertyValue Property="Value" Path="OrderQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Purchase Order NetPrice"/>
+                            <PropertyValue Property="Value" Path="NetPriceAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document"/>
+                            <PropertyValue Property="Value" Path="BillingDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document Item"/>
+                            <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document Date"/>
+                            <PropertyValue Property="Value" Path="BillingDocumentDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Product"/>
+                            <PropertyValue Property="Value" Path="BillingProduct"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Product Text"/>
+                            <PropertyValue Property="Value" Path="BillingProductText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Profit Center"/>
+                            <PropertyValue Property="Value" Path="ProfitCenter"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Profit Center Name"/>
+                            <PropertyValue Property="Value" Path="ProfitCenterName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Condition Type"/>
+                            <PropertyValue Property="Value" Path="ConditionType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Condition Rate Amount"/>
+                            <PropertyValue Property="Value" Path="ConditionRateAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Price"/>
+                            <PropertyValue Property="Value" Path="BillingPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Quantity"/>
+                            <PropertyValue Property="Value" Path="BillingQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Document"/>
+                            <PropertyValue Property="Value" Path="SalesOrderDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Document Item"/>
+                            <PropertyValue Property="Value" Path="SalesOrderDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer Name"/>
+                            <PropertyValue Property="Value" Path="CustomerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran By User"/>
+                            <PropertyValue Property="Value" Path="JobRunBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Date"/>
+                            <PropertyValue Property="Value" Path="JobRunDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Time"/>
+                            <PropertyValue Property="Value" Path="JobRunTime"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>FiscalYear</PropertyPath>
+                        <PropertyPath>FiscalMonth</PropertyPath>
+                        <PropertyPath>CompanyCode</PropertyPath>
+                        <PropertyPath>RecoveryManagementNumber</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_005Type">
                 <Annotation Term="UI.Facets">
                     <Collection>
@@ -1691,6 +3086,482 @@
                         <PropertyPath>FiscalMonth</PropertyPath>
                         <PropertyPath>CompanyCode</PropertyPath>
                         <PropertyPath>RecoveryManagementNumber</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_005_JOBType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="ID" String="collInfoFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="recoveryFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#recovery"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Material Document"/>
+                            <PropertyValue Property="ID" String="collMatFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="matFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#matdoc"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Billing"/>
+                            <PropertyValue Property="ID" String="collbillingFacet"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="billingFacet"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#billing"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="headerFacet"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#header"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="billing">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document"/>
+                                    <PropertyValue Property="Value" Path="BillingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Item"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document Date"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentDate"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Product"/>
+                                    <PropertyValue Property="Value" Path="BillingProduct"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Profit Center"/>
+                                    <PropertyValue Property="Value" Path="ProfitCenter"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Condition Type"/>
+                                    <PropertyValue Property="Value" Path="ConditionType"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Condition Rate Amount"/>
+                                    <PropertyValue Property="Value" Path="ConditionRateAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Price"/>
+                                    <PropertyValue Property="Value" Path="BillingPrice"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Transaction Currency"/>
+                                    <PropertyValue Property="Value" Path="TransactionCurrency"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Quantity"/>
+                                    <PropertyValue Property="Value" Path="BillingQuantity"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Amount"/>
+                                    <PropertyValue Property="Value" Path="RecoveryAmount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Document"/>
+                                    <PropertyValue Property="Value" Path="SalesOrderDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Sales Document Item"/>
+                                    <PropertyValue Property="Value" Path="SalesOrderDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Customer"/>
+                                    <PropertyValue Property="Value" Path="Customer"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="header">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Material Document"/>
+                                    <PropertyValue Property="Value" Path="MaterialDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Material Document Year"/>
+                                    <PropertyValue Property="Value" Path="MaterialDocumentYear"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Material Document Item"/>
+                                    <PropertyValue Property="Value" Path="MaterialDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Billing Document"/>
+                                    <PropertyValue Property="Value" Path="BillingDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Accounting Document Item"/>
+                                    <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="matdoc">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Material Document"/>
+                                    <PropertyValue Property="Value" Path="MaterialDocument"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Material Document Year"/>
+                                    <PropertyValue Property="Value" Path="MaterialDocumentYear"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Material Document Item"/>
+                                    <PropertyValue Property="Value" Path="MaterialDocumentItem"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Material"/>
+                                    <PropertyValue Property="Value" Path="Material"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="GL Account"/>
+                                    <PropertyValue Property="Value" Path="GlAccount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Quantity"/>
+                                    <PropertyValue Property="Value" Path="QuantityInEntryUnit"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                                    <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="recovery">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Fiscal Period"/>
+                                    <PropertyValue Property="Value" Path="FiscalYearPeriod"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Company"/>
+                                    <PropertyValue Property="Value" Path="CompanyCode"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Recovery Management Number"/>
+                                    <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Comsuption View for ZI_BI003_005 Job Saved Data"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                    <Annotation Term="Core.Messages">
+                        <Collection>
+                            <Record>
+                                <PropertyValue Property="message" String="UI.HEADERINFO: TypeNamePlural is mandatory"/>
+                                <PropertyValue Property="severity" String="error"/>
+                            </Record>
+                        </Collection>
+                    </Annotation>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Period"/>
+                            <PropertyValue Property="Value" Path="FiscalYearPeriod"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Company Name"/>
+                            <PropertyValue Property="Value" Path="CompanyCodeName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Management Number"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Material Document"/>
+                            <PropertyValue Property="Value" Path="MaterialDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Material Document Year"/>
+                            <PropertyValue Property="Value" Path="MaterialDocumentYear"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Material Document Item"/>
+                            <PropertyValue Property="Value" Path="MaterialDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Material"/>
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Material Name"/>
+                            <PropertyValue Property="Value" Path="ProductName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="GL Account"/>
+                            <PropertyValue Property="Value" Path="GlAccount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="GL Account Name"/>
+                            <PropertyValue Property="Value" Path="GlAccountName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Quantity"/>
+                            <PropertyValue Property="Value" Path="QuantityInEntryUnit"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Necessary Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryNecessaryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document"/>
+                            <PropertyValue Property="Value" Path="BillingDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document Item"/>
+                            <PropertyValue Property="Value" Path="BillingDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Document Date"/>
+                            <PropertyValue Property="Value" Path="BillingDocumentDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Product"/>
+                            <PropertyValue Property="Value" Path="BillingProduct"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Product Text"/>
+                            <PropertyValue Property="Value" Path="BillingProductText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Profit Center"/>
+                            <PropertyValue Property="Value" Path="ProfitCenter"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Profit Center Name"/>
+                            <PropertyValue Property="Value" Path="ProfitCenterName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Condition Type"/>
+                            <PropertyValue Property="Value" Path="ConditionType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Condition Rate Amount"/>
+                            <PropertyValue Property="Value" Path="ConditionRateAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Price"/>
+                            <PropertyValue Property="Value" Path="BillingPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Billing Quantity"/>
+                            <PropertyValue Property="Value" Path="BillingQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Recovery Amount"/>
+                            <PropertyValue Property="Value" Path="RecoveryAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Document"/>
+                            <PropertyValue Property="Value" Path="SalesOrderDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Sales Document Item"/>
+                            <PropertyValue Property="Value" Path="SalesOrderDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Customer Name"/>
+                            <PropertyValue Property="Value" Path="CustomerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran By User"/>
+                            <PropertyValue Property="Value" Path="JobRunBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Date"/>
+                            <PropertyValue Property="Value" Path="JobRunDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Job Ran Time"/>
+                            <PropertyValue Property="Value" Path="JobRunTime"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>FiscalYear</PropertyPath>
+                        <PropertyPath>FiscalMonth</PropertyPath>
+                        <PropertyPath>CompanyCode</PropertyPath>
+                        <PropertyPath>RecoveryManagementNumber</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_RECOVERY_NUMBER_VHType/Uuid">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_RECOVERY_NUMBER_VHType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="ID" String="GeneralInfo"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Comsuption View for Recovery Number Search Help"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                    <Annotation Term="Core.Messages">
+                        <Collection>
+                            <Record>
+                                <PropertyValue Property="message" String="UI.HEADERINFO: TypeNamePlural is mandatory"/>
+                                <PropertyValue Property="severity" String="error"/>
+                            </Record>
+                        </Collection>
+                    </Annotation>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="回収管理番号"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="会社コードテキスト"/>
+                            <PropertyValue Property="Value" Path="CompanyName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="タイプ"/>
+                            <PropertyValue Property="Value" Path="RecoveryType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="RecoverTypeDescription"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="回収管理番号得意先"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="回収管理番号得意先テキスト"/>
+                            <PropertyValue Property="Value" Path="CustomerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="会計年度"/>
+                            <PropertyValue Property="Value" Path="RecoveryYear"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="回収管理番号"/>
+                            <PropertyValue Property="Value" Path="RecoveryManagementNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="会社コードテキスト"/>
+                            <PropertyValue Property="Value" Path="CompanyName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="タイプ"/>
+                            <PropertyValue Property="Value" Path="RecoveryType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="RecoverTypeDescription"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="回収管理番号得意先"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="回収管理番号得意先テキスト"/>
+                            <PropertyValue Property="Value" Path="CustomerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="会計年度"/>
+                            <PropertyValue Property="Value" Path="RecoveryYear"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>CompanyCode</PropertyPath>
+                        <PropertyPath>RecoveryType</PropertyPath>
+                        <PropertyPath>Customer</PropertyPath>
+                        <PropertyPath>RecoveryYear</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
