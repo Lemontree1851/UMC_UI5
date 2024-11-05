@@ -119,6 +119,10 @@ modules:
       - ppoflist.zip
       name: ppoflist
       target-path: resources/
+    - artifacts:
+      - ppproductionplan.zip
+      name: ppproductionplan
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -290,6 +294,15 @@ modules:
     builder: custom
     commands:
     - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: ppproductionplan
+  type: html5
+  path: productionplan
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
     - npm run build:cf
     supported-platforms: []
 resources:
