@@ -17,7 +17,7 @@ sap.ui.define([
                 this._oDataModel = this.getOwnerComponent().getModel();
                 this._BusyDialog = new BusyDialog();
                 if (sap.ushell && sap.ushell.Container) {
-                    this._UserInfo = sap.ushell.Container.getService("UserInfo");
+                    this._UserInfo = sap.ushell.Container.getService("UserInfo").getUser();
                 };
                 this._LocalData.setProperty("/zdays", 30);
 
@@ -154,11 +154,35 @@ sap.ui.define([
 
             onEdit: function (oEvent) {
                 //Auth Check
+                if (sap.ushell && sap.ushell.Container) {
                 let user = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
                 let username = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
 
                 this.authCheck(user, username)
-
+                } else {
+                    var oTable = this.byId("ReportTable");
+                    var aRows = oTable.getRows();
+                    var sType = "";
+                    let sNum = Number(this.byId("zdays").getValue());
+                    sNum = 16 + sNum;
+                    if (aRows && aRows.length > 0) {
+                        for (var i = 0; i < aRows.length; i++) {
+                            var c7Cell = aRows[i].getCells()[7];
+                            if (c7Cell) {
+                                sType = c7Cell.getText();
+                                if (sType === "出荷計画" || sType === "計画手配") {
+                                    for (var j = 17; j < sNum; j++) {
+                                        var cEdit = aRows[i].getCells()[j];
+                                        var oItems = cEdit.getItems();
+                                        if (cEdit) {
+                                            oItems[1].setEditable(true);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
             },
 
             onInputChange: function (oEvent, sProperty) {
