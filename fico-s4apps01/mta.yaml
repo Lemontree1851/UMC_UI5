@@ -90,6 +90,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaycalculation
@@ -99,6 +100,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaydocument
@@ -108,6 +110,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficoagencypurchasingn
@@ -117,6 +120,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficofixedassetprint
@@ -171,6 +175,37 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozbindglupload
+  type: html5
+  path: zbindglupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozbdglaccountlist
+  type: html5
+  path: zbdglaccountlist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozstockageupload
+  type: html5
+  path: zstockageupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
