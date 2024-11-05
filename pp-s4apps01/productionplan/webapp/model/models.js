@@ -18,7 +18,7 @@ function (JSONModel, Device) {
         // Create local Model
         createLocalModel: function () {
             var oModel = new JSONModel({
-              zday: ""
+
             });
             return oModel;
         },
