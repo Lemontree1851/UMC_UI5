@@ -1,0 +1,220 @@
+{
+  "_version": "1.64.0",
+  "sap.app": {
+    "id": "fico.zstockageupload",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.15.3",
+      "toolsId": "95c21b45-8c39-407a-96fa-7f75dea0b53e"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zui_stockageupload_o4/srvd/sap/zui_stockageupload/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "zui_dtimp_conf_o4": {
+        "uri": "/sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "PrintService": {
+        "uri": "/sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zofsplitrule-display": {
+          "semanticObject": "zstockageupload",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "icon": "sap-icon://request",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.124.8",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "fico.zstockageupload.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },      "Attach": {
+        "dataSource": "zui_dtimp_conf_o4",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "local": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      },
+      "Print": {
+        "dataSource": "PrintService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "STOCKAGEUPLOADList",
+          "target": "STOCKAGEUPLOADList"
+        },
+        {
+          "pattern": "STOCKAGEUPLOAD({key}):?query:",
+          "name": "STOCKAGEUPLOADObjectPage",
+          "target": "STOCKAGEUPLOADObjectPage"
+        }
+      ],
+      "targets": {
+        "STOCKAGEUPLOADList": {
+          "type": "Component",
+          "id": "STOCKAGEUPLOADList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/STOCKAGEUPLOAD",
+              "variantManagement": "Page",
+              "navigation": {
+                "STOCKAGEUPLOAD": {
+                  "detail": {
+                    "route": "STOCKAGEUPLOADObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  },
+                  "actions": {
+                    "upload": {
+                      "press": "fico.zstockageupload.ext.controller.ListReportExt.openUploadDialog",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "{@i18n>upload}",
+                      "icon": "sap-icon://upload-to-cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "STOCKAGEUPLOADObjectPage": {
+          "type": "Component",
+          "id": "STOCKAGEUPLOADObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/STOCKAGEUPLOAD"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "fico-s4apps01"
+  }
+}
