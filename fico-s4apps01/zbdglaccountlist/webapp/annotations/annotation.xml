@@ -1,7 +1,4 @@
 <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
-    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
-        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
-    </edmx:Reference>
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
         <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
     </edmx:Reference>
@@ -63,12 +60,43 @@
                         <PropertyValue Property="Text" String="Table View 1"/>
                     </Record>
                 </Annotation>
-            </Annotations>
-            <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/FinancialStatementItem">
-                <Annotation Term="Common.Text" Path="GLAccount">
-                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="連結勘定"/>
+                            <PropertyValue Property="Value" Path="FinancialStatementItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="連結勘定テキスト"/>
+                            <PropertyValue Property="Value" Path="FinancialStatementItemDesc"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="G/L勘定"/>
+                            <PropertyValue Property="Value" Path="GLAccount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="GLAccountDesc"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード期末残高"/>
+                            <PropertyValue Property="Value" Path="EndingBalanceAmtInCoCodeCrcy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード通貨の貸方残高"/>
+                            <PropertyValue Property="Value" Path="CreditAmountInCoCodeCrcy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="会社コード通貨の借方残高"/>
+                            <PropertyValue Property="Value" Path="DebitAmountInCoCodeCrcy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="開始残高（会社コード通貨）"/>
+                            <PropertyValue Property="Value" Path="StartingBalanceAmtInCoCodeCrcy"/>
+                        </Record>
+                    </Collection>
                 </Annotation>
             </Annotations>
+
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

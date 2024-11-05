@@ -13,7 +13,7 @@ sap.ui.define([
         formatter: formatter,
 
         onInit: function () {
-            ///this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
+            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
         },
 
         _initialize: function () {

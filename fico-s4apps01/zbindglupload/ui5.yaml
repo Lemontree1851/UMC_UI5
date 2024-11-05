@@ -2,7 +2,7 @@
 
 specVersion: "3.1"
 metadata:
-  name: fico.zbdglaccountlist
+  name: fico.zbindglupload
 type: application
 server:
   customMiddleware:
@@ -29,5 +29,5 @@ server:
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
-        component: fico.zbdglaccountlist
+        component: fico.zbindglupload
         ui5Theme: sap_horizon

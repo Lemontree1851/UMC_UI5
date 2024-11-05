@@ -1,6 +1,6 @@
 specVersion: "3.1"
 metadata:
-  name: fico.zbdglaccountlist
+  name: fico.zbindglupload
 type: application
 server:
   customMiddleware:
@@ -24,16 +24,21 @@ server:
         port: 35729
         path: webapp
         delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: fico.zbindglupload
+        ui5Theme: sap_horizon
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
         mountPath: /
         services:
-          - urlPath: /sap/opu/odata4/sap/zui_bdglaccount/srvd/sap/zui_bdglaccount_o4/0001
+          - urlPath: /sap/opu/odata4/sap/zui_bindglupload_o4/srvd/sap/zui_bindglupload_o4/0001
             generateMockData: true
             metadataXmlPath: ./webapp/localService/metadata.xml
             mockdataRootPath: ./webapp/localService/data
-          - urlPath: /sap/opu/odata4/sap/zui_bdglaccount/srvd/sap/zui_bdglaccount_o4/0001/
+          - urlPath: /sap/opu/odata4/sap/zui_bindglupload_o4/srvd/sap/zui_bindglupload_o4/0001/
             metadataPath: ./webapp/localService/metadata.xml
             mockdataPath: ./webapp/localService/mockdata
             generateMockData: true

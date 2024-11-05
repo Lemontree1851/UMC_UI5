@@ -57,31 +57,29 @@
                     <PropertyRef Name="Companycode"/>
                     <PropertyRef Name="calendaryear"/>
                     <PropertyRef Name="calendarMonth"/>
-                    <PropertyRef Name="GLAccount"/>
                     <PropertyRef Name="FinancialStatementItem"/>
+                    <PropertyRef Name="GLAccount"/>
+                    <PropertyRef Name="lineid"/>
                 </Key>
                 <Property Name="Ledger" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
-                <Property Name="GLAccount" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="FinancialStatementItem" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="StartingBalanceAmtInCoCodeCrcy" Type="Edm.Decimal" Nullable="false" Precision="30" Scale="2"/>
-                <Property Name="DebitAmountInCoCodeCrcy" Type="Edm.Decimal" Nullable="false" Precision="30" Scale="2"/>
-                <Property Name="CreditAmountInCoCodeCrcy" Type="Edm.Decimal" Nullable="false" Precision="30" Scale="2"/>
-                <Property Name="EndingBalanceAmtInCoCodeCrcy" Type="Edm.Decimal" Nullable="false" Precision="30" Scale="2"/>
+                <Property Name="GLAccount" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="lineid" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="StartingBalanceAmtInCoCodeCrcy" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="DebitAmountInCoCodeCrcy" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="CreditAmountInCoCodeCrcy" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="EndingBalanceAmtInCoCodeCrcy" Type="Edm.String" Nullable="false" MaxLength="50"/>
                 <Property Name="FinancialStatementItemDesc" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="GLAccountDesc" Type="Edm.String" Nullable="false" MaxLength="50"/>
             </EntityType>
             <EntityContainer Name="Container">
                 <EntitySet Name="ZC_BDGLACCOUNT" EntityType="com.sap.gateway.srvd.zui_bdglaccount_o4.v0001.ZC_BDGLACCOUNTType"/>
             </EntityContainer>
             <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/Ledger">
                 <Annotation Term="SAP__common.Label" String="した元帳"/>
-                <Annotation Term="SAP__common.ValueListReferences">
-                    <Collection>
-                        <String>../../../../srvd_f4/sap/i_ledgergrouptext/0001;ps='srvd-zui_bdglaccount_o4-0001';va='com.sap.gateway.srvd.zui_bdglaccount_o4.v0001.et-zc_bdglaccount.ledger'/$metadata</String>
-                    </Collection>
-                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/Companycode">
                 <Annotation Term="SAP__common.Label" String="会社コード"/>
@@ -101,11 +99,11 @@
                 <Annotation Term="SAP__common.IsDigitSequence"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Calendar Month"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/GLAccount">
-                <Annotation Term="SAP__common.Label" String="G/L勘定"/>
-            </Annotations>
             <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/FinancialStatementItem">
                 <Annotation Term="SAP__common.Label" String="連結勘定"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/GLAccount">
+                <Annotation Term="SAP__common.Label" String="G/L勘定"/>
             </Annotations>
             <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/StartingBalanceAmtInCoCodeCrcy">
                 <Annotation Term="SAP__common.Label" String="開始残高（会社コード通貨）"/>
@@ -122,6 +120,9 @@
             <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/FinancialStatementItemDesc">
                 <Annotation Term="SAP__common.Label" String="連結勘定テキスト"/>
             </Annotations>
+            <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/GLAccountDesc">
+                <Annotation Term="SAP__common.Label" String="G/L勘定テキスト"/>
+            </Annotations>
             <Annotations Target="SAP__self.ZC_BDGLACCOUNTType">
                 <Annotation Term="SAP__common.Label" String="Query CDS"/>
                 <Annotation Term="SAP__UI.HeaderInfo">
@@ -133,16 +134,20 @@
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="G/L勘定"/>
-                            <PropertyValue Property="Value" Path="GLAccount"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="連結勘定"/>
                             <PropertyValue Property="Value" Path="FinancialStatementItem"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="連結勘定テキスト"/>
                             <PropertyValue Property="Value" Path="FinancialStatementItemDesc"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="G/L勘定"/>
+                            <PropertyValue Property="Value" Path="GLAccount"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="G/L勘定テキスト"/>
+                            <PropertyValue Property="Value" Path="GLAccountDesc"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="会社コード期末残高"/>
@@ -170,8 +175,6 @@
                         <PropertyPath>calendarMonth</PropertyPath>
                     </Collection>
                 </Annotation>
-                <Annotation Term="SAP__aggregation.CustomAggregate" Qualifier="StartingBalanceAmtInCoCodeCrcy" String="Edm.Decimal"/>
-                <Annotation Term="SAP__aggregation.CustomAggregate" Qualifier="DebitAmountInCoCodeCrcy" String="Edm.Decimal"/>
             </Annotations>
             <Annotations Target="SAP__self.Container/ZC_BDGLACCOUNT">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
@@ -295,6 +298,9 @@
                 </Annotation>
                 <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
                 <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BDGLACCOUNTType/lineid">
+                <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
