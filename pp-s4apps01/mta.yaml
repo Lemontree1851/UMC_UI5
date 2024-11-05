@@ -123,6 +123,10 @@ modules:
       - ppproductionplan.zip
       name: ppproductionplan
       target-path: resources/
+    - artifacts:
+      - ppzinventoryrequirement.zip
+      name: ppzinventoryrequirement
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -283,7 +287,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppoflist
@@ -293,12 +296,20 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppproductionplan
   type: html5
   path: productionplan
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzinventoryrequirement
+  type: html5
+  path: zinventoryrequirement
   build-parameters:
     build-result: dist
     builder: custom
