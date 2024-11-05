@@ -100,14 +100,15 @@ sap.ui.define([
         _callOData: function (bEvent) {
             var aPromise = [];
             var aExcelSet = this.getModel("local").getProperty("/excelSet");
-            var aGroupKey = this.removeDuplicates(aExcelSet, ["Product", "Plant"]);
+            var aGroupKey = this.removeDuplicates(aExcelSet, ["Product", "Plant", "ProductionRouting"]);
             var aGroupItems;
             for (var m = 0; m < aGroupKey.length; m++) {
                 const sProduct = aGroupKey[m].Product;
                 const sPlant = aGroupKey[m].Plant;
+                const sProductionRouting = aGroupKey[m].ProductionRouting;
                 aGroupItems = [];
                 for (var n = 0; n < aExcelSet.length; n++) {
-                    if (aExcelSet[n].Product === sProduct && aExcelSet[n].Plant === sPlant) {
+                    if (aExcelSet[n].Product === sProduct && aExcelSet[n].Plant === sPlant && aExcelSet[n].ProductionRouting === sProductionRouting) {
                         aGroupItems.push(aExcelSet[n]);
                     }
                 }
