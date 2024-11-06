@@ -3,8 +3,9 @@ sap.ui.define([
     "../model/formatter",
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
-    "sap/ui/core/Fragment"
-], function (ValueHelpDialog, formatter, BusyDialog, MessageBox, Fragment) {
+    "sap/ui/core/Fragment",
+    "sap/m/Token"
+], function (ValueHelpDialog, formatter, BusyDialog, MessageBox, Fragment, Token) {
     'use strict';
 
     var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog;
@@ -13,6 +14,8 @@ sap.ui.define([
         formatter: formatter,
 
         init: function () {
+
+            console.log("listnini")
             
             _myFunction = sap.ui.require("fico/zpaymentmethod/ext/controller/ListReportExt");
             _myBusyDialog = new BusyDialog();
@@ -65,6 +68,9 @@ sap.ui.define([
                 verticalScrolling: false
             });
             // *************************************************
+
+            
+  
         },
 
         openOperationDialog: function () {
@@ -223,108 +229,49 @@ sap.ui.define([
         handleChange: function (oEvent) {
 
             console.log("handleChange");
-            console.log(this.getModel("local"));
-            var aFieldName = [];
-            var sValue, sInputBindingPath, sODataPath, oContextBinding;
+ 
             this._oControl = oEvent.getSource();
-            console.log(this._oControl.getMetadata().getName());
-            switch (this._oControl.getMetadata().getName()) {
-                case "sap.m.Input":
-                    sValue = this._oControl.getValue();
-                    sInputBindingPath = this._oControl.mBindingInfos.value.parts[0].path;
-                    sODataPath = this._oControl.mBindingInfos.suggestionRows.path;
-                    break;
-                case "sap.m.ComboBox":
-                    sValue = this._oControl.getSelectedKey();
-                    //sValue = this._oControl.getValue();
-                    sInputBindingPath = this._oControl.mBindingInfos.selectedKey.parts[0].path;
-                    sODataPath = this._oControl.mBindingInfos.items.path;
-                    break;
-                default:
-                    break;
-            }
-            const selID = oEvent.getSource().getValue();
-            const selID1 = oEvent.getSource().getSelectedKey();
-            //console.log("getValue" +  selID);
-            //console.log("getSelectedKey" +  selID1);
-            //console.log(this._oControl);
-            //console.log(sInputBindingPath);
-            //console.log(sODataPath);
-            this._oControl.setValueState("Error");
-            if (sODataPath === "/ZC_ManufacturingOrderProductVH") {
-                oContextBinding = this.getModel().bindContext(sODataPath + "(ManufacturingOrder='" + sValue.split('/')[0] + "',Item='" + sValue.split('/')[1] + "')");
-            } else if (sODataPath === "/I_StorageLocationStdVH") {
-                var sPlant = this.getModel("local").getProperty("/headSet/Plant");
-                oContextBinding = this.getModel().bindContext(sODataPath + "(Plant='" + sPlant + "',StorageLocation='" + sValue + "')");
-            } else {
-                oContextBinding = this.getModel().bindContext(sODataPath + "('" + sValue + "')");
-            }
-            if (sInputBindingPath.includes("/")) {
-                // head bind
-                if (sInputBindingPath.split("/")[2] === "Type") {
-                    aFieldName.push("Zvalue2");
-                } else {
-                    aFieldName.push(sInputBindingPath.split("/")[2] + "Name");
-                }
-                aFieldName.forEach(field => {
-                    this.getModel("local").setProperty("/headSet/" + field, "");
-                });
-                oContextBinding.requestObject().then(function (context) {
-                    this._oControl.setValueState("None");
-                    aFieldName.forEach(field => {
-                        this.getModel("local").setProperty("/headSet/" + field, context[field]);
-                    });
-                }.bind(this));
-            } else {
-                // table item bind
-                var sBindFieldName = sInputBindingPath;
-                var sItemPath = this._oControl.getParent().oBindingContexts.local.sPath + "/";
-                sInputBindingPath = sItemPath + sBindFieldName;
-                if (sBindFieldName === "ManufacturingOrder") {
-                    aFieldName.push("Product");
-                    aFieldName.push("Material");
-                    aFieldName.push("MaterialDescription");
-                    aFieldName.push("BaseUnit");
-                    aFieldName.push("StandardPrice");
-                    aFieldName.push("OrderIsClosed");
-                } else if (sBindFieldName === "Material") {
-                    aFieldName.push("MaterialDescription");
-                    aFieldName.push("BaseUnit");
-                    aFieldName.push("StandardPrice");
-                    aFieldName.push("TotalAmount");
-                } else {
-                    aFieldName.push("StorageLocationName");
-                }
-                aFieldName.forEach(field => {
-                    this.getModel("local").setProperty(sItemPath + field, "");
-                    if (field === "TotalAmount") {
-                        this.getModel("local").setProperty(sItemPath + field, 0);
-                    }
-                });
-                oContextBinding.requestObject().then(function (context) {
-                    this._oControl.setValueState("None");
-                    for (const key in context) {
-                        if (!key.includes("@odata")) {
-                            this.getModel("local").setProperty(sItemPath + key, context[key]);
-                        }
-                    }
-                    if (sBindFieldName === "ManufacturingOrder" || sBindFieldName === "Material") {
-                        // Calculate amount
-                        var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
-                        if (sValue && context["StandardPrice"]) {
-                            var iAmount = parseFloat(sValue) * parseFloat(context["StandardPrice"]);
-                            this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
-                            if (iAmount >= 100000) {
-                                this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+            var sInputBindingPath = this._oControl.mBindingInfos.value.parts[0].path;
+            console.log(sInputBindingPath);
+    
+            switch (sInputBindingPath) {
+                case "/headSet/CompanyCode":
+                    var idCompanyCodeValue = this.getView().byId("idCompanyCode").getValue();
+                    var oContextBinding = this.getModel().bindContext("/I_CompanyCodeVH" + "('" + idCompanyCodeValue.replace(/\s/g, "") + "')"); 
+                    var oMultiInput = this.getView().byId( "idCompanyCode");
+                    oContextBinding.requestObject().then(function (context) {
+                        for (const key in context) {
+                            if (key == "CompanyCodeName") {
+                                this.getModel("local").setProperty("idCompanyCode" + key, context[key]);
+                                var CompanyCodeText = context[key] + "(" + idCompanyCodeValue.replace(/\s/g, "") + ")";
+                            oMultiInput.setTokens([
+                                new Token({text: CompanyCodeText, key: idCompanyCodeValue})
+                            ]);
+                            oMultiInput.setValue(""); // 清除输入
                             }
                         }
-                    }
-                }.bind(this));
-            }
-            if (!sValue) {
-                this._oControl.setValueState("None");
-            }
-            console.log("sValue"+sValue);
+            
+                    }.bind(this));   
+                    case "/headSet/Customer":
+                        var idCustomerValue = this.getView().byId("idCustomer").getValue();
+                        var oContextBinding = this.getModel().bindContext("/I_BusinessPartnerVH" + "('" + idCustomerValue.replace(/\s/g, "") + "')");
+                        var oMultiInput1 = this.getView().byId( "idCustomer");
+                        oContextBinding.requestObject().then(function (context) {
+                            for (const key in context) {
+                                if (key == "OrganizationBPName1") {
+                                    this.getModel("local").setProperty("idCustomer" + key, context[key]);
+                                    var CustomerText = context[key] + "(" + idCustomerValue.replace(/\s/g, "") + ")";
+                                oMultiInput1.setTokens([
+                                    new Token({text: CustomerText, key: idCustomerValue})
+                                ]);
+                                oMultiInput1.setValue(""); // 清除输入
+                                }
+                            }
+                
+                        }.bind(this));   
+ 
+            } 
+
         },
 
         handleCalculate: function (oEvent) {

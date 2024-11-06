@@ -48,6 +48,7 @@ sap.ui.define([
                 // Set Basic Search for FilterBar
                 oFilterBar.setFilterBarExpanded(false);
                 oFilterBar.setBasicSearch(that._oBasicSearchField);
+ 
 
                 // Trigger filter bar search when the basic search is fired
                 that._oBasicSearchField.attachSearch(function () {
@@ -152,22 +153,16 @@ sap.ui.define([
                 console.log(aTokens);
                 var oMultiInput1 = oView.byId(sFieldID );
                 oMultiInput1.setTokens(aTokens);
+
+                console.log(aTokens[0].getProperty("text"));
+                console.log(aTokens[0].getProperty("key"));
+                //var sItemPath1 = this._oInput.getParent().oBindingContexts.local.sPath + "/";
                // for (var i = 0; i < aTokens.length; i++) {
-                //    oMultiInput1.setTokens([
-                //        new Token({text: aTokens[i].getProperty("text"), key: aTokens[i].getProperty("key")})
+               //    oMultiInput1.setTokens([
+               //         new Token({text: aTokens[i].getProperty("text"), key: aTokens[i].getProperty("key")})
                 //    ]);
                 //}
-
-
-
-
-
-
-
-
-
-
-
+ 
             } else {
 
                 // table item bind
@@ -190,6 +185,7 @@ sap.ui.define([
                         for (const key in context) {
                             if (!key.includes("@odata")) {
                                 this.getModel("local").setProperty(sItemPath + key, context[key]);
+                               
                             }
                         }
                         // Calculate amount
@@ -204,6 +200,7 @@ sap.ui.define([
                     }.bind(this));
                 } else {
                     this.getModel("local").setProperty(sInputPath + "Name", aTokens[0].getProperty("text").split("(")[0]);
+                   
                 }
             }
             //--------------------------------------------------------------------------------

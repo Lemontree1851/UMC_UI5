@@ -12,11 +12,14 @@ sap.ui.define([
 	"sap/ui/model/odata/type/Date",
     "sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"../model/formatter1",
-    "sap/m/Token"
-], function (Base, formatter, xlsx, BusyDialog, MessageBox) {
+	
+    "sap/m/Token",
+    "sap/ui/core/library",
+    "sap/ui/core/date/UI5Date",
+    "../model/formatter1"
+], function (Base, formatter, xlsx, BusyDialog, MessageBox,JSONModel, CoreLibrary,UI5Date) {
     "use strict";
-
+    var ValueState = CoreLibrary.ValueState;
     return Base.extend("fico.zpaymentmethod.controller.Main", {
 
         formatter: formatter,
@@ -24,7 +27,8 @@ sap.ui.define([
         onInit: function () {
             this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
             this.getOwnerComponent().getModel("local").setProperty("/headSet", {});
-
+             
+  
         },
 
         _initialize: function () {
@@ -179,22 +183,24 @@ sap.ui.define([
                                 sap.m.URLHelper.redirect(sURL, true);
                             }
                         } else {
-                        JSON.parse(object.Zzkey).forEach(element => {
-                            for (var index = 0; index < aExcelSet.length; index++) {
-                                if (aExcelSet[index].CompanyCode === element.COMPANYCODE
-                                 && aExcelSet[index].LastDate === element.LASTDATE
-                                 && aExcelSet[index].Supplier === element.SUPPLIER
-                                 && aExcelSet[index].NetdueDate === element.NETDUEDATE
-                                 && aExcelSet[index].PaymentMethod === element.PAYMENTMETHOD
-                                 && aExcelSet[index].PaymentTerms === element.PAYMENTTERMS
-                                ) {
-                                    aExcelSet[index].Status = element.STATUS;
-                                    aExcelSet[index].Message = element.MESSAGE;
-                                   
-                                    
+                            JSON.parse(object.Zzkey).forEach(element => {
+                                for (var index = 0; index < aExcelSet.length; index++) {
+                                    if (aExcelSet[index].CompanyCode === element.COMPANYCODE
+                                    && aExcelSet[index].LastDate === element.LASTDATE
+                                    && aExcelSet[index].Supplier === element.SUPPLIER
+                                    && aExcelSet[index].NetdueDate === element.NETDUEDATE
+                                    && aExcelSet[index].PaymentMethod === element.PAYMENTMETHOD
+                                    && aExcelSet[index].PaymentTerms === element.PAYMENTTERMS
+                                    ) {
+                                        aExcelSet[index].Status = element.STATUS;
+                                        aExcelSet[index].Message = element.MESSAGE;
+                                       // aExcelSet[index].ConditionDate = element.CONDITIONDATE;
+                                       // aExcelSet[index].PaymentMethod_a = element.PAYMENTMETHOD_A;
+                                        
+                                    }
                                 }
-                            }
-                        }); }
+                            }); 
+                       }
                     }
                     this.getModel("local").setProperty("/excelSet", aExcelSet);
                 }).catch((error) => {
@@ -225,6 +231,10 @@ sap.ui.define([
                 };
                 afilterSet.push(filterItems);
                 aGroupItems.push(afilterSet[i]);
+            }
+            if (!aTokens[0]) {
+                MessageBox.error("必須項目を入力ください");
+                return;
             }
 
             var aTokens = this.getView().byId("idCustomer").getTokens();
@@ -265,8 +275,13 @@ sap.ui.define([
                     "HIGH" : ""
                 };
                 afilterSet.push(filterItems);
-                aGroupItems.push(afilterSet[i]);
-          
+                aGroupItems.push(afilterSet[0]);
+             
+                if (!this.getView().byId("idReceiver")._lastValue) {
+                    MessageBox.error("必須項目を入力ください");
+                    return;
+                }
+           
 
             this.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", ["TEST", 0, 0]));
 
@@ -318,7 +333,7 @@ sap.ui.define([
 
                 }).catch((error) => {
                     //MessageBox.error(error);
-                    MessageBox.error("请检查必输");
+                    MessageBox.error("必須項目を入力ください");
                 }).finally(() => {
                     this._BusyDialog.close();
                 });

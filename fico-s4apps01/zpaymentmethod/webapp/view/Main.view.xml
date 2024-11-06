@@ -24,6 +24,7 @@
                             <Column>
                                 <Label text="{i18n>CompanyCodeName}"/>
                             </Column>
+   
                         </suggestionColumns>
                         <suggestionRows>
                             <ColumnListItem>
@@ -31,11 +32,15 @@
                                 <Label text="{CompanyCodeName}" />
                             </ColumnListItem>
                         </suggestionRows>
+                        
                     </MultiInput>
+                    
                     <Label text="{i18n>CompanyCodeName}:" visible = "false"/>
                     <Input value="{local>/headSet/CompanyCodeName}"  visible = "false" width="13rem"/>
                 </VBox>
-                                <VBox class="sapUiSmallMarginEnd">
+
+ 
+                <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>Receiver}:" required="{= ${local>/headSet/Type} !== '31'}"  visible = "false"/>
                     <Input id="idReceiver1" value="{local>/headSet/Receiver}"   width="13rem"  visible = "false"/>
                     <Label text="{i18n>Date}:" required="true"/>
@@ -44,14 +49,16 @@
                 id="idReceiver"
 				width="100%"
 displayFormat="yyyy/MM/dd"
+
 				valueState="{valueState}"
 				valueStateText="{valueStateText}"/>
-
+ 
                 </VBox>
+
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>Customer}:" required="false"/>
                     <MultiInput id="idCustomer" value="{local>/headSet/Customer}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/I_BusinessPartnerVH', ['BusinessPartner','OrganizationBPName1'])" showSuggestion="true" suggestionRows="{ path: '/I_Customer_VH', length: 10 }" required="false" width="13rem">
+                        $event, $controller, '/ZC_SupplierCompanyVH', ['SupplierCompany','SupplierCompanyName'])" showSuggestion="true" suggestionRows="{ path: '/ZC_SupplierCompanyVH', length: 10 }" required="false" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>Customer}"/>
@@ -67,6 +74,7 @@ displayFormat="yyyy/MM/dd"
                             </ColumnListItem>
                         </suggestionRows>
                     </MultiInput>
+                    
                     <Label text="{i18n>CustomerName}:"  visible = "false"/>
                     <Input value="{local>/headSet/CustomerName}" editable="false" width="13rem" visible = "false"/>
                 </VBox>
