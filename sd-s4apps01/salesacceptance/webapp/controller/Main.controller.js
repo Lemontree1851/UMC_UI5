@@ -40,18 +40,16 @@ sap.ui.define([
                     });
                     var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                     var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
-                    var sPeriodType = this.byId("periodType").getSelectedKey();
-                    var sAcceptPeriod = this.byId("acceptPeriod").getSelectedKey();
                     // read valid data starting from line 3 
-                    for (var i = 2; i < aSheetData.length; i++) {
+                    for (var i = 1; i < aSheetData.length; i++) {
                         var item = {
                             "Status": "",
                             "Message": "",
-                            "Row": i - 1,
+                            "Row": i,
                             "SalesOrganization": aSheetData[i]["SalesOrganization"],
                             "Customer": aSheetData[i]["Customer"],
-                            "PeriodType": sPeriodType,
-                            "AcceptPeriod": sAcceptPeriod,
+                            "PeriodType": aSheetData[i]["PeriodType"],
+                            "AcceptPeriod": aSheetData[i]["AcceptPeriod"],
                             "CustomerPO": aSheetData[i]["CustomerPO"],
                             "ItemNo": aSheetData[i]["ItemNo"],
                             "UMCProductCode": aSheetData[i]["UMCProductCode"],
@@ -67,7 +65,8 @@ sap.ui.define([
                             "AccceptAmount": aSheetData[i]["AccceptAmount"],
                             "Currency": aSheetData[i]["Currency"],
                             "TaxRate": aSheetData[i]["TaxRate"],
-                            "OutsideData": aSheetData[i]["OutsideData"]
+                            "OutsideData": aSheetData[i]["OutsideData"],
+                            "FinishStatus": ""
                         };
                         aExcelSet.push(item);
                     }
@@ -160,9 +159,6 @@ sap.ui.define([
             },
 
             _callOData: function (bEvent) {
-                var sPeriodType = this.byId("periodType").getSelectedKey();
-                var sAcceptPeriod = this.byId("acceptPeriod").getSelectedKey();
-                var sFinishStatus = this.byId("finishStatus").getSelectedKey();
                 var aPromise = [];
                 var aExcelSet = this.getModel("local").getProperty("/excelSet");
                 var aGroupItems;
@@ -172,7 +168,7 @@ sap.ui.define([
                     aExcelSet[n].AcceptDate = formatter.odataDate(aExcelSet[n].AcceptDate);
                     aGroupItems.push(aExcelSet[n]);
                 }
-                aPromise.push(this._callODataAction(bEvent, aGroupItems, sPeriodType, sAcceptPeriod, sFinishStatus));
+                aPromise.push(this._callODataAction(bEvent, aGroupItems));
 
                 try {
                     this._BusyDialog.open();
@@ -181,7 +177,6 @@ sap.ui.define([
                             iSuccess: 0,
                             iFailed: 0
                         };
-                        this._BusyDialog.close();
                         var aExcelSet = this.getModel("local").getProperty("/excelSet");
                         for (const activeContext of aContext) {
                             var boundContext = activeContext.getBoundContext();
@@ -203,6 +198,7 @@ sap.ui.define([
                                 });
                                 this.getModel("local").setProperty("/excelSet", aExcelSet);
                                 this.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                                this._BusyDialog.close();
                             } else {
                                 JSON.parse(object.Zzkey).forEach(element => {
                                     for (var index = 0; index < aExcelSet.length; index++) {
@@ -229,14 +225,12 @@ sap.ui.define([
                 }
             },
 
-            _callODataAction: function (bEvent, aRequestData, sPeriodType, sAcceptPeriod, sFinishStatus) {
+            _callODataAction: function (bEvent, aRequestData) {
                 return new Promise((resolve, reject) => {
                     var uploadProcess = this.getModel().bindContext("/SalesAcceptance/com.sap.gateway.srvd.zui_salesacceptance_o4.v0001.processLogic(...)");
                     uploadProcess.setParameter("Event", bEvent);
                     uploadProcess.setParameter("Zzkey", JSON.stringify(aRequestData));
-                    uploadProcess.setParameter("PeriodType", sPeriodType);
-                    uploadProcess.setParameter("AcceptPeriod", sAcceptPeriod);
-                    uploadProcess.setParameter("FinishStatus", sFinishStatus);
+                    uploadProcess.setParameter("RecordUUID", '');
                     uploadProcess.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                         resolve(uploadProcess);
                     }).catch((error) => {
@@ -247,7 +241,7 @@ sap.ui.define([
 
             onExport: function () {
                 // this._callOData("EXPORT");
-                var oTable = this.getView().byId("table1");
+                var oTable = this.getView().byId("tableSalesAcceptance");
                 var sPath = oTable.getBindingPath("rows");
                 var aExcelSet = this.getModel("local").getProperty(sPath);
                 

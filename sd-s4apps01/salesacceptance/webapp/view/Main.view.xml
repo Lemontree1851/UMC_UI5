@@ -16,41 +16,6 @@
                 </upload:UploadSet>
             </Panel>
             <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto" >
-                <l:VerticalLayout>
-                    <l:HorizontalLayout class="sapUiContentPadding">
-                    <l:VerticalLayout>
-                        <Label text="{i18n>periodTypeT}" labelFor="periodType"/>
-                        <ComboBox id="periodType" width="15rem" required="true" selectionChange="onChange" showButton="true"
-                                items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zvalue1' },filters: { path: 'ZID',operator:'EQ',value1:'SD011'} }" >
-                            <core:Item key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" />
-                        </ComboBox>  
-                    </l:VerticalLayout>
-                    <l:VerticalLayout>
-                        <Label text="{i18n>acceptPeriodT}" labelFor="acceptPeriod"/>
-                        <ComboBox id="acceptPeriod" width="10rem" required="true" selectionChange="onChange" showButton="true">
-                            <core:Item key="01" text="{i18n>acceptPeriod01}"/>
-                            <core:Item key="02" text="{i18n>acceptPeriod02}"/>
-                            <core:Item key="03" text="{i18n>acceptPeriod03}"/>
-                            <core:Item key="04" text="{i18n>acceptPeriod04}"/>
-                            <core:Item key="05" text="{i18n>acceptPeriod05}"/>
-                            <core:Item key="06" text="{i18n>acceptPeriod06}"/>
-                            <core:Item key="07" text="{i18n>acceptPeriod07}"/>
-                            <core:Item key="08" text="{i18n>acceptPeriod08}"/>
-                            <core:Item key="09" text="{i18n>acceptPeriod09}"/>
-                            <core:Item key="10" text="{i18n>acceptPeriod10}"/>
-                            <core:Item key="11" text="{i18n>acceptPeriod11}"/>
-                            <core:Item key="12" text="{i18n>acceptPeriod12}"/>
-                        </ComboBox>
-                    </l:VerticalLayout>
-                    <l:VerticalLayout>
-                        <Label text="{i18n>finishStatusT}" labelFor="finishStatus"/>
-                        <ComboBox id="finishStatus" width="10rem" required="true" selectionChange="onChange" showButton="true" >
-                            <core:Item key="0" text="{i18n>finish01}" />
-                            <core:Item key="1" text="{i18n>finish02}" />
-                        </ComboBox>  
-                    </l:VerticalLayout>
-                    </l:HorizontalLayout>
-                </l:VerticalLayout>
                 <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>            
             </Panel>
             <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
