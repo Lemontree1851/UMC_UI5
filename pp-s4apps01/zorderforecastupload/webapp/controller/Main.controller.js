@@ -43,7 +43,6 @@ sap.ui.define([
                     // read valid data starting from line 7
                     var num = 0;
                     for (var i = 5; i < aSheetData.length; i++) {
-                        debugger;
                         var item = {
                             "Status": "",
                             "Message": "",
@@ -55,6 +54,7 @@ sap.ui.define([
                             "RequirementDate": "",
                             "RequirementDate1": "",
                             "RequirementQty": "",
+                            "RequirementQtyStr": "",
                             "Remark": "",
                             "MaterialStr": ""
                         };
@@ -63,9 +63,10 @@ sap.ui.define([
                                 num += 1;
                                 var row = this._deepClone(item);
                                 row.Row = num;
-                                row.RequirementQty = aSheetData[i][key];
                                 row.RequirementDate = aSheetData[1][key] === undefined ? "" : this.conversionDate(aSheetData[1][key]);
                                 row.RequirementDate1 = aSheetData[1][key] === undefined ? "" : new Date(this.formatDateString(aSheetData[1][key]));
+                                row.RequirementQty = aSheetData[i][key];
+                                row.RequirementQtyStr = aSheetData[i][key];
                                 row.MaterialStr = row.MaterialByCustomer + row.Material;
                                 aExcelSet.push(row);
                             }
@@ -84,6 +85,7 @@ sap.ui.define([
                             "RequirementDate": aSheetData[i]["RequirementDate"] === undefined ? "" : this.conversionDate(aSheetData[i]["RequirementDate"]),
                             "RequirementDate1": aSheetData[i]["RequirementDate"] === undefined ? "" : new Date(this.formatDateString(aSheetData[i]["RequirementDate"])),
                             "RequirementQty": aSheetData[i]["RequirementQty"] === undefined ? "" : aSheetData[i]["RequirementQty"],
+                            "RequirementQtyStr": aSheetData[i]["RequirementQty"] === undefined ? "" : aSheetData[i]["RequirementQty"],
                             "Remark": aSheetData[i]["Remark"] === undefined ? "" : aSheetData[i]["Remark"],
                             "MaterialStr": ""
                         };
