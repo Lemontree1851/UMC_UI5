@@ -120,6 +120,7 @@
                 <Property Name="VAT2" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="variable"/>
                 <Property Name="AccountingDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="DeliveryDate" Type="Edm.Date"/>
+                <Property Name="DlvQty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
                 <Property Name="PurgDocPriceDate" Type="Edm.Date"/>
                 <Property Name="IsCompletelyDelivered" Type="Edm.Boolean" Nullable="false"/>
             </EntityType>
@@ -448,6 +449,11 @@
                 <Annotation Term="SAP__common.Heading" String="Deliv. Date"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Item Delivery Date"/>
             </Annotations>
+            <Annotations Target="SAP__self.ZR_POACCEPTANCEType/DlvQty">
+                <Annotation Term="SAP__common.Label" String="{@i18n&gt;DlvQty}"/>
+                <Annotation Term="SAP__common.Heading" String="Quantity"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Quantity"/>
+            </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurgDocPriceDate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurgDocPriceDate}"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Date"/>
@@ -640,6 +646,9 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="DeliveryDate"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="DlvQty"/>
                         </Record>
                     </Collection>
                 </Annotation>
