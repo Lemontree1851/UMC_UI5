@@ -64,6 +64,15 @@
             "parameters": {},
             "additionalParameters": "allowed"
           }
+        },
+        "zstockageupload-display": {
+          "semanticObject": "zstockageupload",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
         }
       }
     }
@@ -117,7 +126,8 @@
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
-      },      "Attach": {
+      },
+      "Attach": {
         "dataSource": "zui_dtimp_conf_o4",
         "preload": true,
         "settings": {
@@ -178,7 +188,8 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "GridTable"
+                    "type": "GridTable",
+                    "disableCopyToClipboard": false
                   },
                   "actions": {
                     "upload": {
