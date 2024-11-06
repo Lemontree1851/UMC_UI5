@@ -101,6 +101,8 @@ sap.ui.define([
                                 var sPath = aContexts[index].getPath(); // 获取选中条目的路径
                                 // 设置对应的 Message 和 Status
                                 aContexts[index].setProperty(sPath + "/message", element.MESSAGE)
+                                aContexts[index].setProperty(sPath + "/accountingdocument1", element.ACCOUNTINGDOCUMENT1)
+                                aContexts[index].setProperty(sPath + "/accountingdocument2", element.ACCOUNTINGDOCUMENT2)
                                 // aContexts[index].setProperty(sPath + "/Status", element.STATUS)
                             }
                         });
