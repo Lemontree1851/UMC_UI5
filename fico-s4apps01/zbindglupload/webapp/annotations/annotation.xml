@@ -91,12 +91,12 @@
                             <PropertyValue Property="Label" String="{@i18n>createdOn}"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="LastChangedAt"/>
-                            <PropertyValue Property="Label" String="{@i18n>changedOn}"/>
-                        </Record>
-                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="LastChangedBy"/>
                             <PropertyValue Property="Label" String="{@i18n>changedBy}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LastChangedAt"/>
+                            <PropertyValue Property="Label" String="{@i18n>changedOn}"/>
                         </Record>
                     </Collection>
                 </Annotation>
