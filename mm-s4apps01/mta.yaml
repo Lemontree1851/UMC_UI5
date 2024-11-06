@@ -79,6 +79,10 @@ modules:
       - mmzpurchasepricevariance.zip
       name: mmzpurchasepricevariance
       target-path: resources/
+    - artifacts:
+      - poposting.zip
+      name: poposting
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -158,6 +162,16 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: poposting
+  type: html5
+  path: poposting
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
