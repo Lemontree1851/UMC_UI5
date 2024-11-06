@@ -28,7 +28,8 @@ sap.ui.define([
         },
 
         formatPercentage: function(dPercentage){
-            return `${dPercentage * 100}%`;
+            var dValue = (dPercentage * 100 ).toFixed(2);
+            return `${dValue}%`;
         }
     }
 });

@@ -14,6 +14,15 @@ sap.ui.define([
             return "None";
         },
 
+        formatIcon: function(value){
+
+            if(value === "E"){
+                return "sap-icon://status-negative";
+            }
+
+            return "sap-icon://status-positive";
+        },
+
         // format Date
         formatDate: function (value) {
             if (value) {
