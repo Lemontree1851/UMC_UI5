@@ -61,17 +61,18 @@
                 <Key>
                     <PropertyRef Name="Plant"/>
                     <PropertyRef Name="BillOfMaterialComponent"/>
-                    <PropertyRef Name="Matererial"/>
+                    <PropertyRef Name="Material"/>
                     <PropertyRef Name="BillOfMaterialVariant"/>
                     <PropertyRef Name="Product"/>
                 </Key>
-                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:filter-restriction="single-value" sap:required-in-filter="true" sap:label="Plant" sap:value-list="standard"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:value-list="standard"/>
                 <Property Name="BillOfMaterialComponent" Type="Edm.String" Nullable="false" MaxLength="40" sap:value-list="standard"/>
-                <Property Name="Matererial" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="BillOfMaterialVariant" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
                 <Property Name="ComponentDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
+                <Property Name="SupplierMaterialNumber" Type="Edm.String" MaxLength="35"/>
                 <Property Name="ProductManufacturerNumber" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Mfr Part Number" sap:quickinfo="Manufacturer Part Number"/>
                 <Property Name="MaterialByCustomer" Type="Edm.String" MaxLength="35"/>
                 <Property Name="MRPResponsible" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="MRP Controller" sap:quickinfo="MRP Controller for Order"/>
@@ -81,8 +82,8 @@
                 <Property Name="BillOfMaterialItemUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="AlternativeItemStrategy" Type="Edm.String" MaxLength="1"/>
                 <Property Name="AlternativeItemPriority" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative"/>
-                <Property Name="NoDisplayNonProduct" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:required-in-filter="true" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
-                <Property Name="NoDisplayColMfrpn" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:required-in-filter="true" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
+                <Property Name="NoDisplayNonProduct" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
+                <Property Name="DisplayPurchasingInfo" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -320,7 +321,7 @@
             <EntityContainer Name="cds_zui_componentusagelist_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
                 <EntitySet Name="I_PlantStdVH" EntityType="cds_zui_componentusagelist_o2.I_PlantStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_ProductStdVH" EntityType="cds_zui_componentusagelist_o2.I_ProductStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="ComponentUsageList" EntityType="cds_zui_componentusagelist_o2.ComponentUsageListType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="ComponentUsageList" EntityType="cds_zui_componentusagelist_o2.ComponentUsageListType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_componentusagelist_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_componentusagelist_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_componentusagelist_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -421,26 +422,14 @@
                 </Annotation>
                 <Annotation Term="Capabilities.FilterRestrictions">
                     <Record>
-                        <PropertyValue Property="RequiresFilter" Bool="true"/>
-                        <PropertyValue Property="RequiredProperties">
-                            <Collection>
-                                <PropertyPath>Plant</PropertyPath>
-                                <PropertyPath>NoDisplayNonProduct</PropertyPath>
-                                <PropertyPath>NoDisplayColMfrpn</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
                         <PropertyValue Property="FilterExpressionRestrictions">
                             <Collection>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="Plant"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
-                                </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="NoDisplayNonProduct"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                                 <Record>
-                                    <PropertyValue Property="Property" PropertyPath="NoDisplayColMfrpn"/>
+                                    <PropertyValue Property="Property" PropertyPath="DisplayPurchasingInfo"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                             </Collection>
@@ -491,12 +480,6 @@
                         <PropertyValue Property="Updatable" Bool="false"/>
                     </Record>
                 </Annotation>
-            </Annotations>
-            <Annotations Target="cds_zui_componentusagelist_o2.ComponentUsageListType/NoDisplayNonProduct" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FilterDefaultValue" Bool="false"/>
-            </Annotations>
-            <Annotations Target="cds_zui_componentusagelist_o2.ComponentUsageListType/NoDisplayColMfrpn" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FilterDefaultValue" Bool="false"/>
             </Annotations>
             <Annotations Target="cds_zui_componentusagelist_o2.cds_zui_componentusagelist_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">

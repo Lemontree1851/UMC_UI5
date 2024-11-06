@@ -24,11 +24,12 @@
                                 <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="BillOfMaterialComponent" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialComponent}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
-                                <smartFilterBar:ControlConfiguration index='40' key="NoDisplayNonProduct" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>NoDisplayNonProduct}"/>
-                                <smartFilterBar:ControlConfiguration index='50' key="NoDisplayColMfrpn" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>NoDisplayColMfrpn}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="NoDisplayNonProduct" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>NoDisplayNonProduct}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="DisplayPurchasingInfo" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>DisplayPurchasingInfo}"/>
 
                                 <!-- visible -->
-                                <smartFilterBar:ControlConfiguration index='999' key="Matererial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Material" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariant" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Product" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductDescription" visible="false"/>

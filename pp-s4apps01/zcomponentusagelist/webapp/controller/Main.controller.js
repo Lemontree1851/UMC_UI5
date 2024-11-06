@@ -13,29 +13,27 @@ sap.ui.define([
             // //设置默认值
             oSmartFilterBar.setFilterData({
                 NoDisplayNonProduct: false,
-                NoDisplayColMfrpn: false
+                DisplayPurchasingInfo: false
             });
         },
 
         onBeforeRebindTable: function (oEvent) {
             // 获取表格对象
             var oTable = this.byId("idTable");
-            var oBinding = oEvent.getParameter("bindingParams");
 
-            // 获取 NoDisplayColMfrpn 的值
+            // 获取 DisplayPurchasingInfo 的值
             var oSmartFilterBar = this.byId("idSmartFilterBar");
-            var sNoDisplayColMfrpn = oSmartFilterBar.getFilterData().NoDisplayColMfrpn;
+            var sDisplayPurchasingInfo = oSmartFilterBar.getFilterData().DisplayPurchasingInfo;
 
             // 动态显示或隐藏列
             var oColumns = oTable.getColumns();
-            var bShowColumn = sNoDisplayColMfrpn ? true : false; // 有值时显示，没值时隐藏
+            var bShowColumn = sDisplayPurchasingInfo === 'true' ? true : false; // 有值时显示，没值时隐藏
 
             oColumns.forEach(function (oColumn) {
-                if (oColumn.getSortProperty() === "ProductManufacturerNumber") {
+                if (oColumn.getSortProperty() === "SupplierMaterialNumber" || oColumn.getSortProperty() === "ProductManufacturerNumber") {
                     oColumn.setVisible(bShowColumn);
                 }
             });
         }
     });
 });
-

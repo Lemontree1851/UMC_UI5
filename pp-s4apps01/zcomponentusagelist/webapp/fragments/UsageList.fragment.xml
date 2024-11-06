@@ -10,7 +10,7 @@
         showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
         persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="NoDisplayNonProduct,NoDisplayColMfrpn">
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="NoDisplayNonProduct">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -42,6 +42,14 @@
                         <Text text="{ComponentDescription}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="13rem" label="{i18n>SupplierMaterialNumber}" sortProperty="SupplierMaterialNumber" filterProperty="SupplierMaterialNumber">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SupplierMaterialNumber", "leadingProperty":"SupplierMaterialNumber"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SupplierMaterialNumber}" wrapping="false" />
+                    </table:template>
+                </table:Column>
                 <table:Column width="13rem" label="{i18n>ProductManufacturerNumber}" sortProperty="ProductManufacturerNumber" filterProperty="ProductManufacturerNumber">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProductManufacturerNumber", "leadingProperty":"ProductManufacturerNumber"}'/>
@@ -50,12 +58,12 @@
                         <Text text="{ProductManufacturerNumber}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8rem" label="{i18n>Matererial}" sortProperty="Matererial" filterProperty="Matererial">
+                <table:Column width="8rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"Matererial", "leadingProperty":"Matererial"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{Matererial}" wrapping="false" />
+                        <Text text="{Material}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>Product}" sortProperty="Product" filterProperty="Product">
