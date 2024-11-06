@@ -16,6 +16,21 @@ sap.ui.define([
             },
 
             onInit: function () {
+                this._setInitialValue();
+            },
+
+            _setInitialValue:function(){ 
+                var oYear = this.byId("sfbRep01DPRecoveryYear");
+                var dNow = new Date(Date.now());
+                var nMonth = dNow.getMonth() + 1;
+                var nYear = dNow.getFullYear();
+    
+                if(nMonth <= 3){ 
+                    nYear = nYear - 1;
+                }
+     
+                var sYear = String(nYear); 
+                oYear.setValue(sYear);
             },
 
             onCreateNewRecovery: function (oEvent) {

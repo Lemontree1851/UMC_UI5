@@ -8,7 +8,28 @@ function (Controller, Filter, FilterOperator) {
 
     return Controller.extend("recoverymanagement.controller.Report003", {
         onInit: function () {
+            this._setInitialValue();
+        },
 
+        _setInitialValue:function(){
+            var oMonth = this.byId("sfbRep03SelFiscalMonth");
+            var oYear = this.byId("sfbRep03DPRecoveryYear");
+            var dNow = new Date(Date.now());
+            var nMonth = dNow.getMonth() + 1;
+            var nYear = dNow.getFullYear();
+
+            if(nMonth <= 3){
+                nMonth = nMonth + 10 - 1;
+                nYear = nYear - 1;
+            }else{
+                nMonth = nMonth - 3;
+            }
+
+            var sMonth = nMonth < 10 ? `0${nMonth}` : String(nMonth);
+            var sYear = String(nYear);
+
+            oMonth.setSelectedKey(sMonth);
+            oYear.setValue(sYear);
         },
 
         onBeforeRebindTable: function (oEvent) {
