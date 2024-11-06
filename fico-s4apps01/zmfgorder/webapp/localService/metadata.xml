@@ -86,12 +86,16 @@
                     <PropertyRef Name="Plant"/>
                     <PropertyRef Name="Product"/>
                     <PropertyRef Name="SoldToParty"/>
+                    <PropertyRef Name="AccountingDocument"/>
+                    <PropertyRef Name="LedgerGLLineItem"/>
                 </Key>
                 <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="7"/>
                 <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="SoldToParty" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="AccountingDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="LedgerGLLineItem" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="CompanycodeText" Type="Edm.String" Nullable="false" MaxLength="25"/>
                 <Property Name="PlantText" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
@@ -100,9 +104,10 @@
                 <Property Name="ProfitCenterLongName" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="Zamount1" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="Zamount2" Type="Edm.String" Nullable="false" MaxLength="30"/>
-                <Property Name="DisplayCurrency" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="DisplayCurrency" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="AccountingDocumentType" Type="Edm.String" Nullable="false" MaxLength="4"/>
             </EntityType>
             <EntityType Name="MFGORDER1Type">
                 <Key>
@@ -114,6 +119,7 @@
                     <PropertyRef Name="ProfitCenter"/>
                     <PropertyRef Name="CostCenter"/>
                     <PropertyRef Name="ActivityType"/>
+                    <PropertyRef Name="orderid"/>
                 </Key>
                 <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="7"/>
                 <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -123,26 +129,29 @@
                 <Property Name="ProfitCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="CostCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="ActivityType" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="orderid" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="CompanycodeText" Type="Edm.String" Nullable="false" MaxLength="25"/>
                 <Property Name="PlantText" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
-                <Property Name="MfgOrderConfirmedYieldQty" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="MfgOrderConfirmedYieldQty" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="3"/>
+                <Property Name="ProductionUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="BusinessPartnerName" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="ProfitCenterLongName" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="CostCenterDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="CostCtrActivityTypeName" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="ProductionSupervisor" Type="Edm.String" Nullable="false" MaxLength="20"/>
-                <Property Name="PlanQtyInCostSourceUnit" Type="Edm.String" Nullable="false" MaxLength="20"/>
-                <Property Name="ActualQtyInCostSourceUnit" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="PlanQtyInCostSourceUnit" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="3"/>
+                <Property Name="ActualQtyInCostSourceUnit" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="3"/>
                 <Property Name="UnitOfMeasure" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="PlanCostRate" Type="Edm.String" Nullable="false" MaxLength="20"/>
-                <Property Name="ActualCostRate" Type="Edm.String" Nullable="false" MaxLength="20"/>
-                <Property Name="TotalActualCost" Type="Edm.String" Nullable="false" MaxLength="30"/>
-                <Property Name="ActualCost1PC" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="PlanCostRate" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ActualCostRate" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="Currency1" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="Currency2" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="TotalActualCost" Type="Edm.Decimal" Nullable="false" Precision="20" Scale="variable"/>
+                <Property Name="ActualCost1PC" Type="Edm.Decimal" Nullable="false" Precision="20" Scale="variable"/>
                 <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
-                <Property Name="orderid" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="producedproduct" Type="Edm.String" Nullable="false" MaxLength="40"/>
             </EntityType>
             <EntityContainer Name="Container">
@@ -346,6 +355,12 @@
             <Annotations Target="SAP__self.MFGORDER3Type/SoldToParty">
                 <Annotation Term="SAP__common.Label" String="得意先"/>
             </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/AccountingDocument">
+                <Annotation Term="SAP__common.Label" String="AccountingDocument"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/LedgerGLLineItem">
+                <Annotation Term="SAP__common.Label" String="LedgerGLLineItem"/>
+            </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type/CompanycodeText">
                 <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
             </Annotations>
@@ -382,6 +397,9 @@
                 <Annotation Term="SAP__common.Label" String="会計期間"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Calendar Month"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER3Type/AccountingDocumentType">
+                <Annotation Term="SAP__common.Label" String="凭证类型"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type">
                 <Annotation Term="SAP__common.Label" String="Query CDS3"/>
@@ -547,6 +565,9 @@
             <Annotations Target="SAP__self.MFGORDER1Type/ActivityType">
                 <Annotation Term="SAP__common.Label" String="活動タイプ"/>
             </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/orderid">
+                <Annotation Term="SAP__common.Label" String="OrderID"/>
+            </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/CompanycodeText">
                 <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
             </Annotations>
@@ -558,6 +579,12 @@
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/MfgOrderConfirmedYieldQty">
                 <Annotation Term="SAP__common.Label" String="入庫数量"/>
+                <Annotation Term="SAP__measures.Unit" Path="ProductionUnit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/ProductionUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/BusinessPartnerName">
                 <Annotation Term="SAP__common.Label" String="得意先テキスト"/>
@@ -579,24 +606,47 @@
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/PlanQtyInCostSourceUnit">
                 <Annotation Term="SAP__common.Label" String="計画工数"/>
+                <Annotation Term="SAP__measures.Unit" Path="UnitOfMeasure"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ActualQtyInCostSourceUnit">
                 <Annotation Term="SAP__common.Label" String="実績工数"/>
+                <Annotation Term="SAP__measures.Unit" Path="UnitOfMeasure"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/UnitOfMeasure">
+                <Annotation Term="SAP__common.IsUnit"/>
                 <Annotation Term="SAP__common.Label" String="工数単位"/>
+                <Annotation Term="SAP__common.Heading" String="UM"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Unit of Measure for Display"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/PlanCostRate">
                 <Annotation Term="SAP__common.Label" String="計画賃率"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency1"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ActualCostRate">
                 <Annotation Term="SAP__common.Label" String="実際賃率"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency2"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Currency1">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Document Currency"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Currency2">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Document Currency"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/TotalActualCost">
                 <Annotation Term="SAP__common.Label" String="加工費実績合計"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency2"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ActualCost1PC">
                 <Annotation Term="SAP__common.Label" String="加工費実績（1単位）"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency2"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/calendaryear">
                 <Annotation Term="SAP__common.Label" String="会計年度"/>
@@ -607,9 +657,6 @@
                 <Annotation Term="SAP__common.Label" String="会計期間"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Calendar Month"/>
-            </Annotations>
-            <Annotations Target="SAP__self.MFGORDER1Type/orderid">
-                <Annotation Term="SAP__common.Label" String="OrderID"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/producedproduct">
                 <Annotation Term="SAP__common.Label" String="構成品目"/>
@@ -789,6 +836,18 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
                 <Annotation Term="SAP__aggregation.ApplySupported">
                     <Record>
                         <PropertyValue Property="Transformations">

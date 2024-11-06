@@ -65,9 +65,6 @@
                             <PropertyValue Property="Value" Path="CostCtrActivityTypeName"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Department"/>
-                        </Record>
-                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProductionSupervisor"/>
                         </Record>
                         <Record Type="UI.DataField">
@@ -203,6 +200,12 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CompanycodeText"/>
                         </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="AccountingDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LedgerGLLineItem"/>
+                        </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Plant"/>
@@ -245,6 +248,9 @@
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="DisplayCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="AccountingDocumentType"/>
                         </Record>
 </Collection>
                 </Annotation>
