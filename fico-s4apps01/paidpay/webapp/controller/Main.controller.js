@@ -67,6 +67,7 @@ sap.ui.define([
 
                     this.getModel("local").setProperty("/excelSet", aExcelSet);
                     this.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", [aExcelSet.length, 0, 0]));
+                    this.byId("idFileUploader").clear();
                     this._BusyDialog.close();
                 }.bind(this);
             },
