@@ -83,6 +83,18 @@ modules:
       - ficozinventoryaging.zip
       name: ficozinventoryaging
       target-path: resources/   
+    - artifacts:
+      - ficozstockageupload.zip
+      name: ficozstockageupload
+      target-path: resources/       
+    - artifacts:
+      - ficozbindglupload.zip
+      name: ficozbindglupload
+      target-path: resources/    
+    - artifacts:
+      - ficozbdglaccountlist.zip
+      name: ficozbdglaccountlist
+      target-path: resources/               
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -90,7 +102,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaycalculation
@@ -100,7 +111,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaydocument
@@ -110,7 +120,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficoagencypurchasingn
@@ -120,7 +129,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficofixedassetprint
@@ -175,7 +183,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozbindglupload
@@ -185,7 +192,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozbdglaccountlist
@@ -195,7 +201,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozstockageupload
@@ -205,7 +210,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:

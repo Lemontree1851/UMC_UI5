@@ -52,6 +52,19 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zaccountingdoc-display": {
+          "semanticObject": "zaccountingdoc",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -109,7 +122,8 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
-      },      "Print1": {
+      },
+      "Print1": {
         "dataSource": "PrintService1",
         "preload": true,
         "settings": {
@@ -160,7 +174,7 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "GridTable"
+                    "type": "AnalyticalTable"
                   },
                   "actions": {
                     "Action1": {
