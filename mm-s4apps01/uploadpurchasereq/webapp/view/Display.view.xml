@@ -122,6 +122,23 @@
                                 index="40"
                             />
                             <smartFilterBar:ControlConfiguration
+                                key="ApproveStatus"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>ApproveStatus}"
+                                mandatory="notMandatory"
+                                index="41"
+                            > 
+                                <smartFilterBar:customControl>
+                                    <Select id="idApproveStatusSelect" >
+                                        <core:ListItem key="0" text="" />
+                                        <core:ListItem key="1" text="{i18n>Status1Text}" />
+                                        <core:ListItem key="2" text="{i18n>Status2Text}" />
+                                        <core:ListItem key="3" text="{i18n>Status3Text}" />
+                                        <core:ListItem key="4" text="{i18n>Status4Text}" />
+                                    </Select>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
                                 id="id8ControlConfiguration"
                                 key="WbsElemnt"
                                 visibleInAdvancedArea="true"
@@ -155,7 +172,7 @@
                 beforeRebindTable="onBeforeRebindTable"
             >
                 <smartTable:customToolbar>
-                    <OverflowToolbar >
+                    <OverflowToolbar>
                         <ToolbarSpacer />
                         <Button
                             icon="sap-icon://document"
@@ -189,7 +206,7 @@
                     <t:columns>
                         <t:Column
                             width="4rem"
-                            label="{i18n>Type}"
+                            label="{i18n>Status}"
                             sortProperty="Type"
                             filterProperty="Type"
                         >
@@ -200,18 +217,35 @@
                                 />
                             </t:customData>
                             <t:template>
-                                <ObjectStatus state="{path:'Type', formatter:'.formatter.setState'}" icon="sap-icon://status-negative"/>
+                                <ObjectStatus
+                                    state="{
+                                        path: 'Type',
+                                        formatter: '.formatter.setState'
+                                    }"
+                                    icon="sap-icon://status-negative"
+                                />
                             </t:template>
                         </t:Column>
-                        <t:Column width="5rem" label="{i18n>Result}" sortProperty="ResultText">
-							<t:customData>
-								<core:CustomData key="p13nData"
-									value='\{"columnKey":"ResultText", "leadingProperty":"ResultText", "sortProperty":"ResultText", "filterProperty": "ResultText"}'/>
-							</t:customData>
-							<t:template>
-								<Text text="{path:'Type', formatter:'.formatter.setResult'}"/>
-							</t:template>
-						</t:Column>
+                        <t:Column
+                            width="5rem"
+                            label="{i18n>Result}"
+                            sortProperty="ResultText"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"ResultText", "leadingProperty":"ResultText", "sortProperty":"ResultText", "filterProperty": "ResultText"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{
+                                    path: 'Type',
+                                    formatter: '.formatter.setResult'
+                                }"
+                                />
+                            </t:template>
+                        </t:Column>
                         <t:Column
                             width="12rem"
                             label="{i18n>Message}"
@@ -651,7 +685,10 @@
                             <t:template>
                                 <Text
                                     id="idDeliveryDateText"
-                                    text="{path:'DeliveryDate', formatter:'.formatter.date'}"
+                                    text="{
+                                        path: 'DeliveryDate',
+                                        formatter: '.formatter.date'
+                                    }"
                                 />
                             </t:template>
                         </t:Column>
@@ -996,6 +1033,24 @@
                             </t:template>
                         </t:Column>
                         <t:Column
+                            width="8rem"
+                            label="{i18n>ApproveStatus}"
+                            sortProperty="ApproveStatus"
+                            filterProperty="ApproveStatus"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"ApproveStatus", "leadingProperty":"ApproveStatus", "sortProperty":"ApproveStatus", "filterProperty": "ApproveStatus"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{ApproveStatus}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
                             id="id34Column"
                             width="8rem"
                             label="{i18n>IsLink}"
@@ -1059,6 +1114,24 @@
                             </t:template>
                         </t:Column>
                         <t:Column
+                            width="6rem"
+                            label="{i18n>ApplyDepart}"
+                            sortProperty="ApplyDepart"
+                            filterProperty="ApplyDepart"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"ApplyDepart", "leadingProperty":"ApplyDepart", "sortProperty":"ApplyDepart", "filterProperty": "ApplyDepart"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{ApplyDepart}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
                             id="id37Column"
                             width="6rem"
                             label="{i18n>Kyoten}"
@@ -1100,6 +1173,60 @@
                                         path: 'CreatedAt',
                                         type: 'sap.ui.model.type.Date'
                                     }"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="6rem"
+                            label="{i18n>ApplyDate}"
+                            sortProperty="ApplyDate"
+                            filterProperty="ApplyDate"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"ApplyDate", "leadingProperty":"ApplyDate", "sortProperty":"ApplyDate", "filterProperty": "ApplyDate"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{path:'ApplyDate', formatter:'.formatter.date'}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="6rem"
+                            label="{i18n>ApplyTime}"
+                            sortProperty="ApplyTime"
+                            filterProperty="ApplyTime"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"ApplyTime", "leadingProperty":"ApplyTime", "sortProperty":"ApplyTime", "filterProperty": "ApplyTime"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{path:'ApplyTime', formatter:'.formatter.time'}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="6rem"
+                            label="{i18n>IsApprove}"
+                            sortProperty="IsApprove"
+                            filterProperty="IsApprove"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"IsApprove", "leadingProperty":"IsApprove", "sortProperty":"IsApprove", "filterProperty": "IsApprove"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{IsApprove}"
                                 />
                             </t:template>
                         </t:Column>

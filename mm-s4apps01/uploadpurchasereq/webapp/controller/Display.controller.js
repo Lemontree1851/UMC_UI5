@@ -64,6 +64,11 @@ sap.ui.define([
 			if (oCreatedAt) {
 				aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
 			}
+
+			var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
+			if(sApproveStatus !== "0") {
+				aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
+			}
 			
 			oNewFilter = new Filter({
 				filters:aNewFilter,

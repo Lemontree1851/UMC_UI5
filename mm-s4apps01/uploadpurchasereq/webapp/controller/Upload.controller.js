@@ -3,18 +3,15 @@ sap.ui.define([
     "../model/formatter",
     "./messages",
     "../util/xlsx",
-    "sap/m/BusyDialog"
+    "sap/m/BusyDialog",
+    "sap/ui/export/Spreadsheet"
 ], function (
-    Controller,
-    formatter,
-    messages,
-    xlsx,
-    BusyDialog
+    Controller, formatter, messages, xlsx, BusyDialog, Spreadsheet
 ) {
     "use strict";
 
     return Controller.extend("mm.uploadpurchasereq.controller.Upload", {
-        formatter : formatter,
+        formatter: formatter,
         onInit: function () {
             this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
@@ -22,25 +19,25 @@ sap.ui.define([
             this._BusyDialog = new BusyDialog();
 
             // 绑定模板附件path
-			var oUploadSet = this.byId("idUploadSet");
-			var sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='" + "SAT" +
-				"',DocumentInfoRecordDocNumber='" + "10000000000" + "',DocumentInfoRecordDocVersion='" +
-				"00" + "',DocumentInfoRecordDocPart='" + "000" + "')";
-			oUploadSet.bindElement(sPath);
-            
+            var oUploadSet = this.byId("idUploadSet");
+            var sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='" + "SAT" +
+                "',DocumentInfoRecordDocNumber='" + "10000000000" + "',DocumentInfoRecordDocVersion='" +
+                "00" + "',DocumentInfoRecordDocPart='" + "000" + "')";
+            oUploadSet.bindElement(sPath);
+
         },
 
         getMediaUrl: function (sUrlString) {
-			if (sUrlString) {
-				var sUrl = new URL(sUrlString);
-				var iStart = sUrl.href.indexOf(sUrl.origin);
-				var sPath = sUrl.href.substring(iStart + sUrl.origin.length, sUrl.href.length);
-				//return "/S4" + sPath;
-				return jQuery.sap.getModulePath("mm.uploadpurchasereq") + sPath;
-			} else {
-				return "";
-			}
-		},
+            if (sUrlString) {
+                var sUrl = new URL(sUrlString);
+                var iStart = sUrl.href.indexOf(sUrl.origin);
+                var sPath = sUrl.href.substring(iStart + sUrl.origin.length, sUrl.href.length);
+                //return "/S4" + sPath;
+                return jQuery.sap.getModulePath("mm.uploadpurchasereq") + sPath;
+            } else {
+                return "";
+            }
+        },
 
         onFileUploaderChange: function (oEvent) {
             /*global XLSX*/
@@ -77,11 +74,11 @@ sap.ui.define([
                 // 获取sheet1单元格的内容
                 var oSheet1 = oWB.Sheets[oWB.SheetNames[0]];
                 // 将单元格的内容转换成数组的形式（自动将第一行作为抬头）
-                var aSheet1 = XLSX.utils.sheet_to_row_object_array(oSheet1);
+                var aSheet1 = XLSX.utils.sheet_to_row_object_array(oSheet1, {raw: false});
                 // for循环每一行的内容添加到数据集当中,数据从第excel的3行开始（第一行默认为技术字段，不读取，第二行为说明行，JS中从0开始，所以从1开始读）
                 var pritem = 0;
                 for (var i = 1; i < aSheet1.length; i++) {
-                    pritem ++;
+                    pritem++;
                     oItem = {
                         Type: "",
                         Message: "",
@@ -128,17 +125,14 @@ sap.ui.define([
                         PurchaseOrderItem: aSheet1[i]["PurchaseOrderItem"] || "",
                         IsLink: aSheet1[i]["IsLink"] || "",
                         Kyoten: aSheet1[i]["Kyoten"] || "",
+                        IsApprove: aSheet1[i]["IsApprove"] || "",
                     };
-                    //因为有些数据读出来是数值类型，但odta要求字符类型，通过此种方式将所有值转换成字符类型
-                    oItem = JSON.parse(JSON.stringify(oItem));
-                    //同时这种方式会将日期类型转换成ISO类型的字符，我们只截取日期部分
-                    oItem.DeliveryDate = oItem.DeliveryDate.slice(0,10);
                     aExcelSet.push(oItem);
-                    if(this.checkInconsistencies(aExcelSet)) {
-                        this.byId("idCheckButton").setEnabled(false);
-                    } else {
-                        this.byId("idCheckButton").setEnabled(true);
-                    }
+                }
+                if (this.checkInconsistencies(aExcelSet)) {
+                    this.byId("idCheckButton").setEnabled(false);
+                } else {
+                    this.byId("idCheckButton").setEnabled(true);
                 }
 
                 this._LocalData.setProperty("/excelSet", aExcelSet)
@@ -151,27 +145,46 @@ sap.ui.define([
             let isInconsistencies = false;
             // 如果数组为空或只有一个对象，直接返回一致
             if (aExcelSet.length <= 1) return false;
-        
+
             // 取第一个对象的这四个属性作为比较基准
-            const { ApplyDepart, PrType, OrderType, Kyoten } = aExcelSet[0];
-        
-            // 遍历数组，检查每个对象的这四个属性是否与基准一致
+            const { ApplyDepart, PrType, OrderType, Kyoten, CompanyCode } = aExcelSet[0];
+
+            // 先检查公司代码是否一致
             for (let i = 1; i < aExcelSet.length; i++) {
                 const obj = aExcelSet[i];
-                if (
-                    // obj.ApplyDepart !== ApplyDepart ||
-                    // obj.PrType !== PrType ||
-                    // obj.OrderType !== OrderType ||
-                    // obj.Kyoten !== Kyoten
-                    obj.ApplyDepart !== ApplyDepart ||
-                    obj.OrderType !== OrderType
-                ) {
+                if (obj.CompanyCode !== CompanyCode) {
                     aExcelSet[i].Type = "E";
                     aExcelSet[i].Message = this._ResourceBundle.getText("msgDuplicate");
                     isInconsistencies = true; // 发现不一致，返回 true
                 }
             }
-        
+            if(!isInconsistencies) {
+                // 遍历数组，检查每个对象的这四个属性是否与基准一致
+                for (let i = 1; i < aExcelSet.length; i++) {
+                    const obj = aExcelSet[i];
+                    if (obj.CompanyCode === "1400") {
+                        if (
+                            obj.ApplyDepart !== ApplyDepart ||
+                            obj.OrderType !== OrderType
+                        ) {
+                            isInconsistencies = true; // 发现不一致，返回 true
+                        }
+                    } else {
+                        if (
+                            obj.ApplyDepart !== ApplyDepart ||
+                            obj.PrType !== PrType ||
+                            obj.OrderType !== OrderType ||
+                            obj.Kyoten !== Kyoten
+                        ) {
+                            isInconsistencies = true; // 发现不一致，返回 true
+                        }
+                    }
+                    if (isInconsistencies) {
+                        aExcelSet[i].Type = "E";
+                        aExcelSet[i].Message = this._ResourceBundle.getText("msgDuplicate");
+                    }
+                }
+            }
             return isInconsistencies; // 所有对象都一致，返回 false
         },
 
@@ -181,7 +194,7 @@ sap.ui.define([
             );
         },
 
-        getErrorCount: function (aExcelSet,sAction) {
+        getErrorCount: function (aExcelSet, sAction) {
             var iTotal = 0,
                 iError = 0,
                 iSuccess = 0;
@@ -215,45 +228,47 @@ sap.ui.define([
             aDeferredGroups = aDeferredGroups.concat(["UploadHead0"]);
             oModel.setDeferredGroups(aDeferredGroups);
             for (var i = 0; i < postDocs.length; i++) {
-				this.postCreate(postDocs[i], i);
-			}
+                this.postCreate(postDocs[i], i);
+            }
             oModel.submitChanges({ groupId: "UploadHead0" });
         },
 
         onButtonPress: function (oEvent, sAction) {
             let postDocs = this.preparePostBatchBody();
             for (var i = 0; i < postDocs.length; i++) {
-				this.postAction(sAction, postDocs[i], i);
-			}
+                this.postAction(sAction, postDocs[i], i);
+            }
         },
 
         preparePostBody: function () {
             let aExcelSet = this._LocalData.getProperty("/excelSet"),
-			    postDocs = [],
-			    postDoc,
-			    post = [];
+                postDocs = [],
+                postDoc,
+                post = [];
 
-			aExcelSet.forEach(function (line) {
-				post.push(JSON.parse(JSON.stringify(line)));
-			}, this);
+            aExcelSet.forEach(function (line) {
+                post.push(JSON.parse(JSON.stringify(line)));
+            }, this);
 
-			postDocs = post;
-			return postDocs;
+            postDocs = post;
+            return postDocs;
         },
         preparePostBatchBody: function () {
             let aExcelSet = this._LocalData.getProperty("/excelSet");
             let copyExcelSet = [];
             aExcelSet.forEach(item => {
                 let postDoc = JSON.parse(JSON.stringify(item));
-                postDoc.DeliveryDate = postDoc.DeliveryDate.replace(/-/g, "");
+                postDoc.Type = "";
+                postDoc.Message = "";
+                postDoc.DeliveryDate = postDoc.DeliveryDate.replace(/[-/]/g, "");
                 copyExcelSet.push(postDoc);
             }, this)
             let postDocs = [JSON.stringify(copyExcelSet)];
             return postDocs;
         },
-        postAction: function (sAction, postData,i) {
+        postAction: function (sAction, postData, i) {
             var oModel = this._oDataModel;
-                // aDeferredGroups = oModel.getDeferredGroups();
+            // aDeferredGroups = oModel.getDeferredGroups();
             // aDeferredGroups = aDeferredGroups.concat(["myId"]);
             // oModel.setDeferredGroups(aDeferredGroups);
 
@@ -270,9 +285,9 @@ sap.ui.define([
                     let aExcelSet = this._LocalData.getProperty("/excelSet");
                     let result = JSON.parse(oData["batchProcess"].Zzkey);
                     result.forEach(function (line) {
-                        for ( let i = 0; i < aExcelSet.length; i++ ) {
-                            if (aExcelSet[i].Row == line.ROW ) {
-                                Object.keys(aExcelSet[0]).forEach(function(key) {
+                        for (let i = 0; i < aExcelSet.length; i++) {
+                            if (aExcelSet[i].Row == line.ROW) {
+                                Object.keys(aExcelSet[0]).forEach(function (key) {
                                     if (key !== "Row") {
                                         aExcelSet[i][key] = line[key.toUpperCase()];
                                     }
@@ -314,6 +329,49 @@ sap.ui.define([
                 }.bind(this)
             };
             this.getOwnerComponent().getModel().create("/PurchaseReq", postData, mParameters);
+        },
+
+        onExport: function (oEvent) {
+            // 根据id值获取table 
+            var oTable = this.getView().byId("idTable");
+            // 获取table的绑定路径
+            var sPath = oTable.getBindingPath("rows");
+            // 获取table数据
+            var aExcelSet = this._LocalData.getProperty(sPath);
+
+            var aExcelCol = [];
+            // 获取table的columns
+            var aTableCol = oTable.getColumns();
+            for (var i = 1; i < aTableCol.length; i++) {
+                if (aTableCol[i].getVisible()) {
+                    var sLabelText = aTableCol[i].getAggregation("label").getText();
+                    var oExcelCol = {
+                        // 获取表格的列名，即设置excel的抬头
+                        label: sLabelText,
+                        // 数据类型，即设置excel该列的数据类型
+                        type: "string",
+                        // 获取数据的绑定路径，即设置excel该列的字段路径
+                        property: aTableCol[i].getAggregation("template").getBindingPath("text"),
+                        // 获取表格的width属性，即设置excel该列的长度
+                        width: parseFloat(aTableCol[i].getWidth())
+                    };
+                    aExcelCol.push(oExcelCol);
+                }
+            }
+            // 设置excel的相关属性
+            var oSettings = {
+                workbook: {
+                    columns: aExcelCol,
+                    context: {
+                        version: "1.54",
+                        hierarchyLevel: "level"
+                    }
+                },
+                dataSource: aExcelSet, // 传入参数，数据源
+                fileName: "Export_" + this._ResourceBundle.getText("title") + new Date().getTime() + ".xlsx" // 文件名，需要加上后缀
+            };
+            // 导出excel
+            new Spreadsheet(oSettings).build();
         },
     });
 });

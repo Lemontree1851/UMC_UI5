@@ -108,6 +108,14 @@
                             visible="{= ${local>/excelSet}.length > 0}"
                             enabled="{local>/recordCheckSuccessed}"
                         />
+                        <Button
+                            id="idDownloadButton"
+                            icon="sap-icon://excel-attachment"
+                            type="Transparent"
+                            text="{i18n>UploadView.DownloadBtn}"
+                            press="onExport"
+                            enabled="{= ${local>/excelSet}.length > 0}"
+                        />
                     </OverflowToolbar>
                 </t:extension>
                 <t:columns>
@@ -220,6 +228,40 @@
                             <Text
                                 id="idOrderTypeText"
                                 text="{local>OrderType}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="id41Column"
+                        width="6rem"
+                        label="{i18n>Kyoten}"
+                    >
+                        <t:template>
+                            <Text
+                                id="idKyotenText"
+                                text="{local>Kyoten}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="id34Column"
+                        width="8rem"
+                        label="{i18n>IsLink}"
+                    >
+                        <t:template>
+                            <Text
+                                id="idIsLinkText"
+                                text="{local>IsLink}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="6rem"
+                        label="{i18n>IsApprove}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>IsApprove}"
                             />
                         </t:template>
                     </t:Column>
@@ -612,18 +654,6 @@
                         </t:template>
                     </t:Column>
                     <t:Column
-                        id="id34Column"
-                        width="8rem"
-                        label="{i18n>IsLink}"
-                    >
-                        <t:template>
-                            <Text
-                                id="idIsLinkText"
-                                text="{local>IsLink}"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
                         id="id39Column"
                         width="8rem"
                         label="{i18n>PurchaseOrder}"
@@ -647,18 +677,7 @@
                             />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        id="id41Column"
-                        width="6rem"
-                        label="{i18n>Kyoten}"
-                    >
-                        <t:template>
-                            <Text
-                                id="idKyotenText"
-                                text="{local>Kyoten}"
-                            />
-                        </t:template>
-                    </t:Column>
+                    
                 </t:columns>
             </t:Table>
         </Panel>

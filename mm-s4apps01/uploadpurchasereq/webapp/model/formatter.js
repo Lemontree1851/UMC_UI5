@@ -11,6 +11,9 @@ sap.ui.define([
             if (v === "E") {
                 return "Error";
             }
+            if (v === "W") {
+                return "Warning";
+            }
             return "None";
         },
 
@@ -21,7 +24,10 @@ sap.ui.define([
             if (v === "E") {
                 return "sap-icon://status-negative";
             }
-            return "sap-icon://status-negative";
+            if (v === "W") {
+                return "sap-icon://status-critical";
+            }
+            return "sap-icon://status-inactive";
         },
 
         setResult: function (v) {
@@ -30,6 +36,9 @@ sap.ui.define([
             }
             if (v === "E") {
                 return "失敗";
+            }
+            if (v === "W") {
+                return "に警告";
             }
             return "";
         },
@@ -40,15 +49,17 @@ sap.ui.define([
 
         // 0000/00/00
         date: function (value) {
-            let localDate = new Date(value);
-            if (!isNaN(localDate.getTime())) {
-                var oDateFormat = DateFormat.getDateTimeInstance({
-                    pattern: "yyyy/MM/dd"
-                });
-                return oDateFormat.format(new Date(value));
-            } else {
-                if (value.length === 8){
-                    return value.substring(0, 4) + "/" + value.substring(4, 6) + "/" + value.substring(6);
+            if (value) {
+                let localDate = new Date(value);
+                if (!isNaN(localDate.getTime())) {
+                    var oDateFormat = DateFormat.getDateTimeInstance({
+                        pattern: "yyyy/MM/dd"
+                    });
+                    return oDateFormat.format(new Date(value));
+                } else {
+                    if (value.length === 8){
+                        return value.substring(0, 4) + "/" + value.substring(4, 6) + "/" + value.substring(6);
+                    }
                 }
                 return value;
             }
@@ -57,14 +68,20 @@ sap.ui.define([
         // 00:00:00
         time: function (value) {
             if (value) {
-                var timeFormat = DateFormat.getTimeInstance({
-                    pattern: "HH:mm:ss"
-                });
-                if (value.ms !== 0) {
-                    return timeFormat.format(new Date(value.ms), true);
+                let localDate = new Date(value);
+                if (!isNaN(localDate.getTime())) {
+                    var timeFormat = DateFormat.getTimeInstance({
+                        pattern: "HH:mm:ss"
+                    });
+                    if (value.ms !== 0) {
+                        return timeFormat.format(new Date(value.ms), true);
+                    }
+                    return null;
+                } else {
+                    if (value.length === 6){
+                        return value.substring(0, 2) + ":" + value.substring(2, 4) + ":" + value.substring(4);
+                    }
                 }
-                return null;
-            } else {
                 return value;
             }
         },
