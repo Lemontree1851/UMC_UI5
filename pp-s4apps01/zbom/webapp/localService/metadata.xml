@@ -89,7 +89,7 @@
                 <Property Name="DiscontinuationGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="FollowUpGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="ProductManufacturerNumber" Type="Edm.String" Nullable="false" MaxLength="40"/>
-                <Property Name="ManufacturerNumber" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="BusinessPartnerFullName" Type="Edm.String" Nullable="false" MaxLength="80"/>
                 <Property Name="BillOfMaterialItemUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="BOMHeaderText" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="ComponentQuantityInCompUoM" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
@@ -110,7 +110,7 @@
                 <Property Name="ProductGroupName" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="BillOfMaterialItemBaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="ComponentQuantityInBaseUoM" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
-                <Property Name="CrossPlantStatus" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="ProfileCode" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="MRPResponsible" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="BOMItemIsSparePart" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="ProdOrderIssueLocation" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -241,7 +241,7 @@
             <Annotations Target="SAP__self.BOMType/ProductManufacturerNumber">
                 <Annotation Term="SAP__common.Label" String="MPN"/>
             </Annotations>
-            <Annotations Target="SAP__self.BOMType/ManufacturerNumber">
+            <Annotations Target="SAP__self.BOMType/BusinessPartnerFullName">
                 <Annotation Term="SAP__common.Label" String="メーカー"/>
             </Annotations>
             <Annotations Target="SAP__self.BOMType/BillOfMaterialItemUnit">
@@ -307,7 +307,7 @@
             <Annotations Target="SAP__self.BOMType/ComponentQuantityInBaseUoM">
                 <Annotation Term="SAP__common.Label" String="BOM構成品目単位数量"/>
             </Annotations>
-            <Annotations Target="SAP__self.BOMType/CrossPlantStatus">
+            <Annotations Target="SAP__self.BOMType/ProfileCode">
                 <Annotation Term="SAP__common.Label" String="発注可否"/>
             </Annotations>
             <Annotations Target="SAP__self.BOMType/MRPResponsible">
@@ -407,7 +407,7 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="メーカー"/>
-                            <PropertyValue Property="Value" Path="ManufacturerNumber"/>
+                            <PropertyValue Property="Value" Path="BusinessPartnerFullName"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="BOM構成品目単位"/>
@@ -491,7 +491,7 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="発注可否"/>
-                            <PropertyValue Property="Value" Path="CrossPlantStatus"/>
+                            <PropertyValue Property="Value" Path="ProfileCode"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="MRP管理者"/>
