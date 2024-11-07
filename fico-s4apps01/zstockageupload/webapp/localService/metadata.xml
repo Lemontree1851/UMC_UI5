@@ -56,11 +56,16 @@
                     <PropertyRef Name="Ledger"/>
                     <PropertyRef Name="CalendarYear"/>
                     <PropertyRef Name="CalendarMonth"/>
+                    <PropertyRef Name="CompanyCode"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Material"/>
+                    <PropertyRef Name="Age"/>
                     <PropertyRef Name="IsActiveEntity"/>
                 </Key>
                 <Property Name="Ledger" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="CalendarYear" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="CalendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18"/>
                 <Property Name="Age" Type="Edm.Decimal" Nullable="false" Precision="20"/>
@@ -71,6 +76,7 @@
                 <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="CompanyCodeName" Type="Edm.String" Nullable="false" MaxLength="25"/>
                 <Property Name="PlantName" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="CreateUserName" Type="Edm.String" Nullable="false" MaxLength="80"/>
                 <Property Name="UpdateUserName" Type="Edm.String" Nullable="false" MaxLength="80"/>
@@ -169,6 +175,11 @@
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/Ledger">
                 <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_ledgercompanycodecrcyroles/0001;ps='srvd-zui_stockageupload-0001';va='com.sap.gateway.srvd.zui_stockageupload.v0001.et-zc_stockageupload.ledger'/$metadata</String>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="SAP__common.Label" String="Ledger"/>
                 <Annotation Term="SAP__common.Heading" String="Ld"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Ledger in General Ledger Accounting"/>
@@ -183,10 +194,27 @@
                 <Annotation Term="SAP__common.IsDigitSequence"/>
                 <Annotation Term="SAP__common.Label" String="Calendar Month"/>
             </Annotations>
+            <Annotations Target="SAP__self.STOCKAGEUPLOADType/CompanyCode">
+                <Annotation Term="SAP__common.Text" Path="CompanyCodeName"/>
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_stockageupload-0001';va='com.sap.gateway.srvd.zui_stockageupload.v0001.et-zc_stockageupload.companycode'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Label" String="Company Code"/>
+                <Annotation Term="SAP__common.Heading" String="CoCd"/>
+            </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/Plant">
                 <Annotation Term="SAP__common.Text" Path="PlantName"/>
                 <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plantstdvh/0001;ps='srvd-zui_stockageupload-0001';va='com.sap.gateway.srvd.zui_stockageupload.v0001.et-zc_stockageupload.plant'/$metadata</String>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="SAP__common.Label" String="Plant"/>
                 <Annotation Term="SAP__common.Heading" String="Plnt"/>
             </Annotations>
@@ -239,6 +267,12 @@
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Product Description"/>
+            </Annotations>
+            <Annotations Target="SAP__self.STOCKAGEUPLOADType/CompanyCodeName">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Company Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name of Company Code or Company"/>
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/PlantName">
                 <Annotation Term="SAP__core.Computed"/>

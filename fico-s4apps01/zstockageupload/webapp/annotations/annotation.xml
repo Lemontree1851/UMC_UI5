@@ -80,20 +80,23 @@
                             <PropertyValue Property="Label" String="{@i18n>calendarMonth}"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>plant}"/>
                             <PropertyValue Property="Value" Path="Plant"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="{@i18n>age}"/>
-                            <PropertyValue Property="Value" Path="Age"/>
+                            <PropertyValue Property="Label" String="{@i18n>material}"/>
+                            <PropertyValue Property="Value" Path="Material"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>qty}"/>
                             <PropertyValue Property="Value" Path="Qty"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="{@i18n>material}"/>
-                            <PropertyValue Property="Value" Path="Material"/>
+                            <PropertyValue Property="Label" String="{@i18n>age}"/>
+                            <PropertyValue Property="Value" Path="Age"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CreatedBy"/>
@@ -108,6 +111,7 @@
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
                         <PropertyPath>Ledger</PropertyPath>
+                        <PropertyPath>CompanyCode</PropertyPath>
                         <PropertyPath>Plant</PropertyPath>
                         <PropertyPath>CalendarYear</PropertyPath>
                         <PropertyPath>CalendarMonth</PropertyPath>
@@ -125,6 +129,9 @@
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/Ledger">
                 <Annotation Term="Common.Label" String="{@i18n>ledger}"/>
+            </Annotations>
+            <Annotations Target="SAP__self.STOCKAGEUPLOADType/CompanyCode">
+                <Annotation Term="Common.Label" String="{@i18n>companyCode}"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

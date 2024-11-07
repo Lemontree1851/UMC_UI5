@@ -61,6 +61,7 @@ sap.ui.define([
                         "Message": "",
                         "Row": i - 2,
                         "Ledger": aSheetData[i]["Ledger"] === undefined ? "" : aSheetData[i]["Ledger"],
+                        "CompanyCode": aSheetData[i]["CompanyCode"] === undefined ? "" : aSheetData[i]["CompanyCode"],
                         "CalendarYear": aSheetData[i]["CalendarYear"] === undefined ? "" : aSheetData[i]["CalendarYear"],
                         "CalendarMonth": aSheetData[i]["CalendarMonth"] === undefined ? "" : aSheetData[i]["CalendarMonth"],
                         "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],

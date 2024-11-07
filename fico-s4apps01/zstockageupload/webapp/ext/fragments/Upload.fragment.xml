@@ -39,6 +39,11 @@
                                 <Text text="{local>Message}" wrapping="false"/>
                             </table:template>
                         </table:Column>
+                        <table:Column width="6rem" label="{i18n>CompanyCode}">
+                            <table:template>
+                                <Text text="{local>CompanyCode}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>   
                         <table:Column width="6rem" label="{i18n>Ledger}">
                             <table:template>
                                 <Text text="{local>Ledger}" wrapping="false"/>
