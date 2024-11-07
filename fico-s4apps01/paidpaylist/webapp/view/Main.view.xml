@@ -1,0 +1,199 @@
+<mvc:View controllerName="fico.paidpaylist.controller.Main"
+    displayBlock="true" 
+    xmlns:core="sap.ui.core" 
+    xmlns="sap.m"
+	xmlns:f="sap.f" 
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+    xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:sv="sap.ui.comp.smartvariants" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:table="sap.ui.table">
+
+    <smartFilterBar:SmartFilterBar id="SFB" useToolbar="false" entitySet="PaidPayReport" persistencyKey="FilterBar">
+		<!--<RadioButtonGroup id="rbg1" columns="4" width="100%" class="sapUiMediumMarginBottom">-->
+		<RadioButton groupName="GroupA" id="Option1" text="{i18n>Option1}" selected="true" select="onButtonSelect"/>
+		<RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect"/>
+		<!--</RadioButtonGroup>-->
+		<!--filterChange="check">-->
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration index="1" id="Company" key="CompanyCode" visibleInAdvancedArea="true" label="{i18n>Bukrs}"
+				filterType="single" mandatory="mandatory"/>
+			<smartFilterBar:ControlConfiguration index="2" id="Year" key="FiscalYear" visibleInAdvancedArea="true" label="{i18n>Gjahr}" mandatory="mandatory">
+				<smartFilterBar:customControl>
+					<DatePicker id="idGjahr" displayFormat="yyyy" />
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="3" id="Monat" key="Period" visibleInAdvancedArea="true" label="{i18n>Period}" mandatory="mandatory">
+				<smartFilterBar:customControl>
+					<Select id="idMonat">
+						<core:Item id = "01" key="01" text="01"/>
+						<core:Item id = "02" key="02" text="02"/>
+						<core:Item id = "03" key="03" text="03"/>
+						<core:Item id = "04" key="04" text="04"/>
+						<core:Item id = "05" key="05" text="05"/>
+						<core:Item id = "06" key="06" text="06"/>
+						<core:Item id = "07" key="07" text="07"/>
+						<core:Item id = "08" key="08" text="08"/>
+						<core:Item id = "09" key="09" text="09"/>
+						<core:Item id = "10" key="10" text="10"/>
+						<core:Item id = "11" key="11" text="11"/>
+						<core:Item id = "12" key="12" text="12"/>
+					</Select>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>	
+		</smartFilterBar:controlConfiguration>
+	</smartFilterBar:SmartFilterBar>
+    
+    <smartTable:SmartTable id="smartTable" smartVariant="__SVM01" persistencyKey="smartTable" entitySet="PaidPayReport"
+		smartFilterId="SFB" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="false" 
+		showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport"
+		beforeRebindTable="onBeforeRebindTable">
+
+		<table:Table id="Table" selectionMode="None" selectionBehavior="Row" > 
+			<table:columns>
+				<table:Column id="CompanyCode" width="6rem" visible="true" autoResizable="true" sortProperty="CompanyCode" filterProperty="CompanyCode">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty": "CompanyCode", "filterProperty": "CompanyCode"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>CompanyCode}"/>
+					</table:label>
+					<table:template>
+						<Label text="{CompanyCode}"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column id="FiscalYear" width="6rem" visible="true" autoResizable="true" sortProperty="FiscalYear" filterProperty="FiscalYear">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"FiscalYear", "leadingProperty":"FiscalYear", "sortProperty": "FiscalYear", "filterProperty": "FiscalYear"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>FiscalYear}"/>
+					</table:label>
+					<table:template>
+						<Label text="{FiscalYear}"/>
+					</table:template>
+				</table:Column>
+
+				<table:Column id="Period" width="6rem" visible="true" autoResizable="true" sortProperty="Period" filterProperty="Period">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"Period", "leadingProperty":"Period", "sortProperty": "Period", "filterProperty": "Period"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>Period}"/>
+					</table:label>
+					<table:template>
+						<Label text="{Period}"/>
+					</table:template>
+				</table:Column>
+
+				<table:Column id="ProfitCenter" width="6rem" visible="true" autoResizable="true" sortProperty="ProfitCenter" filterProperty="ProfitCenter">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty": "ProfitCenter", "filterProperty": "ProfitCenter"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>ProfitCenter}"/>
+					</table:label>
+					<table:template>
+						<Label text="{ProfitCenter}"/>
+					</table:template>
+				</table:Column>
+                
+				<table:Column id="BusinessPartner" width="8rem" visible="true" autoResizable="true" sortProperty="BusinessPartner" filterProperty="BusinessPartner">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"BusinessPartner", "leadingProperty":"BusinessPartner", "sortProperty": "BusinessPartner", "filterProperty": "BusinessPartner"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>BusinessPartner}"/>
+					</table:label>
+					<table:template>
+						<Label text="{BusinessPartner}"/>
+					</table:template>
+				</table:Column>
+
+				<table:Column id="PurchasingGroup" width="10rem" visible="true" autoResizable="true" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"PurchasingGroup", "leadingProperty":"PurchasingGroup", "sortProperty": "PurchasingGroup", "filterProperty": "PurchasingGroup"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>PurchasingGroup}"/>
+					</table:label>
+					<table:template>
+						<Label text="{PurchasingGroup}"/>
+					</table:template>
+				</table:Column>
+
+				<table:Column id="PreStockAmt" width="10rem" visible="true" autoResizable="true" sortProperty="PreStockAmt" filterProperty="PreStockAmt">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"PreStockAmt", "leadingProperty":"PreStockAmt", "sortProperty": "PreStockAmt", "filterProperty": "PreStockAmt"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>PreStockAmt}"/>
+					</table:label>
+					<table:template>
+						<Label text="{path:'PreStockAmt', formatter:'.formatter.formatFloat'}"/>
+					</table:template>
+				</table:Column>
+
+				<table:Column id="BegPurGrpAmt" width="10rem" visible="false" autoResizable="true" sortProperty="BegPurGrpAmt" filterProperty="BegPurGrpAmt">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"BegPurGrpAmt", "leadingProperty":"BegPurGrpAmt", "sortProperty": "BegPurGrpAmt", "filterProperty": "BegPurGrpAmt"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>BegPurGrpAmt}"/>
+					</table:label>
+					<table:template>
+						<Label text="{path:'BegPurGrpAmt', formatter:'.formatter.formatFloat'}"/>
+					</table:template>
+				</table:Column>
+
+				<table:Column id="BegChgMaterialAmt" width="10rem" visible="false" autoResizable="true" sortProperty="BegChgMaterialAmt" filterProperty="BegChgMaterialAmt">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"BegChgMaterialAmt", "leadingProperty":"BegChgMaterialAmt", "sortProperty": "BegChgMaterialAmt", "filterProperty": "BegChgMaterialAmt"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>BegChgMaterialAmt}"/>
+					</table:label>
+					<table:template>
+						<Label text="{path:'BegChgMaterialAmt', formatter:'.formatter.formatFloat'}"/>
+					</table:template>
+				</table:Column>
+
+				<table:Column id="BegCustomerRev" width="10rem" visible="false" autoResizable="true" sortProperty="BegCustomerRev" filterProperty="BegCustomerRev">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"BegCustomerRev", "leadingProperty":"BegCustomerRev", "sortProperty": "BegCustomerRev", "filterProperty": "BegCustomerRev"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>BegCustomerRev}"/>
+					</table:label>
+					<table:template>
+						<Label text="{path:'BegCustomerRev', formatter:'.formatter.formatFloat'}"/>
+					</table:template>
+				</table:Column>
+
+				<table:Column id="BegRev" width="10rem" visible="false" autoResizable="true" sortProperty="BegRev" filterProperty="BegRev">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"BegRev", "leadingProperty":"BegRev", "sortProperty": "BegRev", "filterProperty": "BegRev"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>BegRev}"/>
+					</table:label>
+					<table:template>
+						<Label text="{path:'BegRev', formatter:'.formatter.formatFloat'}"/>
+					</table:template>
+				</table:Column>
+            </table:columns>
+		</table:Table>
+	</smartTable:SmartTable>				
+</mvc:View>

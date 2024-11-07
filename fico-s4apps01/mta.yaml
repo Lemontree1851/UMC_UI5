@@ -78,23 +78,27 @@ modules:
     - artifacts:
       - ficozdaystocktrans.zip
       name: ficozdaystocktrans
-      target-path: resources/    
+      target-path: resources/
     - artifacts:
       - ficozinventoryaging.zip
       name: ficozinventoryaging
-      target-path: resources/   
+      target-path: resources/
     - artifacts:
       - ficozstockageupload.zip
       name: ficozstockageupload
-      target-path: resources/       
+      target-path: resources/
     - artifacts:
       - ficozbindglupload.zip
       name: ficozbindglupload
-      target-path: resources/    
+      target-path: resources/
     - artifacts:
       - ficozbdglaccountlist.zip
       name: ficozbdglaccountlist
-      target-path: resources/               
+      target-path: resources/
+    - artifacts:
+      - ficopaidpaylist.zip
+      name: ficopaidpaylist
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -206,6 +210,15 @@ modules:
 - name: ficozstockageupload
   type: html5
   path: zstockageupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficopaidpaylist
+  type: html5
+  path: paidpaylist
   build-parameters:
     build-result: dist
     builder: custom
