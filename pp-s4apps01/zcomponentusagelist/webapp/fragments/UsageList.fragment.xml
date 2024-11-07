@@ -10,7 +10,7 @@
         showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
         persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="NoDisplayNonProduct">
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="NoDisplayNonProduct,DisplayPurchasingInfo">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -103,7 +103,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"HighLevelMatValidityStartDate", "leadingProperty":"HighLevelMatValidityStartDate"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{HighLevelMatValidityStartDate}" wrapping="false" />
+                        <Text text="{path:'HighLevelMatValidityStartDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"  wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>BillOfMaterialItemNumber}" sortProperty="BillOfMaterialItemNumber" filterProperty="BillOfMaterialItemNumber">
@@ -152,6 +152,14 @@
                     </table:customData>
                     <table:template>
                         <Text text="{AlternativeItemPriority}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="18rem" label="{i18n>BOMSubItemInstallationPoint}" sortProperty="BOMSubItemInstallationPoint" filterProperty="BOMSubItemInstallationPoint">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BOMSubItemInstallationPoint", "leadingProperty":"BOMSubItemInstallationPoint"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BOMSubItemInstallationPoint}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>

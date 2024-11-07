@@ -23,8 +23,8 @@
                             <smartFilterBar:controlConfiguration>
                                 <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="BillOfMaterialComponent" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialComponent}"/>
-                                <smartFilterBar:ControlConfiguration index='30' key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
-                                <smartFilterBar:ControlConfiguration index='40' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="NoDisplayNonProduct" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>NoDisplayNonProduct}"/>
                                 <smartFilterBar:ControlConfiguration index='60' key="DisplayPurchasingInfo" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>DisplayPurchasingInfo}"/>
 
@@ -42,6 +42,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemUnit" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemStrategy" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemPriority" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMSubItemInstallationPoint" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
