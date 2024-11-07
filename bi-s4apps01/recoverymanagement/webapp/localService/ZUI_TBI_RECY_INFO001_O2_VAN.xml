@@ -336,6 +336,10 @@
                             <PropertyValue Property="Value" Path="CreatedBy"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created Name"/>
+                            <PropertyValue Property="Value" Path="CreatedName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Created On"/>
                             <PropertyValue Property="Value" Path="CreatedDate"/>
                         </Record>
@@ -397,6 +401,10 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Created By"/>
                             <PropertyValue Property="Value" Path="CreatedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Created Name"/>
+                            <PropertyValue Property="Value" Path="CreatedName"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="Created On"/>

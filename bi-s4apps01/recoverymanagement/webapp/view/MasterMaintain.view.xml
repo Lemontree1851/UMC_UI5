@@ -26,12 +26,13 @@
                 <smarttable:customToolbar>
                     <OverflowToolbar id="overFlowToolbar">
                         <ToolbarSpacer id="toolbarSpacer" />
-                        <Button id="btnCreate" text="{i18n>create}" enabled="true" type="Transparent" press="onCreate" /> 
+                        <Button id="btnCreate" text="{i18n>create}" enabled="true" type="Transparent" press="onCreate" />
+                        <Button id="btnEdit" text="{i18n>edit}" enabled="true" type="Transparent" press="onEdit" />  
                         <Button id="btnSave" text="{i18n>save}" enabled="true" type="Transparent" press="onSave" />
                     </OverflowToolbar>
                 </smarttable:customToolbar>
 
-                <table:Table id="tableMaster" threshold="20" fixedColumnCount="4" selectionMode="None"> 
+                <table:Table id="tableMaster" threshold="20" fixedColumnCount="4" selectionMode="Single"> 
                     <table:rowMode>
                         <rowmodes:Auto id="idAuto" minRowCount="15"></rowmodes:Auto>
                     </table:rowMode>
@@ -58,7 +59,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "additionalProperty":"CompanyName", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfCompany" value="{CompanyCode}" wrapping="false" editable="false"/>
+                                <Text id="sfCompany" text="{parts: [{path: 'CompanyCode'}, {path: 'CompanyName'}], formatter: '.formatter.formatCompanyCode'}" wrapping="false" />
                             </table:template>
                         </table:Column>
                         <table:Column id="idYear" width="6rem" label="{i18n>year}" sortProperty="RecoveryYear" filterProperty="RecoveryYear" visible="true">
@@ -74,7 +75,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "additionalProperty":"CustomerName", "leadingProperty":"Customer", "sortProperty":"Customer", "filterProperty": "Customer"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfCustomer" value="{Customer}" wrapping="false" editable="false"/>
+                                <Text id="sfCustomer" text="{parts: [{path: 'Customer'}, {path: 'CustomerName'}], formatter: '.formatter.formatCustomer'}" wrapping="false" />
                             </table:template>
                         </table:Column>
                         <table:Column id="idMachine" width="12rem" label="{i18n>machine}" sortProperty="Machine" filterProperty="Machine" visible="true">
@@ -87,15 +88,15 @@
                         </table:Column>
                         <table:Column id="idCreatedDate" width="10rem" label="{i18n>createdDate}" sortProperty="CreatedDate" filterProperty="CreatedDate" visible="true">
                             <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"CreatedDate", "leadingProperty":"CreatedDate", "sortProperty":"CreatedDate", "filterProperty": "CreatedDate"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CreatedDate", "leadingProperty":"CreatedDate", "sortProperty":"CreatedDate", "filterProperty": "CreatedDate", "type":"date"}'/>
                             </table:customData>
                             <table:template>
                                 <smartfield:SmartField id="sfCreatedDate" value="{CreatedDate}" wrapping="false" editable="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="idCreatedUser" width="10rem" label="{i18n>createdUser}" sortProperty="CreatedBy" filterProperty="CreatedBy" visible="true">
+                        <table:Column id="idCreatedUser" width="15rem" label="{i18n>createdUser}" sortProperty="CreatedBy" filterProperty="CreatedBy" visible="true">
                             <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"CreatedBy", "leadingProperty":"CreatedBy", "sortProperty":"CreatedBy", "filterProperty": "CreatedBy"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CreatedBy", "additionalProperty":"CreatedName", "leadingProperty":"CreatedBy", "sortProperty":"CreatedBy", "filterProperty": "CreatedBy"}'/>
                             </table:customData>
                             <table:template>
                                 <smartfield:SmartField id="sfCreatedUser" value="{CreatedBy}" wrapping="false" editable="false"/>

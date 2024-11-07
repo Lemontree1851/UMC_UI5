@@ -1,0 +1,39 @@
+<c:FragmentDefinition xmlns:smartField="sap.ui.comp.smartfield" xmlns:smartForm="sap.ui.comp.smartform" xmlns="sap.m" xmlns:c="sap.ui.core">
+    <Dialog id="idEditDialog" contentWidth="30%" title="{i18n>create}" afterClose="onDestroy">
+        <beginButton>
+            <Button id="btnSaveEdit" text="{i18n>save}" type="Emphasized" press="onSaveEditRecovery" />
+        </beginButton>
+
+        <content>
+ 		<smartForm:SmartForm id="editForm" editable="true">
+			<smartForm:Group id="editGroup">
+				<smartForm:GroupElement id="sfElRecoveryNumber_e">
+					<smartField:SmartField id="sfRecoveryNumber_e" value="{RecoveryManagementNumber}" />
+				</smartForm:GroupElement>			
+				<smartForm:GroupElement id="sfElCompanyCode_e">
+					<smartField:SmartField id="sfCreateCompanyCode_e" value="{CompanyCode}" />
+				</smartForm:GroupElement>
+				<smartForm:GroupElement id="sfElRecoveryCode_e">
+					<smartField:SmartField id="sfCreateRecoveryCode_e" value="{RecoveryYear}" />
+				</smartForm:GroupElement>
+				<smartForm:GroupElement id = "sfElRecoveryType_e">
+					<smartField:SmartField id="sfCreateRecoveryType_e" value="{RecoveryType}" />
+				</smartForm:GroupElement>
+				<smartForm:GroupElement id="sfElCustomer_e">
+					<smartField:SmartField id="sfCreateCustomer_e" value="{Customer}" />
+				</smartForm:GroupElement>  
+				<smartForm:GroupElement id = "sfElMachine_e">
+					<smartField:SmartField id="sfMachine_e" textLabel="{i18n>machine}" value="{Machine}" />
+				</smartForm:GroupElement>
+				<smartForm:GroupElement id="sfElRecoveryStatus_e">
+					<smartField:SmartField id="sfRecoveryStatus_e" textLabel="{i18n>recoverStatus}" value="{RecoveryStatus}" />
+				</smartForm:GroupElement> 
+			</smartForm:Group> 
+		</smartForm:SmartForm>
+        </content>
+
+        <endButton>
+            <Button id="btnCloseEdit" text="{i18n>cancel}" type="Transparent" press="onCloseEditDialog" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

@@ -15,6 +15,14 @@ sap.ui.define([
             return dRecoveryAlready / dRecoveryNeccessaryAmount;
         },
 
+        formatCompanyCode: function(sCompanyCode, sCompanyName){
+            return `${sCompanyName} (${sCompanyCode})`;
+        },
+
+        formatCustomer: function(sCustomer, sCustomerName){
+            return `${sCustomerName} (${sCustomer})`;
+        },
+
         formatRecoveryStatus: function(sRecoveryStatus, dRecoveryNeccessaryAmount, dRecoveryAlready){
             if(!sRecoveryStatus && !dRecoveryNeccessaryAmount && !dRecoveryAlready){
                 return 1;

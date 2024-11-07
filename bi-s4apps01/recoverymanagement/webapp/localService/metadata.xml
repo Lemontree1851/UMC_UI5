@@ -200,9 +200,9 @@
                 <Property Name="RecoveryManagementNumber" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Recycle No" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
                 <Property Name="RecoveryType" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:text="RecoverTypeDescription" sap:label="Recycle Type" sap:updatable="false" sap:value-list="fixed-values"/>
                 <Property Name="RecoveryNum" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Recycle Number"/>
-                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="CompanyName" sap:label="Company Code" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="CompanyName" sap:label="Company Code" sap:value-list="standard"/>
                 <Property Name="CompanyName" Type="Edm.String" MaxLength="25" sap:label="Company Name" sap:quickinfo="Name of Company Code or Company" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="CustomerName" sap:label="Customer" sap:quickinfo="Customer Number" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="CustomerName" sap:label="Customer" sap:quickinfo="Customer Number" sap:value-list="standard"/>
                 <Property Name="CustomerName" Type="Edm.String" MaxLength="40" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="RecoveryYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Fiscal Year" sap:updatable="false"/>
                 <Property Name="Machine" Type="Edm.String" MaxLength="50" sap:label="Machine"/>
@@ -211,7 +211,8 @@
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:creatable="false" sap:updatable="false" sap:semantics="currency-code"/>
                 <Property Name="RecoveryPercentage" Type="Edm.Decimal" Precision="6" Scale="2" sap:label="Recycle Progress (%)" sap:quickinfo="Recycle Progress" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="RecoveryStatus" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:text="RecoverStatusDescription" sap:value-list="fixed-values"/>
-                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="CreatedName" sap:label="Created By" sap:quickinfo="Created By User" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CreatedName" Type="Edm.String" MaxLength="80" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="CreatedDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Creation Date" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User" sap:creatable="false" sap:updatable="false"/>
@@ -239,7 +240,8 @@
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
                 <Property Name="RecoveryPercentage" Type="Edm.Decimal" Precision="6" Scale="2" sap:label="Recycle Progress (%)" sap:quickinfo="Recycle Progress"/>
                 <Property Name="RecoveryStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:text="RecoverStatusDescription" sap:label="Recycle Status" sap:heading="" sap:value-list="fixed-values"/>
-                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Name of Person Responsible for Creating the Object"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:text="CreatedName" sap:label="Created By" sap:quickinfo="Name of Person Responsible for Creating the Object"/>
+                <Property Name="CreatedName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="CreatedDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Record Creation Date"/>
                 <Property Name="RecoverStatusDescription" Type="Edm.String" MaxLength="60"/>
                 <Property Name="RecoverTypeDescription" Type="Edm.String" MaxLength="60"/>
@@ -260,7 +262,7 @@
                 <Property Name="BillingDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="Sales Document Item"/>
                 <Property Name="RecoveryManagementNumber" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="EAN/UPC" sap:quickinfo="International Article Number (EAN/UPC)" sap:value-list="standard"/>
                 <Property Name="DocumentCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Order Unit" sap:quickinfo="Purchase Order Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Creation Date of Purchasing Document"/>
                 <Property Name="CompanyCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="OrderQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Order Quantity" sap:quickinfo="Purchase Order Quantity"/>
@@ -377,7 +379,7 @@
                 <Property Name="ProductGroup" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:text="ProductGroupName" sap:label="Product Group"/>
                 <Property Name="ProductGroupName" Type="Edm.String" MaxLength="20" sap:label="Prod Grp Desc." sap:quickinfo="Product Group Description"/>
                 <Property Name="OrderQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Order Quantity" sap:quickinfo="Purchase Order Quantity"/>
-                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Order Unit" sap:quickinfo="Purchase Order Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="NetPriceAmount" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="CompanyCurrency" sap:variable-scale="true" sap:label="Amount in Loc. Curr." sap:quickinfo="Amount in local currency"/>
                 <Property Name="CompanyCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="RecoveryNecessaryAmount" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="CompanyCurrency" sap:variable-scale="true" sap:label="Amount in Loc. Curr." sap:quickinfo="Amount in local currency"/>
@@ -490,7 +492,7 @@
                 <Property Name="ProductGroup" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:text="ProductGroupName" sap:label="Product Group"/>
                 <Property Name="ProductGroupName" Type="Edm.String" MaxLength="20" sap:label="Prod Grp Desc." sap:quickinfo="Product Group Description"/>
                 <Property Name="OrderQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Order Quantity" sap:quickinfo="Purchase Order Quantity"/>
-                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Order Unit" sap:quickinfo="Purchase Order Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="NetPriceAmount" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="CompanyCurrency" sap:variable-scale="true" sap:label="Amount in Loc. Curr." sap:quickinfo="Amount in local currency"/>
                 <Property Name="CompanyCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="RecoveryNecessaryAmount" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="CompanyCurrency" sap:variable-scale="true" sap:label="Amount in Loc. Curr." sap:quickinfo="Amount in local currency"/>
@@ -1144,7 +1146,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__core.Immutable"/>
             </Annotations>
             <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -1468,7 +1469,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__core.Immutable"/>
             </Annotations>
             <Annotations Target="cds_zui_tbi_recy_info001_o4.ZC_BI003_REPORT_001Type/RecoveryStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">

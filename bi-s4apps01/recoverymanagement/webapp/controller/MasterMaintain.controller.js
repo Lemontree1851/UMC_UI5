@@ -87,6 +87,30 @@ sap.ui.define([
 
             },
 
+            onSaveEditRecovery: function (oEvent) { 
+
+                var oModel = this.getView().getModel();
+
+                if (!oModel || !oModel.hasPendingChanges()) {
+                    return;
+                }
+
+                var that = this;
+                oModel.submitChanges({
+                    success: function (oRes) {
+                        MessageToast.show(that._getI18nBundle().getText("dataSavedOK"));
+                        that._closeDialog(that, 'idEditDialog');
+                        that._rebind = true;
+                        oModel.refresh();
+                    },
+                    error: function (oErr) {
+                        const sMsgRoot = MessageToast.show(that._getI18nBundle().getText("dataSavedFailed"));
+                        MessageBox.error(`${sMsgRoot}: ${oErr.getText()}`);
+                    }
+                });
+
+            },
+
             onSave: function (oEvent) {
 
                 var oModel = this.getView().getModel();
@@ -120,6 +144,17 @@ sap.ui.define([
                 this._closeDialog(this, 'idCreateDialog');
             },
 
+            onCloseEditDialog: function (oEvent) {
+                var oModel = this.getView().getModel();
+               // var oContext = this.getView().byId("editForm").getBindingContext();
+                
+                if(oModel.hasPendingChanges()){
+                    oModel.resetChanges();
+                }
+
+                this._closeDialog(this, 'idEditDialog');
+            },
+
             onCreate: function (oEvent) {
                 //this.openDialog(this, 'recoverymanagement.view.Create');
                 var oModel = this.getView().getModel();
@@ -132,6 +167,31 @@ sap.ui.define([
 
                 this.loadFragment({
                     name: 'recoverymanagement.view.Create'
+                }).then(function (oDialog) {
+                    oDialog.setBindingContext(oBindingContext);
+                    oDialog.open();
+                });
+            },
+
+            onEdit: function (oEvent) {
+                var oTable = this.byId("tableMaster");
+
+                if(!oTable){
+                    return;
+                }
+
+                const aIndex = oTable.getSelectedIndices();
+
+                if(aIndex.length !== 1){
+                    MessageToast.show(this._getI18nBundle().getText("selectOneRecord"));
+                    return;
+                } 
+
+
+                var oBindingContext = oTable.getContextByIndex(aIndex[0]);
+
+                this.loadFragment({
+                    name: 'recoverymanagement.view.Edit'
                 }).then(function (oDialog) {
                     oDialog.setBindingContext(oBindingContext);
                     oDialog.open();
@@ -179,5 +239,12 @@ sap.ui.define([
                 oDialog.close();
                 oDialog.destroy();
             },
+
+            onDestroy : function(oEvent){
+                var oSource = oEvent.getSource();
+                if(oSource){
+                    oSource.destroy();
+                }
+            }
         });
     });
