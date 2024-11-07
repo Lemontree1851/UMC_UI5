@@ -41,7 +41,7 @@ sap.ui.define([
                     var item = {
                         "Status": "",
                         "Message": "",
-                        "Row": i - 11,
+                        "Row": i,
                         "DocumentDate": aSheetData[i]["DOCUMENTDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toLocaleDateString())) : new Date(this.formatDateString(aSheetData[i]["DOCUMENTDATE"])),
                         "PostingDate": aSheetData[i]["POSTINGDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toDateString())) : new Date(this.formatDateString(aSheetData[i]["POSTINGDATE"])),
                         "MaterialDocumentHeaderText": aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"] === undefined ? "" : aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"],
@@ -116,6 +116,10 @@ sap.ui.define([
                                     if (aExcelSet[index].Row === element.ROW) {
                                         aExcelSet[index].Status = element.STATUS;
                                         aExcelSet[index].Message = element.MESSAGE;
+                                        aExcelSet[index].DocumentDate = element.DOCUMENTDATE,
+                                        aExcelSet[index].PostingDate = element.POSTINGDATE,
+                                        aExcelSet[index].Plant = element.PLANT,
+                                        aExcelSet[index].StorageLocation = element.STORAGELOCATION
                                     }
                                 }
                                 if (element.STATUS === 'E') {
