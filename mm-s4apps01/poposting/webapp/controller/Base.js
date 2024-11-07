@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Controller, UIComponent, History, MessageBox, Fragment, Filter, FilterOperator) {
     "use strict";
 
-    return Controller.extend("pp.zbomupload.controller.Base", {
+    return Controller.extend("poposting.controller.Base", {
 
         /**
          * Convenience method for accessing the router in every controller of the application.
