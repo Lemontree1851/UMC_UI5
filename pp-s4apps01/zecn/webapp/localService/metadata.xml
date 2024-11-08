@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="com.sap.gateway.srvd.zui_ecn_o4.v0001" Alias="SAP__self">
+            <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
+            <EntityType Name="ECNType">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="MRPResponsible" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="BillOfMaterialVariantUsage" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="BillOfMaterialVariant" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ECNCreateAt" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ECNNo" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ECNValidFrom" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ECNText" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ECNReason" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Revison" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="HeadMat" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Plant1" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="AltBOMNo" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ItemNo" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Component" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Qty" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="AltGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="DiscontinuationGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="FollowUpGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Netweight" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="WeightUnit" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" Nullable="false" MaxLength="2"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="ECN" EntityType="com.sap.gateway.srvd.zui_ecn_o4.v0001.ECNType"/>
+            </EntityContainer>
+            <Annotations Target="SAP__self.ECNType/Plant">
+                <Annotation Term="SAP__common.Label" String="プラント"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plantstdvh/0001;ps='srvd-zui_ecn_o4-0001';va='com.sap.gateway.srvd.zui_ecn_o4.v0001.et-zr_ecn.plant'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Heading" String="Plnt"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Plant"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/MRPResponsible">
+                <Annotation Term="SAP__common.Label" String="MRP管理者"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Material">
+                <Annotation Term="SAP__common.Label" String="品目コード"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_bommaterialvh/0001;ps='srvd-zui_ecn_o4-0001';va='com.sap.gateway.srvd.zui_ecn_o4.v0001.et-zr_ecn.material'/$metadata</String>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BillOfMaterialVariantUsage">
+                <Annotation Term="SAP__common.Label" String="BOM用途"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BillOfMaterialVariant">
+                <Annotation Term="SAP__common.Label" String="代替BOM"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNCreateAt">
+                <Annotation Term="SAP__common.Label" String="ECN登録日付"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNNo">
+                <Annotation Term="SAP__common.Label" String="変更番号"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNValidFrom">
+                <Annotation Term="SAP__common.Label" String="ECN有効開始日付"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNText">
+                <Annotation Term="SAP__common.Label" String="変更番号テキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNReason">
+                <Annotation Term="SAP__common.Label" String="変更理由"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Revison">
+                <Annotation Term="SAP__common.Label" String="改訂レベル"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/HeadMat">
+                <Annotation Term="SAP__common.Label" String="対象品目"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Plant1">
+                <Annotation Term="SAP__common.Label" String="プラント"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/AltBOMNo">
+                <Annotation Term="SAP__common.Label" String="代替BOM"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ItemNo">
+                <Annotation Term="SAP__common.Label" String="明細番号"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Component">
+                <Annotation Term="SAP__common.Label" String="構成品目"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Qty">
+                <Annotation Term="SAP__common.Label" String="構成数量"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Unit">
+                <Annotation Term="SAP__common.Label" String="単位"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/AltGroup">
+                <Annotation Term="SAP__common.Label" String="代替明細グループ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/DiscontinuationGroup">
+                <Annotation Term="SAP__common.Label" String="打切りグループ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/FollowUpGroup">
+                <Annotation Term="SAP__common.Label" String="フォローアップグループ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Netweight">
+                <Annotation Term="SAP__common.Label" String="正味重量"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/WeightUnit">
+                <Annotation Term="SAP__common.Label" String="重要単位"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BOMSubItemInstallationPoint">
+                <Annotation Term="SAP__common.Label" String="設定ポイント"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType">
+                <Annotation Term="SAP__common.Label" String="ECNのレポート"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="ECNのレポート"/>
+                        <PropertyValue Property="TypeNamePlural" String="ECNのレポート"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="プラント"/>
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="MRP管理者"/>
+                            <PropertyValue Property="Value" Path="MRPResponsible"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="品目"/>
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="BOM用途"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialVariantUsage"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="代替BOM"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialVariant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="設定ポイント"/>
+                            <PropertyValue Property="Value" Path="BOMSubItemInstallationPoint"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="重要単位"/>
+                            <PropertyValue Property="Value" Path="WeightUnit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="正味重量"/>
+                            <PropertyValue Property="Value" Path="Netweight"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="フォローアップグループ"/>
+                            <PropertyValue Property="Value" Path="FollowUpGroup"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="打切りグループ"/>
+                            <PropertyValue Property="Value" Path="DiscontinuationGroup"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="代替明細グループ"/>
+                            <PropertyValue Property="Value" Path="AltGroup"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="単位"/>
+                            <PropertyValue Property="Value" Path="Unit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="構成数量"/>
+                            <PropertyValue Property="Value" Path="Qty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="構成品目"/>
+                            <PropertyValue Property="Value" Path="Component"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="明細番号"/>
+                            <PropertyValue Property="Value" Path="ItemNo"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="代替BOM"/>
+                            <PropertyValue Property="Value" Path="AltBOMNo"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="プラント"/>
+                            <PropertyValue Property="Value" Path="Plant1"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="対象品目"/>
+                            <PropertyValue Property="Value" Path="HeadMat"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="改訂レベル"/>
+                            <PropertyValue Property="Value" Path="Revison"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="変更理由"/>
+                            <PropertyValue Property="Value" Path="ECNReason"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="変更番号テキスト"/>
+                            <PropertyValue Property="Value" Path="ECNText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="ECN有効開始日付"/>
+                            <PropertyValue Property="Value" Path="ECNValidFrom"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="変更番号"/>
+                            <PropertyValue Property="Value" Path="ECNNo"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="ECN登録日付"/>
+                            <PropertyValue Property="Value" Path="ECNCreateAt"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>MRPResponsible</PropertyPath>
+                        <PropertyPath>Material</PropertyPath>
+                        <PropertyPath>BillOfMaterialVariantUsage</PropertyPath>
+                        <PropertyPath>BillOfMaterialVariant</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ECN">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Plant"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="MRPResponsible"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BillOfMaterialVariantUsage"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BillOfMaterialVariant"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>Plant</PropertyPath>
+                                <PropertyPath>Material</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

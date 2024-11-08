@@ -127,6 +127,10 @@ modules:
       - ppzinventoryrequirement.zip
       name: ppzinventoryrequirement
       target-path: resources/
+    - artifacts:
+      - zecnzecn.zip
+      name: zecnzecn
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -314,6 +318,16 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: zecnzecn
+  type: html5
+  path: zecn
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
