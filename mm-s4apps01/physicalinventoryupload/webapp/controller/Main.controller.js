@@ -232,7 +232,7 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, MessageToast, Spreadshe
 					}
 				},
 				dataSource: aExcelSet, 
-				fileName: "Export_" + this.getResourceBundle().getText("title") + formatter.formatDate(new Date()) + formatter.formatTime(new Date()) + ".xlsx" // 文件名，需要加上后缀
+				fileName: this.getResourceBundle().getText("title") +"_" + formatter.formatDate(new Date()) + formatter.formatTime(new Date()) + ".xlsx" // 文件名，需要加上后缀
             };
 			
 			// 导出excel

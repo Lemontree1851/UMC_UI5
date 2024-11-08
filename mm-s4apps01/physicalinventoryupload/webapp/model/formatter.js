@@ -28,7 +28,7 @@ sap.ui.define([
         formatDate: function (value) {
             if (value) {
                 var oDateFormat = DateFormat.getTimeInstance({
-                    pattern: "yyyy/MM/dd"
+                    pattern: "yyyyMMdd"
                 });
                 return oDateFormat.format(new Date(value));
             }
@@ -37,18 +37,18 @@ sap.ui.define([
         odataDate: function (sDate) {
 			var oDate = new Date(sDate);
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-				pattern: "yyyy-MM-dd"
+				pattern: "yyyyMMdd"
 			});
 			var sFormatDate = oDateFormat.format(oDate, false);
 			return new Date(sFormatDate);
 		},
-        // format Time
+        // 格式化时间
         formatTime: function (value) {
             if (value) {
                 var oTimeFormat = DateFormat.getTimeInstance({
-                    pattern: "HH:mm:ss"
+                    pattern: "HHmmss"  // 自定义时间格式
                 });
-                return oTimeFormat.format(new Date(value.ms));
+                return oTimeFormat.format(new Date(value.ms || value)); // 确保传入值包含有效时间信息
             }
             return value;
         },
