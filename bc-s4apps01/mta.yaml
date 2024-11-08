@@ -63,6 +63,10 @@ modules:
       - bczauthorityrolelist.zip
       name: bczauthorityrolelist
       target-path: resources/
+    - artifacts:
+      - bczwfapprovalconfigmanage.zip
+      name: bczwfapprovalconfigmanage
+      target-path: resources/
 - name: bczdtimpconf
   type: html5
   path: zdtimpconf
@@ -102,6 +106,15 @@ modules:
 - name: bczauthorityrolelist
   type: html5
   path: zauthorityrolelist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bczwfapprovalconfigmanage
+  type: html5
+  path: zwfapprovalconfigmanage
   build-parameters:
     build-result: dist
     builder: custom
