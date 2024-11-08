@@ -16,7 +16,16 @@ sap.ui.define([
 
         // Create local Model
         createLocalModel: function () {
-            var oModel = new JSONModel({});
+            var oModel = new JSONModel({
+                filter: {
+                    DisplayUnit: "D",      // 日単位
+                    DisplayDimension: "H", // 横表示
+                    ShowInformation: "X",  // はい
+                    ShowDetailLines: "X",  // はい
+                    ShowDEMAND: "X"        // はい
+                },
+                resultSet: []
+            });
             return oModel;
         }
     };

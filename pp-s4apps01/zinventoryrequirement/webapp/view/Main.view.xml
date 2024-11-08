@@ -1,7 +1,95 @@
-<mvc:View controllerName="pp.zinventoryrequirement.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+<mvc:View controllerName="pp.zinventoryrequirement.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="InventoryRequirementSVM" showShare="true" showExecuteOnSelection="true" entitySet="ZC_InventoryRequirement"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_InventoryRequirement" useToolbar="false" smartVariant="__SVM01" persistencyKey="InventoryRequirementSFB" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="MRPArea" visibleInAdvancedArea="true" label="{i18n>MRPArea}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="MRPController" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="ProductGroup" visibleInAdvancedArea="true" label="{i18n>ProductGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="ProductType" visibleInAdvancedArea="true" label="{i18n>ProductType}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="Product" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="DisplayUnit" visibleInAdvancedArea="true" label="{i18n>DisplayUnit}">
+                                    <smartFilterBar:customControl>
+                                        <Select forceSelection="true" selectedKey="{local>/filter/DisplayUnit}">
+                                            <core:Item key="D" text="{i18n>UnitDay}"/>
+                                            <core:Item key="W" text="{i18n>UnitWeek}"/>
+                                            <core:Item key="M" text="{i18n>UnitMonth}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='110' key="PeriodEndDate" visibleInAdvancedArea="true" label="{i18n>PeriodEndDate}"/>
+                                <smartFilterBar:ControlConfiguration index='120' key="DisplayDimension" visibleInAdvancedArea="true" label="{i18n>DisplayDimension}">
+                                    <smartFilterBar:customControl>
+                                        <Select forceSelection="true" selectedKey="{local>/filter/DisplayDimension}">
+                                            <core:Item key="H" text="{i18n>Horizontal}"/>
+                                            <core:Item key="V" text="{i18n>Vertical}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='130' key="SelectionRule" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>SelectionRule}">
+                                    <smartFilterBar:customControl>
+                                        <Select items="{ path: '/ZC_TBC1001', filters : { path: 'ZID', operator: 'EQ', value1: 'ZPP018' }, sorter:{ path: 'Zvalue1' } }" forceSelection="true" selectedKey="{local>/filter/SelectionRule}" showSecondaryValues="true" columnRatio="1:3">
+                                            <core:ListItem key="{Zvalue1}" text="{Zvalue1}" additionalText="{Zvalue2}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='140' key="ShowInformation" visibleInAdvancedArea="true" label="{i18n>ShowInformation}">
+                                    <smartFilterBar:customControl>
+                                        <Select forceSelection="true" selectedKey="{local>/filter/ShowInformation}">
+                                            <core:Item key="X" text="{i18n>Yes}"/>
+                                            <core:Item key="" text="{i18n>No}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='150' key="ShowDetailLines" visibleInAdvancedArea="true" label="{i18n>ShowDetailLines}">
+                                    <smartFilterBar:customControl>
+                                        <Select forceSelection="true" selectedKey="{local>/filter/ShowDetailLines}">
+                                            <core:Item key="X" text="{i18n>Yes}"/>
+                                            <core:Item key="" text="{i18n>No}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='160' key="ShowDEMAND" visibleInAdvancedArea="true" label="{i18n>ShowDEMAND}">
+                                    <smartFilterBar:customControl>
+                                        <Select forceSelection="true" selectedKey="{local>/filter/ShowDEMAND}">
+                                            <core:Item key="X" text="{i18n>Yes}"/>
+                                            <core:Item key="" text="{i18n>No}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="UUID" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <!-- <FlexBox fitContainer="true"> -->
+                <core:Fragment fragmentName="pp.zinventoryrequirement.fragments.List" type="XML"/>
+            <!-- </FlexBox> -->
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>
