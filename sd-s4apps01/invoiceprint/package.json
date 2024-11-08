@@ -19,7 +19,7 @@
     "mbt": "^1.2.27"
   },
   "scripts": {
-    "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#sdinvoiceprint-tile\"",
+    "start": "fiori run --open \"test/flpSandbox.html?sap-language=ja&sap-ui-xx-viewCache=false#sdinvoiceprint-tile\"",
     "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#sdinvoiceprint-tile\"",
     "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
     "start-mock": "fiori run --config ./ui5-mock.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#sdinvoiceprint-tile\"",

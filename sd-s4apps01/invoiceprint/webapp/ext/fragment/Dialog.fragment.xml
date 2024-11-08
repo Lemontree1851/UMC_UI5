@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
+	<Dialog id="AnswerDialog" title="{i18n>DialogTitle}" contentWidth="18rem" contentHeight="5rem" draggable="true">
+		<FlexBox id="_IDGenFlexBox" direction="Column" alignItems="Center" justifyContent="Center" alignContent="Center">
+			<HBox id="_IDGenHBox1" justifyContent="Center">
+				<VBox id="_IDGenVBox">
+					<Label id="_IDGenLabel" text="{i18n>printDate}:"/>
+					<DatePicker id="idPrintDate" width="12rem" displayFormat="yyy/MM/dd" valueFormat="yyy/MM/dd"/>
+				</VBox>
+			</HBox>
+		</FlexBox>
+		<!-- <beginButton>
+			<Button id="_IDGenButton" text="{i18n>bConfirm}" press="onDialogConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button id="_IDGenButton1" text="{i18n>bCancel}" press="onDialogClose"/>
+		</endButton> -->
+	</Dialog>
+</core:FragmentDefinition>

@@ -148,7 +148,10 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "GridTable",
-                    "selectionMode": "Multi"
+                    "selectionMode": "Multi",
+                    "quickVariantSelection": {
+                      "showCounts": true
+                    }
                   },
                   "actions": {
                     "ListReportExt": {
@@ -172,7 +175,14 @@
                       "requiresSelection": true,
                       "text": "{i18n>delete}"
                     }
-
+                  },
+                  "columns": {
+                    "DataField::ShippingPoint": {
+                      "width": "7rem"
+                    },
+                    "DataField::OverallSDProcessStatus": {
+                      "width": "8rem"
+                    }
                   }
                 }
               }
@@ -191,3 +201,4 @@
     "service": "sd-s4apps01"
   }
 }
+

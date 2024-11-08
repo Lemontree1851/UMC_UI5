@@ -3,7 +3,10 @@ sap.ui.define([
     "sap/m/BusyDialog",
     "./messages",
     "../../lib/xml-js",
-], function(MessageToast, BusyDialog, messages, xml) {
+    "../../lib/decimal",
+    "sap/ui/core/Fragment",
+	"sap/m/Dialog"
+], function(MessageToast, BusyDialog, messages, xml, decimal, Fragment, Dialog) {
     'use strict';
     var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel;
     return {
@@ -15,11 +18,13 @@ sap.ui.define([
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
 
-            // 获取选择的行项目
-            if (this.getSelectedContexts) {
-                var aSelectedContexts = this.getSelectedContexts();
-            }
-            _oFunctions.onCustomAction(aSelectedContexts,"printInvoice");
+            _oFunctions.onDialogPress(this.routing,this,"printInvoice");
+
+            // // 获取选择的行项目
+            // if (this.getSelectedContexts) {
+            //     var aSelectedContexts = this.getSelectedContexts();
+            // }
+            // _oFunctions.onCustomAction(aSelectedContexts,"printInvoice");
 
         },
 
@@ -27,12 +32,12 @@ sap.ui.define([
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
-
-            // 获取选择的行项目
-            if (this.getSelectedContexts) {
-                var aSelectedContexts = this.getSelectedContexts();
-            }
-            _oFunctions.onCustomAction(aSelectedContexts,"reprintInvoice");
+            _oFunctions.onDialogPress(this.routing,this,"reprintInvoice");
+            // // 获取选择的行项目
+            // if (this.getSelectedContexts) {
+            //     var aSelectedContexts = this.getSelectedContexts();
+            // }
+            // _oFunctions.onCustomAction(aSelectedContexts,"reprintInvoice");
         },
 
         onDelete: function () {
@@ -47,7 +52,7 @@ sap.ui.define([
             _oFunctions.onCustomAction(aSelectedContexts,"deleteInovice");
         },
 
-        onCustomAction: function (aSelectedContexts,sActionName) {
+        onCustomAction: function (aSelectedContexts,sActionName, sPrintDate) {
             var aSelectedItem = [];
             var aPromise = [];
             var aItems = [];
@@ -69,7 +74,7 @@ sap.ui.define([
             Promise.all(aPromise).then(function (records) {
                 records.forEach(record => {
                     if (sActionName !== "deleteInovice" ) {
-                        var pdfContent = _oFunctions.porcessPrintContent(record);
+                        var pdfContent = _oFunctions.porcessPrintContent(record, sPrintDate);
                         _oFunctions.getPDF(pdfContent);
                     } else {
                         messages.showSuccess(_ResourceBundle.getText("msgDeleteSuccessed"));
@@ -100,7 +105,7 @@ sap.ui.define([
         },
 
         //接收到从action返回的数据后，处理成PDF需要的
-        porcessPrintContent: function (aSelectedItem) {
+        porcessPrintContent: function (aSelectedItem, sPrintDate) {
             // 检查选择的数据打印的维度是否一致，如果不一致则报错
             if (this.checkInconsistencies(aSelectedItem)) {
                 messages.showError(_ResourceBundle.getText("msgInconsistencies"));
@@ -112,8 +117,22 @@ sap.ui.define([
                     results: []
                 }
             };
+            //合计相关金额字段
+            var iTotalNetAmount10 = 0,
+                iTotalNetAmountTax10 = 0,
+                iTotalNetAmountIncludeTax10 = 0,
+                iTotalNetAmountExclude = 0;
+            aSelectedItem.forEach(item=>{
+                iTotalNetAmount10 = Decimal.add(iTotalNetAmount10, item.NetAmount10);
+                iTotalNetAmountExclude = Decimal.add(iTotalNetAmountExclude, item.NetAmountExclude);
+            });
+            iTotalNetAmount10 = iTotalNetAmount10.toFixed(0);
+            iTotalNetAmountTax10 = Decimal.mul(iTotalNetAmount10, 0.1).toFixed(0);
+            iTotalNetAmountIncludeTax10 = Decimal.add(iTotalNetAmount10, iTotalNetAmountTax10);
+            iTotalNetAmountExclude = iTotalNetAmountExclude.toFixed(0);
             // 请求书抬头
             var InvoicePrint = {
+                PrintDate: sPrintDate,
                 InvoiceNo: aSelectedItem[0].InvoiceNo,
                 TheCompanyPostalCode: aSelectedItem[0].TheCompanyPostalCode,
                 TheCompanyName: aSelectedItem[0].TheCompanyName,
@@ -125,13 +144,13 @@ sap.ui.define([
                 CustomerName: aSelectedItem[0].CustomerName,
                 TelephoneNumber1: aSelectedItem[0].TelephoneNumber1,
                 FaxNumber: aSelectedItem[0].FaxNumber,
-                TotalNetAmount: aSelectedItem[0].TotalNetAmount,
+                TotalNetAmount: Decimal(aSelectedItem[0].TotalNetAmount).toFixed(0),
                 CompanyCodeParameterValue: aSelectedItem[0].CompanyCodeParameterValue,
                 RemitAddress: aSelectedItem[0].RemitAddress,
-                NetAmount10: aSelectedItem[0].NetAmount10,
-                NetAmountTax10: aSelectedItem[0].NetAmountTax10,
-                NetAmountIncludeTax10: aSelectedItem[0].NetAmountIncludeTax10,
-                NetAmountExclude: aSelectedItem[0].NetAmountExclude,
+                NetAmount10: iTotalNetAmount10.valueOf(),
+                NetAmountTax10: iTotalNetAmountTax10.valueOf(),
+                NetAmountIncludeTax10: iTotalNetAmountIncludeTax10.valueOf(),
+                NetAmountExclude: iTotalNetAmountExclude.valueOf(),
                 to_Item:{
                     results:[]
                 }
@@ -230,5 +249,63 @@ sap.ui.define([
         
             return isInconsistencies; // 所有对象都一致，返回 false
         },
+        onDialogPress: function (oRouting,that,sAction) {			
+            if (!this.Dialog) {
+                var oView = oRouting.getView();
+                if (!this.Dialog) {
+                    this.Dialog = Fragment.load({
+                        id: oView.getId(),
+                        name: "sd.invoiceprint.ext.fragment.Dialog",
+                        controller: that
+                    }).then(function (oDialog){
+                        oRouting.getView().addDependent(oDialog);
+                        oDialog.setBeginButton(new sap.m.Button({
+                            text: "{i18n>bConfirm}",
+                            press: function () {
+                                var sPrintDate = oRouting.getView().byId("idPrintDate").getValue();
+                                if (sPrintDate === ''){
+                                    const currentDate = new Date();
+                                    sPrintDate = currentDate.toLocaleDateString('zh-CN', {
+                                        year: 'numeric',
+                                        month: '2-digit',
+                                        day: '2-digit'
+                                    }).replace(/\//g, '/'); // 将年月日间的分隔符改为"/"
+                                }
+                                // 获取选择的行项目
+                                if (that.getSelectedContexts) {
+                                    var aSelectedContexts = that.getSelectedContexts();
+                                }
+                                _oFunctions.onCustomAction(aSelectedContexts,sAction,sPrintDate);
+                                oDialog.close();
+                            }
+                        }));
+                        oDialog.setEndButton(new sap.m.Button({
+                            text: "{i18n>bCancel}",
+                            press: function () {
+                                oDialog.close();
+                            }
+                        }));
+
+                        return oDialog;
+                    }.bind(this));
+                }
+            }
+            this.Dialog.then(function(oDialog) {
+                oDialog.open();
+            }.bind(this));
+        },
+    
+        onDialogClose: function(){
+            this.byId("AnswerDialog").close();
+        },
+
+        onDialogConfirm: function() {
+            // 获取选择的行项目
+            if (this.getSelectedContexts) {
+                var aSelectedContexts = this.getSelectedContexts();
+            }
+            this.onCustomAction(aSelectedContexts,"printInvoice");
+        },
+
     };
 });

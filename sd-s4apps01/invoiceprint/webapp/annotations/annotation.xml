@@ -26,7 +26,7 @@
                             <PropertyValue Property="Value" Path="BillToParty"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="SoldToParty"/>
+                            <PropertyValue Property="Value" Path="PayerParty"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ShippingPoint"/>
@@ -36,12 +36,14 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="OverallSDProcessStatus"/>
+                            <PropertyValue Property="Label" String="{@i18n>overallStatus}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="BillingDocumentType"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Product"/>
+                            <PropertyValue Property="Label" String="{@i18n>product}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CreatedByUser"/>
@@ -51,6 +53,10 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SalesDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="InvoiceNo"/>
+                            <PropertyValue Property="Label" String="{@i18n>invoiceno}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="BillingQuantity"/>
@@ -67,6 +73,10 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="TaxRate"/>
                             <PropertyValue Property="Label" String="{@i18n>taxRate}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MaterialByCustomer"/>
+                            <PropertyValue Property="Label" String="{@i18n>customerMaterial}"/>
                         </Record>
                     </Collection>
                 </Annotation>

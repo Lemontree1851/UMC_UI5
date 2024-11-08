@@ -63,6 +63,7 @@
                 <Property Name="BillingDocumentItemText" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="SoldToParty" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="PayerParty" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="BillToParty" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="ShippingPoint" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="SalesOffice" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -87,23 +88,56 @@
                 <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="2"/>
                 <Property Name="ConditionQuantity" Type="Edm.Decimal" Nullable="false" Precision="5"/>
                 <Property Name="ConditionQuantityUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="TaxRate" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="9"/>
+                <Property Name="TaxRate" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="NetAmount10" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
                 <Property Name="NetAmountTax10" Type="Edm.Decimal" Nullable="false" Precision="17"/>
                 <Property Name="NetAmountIncludeTax10" Type="Edm.Decimal" Nullable="false" Precision="19" Scale="1"/>
                 <Property Name="NetAmountExclude" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
                 <Property Name="InvoiceNo" Type="Edm.String" Nullable="false" MaxLength="11"/>
-                <Property Name="TheCompanyPostalCode" Type="Edm.String" Nullable="false" MaxLength="60"/>
-                <Property Name="TheCompanyCityName1" Type="Edm.String" Nullable="false" MaxLength="60"/>
-                <Property Name="TheCompanyCityName2" Type="Edm.String" Nullable="false" MaxLength="60"/>
-                <Property Name="TheCompanyTelNumber" Type="Edm.String" Nullable="false" MaxLength="60"/>
-                <Property Name="TheCompanyFaxNumber" Type="Edm.String" Nullable="false" MaxLength="60"/>
-                <Property Name="TheCompanyName" Type="Edm.String" Nullable="false" MaxLength="60"/>
+                <Property Name="TheCompanyPostalCode" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyCityName1" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyCityName2" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyTelNumber" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyFaxNumber" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyName" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="RemitAddress" Type="Edm.String" Nullable="false"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_invoicereport_o4.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
+            <ComplexType Name="SAP__Message">
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+                <Property Name="message" Type="Edm.String" Nullable="false"/>
+                <Property Name="target" Type="Edm.String"/>
+                <Property Name="additionalTargets" Type="Collection(Edm.String)" Nullable="false"/>
+                <Property Name="transition" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false"/>
+                <Property Name="longtextUrl" Type="Edm.String"/>
+            </ComplexType>
+            <Action Name="reprintInvoice" EntitySetPath="_it" IsBound="true">
+                <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_invoicereport_o4.v0001.InvoiceReportType)" Nullable="false"/>
+                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
+                <ReturnType Type="Collection(com.sap.gateway.srvd.zui_invoicereport_o4.v0001.InvoiceReportType)" Nullable="false"/>
+            </Action>
+            <Action Name="deleteInovice" EntitySetPath="_it" IsBound="true">
+                <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_invoicereport_o4.v0001.InvoiceReportType)" Nullable="false"/>
+                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
+                <ReturnType Type="Collection(com.sap.gateway.srvd.zui_invoicereport_o4.v0001.InvoiceReportType)" Nullable="false"/>
+            </Action>
+            <Action Name="printInvoice" EntitySetPath="_it" IsBound="true">
+                <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_invoicereport_o4.v0001.InvoiceReportType)" Nullable="false"/>
+                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
+                <ReturnType Type="Collection(com.sap.gateway.srvd.zui_invoicereport_o4.v0001.InvoiceReportType)" Nullable="false"/>
+            </Action>
             <EntityContainer Name="Container">
                 <EntitySet Name="InvoiceReport" EntityType="com.sap.gateway.srvd.zui_invoicereport_o4.v0001.InvoiceReportType"/>
             </EntityContainer>
             <Annotations Target="SAP__self.InvoiceReportType/BillingDocument">
+                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
@@ -115,6 +149,7 @@
             </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/BillingDocumentItem">
                 <Annotation Term="SAP__common.Text" Path="BillingDocumentItemText"/>
+                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
                 <Annotation Term="SAP__common.Label" String="Item"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Billing Item"/>
@@ -138,6 +173,15 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Sales Organization"/>
                 <Annotation Term="SAP__common.Heading" String="SOrg."/>
+            </Annotations>
+            <Annotations Target="SAP__self.InvoiceReportType/PayerParty">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_customer_vh/0001;ps='srvd-zui_invoicereport_o4-0001';va='com.sap.gateway.srvd.zui_invoicereport_o4.v0001.et-zc_invoicereport.payerparty'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Label" String="Payer"/>
             </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/BillToParty">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -274,6 +318,7 @@
                         <PropertyPath>SalesDocument</PropertyPath>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/NetAmount">
                 <Annotation Term="SAP__measures.ISOCurrency" Path="TransactionCurrency"/>
@@ -345,10 +390,88 @@
                 <Annotation Term="SAP__common.Label" String="Net Value"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Net Value of Billing item in Document Currency"/>
             </Annotations>
+            <Annotations Target="SAP__self.InvoiceReportType/TheCompanyPostalCode">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.InvoiceReportType/TheCompanyCityName1">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.InvoiceReportType/TheCompanyCityName2">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.InvoiceReportType/TheCompanyTelNumber">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.InvoiceReportType/TheCompanyFaxNumber">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.InvoiceReportType/TheCompanyName">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.InvoiceReportType/RemitAddress">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.reprintInvoice(Collection(SAP__self.InvoiceReportType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.reprintInvoice(Collection(SAP__self.InvoiceReportType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
+            <Annotations Target="SAP__self.deleteInovice(Collection(SAP__self.InvoiceReportType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.deleteInovice(Collection(SAP__self.InvoiceReportType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
+            <Annotations Target="SAP__self.printInvoice(Collection(SAP__self.InvoiceReportType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.printInvoice(Collection(SAP__self.InvoiceReportType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
             <Annotations Target="SAP__self.Container/InvoiceReport">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
                     <Record>
                         <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="RemitAddress"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>RemitAddress</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>RemitAddress</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.InsertRestrictions">
@@ -373,38 +496,6 @@
                 </Annotation>
                 <Annotation Term="SAP__core.OptimisticConcurrency">
                     <Collection/>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.FilterRestrictions">
-                    <Record>
-                        <PropertyValue Property="FilterExpressionRestrictions">
-                            <Collection>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="BillingQuantity"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="NetAmount"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="TotalNetAmount"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="ConditionQuantity"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="NetAmount10"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="NetAmountExclude"/>
-                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.Container">
@@ -506,10 +597,6 @@
             <Annotations Target="SAP__self.InvoiceReportType/TelephoneNumber1">
                 <Annotation Term="SAP__common.Label" String="Telephone 1"/>
                 <Annotation Term="SAP__common.QuickInfo" String="First telephone number"/>
-            </Annotations>
-            <Annotations Target="SAP__self.InvoiceReportType/TaxRate">
-                <Annotation Term="SAP__common.Label" String="Amount"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Condition Amount or Percentage"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
