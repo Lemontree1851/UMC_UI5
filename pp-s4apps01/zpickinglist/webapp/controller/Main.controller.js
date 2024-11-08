@@ -437,9 +437,9 @@ sap.ui.define([
                     var sType, sTextAlign = "Begin";;
                     switch (aTableCol[i].mBindingInfos.label.parts[0].path) {
                         //  Date
-                        case "RequisitionDate":
-                            sType = sap.ui.export.EdmType.Date;
-                            break;
+                        // case "RequisitionDate":
+                        //     sType = sap.ui.export.EdmType.Date;
+                        //     break;
                         //  Number 分隔符 没有小数位
                         case "TotalRequiredQuantity":
                         case "TotalShortFallQuantity":
