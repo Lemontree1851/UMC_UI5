@@ -83,6 +83,11 @@ modules:
       - poposting.zip
       name: poposting
       target-path: resources/
+    - artifacts:  
+      - mmpurinfomasterlist.zip
+      name: mmpurinfomasterlist
+      target-path: resources/
+     
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -167,6 +172,15 @@ modules:
 - name: poposting
   type: html5
   path: poposting
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpurinfomasterlist
+  type: html5
+  path: purinfomasterlist
   build-parameters:
     build-result: dist
     builder: custom
