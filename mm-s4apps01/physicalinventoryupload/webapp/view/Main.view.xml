@@ -7,7 +7,7 @@
     <Page id="_IDGenPage">
         <content>
             <Panel id="_IDGenPanel" expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
-                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_PURINFORECORD_CREATE' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration',filters : { path : 'Object', operator : 'EQ', value1 : 'ZDOWNLOAD_INVENTORY' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
                     <upload:items>
                         <upload:UploadSetItem id="_IDGenUploadSetItem" fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
                     </upload:items>

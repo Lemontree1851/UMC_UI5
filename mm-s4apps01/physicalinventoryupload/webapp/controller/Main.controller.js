@@ -41,8 +41,8 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, MessageToast, Spreadshe
                 });
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
-                // read valid data starting from line 2
-                for (var i = 1; i < aSheetData.length; i++) {
+                // read valid data starting from line 3
+                for (var i = 2; i < aSheetData.length; i++) {
                     var item = {
                         "Status": "",
                         "Message": "",
@@ -232,7 +232,7 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, MessageToast, Spreadshe
 					}
 				},
 				dataSource: aExcelSet, 
-				fileName: this.getResourceBundle().getText("title") + formatter.formatDate(new Date()) + ".xlsx" // 文件名，需要加上后缀
+				fileName: "Export_" + this.getResourceBundle().getText("title") + formatter.formatDate(new Date()) + formatter.formatTime(new Date()) + ".xlsx" // 文件名，需要加上后缀
             };
 			
 			// 导出excel
