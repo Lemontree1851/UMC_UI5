@@ -103,6 +103,19 @@
 					</table:template>
 				</table:Column>
                 
+				<table:Column id="ProfitCenterName" width="6rem" visible="true" autoResizable="true" sortProperty="ProfitCenterName" filterProperty="ProfitCenterName">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"ProfitCenterName", "leadingProperty":"ProfitCenterName", "sortProperty": "ProfitCenterName", "filterProperty": "ProfitCenterName"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>ProfitCenterName}"/>
+					</table:label>
+					<table:template>
+						<Label text="{ProfitCenterName}"/>
+					</table:template>
+				</table:Column>
+
 				<table:Column id="BusinessPartner" width="8rem" visible="true" autoResizable="true" sortProperty="BusinessPartner" filterProperty="BusinessPartner">
 					<table:customData>
 						<core:CustomData key="p13nData"
@@ -116,6 +129,19 @@
 					</table:template>
 				</table:Column>
 
+				<table:Column id="BusinessPartnerName" width="8rem" visible="true" autoResizable="true" sortProperty="BusinessPartnerName" filterProperty="BusinessPartnerName">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"BusinessPartnerName", "leadingProperty":"BusinessPartnerName", "sortProperty": "BusinessPartnerName", "filterProperty": "BusinessPartnerName"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>BusinessPartnerName}"/>
+					</table:label>
+					<table:template>
+						<Label text="{BusinessPartnerName}"/>
+					</table:template>
+				</table:Column>
+
 				<table:Column id="PurchasingGroup" width="10rem" visible="true" autoResizable="true" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup">
 					<table:customData>
 						<core:CustomData key="p13nData"
@@ -126,6 +152,19 @@
 					</table:label>
 					<table:template>
 						<Label text="{PurchasingGroup}"/>
+					</table:template>
+				</table:Column>
+
+				<table:Column id="PurchasingGroupName" width="10rem" visible="true" autoResizable="true" sortProperty="PurchasingGroupName" filterProperty="PurchasingGroupName">
+					<table:customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey":"PurchasingGroupName", "leadingProperty":"PurchasingGroupName", "sortProperty": "PurchasingGroupName", "filterProperty": "PurchasingGroupName"}'/>
+					</table:customData>
+					<table:label>
+						<Label text="{i18n>PurchasingGroupName}"/>
+					</table:label>
+					<table:template>
+						<Label text="{PurchasingGroupName}"/>
 					</table:template>
 				</table:Column>
 
