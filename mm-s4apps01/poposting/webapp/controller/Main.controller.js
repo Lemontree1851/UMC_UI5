@@ -41,6 +41,9 @@ sap.ui.define([
                     var item = {
                         "Status": "",
                         "Message": "",
+                        "MaterialDocument":"",
+                        "MaterialDocumentYear":"",
+                        "MaterialDocumentItem":"",
                         "Row": i - 1,
                         "DocumentDate": aSheetData[i]["DOCUMENTDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : new Date(this.formatDateString(aSheetData[i]["DOCUMENTDATE"])),
                         "PostingDate": aSheetData[i]["POSTINGDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : new Date(this.formatDateString(aSheetData[i]["POSTINGDATE"])),
@@ -49,7 +52,8 @@ sap.ui.define([
                         "QuantityInEntryUnit": aSheetData[i]["QUANTITYINENTRY"] === undefined ? "" : aSheetData[i]["QUANTITYINENTRY"],
                         "Batch": aSheetData[i]["BATCH"] === undefined ? "" : aSheetData[i]["BATCH"],
                         "Plant": aSheetData[i]["PLANT"] === undefined ? "" : aSheetData[i]["PLANT"],
-                        "StorageLocation": aSheetData[i]["STORAGELOCATION"] === undefined ? "" : aSheetData[i]["STORAGELOCATION"],
+                        "StorageLocation": aSheetData[i]["STORAGELOCATION"] === undefined ? "" : aSheetData[i]["STORAGELOCATION"]
+                        
                     };
                     aExcelSet.push(item);
                 }
@@ -120,6 +124,9 @@ sap.ui.define([
                                         aExcelSet[index].PostingDate = element.POSTINGDATE,
                                         aExcelSet[index].Plant = element.PLANT,
                                         aExcelSet[index].StorageLocation = element.STORAGELOCATION
+                                        aExcelSet[index].MaterialDocument = element.MATERIALDOCUMENT
+                                        aExcelSet[index].MaterialDocumentYear = element.MATERIALDOCUMENTYEAR
+                                        aExcelSet[index].MaterialDocumentItem = element.MATERIALDOCUMENTITEM
                                     }
                                 }
                                 if (element.STATUS === 'E') {

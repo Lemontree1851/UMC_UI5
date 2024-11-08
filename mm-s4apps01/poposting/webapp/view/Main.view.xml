@@ -17,7 +17,7 @@
                 <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
             </Panel>
             <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
-                <table:Table rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:Table rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="3" rowMode="Interactive" class="sapUiSizeCompact">
                     <table:extension>
                         <OverflowToolbar>
                             <Text text="{local>/logInfo}"/>
@@ -39,6 +39,25 @@
                                 <Text text="{local>Message}" wrapping="false"/>
                             </table:template>
                         </table:Column>
+
+                        <table:Column width="10rem" label="{i18n>MaterialDocument}">
+                            <table:template>
+                                <Text text="{local>MaterialDocument}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+
+                        <table:Column width="10rem" label="{i18n>MaterialDocumentYear}">
+                            <table:template>
+                                <Text text="{local>MaterialDocumentYear}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+
+                        <table:Column width="10rem" label="{i18n>MaterialDocumentItem}">
+                            <table:template>
+                                <Text text="{local>MaterialDocumentItem}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        
                         <table:Column width="10rem" label="{i18n>DocumentDate}">
                             <table:template>
                                 <Text text="{ path:'local>DocumentDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
