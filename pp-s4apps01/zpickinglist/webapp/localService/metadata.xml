@@ -105,6 +105,13 @@
                 <Property Name="ConfignDeprecationCodeName" Type="Edm.String" MaxLength="60" sap:label="Validity Text" sap:quickinfo="Value Help: Flag Obsolete Entries"/>
                 <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
             </EntityType>
+            <EntityType Name="ZC_BOOLEAN_VHType" sap:label="True/False" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="value_low"/>
+                </Key>
+                <Property Name="value_low" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Lower Value" sap:quickinfo="Values for Domains: Single Value/Lower Limit"/>
+                <Property Name="text" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+            </EntityType>
             <EntityType Name="ZC_MaterialStockVHType" sap:label="Material Stock Value Help" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Material"/>
@@ -124,6 +131,18 @@
                 </Key>
                 <Property Name="MRPController" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="MRP Controller"/>
                 <Property Name="MRPControllerName" Type="Edm.String" MaxLength="18" sap:label="MRP Controller Name"/>
+            </EntityType>
+            <EntityType Name="ZC_PICKINGLIST_RESERVATIONVHType" sap:label="Picking List Reservation Data" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Reservation"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="Reservation" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Reservation" sap:quickinfo="Number of reservation/dependent requirements"/>
+                <Property Name="StorageLocationFrom" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location From" sap:quickinfo="Storage Location"/>
+                <Property Name="StorageLocationTo" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location To" sap:quickinfo="Storage Location"/>
+                <Property Name="CreatedDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created Date"/>
+                <Property Name="CreatedByUserName" Type="Edm.String" MaxLength="20" sap:label="Created By"/>
             </EntityType>
             <EntityType Name="ZC_PICKINGLIST_STDType" sap:label="Picking List Standard Data" sap:content-version="1">
                 <Key>
@@ -161,7 +180,7 @@
                     <PropertyRef Name="Reservation"/>
                     <PropertyRef Name="ReservationItem"/>
                 </Key>
-                <Property Name="Reservation" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Reservation" sap:quickinfo="Number of reservation/dependent requirements" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Reservation" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Reservation" sap:quickinfo="Number of reservation/dependent requirements" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
                 <Property Name="ReservationItem" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Item no." sap:quickinfo="Item Number of Reservation / Dependent Requirements" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:value-list="standard"/>
                 <Property Name="Material" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:value-list="standard"/>
@@ -180,7 +199,7 @@
                 <Property Name="TotalTransferQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
                 <Property Name="M_CARD_Quantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
                 <Property Name="M_CARD" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
-                <Property Name="DeleteFlag" Type="Edm.Boolean" sap:label="Flag" sap:quickinfo="Xflag"/>
+                <Property Name="DeleteFlag" Type="Edm.Boolean" sap:label="Deletion indicator" sap:quickinfo="Asset class marked for deletion" sap:value-list="fixed-values"/>
                 <Property Name="CreatedDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval"/>
                 <Property Name="CreatedTime" Type="Edm.Time" Precision="0"/>
                 <Property Name="CreatedByUser" Type="Edm.String" MaxLength="50"/>
@@ -198,7 +217,7 @@
                 <Property Name="MaterialName" Type="Edm.String" MaxLength="40" sap:label="Product Description" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="StorageLocationFromName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="StorageLocationToName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="DeleteFlagText" Type="Edm.String" MaxLength="60" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DeleteFlagText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
             </EntityType>
             <EntityType Name="ZC_ProductionSupervisorVHType" sap:label="Production Supervisor Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -452,8 +471,10 @@
                 <EntitySet Name="I_ProductGroup_2" EntityType="cds_zui_pickinglist_o2.I_ProductGroup_2Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_ProductStdVH" EntityType="cds_zui_pickinglist_o2.I_ProductStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_StorageLocationStdVH" EntityType="cds_zui_pickinglist_o2.I_StorageLocationStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZC_BOOLEAN_VH" EntityType="cds_zui_pickinglist_o2.ZC_BOOLEAN_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_MaterialStockVH" EntityType="cds_zui_pickinglist_o2.ZC_MaterialStockVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_MRPControllerVH" EntityType="cds_zui_pickinglist_o2.ZC_MRPControllerVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_PICKINGLIST_RESERVATIONVH" EntityType="cds_zui_pickinglist_o2.ZC_PICKINGLIST_RESERVATIONVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_PICKINGLIST_STD" EntityType="cds_zui_pickinglist_o2.ZC_PICKINGLIST_STDType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_PICKINGLIST_TAB" EntityType="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_ProductionSupervisorVH" EntityType="cds_zui_pickinglist_o2.ZC_ProductionSupervisorVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
@@ -754,6 +775,38 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/Reservation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Reservation"/>
+                        <PropertyValue Property="CollectionPath" String="ZC_PICKINGLIST_RESERVATIONVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Reservation"/>
+                                    <PropertyValue Property="ValueListProperty" String="Reservation"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="StorageLocationFrom"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="StorageLocationTo"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CreatedDate"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CreatedByUserName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -960,6 +1013,27 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/DeleteFlag" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Deletion indicator"/>
+                        <PropertyValue Property="CollectionPath" String="ZC_BOOLEAN_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="DeleteFlag"/>
+                                    <PropertyValue Property="ValueListProperty" String="value_low"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues"/>
+            </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.cds_zui_pickinglist_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
@@ -1065,6 +1139,23 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_pickinglist_o2.cds_zui_pickinglist_o2_Entities/ZC_BOOLEAN_VH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.cds_zui_pickinglist_o2_Entities/ZC_MRPControllerVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
@@ -1083,6 +1174,23 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_pickinglist_o2.cds_zui_pickinglist_o2_Entities/ZC_MaterialStockVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_pickinglist_o2.cds_zui_pickinglist_o2_Entities/ZC_PICKINGLIST_RESERVATIONVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Bool="false"/>

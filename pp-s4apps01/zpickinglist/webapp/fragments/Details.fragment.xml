@@ -5,16 +5,32 @@
     xmlns:table="sap.ui.table">
     <Dialog title="{i18n>ShowDetails}">
         <Panel expandable="false" expanded="true" width="auto">
-            <table:Table rows="{local>/detailSet}" selectionMode="Multi" rowMode="Interactive" class="sapUiSizeCompact">
+            <table:Table id="idDetailsTable" rows="{local>/detailSet}" selectionMode="Multi" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:extension>
+                    <OverflowToolbar>
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExportDetails" visible="{= ${local>/detailSet}.length > 0}"/>
+                    </OverflowToolbar>
+                </table:extension>
                 <table:columns>
                     <table:Column width="6rem" label="{i18n>Plant}">
                         <table:template>
                             <Text text="{local>Plant}" wrapping="false"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>Material}">
+                    <table:Column width="10rem" label="{i18n>Material}">
                         <table:template>
-                            <Text text="{local>MaterialName}({local>Material})" wrapping="false"/>
+                            <Text text="{local>Material}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>MaterialName}">
+                        <table:template>
+                            <Text text="{local>MaterialName}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem" label="{i18n>BaseUnit}">
+                        <table:template>
+                            <Text text="{local>BaseUnit}" wrapping="false"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="12rem" label="{i18n>TotalRequiredQuantity}" hAlign="End">
@@ -32,9 +48,14 @@
                             <Text text="{ path:'local>TotalShortFallQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>StorageLocationTo}">
+                    <table:Column width="10rem" label="{i18n>StorageLocationTo}">
                         <table:template>
-                            <Text text="{local>StorageLocationToName}({local>StorageLocationTo})" wrapping="false"/>
+                            <Text text="{local>StorageLocationTo}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>StorageLocationToName}">
+                        <table:template>
+                            <Text text="{local>StorageLocationToName}" wrapping="false"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="10rem" label="{i18n>ManufacturingOrder}">
@@ -42,9 +63,14 @@
                             <Text text="{local>ManufacturingOrder}" wrapping="false"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>Product}">
+                    <table:Column width="10rem" label="{i18n>Product}">
                         <table:template>
-                            <Text text="{local>ProductName}({local>Product})" wrapping="false"/>
+                            <Text text="{local>Product}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>ProductName}">
+                        <table:template>
+                            <Text text="{local>ProductName}" wrapping="false"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="12rem" label="{i18n>OrderRequiredQuantity}" hAlign="End">

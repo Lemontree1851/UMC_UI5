@@ -6,7 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_STD" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="BaseUnit,LaboratoryOrDesignOfficeName,DetailsJson" ignoredFields="BaseUnit,LaboratoryOrDesignOfficeName,RequisitionDate,MRPController,ProductionSupervisor,DetailsJson,ExternalProductGroup">
+    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_STD" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExportStandardList" showFullScreenButton="true" requestAtLeastFields="BaseUnit,LaboratoryOrDesignOfficeName,DetailsJson" ignoredFields="BaseUnit,LaboratoryOrDesignOfficeName,RequisitionDate,MRPController,ProductionSupervisor,DetailsJson,ExternalProductGroup">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -64,6 +64,14 @@
                     </table:customData>
                     <table:template>
                         <Text text="{StorageLocationToName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>BaseUnit}" sortProperty="BaseUnit" filterProperty="BaseUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit", "leadingProperty":"BaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="11rem" label="{i18n>TotalRequiredQuantity}" sortProperty="TotalRequiredQuantity" filterProperty="TotalRequiredQuantity" hAlign="End">

@@ -156,7 +156,15 @@ sap.ui.define([
                 sInputPath = sItemPath + sBindFieldName;
                 this.getModel().setProperty(sInputPath, aTokens[0].getProperty("key"));
                 this.getModel().setProperty(sInputPath + "Name", aTokens[0].getProperty("text").split("(")[0]);
-                // this.getModel().setProperty(sInputPath + "Stock", oResponse["StockQuantity"]);
+
+                if (sBindFieldName === "/StorageLocationFrom") {
+                    var oRow = this.getModel().getProperty(sItemPath);
+                    var sPlant = oRow.Plant;
+                    var sMaterial = oRow.Material;
+                    var sPath = "/ZC_MaterialStockVH(Material='" + sMaterial + "',Plant='" + sPlant + "',StorageLocation='" + aTokens[0].getProperty("key") + "')";
+                    var oVHRow = this.getModel().getProperty(sPath);
+                    this.getModel().setProperty(sInputPath + "Stock", oVHRow["StockQuantity"]);
+                }
             }
             //----------------------------Custom Logic----------------------------------------
             this._oVHD.close();

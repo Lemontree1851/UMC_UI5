@@ -7,8 +7,9 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/Fragment"
-], function (Base, ValueHelpDialog, formatter, BusyDialog, MessageBox, MessageToast, Filter, FilterOperator, Fragment) {
+    "sap/ui/core/Fragment",
+    "sap/ui/export/Spreadsheet"
+], function (Base, ValueHelpDialog, formatter, BusyDialog, MessageBox, MessageToast, Filter, FilterOperator, Fragment, Spreadsheet) {
     "use strict";
 
     return Base.extend("pp.zpickinglist.controller.Main", {
@@ -384,6 +385,100 @@ sap.ui.define([
             aFilters.push(new sap.ui.model.Filter("Plant", sap.ui.model.FilterOperator.EQ, oRowData.Plant));
             aFilters.push(new sap.ui.model.Filter("Material", sap.ui.model.FilterOperator.EQ, oRowData.Material));
             oEvent.getSource().getBinding("suggestionRows").filter(aFilters);
+        },
+
+        onBeforeExportStandardList: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("StandardListFileName");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        onBeforeExportCustomList: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("CustomListFileName");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date
+                    case "CreatedDate":
+                    case "LastChangedDate":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                    //  Number 分隔符 没有小数位
+                    case "TotalRequiredQuantity":
+                    case "TotalShortFallQuantity":
+                    case "StorageLocationToStock":
+                    case "M_CARD_Quantity":
+                    case "TotalTransferQuantity":
+                    case "StorageLocationFromStock":
+                    case "GR_SlipsQuantity":
+                    case "PostingQuantity":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.textAlign = "End";
+                        break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+        },
+
+        onExportDetails: function () {
+            var oTable = sap.ui.getCore().byId("idDetailsTable");
+            var sPath = oTable.getBindingPath("rows");
+            var aExcelSet = this.getModel("local").getProperty(sPath) ? this.getModel("local").getProperty(sPath) : [];
+            var aExcelCol = [];
+            var aTableCol = oTable.getColumns();
+            for (var i = 0; i < aTableCol.length; i++) {
+                if (aTableCol[i].getVisible()) {
+                    var sLabelText = aTableCol[i].getAggregation("label").getText();
+                    var sType, sTextAlign = "Begin";;
+                    switch (aTableCol[i].mBindingInfos.label.parts[0].path) {
+                        //  Date
+                        case "RequisitionDate":
+                            sType = sap.ui.export.EdmType.Date;
+                            break;
+                        //  Number 分隔符 没有小数位
+                        case "TotalRequiredQuantity":
+                        case "TotalShortFallQuantity":
+                        case "StorageLocationToStock":
+                        case "M_CARD_Quantity":
+                        case "TotalTransferQuantity":
+                        case "StorageLocationFromStock":
+                        case "GR_SlipsQuantity":
+                        case "PostingQuantity":
+                            sType = sap.ui.export.EdmType.Number;
+                            sTextAlign = "End";
+                            break;
+                        default:
+                            sType = sap.ui.export.EdmType.String;
+                            break;
+                    }
+                    var oExcelCol = {
+                        label: sLabelText,
+                        type: sType,
+                        property: aTableCol[i].getAggregation("template").getBindingPath("text"),
+                        width: parseFloat(aTableCol[i].getWidth()),
+                        textAlign: sTextAlign
+                    };
+                    aExcelCol.push(oExcelCol);
+                }
+            }
+            var oSettings = {
+                workbook: {
+                    columns: aExcelCol,
+                    context: {
+                        version: "1.54",
+                        hierarchyLevel: "level"
+                    }
+                },
+                dataSource: aExcelSet,
+                fileName: this.getModel("i18n").getResourceBundle().getText("DetailsFileName") + "_" + this.getCurrentDateTime() + ".xlsx"
+            };
+            // export excel file
+            new Spreadsheet(oSettings).build();
         }
     });
 });
