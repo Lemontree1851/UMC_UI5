@@ -28,7 +28,7 @@ function (Controller, Filter, FilterOperator) {
             var sMonth = nMonth < 10 ? `0${nMonth}` : String(nMonth);
             var sYear = String(nYear);
 
-            oMonth.setSelectedKey(sMonth);
+            oMonth.setSelectedKeys([sMonth]);
             oYear.setValue(sYear);
         },
 
@@ -53,16 +53,16 @@ function (Controller, Filter, FilterOperator) {
 
 
             if(oMonth){
-                var sMonth = oMonth.getSelectedKey();
-                if(sMonth !== ''){
+                var aMonth = oMonth.getSelectedKeys();
+                aMonth.forEach((e)=>{
                     oParameters.filters.push(
                         new Filter(
                             "FiscalMonth",
                             FilterOperator.EQ,
-                            sMonth
+                            e
                         )
-                    );                    
-                }
+                    );  
+                })
             }
         }
     });

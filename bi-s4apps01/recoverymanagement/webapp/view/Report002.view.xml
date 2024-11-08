@@ -18,7 +18,7 @@
 
                     <smartfilterbar:ControlConfiguration id="sfbRep02ConfigFiscalMonth" key="FiscalMonth" label="{i18n>FiscalMonth}">
                         <smartfilterbar:customControl>
-                           <Select id="sfbRep02SelFiscalMonth">
+                           <MultiComboBox id="sfbRep02SelFiscalMonth" >
                              <items>
                                 <core:Item id="idRep02Month01" key="01" text="01"></core:Item>
                                 <core:Item id="idRep02Month02" key="02" text="02"></core:Item>
@@ -33,7 +33,7 @@
                                 <core:Item id="idRep02Month11" key="11" text="11"></core:Item>
                                 <core:Item id="idRep02Month12" key="12" text="12"></core:Item>
                              </items>
-                           </Select>
+                           </MultiComboBox>
                         </smartfilterbar:customControl>
                     </smartfilterbar:ControlConfiguration> 
 

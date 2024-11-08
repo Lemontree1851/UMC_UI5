@@ -18,7 +18,7 @@
 
                     <smartfilterbar:ControlConfiguration id="sfbRep03ConfigFiscalMonth" key="FiscalMonth" label="{i18n>FiscalMonth}" >
                         <smartfilterbar:customControl>
-                            <Select id="sfbRep03SelFiscalMonth">
+                            <MultiComboBox id="sfbRep03SelFiscalMonth">
                              <items>
                                 <core:Item id="idRep03Month01" key="01" text="01"></core:Item>
                                 <core:Item id="idRep03Month02" key="02" text="02"></core:Item>
@@ -33,7 +33,7 @@
                                 <core:Item id="idRep03Month11" key="11" text="11"></core:Item>
                                 <core:Item id="idRep03Month12" key="12" text="12"></core:Item>
                              </items>
-                           </Select>
+                           </MultiComboBox>
                         </smartfilterbar:customControl>
                     </smartfilterbar:ControlConfiguration>
 
@@ -101,7 +101,7 @@
                                 <smartfield:SmartField id="sfRep03Material" value="{Material}" wrapping="false" editable="true"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="idRep03MaterialType" width="10em" label="{i18n>MaterialType}" sortProperty="ProductGroup" filterProperty="ProductGroup" visible="true">
+                        <table:Column id="idRep03MaterialType" width="14em" label="{i18n>MaterialType}" sortProperty="ProductGroup" filterProperty="ProductGroup" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ProductGroup", "additionalProperty": "ProductGroupName",  "leadingProperty":"ProductGroup", "sortProperty":"ProductGroup", "filterProperty": "ProductGroup"}'/>
                             </table:customData>
@@ -274,7 +274,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PercentageOfAp", "leadingProperty":"PercentageOfAp", "sortProperty":"PercentageOfAp", "filterProperty": "PercentageOfAp"}'/>
                             </table:customData>
                             <table:template>
-                                <Text id="sfRep03PercentageOfAp" text="{PercentageOfAp}" wrapping="false" />
+                                <Text id="sfRep03PercentageOfAp" text="{parts: [{path: 'PercentageOfAp'}], formatter: '.formatter.formatPercentage'}" wrapping="false" />
                             </table:template>
                         </table:Column>  
                         <table:Column id="idRep03AccountingPostingAmount" width="13em" label="{i18n>AccountingPostingAmount}" sortProperty="AccountingPostingAmount" filterProperty="AccountingPostingAmount" visible="true">
