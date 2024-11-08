@@ -4,12 +4,12 @@
     xmlns:unified="sap.ui.unified"
     xmlns:upload="sap.m.upload"
     xmlns:table="sap.ui.table">    
-    <Page id="_IDGenPage">
+    <Page >
         <content>
-            <Panel id="_IDGenPanel" expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
-                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration',filters : { path : 'Object', operator : 'EQ', value1 : 'ZDOWNLOAD_INVENTORY' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+            <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZDOWNLOAD_INVENTORY' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
                     <upload:items>
-                        <upload:UploadSetItem id="_IDGenUploadSetItem" fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+                        <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
                     </upload:items>
                 </upload:UploadSet>
             </Panel>
