@@ -1,9 +1,9 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Fri Nov 08 2024 14:43:43 GMT+0000 (Coordinated Universal Time)|
+|**Generation Date and Time**<br>Sat Nov 09 2024 14:49:37 GMT+0000 (Coordinated Universal Time)|
 |**App Generator**<br>@sap/generator-fiori-elements|
-|**App Generator Version**<br>1.15.3|
+|**App Generator Version**<br>1.15.4|
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>List Report Page V4|
 |**Service Type**<br>SAP System (ABAP On Premise)|

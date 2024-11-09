@@ -53,10 +53,12 @@
             <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
             <EntityType Name="ApprovalNodeType">
                 <Key>
+                    <PropertyRef Name="WorkflowId"/>
                     <PropertyRef Name="ApplicationId"/>
                     <PropertyRef Name="Node"/>
                     <PropertyRef Name="IsActiveEntity"/>
                 </Key>
+                <Property Name="WorkflowId" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="ApplicationId" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="Node" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="NodeName" Type="Edm.String" Nullable="false" MaxLength="30"/>
@@ -78,6 +80,7 @@
                 <NavigationProperty Name="DraftAdministrativeData" Type="com.sap.gateway.srvd.zui_wf_manage_o4.v0001.I_DraftAdministrativeDataType"/>
                 <NavigationProperty Name="SiblingEntity" Type="com.sap.gateway.srvd.zui_wf_manage_o4.v0001.ApprovalNodeType"/>
                 <NavigationProperty Name="_ApprovalPath" Type="com.sap.gateway.srvd.zui_wf_manage_o4.v0001.ApprovalPathType" Nullable="false" Partner="_ApprovalNode">
+                    <ReferentialConstraint Property="WorkflowId" ReferencedProperty="WorkflowId"/>
                     <ReferentialConstraint Property="ApplicationId" ReferencedProperty="ApplicationId"/>
                 </NavigationProperty>
                 <NavigationProperty Name="_ApprovalUser" Type="Collection(com.sap.gateway.srvd.zui_wf_manage_o4.v0001.ApprovalUserType)" Partner="_ApprovalNode">
@@ -86,11 +89,13 @@
             </EntityType>
             <EntityType Name="ApprovalUserType">
                 <Key>
+                    <PropertyRef Name="WorkflowId"/>
                     <PropertyRef Name="ApplicationId"/>
                     <PropertyRef Name="Node"/>
                     <PropertyRef Name="Zseq"/>
                     <PropertyRef Name="IsActiveEntity"/>
                 </Key>
+                <Property Name="WorkflowId" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="ApplicationId" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="Node" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Zseq" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -111,6 +116,7 @@
                 <NavigationProperty Name="DraftAdministrativeData" Type="com.sap.gateway.srvd.zui_wf_manage_o4.v0001.I_DraftAdministrativeDataType"/>
                 <NavigationProperty Name="SiblingEntity" Type="com.sap.gateway.srvd.zui_wf_manage_o4.v0001.ApprovalUserType"/>
                 <NavigationProperty Name="_ApprovalNode" Type="com.sap.gateway.srvd.zui_wf_manage_o4.v0001.ApprovalNodeType" Nullable="false" Partner="_ApprovalUser">
+                    <ReferentialConstraint Property="WorkflowId" ReferencedProperty="WorkflowId"/>
                     <ReferentialConstraint Property="ApplicationId" ReferencedProperty="ApplicationId"/>
                     <ReferentialConstraint Property="Node" ReferencedProperty="Node"/>
                 </NavigationProperty>
@@ -141,9 +147,11 @@
             </EntityType>
             <EntityType Name="ApprovalPathType">
                 <Key>
+                    <PropertyRef Name="WorkflowId"/>
                     <PropertyRef Name="ApplicationId"/>
                     <PropertyRef Name="IsActiveEntity"/>
                 </Key>
+                <Property Name="WorkflowId" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="ApplicationId" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="PrType" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="ApplyDepart" Type="Edm.String" Nullable="false" MaxLength="1"/>
@@ -234,23 +242,59 @@
                 </EntitySet>
                 <EntitySet Name="I_DraftAdministrativeData" EntityType="com.sap.gateway.srvd.zui_wf_manage_o4.v0001.I_DraftAdministrativeDataType"/>
             </EntityContainer>
+            <Annotations Target="SAP__self.ApprovalNodeType/WorkflowId">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
             <Annotations Target="SAP__self.ApprovalNodeType/ApplicationId">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
             <Annotations Target="SAP__self.ApprovalNodeType/Node">
+                <Annotation Term="SAP__common.Label" String="Node"/>
                 <Annotation Term="SAP__core.Immutable"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
             </Annotations>
+            <Annotations Target="SAP__self.ApprovalNodeType/NodeName">
+                <Annotation Term="SAP__common.Label" String="Node Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalNodeType/AutoConver">
+                <Annotation Term="SAP__common.Label" String="Auto Conver"/>
+                <Annotation Term="SAP__common.Heading" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalNodeType/Active">
+                <Annotation Term="SAP__common.Label" String="Active"/>
+                <Annotation Term="SAP__common.Heading" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
             <Annotations Target="SAP__self.ApprovalNodeType/CreatedBy">
+                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Created By"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Created By User"/>
             </Annotations>
+            <Annotations Target="SAP__self.ApprovalNodeType/CreatedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Created On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Creation Date Time"/>
+            </Annotations>
             <Annotations Target="SAP__self.ApprovalNodeType/LastChangedBy">
+                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Changed By"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Last Changed By User"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalNodeType/LastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Changed On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Last Change Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalNodeType/LocalLastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Changed On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
             </Annotations>
             <Annotations Target="SAP__self.ApprovalNodeType/HasDraftEntity">
                 <Annotation Term="SAP__core.Computed"/>
@@ -406,19 +450,118 @@
             </Annotations>
             <Annotations Target="SAP__self.ApprovalNodeType">
                 <Annotation Term="SAP__common.Label" String="Workflow Approval Node"/>
+                <Annotation Term="SAP__UI.Facets">
+                    <Collection>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Approval Node"/>
+                            <PropertyValue Property="ID" String="GeneralInfo"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Approval User"/>
+                            <PropertyValue Property="ID" String="idNode"/>
+                            <PropertyValue Property="Target" AnnotationPath="_ApprovalUser/@SAP__UI.LineItem"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="WF Approval Node"/>
+                        <PropertyValue Property="TypeNamePlural" String="WF Approval Node"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="WorkflowId"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="ApplicationId"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Node"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="NodeName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="AutoConver"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Active"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Node"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="NodeName"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="30rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="AutoConver"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Active"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalUserType/WorkflowId">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
             <Annotations Target="SAP__self.ApprovalUserType/ApplicationId">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
             <Annotations Target="SAP__self.ApprovalUserType/Node">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.Hidden"/>
             </Annotations>
             <Annotations Target="SAP__self.ApprovalUserType/Zseq">
+                <Annotation Term="SAP__common.Label" String="Sequence No."/>
                 <Annotation Term="SAP__core.Immutable"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalUserType/UserName">
+                <Annotation Term="SAP__common.Label" String="User Name"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalUserType/EmailAddress">
+                <Annotation Term="SAP__common.Label" String="Email Address"/>
             </Annotations>
             <Annotations Target="SAP__self.ApprovalUserType/CreatedBy">
                 <Annotation Term="SAP__core.Computed"/>
@@ -591,6 +734,75 @@
             </Annotations>
             <Annotations Target="SAP__self.ApprovalUserType">
                 <Annotation Term="SAP__common.Label" String="Workflow Approval User"/>
+                <Annotation Term="SAP__UI.Facets">
+                    <Collection>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Approval User"/>
+                            <PropertyValue Property="ID" String="GeneralInfo"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="WF Approval User"/>
+                        <PropertyValue Property="TypeNamePlural" String="WF Approval User"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="WorkflowId"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="ApplicationId"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Zseq"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="UserName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="EmailAddress"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Zseq"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="UserName"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="15rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="EmailAddress"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="20rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
             <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftEntityType">
@@ -680,24 +892,71 @@
                     <Collection/>
                 </Annotation>
             </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/WorkflowId">
+                <Annotation Term="SAP__common.Label" String="Workflow Id"/>
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
             <Annotations Target="SAP__self.ApprovalPathType/ApplicationId">
+                <Annotation Term="SAP__common.Label" String="Application Id"/>
                 <Annotation Term="SAP__core.Immutable"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
             </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/PrType">
+                <Annotation Term="SAP__common.Label" String="PR Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/ApplyDepart">
+                <Annotation Term="SAP__common.Label" String="Apply Depart"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/OrderType">
+                <Annotation Term="SAP__common.Label" String="Order Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/BuyPurpose">
+                <Annotation Term="SAP__common.Label" String="Buy Purpose"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/Location">
+                <Annotation Term="SAP__common.Label" String="Location"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/Knttp">
+                <Annotation Term="SAP__common.Label" String="Acc. Assignment Category"/>
+            </Annotations>
             <Annotations Target="SAP__self.ApprovalPathType/CostCenter">
-                <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Cost Center"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Heading" String="Cost Ctr"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Cost Center"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/AmountFrom">
+                <Annotation Term="SAP__common.Label" String="Amount From"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/AmountTo">
+                <Annotation Term="SAP__common.Label" String="Amount To"/>
             </Annotations>
             <Annotations Target="SAP__self.ApprovalPathType/CreatedBy">
+                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Created By"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Created By User"/>
             </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/CreatedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Created On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Creation Date Time"/>
+            </Annotations>
             <Annotations Target="SAP__self.ApprovalPathType/LastChangedBy">
+                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Changed By"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Last Changed By User"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/LastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Changed On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Last Change Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ApprovalPathType/LocalLastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Changed On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
             </Annotations>
             <Annotations Target="SAP__self.ApprovalPathType/HasDraftEntity">
                 <Annotation Term="SAP__core.Computed"/>
@@ -819,6 +1078,7 @@
                     <Record>
                         <PropertyValue Property="RequiredProperties">
                             <Collection>
+                                <PropertyPath>WorkflowId</PropertyPath>
                                 <PropertyPath>ApplicationId</PropertyPath>
                             </Collection>
                         </PropertyValue>
@@ -860,6 +1120,132 @@
             </Annotations>
             <Annotations Target="SAP__self.ApprovalPathType">
                 <Annotation Term="SAP__common.Label" String="Workflow Approval Path"/>
+                <Annotation Term="SAP__UI.Facets">
+                    <Collection>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Approval Path"/>
+                            <PropertyValue Property="ID" String="GeneralInfo"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Approval Node"/>
+                            <PropertyValue Property="ID" String="idNode"/>
+                            <PropertyValue Property="Target" AnnotationPath="_ApprovalNode/@SAP__UI.LineItem"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="WF Approval Path"/>
+                        <PropertyValue Property="TypeNamePlural" String="WF Approval Path"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="WorkflowId"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="ApplicationId"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="WorkflowId"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ApplicationId"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="PrType"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ApplyDepart"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="OrderType"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BuyPurpose"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Location"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Knttp"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCenter"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="AmountFrom"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="AmountTo"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="WorkflowId"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ApplicationId"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="PrType"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ApplyDepart"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="OrderType"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BuyPurpose"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Location"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Knttp"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CostCenter"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="AmountFrom"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="AmountTo"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>WorkflowId</PropertyPath>
+                        <PropertyPath>ApplicationId</PropertyPath>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
             <Annotations Target="SAP__self.Container">
@@ -962,26 +1348,6 @@
                 <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Draft In Process By (Description)"/>
             </Annotations>
-            <Annotations Target="SAP__self.ApprovalNodeType/AutoConver">
-                <Annotation Term="SAP__common.Label" String="Truth Value"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ApprovalNodeType/Active">
-                <Annotation Term="SAP__common.Label" String="Truth Value"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ApprovalNodeType/CreatedAt">
-                <Annotation Term="SAP__common.Label" String="Created On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Creation Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ApprovalNodeType/LastChangedAt">
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Last Change Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ApprovalNodeType/LocalLastChangedAt">
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
-            </Annotations>
             <Annotations Target="SAP__self.ApprovalNodeType/__CreateByAssociationControl/_ApprovalUser">
                 <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Create by Association Control"/>
@@ -1012,18 +1378,6 @@
             </Annotations>
             <Annotations Target="SAP__self.I_DraftAdministrativeDataType/LastChangeDateTime">
                 <Annotation Term="SAP__common.Label" String="Draft Last Changed On"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ApprovalPathType/CreatedAt">
-                <Annotation Term="SAP__common.Label" String="Created On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Creation Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ApprovalPathType/LastChangedAt">
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Last Change Date Time"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ApprovalPathType/LocalLastChangedAt">
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
             </Annotations>
             <Annotations Target="SAP__self.ApprovalPathType/__CreateByAssociationControl/_ApprovalNode">
                 <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>

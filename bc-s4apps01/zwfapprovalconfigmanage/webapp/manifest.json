@@ -12,8 +12,8 @@
     "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
-      "version": "1.15.3",
-      "toolsId": "2eafc2e7-fc38-4cb5-8337-955811fefd3d"
+      "version": "1.15.4",
+      "toolsId": "fa50c40a-3f95-4fab-b98f-0a264b4f4530"
     },
     "dataSources": {
       "mainService": {
@@ -121,6 +121,11 @@
           "pattern": "ApprovalPath({key})/_ApprovalNode({key2}):?query:",
           "name": "ApprovalNodeObjectPage",
           "target": "ApprovalNodeObjectPage"
+        },
+        {
+          "name": "ApprovalPath__ApprovalNode__ApprovalUserObjectPage",
+          "pattern": "ApprovalPath({key})/_ApprovalNode({key2})/_ApprovalUser({_ApprovalUserKey}):?query:",
+          "target": "ApprovalPath__ApprovalNode__ApprovalUserObjectPage"
         }
       ],
       "targets": {
@@ -174,7 +179,25 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/ApprovalPath/_ApprovalNode"
+              "contextPath": "/ApprovalPath/_ApprovalNode",
+              "navigation": {
+                "_ApprovalUser": {
+                  "detail": {
+                    "route": "ApprovalPath__ApprovalNode__ApprovalUserObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ApprovalPath__ApprovalNode__ApprovalUserObjectPage": {
+          "type": "Component",
+          "id": "ApprovalPath__ApprovalNode__ApprovalUserObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/ApprovalPath/_ApprovalNode/_ApprovalUser"
             }
           }
         }
