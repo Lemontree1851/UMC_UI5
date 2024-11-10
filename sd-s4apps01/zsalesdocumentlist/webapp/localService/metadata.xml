@@ -162,7 +162,7 @@
                 <Property Name="PaymentTermsName" Type="Edm.String" MaxLength="30"/>
                 <Property Name="ShippingType" Type="Edm.String" MaxLength="2"/>
                 <Property Name="ShippingTypeName" Type="Edm.String" MaxLength="20"/>
-                <Property Name="IsConfirmedDelivSchedLine" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
+                <Property Name="IsConfirmedDelivSchedLine" Type="Edm.String" MaxLength="1"/>
                 <Property Name="ScheduleLineCategory" Type="Edm.String" MaxLength="2"/>
                 <Property Name="ScheduleLineCategoryName" Type="Edm.String" MaxLength="20"/>
                 <Property Name="DeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
@@ -170,43 +170,43 @@
                 <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Document Currency" sap:quickinfo="SD Document Currency" sap:semantics="currency-code"/>
                 <Property Name="PriceDetnExchangeRate" Type="Edm.Decimal" Precision="9" Scale="5"/>
                 <Property Name="ExchangeRateDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Translation Date"/>
-                <Property Name="ConditionRateValuePPR0" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyPPR0" sap:variable-scale="true"/>
+                <Property Name="ConditionRateValuePPR0" Type="Edm.Decimal" Precision="24" Scale="9"/>
                 <Property Name="ConditionCurrencyPPR0" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="ConditionAmountPPR0" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionAmountPPR0" Type="Edm.Decimal" Precision="15" Scale="2"/>
                 <Property Name="ConditionRateValueTTX1" Type="Edm.Decimal" Precision="24" Scale="9"/>
-                <Property Name="ConditionAmountTTX1" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPFC" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPFC" sap:variable-scale="true"/>
+                <Property Name="ConditionAmountTTX1" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="ConditionRateValueZPFC" Type="Edm.Decimal" Precision="24" Scale="9"/>
                 <Property Name="ConditionCurrencyZPFC" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="ConditionAmountZPFC" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPST" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPST" sap:variable-scale="true"/>
+                <Property Name="ConditionAmountZPFC" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="ConditionRateValueZPST" Type="Edm.Decimal" Precision="24" Scale="9"/>
                 <Property Name="ConditionCurrencyZPST" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="ConditionAmountZPST" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPIN" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPIN" sap:variable-scale="true"/>
+                <Property Name="ConditionAmountZPST" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="ConditionRateValueZPIN" Type="Edm.Decimal" Precision="24" Scale="9"/>
                 <Property Name="ConditionCurrencyZPIN" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="ConditionAmountZPIN" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPSB" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPSB" sap:variable-scale="true"/>
+                <Property Name="ConditionAmountZPIN" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="ConditionRateValueZPSB" Type="Edm.Decimal" Precision="24" Scale="9"/>
                 <Property Name="ConditionCurrencyZPSB" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="ConditionAmountZPSB" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPSS" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPSS" sap:variable-scale="true"/>
+                <Property Name="ConditionAmountZPSB" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="ConditionRateValueZPSS" Type="Edm.Decimal" Precision="24" Scale="9"/>
                 <Property Name="ConditionCurrencyZPSS" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="ConditionAmountZPSS" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPCM" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPCM" sap:variable-scale="true"/>
+                <Property Name="ConditionAmountZPSS" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="ConditionRateValueZPCM" Type="Edm.Decimal" Precision="24" Scale="9"/>
                 <Property Name="ConditionCurrencyZPCM" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="ConditionAmountZPCM" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
-                <Property Name="ConditionRateValueZPGP" Type="Edm.Decimal" Precision="24" Scale="9" sap:unit="ConditionCurrencyZPGP" sap:variable-scale="true"/>
+                <Property Name="ConditionAmountZPCM" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="ConditionRateValueZPGP" Type="Edm.Decimal" Precision="24" Scale="9"/>
                 <Property Name="ConditionCurrencyZPGP" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="ConditionAmountZPGP" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
+                <Property Name="ConditionAmountZPGP" Type="Edm.Decimal" Precision="15" Scale="2"/>
                 <Property Name="YY1_ItemRemarks_1_SDI" Type="Edm.String" MaxLength="70"/>
                 <Property Name="DeliveredQtyInOrderQtyUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="OrderQuantityUnit" sap:label="Quantity"/>
-                <Property Name="OpenReqdDelivQtyInOrdQtyUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="OrderQuantityUnit" sap:label="Quantity"/>
+                <Property Name="OpenConfdDelivQtyInOrdQtyUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="OrderQuantityUnit" sap:label="Quantity"/>
                 <Property Name="ComplDeliveredQtyInBaseUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
                 <Property Name="NoComplDeliveredQtyInBaseUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="InternalTansferQtyInBaseUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="NoInternalTansferQtyInBaseUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
+                <Property Name="InternalTansferQtyInBaseUnit" Type="Edm.String" MaxLength="20"/>
+                <Property Name="NoInternalTansferQtyInBaseUnit" Type="Edm.String" MaxLength="20"/>
                 <Property Name="EnternalTansferQtyInBaseUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
                 <Property Name="NoEnternalTansferQtyInBaseUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="BillingQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BillingQuantityUnit" sap:label="Invoiced Quantity" sap:quickinfo="Actual Invoiced Quantity"/>
-                <Property Name="NoBillingQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BillingQuantityUnit" sap:label="Invoiced Quantity" sap:quickinfo="Actual Invoiced Quantity"/>
+                <Property Name="BillingQuantityInBaseUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
+                <Property Name="NoBillingQuantityInBaseUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
                 <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Record Creation Date"/>
                 <Property Name="CreationDateItem" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Record Creation Date"/>
                 <Property Name="LastChangeDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Changed On" sap:quickinfo="Last Changed On"/>
@@ -223,7 +223,6 @@
                 <Property Name="Indicator4" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="Indicator5" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="Indicator6" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
-                <Property Name="BillingQuantityUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
             </EntityType>
             <EntityType Name="ZC_SalesDocumentTypeVHType" sap:label="Sales Document Type Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -473,7 +472,7 @@
                 <EntitySet Name="I_SalesOrganization" EntityType="cds_zui_salesdocumentlist_o2.I_SalesOrganizationType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ZC_SalesDocApprovalStatusVH" EntityType="cds_zui_salesdocumentlist_o2.ZC_SalesDocApprovalStatusVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="SalesDocumentList" EntityType="cds_zui_salesdocumentlist_o2.SalesDocumentListType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
-                <EntitySet Name="ZC_SalesDocumentTypeVH" EntityType="cds_zui_salesdocumentlist_o2.ZC_SalesDocumentTypeVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_SalesDocumentTypeVH" EntityType="cds_zui_salesdocumentlist_o2.ZC_SalesDocumentTypeVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_salesdocumentlist_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_salesdocumentlist_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_salesdocumentlist_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -624,7 +623,7 @@
                     <Record>
                         <PropertyValue Property="Label" String="Sales Document Type"/>
                         <PropertyValue Property="CollectionPath" String="ZC_SalesDocumentTypeVH"/>
-                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
                         <PropertyValue Property="Parameters">
                             <Collection>
                                 <Record Type="Common.ValueListParameterInOut">

@@ -10,7 +10,7 @@
         showRowCount="false" useVariantManagement="false" useTablePersonalisation="true" 
         persistencyKey="SalesDocumentListST" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="RequestedDeliveryDate,SalesDocumentDate,BillingQuantityUnit,Indicator1,Indicator2,Indicator3,Indicator4,Indicator5,Indicator6">
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="RequestedDeliveryDate,SalesDocumentDate,Indicator1,Indicator2,Indicator3,Indicator4,Indicator5,Indicator6">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -626,12 +626,12 @@
                         <Text text="{DeliveredQtyInOrderQtyUnit} {OrderQuantityUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>OpenReqdDelivQtyInOrdQtyUnit}" sortProperty="OpenReqdDelivQtyInOrdQtyUnit" filterProperty="OpenReqdDelivQtyInOrdQtyUnit">
+                <table:Column width="12rem" label="{i18n>OpenConfdDelivQtyInOrdQtyUnit}" sortProperty="OpenConfdDelivQtyInOrdQtyUnit" filterProperty="OpenConfdDelivQtyInOrdQtyUnit">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"OpenReqdDelivQtyInOrdQtyUnit", "leadingProperty":"OpenReqdDelivQtyInOrdQtyUnit"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OpenConfdDelivQtyInOrdQtyUnit", "leadingProperty":"OpenConfdDelivQtyInOrdQtyUnit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{OpenReqdDelivQtyInOrdQtyUnit} {OrderQuantityUnit}" wrapping="false" />
+                        <Text text="{OpenConfdDelivQtyInOrdQtyUnit} {OrderQuantityUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>ComplDeliveredQtyInBaseUnit}" sortProperty="ComplDeliveredQtyInBaseUnit" filterProperty="ComplDeliveredQtyInBaseUnit">
@@ -655,7 +655,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"InternalTansferQtyInBaseUnit", "leadingProperty":"InternalTansferQtyInBaseUnit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{InternalTansferQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                        <Text text="{InternalTansferQtyInBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>NoInternalTansferQtyInBaseUnit}" sortProperty="NoInternalTansferQtyInBaseUnit" filterProperty="NoInternalTansferQtyInBaseUnit">
@@ -663,7 +663,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"NoInternalTansferQtyInBaseUnit", "leadingProperty":"NoInternalTansferQtyInBaseUnit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{NoInternalTansferQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                        <Text text="{NoInternalTansferQtyInBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>EnternalTansferQtyInBaseUnit}" sortProperty="EnternalTansferQtyInBaseUnit" filterProperty="EnternalTansferQtyInBaseUnit">
@@ -682,20 +682,20 @@
                         <Text text="{NoEnternalTansferQtyInBaseUnit} {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>BillingQuantity}" sortProperty="BillingQuantity" filterProperty="BillingQuantity">
+                <table:Column width="12rem" label="{i18n>BillingQuantityInBaseUnit}" sortProperty="BillingQuantityInBaseUnit" filterProperty="BillingQuantityInBaseUnit">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantity", "leadingProperty":"BillingQuantity"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantityInBaseUnit", "leadingProperty":"BillingQuantityInBaseUnit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{BillingQuantity} {BillingQuantityUnit}" wrapping="false" />
+                        <Text text="{BillingQuantityInBaseUnit} {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8rem" label="{i18n>NoBillingQuantity}" sortProperty="NoBillingQuantity" filterProperty="NoBillingQuantity">
+                <table:Column width="8rem" label="{i18n>NoBillingQuantityInBaseUnit}" sortProperty="NoBillingQuantityInBaseUnit" filterProperty="NoBillingQuantityInBaseUnit">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"NoBillingQuantity", "leadingProperty":"NoBillingQuantity"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NoBillingQuantityInBaseUnit", "leadingProperty":"NoBillingQuantityInBaseUnit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{NoBillingQuantity} {BillingQuantityUnit}" wrapping="false" />
+                        <Text text="{NoBillingQuantityInBaseUnit} {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>CreationDate}" sortProperty="CreationDate" filterProperty="CreationDate">
