@@ -50,6 +50,13 @@
                                 index="1"
                             />
                             <smartFilterBar:ControlConfiguration
+                                key="MaterialByCustomer"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>MaterialByCustomer}"
+                                mandatory="notMandatory"
+                                index="2"
+                            />
+                            <smartFilterBar:ControlConfiguration
                                 key="Plant"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Plant}"

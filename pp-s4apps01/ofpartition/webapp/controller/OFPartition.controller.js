@@ -49,13 +49,61 @@ sap.ui.define([
 			this.aHttpRequest.forEach(function (req) {
 				req.abort();
 			});
-            var sParamtetrsOfSelect = "Customer,Plant,Material,RequirementDate,RequirementQty";
-			//获取数据
-            this._LocalData.setProperty("/OFPartition", []);
-            this.getEntityContent(aFilter, sParamtetrsOfSelect);
+            // var sParamtetrsOfSelect = "Customer,Plant,Material,MaterialByCustomer,MaterialName,RequirementDate,RequirementQty";
+			// //获取数据
+            // this._LocalData.setProperty("/OFPartition", []);
+            // this.getEntityContent(aFilter, sParamtetrsOfSelect);
+
+			this.getEntityCount(aFilter).then(function (iItemCount) {
+				if (iItemCount > 0) {
+					//设置要查询的字段
+					let sParamtetrsOfSelect = "Customer,Plant,Material,MaterialByCustomer,MaterialName,RequirementDate,RequirementQty";
+					//获取数据
+					this._LocalData.setProperty("/OFPartition", []);
+					this.getEntityContentOnePage(iItemCount, aFilter, sParamtetrsOfSelect);
+				} else {
+					this._LocalData.setProperty("/OFPartition", []);
+					this.byId("reportTable1").setBusy(false);
+				}
+			}.bind(this));
         },
 
-        getEntityContent: function (aFilter, sParamtetrsOfSelect) {
+		getEntityCount: function (aFilter) {
+			var that = this;
+			that.byId("reportTable1").setBusy(true);
+			// 获取分割范围
+			var oDateRange = that.byId("idDateRangeSelection");
+			var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
+			var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
+			var splitRange = splitStart + "-" + splitEnd;
+			var promise = new Promise(function (resolve, reject) {
+				var mParameters = {
+					filters: aFilter,
+					success: function (oData, response) {
+						//如果后端统计条目数时不是使用的最终数据内表统计，那么这里的iItemCount并不一定准确，实际条目可能会少一些
+						var iItemCount = Number(oData);
+						resolve(iItemCount);
+					},
+					error: function (oError) {
+						var iItemCount = 0;
+						resolve(iItemCount);
+						that.byId("reportTable1").setBusy(false);
+						var sErrorMessage;
+						try {
+							var oJsonMessage = JSON.parse(oError.responseText);
+							sErrorMessage = oJsonMessage.error.message.value;
+						} catch (e) {
+							sErrorMessage = oError.responseText;
+						}
+						MessageBox.error(sErrorMessage);
+					}
+				};
+				that.getOwnerComponent().getModel().read("/OFPartition(SplitRange='" + splitRange + "')/Set/$count", mParameters);
+			});
+			return promise;
+		},
+
+        getEntityContentOnePage: function (iTop,aFilter, sParamtetrsOfSelect) {
 			sParamtetrsOfSelect = sParamtetrsOfSelect ? sParamtetrsOfSelect : "";
 			var that = this;
 			this.aHttpRequest = [];
@@ -72,18 +120,15 @@ sap.ui.define([
 				var mParameters = {
 					filters: aFilter,
 					urlParameters: {
-						// "$top": iTop,
-						// "$skip": iSkip,
+						"$top": iTop,
+						// "$skip": 0,
 						"$select": sParamtetrsOfSelect
 					},
 					success: function (oData) {
 						if (oData.results.length > 0) {
-							// let sTitle = that._ResourceBundle.getText("tableHeaderTitle");
-							// let resultCount = aResult.push.apply(aResult, oData.results);
-							// that._LocalData.setProperty("/OFPartition", aResult);
-							// sTitle = sTitle + "(" + resultCount + ")";
-							// that.byId("idReportTableTitle").setText(sTitle);
-                            aResult = that.transformData(oData.results);
+							aResult = that.transformData(oData.results);
+							// aResult.push.apply(aResult, that.transformData(aResult,oData.results));
+
 							that._LocalData.setProperty("/OFPartition", aResult);
 							that.addColumns();
 						} 
@@ -92,8 +137,6 @@ sap.ui.define([
 					error: function (oError) {
 						//手动中止的导致的错误不需要处理
 						if (!oError.aborted) {
-							// let sTitle = that._ResourceBundle.getText("tableHeaderTitle");
-							// that.byId("idReportTableTitle").setText(sTitle);
 							that.byId("reportTable1").setBusy(false);
 							var sErrorMessage;
 							try {
@@ -115,7 +158,6 @@ sap.ui.define([
 						}
 					}
 				};
-				// that.getOwnerComponent().getModel().setHeaders({"splitStart":splitStart, "splitEnd":splitEnd});
 				that.getOwnerComponent().getModel().setUseBatch(false);
 				that.aHttpRequest.push(that.getOwnerComponent().getModel().read("/OFPartition(SplitRange='" + splitRange + "')/Set", mParameters));
 			});
@@ -145,7 +187,7 @@ sap.ui.define([
                         Customer: item.Customer,
                         Plant: item.Plant,
                         Material: item.Material,
-						MaterialByCustomer: item.Material,
+						MaterialByCustomer: item.MaterialByCustomer,
 						MaterialName: item.MaterialName,
                         ReqDates: {}
                     };
@@ -165,6 +207,8 @@ sap.ui.define([
                     Customer: item.Customer,
                     Plant: item.Plant,
                     Material: item.Material,
+					MaterialByCustomer: item.MaterialByCustomer,
+					MaterialName: item.MaterialName,
                     ...item.ReqDates // 展开动态生成的日期列
                 };
             });
@@ -188,7 +232,6 @@ sap.ui.define([
 			// }
 			var oText = new sap.m.Input({
 							value : "{local>" + sColName + "}",
-					    	wrapping: false,
 					    	tooltip:"{local>" + sColName + "}"
 						});
 			var sLabel = sColName.slice(7);
