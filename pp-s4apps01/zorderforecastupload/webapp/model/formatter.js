@@ -59,6 +59,8 @@ sap.ui.define([
                     n1 = sign + n1;
                 }
                 return n1;
+            } else {
+                return n;
             }
         },
 
@@ -85,6 +87,8 @@ sap.ui.define([
                     n1 = sign + n1;
                 }
                 return n1;
+            } else {
+                return n;
             }
         }
     };
