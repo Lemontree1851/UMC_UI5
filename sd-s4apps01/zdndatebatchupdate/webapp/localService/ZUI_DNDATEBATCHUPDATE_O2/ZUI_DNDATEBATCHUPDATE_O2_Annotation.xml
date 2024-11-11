@@ -100,8 +100,26 @@
             <Annotations Target="cds_zui_dndatebatchupdate_o2.I_Customer_VHType/IsCompetitor">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
+            <Annotations Target="cds_zui_dndatebatchupdate_o2.I_SalesOrganizationType/AddressID">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
             <Annotations Target="cds_zui_dndatebatchupdate_o2.I_ShippingPointStdVHType/ShippingPointName">
                 <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_dndatebatchupdate_o2.I_StorageLocationStdVHType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="StorageLocation"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="StorageLocationName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_dndatebatchupdate_o2.YY1_SALESDOCTYPE_VType/IsDisabled">
                 <Annotation Term="UI.Hidden"/>

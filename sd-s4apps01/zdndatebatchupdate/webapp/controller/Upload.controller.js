@@ -74,7 +74,7 @@ sap.ui.define([
                 var oWB = XLSX.read(sResult, {
                     type: "binary",
                     cellDates: true,
-                    dateNF: 'yyyy/mm/dd;@'
+                    dateNF: 'yyyymmdd;@'
                 });
                 // 获取sheet1单元格的内容
                 var oSheet1 = oWB.Sheets[oWB.SheetNames[0]];
@@ -100,15 +100,18 @@ sap.ui.define([
                         DeliveryDate: aSheet1[i]["DeliveryDate"] || "",
                         ActualGoodsMovementDate: aSheet1[i]["ActualGoodsMovementDate"] || "",
                         OverallGoodsMovementStatus: aSheet1[i]["OverallGoodsMovementStatus"] || "",
-                        IntcoExtPlndTransfOfCtrlDteTme: aSheet1[i]["IntcoExtPlndTransfOfCtrlDteTme"] || "",
-                        IntcoExtActlTransfOfCtrlDteTme: aSheet1[i]["IntcoExtActlTransfOfCtrlDteTme"] || "",
-                        IntcoIntPlndTransfOfCtrlDteTme: aSheet1[i]["IntcoIntPlndTransfOfCtrlDteTme"] || "",
-                        IntcoIntActlTransfOfCtrlDteTme: aSheet1[i]["IntcoIntActlTransfOfCtrlDteTme"] || "",
+                        IntcoExtPlndTransfOfCtrlDteTme: aSheet1[i]["IntcoExtPlndTransfOfCtrlDteTme"].toString() || "",
+                        IntcoExtActlTransfOfCtrlDteTme: aSheet1[i]["IntcoExtActlTransfOfCtrlDteTme"].toString() || "",
+                        IntcoIntPlndTransfOfCtrlDteTme: aSheet1[i]["IntcoIntPlndTransfOfCtrlDteTme"].toString() || "",
+                        IntcoIntActlTransfOfCtrlDteTme: aSheet1[i]["IntcoIntActlTransfOfCtrlDteTme"].toString() || "",
                     };
                     //因为有些数据读出来是数值类型，但odta要求字符类型，通过此种方式将所有值转换成字符类型
                     oItem = JSON.parse(JSON.stringify(oItem));
-                    //同时这种方式会将日期类型转换成ISO类型的字符，我们只截取日期部分
-                    oItem.DeliveryDate = oItem.DeliveryDate.slice(0,10);
+                    // //同时这种方式会将日期类型转换成ISO类型的字符，我们只截取日期部分
+                    // oItem.IntcoExtPlndTransfOfCtrlDteTme = oItem.IntcoExtPlndTransfOfCtrlDteTme.slice(0,8);
+                    // oItem.IntcoExtActlTransfOfCtrlDteTme = oItem.IntcoExtActlTransfOfCtrlDteTme.slice(0,8);
+                    // oItem.IntcoIntPlndTransfOfCtrlDteTme = oItem.IntcoIntPlndTransfOfCtrlDteTme.slice(0,8);
+                    // oItem.IntcoIntActlTransfOfCtrlDteTme = oItem.IntcoIntActlTransfOfCtrlDteTme.slice(0,8);
                     aExcelSet.push(oItem);
                     // if(this.checkInconsistencies(aExcelSet)) {
                     //     this.byId("idCheckButton").setEnabled(false);
