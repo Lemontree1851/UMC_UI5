@@ -28,11 +28,6 @@
                             <Text text="{local>MaterialName}" wrapping="false"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="6rem" label="{i18n>BaseUnit}">
-                        <table:template>
-                            <Text text="{local>BaseUnit}" wrapping="false"/>
-                        </table:template>
-                    </table:Column>
                     <table:Column width="12rem" label="{i18n>TotalRequiredQuantity}" hAlign="End">
                         <table:template>
                             <Text text="{ path:'local>TotalRequiredQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>

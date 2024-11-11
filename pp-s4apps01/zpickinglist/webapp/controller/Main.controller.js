@@ -419,6 +419,7 @@ sap.ui.define([
                         oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.delimiter = true;
                         oColumn.textAlign = "End";
+                        oColumn.unitProperty = "BaseUnit";
                         break;
                 }
             });
@@ -434,7 +435,7 @@ sap.ui.define([
             for (var i = 0; i < aTableCol.length; i++) {
                 if (aTableCol[i].getVisible()) {
                     var sLabelText = aTableCol[i].getAggregation("label").getText();
-                    var sType, sTextAlign = "Begin";;
+                    var sType, sTextAlign, sUnitProperty;
                     switch (aTableCol[i].mBindingInfos.label.parts[0].path) {
                         //  Date
                         // case "RequisitionDate":
@@ -444,16 +445,18 @@ sap.ui.define([
                         case "TotalRequiredQuantity":
                         case "TotalShortFallQuantity":
                         case "StorageLocationToStock":
-                        case "M_CARD_Quantity":
-                        case "TotalTransferQuantity":
-                        case "StorageLocationFromStock":
-                        case "GR_SlipsQuantity":
-                        case "PostingQuantity":
+                        case "OrderRequiredQuantity":
+                        case "ResidueStockQuantity":
+                        case "ShortQuantity":
+                        case "ConfirmedAvailableQuantity":
                             sType = sap.ui.export.EdmType.Number;
                             sTextAlign = "End";
+                            sUnitProperty = "BaseUnit";
                             break;
                         default:
                             sType = sap.ui.export.EdmType.String;
+                            sTextAlign = "Begin";
+                            sUnitProperty = "";
                             break;
                     }
                     var oExcelCol = {
@@ -461,7 +464,8 @@ sap.ui.define([
                         type: sType,
                         property: aTableCol[i].getAggregation("template").getBindingPath("text"),
                         width: parseFloat(aTableCol[i].getWidth()),
-                        textAlign: sTextAlign
+                        textAlign: sTextAlign,
+                        unitProperty: sUnitProperty
                     };
                     aExcelCol.push(oExcelCol);
                 }

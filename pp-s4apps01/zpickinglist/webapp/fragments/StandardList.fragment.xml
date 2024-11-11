@@ -66,14 +66,6 @@
                         <Text text="{StorageLocationToName}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8rem" label="{i18n>BaseUnit}" sortProperty="BaseUnit" filterProperty="BaseUnit">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit", "leadingProperty":"BaseUnit"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{BaseUnit}" wrapping="false" />
-                    </table:template>
-                </table:Column>
                 <table:Column width="11rem" label="{i18n>TotalRequiredQuantity}" sortProperty="TotalRequiredQuantity" filterProperty="TotalRequiredQuantity" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"TotalRequiredQuantity", "leadingProperty":"TotalRequiredQuantity"}'/>
