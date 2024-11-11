@@ -46,20 +46,6 @@ sap.ui.define([
                     //More event handling can be done here
               };
 
-            // // 获取 NoDisplayColMfrpn 的值
-            // var oSmartFilterBar = this.byId("idSmartFilterBar");
-            // var sNoDisplayColMfrpn = oSmartFilterBar.getFilterData().NoDisplayColMfrpn;
-
-            // // 动态显示或隐藏列
-            // var oColumns = oTable.getColumns();
-            // var bShowColumn = sNoDisplayColMfrpn ? true : false; // 有值时显示，没值时隐藏
-
-            // oColumns.forEach(function (oColumn) {
-            //     if (oColumn.getSortProperty() === "ProductManufacturerNumber") {
-            //         oColumn.setVisible(bShowColumn);
-            //     }
-            // });
-
             // 根据选择框，添加过滤条件传值到后端
             var filters = oEvent.getParameters().bindingParams.filters;
             if(!filters){
@@ -136,25 +122,49 @@ sap.ui.define([
 
             // oSettings.fileName = this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("fileName");
 
-            try {
-                columns.find(cloumn => cloumn.property === "DeliveryDate").type = "Date";
-                columns.find(cloumn => cloumn.property === "ConfirmedDeliveryDate").type = "Date";
-                columns.find(cloumn => cloumn.property === "ExchangeRateDate").type = "Date";
-                columns.find(cloumn => cloumn.property === "CreationDate").type = "Date";
-                columns.find(cloumn => cloumn.property === "CreationDateItem").type = "Date";
-                columns.find(cloumn => cloumn.property === "LastChangeDate").type = "Date";
-
-                // if (dataSource && Array.isArray(dataSource)) {
-                //     dataSource.forEach(item => {
-                //         if (item[ConditionAmountPPR0]) {
-                //             // 根据需要修改字段值
-                //             item[ConditionAmountPPR0] = item[ConditionAmountPPR0] + item[TransactionCurrency]; 
-                //         }
-                //     });
-                // }
-            } catch (error) {
-                
-            }
+            columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    case "DeliveryDate":
+                    case "ConfirmedDeliveryDate":
+                    case "ExchangeRateDate":
+                    case "CreationDate":
+                    case "CreationDateItem":
+                    case "LastChangeDate":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break
+                    case "OrderQuantity":
+                    case "DeliveredQtyInOrderQtyUnit":
+                    case "OpenConfdDelivQtyInOrdQtyUnit":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        // oColumn.delimiter =true;
+                        // oColumn.textAlign ="End";
+                        oColumn.unitProperty="OrderQuantityUnit";
+                        break;
+                    case "ComplDeliveredQtyInBaseUnit":
+                    case "NoComplDeliveredQtyInBaseUnit":
+                    case "EnternalTansferQtyInBaseUnit":
+                    case "NoEnternalTansferQtyInBaseUnit":
+                    case "BillingQuantityInBaseUnit":
+                    case "NoBillingQuantityInBaseUnit":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.unitProperty="BaseUnit";
+                        break;
+                    case "ConditionAmountPPR0":
+                    case "ConditionAmountTTX1":
+                    case "ConditionAmountZPFC":
+                    case "ConditionAmountZPST":
+                    case "ConditionAmountZPIN":
+                    case "ConditionAmountZPSB":
+                    case "ConditionAmountZPSS":
+                    case "ConditionAmountZPCM":
+                    case "ConditionAmountZPGP": 
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.unitProperty="TransactionCurrency";
+                        break;
+                    default:
+                        break;
+                }
+            });
         },
     });
 });
