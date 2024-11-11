@@ -75,6 +75,10 @@ modules:
       - sdzsalesdocumentlist.zip
       name: sdzsalesdocumentlist
       target-path: resources/
+    - artifacts:
+      - sdzdndatebatchupdate.zip
+      name: sdzdndatebatchupdate
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -141,6 +145,15 @@ modules:
 - name: sdsalesacceptdn
   type: html5
   path: salesacceptdn
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdzdndatebatchupdate
+  type: html5
+  path: zdndatebatchupdate
   build-parameters:
     build-result: dist
     builder: custom
