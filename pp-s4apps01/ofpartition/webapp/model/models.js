@@ -22,6 +22,7 @@ function (JSONModel, Device) {
 				errors: "",
 				excelSet:[],
 				OFPartition: [],
+				OFPartitionTemp:[],
 				upload: [{}],
 				isRecordCheckSuccessed: false
 			};

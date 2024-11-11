@@ -4,21 +4,23 @@ sap.ui.define([
     "./messages",
 	"sap/ui/model/Filter",
 	"sap/m/MessageBox",
-	"sap/ui/export/Spreadsheet"
+	"sap/ui/export/Spreadsheet",
+	"sap/m/BusyDialog",
 ], function(
     Controller,
     formatter,
     messages,
 	Filter,
 	MessageBox,
-	Spreadsheet
+	Spreadsheet,
+	BusyDialog
 ) {
 	"use strict";
 
 	return Controller.extend("pp.ofpartition.controller.OFPartition", {
         formatter : formatter,
         onInit: function () {
-            // this._BusyDialog = new BusyDialog();
+            this._BusyDialog = new BusyDialog();
             this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
@@ -49,18 +51,20 @@ sap.ui.define([
 			this.aHttpRequest.forEach(function (req) {
 				req.abort();
 			});
-            // var sParamtetrsOfSelect = "Customer,Plant,Material,MaterialByCustomer,MaterialName,RequirementDate,RequirementQty";
-			// //获取数据
-            // this._LocalData.setProperty("/OFPartition", []);
-            // this.getEntityContent(aFilter, sParamtetrsOfSelect);
+			// 获取分割范围
+			var oDateRange = this.byId("idDateRangeSelection");
+			var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
+			var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
+			var splitRange = splitStart + "-" + splitEnd;
 
-			this.getEntityCount(aFilter).then(function (iItemCount) {
+			this.getEntityCount(aFilter, splitRange).then(function (iItemCount) {
 				if (iItemCount > 0) {
 					//设置要查询的字段
 					let sParamtetrsOfSelect = "Customer,Plant,Material,MaterialByCustomer,MaterialName,RequirementDate,RequirementQty";
 					//获取数据
 					this._LocalData.setProperty("/OFPartition", []);
-					this.getEntityContentOnePage(iItemCount, aFilter, sParamtetrsOfSelect);
+					this._LocalData.setProperty("/OFPartitionTemp", []);
+					this.getEntityContentOnePage(iItemCount, 0, aFilter, sParamtetrsOfSelect, splitRange);
 				} else {
 					this._LocalData.setProperty("/OFPartition", []);
 					this.byId("reportTable1").setBusy(false);
@@ -68,14 +72,9 @@ sap.ui.define([
 			}.bind(this));
         },
 
-		getEntityCount: function (aFilter) {
+		getEntityCount: function (aFilter, splitRange) {
 			var that = this;
 			that.byId("reportTable1").setBusy(true);
-			// 获取分割范围
-			var oDateRange = that.byId("idDateRangeSelection");
-			var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
-			var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
-			var splitRange = splitStart + "-" + splitEnd;
 			var promise = new Promise(function (resolve, reject) {
 				var mParameters = {
 					filters: aFilter,
@@ -103,36 +102,29 @@ sap.ui.define([
 			return promise;
 		},
 
-        getEntityContentOnePage: function (iTop,aFilter, sParamtetrsOfSelect) {
+        getEntityContentOnePage: function (iTop, iSkip, aFilter, sParamtetrsOfSelect, splitRange) {
 			sParamtetrsOfSelect = sParamtetrsOfSelect ? sParamtetrsOfSelect : "";
 			var that = this;
 			this.aHttpRequest = [];
 			that.byId("reportTable1").setBusy(true);
 			var aPromise = [];
 
-			// 获取分割范围
-			var oDateRange = that.byId("idDateRangeSelection");
-			var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
-			var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
-			var splitRange = splitStart + "-" + splitEnd;
 			var aResult = that._LocalData.getProperty("/OFPartition");
+			var aResultTemp = that._LocalData.getProperty("/OFPartitionTemp");
 			var promise = new Promise(function (resolve, reject) {
 				var mParameters = {
 					filters: aFilter,
 					urlParameters: {
-						"$top": iTop,
-						// "$skip": 0,
+						"$top": iTop,// iTop等于总数 超过5000条abap cloud会自动分页
+						"$skiptoken": iSkip,
 						"$select": sParamtetrsOfSelect
 					},
 					success: function (oData) {
 						if (oData.results.length > 0) {
-							aResult = that.transformData(oData.results);
-							// aResult.push.apply(aResult, that.transformData(aResult,oData.results));
-
-							that._LocalData.setProperty("/OFPartition", aResult);
-							that.addColumns();
+							aResultTemp.push.apply(aResultTemp, oData.results);
+							that._LocalData.setProperty("/OFPartitionTemp", aResultTemp);
 						} 
-						resolve();
+						resolve(oData);
 					},
 					error: function (oError) {
 						//手动中止的导致的错误不需要处理
@@ -161,11 +153,25 @@ sap.ui.define([
 				that.getOwnerComponent().getModel().setUseBatch(false);
 				that.aHttpRequest.push(that.getOwnerComponent().getModel().read("/OFPartition(SplitRange='" + splitRange + "')/Set", mParameters));
 			});
-			//最后一次取值成功处理
-            promise.then(function () {
-                that.byId("reportTable1").setBusy(false);
-                that.aHttpRequest = [];
-                that._LocalData.refresh();
+            promise.then(function (oData) {
+				// 如果存在next参数，说明数据还未取完，需要再次取值
+				if (oData.__next) {
+					//abap cloud中odata每次最多只能取5000条，所以当还有数据时 iSkip加5000即可
+					// 但这里会存在效率问题，虽然服务器强制分页，但是后端处理数据的逻辑中并没有考虑分页，那么相当于整个取值逻辑要重复执行好几次
+					// 且需要前一页执行完毕之后才处理第二页
+					iSkip = iSkip + 5000;
+					that.getEntityContentOnePage(iTop, iSkip, aFilter, sParamtetrsOfSelect, splitRange);
+				// 如果不存在next参数则说明数据已经取完
+				} else {
+					aResultTemp = that._LocalData.getProperty("/OFPartitionTemp");
+					aResult = that.transformData(aResultTemp);
+					that._LocalData.setProperty("/OFPartition", aResult);
+					that.addColumns();
+
+					that.aHttpRequest = [];
+					that._LocalData.refresh();
+					that.byId("reportTable1").setBusy(false);
+				}
             });
 			// aPromise.push(promise);
 		},
@@ -226,10 +232,7 @@ sap.ui.define([
 		},
 
 		addColumn: function(sColName,oObj){
-			// var sId = sColName + index;
-			// if (oObj.byId(sId)){
-			// 	oObj.byId(sId).destroy(true);
-			// }
+			// 生成input控件
 			var oText = new sap.m.Input({
 							value : "{local>" + sColName + "}",
 					    	tooltip:"{local>" + sColName + "}"
@@ -241,12 +244,15 @@ sap.ui.define([
 			if (sColName.indexOf("ReqDate") >= 0) {
 				shAlign = "End";
 			}
+			// 生成column id
 			var sId = oObj.getView().createId(sColName);
+			// 如果相同ID的column存在则删除(为了保证column的顺序，需要重新添加)
 			if (oObj.byId(sId)){
 				oObj.byId(sId).destroyLabel();
 				oObj.byId(sId).destroyTemplate();
 				oObj.byId(sId).destroy(true);
 			}
+			// 往表中添加column
 			var oColumn = new sap.ui.table.Column({
 					id: oObj.getView().createId(sColName),
 					hAlign: shAlign,
