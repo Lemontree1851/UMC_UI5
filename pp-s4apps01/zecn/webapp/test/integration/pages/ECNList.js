@@ -8,7 +8,7 @@ sap.ui.define(['sap/fe/test/ListReport'], function(ListReport) {
 
     return new ListReport(
         {
-            appId: 'zecn.zecn',
+            appId: 'pp.zecn',
             componentId: 'ECNList',
             contextPath: '/ECN'
         },

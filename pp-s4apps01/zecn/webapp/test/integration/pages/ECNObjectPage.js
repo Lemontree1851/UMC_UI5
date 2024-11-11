@@ -8,7 +8,7 @@ sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
 
     return new ObjectPage(
         {
-            appId: 'zecn.zecn',
+            appId: 'pp.zecn',
             componentId: 'ECNObjectPage',
             contextPath: '/ECN'
         },

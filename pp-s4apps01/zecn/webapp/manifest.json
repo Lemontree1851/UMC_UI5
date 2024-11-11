@@ -1,7 +1,7 @@
 {
   "_version": "1.64.0",
   "sap.app": {
-    "id": "zecn.zecn",
+    "id": "pp.zecn",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -83,7 +83,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "zecn.zecn.i18n.i18n"
+          "bundleName": "pp.zecn.i18n.i18n"
         }
       },
       "": {
@@ -136,7 +136,9 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "GridTable"
+                    "type": "GridTable",
+                    "enableExport": true,
+                    "selectAll": true
                   }
                 }
               }
