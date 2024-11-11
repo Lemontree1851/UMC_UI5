@@ -83,19 +83,26 @@ sap.ui.define([
                 success: function (oData) {
                     let aExcelSet = this.localData.getProperty("/excelSet");
                     let result = JSON.parse(oData["batchProcess"].Zzkey);
-                    result.forEach(function (line) {
-                        for ( let i = 0; i < aExcelSet.length; i++ ) {
-                            if (aExcelSet[i].Row == line.ROW ) {
-                                Object.keys(aExcelSet[0]).forEach(function(key) {
-                                    if (key == "Status" || key == "Message") {
-                                        aExcelSet[i][key] = line[key.toUpperCase()];
-                                    }
-                                });
-                                // aExcelSet[i].Type = line.TYPE;
-                                // aExcelSet[i].Message = line.MESSAGE;
-                            }
+                    if (sAction === "export") {
+                        if (oData["batchProcess"].RecordUUID) {
+                            var sURL = this.getOwnerComponent().getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + oData["batchProcess"].RecordUUID + ",IsActiveEntity=true)/PDFContent";
+                            sap.m.URLHelper.redirect(sURL, true);
                         }
-                    });
+                    }else{
+                        result.forEach(function (line) {
+                            for ( let i = 0; i < aExcelSet.length; i++ ) {
+                                if (aExcelSet[i].Row == line.ROW ) {
+                                    Object.keys(aExcelSet[0]).forEach(function(key) {
+                                        if (key == "Status" || key == "Message") {
+                                            aExcelSet[i][key] = line[key.toUpperCase()];
+                                        }
+                                    });
+                                    // aExcelSet[i].Type = line.TYPE;
+                                    // aExcelSet[i].Message = line.MESSAGE;
+                                }
+                            }
+                        });
+                    };
                     this.localData.setProperty("/excelSet", aExcelSet);
                     this.getErrorCount(aExcelSet, sAction);
                 }.bind(this),

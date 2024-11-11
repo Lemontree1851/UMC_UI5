@@ -67,7 +67,7 @@
                 </t:extension>
                 <t:columns>
                     <!-- ステータス -->
-                    <t:Column id="id1Column" width="6rem" sortProperty="Status" hAlign="Center" label="{i18n>Status}" >
+                    <t:Column width="6rem" sortProperty="Status" hAlign="Center" label="{i18n>Status}" >
                         <t:template>
                             <ObjectStatus
                                 id="idObjectStatus"
@@ -86,7 +86,6 @@
                     <t:Column id="id2Column" width="14rem" sortProperty="Message" label="{i18n>Message}" >
                         <t:template>
                             <Text
-                                id="idMessageText"
                                 text="{local>Message}"
                                 tooltip="{local>Message}"
                                 wrapping="false" />
@@ -94,128 +93,128 @@
                     </t:Column>
 
                     <!-- 出荷伝票 -->
-                    <t:Column id="id3Column" width="8rem" label="{i18n>DeliveryDocument}" >
+                    <t:Column width="8rem" label="{i18n>DeliveryDocument}" >
                         <t:template>
                             <Text
-                                id="idDeliveryDocumentText"
-                                text="{local>DeliveryDocument}" />
+                                text="{local>DeliveryDocument}"
+                                wrapping="false" />
                         </t:template>
                     </t:Column>
 
                     <!-- 出荷ポイント -->
-                    <t:Column id="id4Column" width="8rem" label="{i18n>ShippingPoint}" >
+                    <t:Column width="8rem" label="{i18n>ShippingPoint}" >
                         <t:template>
                             <Text
-                                id="idShippingPointText"
-                                text="{local>ShippingPoint}" />
+                                text="{local>ShippingPoint}"
+                                wrapping="false" />
                         </t:template>
                     </t:Column>
 
                     <!-- 販売組織 -->
-                    <t:Column id="id5Column" width="8rem" label="{i18n>SalesOrganization}" >
+                    <t:Column width="8rem" label="{i18n>SalesOrganization}" >
                         <t:template>
                             <Text
-                                id="idSalesOrganizationText"
-                                text="{local>SalesOrganization}" />
+                                text="{local>SalesOrganization}"
+                                wrapping="false" />
                         </t:template>
                     </t:Column>
 
                     <!-- 営業所 -->
-                    <t:Column id="id6Column" width="8rem" label="{i18n>SalesOffice}" >
+                    <t:Column width="8rem" label="{i18n>SalesOffice}" >
                         <t:template>
                             <Text
-                                id="idSalesOfficeText"
-                                text="{local>SalesOffice}" />
+                                text="{local>SalesOffice}"
+                                wrapping="false" />
                         </t:template>
                     </t:Column>
 
                     <!-- 受注先 -->
-                    <t:Column id="id7Column" width="8rem" label="{i18n>SoldToParty}" >
+                    <t:Column width="8rem" label="{i18n>SoldToParty}" >
                         <t:template>
                             <Text
-                                id="idSoldToPartyText"
-                                text="{local>SoldToParty}" />
+                                text="{local>SoldToParty}"
+                                wrapping="false" />
                         </t:template>
                     </t:Column>
 
                     <!-- 出荷先 -->
-                    <t:Column id="id8Column" width="8rem" label="{i18n>ShipToParty}" >
+                    <t:Column width="8rem" label="{i18n>ShipToParty}" >
                         <t:template>
                             <Text
-                                id="idShipToPartyText"
-                                text="{local>ShipToParty}" />
+                                text="{local>ShipToParty}"
+                                wrapping="false" />
                         </t:template>
                     </t:Column>
 
                     <!-- 伝票日付 -->
-                    <t:Column id="id9Column" width="8rem" label="{i18n>DocumentDate}" >
+                    <t:Column width="8rem" label="{i18n>DocumentDate}" >
                         <t:template>
                             <Text
-                                id="idDocumentDateText"
-                                text="{path:'local>DocumentDate', formatter:'.formatter.date'}" />
+                                text="{path:'local>DocumentDate', formatter:'.formatter.date'}" 
+                                wrapping="false"/>
                         </t:template>
                     </t:Column>
 
                     <!-- 納入日付 -->
-                    <t:Column id="id10Column" width="8rem" label="{i18n>DeliveryDate}" >
+                    <t:Column width="8rem" label="{i18n>DeliveryDate}" >
                         <t:template>
                             <Text
-                                id="idDeliveryDateText"
-                                text="{path:'local>DeliveryDate', formatter:'.formatter.date'}" />
+                                text="{path:'local>DeliveryDate', formatter:'.formatter.date'}" 
+                                wrapping="false"/>
                         </t:template>
                     </t:Column>
 
                     <!-- 実出庫移動日付 -->
-                    <t:Column id="id11Column" width="8rem" label="{i18n>ActualGoodsMovementDate}" >
+                    <t:Column width="8rem" label="{i18n>ActualGoodsMovementDate}" >
                         <t:template>
                             <Text
-                                id="idActualGoodsMovementDateText"
-                                text="{path:'local>ActualGoodsMovementDate', formatter:'.formatter.date'}" />
+                                text="{path:'local>ActualGoodsMovementDate', formatter:'.formatter.date'}" 
+                                wrapping="false"/>
                         </t:template>
                     </t:Column>
 
                     <!-- 在庫移動ステータス -->
-                    <t:Column id="id12Column" width="8rem" label="{i18n>OverallGoodsMovementStatus}" >
+                    <t:Column width="8rem" label="{i18n>OverallGoodsMovementStatus}" >
                         <t:template>
                             <Text
-                                id="idOverallGoodsMovementStatusText"
-                                text="{local>OverallGoodsMovementStatus}" />
+                                text="{local>OverallGoodsMovementStatus}" 
+                                wrapping="false"/>
                         </t:template>
                     </t:Column>
 
                     <!-- 外部計画日付 -->
-                    <t:Column id="id13Column" width="8rem" label="{i18n>IntcoExtPlndTransfOfCtrlDteTme}" >
+                    <t:Column width="8rem" label="{i18n>IntcoExtPlndTransfOfCtrlDteTme}" >
                         <t:template>
                             <Text
-                                id="idIntcoExtPlndTransfOfCtrlDteTmeText"
-                                text="{path:'local>IntcoExtPlndTransfOfCtrlDteTme', formatter:'.formatter.date'}" />
+                                text="{path:'local>IntcoExtPlndTransfOfCtrlDteTme', formatter:'.formatter.date'}" 
+                                wrapping="false"/>
                         </t:template>
                     </t:Column>
 
                     <!-- 外部実績日付 -->
-                    <t:Column id="id14Column" width="8rem" label="{i18n>IntcoExtActlTransfOfCtrlDteTme}" >
+                    <t:Column width="8rem" label="{i18n>IntcoExtActlTransfOfCtrlDteTme}" >
                         <t:template>
                             <Text
-                                id="idIntcoExtActlTransfOfCtrlDteTmeText"
-                                text="{path:'local>IntcoExtActlTransfOfCtrlDteTme', formatter:'.formatter.date'}" />
+                                text="{path:'local>IntcoExtActlTransfOfCtrlDteTme', formatter:'.formatter.date'}" 
+                                wrapping="false"/>
                         </t:template>
                     </t:Column>
 
                     <!-- 内部計画日付 -->
-                    <t:Column id="id15Column" width="8rem" label="{i18n>IntcoIntPlndTransfOfCtrlDteTme}" >
+                    <t:Column width="8rem" label="{i18n>IntcoIntPlndTransfOfCtrlDteTme}" >
                         <t:template>
                             <Text
-                                id="idIntcoIntPlndTransfOfCtrlDteTmeText"
-                                text="{path:'local>IntcoIntPlndTransfOfCtrlDteTme', formatter:'.formatter.date'}" />
+                                text="{path:'local>IntcoIntPlndTransfOfCtrlDteTme', formatter:'.formatter.date'}" 
+                                wrapping="false"/>
                         </t:template>
                     </t:Column>
 
                     <!-- 内部実績日付 -->
-                    <t:Column id="id16Column" width="8rem" label="{i18n>IntcoIntActlTransfOfCtrlDteTme}" >
+                    <t:Column width="8rem" label="{i18n>IntcoIntActlTransfOfCtrlDteTme}" >
                         <t:template>
                             <Text
-                                id="idIntcoIntActlTransfOfCtrlDteTmeText"
-                                text="{path:'local>IntcoIntActlTransfOfCtrlDteTme', formatter:'.formatter.date'}" />
+                                text="{path:'local>IntcoIntActlTransfOfCtrlDteTme', formatter:'.formatter.date'}" 
+                                wrapping="false"/>
                         </t:template>
                     </t:Column>
                 </t:columns>
