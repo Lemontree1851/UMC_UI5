@@ -56,27 +56,51 @@ sap.ui.define([
 
         _renderingColumns: function (object) {
             var oTable = this.byId("idListTable");
+            oTable.removeAllColumns();
             for (const key in object) {
-                var oColumn;
+                var sTextAlign, bvisible;
+                switch (key) {
+                    case "IndustrystandardName":
+                    case "EOLGroup":
+                    case "IsMainProduct":
+                    case "Supplier":
+                    case "SupplierName":
+                    case "SupplierMaterialNumber":
+                    case "ProductManufacturerNumber":
+                    case "ManufacturerNumber":
+                    case "MaterialPlannedDeliveryDurn":
+                    case "MinimumPurchaseOrderQty":
+                    case "SupplierPrice":
+                    case "SupplierCertoriginCountry":
+                        bvisible = "{= ${local>/filter/ShowDetailLines} === 'X'}";
+                        break;
+                    default:
+                        bvisible = true;
+                        break;
+                }
                 switch (key) {
                     case "MinimumPurchaseOrderQty":
                     case "SupplierPrice":
                     case "StandardPrice":
-                        oColumn = new UIColumn({
-                            width: "10rem",
-                            label: new Label({ text: "{i18n>" + key + "}" }),
-                            hAlign: "End",
-                            template: new Text({ text: "{ path:'local>" + key + "',formatter:'.formatter.formatFloat'}", wrapping: false })
-                        });
+                        sTextAlign = "End";
                         break;
                     default:
-                        oColumn = new UIColumn({
-                            width: "10rem",
-                            label: new Label({ text: "{i18n>" + key + "}" }),
-                            template: new Text({ text: "{local>" + key + "}", wrapping: false })
-                        });
+                        sTextAlign = "Begin"
                         break;
                 }
+                var oColumn = new UIColumn({
+                    width: "10rem",
+                    label: new Label({ text: "{i18n>" + key + "}" }),
+                    hAlign: sTextAlign,
+                    visible: bvisible,
+                    template: new Text({ text: "{local>" + key + "}", wrapping: false })
+                });
+                // oColumn = new UIColumn({
+                //     width: "10rem",
+                //     label: new Label({ text: "{i18n>" + key + "}" }),
+                //     hAlign: "End",
+                //     template: new Text({ text: "{ path:'local>" + key + "',formatter:'.formatter.formatFloat'}", wrapping: false })
+                // });
                 oTable.addColumn(oColumn);
             }
         }
