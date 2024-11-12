@@ -80,7 +80,15 @@
                             <PropertyValue Property="Value" Path="PlanCostRate"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CostRateScaleFactor1"/>
+                            <PropertyValue Property="Label" String="{@i18n>costratescalefactor1}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ActualCostRate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CostRateScaleFactor2"/>
+                            <PropertyValue Property="Label" String="{@i18n>costratescalefactor2}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="TotalActualCost"/>
