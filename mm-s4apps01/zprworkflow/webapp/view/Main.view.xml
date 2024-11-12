@@ -1,0 +1,17 @@
+<mvc:View controllerName="mm.zprworkflow.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+    <Page id="idPage" showHeader="false">
+        <content>
+            <IconTabBar id="id0IconTabBar" expanded="{device>/isNoPhone}" stretchContentHeight="true" backgroundDesign="Transparent"
+                applyContentPadding="false" class="sapUiResponsiveContentPadding">
+                <items>
+                    <IconTabFilter id="id0IconTabFilter" text="{i18n>Result1}" key="result1">
+                        <mvc:XMLView id="id0XMLView" viewName="mm.zprworkflow.view.Upload" height="100%" />
+                    </IconTabFilter>
+                    <IconTabFilter id="id1IconTabFilter" text="{i18n>Result2}" key="result2">
+                        <mvc:XMLView id="id1XMLView" viewName="mm.zprworkflow.view.Display" height="100%" />
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>
