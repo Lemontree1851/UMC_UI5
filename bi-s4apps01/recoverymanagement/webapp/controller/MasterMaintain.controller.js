@@ -166,7 +166,7 @@ sap.ui.define([
                 });
 
                 this.loadFragment({
-                    name: 'recoverymanagement.view.Create'
+                    name: 'recoverymanagement.fragment.Create'
                 }).then(function (oDialog) {
                     oDialog.setBindingContext(oBindingContext);
                     oDialog.open();
@@ -191,7 +191,7 @@ sap.ui.define([
                 var oBindingContext = oTable.getContextByIndex(aIndex[0]);
 
                 this.loadFragment({
-                    name: 'recoverymanagement.view.Edit'
+                    name: 'recoverymanagement.fragment.Edit'
                 }).then(function (oDialog) {
                     oDialog.setBindingContext(oBindingContext);
                     oDialog.open();
