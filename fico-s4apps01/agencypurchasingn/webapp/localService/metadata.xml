@@ -53,30 +53,25 @@
             <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
             <EntityType Name="ItemdataType">
                 <Key>
+                    <PropertyRef Name="ZPostingDate"/>
                     <PropertyRef Name="PostingDate"/>
                     <PropertyRef Name="CompanyCode"/>
-                    <PropertyRef Name="CompanyCode2"/>
                     <PropertyRef Name="CompanyCodeCurrency"/>
                     <PropertyRef Name="TaxCode"/>
                 </Key>
-                <Property Name="PostingDate" Type="Edm.Date" Nullable="false"/>
+                <Property Name="ZPostingDate" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="PostingDate" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="CompanyCode2" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="CompanyCodeCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
-                <Property Name="TaxCode" Type="Edm.String" Nullable="false" MaxLength="2"/>
-                <Property Name="Ledger" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="TaxCode" Type="Edm.String" Nullable="false" MaxLength="16"/>
+                <Property Name="CompanyCode2" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="GLAccount" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="AccountingDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="FiscalYearPeriod" Type="Edm.String" Nullable="false" MaxLength="7"/>
-                <Property Name="ReferenceDocumentContext" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="ReferenceDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="Currency1" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="variable"/>
                 <Property Name="Currency2" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="variable"/>
-                <Property Name="Currency3" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="variable"/>
+                <Property Name="Currency3" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="variable"/>
                 <Property Name="accountingdocument1" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="accountingdocument2" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="message" Type="Edm.String" Nullable="false" MaxLength="220"/>
+                <Property Name="message" Type="Edm.String" Nullable="false" MaxLength="500"/>
                 <Property Name="uuid1" Type="Edm.Guid"/>
                 <Property Name="uuid2" Type="Edm.Guid"/>
                 <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.EntityControl"/>
@@ -114,74 +109,27 @@
                 <Annotation Term="SAP__common.Label" String="UUID"/>
                 <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
             </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/PostingDate">
+            <Annotations Target="SAP__self.ItemdataType/ZPostingDate">
                 <Annotation Term="SAP__common.Label" String="年度期間"/>
-                <Annotation Term="SAP__common.Heading" String="Posting Date"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Posting Date"/>
             </Annotations>
             <Annotations Target="SAP__self.ItemdataType/CompanyCode">
                 <Annotation Term="SAP__common.Label" String="転記先会社コード"/>
-                <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
                         <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing.companycode'/$metadata</String>
                     </Collection>
                 </Annotation>
-                <Annotation Term="SAP__common.Heading" String="Company Code"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Company Code"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ItemdataType/CompanyCodeCurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
             </Annotations>
             <Annotations Target="SAP__self.ItemdataType/CompanyCode2">
                 <Annotation Term="SAP__common.Label" String="決済対象会社コード"/>
-                <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
                         <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing.companycode2'/$metadata</String>
                     </Collection>
                 </Annotation>
-                <Annotation Term="SAP__common.Heading" String="Company Code"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Company Code"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/CompanyCodeCurrency">
-                <Annotation Term="SAP__common.IsCurrency"/>
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Company Code Currency"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/TaxCode">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Tax Code"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Tax on Sales/Purchases Code"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/Ledger">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Ledger"/>
-                <Annotation Term="SAP__common.Heading" String="Ld"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Ledger in General Ledger Accounting"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/GLAccount">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="G/L Account"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/AccountingDocument">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Journal Entry"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/FiscalYear">
-                <Annotation Term="SAP__common.IsDigitSequence"/>
-                <Annotation Term="SAP__common.Label" String="Fiscal Year"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/FiscalYearPeriod">
-                <Annotation Term="SAP__common.IsDigitSequence"/>
-                <Annotation Term="SAP__common.Label" String="Fiscal Year Period"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/ReferenceDocumentContext">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Reference Document Context"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/ReferenceDocument">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Reference Document"/>
-                <Annotation Term="SAP__common.Heading" String="Ref. Doc."/>
-                <Annotation Term="SAP__common.QuickInfo" String="Reference Doc. Number"/>
             </Annotations>
             <Annotations Target="SAP__self.ItemdataType/Currency1">
                 <Annotation Term="SAP__measures.ISOCurrency" Path="CompanyCodeCurrency"/>
@@ -209,6 +157,12 @@
             </Annotations>
             <Annotations Target="SAP__self.ItemdataType">
                 <Annotation Term="SAP__common.Label" String="代理購買仕訳生成"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="代理購買仕訳生成"/>
+                        <PropertyValue Property="TypeNamePlural" String="代理購買仕訳生成"/>
+                    </Record>
+                </Annotation>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
@@ -263,7 +217,7 @@
                 </Annotation>
                 <Annotation Term="SAP__UI.SelectionFields">
                     <Collection>
-                        <PropertyPath>PostingDate</PropertyPath>
+                        <PropertyPath>ZPostingDate</PropertyPath>
                         <PropertyPath>CompanyCode</PropertyPath>
                         <PropertyPath>CompanyCode2</PropertyPath>
                     </Collection>
@@ -282,9 +236,15 @@
                         <PropertyValue Property="FilterExpressionRestrictions">
                             <Collection>
                                 <Record>
-                                    <PropertyValue Property="Property" PropertyPath="PostingDate"/>
+                                    <PropertyValue Property="Property" PropertyPath="ZPostingDate"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
                                 </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>ZPostingDate</PropertyPath>
+                                <PropertyPath>CompanyCode</PropertyPath>
                             </Collection>
                         </PropertyValue>
                         <PropertyValue Property="NonFilterableProperties">
