@@ -53,17 +53,16 @@
             <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
             <EntityType Name="ItemdataType">
                 <Key>
-                    <PropertyRef Name="ZPostingDate"/>
                     <PropertyRef Name="PostingDate"/>
                     <PropertyRef Name="CompanyCode"/>
                     <PropertyRef Name="CompanyCodeCurrency"/>
                     <PropertyRef Name="TaxCode"/>
                 </Key>
-                <Property Name="ZPostingDate" Type="Edm.String" Nullable="false" MaxLength="8"/>
                 <Property Name="PostingDate" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="CompanyCodeCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
                 <Property Name="TaxCode" Type="Edm.String" Nullable="false" MaxLength="16"/>
+                <Property Name="ZPostingDate" Type="Edm.Date"/>
                 <Property Name="CompanyCode2" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="GLAccount" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="Currency1" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="variable"/>
@@ -71,7 +70,7 @@
                 <Property Name="Currency3" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="variable"/>
                 <Property Name="accountingdocument1" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="accountingdocument2" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="message" Type="Edm.String" Nullable="false" MaxLength="500"/>
+                <Property Name="message" Type="Edm.String" Nullable="false" MaxLength="100"/>
                 <Property Name="uuid1" Type="Edm.Guid"/>
                 <Property Name="uuid2" Type="Edm.Guid"/>
                 <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.EntityControl"/>
@@ -109,25 +108,27 @@
                 <Annotation Term="SAP__common.Label" String="UUID"/>
                 <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
             </Annotations>
-            <Annotations Target="SAP__self.ItemdataType/ZPostingDate">
-                <Annotation Term="SAP__common.Label" String="年度期間"/>
-            </Annotations>
             <Annotations Target="SAP__self.ItemdataType/CompanyCode">
                 <Annotation Term="SAP__common.Label" String="転記先会社コード"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing.companycode'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing_cp.companycode'/$metadata</String>
                     </Collection>
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ItemdataType/CompanyCodeCurrency">
                 <Annotation Term="SAP__common.IsCurrency"/>
             </Annotations>
+            <Annotations Target="SAP__self.ItemdataType/ZPostingDate">
+                <Annotation Term="SAP__common.Label" String="年度期間"/>
+                <Annotation Term="SAP__common.Heading" String="Doc. Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Document Date in Document"/>
+            </Annotations>
             <Annotations Target="SAP__self.ItemdataType/CompanyCode2">
                 <Annotation Term="SAP__common.Label" String="決済対象会社コード"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing.companycode2'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing_cp.companycode2'/$metadata</String>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -232,6 +233,12 @@
                 </Annotation>
                 <Annotation Term="SAP__capabilities.FilterRestrictions">
                     <Record>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>CompanyCode</PropertyPath>
+                                <PropertyPath>ZPostingDate</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
                         <PropertyValue Property="Filterable" Bool="true"/>
                         <PropertyValue Property="FilterExpressionRestrictions">
                             <Collection>
@@ -239,12 +246,6 @@
                                     <PropertyValue Property="Property" PropertyPath="ZPostingDate"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
                                 </Record>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="RequiredProperties">
-                            <Collection>
-                                <PropertyPath>ZPostingDate</PropertyPath>
-                                <PropertyPath>CompanyCode</PropertyPath>
                             </Collection>
                         </PropertyValue>
                         <PropertyValue Property="NonFilterableProperties">
