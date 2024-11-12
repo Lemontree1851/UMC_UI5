@@ -43,6 +43,24 @@ sap.ui.define([
         onSearch: function (oEvent) {
             this.errorPopup = false;
 			var aFilter = this.getView().byId("idSmartFilterBar").getFilters();
+			var oNewFilter, aNewFilter = [];
+
+			// 获取分割范围
+			var oDateRange = this.byId("idDateRangeSelection");
+			if (oDateRange.getValue()) {
+				var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
+				var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
+				var splitRange = splitStart + "-" + splitEnd;
+				aNewFilter.push(new Filter("SplitRange", "EQ", splitRange)); 
+			}
+
+			oNewFilter = new Filter({
+				filters:aNewFilter,
+				and:true
+			});
+			if (aNewFilter.length > 0) {
+				aFilter.push(oNewFilter);
+			}
 			if (!aFilter) {
 				aFilter = [];
 			}
@@ -51,12 +69,7 @@ sap.ui.define([
 			this.aHttpRequest.forEach(function (req) {
 				req.abort();
 			});
-			// 获取分割范围
-			var oDateRange = this.byId("idDateRangeSelection");
-			var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
-			var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
-			var splitRange = splitStart + "-" + splitEnd;
-
+			
 			this.getEntityCount(aFilter, splitRange).then(function (iItemCount) {
 				if (iItemCount > 0) {
 					//设置要查询的字段
@@ -97,7 +110,8 @@ sap.ui.define([
 						MessageBox.error(sErrorMessage);
 					}
 				};
-				that.getOwnerComponent().getModel().read("/OFPartition(SplitRange='" + splitRange + "')/Set/$count", mParameters);
+				// that.getOwnerComponent().getModel().read("/OFPartition(SplitRange='" + splitRange + "')/Set/$count", mParameters);
+				that.getOwnerComponent().getModel().read("/OFPartition/$count", mParameters);
 			});
 			return promise;
 		},
@@ -151,7 +165,8 @@ sap.ui.define([
 					}
 				};
 				that.getOwnerComponent().getModel().setUseBatch(false);
-				that.aHttpRequest.push(that.getOwnerComponent().getModel().read("/OFPartition(SplitRange='" + splitRange + "')/Set", mParameters));
+				// that.aHttpRequest.push(that.getOwnerComponent().getModel().read("/OFPartition(SplitRange='" + splitRange + "')/Set", mParameters));
+				that.aHttpRequest.push(that.getOwnerComponent().getModel().read("/OFPartition", mParameters));
 			});
             promise.then(function (oData) {
 				// 如果存在next参数，说明数据还未取完，需要再次取值
@@ -399,6 +414,10 @@ sap.ui.define([
 				if (aTableCol[i].getVisible()) {
 					var sLabelText = aTableCol[i].getAggregation("label").getText();
 					var sProperty = aTableCol[i].getAggregation("template").getBindingPath("text");
+					// 对于Text控件需要获取text属性，对于Input控件需要获取value属性
+					if (!sProperty) {
+						sProperty = aTableCol[i].getAggregation("template").getBindingPath("value");
+					}
 					var sType = "string";
 					// switch (sProperty) {
 					// 	case "PrdStartDate":

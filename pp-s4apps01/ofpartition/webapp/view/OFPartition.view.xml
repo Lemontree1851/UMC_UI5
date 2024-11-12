@@ -23,7 +23,7 @@
                         showShare="true"
                         persistencyKey="uploadOFPartitionFilter"
                         showExecuteOnSelection="true"
-                        entitySet="OFPartitionSet"
+                        entitySet="OFPartition"
                     />
                 </f:heading>
             </f:DynamicPageTitle>
@@ -36,7 +36,7 @@
                         id="idSmartFilterBar"
                         smartVariant="idSmartVariantManagement"
                         persistencyKey="uploadOFPartition"
-                        entitySet="OFPartitionSet"
+                        entitySet="OFPartition"
                         useToolbar="false"
                         class="sapUiResponsiveMargin"
                         search="onSearch"
@@ -74,7 +74,7 @@
                                 key="SplitRange"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>SplitRange}"
-                                mandatory="mandatory"
+                                mandatory="notMandatory"
                                 index="6"
                                 visible="true"
                             >
