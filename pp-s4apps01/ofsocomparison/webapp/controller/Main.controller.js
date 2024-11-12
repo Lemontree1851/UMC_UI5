@@ -63,10 +63,11 @@ function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter) {
 
 		getTableContent: function (aFilters, oFilterData, oTable) {
 			var that = this;
-			if (oFilterData.Material) {
-				var b = this.readProductOldID(oFilterData.Material);
-			}
-			Promise.all([this.readData(aFilters), b]).then((results) => {
+			// if (oFilterData.Material) {
+			// 	var b = this.readProductOldID(oFilterData.Material);
+			// }
+			// Promise.all([this.readData(aFilters), b]).then((results) => {
+			Promise.all([this.readData(aFilters)]).then((results) => {
 				that.getModel("local").setProperty("/data", results[0].results);
 				that.buildListResultUITable(oTable, results[0].results[0]);
 			}).catch(() => {
