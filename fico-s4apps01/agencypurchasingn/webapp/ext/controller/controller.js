@@ -82,9 +82,9 @@ sap.ui.define([
 
             aPromise.push(_myFunction._callODataAction(bEvent, oRequestData, that));
             try {
-                //     _myBusyDialog.open();
+                    _myBusyDialog.open();
                 Promise.all(aPromise).then((aContext) => {
-                    //         _myBusyDialog.close();
+                            _myBusyDialog.close();
                     var aMessageItems = [];
                     var aPrintRecords = [];
                     for (const activeContext of aContext) {
@@ -182,7 +182,7 @@ sap.ui.define([
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
-                    // _myBusyDialog.close();
+                    _myBusyDialog.close();
                     // var aMessageItems = that.getModel("local").getProperty("/MessageItems");
                     // if (aMessageItems.length > 0) {
                     //     _myMessageView.navigateBack();
