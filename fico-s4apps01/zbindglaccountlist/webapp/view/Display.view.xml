@@ -1,0 +1,79 @@
+<mvc:View
+    controllerName="fico.zbindglaccountlist.controller.Display"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <f:DynamicPage id="idDynamicPage">
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idSmartVariantManagement"
+                        showShare="true"
+                        persistencyKey="uploadPurchaseReqFilter"
+                        showExecuteOnSelection="true"
+                        entitySet="ZC_BDGLACCOUNT"
+                    />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader">
+                <f:content>
+                    <!--数据查询-->
+                    <smartFilterBar:SmartFilterBar
+                        id="idSmartFilterBar"
+                        smartVariant="idSmartVariantManagement"
+                        persistencyKey="uploadPurchaseReq"
+                        entitySet="ZC_BDGLACCOUNT"
+                        useToolbar="false"
+                        class="sapUiResponsiveMargin"
+                    >
+                        <smartFilterBar:controlConfiguration>
+
+ 
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                id="idSmartTable"
+                entitySet="ZC_BDGLACCOUNT"
+                smartFilterId="idSmartFilterBar"
+                smartVariant="idSmartVariantManagement"
+                persistencyKey="uploadPurchaseReqTable"
+                header="{i18n>tableHeaderTitle}"
+                placeToolbarInTable="true"
+                beforeRebindTable="onBeforeRebindTable"
+            >
+                 <smartTable:customToolbar>
+ 
+                </smartTable:customToolbar>
+                <t:Table
+                    id="idPurchaseReqTable"
+                    rowActionCount="1"
+                    rowsUpdated="onUITableRowsUpdated" 
+                >
+                    <t:rowMode>
+                        <rm:Auto id="idAuto" />
+                    </t:rowMode>
+
+ 
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
