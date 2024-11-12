@@ -73,7 +73,6 @@
                 <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
-                <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="CompanyCodeName" Type="Edm.String" Nullable="false" MaxLength="25"/>
@@ -195,7 +194,6 @@
                 <Annotation Term="SAP__common.Label" String="Calendar Month"/>
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/CompanyCode">
-                <Annotation Term="SAP__common.Text" Path="CompanyCodeName"/>
                 <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.ValueListReferences">
@@ -207,7 +205,6 @@
                 <Annotation Term="SAP__common.Heading" String="CoCd"/>
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/Plant">
-                <Annotation Term="SAP__common.Text" Path="PlantName"/>
                 <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.ValueListReferences">
@@ -219,7 +216,6 @@
                 <Annotation Term="SAP__common.Heading" String="Plnt"/>
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/Material">
-                <Annotation Term="SAP__common.Text" Path="ProductName"/>
                 <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Material"/>
@@ -238,7 +234,6 @@
                 <Annotation Term="SAP__common.CreatedBy" Path="CreatedBy"/>
                 <Annotation Term="SAP__common.CreatedAt" Path="CreatedAt"/>
                 <Annotation Term="SAP__common.ChangedBy" Path="LastChangedBy"/>
-                <Annotation Term="SAP__common.ChangedAt" Path="LastChangedAt"/>
                 <Annotation Term="SAP__common.Label" String="Inventory Aging Upload"/>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
@@ -253,11 +248,6 @@
                 <Annotation Term="SAP__common.Label" String="Changed By"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Last Changed By User"/>
             </Annotations>
-            <Annotations Target="SAP__self.STOCKAGEUPLOADType/LastChangedAt">
-                <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__common.Label" String="Changed On"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Last Change Date Time"/>
-            </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/LocalLastChangedAt">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.Label" String="Changed On"/>
@@ -265,18 +255,15 @@
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/ProductName">
                 <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Product Description"/>
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/CompanyCodeName">
                 <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Company Name"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Name of Company Code or Company"/>
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/PlantName">
                 <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Plant Name"/>
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/CreateUserName">

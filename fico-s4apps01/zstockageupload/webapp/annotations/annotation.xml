@@ -83,12 +83,24 @@
                             <PropertyValue Property="Value" Path="CompanyCode"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CompanyCodeName"/>
+                            <PropertyValue Property="Label" String="{@i18n>companyName}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>plant}"/>
                             <PropertyValue Property="Value" Path="Plant"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="PlantName"/>
+                            <PropertyValue Property="Label" String="{@i18n>plantName}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>material}"/>
                             <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductName"/>
+                            <PropertyValue Property="Label" String="{@i18n>productDescription}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>qty}"/>
