@@ -87,7 +87,10 @@ modules:
       - mmpurinfomasterlist.zip
       name: mmpurinfomasterlist
       target-path: resources/
-     
+    - artifacts:
+      - mmzprworkflow.zip
+      name: mmzprworkflow
+      target-path: resources/     
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -181,6 +184,15 @@ modules:
 - name: mmpurinfomasterlist
   type: html5
   path: purinfomasterlist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmzprworkflow
+  type: html5
+  path: zprworkflow
   build-parameters:
     build-result: dist
     builder: custom
