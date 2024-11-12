@@ -88,9 +88,12 @@ onUITableRowsUpdated: function (oEvent) {
 			 if (c2Cell) {
 			 	sType = c2Cell.getText();
 			 	if (sType === "合計") { 
-			 		$("#" + aRows[i].getId()).css("background-color", "#ffff33");
-			 		//$("#" + aRows[i].getId() + "-fixed").css("background-color", "");
+			 		$("#" + aRows[i].getId()).css("background-color", "#FFFF00");
+					 $("#" + aRows[i].getId() + "-fixed").css("background-color", "#FFFF00");
 			 	}
+				else{$("#" + aRows[i].getId()).css("background-color", "");
+					$("#" + aRows[i].getId() + "-fixed").css("background-color", "");
+				}
 			 }
 /*
 			if (i > 0 && i < aRows.length) {
@@ -167,8 +170,8 @@ onUITableRowsUpdated: function (oEvent) {
 				
  
 			}
-			pRow = aRows[i];
-			*/
+			pRow = aRows[i];*/
+			
 		}
 	}
 },

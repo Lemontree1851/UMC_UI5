@@ -72,10 +72,10 @@
                 <Property Name="PlantText" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="BusinessPartnerName" Type="Edm.String" Nullable="false" MaxLength="35"/>
-                <Property Name="SalesPerformanceActualQuantity" Type="Edm.String" Nullable="false" MaxLength="30"/>
-                <Property Name="SalesPerfActualQuantityUnit" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="SalesPerfActlAmtInDspCurrency" Type="Edm.String" Nullable="false" MaxLength="30"/>
-                <Property Name="DisplayCurrency" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="SalesPerformanceActualQuantity" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="3"/>
+                <Property Name="SalesPerfActualQuantityUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="SalesPerfActlAmtInDspCurrency" Type="Edm.Decimal" Nullable="false" Precision="20" Scale="variable"/>
+                <Property Name="DisplayCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
                 <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
             </EntityType>
@@ -102,9 +102,9 @@
                 <Property Name="BusinessPartnerName" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="ProfitCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="ProfitCenterLongName" Type="Edm.String" Nullable="false" MaxLength="40"/>
-                <Property Name="Zamount1" Type="Edm.String" Nullable="false" MaxLength="30"/>
-                <Property Name="Zamount2" Type="Edm.String" Nullable="false" MaxLength="30"/>
-                <Property Name="DisplayCurrency" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Zamount1" Type="Edm.Decimal" Nullable="false" Precision="22" Scale="variable"/>
+                <Property Name="Zamount2" Type="Edm.Decimal" Nullable="false" Precision="22" Scale="variable"/>
+                <Property Name="DisplayCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
                 <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="AccountingDocumentType" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -148,6 +148,8 @@
                 <Property Name="ActualCostRate" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
                 <Property Name="Currency1" Type="Edm.String" Nullable="false" MaxLength="5"/>
                 <Property Name="Currency2" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="CostRateScaleFactor1" Type="Edm.Decimal" Nullable="false" Precision="5"/>
+                <Property Name="CostRateScaleFactor2" Type="Edm.Decimal" Nullable="false" Precision="5"/>
                 <Property Name="TotalActualCost" Type="Edm.Decimal" Nullable="false" Precision="20" Scale="variable"/>
                 <Property Name="ActualCost1PC" Type="Edm.Decimal" Nullable="false" Precision="20" Scale="variable"/>
                 <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -160,7 +162,7 @@
                 <EntitySet Name="MFGORDER3" EntityType="com.sap.gateway.srvd.zui_mfgorder.v0001.MFGORDER3Type"/>
             </EntityContainer>
             <Annotations Target="SAP__self.MFGORDER2Type/YearMonth">
-                <Annotation Term="SAP__common.Label" String="TEST年月"/>
+                <Annotation Term="SAP__common.Label" String="年月"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type/Companycode">
                 <Annotation Term="SAP__common.Label" String="会社コード"/>
@@ -194,15 +196,24 @@
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type/SalesPerformanceActualQuantity">
                 <Annotation Term="SAP__common.Label" String="実績数量"/>
+                <Annotation Term="SAP__measures.Unit" Path="SalesPerfActualQuantityUnit"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type/SalesPerfActualQuantityUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
                 <Annotation Term="SAP__common.Label" String="販売単位"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Base Unit of Measure"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type/SalesPerfActlAmtInDspCurrency">
                 <Annotation Term="SAP__common.Label" String="実績値"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="DisplayCurrency"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type/DisplayCurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
                 <Annotation Term="SAP__common.Label" String="照会通貨"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type/calendaryear">
                 <Annotation Term="SAP__common.Label" String="会計年度"/>
@@ -340,6 +351,78 @@
                     <Collection/>
                 </Annotation>
             </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type/YearMonth">
                 <Annotation Term="SAP__common.Label" String="年月"/>
             </Annotations>
@@ -381,12 +464,18 @@
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type/Zamount1">
                 <Annotation Term="SAP__common.Label" String="主材費"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="DisplayCurrency"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type/Zamount2">
                 <Annotation Term="SAP__common.Label" String="副資材費"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="DisplayCurrency"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type/DisplayCurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
                 <Annotation Term="SAP__common.Label" String="照会通貨"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type/calendaryear">
                 <Annotation Term="SAP__common.Label" String="会計年度"/>
@@ -834,78 +923,6 @@
                 <Annotation Term="SAP__core.OptimisticConcurrency">
                     <Collection/>
                 </Annotation>
-            </Annotations>
-            <Annotations Target="SAP__self.Container">
-                <Annotation Term="SAP__CodeList.CurrencyCodes">
-                    <Record>
-                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
-                        <PropertyValue Property="CollectionPath" String="Currencies"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
-                    <Record>
-                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
-                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__aggregation.ApplySupported">
-                    <Record>
-                        <PropertyValue Property="Transformations">
-                            <Collection>
-                                <String>aggregate</String>
-                                <String>groupby</String>
-                                <String>filter</String>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
-                <Annotation Term="SAP__capabilities.FilterFunctions">
-                    <Collection>
-                        <String>eq</String>
-                        <String>ne</String>
-                        <String>gt</String>
-                        <String>ge</String>
-                        <String>lt</String>
-                        <String>le</String>
-                        <String>and</String>
-                        <String>or</String>
-                        <String>contains</String>
-                        <String>startswith</String>
-                        <String>endswith</String>
-                        <String>any</String>
-                        <String>all</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.SupportedFormats">
-                    <Collection>
-                        <String>application/json</String>
-                        <String>application/pdf</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__PDF.Features">
-                    <Record>
-                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
-                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
-                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
-                        <PropertyValue Property="Border" Bool="true"/>
-                        <PropertyValue Property="CoverPage" Bool="true"/>
-                        <PropertyValue Property="FitToPage" Bool="true"/>
-                        <PropertyValue Property="FontName" Bool="true"/>
-                        <PropertyValue Property="FontSize" Bool="true"/>
-                        <PropertyValue Property="Margin" Bool="true"/>
-                        <PropertyValue Property="Padding" Bool="true"/>
-                        <PropertyValue Property="Signature" Bool="true"/>
-                        <PropertyValue Property="HeaderFooter" Bool="true"/>
-                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
-                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
-                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
-                        <PropertyValue Property="Treeview" Bool="true"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
-                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
