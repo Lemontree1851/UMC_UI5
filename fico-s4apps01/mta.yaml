@@ -92,12 +92,12 @@ modules:
       name: ficozbindglupload
       target-path: resources/
     - artifacts:
-      - ficozbdglaccountlist.zip
-      name: ficozbdglaccountlist
-      target-path: resources/
-    - artifacts:
       - ficopaidpaylist.zip
       name: ficopaidpaylist
+      target-path: resources/
+    - artifacts:
+      - ficozbindglaccountlist.zip
+      name: ficozbindglaccountlist
       target-path: resources/
 - name: ficopaidpay
   type: html5
@@ -186,21 +186,12 @@ modules:
   build-parameters:
     build-result: dist
     builder: custom
-    commands:
+    commands: 
     - npm run build:cf
     supported-platforms: []
 - name: ficozbindglupload
   type: html5
   path: zbindglupload
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozbdglaccountlist
-  type: html5
-  path: zbdglaccountlist
   build-parameters:
     build-result: dist
     builder: custom
@@ -213,12 +204,21 @@ modules:
   build-parameters:
     build-result: dist
     builder: custom
-    commands:
+    commands:   
     - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaylist
   type: html5
   path: paidpaylist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozbindglaccountlist
+  type: html5
+  path: zbindglaccountlist
   build-parameters:
     build-result: dist
     builder: custom
