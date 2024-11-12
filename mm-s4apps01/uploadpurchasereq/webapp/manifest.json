@@ -35,11 +35,16 @@
                 "type": "OData",
                 "settings": {
                     "annotations": [
-                        "annotation"
+                        "annotation",
+                        "ZUI_UPLOADPR_O2_ANNOTATION"
                     ],
                     "localUri": "localService/metadata.xml",
                     "odataVersion": "2.0"
                 }
+            },
+            "ZUI_UPLOADPR_O2_ANNOTATION": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_UPLOADPR_O2_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation"
             },
             "PurchaseOrder": {
                 "uri": "/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/",
