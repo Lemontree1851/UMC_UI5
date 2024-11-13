@@ -133,7 +133,7 @@ sap.ui.define([
 
 			onCalc: function (oEvent) {
 				var that = this;
-
+				this._BusyDialog.open();
 				var sOption1 = this.byId("Option1").getSelected();
 				if (sOption1 === true) {
 					var sType = "A";
@@ -158,20 +158,12 @@ sap.ui.define([
 					return;
 				}
 
-				this._BusyDialog.open();
-
-				var oModel = this._oDataModel;
-				oModel.callFunction("/processLogic", {
-					method: "POST",
-
-					urlParameters: {
-						CompanyCode: sBukrs,
-						FiscalYear: sYear,
-						Period: sMonat,
-						Ztype: sType
-					},
-					success: function (oData) {
-						that.setBusy(false);
+				var aPromise = [];
+				aPromise.push(this.callAction(sType, sBukrs, sYear, sMonat));
+			
+				Promise.all(aPromise).then((oData) => {
+					//refresh search
+					oData.forEach((item) => {
 						let result = JSON.parse(oData["processLogic"].Zzkey);
 						result.forEach(function (line) {
 							if (line.STATUS === 'S') {
@@ -181,12 +173,43 @@ sap.ui.define([
 								MessageBox.error(line.MESSAGE);
 							}
 						});
-					}.bind(this),
-					error: function (oError) {
-						MessageBox.error((oError.message));;
-					}.bind(this)
+
+					})
+
+				}).catch((error) => {
+					MessageBox.error(error.message);
+				}).finally(() => {
+					this._BusyDialog.close();
 				});
-                this._BusyDialog.close();
+
 			},
+
+			callAction: function (sType, sBukrs, sYear, sMonat) {
+				let parts = sBukrs.split("(");
+				let part = parts[1].substring(0,4);
+				return new Promise(
+					function (resolve, reject) {
+						var mParameter = {
+							success: function (oData, response) {
+								resolve(oData);
+							},
+							error: function (oError) {
+								resolve(reject);
+							},
+							method: "POST",
+							urlParameters: {
+								Zzkey: " ",
+								CompanyCode: part,
+								FiscalYear: sYear,
+								Period: sMonat,
+								Ztype: sType
+							}
+						};
+
+						this.getModel().callFunction("/processLogic", mParameter);
+					}.bind(this)
+
+				);
+			}
 		});
 	});
