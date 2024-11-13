@@ -319,7 +319,7 @@ sap.ui.define([
                 };
             },
 
-            onWeb5: function (oEvent) {
+            onWeb6: function (oEvent) {
                 let currentPath = window.location.href;
                 let parts = currentPath.split(".");
                 //let part = parts[0];
