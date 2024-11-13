@@ -38,6 +38,7 @@ sap.ui.define([
 			// }.bind(this));
 
             this.aHttpRequest = [];
+			this.dataFinished = true;
         },
 
         onSearch: function (oEvent) {
@@ -121,6 +122,7 @@ sap.ui.define([
 			var that = this;
 			this.aHttpRequest = [];
 			that.byId("reportTable1").setBusy(true);
+			that.dataFinished = false;
 			var aPromise = [];
 
 			var aResult = that._LocalData.getProperty("/OFPartition");
@@ -185,10 +187,17 @@ sap.ui.define([
 
 					that.aHttpRequest = [];
 					that._LocalData.refresh();
-					that.byId("reportTable1").setBusy(false);
+					that.dataFinished = true;
+					// that.byId("reportTable1").setBusy(false);
 				}
             });
 			// aPromise.push(promise);
+		},
+
+		onRowsUpdated:function(){
+			if (this.dataFinished) {
+				this.byId("reportTable1").setBusy(false);
+			}
 		},
 
         transformData: function (data) {
@@ -286,11 +295,13 @@ sap.ui.define([
 		},
 
 		onCreatePIR: function () {
+			
 			var aOFPartition = this._LocalData.getProperty("/OFPartition");
 			var aSelectedItem = this.preparePostBody();
 			var aPromise = [];
 			var that = this;
 			var processDate = this.getDates();
+			that.byId("reportTable1").setBusy(true);
 			aSelectedItem.forEach( function (line){
 				var promise = new Promise((resolve, reject) => {
 					var createPrintRecord = this.getOwnerComponent().getModel("pir").bindContext("/ZC_CREATEPIR/com.sap.gateway.srvd.zui_createpir_o4.v0001.processOFPartition(...)");
@@ -308,7 +319,6 @@ sap.ui.define([
 					// createPrintRecord.setParameter("ProvidedKeys", JSON.stringify({ Uuid: uuidx16.toUpperCase() }));
 					// createPrintRecord.setParameter("ResultIsActiveEntity", true);
 					createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then((odata) => {
-						resolve(createPrintRecord);
 						var object = createPrintRecord.getBoundContext().getObject(); //获取返回的数据
 						// 更新message
 						const searchKey = `${object.Customer}_${object.Plant}_${object.Material}`;
@@ -328,6 +338,7 @@ sap.ui.define([
 							}
 						});
 						that._LocalData.setProperty("/OFPartition", aOFPartition);
+						resolve(createPrintRecord);
 					}).catch((oError) => {
 						console.log(oError.error);
 						reject(oError);
@@ -338,6 +349,8 @@ sap.ui.define([
 
 			Promise.all(aPromise).then(function () {
 
+			}).finally(function () {
+				that.byId("reportTable1").setBusy(false);
 			});
 		},
 		  
