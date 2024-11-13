@@ -57,7 +57,10 @@ sap.ui.define([
 
         _renderingColumns: function (object) {
             for (const key in object) {
-                var sTextAlign, bvisible;
+                if (key === "BaseUnit" || key === "Currency") {
+                    continue;
+                }
+                var oColumn, oLabel, oTemplate, sTextAlign, bvisible;
                 switch (key) {
                     case "IndustrystandardName":
                     case "EOLGroup":
@@ -73,38 +76,89 @@ sap.ui.define([
                     case "SupplierCertoriginCountry":
                         bvisible = "{= ${local>/filter/ShowInformation} === 'X'}";
                         break;
+                    case "FinalProduct":
+                    case "HighLevelMaterial":
+                        bvisible = "{= ${local>/filter/ShowDEMAND} === 'X'}";
+                        break;
                     default:
                         bvisible = true;
                         break;
                 }
                 switch (key) {
+                    case "MaterialPlannedDeliveryDurn":
                     case "MinimumPurchaseOrderQty":
                     case "RequiredQty":
+                    case "ShipmentNoticeQty":
                     case "StockQty":
+                    case "SafetyStock":
                     case "SuppliedQty":
                     case "AvailableStock":
                     case "RemainingQty":
                     case "SupplierPrice":
                     case "StandardPrice":
+                    case "PastQty":
+                    case "FutureQty":
+                    case "TotalQty":
                         sTextAlign = "End";
                         break;
                     default:
                         sTextAlign = "Begin"
                         break;
                 }
-                var oColumn = new UIColumn({
+
+                oLabel = new Label({ text: "{i18n>" + key + "}" });
+                if (key.substring(0, 3) === "YMD" || key.substring(0, 2) === "YW" || key.substring(0, 2) === "YM") {
+                    oLabel = new Label({ text: key });
+                    sTextAlign = "End";
+                }
+                if (sTextAlign === "End") {
+                    oTemplate = new Text({
+                        // text: "{ path:'local>" + key + "', formatter:'.formatter.formatFloat' }",
+                        text: {
+                            path: "local>" + key,
+                            formatter: function (n) {
+                                if (n) {
+                                    var sign = "";
+                                    if (typeof n === "string") {
+                                        var bNegative = n.endsWith("-");
+                                        if (bNegative) {
+                                            n = "-" + n.substring(0, n.length - 1);
+                                        }
+                                    }
+                                    var num = Number(n).toFixed(3);
+                                    if (num < 0) {
+                                        num = num.substring(1);
+                                        sign = "-";
+                                    }
+                                    var re = /\d{1,3}(?=(\d{3})+$)/g;
+                                    var n1 = num.toString().replace(/^(\d+)((\.\d+)?)$/, function (s, s1, s2) {
+                                        return s1.replace(re, "$&,") + s2;
+                                    });
+                                    if (sign === "-") {
+                                        n1 = sign + n1;
+                                    }
+                                    return n1;
+                                } else {
+                                    return n;
+                                }
+                            }
+                        },
+                        wrapping: false
+                    });
+                } else {
+                    oTemplate = new Text({
+                        text: "{local>" + key + "}",
+                        wrapping: false
+                    });
+                }
+
+                oColumn = new UIColumn({
                     width: "10rem",
-                    label: new Label({ text: "{i18n>" + key + "}" }),
+                    label: oLabel,
                     hAlign: sTextAlign,
                     visible: bvisible,
-                    template: new Text({ text: "{local>" + key + "}", wrapping: false })
+                    template: oTemplate
                 });
-                // oColumn = new UIColumn({
-                //     width: "10rem",
-                //     label: new Label({ text: "{i18n>" + key + "}" }),
-                //     hAlign: "End",
-                //     template: new Text({ text: "{ path:'local>" + key + "',formatter:'.formatter.formatFloat'}", wrapping: false })
-                // });
                 this._oTable.addColumn(oColumn);
             }
         },
