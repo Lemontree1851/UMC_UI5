@@ -344,7 +344,7 @@
             <ComplexType Name="ZD_PARAFORPRODUCTIONPLAN">
                 <Property Name="Event" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Username" Type="Edm.String" MaxLength="40"/>
-                <Property Name="Zday" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Zday" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Zzkey" Type="Edm.String" sap:label="Zzkey" sap:quickinfo="String Type"/>
             </ComplexType>
             <ComplexType Name="SAP__FitToPage">
@@ -508,7 +508,7 @@
                 </AssociationSet>
                 <FunctionImport Name="processLogic" ReturnType="cds_zui_productionplan_o2.ZD_PARAFORPRODUCTIONPLAN" m:HttpMethod="POST">
                     <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
-                    <Parameter Name="zday" Type="Edm.String" Mode="In" MaxLength="2" Nullable="true"/>
+                    <Parameter Name="zday" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
                     <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
                     <Parameter Name="Username" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"/>
                 </FunctionImport>

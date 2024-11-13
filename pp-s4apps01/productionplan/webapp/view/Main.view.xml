@@ -17,8 +17,8 @@
                     <smartFilterBar:controlConfiguration>
                         <smartFilterBar:ControlConfiguration index="10" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory"/>
                         <smartFilterBar:ControlConfiguration index="20" key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}" mandatory="mandatory"/>
-                        <smartFilterBar:ControlConfiguration index="30" key="ProductionSupervisor" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}" mandatory="mandatory"/>
-                        <smartFilterBar:ControlConfiguration index="40" key="Product" visibleInAdvancedArea="true" label="{i18n>Product}" mandatory="mandatory"/>
+                        <smartFilterBar:ControlConfiguration index="30" key="ProductionSupervisor" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}" />
+                        <smartFilterBar:ControlConfiguration index="40" key="Product" visibleInAdvancedArea="true" label="{i18n>Product}" />
                     </smartFilterBar:controlConfiguration>
                     <VBox id="day">
                         <Label id="dayinput" text="計画期間" labelFor="zdays"/>
@@ -54,7 +54,7 @@
             <Button id="web6" icon="sap-icon://internet-browser" text="{i18n>web6ButtonText}" tooltip="{i18n>web6ButtonText}" press="onWeb6"/>  
         </OverflowToolbar>
 			</smartTable:customToolbar>
-            <t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated">
+            <t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" visibleRowCount="12">
                 <t:Column id="Plant" label="{i18n>Plant}" width="4rem" sortProperty="Plant" filterProperty="Plant" visible="true" autoResizable="true">
                     <t:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>
@@ -111,7 +111,7 @@
                         <Text text="{Mdv01}"/>
                     </t:template>
                 </t:Column>
-                <t:Column id="PlanType" label="{i18n>PlanType}" width="6rem" sortProperty="PlanType" filterProperty="PlanType" visible="false" autoResizable="true">
+                <t:Column id="PlanType" label="{i18n>PlanType}" width="6rem" sortProperty="PlanType" filterProperty="PlanType" visible="true" autoResizable="true">
                     <t:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PlanType", "leadingProperty":"PlanType", "sortProperty":"PlanType", "filterProperty": "PlanType"}'/>
                     </t:customData>

@@ -5,8 +5,9 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
+    "sap/ui/table/rowmodes/Fixed",
 ],
-    function (Base, formatter, Filter, FilterOperator, BusyDialog, MessageBox) {
+    function (Base, formatter, Filter, FilterOperator, BusyDialog, MessageBox, Fixed) {
         "use strict";
 
         return Base.extend("pp.productionplan.controller.Main", {
@@ -24,7 +25,6 @@ sap.ui.define([
                 this.onUpdateTitle();
 
             },
-
 
             onUpdateTitle: function (oEvent) {
                 var oDateFrom = new Date();
@@ -117,6 +117,7 @@ sap.ui.define([
                 var aRows = oTable.getRows();
                 var sType = "";
                 var sColor = "";
+                var sColor = "";
                 let sNum = Number(this.byId("zdays").getValue());
                 sNum = 16 + sNum;
                 if (aRows && aRows.length > 0) {
@@ -124,41 +125,49 @@ sap.ui.define([
                         var c7Cell = aRows[i].getCells()[7];
                         if (c7Cell) {
                             sType = c7Cell.getText();
-                            if (sType === "未処分") {
-                                for (var j = 17; j < sNum; j++) {
+                            if (sType === "W") {
+                                for (var j = 18; j < sNum; j++) {
                                     var cColor = aRows[i].getCells()[j];
                                     var oItems = cColor.getItems();
-                                    var sColor = oItems[0].getText();
-                                    if (cColor) {
-                                        switch (sColor.charAt(0)) {
-                                            case "R":
-                                                cColor.addStyleClass("redCell");
-                                                oItems[0].setText(sColor.slice(1));
-                                                break;
-                                            case "Y":
-                                                cColor.addStyleClass("yellowCell");
-                                                oItems[0].setText(sColor.slice(1));
-                                                break;
-                                            case "G":
-                                                cColor.addStyleClass("greenCell");
-                                                oItems[0].setText(sColor.slice(1));
-                                                break;
-                                        };
-                                    }
+                                    var sValue = oItems[1].getValue();
+                                    sColor = sValue;
+                                    switch (sValue.charAt(0)) {
+                                        case "R":
+                                            cColor.addStyleClass("redCell");
+                                            oItems[0].setText(sColor.slice(1));
+                                            break;
+                                        case "Y":
+                                            cColor.addStyleClass("yellowCell");
+                                            oItems[0].setText(sColor.slice(1));
+                                            break;
+                                        case "G":
+                                            cColor.addStyleClass("greenCell");
+                                            oItems[0].setText(sColor.slice(1));
+                                            break;
+                                        default:
+
+                                    };
+                                }
+                            } else {
+                                for (var j = 18; j < sNum; j++) {
+                                    var cColor1 = aRows[i].getCells()[j];
+                                    cColor1.addStyleClass("whiteCell");
                                 }
                             }
                         }
                     }
                 }
+
+
             },
 
             onEdit: function (oEvent) {
                 //Auth Check
                 if (sap.ushell && sap.ushell.Container) {
-                let user = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-                let username = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+                    let user = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+                    let username = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
 
-                this.authCheck(user, username)
+                    this.authCheck(user, username)
                 } else {
                     var oTable = this.byId("ReportTable");
                     var aRows = oTable.getRows();
@@ -170,8 +179,8 @@ sap.ui.define([
                             var c7Cell = aRows[i].getCells()[7];
                             if (c7Cell) {
                                 sType = c7Cell.getText();
-                                if (sType === "出荷計画" || sType === "計画手配") {
-                                    for (var j = 17; j < sNum; j++) {
+                                if (sType === "I" || sType === "P") {
+                                    for (var j = 18; j < sNum; j++) {
                                         var cEdit = aRows[i].getCells()[j];
                                         var oItems = cEdit.getItems();
                                         if (cEdit) {
@@ -197,7 +206,7 @@ sap.ui.define([
                 var sCheck;
                 var aPromise = [];
                 var bEvent = "EDIT";
-                aPromise.push(this.callAction("", "", bEvent, username));
+                aPromise.push(this.callAction("", bEvent, username));
                 Promise.all(aPromise).then((oData) => {
                     oData.forEach((item) => {
                         sCheck = JSON.parse(item["processLogic"].Zzkey);
@@ -209,14 +218,14 @@ sap.ui.define([
                             var aRows = oTable.getRows();
                             var sType = "";
                             let sNum = Number(this.byId("zdays").getValue());
-                            sNum = 16 + sNum;
+                            sNum = 17 + sNum;
                             if (aRows && aRows.length > 0) {
                                 for (var i = 0; i < aRows.length; i++) {
                                     var c7Cell = aRows[i].getCells()[7];
                                     if (c7Cell) {
                                         sType = c7Cell.getText();
-                                        if (sType === "出荷計画" || sType === "計画手配") {
-                                            for (var j = 17; j < sNum; j++) {
+                                        if (sType === "I" || sType === "P") {
+                                            for (var j = 18; j < sNum; j++) {
                                                 var cEdit = aRows[i].getCells()[j];
                                                 var oItems = cEdit.getItems();
                                                 if (cEdit) {
@@ -239,12 +248,16 @@ sap.ui.define([
             },
 
             onRefresh: function (oEvent) {
-                this.getView().byId("smartFilterBar").search();
+                //this.getView().byId("smartFilterBar").search();
+                var oModel = this._oDataModel;
+                oModel.refresh(true);
             },
 
             onWeb1: function (oEvent) {
-                let currentPath = window.location.pathname;
-                let result = currentPath.substring(6, 9);
+                let currentPath = window.location.href;
+                let parts = currentPath.split("#");
+                let part = parts[0];
+                let result = part.slice(-3);
                 //MRP実行スケジュール
                 switch (result) {
                     case "Dev":
@@ -255,8 +268,10 @@ sap.ui.define([
             },
 
             onWeb2: function (oEvent) {
-                let currentPath = window.location.pathname;
-                let result = currentPath.substring(6, 9);
+                let currentPath = window.location.href;
+                let parts = currentPath.split("#");
+                let part = parts[0];
+                let result = part.slice(-3);
                 //製造指図と受注の割当
                 switch (result) {
                     case "Dev":
@@ -266,8 +281,10 @@ sap.ui.define([
             },
 
             onWeb3: function (oEvent) {
-                let currentPath = window.location.pathname;
-                let result = currentPath.substring(6, 9);
+                let currentPath = window.location.href;
+                let parts = currentPath.split("#");
+                let part = parts[0];
+                let result = part.slice(-3);
                 //製造指図発行
                 switch (result) {
                     case "Dev":
@@ -277,8 +294,10 @@ sap.ui.define([
             },
 
             onWeb4: function (oEvent) {
-                let currentPath = window.location.pathname;
-                let result = currentPath.substring(6, 9);
+                let currentPath = window.location.href;
+                let parts = currentPath.split("#");
+                let part = parts[0];
+                let result = part.slice(-3);
                 //製造指図/計画手配監視
                 switch (result) {
                     case "Dev":
@@ -288,8 +307,10 @@ sap.ui.define([
             },
 
             onWeb5: function (oEvent) {
-                let currentPath = window.location.pathname;
-                let result = currentPath.substring(6, 9);
+                let currentPath = window.location.href;
+                let parts = currentPath.split("#");
+                let part = parts[0];
+                let result = part.slice(-3);
                 //サマリBOM
                 switch (result) {
                     case "Dev":
@@ -299,8 +320,10 @@ sap.ui.define([
             },
 
             onWeb5: function (oEvent) {
-                let currentPath = window.location.pathname;
-                let result = currentPath.substring(6, 9);
+                let currentPath = window.location.href;
+                let parts = currentPath.split("#");
+                let part = parts[0];
+                let result = part.slice(-3);
                 //作業手順照会
                 switch (result) {
                     case "Dev":
@@ -313,15 +336,15 @@ sap.ui.define([
                 var that = this;
                 var bEvent = "POST";
                 let postDocs = this.preparePostBody();
-                let sDays = this.byId("zdays").getValue();
                 this._BusyDialog.open();
                 var aPromise = [];
-                aPromise.push(this.callAction(postDocs, sDays, bEvent, ""));
+                aPromise.push(this.callAction(postDocs, bEvent, ""));
 
                 Promise.all(aPromise).then((oData) => {
                     //refresh search
-                    that.getView().byId("smartFilterBar").search();
-
+                    //that.getView().byId("smartFilterBar").search();
+                    var oModel = this._oDataModel;
+                    oModel.refresh(true);
                     oData.forEach((item) => {
                         let result = JSON.parse(item["processLogic"].Zzkey);
                         result.forEach(function (line) {
@@ -364,8 +387,8 @@ sap.ui.define([
 
             },
 
-            callAction: function (postData, sDays, bEvent, username) {
-                var oModel = this._oDataModel;
+            callAction: function (postData, bEvent, username) {
+                var sDays = this.byId("zdays").getValue();
                 return new Promise(
                     function (resolve, reject) {
                         var mParameter = {
@@ -378,7 +401,7 @@ sap.ui.define([
                             method: "POST",
                             urlParameters: {
                                 Zzkey: postData,
-                                Zday: sDays,
+                                Zdays: sDays,
                                 Event: bEvent,
                                 Username: username
                             }
