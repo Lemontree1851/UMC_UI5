@@ -18,10 +18,10 @@ sap.ui.define([
         formatter: formatter,
 
         onInit: function () {
-
+            this._oTable = this.byId("idListTable");
         },
 
-        onSearch: function (oEvent) {
+        onSearch: function () {
             var aFilters = this.byId("idSmartFilterBar").getFilters();
 
             var sDisplayUnit = this.getModel("local").getProperty("/filter/DisplayUnit");
@@ -38,13 +38,14 @@ sap.ui.define([
             aFilters.push(new Filter("ShowDetailLines", FilterOperator.EQ, sShowDetailLines === "X" ? true : false));
             aFilters.push(new Filter("ShowDEMAND", FilterOperator.EQ, sShowDEMAND === "X" ? true : false));
 
+            this.removeAllColumns();
             this._CallODataV2("READ", "/ZC_InventoryRequirement", aFilters, {}, {}).then(function (oResponse) {
                 var aResults = [];
                 if (oResponse.results[0]) {
                     aResults = JSON.parse(oResponse.results[0].DynamicData);
                 }
-                this.getModel("local").setProperty("/resultSet", aResults);
                 if (aResults.length > 0) {
+                    this.getModel("local").setProperty("/resultSet", aResults);
                     this._renderingColumns(aResults[0]);
                 } else {
                     MessageBox.error("No Data");
@@ -55,8 +56,6 @@ sap.ui.define([
         },
 
         _renderingColumns: function (object) {
-            var oTable = this.byId("idListTable");
-            oTable.removeAllColumns();
             for (const key in object) {
                 var sTextAlign, bvisible;
                 switch (key) {
@@ -72,7 +71,7 @@ sap.ui.define([
                     case "MinimumPurchaseOrderQty":
                     case "SupplierPrice":
                     case "SupplierCertoriginCountry":
-                        bvisible = "{= ${local>/filter/ShowDetailLines} === 'X'}";
+                        bvisible = "{= ${local>/filter/ShowInformation} === 'X'}";
                         break;
                     default:
                         bvisible = true;
@@ -80,6 +79,11 @@ sap.ui.define([
                 }
                 switch (key) {
                     case "MinimumPurchaseOrderQty":
+                    case "RequiredQty":
+                    case "StockQty":
+                    case "SuppliedQty":
+                    case "AvailableStock":
+                    case "RemainingQty":
                     case "SupplierPrice":
                     case "StandardPrice":
                         sTextAlign = "End";
@@ -101,8 +105,13 @@ sap.ui.define([
                 //     hAlign: "End",
                 //     template: new Text({ text: "{ path:'local>" + key + "',formatter:'.formatter.formatFloat'}", wrapping: false })
                 // });
-                oTable.addColumn(oColumn);
+                this._oTable.addColumn(oColumn);
             }
+        },
+
+        removeAllColumns: function () {
+            this._oTable.removeAllColumns();
+            this.getModel("local").setProperty("/resultSet", []);
         }
     });
 });
