@@ -6,8 +6,9 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"pp/ofsocomparison/model/formatter",
+	'sap/ui/export/Spreadsheet',
 ],
-function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter) {
+function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter,Spreadsheet) {
     "use strict";
 
     return Base.extend("pp.ofsocomparison.controller.Main", {
@@ -508,7 +509,29 @@ function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter) {
 
 		},
 
+		onDataExport: function () {
+			var aCols = [],
+				oSettings, oSheet;
 
+			var oTable = this.byId("tablelist");
+			var aColumns = oTable.getColumns();
+			for (var column of aColumns) {
+				aCols.push({
+					label: column.getLabel().getText(),
+					property: column.getTemplate().getBindingInfo("text").parts[0].path,
+					scale : 0
+				});
+			}
+			oSettings = {
+				workbook: {
+					columns: aCols
+				},
+				dataSource: this.getModel("local").getProperty("/data")
+			};
+			oSheet = new Spreadsheet(oSettings);
+			oSheet.build()
+				.finally(oSheet.destroy);
+		}
 
 
 

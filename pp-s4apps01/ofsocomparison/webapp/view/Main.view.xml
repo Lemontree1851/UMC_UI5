@@ -122,6 +122,7 @@
                     <OverflowToolbar style="Clear">
                         <Title text="{i18n>Results}"/>
                         <ToolbarSpacer></ToolbarSpacer>
+                        <Button icon="sap-icon://excel-attachment" press="onDataExport" />
                     </OverflowToolbar>
                 </table:extension>
             </table:Table>
