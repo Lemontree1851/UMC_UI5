@@ -339,6 +339,30 @@
                                             value="{CreatedAt}"
                                         />
                                     </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField
+                                            textLabel="{i18n>ApplyDepart}"
+                                            value="{ApplyDepart}"
+                                        />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField
+                                            textLabel="{i18n>IsApprove}"
+                                            value="{IsApprove}"
+                                        />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField
+                                            textLabel="{i18n>SupplierMat}"
+                                            value="{SupplierMat}"
+                                        />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField
+                                            textLabel="{i18n>PolinkBy}"
+                                            value="{PolinkBy}"
+                                        />
+                                    </smartForm:GroupElement>
                                 </smartForm:Group>
                             </smartForm:SmartForm>
                         </xuap:ObjectPageSubSection>

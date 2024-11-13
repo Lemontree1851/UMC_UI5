@@ -654,6 +654,26 @@
                         </t:template>
                     </t:Column>
                     <t:Column
+                        width="8rem"
+                        label="{i18n>SupplierMat}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>SupplierMat}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        label="{i18n>PolinkBy}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>PolinkBy}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
                         id="id39Column"
                         width="8rem"
                         label="{i18n>PurchaseOrder}"

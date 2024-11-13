@@ -154,6 +154,13 @@
                                 mandatory="notMandatory"
                                 index="50"
                             />
+                            <smartFilterBar:ControlConfiguration
+                                key="SupplierMat"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>SupplierMat}"
+                                mandatory="notMandatory"
+                                index="55"
+                            />
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -1227,6 +1234,42 @@
                             <t:template>
                                 <Text
                                     text="{IsApprove}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            label="{i18n>SupplierMat}"
+                            sortProperty="SupplierMat"
+                            filterProperty="SupplierMat"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"SupplierMat", "leadingProperty":"SupplierMat", "sortProperty":"SupplierMat", "filterProperty": "SupplierMat"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{SupplierMat}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            label="{i18n>PolinkBy}"
+                            sortProperty="PolinkBy"
+                            filterProperty="PolinkBy"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"PolinkBy", "leadingProperty":"PolinkBy", "sortProperty":"PolinkBy", "filterProperty": "PolinkBy"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{PolinkBy}"
                                 />
                             </t:template>
                         </t:Column>

@@ -126,6 +126,8 @@ sap.ui.define([
                         IsLink: aSheet1[i]["IsLink"] || "",
                         Kyoten: aSheet1[i]["Kyoten"] || "",
                         IsApprove: aSheet1[i]["IsApprove"] || "",
+                        SupplierMat: aSheet1[i]["SupplierMat"] || "",
+                        PolinkBy: aSheet1[i]["PolinkBy"] || "",
                     };
                     aExcelSet.push(oItem);
                 }
