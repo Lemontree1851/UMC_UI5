@@ -255,12 +255,12 @@ sap.ui.define([
 
             onWeb1: function (oEvent) {
                 let currentPath = window.location.href;
-                let parts = currentPath.split("#");
-                let part = parts[0];
-                let result = part.slice(-3);
+                let parts = currentPath.split(".");
+                //let part = parts[0];
+                let result = parts[0];
                 //MRP実行スケジュール
                 switch (result) {
-                    case "Dev":
+                    case "https://s01-test":
                         window.open("https://my412552.s4hana.cloud.sap/ui#MRPRun-schedule?JobCatalogEntryName=SAP_SCM_MRP&/v4_JobRunList?sap-iapp-state=AS7Z8GAGA92B6PWBDCH0JWRN8PG5P17OQJ4XJDH8", "_blank");
                         break;
                 };
@@ -269,12 +269,12 @@ sap.ui.define([
 
             onWeb2: function (oEvent) {
                 let currentPath = window.location.href;
-                let parts = currentPath.split("#");
-                let part = parts[0];
-                let result = part.slice(-3);
+                let parts = currentPath.split(".");
+                //let part = parts[0];
+                let result = parts[0];
                 //製造指図と受注の割当
                 switch (result) {
-                    case "Dev":
+                    case "https://s01-test":
                         window.open("https://s01-test.launchpad.cfapps.jp10.hana.ondemand.com/site/Dev#zmfgorderassignso-display?sap-ui-app-id-hint=saas_approuter_pp.zmfgorderassignso", "_blank");
                         break;
                 };
@@ -282,12 +282,12 @@ sap.ui.define([
 
             onWeb3: function (oEvent) {
                 let currentPath = window.location.href;
-                let parts = currentPath.split("#");
-                let part = parts[0];
-                let result = part.slice(-3);
+                let parts = currentPath.split(".");
+                //let part = parts[0];
+                let result = parts[0];
                 //製造指図発行
                 switch (result) {
-                    case "Dev":
+                    case "https://s01-test":
                         window.open("https://my412552.s4hana.cloud.sap/ui#PlannedOrder-convertToProductionOrders?sap-ui-tech-hint=GUI", "_blank");
                         break;
                 };
@@ -295,12 +295,12 @@ sap.ui.define([
 
             onWeb4: function (oEvent) {
                 let currentPath = window.location.href;
-                let parts = currentPath.split("#");
-                let part = parts[0];
-                let result = part.slice(-3);
+                let parts = currentPath.split(".");
+                //let part = parts[0];
+                let result = parts[0];
                 //製造指図/計画手配監視
                 switch (result) {
-                    case "Dev":
+                    case "https://s01-test":
                         window.open("https://my412552.s4hana.cloud.sap/ui#ProductionOrder-monitor?sap-ui-tech-hint=GUI", "_blank");
                         break;
                 };
@@ -308,12 +308,12 @@ sap.ui.define([
 
             onWeb5: function (oEvent) {
                 let currentPath = window.location.href;
-                let parts = currentPath.split("#");
-                let part = parts[0];
-                let result = part.slice(-3);
+                let parts = currentPath.split(".");
+                //let part = parts[0];
+                let result = parts[0];
                 //サマリBOM
                 switch (result) {
-                    case "Dev":
+                    case "https://s01-test":
                         window.open("https://my412552.s4hana.cloud.sap/ui#MaterialBOM-summarizedBOM?sap-ui-tech-hint=GUI", "_blank");
                         break;
                 };
@@ -321,12 +321,12 @@ sap.ui.define([
 
             onWeb5: function (oEvent) {
                 let currentPath = window.location.href;
-                let parts = currentPath.split("#");
-                let part = parts[0];
-                let result = part.slice(-3);
+                let parts = currentPath.split(".");
+                //let part = parts[0];
+                let result = parts[0];
                 //作業手順照会
                 switch (result) {
-                    case "Dev":
+                    case "https://s01-test":
                         window.open("https://my412552.s4hana.cloud.sap/ui#ProductionRouting-display?sap-ui-tech-hint=GUI", "_blank");
                         break;
                 };
