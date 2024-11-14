@@ -1257,6 +1257,43 @@
                                 />
                             </t:template>
                         </t:Column>
+                                                <t:Column
+                            width="6rem"
+                            label="{i18n>InstanceId}"
+                            sortProperty="InstanceId"
+                            filterProperty="InstanceId"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"InstanceId", "leadingProperty":"InstanceId", "sortProperty":"InstanceId", "filterProperty": "InstanceId"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{InstanceId}"
+                                />
+                            </t:template>
+                        </t:Column>
+                                              
+                                                <t:Column
+                            width="6rem"
+                            label="{i18n>ApplicationId}"
+                            sortProperty="ApplicationId"
+                            filterProperty="ApplicationId"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"ApplicationId", "leadingProperty":"ApplicationId", "sortProperty":"ApplicationId", "filterProperty": "ApplicationId"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{ApplicationId}"
+                                />
+                            </t:template>
+                        </t:Column>
                     </t:columns>
                 </t:Table>
             </smartTable:SmartTable>

@@ -35,7 +35,9 @@ sap.ui.define([
 				contextPath : oCtx.getProperty("UUID"),
 				contextPrNo: oCtx.getProperty("PrNo"),
 				contextApplyDepart: oCtx.getProperty("ApplyDepart"),
-				
+
+				contextInstanceId: oCtx.getProperty("InstanceId"),
+				contextApplicationId: oCtx.getProperty("ApplicationId"),
 			});
 		},
         _onRouteMatched : function (oEvent) {

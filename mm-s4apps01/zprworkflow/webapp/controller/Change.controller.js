@@ -4,21 +4,37 @@ sap.ui.define([
     "./messages",
 	"sap/m/MessageBox",
 	"sap/ui/core/Messaging",
-	"sap/m/MessageToast"
+	"sap/m/MessageToast",
+	"sap/ui/core/Fragment",
+	"sap/m/Dialog",
+	"sap/m/BusyDialog",
+	"sap/suite/ui/commons/library",
+	"sap/ui/model/FilterOperator",
+	"sap/ui/model/Filter",
 ], function(
     BaseController,
     formatter,
     messages,
 	MessageBox,
 	Messaging,
-	MessageToast
+	MessageToast,
+	Fragment,
+	Dialog,
+	BusyDialog,
+	suiteLibrary,
+	FilterOperator,
+	Filter,
+	JSONModel
 ) {
 	"use strict";
 
 	return BaseController.extend("mm.zprworkflow.controller.Change", {
+		
         formatter : formatter,
         onInit: function (oEvent) {
             // this._BusyDialog = new BusyDialog();
+			var TimelineFilterType = suiteLibrary.TimelineFilterType;
+			this._BusyDialog = new BusyDialog();
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
@@ -34,6 +50,59 @@ sap.ui.define([
 
 			// activate automatic message generation for complete view
 			Messaging.registerObject(this.getView(), true);
+			this._timeline = this.byId("idTimeline");
+			this._timeline.setEnableScroll(false);
+			console.log("onInit",this._InsNo1);
+			
+ /*
+
+			
+			var oModel = this.getView().getModel(); // Assuming you have the model set in your view
+			var oTimeline = this.byId("idTimeline");
+			
+			var oFilter = new sap.ui.model.Filter("Zseq", sap.ui.model.FilterOperator.EQ, "1");
+			
+			//this._timeline.bindElement({
+			//	 path: "/ApprovalHistory" 
+				 
+			//});
+
+			var sSelectedItem = oEvent.getParameter("selected"),
+				filter = null,
+				aSelectedDataItems = [];
+		 
+				filter = new Filter({
+					path: "Operator",
+					value: "1",
+					operator: FilterOperator.EQ
+				});
+
+				aSelectedDataItems = ["1"];
+			 
+
+			this._timeline.setModelFilter({
+				type: TimelineFilterType.Data,
+				filter: filter
+			});
+			this._timeline.setCurrentFilter(aSelectedDataItems);
+			*/
+/*
+			var oNewDataModel = new sap.ui.model.json.JSONModel({
+				// Your new data here
+			});
+			
+			// Find the Timeline control using the ID
+			var oTimeline = this.getView().byId("idTimeline");
+			
+			oTimeline.bindElement({
+				path : "/ApprovalHistory",
+			});
+			oTimeline.updateBindings(true);
+*/
+ 
+
+
+
 
 
         },
@@ -57,6 +126,8 @@ sap.ui.define([
 			this._InsNo = oArgs.contextPrNo;
 			this._InsNo1 = oArgs.contextApplyDepart;
 			this._InsNo2 = oArgs.contextPath;
+ 			this._InsNo3 = oArgs.contextInstanceId;
+ 			this._InsNo4 = oArgs.contextApplicationId;
             console.log("/PurchaseReqWFSum(ApplyDepart='" + oArgs.contextApplyDepart + "',PrNo='" + oArgs.contextPrNo + "')");
  //"/PurchaseReqWFItem(guid'" + oArgs.contextPath + "')",
 			oView.bindElement({
@@ -84,7 +155,8 @@ sap.ui.define([
 		//		}
 			//});
 			this.byId("idSmartForm").setEditable(false);
-			this.byId("idPage").setShowFooter(false);
+			this.byId("idPage").setShowFooter(true);
+			this._bindTimelineAggregation();
 		},
 		_onRouteMatched1 : function (oEvent) {
             this.getView().getModel().resetChanges();
@@ -245,6 +317,42 @@ sap.ui.define([
 			}.bind(this));
 			return promise;
 		},
+		onDialogPress: function () {			
+            if (!this.Dialog) {
+                var oView = this.getView();
+				if (!this.Dialog) {
+					var oView = this.getView();
+					if (!this.Dialog) {
+						this.Dialog = Fragment.load({
+							id: oView.getId(),
+							name: "mm.zprworkflow.fragment.Dialog",
+							controller: this
+						}).then(function (oDialog){
+							this.getView().addDependent(oDialog);
+							// oDialog.setModel(oView.getModel());
+							return oDialog;
+						}.bind(this));
+					}
+				}
+				this.Dialog.then(function(oDialog) {
+					oDialog.open();
+				}.bind(this));
+            }
+            this.Dialog.then(function(oDialog) {
+                oDialog.open();
+            }.bind(this));
+        },
+    
+        onDialogClose: function(){
+			var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
+			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
+			console.log("onDialogClose",sValue);
+            this.byId("AnswerDialog").close();
+        },
+
+        onDialogConfirm: function() {
+            this.AcceptPRWF();
+        },
 		_bindUploadSetUrl: function (oUploadSet, item) {
 			const sDocumentInfoRecordDocNumber = item.DocumentInfoRecordDocNumber;
 			const sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
@@ -294,6 +402,128 @@ sap.ui.define([
 				};
 				this.getView().getModel("Attach").remove(sAttachmentUrl, mParameters);
 			}
+		},
+		AcceptPRWF: function () {
+			var aSelectedItems = this.preparePostBody();
+			if (aSelectedItems.length === 0) {
+				return;
+			}
+			this.postAction("AcceptPRWF", JSON.stringify(aSelectedItems));
+
+		},
+
+		preparePostBody:function () {
+			var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
+			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
+			var aData = [];
+
+			var item = {
+				"PrNo": this._InsNo,
+				"ApplyDepart": this._InsNo1,
+				"Remark": sValue,
+			};
+			aData.push(item);
+ 
+			return aData;
+		},
+
+		postAction: function (sAction, postData) {
+			this._BusyDialog.open();
+            var oModel = this._oDataModel;
+            oModel.callFunction(`/${sAction}`, {
+                method: "POST",
+                // groupId: "myId",//如果设置groupid，会多条一起进入action
+                changeSetId: 1,
+                //建议只传输前端修改的参数，其他字段从后端获取
+                urlParameters: {
+                    Event: sAction,
+                    Zzkey: postData
+                },
+                success: function (oData) {
+					var aDataKey = Object.getOwnPropertyNames(this._oDataModel.getProperty("/"));
+					for (var i = aDataKey.length - 1; i >= 0; i--) {
+						if (aDataKey[i].slice(0,11) !== "PurchaseReq") {
+							aDataKey.splice(i, 1);
+						}
+					}
+                    let result = JSON.parse(oData[sAction].Zzkey);
+					this._LocalData.setProperty("/recordCheckSuccessed", false);
+                    messages.showSuccess(this._ResourceBundle.getText("msgDeleteSuccessed"));
+					MessageToast.show(this._ResourceBundle.getText("msgSaveSuccessed"))
+					this.byId("AnswerDialog").close();
+					/*
+                    result.forEach(function (line) {
+                        aDataKey.forEach(function(key, index){
+							var lineData = this._oDataModel.getProperty("/" + key);
+							if (lineData.UUID.replace(/-/g, '') === this.base64ToHex(line.UUID)) {
+								// lineCount++;
+								this._oDataModel.setProperty("/" + key + "/Type", line.TYPE);
+								this._oDataModel.setProperty("/" + key + "/Message", line.MESSAGE);
+								this._oDataModel.setProperty("/" + key + "/PurchaseOrder", line.PURCHASEORDER);
+								this._oDataModel.setProperty("/" + key + "/PurchaseOrderItem", line.PURCHASEORDERITEM);
+							}
+						},this);
+                    },this);*/
+					this._BusyDialog.close();
+                }.bind(this),
+                error: function (oError) {
+                    this._LocalData.setProperty("/recordCheckSuccessed", false);
+                    messages.showError(messages.parseErrors(oError));
+					this._BusyDialog.close();
+                }.bind(this)
+            });
+            // oModel.submitChanges({ groupId: "myId" });
+        },
+		base64ToHex: function (base64) {
+			const raw = atob(base64);  // Decode the base64 string
+			let result = '';
+			for (let i = 0; i < raw.length; i++) {
+				const hex = raw.charCodeAt(i).toString(16).padStart(2, '0');
+				result += hex;
+			}
+			return result.toLowerCase();
+		},
+		onPressItems : function(evt) {
+			MessageToast.show("The TimelineItem is pressed.");
+		},
+ 
+		orientationChanged: function (oEvent) {
+			var sKey = oEvent.getParameter("selectedItem").getProperty("key");
+			this._timeline.setAxisOrientation(sKey);
+		},
+		onScrollbarSelected: function (oEvent) {
+			var bSelected = oEvent.getParameter("selected");
+			this._timeline.setEnableScroll(bSelected);
+			this._setMessage();
+
+			// in production you would probably want to use something like ScrollContainer
+			// but for demo purpose we want to keep it simple
+			// this allows scrolling for horizontal mode without EnableScrollbar ON
+			document.querySelector('section').style.overflow = "auto";
+			this._bindTimelineAggregation();
+		},
+		_bindTimelineAggregation: function () {
+ 
+			var afilters = [];
+			var ApplicationId = "00" + this._InsNo4;
+			var oFilter1 = new sap.ui.model.Filter("WorkflowId", sap.ui.model.FilterOperator.EQ, "purchaserequisition");
+			var oFilter2 = new sap.ui.model.Filter("InstanceId", sap.ui.model.FilterOperator.EQ, this._InsNo3);
+			var oFilter3 = new sap.ui.model.Filter("ApplicationId", sap.ui.model.FilterOperator.EQ, ApplicationId);
+			afilters.push(oFilter1);
+			afilters.push( oFilter2);
+			
+			afilters.push(oFilter3);
+			console.log("afilters",afilters);
+			//afilters.push(oFilter1, oFilter2, oFilter3);
+			this._timeline.bindAggregation("content", {
+				path: "/ApprovalHistory",
+				filters:afilters,
+				template: this.byId("idTemplateItem").clone()
+			});
+		},
+
+		_timelineHasGrowing: function () {
+			return this._timeline.getGrowingThreshold() !== 0;
 		},
 		_getAttachmentUrl: function (sUrl) {
 			// 修改正则表达式以匹配前面的斜杠

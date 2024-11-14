@@ -616,18 +616,7 @@ xmlns:m="sap.m"
                         <rm:Auto id="idAuto" />
                     </t:rowMode>
                     <t:rowActionTemplate>
-                        <t:RowAction
-                            id="idRowAction"
-                            visible="true"
-                        >
-                            <t:items>
-                                <t:RowActionItem
-                                    id="idRowActionItem"
-                                    type="Navigation"
-                                    press="onRowActionItemPress"
-                                />
-                            </t:items>
-                        </t:RowAction>
+ 
                     </t:rowActionTemplate>
                     <t:columns>
                         
@@ -1603,29 +1592,33 @@ xmlns:m="sap.m"
                 </xuap:ObjectPageSection>
 
 
-    <xuap:ObjectPageSection id="id0ObjectPageSection">
+    <xuap:ObjectPageSection id="id0ObjectPageSection"  >
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection
                             id="id0ObjectPageSubSection"
                             title="{i18n>attachment}"
+                             
                         >
 
  
 <m:Toolbar id="idToolbar">
-<m:Button id="idButton1" text="No paging" press="onNoPagingPress"/>
-<m:CheckBox   text="Lazy loading" select="onLazyLoadingSelected" selected="true" id="idLazyLoading"/>
-<m:CheckBox text="Growing (10 items)" select="onGrowingSelected" selected="false" id="idGrowing"/>
+ 
 <m:Label id="idLabel" text="Axis orientation"/>
 <m:Select id="idSelect" change="orientationChanged">
 <core:Item id="idItem1" key="Vertical" text="Vertical"/>
 <core:Item id="idItem2" key="Horizontal" text="Horizontal"/>
 </m:Select>
-<m:CheckBox id="idShowHeader" text="Scrollbar" select="onScrollbarSelected" selected="true"/>
+<m:CheckBox id="idShowHeader" text="Scrollbar" select="onScrollbarSelected" selected="false"/>
 </m:Toolbar>
-<r:Timeline id="idTimeline" enableBackendFilter="true" lazyLoading="true" growingThreshold="10" content="{/Items}" showIcons="false">
+<r:Timeline id="idTimeline"   content="{/ApprovalHistory}"  filterList="{/ApprovalHistory}" showIcons="false"
+textHeight="100px" >
 <r:content>
-<r:TimelineItem id="idTemplateItem" dateTime="{Date}" text="{Text}" title="{Title}" userName="{UserName}" select="onPressItems"> </r:TimelineItem>
+<r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{Zseq}" userName="{Operator}" select="onPressItems"
+filterValue="{Operator}" > </r:TimelineItem>
 </r:content>
+<r:filterList>
+<r:TimelineFilterListItem id="idTimelineFilterListItem" key="{Operator}" text="{Operator}"> </r:TimelineFilterListItem>
+</r:filterList>
 </r:Timeline>
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
@@ -1638,20 +1631,7 @@ xmlns:m="sap.m"
         <footer>
         
             <OverflowToolbar id="id0OverflowToolbar">
-                <Button
-                    id="idButtonAccept"
-                     
-                    text="{i18n>idButtonAccept}"
-                    type="Emphasized"
-                    press="onMessagePopoverPress"
-                />
-                              <Button
-                    id="idButtonReject"
-                    
-                    text="{i18n>idButtonReject}"
-                    type="Emphasized"
-                    press="onMessagePopoverPress"
-                />
+
                 <Button
                     id="idButton"
                     icon="sap-icon://alert"
@@ -1661,11 +1641,19 @@ xmlns:m="sap.m"
                     press="onMessagePopoverPress"
                 />
                 <ToolbarSpacer id="id0ToolbarSpacer" />
-                <Button
-                    id="idTestButton"
+                                <Button
+                    id="idButtonAccept"
+                    visible="true"
+                    text="{i18n>idButtonAccept}"
                     type="Emphasized"
-                    text="{i18n>ChangeView.InSave}"
-                    press="onButtonSavePress"
+                    press="onDialogPress"
+                />
+                <Button
+                    id="idButtonReject"
+                    visible="true"
+                    text="{i18n>idButtonReject}"
+                    type="Emphasized"
+                    press="onButtonAcceptReject"
                 />
             </OverflowToolbar>
             
