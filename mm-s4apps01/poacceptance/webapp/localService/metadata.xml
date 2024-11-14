@@ -117,7 +117,7 @@
                 <Property Name="NetPrice2" Type="Edm.String" Nullable="false" MaxLength="13"/>
                 <Property Name="NetPrice3" Type="Edm.String" Nullable="false" MaxLength="13"/>
                 <Property Name="NetAmount3" Type="Edm.String" Nullable="false" MaxLength="13"/>
-                <Property Name="VAT2" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="variable"/>
+                <Property Name="VAT2" Type="Edm.String" Nullable="false" MaxLength="13"/>
                 <Property Name="AccountingDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="DeliveryDate" Type="Edm.Date"/>
                 <Property Name="DlvQty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
@@ -436,7 +436,6 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/VAT2">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;VAT2}"/>
-                <Annotation Term="SAP__measures.ISOCurrency" Path="DocumentCurrency"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/AccountingDocument">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;AccountingDocument}"/>
