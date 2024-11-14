@@ -45,6 +45,7 @@ sap.ui.define([
 		},
 
         onFileUploaderChange: function (oEvent) {
+            this._BusyDialog.open();
             /*global XLSX*/
             this._LocalData.setProperty("/logInfo", "");
             // var oFile = oEvent.getSource().getFocusDomRef().files[0];
@@ -121,8 +122,11 @@ sap.ui.define([
                 }
                 this.checkDate(aExcelSet);
                 this._LocalData.setProperty("/excelSet", aExcelSet)
-                this._BusyDialog.close();
-                this._LocalData.setProperty("/recordCheckSuccessed", false);
+
+                let postDocs = this.preparePostBatchBody();
+                for (var i = 0; i < postDocs.length; i++) {
+                    this.postAction("check", postDocs[i], i);
+                }
             }.bind(this);
         },
 
@@ -143,27 +147,21 @@ sap.ui.define([
             }
         },
 
-        convertObjectValuesToString: function (obj) {
-            return Object.fromEntries(
-                Object.entries(obj).map(([key, value]) => [key, String(value)])
-            );
-        },
-
-        onButtonCheckPress: function () {
-            let postDocs = this.preparePostBody();
-            let oModel = this._oDataModel,
-                aDeferredGroups = oModel.getDeferredGroups();
-            aDeferredGroups = aDeferredGroups.concat(["UploadHead0"]);
-            oModel.setDeferredGroups(aDeferredGroups);
-            for (var i = 0; i < postDocs.length; i++) {
-				this.postCreate(postDocs[i], i);
-			}
-            oModel.submitChanges({ groupId: "UploadHead0" });
-        },
+        // onButtonCheckPress: function () {
+        //     let postDocs = this.preparePostBody();
+        //     let oModel = this._oDataModel,
+        //         aDeferredGroups = oModel.getDeferredGroups();
+        //     aDeferredGroups = aDeferredGroups.concat(["UploadHead0"]);
+        //     oModel.setDeferredGroups(aDeferredGroups);
+        //     for (var i = 0; i < postDocs.length; i++) {
+		// 		this.postCreate(postDocs[i], i);
+		// 	}
+        //     oModel.submitChanges({ groupId: "UploadHead0" });
+        // },
 
         onButtonPress: function (oEvent, sAction) {
             let postDocs = this.preparePostBatchBody();
-            
+            this._BusyDialog.open();
             for (var i = 0; i < postDocs.length; i++) {
 				this.postAction(sAction, postDocs[i], i);
 			}
@@ -176,23 +174,23 @@ sap.ui.define([
             //     that._BusyDialog.close();
             // });
         },
+// 
+        // preparePostBody: function () {
+        //     let aExcelSet = this._LocalData.getProperty("/excelSet"),
+		// 	    postDocs = [],
+		// 	    postDoc,
+		// 	    post = [];
 
-        preparePostBody: function () {
-            let aExcelSet = this._LocalData.getProperty("/excelSet"),
-			    postDocs = [],
-			    postDoc,
-			    post = [];
+		// 	aExcelSet.forEach(function (line) {
+		// 		post.push(JSON.parse(JSON.stringify(line)));
+		// 	}, this);
 
-			aExcelSet.forEach(function (line) {
-				post.push(JSON.parse(JSON.stringify(line)));
-			}, this);
-
-			postDocs = post;
-			return postDocs;
-        },
+		// 	postDocs = post;
+		// 	return postDocs;
+        // },
         preparePostBatchBody: function () {
             let aExcelSet = this._LocalData.getProperty("/excelSet");
-            this.checkDate(aExcelSet);
+            // this.checkDate(aExcelSet);
             let copyExcelSet = [];
             aExcelSet.forEach(item => {
                 let postDoc = JSON.parse(JSON.stringify(item));
@@ -202,28 +200,28 @@ sap.ui.define([
             let postDocs = [JSON.stringify(copyExcelSet)];
             return postDocs;
         },
-        postCreate: function (postData, i) {
-            delete postData.Type;
-            delete postData.Message;
-            let mParameters = {
-                groupId: "UploadHead" + Math.floor(i / 100),
-                // changeSetId: i,
-                success: function (oData) {
-                    // var aExcelSet = this._LocalData.getProperty("/excelSet");
-                    // aExcelSet.forEach(function (line) {
-                    // 	line.Type = oData.Type;
-                    // 	line.Message = oData.Message;
-                    // });
-                }.bind(this),
-                error: function (oError) {
-                    // var aExcelSet = this._LocalData.getProperty("/excelSet");
-                    // aExcelSet.forEach(function (line) {
-                    // 	line.Type = "E";
-                    // 	line.Message = messages.parseErrors(oError,line.Datanumber);
-                    // });
-                }.bind(this)
-            };
-            this.getOwnerComponent().getModel().create("/PurchaseReq", postData, mParameters);
-        },
+        // postCreate: function (postData, i) {
+        //     delete postData.Type;
+        //     delete postData.Message;
+        //     let mParameters = {
+        //         groupId: "UploadHead" + Math.floor(i / 100),
+        //         // changeSetId: i,
+        //         success: function (oData) {
+        //             // var aExcelSet = this._LocalData.getProperty("/excelSet");
+        //             // aExcelSet.forEach(function (line) {
+        //             // 	line.Type = oData.Type;
+        //             // 	line.Message = oData.Message;
+        //             // });
+        //         }.bind(this),
+        //         error: function (oError) {
+        //             // var aExcelSet = this._LocalData.getProperty("/excelSet");
+        //             // aExcelSet.forEach(function (line) {
+        //             // 	line.Type = "E";
+        //             // 	line.Message = messages.parseErrors(oError,line.Datanumber);
+        //             // });
+        //         }.bind(this)
+        //     };
+        //     this.getOwnerComponent().getModel().create("/PurchaseReq", postData, mParameters);
+        // },
     });
 });

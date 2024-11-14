@@ -67,9 +67,6 @@ sap.ui.define([
             this.oDataModel = this.getOwnerComponent().getModel();
 
             var oModel = this.oDataModel;
-                // aDeferredGroups = oModel.getDeferredGroups();
-            // aDeferredGroups = aDeferredGroups.concat(["myId"]);
-            // oModel.setDeferredGroups(aDeferredGroups);
 
             oModel.callFunction("/batchProcess", {
                 method: "POST",
@@ -83,54 +80,52 @@ sap.ui.define([
                 success: function (oData) {
                     let aExcelSet = this.localData.getProperty("/excelSet");
                     let result = JSON.parse(oData["batchProcess"].Zzkey);
-                    if (sAction === "export") {
-                        if (oData["batchProcess"].RecordUUID) {
-                            var sURL = this.getOwnerComponent().getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + oData["batchProcess"].RecordUUID + ",IsActiveEntity=true)/PDFContent";
-                            sap.m.URLHelper.redirect(sURL, true);
-                        }
-                    }else{
-                        result.forEach(function (line) {
-                            for ( let i = 0; i < aExcelSet.length; i++ ) {
-                                if (aExcelSet[i].Row == line.ROW ) {
-                                    Object.keys(aExcelSet[0]).forEach(function(key) {
-                                        if (key == "Status" || key == "Message") {
-                                            aExcelSet[i][key] = line[key.toUpperCase()];
-                                        }
-                                    });
-                                    // aExcelSet[i].Type = line.TYPE;
-                                    // aExcelSet[i].Message = line.MESSAGE;
-                                }
+                    switch (sAction) {
+                        case "export":
+                            if (oData["batchProcess"].RecordUUID) {
+                                var sURL = this.getOwnerComponent().getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + oData["batchProcess"].RecordUUID + ",IsActiveEntity=true)/PDFContent";
+                                sap.m.URLHelper.redirect(sURL, true);
                             }
-                        });
+                            break;
+                        default:
+                            result.forEach(function (line) {
+                                for ( let i = 0; i < aExcelSet.length; i++ ) {
+                                    if (aExcelSet[i].Row == line.ROW ) {
+                                        Object.keys(aExcelSet[0]).forEach(function(key) {
+                                            if (sAction == "save") {
+                                                if (key == "Status" || key == "Message") {
+                                                    aExcelSet[i][key] = line[key.toUpperCase()];
+                                                }
+                                            } else {
+                                                if ((key == "IntcoExtActlTransfOfCtrlDteTme" || key == "IntcoIntActlTransfOfCtrlDteTme") && line[key.toUpperCase()] == 0) {
+                                                    aExcelSet[i][key] = "";
+                                                }
+                                            }
+                                            
+                                        });
+                                        // aExcelSet[i].Type = line.TYPE;
+                                        // aExcelSet[i].Message = line.MESSAGE;
+                                    }
+                                }
+                            });
+                            break;
                     };
                     this.localData.setProperty("/excelSet", aExcelSet);
-                    this.getErrorCount(aExcelSet, sAction);
+                    if (sAction == "save") {
+                        this.getErrorCount(aExcelSet, sAction);
+                    }
+                    if (sAction == "check") {
+                        this._LocalData.setProperty("/excelSet", aExcelSet)
+                        // this._LocalData.setProperty("/recordCheckSuccessed", false);
+                    }
+                    this._BusyDialog.close();
                 }.bind(this),
                 error: function (oError) {
-                    this.localData.setProperty("/recordCheckSuccessed", false);
+                    // this.localData.setProperty("/recordCheckSuccessed", false);
                     messages.showError(messages.parseErrors(oError));
+                    this._BusyDialog.close();
                 }.bind(this)
             });
-            // oModel.submitChanges({ groupId: "myId" });
-            // var that = this;
-            // var promise = new Promise(function (resolve, reject) {
-            //     var oAction = that._oDataModel.bindContext("/DNProcess/com.sap.gateway.srvd.zui_salesaccept_dnprocess_o4.v0001." + sAction + "(...)");
-            //     oAction.setParameter("Zzkey", JSON.stringify(postData));
-            //     oAction.setParameter("Event", "");
-            //     oAction.setParameter("RecordUUID", "");
-
-            //     oAction.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
-            //         try {
-            //             var records = oAction.getBoundContext().getObject().value; //获取返回的数据
-            //         } catch (e) { }
-            //         resolve(records);
-
-            //     }).catch((oError) => {
-            //         messages.showError(oError.message);
-            //         reject(oError);
-            //     });
-            // });
-            // return promise;
         },
 
         getErrorCount: function (aExcelSet,sAction) {
@@ -150,14 +145,14 @@ sap.ui.define([
             if (iError > 0) {
                 return;
             }
-            switch (sAction) {
-                case "check":
-                    this.localData.setProperty("/recordCheckSuccessed", true);
-                    break;
-                case "save":
-                    this.localData.setProperty("/recordCheckSuccessed", false);
-                    break;
-            }
+            // switch (sAction) {
+            //     case "check":
+            //         this.localData.setProperty("/recordCheckSuccessed", true);
+            //         break;
+            //     case "save":
+            //         this.localData.setProperty("/recordCheckSuccessed", false);
+            //         break;
+            // }
         },
 
 		overwriteToFixed: function () {
