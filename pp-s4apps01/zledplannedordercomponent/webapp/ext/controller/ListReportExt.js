@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/m/BusyDialog",
-    "sap/m/MessageBox"
-], function ( BusyDialog, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/m/MessageToast",
+], function ( BusyDialog, MessageBox,MessageToast) {
     'use strict';
 
     var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog;
@@ -71,8 +72,14 @@ sap.ui.define([
             var sTitle, items = [];
             var aContexts = that._controller.extensionAPI.getSelectedContexts();
             aContexts.forEach(element => {
-                items.push(element.getObject(element.getPath()));
+                if (element.getObject(element.getPath()).STATUS == "") {
+                    items.push(element.getObject(element.getPath()));
+                }
             });
+            if (items.length == 0) {
+                MessageBox.show(that.getModel("i18n").getResourceBundle().getText("confirmMessage1"))
+                return;
+            }
             var oRequestData = items
             switch (bEvent) {
                 case "ACCEPT":
@@ -117,6 +124,7 @@ sap.ui.define([
                             }
                         });
                     }
+                    MessageToast.show(that.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
