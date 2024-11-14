@@ -74,7 +74,6 @@
                 <Property Name="uuid1" Type="Edm.Guid"/>
                 <Property Name="uuid2" Type="Edm.Guid"/>
                 <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.EntityControl"/>
-                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
             <ComplexType Name="ZR_UPLOAD_PARAMETER">
                 <Property Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
@@ -83,15 +82,6 @@
             </ComplexType>
             <ComplexType Name="EntityControl">
                 <Property Name="Updatable" Type="Edm.Boolean" Nullable="false"/>
-            </ComplexType>
-            <ComplexType Name="SAP__Message">
-                <Property Name="code" Type="Edm.String" Nullable="false"/>
-                <Property Name="message" Type="Edm.String" Nullable="false"/>
-                <Property Name="target" Type="Edm.String"/>
-                <Property Name="additionalTargets" Type="Collection(Edm.String)" Nullable="false"/>
-                <Property Name="transition" Type="Edm.Boolean" Nullable="false"/>
-                <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false"/>
-                <Property Name="longtextUrl" Type="Edm.String"/>
             </ComplexType>
             <Action Name="processLogic" IsBound="true">
                 <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.ItemdataType)" Nullable="false"/>
@@ -112,7 +102,7 @@
                 <Annotation Term="SAP__common.Label" String="転記先会社コード"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing_cp.companycode'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing.companycode'/$metadata</String>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -128,7 +118,7 @@
                 <Annotation Term="SAP__common.Label" String="決済対象会社コード"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing_cp.companycode2'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/i_companycodestdvh/0001;ps='srvd-zui_agencypurchasing_o4-0001';va='com.sap.gateway.srvd.zui_agencypurchasing_o4.v0001.et-zc_agencypurchasing.companycode2'/$metadata</String>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -223,7 +213,6 @@
                         <PropertyPath>CompanyCode2</PropertyPath>
                     </Collection>
                 </Annotation>
-                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
             <Annotations Target="SAP__self.Container/Itemdata">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
@@ -262,6 +251,11 @@
                                 <PropertyPath>__EntityControl</PropertyPath>
                             </Collection>
                         </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.ReadRestrictions">
+                    <Record>
+                        <PropertyValue Property="Readable" Bool="false"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.DeleteRestrictions">
