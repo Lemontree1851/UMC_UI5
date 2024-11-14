@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:layout="sap.ui.layout"
     xmlns:table="sap.ui.table">
-    <Dialog title="{i18n>ChangeAssignMaterial}">
+    <Dialog title="{i18n>ChangeAssignMaterial}" draggable="true">
         <Panel expandable="false" expanded="true" width="auto">
             <VBox >
                 <Text text="{i18n>AssignMaterial}"/>

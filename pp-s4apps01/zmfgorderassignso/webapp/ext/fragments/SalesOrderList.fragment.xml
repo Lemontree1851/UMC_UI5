@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:layout="sap.ui.layout"
     xmlns:table="sap.ui.table">
-    <Dialog title="{i18n>AssignSalesOrder}">
+    <Dialog title="{i18n>AssignSalesOrder}" draggable="true">
         <Panel expandable="false" expanded="true" width="auto">
             <table:Table id="idSalesOrderList" rows="{local>/SalesOrderList}" selectionMode="None" rowMode="Interactive" class="sapUiSizeCompact">
                 <table:columns>

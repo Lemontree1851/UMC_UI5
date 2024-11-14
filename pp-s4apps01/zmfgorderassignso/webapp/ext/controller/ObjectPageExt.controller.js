@@ -95,7 +95,9 @@ sap.ui.define([
         onChangeAssignSalesOrder: function (oEvent) {
             this._getSelectedRowData(oEvent);
             var sMaterial = this.getView().getModel("local").getProperty("/SelectedItem/Material");
-            this._getSalesOrderList("ChangeAssignSalesOrder", "SalesOrderList", sMaterial, this._iMaxQuantity);
+            var sAssignQty = this.getView().getModel("local").getProperty("/SelectedItem/AssignQty");
+            // this._getSalesOrderList("ChangeAssignSalesOrder", "SalesOrderList", sMaterial, this._iMaxQuantity);
+            this._getSalesOrderList("ChangeAssignSalesOrder", "SalesOrderList", sMaterial, parseFloat(sAssignQty));
         },
 
         // 削除
@@ -256,12 +258,20 @@ sap.ui.define([
                     }
                 }
             });
-            if (iSumAssignQty > parseFloat(this._oBindingData.AvailableAssignQty)) {
+            // if (iSumAssignQty > parseFloat(this._oBindingData.AvailableAssignQty)) {
+            //     aMessageItems.push({
+            //         type: "Error",
+            //         title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
+            //         description: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [iSumAssignQty, parseFloat(this._oBindingData.AvailableAssignQty)]),
+            //         subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [iSumAssignQty, parseFloat(this._oBindingData.AvailableAssignQty)])
+            //     });
+            // } else 
+            if (iSumAssignQty !== parseFloat(this._oBindingData.AvailableAssignQty)) {
                 aMessageItems.push({
                     type: "Error",
                     title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
-                    description: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [iSumAssignQty, parseFloat(this._oBindingData.AvailableAssignQty)]),
-                    subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [iSumAssignQty, parseFloat(this._oBindingData.AvailableAssignQty)])
+                    description: this.getView().getModel("i18n").getResourceBundle().getText("Message5", [iSumAssignQty, parseFloat(this._oBindingData.AvailableAssignQty)]),
+                    subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message5", [iSumAssignQty, parseFloat(this._oBindingData.AvailableAssignQty)])
                 });
             }
             if (aMessageItems.length > 0 || aRequestData.length === 0) {
@@ -396,12 +406,13 @@ sap.ui.define([
                     }
                 }
             });
-            if (iSumAssignQty > parseFloat(this._iMaxQuantity)) {
+            // if (iSumAssignQty > parseFloat(this._iMaxQuantity)) {
+            if (iSumAssignQty !== oRow.AssignQty) {
                 aMessageItems.push({
                     type: "Error",
                     title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
-                    description: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [iSumAssignQty, parseFloat(this._iMaxQuantity)]),
-                    subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message3", [iSumAssignQty, parseFloat(this._iMaxQuantity)])
+                    description: this.getView().getModel("i18n").getResourceBundle().getText("Message5", [iSumAssignQty, parseFloat(oRow.AssignQty)]),
+                    subtitle: this.getView().getModel("i18n").getResourceBundle().getText("Message5", [iSumAssignQty, parseFloat(oRow.AssignQty)])
                 });
             }
             if (aMessageItems.length > 0 || aRequestData.length === 1) {

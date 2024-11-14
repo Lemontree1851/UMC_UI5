@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:layout="sap.ui.layout"
     xmlns:table="sap.ui.table">
-    <Dialog title="{i18n>ChangeAssignQty}">
+    <Dialog title="{i18n>ChangeAssignQty}" draggable="true">
         <Panel expandable="false" expanded="true" width="auto">
             <VBox >
                 <Text text="{i18n>AssignQty}"/>
