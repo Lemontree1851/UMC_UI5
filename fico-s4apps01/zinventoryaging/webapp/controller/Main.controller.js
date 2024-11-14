@@ -1,11 +1,13 @@
 sap.ui.define([
+    "../model/formatter",
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageBox"
-], function (Controller,MessageBox) {
+], function (formatter,Controller,MessageBox) {
     "use strict";
 
     return Controller.extend("fico.zinventoryaging.controller.Main", {
-
+        formatter: formatter,
+        
         onInit: function () {
             var that = this;
             // *************************************************

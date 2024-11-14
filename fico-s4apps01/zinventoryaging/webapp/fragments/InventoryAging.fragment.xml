@@ -17,7 +17,7 @@
                 <Button icon="sap-icon://save" text="{i18n>ReCalculate}" type="Transparent" press="onPressBtn('ReCalculate')"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
-       <table:Table id="idTable" selectionMode="None" rowMode="Auto">
+        <table:Table id="idTable" selectionMode="None" rowMode="Auto">
             <table:columns>
                 <table:Column width="5rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
                     <table:customData>
@@ -144,7 +144,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity", "leadingProperty":"ValuationQuantity"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ValuationQuantity}" wrapping="false" />
+                        <Text text="{path:'ValuationQuantity', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>BaseUnit}" sortProperty="BaseUnit" filterProperty="BaseUnit">
@@ -160,7 +160,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ActualCost", "leadingProperty":"ActualCost"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ActualCost}" wrapping="false" />
+                        <Text text="{path: 'ActualCost', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>InventoryAmount}" sortProperty="InventoryAmount" filterProperty="InventoryAmount">
@@ -168,7 +168,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"InventoryAmount", "leadingProperty":"InventoryAmount"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{InventoryAmount}" wrapping="false" />
+                        <Text text="{path:'InventoryAmount', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>ValuationUnitPrice}" sortProperty="ValuationUnitPrice" filterProperty="ValuationUnitPrice">
@@ -176,7 +176,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ValuationUnitPrice", "leadingProperty":"ValuationUnitPrice"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ValuationUnitPrice}" wrapping="false" />
+                        <Text text="{path:'ValuationUnitPrice', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>ValuationAmount}" sortProperty="ValuationAmount" filterProperty="ValuationAmount">
@@ -184,7 +184,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ValuationAmount", "leadingProperty":"ValuationAmount"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ValuationAmount}" wrapping="false" />
+                        <Text text="{path:'ValuationAmount', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>ValuationAfterAmount}" sortProperty="ValuationAfterAmount" filterProperty="ValuationAfterAmount">
@@ -192,7 +192,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ValuationAfterAmount", "leadingProperty":"ValuationAfterAmount"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ValuationAfterAmount}" wrapping="false" />
+                        <Text text="{path:'ValuationAfterAmount', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>ValuationLoss}" sortProperty="ValuationLoss" filterProperty="ValuationLoss">
@@ -200,7 +200,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ValuationLoss", "leadingProperty":"ValuationLoss"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ValuationLoss}" wrapping="false" />
+                        <Text text="{path:'ValuationLoss', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>Currency}" sortProperty="Currency" filterProperty="Currency">
@@ -216,7 +216,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth1", "leadingProperty":"QuantityMonth1"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth1}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth1', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth1}" sortProperty="AmountMonth1" filterProperty="AmountMonth1">
@@ -224,7 +224,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth1", "leadingProperty":"AmountMonth1"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth1}" wrapping="false" />
+                        <Text text="{path:'AmountMonth1', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth2}" sortProperty="QuantityMonth2" filterProperty="QuantityMonth2">
@@ -232,7 +232,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth2", "leadingProperty":"QuantityMonth2"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth2}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth2', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth2}" sortProperty="AmountMonth2" filterProperty="AmountMonth2">
@@ -240,7 +240,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth2", "leadingProperty":"AmountMonth2"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth2}" wrapping="false" />
+                        <Text text="{path:'AmountMonth2', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth3}" sortProperty="QuantityMonth3" filterProperty="QuantityMonth3">
@@ -248,7 +248,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth3", "leadingProperty":"QuantityMonth3"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth3}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth3', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth3}" sortProperty="AmountMonth3" filterProperty="AmountMonth3">
@@ -256,7 +256,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth3", "leadingProperty":"AmountMonth3"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth3}" wrapping="false" />
+                        <Text text="{path:'AmountMonth3', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth4}" sortProperty="QuantityMonth4" filterProperty="QuantityMonth4">
@@ -264,7 +264,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth4", "leadingProperty":"QuantityMonth4"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth4}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth4', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth4}" sortProperty="AmountMonth4" filterProperty="AmountMonth4">
@@ -272,7 +272,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth4", "leadingProperty":"AmountMonth4"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth4}" wrapping="false" />
+                        <Text text="{path:'AmountMonth4', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth5}" sortProperty="QuantityMonth5" filterProperty="QuantityMonth5">
@@ -280,7 +280,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth5", "leadingProperty":"QuantityMonth5"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth5}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth5', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth5}" sortProperty="AmountMonth5" filterProperty="AmountMonth5">
@@ -288,7 +288,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth5", "leadingProperty":"AmountMonth5"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth5}" wrapping="false" />
+                        <Text text="{path:'AmountMonth5', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth6}" sortProperty="QuantityMonth6" filterProperty="QuantityMonth6">
@@ -296,7 +296,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth6", "leadingProperty":"QuantityMonth6"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth6}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth6', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth6}" sortProperty="AmountMonth6" filterProperty="AmountMonth6">
@@ -304,7 +304,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth6", "leadingProperty":"AmountMonth6"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth6}" wrapping="false" />
+                        <Text text="{path:'AmountMonth6', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth7}" sortProperty="QuantityMonth7" filterProperty="QuantityMonth7">
@@ -312,7 +312,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth7", "leadingProperty":"QuantityMonth7"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth7}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth7', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth7}" sortProperty="AmountMonth7" filterProperty="AmountMonth7">
@@ -320,7 +320,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth7", "leadingProperty":"AmountMonth7"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth7}" wrapping="false" />
+                        <Text text="{path:'AmountMonth7', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth8}" sortProperty="QuantityMonth8" filterProperty="QuantityMonth8">
@@ -328,7 +328,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth8", "leadingProperty":"QuantityMonth8"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth8}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth8', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth8}" sortProperty="AmountMonth8" filterProperty="AmountMonth8">
@@ -336,7 +336,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth8", "leadingProperty":"AmountMonth8"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth8}" wrapping="false" />
+                        <Text text="{path:'AmountMonth8', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth9}" sortProperty="QuantityMonth9" filterProperty="QuantityMonth9">
@@ -344,7 +344,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth9", "leadingProperty":"QuantityMonth9"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth9}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth9', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth9}" sortProperty="AmountMonth9" filterProperty="AmountMonth9">
@@ -352,7 +352,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth9", "leadingProperty":"AmountMonth9"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth9}" wrapping="false" />
+                        <Text text="{path:'AmountMonth9', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth10}" sortProperty="QuantityMonth10" filterProperty="QuantityMonth10">
@@ -360,7 +360,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth10", "leadingProperty":"QuantityMonth10"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth10}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth10', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth10}" sortProperty="AmountMonth10" filterProperty="AmountMonth10">
@@ -368,7 +368,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth10", "leadingProperty":"AmountMonth10"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth10}" wrapping="false" />
+                        <Text text="{path:'AmountMonth10', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth11}" sortProperty="QuantityMonth11" filterProperty="QuantityMonth11">
@@ -376,7 +376,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth11", "leadingProperty":"QuantityMonth11"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth11}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth11', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth11}" sortProperty="AmountMonth11" filterProperty="AmountMonth11">
@@ -384,7 +384,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth11", "leadingProperty":"AmountMonth11"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth11}" wrapping="false" />
+                        <Text text="{path:'AmountMonth11', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth12}" sortProperty="QuantityMonth12" filterProperty="QuantityMonth12">
@@ -392,7 +392,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth12", "leadingProperty":"QuantityMonth12"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth12}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth12', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth12}" sortProperty="AmountMonth12" filterProperty="AmountMonth12">
@@ -400,7 +400,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth12", "leadingProperty":"AmountMonth12"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth12}" wrapping="false" />
+                        <Text text="{path:'AmountMonth12', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth13}" sortProperty="QuantityMonth13" filterProperty="QuantityMonth13">
@@ -408,7 +408,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth13", "leadingProperty":"QuantityMonth13"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth13}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth13', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth13}" sortProperty="AmountMonth13" filterProperty="AmountMonth13">
@@ -416,7 +416,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth13", "leadingProperty":"AmountMonth13"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth13}" wrapping="false" />
+                        <Text text="{path:'AmountMonth13', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth14}" sortProperty="QuantityMonth14" filterProperty="QuantityMonth14">
@@ -424,7 +424,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth14", "leadingProperty":"QuantityMonth14"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth14}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth14', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth14}" sortProperty="AmountMonth14" filterProperty="AmountMonth14">
@@ -432,7 +432,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth14", "leadingProperty":"AmountMonth14"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth14}" wrapping="false" />
+                        <Text text="{path:'AmountMonth14', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth15}" sortProperty="QuantityMonth15" filterProperty="QuantityMonth15">
@@ -440,7 +440,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth15", "leadingProperty":"QuantityMonth15"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth15}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth15', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth15}" sortProperty="AmountMonth15" filterProperty="AmountMonth15">
@@ -448,7 +448,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth15", "leadingProperty":"AmountMonth15"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth15}" wrapping="false" />
+                        <Text text="{path:'AmountMonth15', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth16}" sortProperty="QuantityMonth16" filterProperty="QuantityMonth16">
@@ -456,7 +456,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth16", "leadingProperty":"QuantityMonth16"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth16}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth16', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth16}" sortProperty="AmountMonth16" filterProperty="AmountMonth16">
@@ -464,7 +464,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth16", "leadingProperty":"AmountMonth16"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth16}" wrapping="false" />
+                        <Text text="{path:'AmountMonth16', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth17}" sortProperty="QuantityMonth17" filterProperty="QuantityMonth17">
@@ -472,7 +472,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth17", "leadingProperty":"QuantityMonth17"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth17}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth17', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth17}" sortProperty="AmountMonth17" filterProperty="AmountMonth17">
@@ -480,7 +480,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth17", "leadingProperty":"AmountMonth17"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth17}" wrapping="false" />
+                        <Text text="{path:'AmountMonth17', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth18}" sortProperty="QuantityMonth18" filterProperty="QuantityMonth18">
@@ -488,7 +488,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth18", "leadingProperty":"QuantityMonth18"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth18}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth18', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth18}" sortProperty="AmountMonth18" filterProperty="AmountMonth18">
@@ -496,7 +496,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth18", "leadingProperty":"AmountMonth18"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth18}" wrapping="false" />
+                        <Text text="{path:'AmountMonth18', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth19}" sortProperty="QuantityMonth19" filterProperty="QuantityMonth19">
@@ -504,7 +504,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth19", "leadingProperty":"QuantityMonth19"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth19}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth19', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth19}" sortProperty="AmountMonth19" filterProperty="AmountMonth19">
@@ -512,7 +512,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth19", "leadingProperty":"AmountMonth19"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth19}" wrapping="false" />
+                        <Text text="{path:'AmountMonth19', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth20}" sortProperty="QuantityMonth20" filterProperty="QuantityMonth20">
@@ -520,7 +520,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth20", "leadingProperty":"QuantityMonth20"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth20}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth20', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth20}" sortProperty="AmountMonth20" filterProperty="AmountMonth20">
@@ -528,7 +528,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth20", "leadingProperty":"AmountMonth20"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth20}" wrapping="false" />
+                        <Text text="{path:'AmountMonth20', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth21}" sortProperty="QuantityMonth21" filterProperty="QuantityMonth21">
@@ -536,7 +536,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth21", "leadingProperty":"QuantityMonth21"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth21}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth21', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth21}" sortProperty="AmountMonth21" filterProperty="AmountMonth21">
@@ -544,7 +544,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth21", "leadingProperty":"AmountMonth21"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth21}" wrapping="false" />
+                        <Text text="{path:'AmountMonth21', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth22}" sortProperty="QuantityMonth22" filterProperty="QuantityMonth22">
@@ -552,7 +552,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth22", "leadingProperty":"QuantityMonth22"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth22}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth22', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth22}" sortProperty="AmountMonth22" filterProperty="AmountMonth22">
@@ -560,7 +560,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth22", "leadingProperty":"AmountMonth22"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth22}" wrapping="false" />
+                        <Text text="{path:'AmountMonth22', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth23}" sortProperty="QuantityMonth23" filterProperty="QuantityMonth23">
@@ -568,7 +568,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth23", "leadingProperty":"QuantityMonth23"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth23}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth23', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth23}" sortProperty="AmountMonth23" filterProperty="AmountMonth23">
@@ -576,7 +576,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth23", "leadingProperty":"AmountMonth23"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth23}" wrapping="false" />
+                        <Text text="{path:'AmountMonth23', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth24}" sortProperty="QuantityMonth24" filterProperty="QuantityMonth24">
@@ -584,7 +584,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth24", "leadingProperty":"QuantityMonth24"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth24}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth24', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth24}" sortProperty="AmountMonth24" filterProperty="AmountMonth24">
@@ -592,7 +592,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth24", "leadingProperty":"AmountMonth24"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth24}" wrapping="false" />
+                        <Text text="{path:'AmountMonth24', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth25}" sortProperty="QuantityMonth25" filterProperty="QuantityMonth25">
@@ -600,7 +600,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth25", "leadingProperty":"QuantityMonth25"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth25}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth25', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth25}" sortProperty="AmountMonth25" filterProperty="AmountMonth25">
@@ -608,7 +608,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth25", "leadingProperty":"AmountMonth25"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth25}" wrapping="false" />
+                        <Text text="{path:'AmountMonth25', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth26}" sortProperty="QuantityMonth26" filterProperty="QuantityMonth26">
@@ -616,7 +616,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth26", "leadingProperty":"QuantityMonth26"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth26}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth26', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth26}" sortProperty="AmountMonth26" filterProperty="AmountMonth26">
@@ -624,7 +624,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth26", "leadingProperty":"AmountMonth26"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth26}" wrapping="false" />
+                        <Text text="{path:'AmountMonth26', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth27}" sortProperty="QuantityMonth27" filterProperty="QuantityMonth27">
@@ -632,7 +632,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth27", "leadingProperty":"QuantityMonth27"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth27}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth27', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth27}" sortProperty="AmountMonth27" filterProperty="AmountMonth27">
@@ -640,7 +640,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth27", "leadingProperty":"AmountMonth27"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth27}" wrapping="false" />
+                        <Text text="{path:'AmountMonth27', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth28}" sortProperty="QuantityMonth28" filterProperty="QuantityMonth28">
@@ -648,7 +648,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth28", "leadingProperty":"QuantityMonth28"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth28}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth28', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth28}" sortProperty="AmountMonth28" filterProperty="AmountMonth28">
@@ -656,7 +656,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth28", "leadingProperty":"AmountMonth28"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth28}" wrapping="false" />
+                        <Text text="{path:'AmountMonth28', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth29}" sortProperty="QuantityMonth29" filterProperty="QuantityMonth29">
@@ -664,7 +664,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth29", "leadingProperty":"QuantityMonth29"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth29}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth29', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth29}" sortProperty="AmountMonth29" filterProperty="AmountMonth29">
@@ -672,7 +672,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth29", "leadingProperty":"AmountMonth29"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth29}" wrapping="false" />
+                        <Text text="{path:'AmountMonth29', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth30}" sortProperty="QuantityMonth30" filterProperty="QuantityMonth30">
@@ -680,7 +680,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth30", "leadingProperty":"QuantityMonth30"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth30}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth30', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth30}" sortProperty="AmountMonth30" filterProperty="AmountMonth30">
@@ -688,7 +688,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth30", "leadingProperty":"AmountMonth30"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth30}" wrapping="false" />
+                        <Text text="{path:'AmountMonth30', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth31}" sortProperty="QuantityMonth31" filterProperty="QuantityMonth31">
@@ -696,7 +696,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth31", "leadingProperty":"QuantityMonth31"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth31}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth31', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth31}" sortProperty="AmountMonth31" filterProperty="AmountMonth31">
@@ -704,7 +704,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth31", "leadingProperty":"AmountMonth31"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth31}" wrapping="false" />
+                        <Text text="{path:'AmountMonth31', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth32}" sortProperty="QuantityMonth32" filterProperty="QuantityMonth32">
@@ -712,7 +712,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth32", "leadingProperty":"QuantityMonth32"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth32}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth32', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth32}" sortProperty="AmountMonth32" filterProperty="AmountMonth32">
@@ -720,7 +720,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth32", "leadingProperty":"AmountMonth32"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth32}" wrapping="false" />
+                        <Text text="{path:'AmountMonth32', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth33}" sortProperty="QuantityMonth33" filterProperty="QuantityMonth33">
@@ -728,7 +728,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth33", "leadingProperty":"QuantityMonth33"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth33}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth33', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth33}" sortProperty="AmountMonth33" filterProperty="AmountMonth33">
@@ -736,7 +736,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth33", "leadingProperty":"AmountMonth33"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth33}" wrapping="false" />
+                        <Text text="{path:'AmountMonth33', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth34}" sortProperty="QuantityMonth34" filterProperty="QuantityMonth34">
@@ -744,7 +744,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth34", "leadingProperty":"QuantityMonth34"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth34}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth34', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth34}" sortProperty="AmountMonth34" filterProperty="AmountMonth34">
@@ -752,7 +752,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth34", "leadingProperty":"AmountMonth34"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth34}" wrapping="false" />
+                        <Text text="{path:'AmountMonth34', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth35}" sortProperty="QuantityMonth35" filterProperty="QuantityMonth35">
@@ -760,7 +760,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth35", "leadingProperty":"QuantityMonth35"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth35}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth35', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth35}" sortProperty="AmountMonth35" filterProperty="AmountMonth35">
@@ -768,7 +768,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth35", "leadingProperty":"AmountMonth35"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth35}" wrapping="false" />
+                        <Text text="{path:'AmountMonth35', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>QuantityMonth36}" sortProperty="QuantityMonth36" filterProperty="QuantityMonth36">
@@ -776,7 +776,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"QuantityMonth36", "leadingProperty":"QuantityMonth36"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{QuantityMonth36}" wrapping="false" />
+                        <Text text="{path:'QuantityMonth36', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>AmountMonth36}" sortProperty="AmountMonth36" filterProperty="AmountMonth36">
@@ -784,7 +784,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AmountMonth36", "leadingProperty":"AmountMonth36"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AmountMonth36}" wrapping="false" />
+                        <Text text="{path:'AmountMonth36', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>
