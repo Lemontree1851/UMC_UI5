@@ -85,15 +85,55 @@
                 <Property Name="PostalCode" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="CityName" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="CustomerName" Type="Edm.String" Nullable="false" MaxLength="80"/>
+                <Property Name="DeliveryReceiptNo" Type="Edm.String" Nullable="false" MaxLength="11"/>
+                <Property Name="TheCompanyPostalCode" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyCityName1" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyCityName2" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyTelNumber" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyFaxNumber" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="TheCompanyName" Type="Edm.String" Nullable="false" MaxLength="120"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
+            <ComplexType Name="SAP__Message">
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+                <Property Name="message" Type="Edm.String" Nullable="false"/>
+                <Property Name="target" Type="Edm.String"/>
+                <Property Name="additionalTargets" Type="Collection(Edm.String)" Nullable="false"/>
+                <Property Name="transition" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false"/>
+                <Property Name="longtextUrl" Type="Edm.String"/>
+            </ComplexType>
+            <Action Name="deleteDeliveryReceiptNo" EntitySetPath="_it" IsBound="true">
+                <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.DeliveryReceiptType)" Nullable="false"/>
+                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
+                <ReturnType Type="Collection(com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.DeliveryReceiptType)" Nullable="false"/>
+            </Action>
+            <Action Name="reprintDeliveryReceiptNo" EntitySetPath="_it" IsBound="true">
+                <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.DeliveryReceiptType)" Nullable="false"/>
+                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
+                <ReturnType Type="Collection(com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.DeliveryReceiptType)" Nullable="false"/>
+            </Action>
+            <Action Name="printDeliveryReceiptNo" EntitySetPath="_it" IsBound="true">
+                <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.DeliveryReceiptType)" Nullable="false"/>
+                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
+                <ReturnType Type="Collection(com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.DeliveryReceiptType)" Nullable="false"/>
+            </Action>
             <EntityContainer Name="Container">
                 <EntitySet Name="DeliveryReceipt" EntityType="com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.DeliveryReceiptType"/>
             </EntityContainer>
             <Annotations Target="SAP__self.DeliveryReceiptType/DeliveryDocument">
+                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Delivery"/>
             </Annotations>
             <Annotations Target="SAP__self.DeliveryReceiptType/DeliveryDocumentItem">
+                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
                 <Annotation Term="SAP__common.Label" String="Item"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Delivery Item"/>
@@ -118,6 +158,11 @@
             </Annotations>
             <Annotations Target="SAP__self.DeliveryReceiptType/DeliveryDocumentType">
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_deliverydocumenttype/0001;ps='srvd-zui_deliveryreceipt_o4-0001';va='com.sap.gateway.srvd.zui_deliveryreceipt_o4.v0001.et-zc_deliveryreceipt.deliverydocumenttype'/$metadata</String>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="SAP__common.Label" String="Delivery Type"/>
                 <Annotation Term="SAP__common.Heading" String="DlvTy"/>
             </Annotations>
@@ -159,7 +204,7 @@
             </Annotations>
             <Annotations Target="SAP__self.DeliveryReceiptType">
                 <Annotation Term="SAP__common.CreatedBy" Path="CreatedByUser"/>
-                <Annotation Term="SAP__common.Label" String="納受領出力"/>
+                <Annotation Term="SAP__common.Label" String="納受領出力-报表"/>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
@@ -231,6 +276,7 @@
                         <PropertyPath>MaterialByCustomer</PropertyPath>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
             <Annotations Target="SAP__self.DeliveryReceiptType/SalesOrganization">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -292,9 +338,67 @@
                 <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
             </Annotations>
             <Annotations Target="SAP__self.DeliveryReceiptType/PostalCode">
+                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Postal Code"/>
                 <Annotation Term="SAP__common.Heading" String="PostalCode"/>
+            </Annotations>
+            <Annotations Target="SAP__self.DeliveryReceiptType/CityName">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="City"/>
+            </Annotations>
+            <Annotations Target="SAP__self.DeliveryReceiptType/CustomerName">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Name of Customer"/>
+                <Annotation Term="SAP__common.Heading" String="Customer"/>
+            </Annotations>
+            <Annotations Target="SAP__self.DeliveryReceiptType/TheCompanyPostalCode">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.DeliveryReceiptType/TheCompanyCityName1">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.DeliveryReceiptType/TheCompanyCityName2">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.DeliveryReceiptType/TheCompanyTelNumber">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.DeliveryReceiptType/TheCompanyFaxNumber">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.DeliveryReceiptType/TheCompanyName">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.deleteDeliveryReceiptNo(Collection(SAP__self.DeliveryReceiptType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.deleteDeliveryReceiptNo(Collection(SAP__self.DeliveryReceiptType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
+            <Annotations Target="SAP__self.reprintDeliveryReceiptNo(Collection(SAP__self.DeliveryReceiptType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.reprintDeliveryReceiptNo(Collection(SAP__self.DeliveryReceiptType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
+            <Annotations Target="SAP__self.printDeliveryReceiptNo(Collection(SAP__self.DeliveryReceiptType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.printDeliveryReceiptNo(Collection(SAP__self.DeliveryReceiptType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
             </Annotations>
             <Annotations Target="SAP__self.Container/DeliveryReceipt">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
@@ -434,13 +538,6 @@
             <Annotations Target="SAP__self.DeliveryReceiptType/CreationDate">
                 <Annotation Term="SAP__common.Label" String="Created On"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Record Creation Date"/>
-            </Annotations>
-            <Annotations Target="SAP__self.DeliveryReceiptType/CityName">
-                <Annotation Term="SAP__common.Label" String="City"/>
-            </Annotations>
-            <Annotations Target="SAP__self.DeliveryReceiptType/CustomerName">
-                <Annotation Term="SAP__common.Label" String="Name of Customer"/>
-                <Annotation Term="SAP__common.Heading" String="Customer"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
