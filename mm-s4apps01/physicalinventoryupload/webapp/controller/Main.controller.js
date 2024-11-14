@@ -153,6 +153,8 @@ function (Base, formatter, xlsx, BusyDialog, MessageBox, MessageToast, Spreadshe
                                 if (aExcelSet[index].Row === element.ROW) {
                                     aExcelSet[index].Status = element.STATUS;
                                     aExcelSet[index].Message = element.MESSAGE;
+                                    //20241113 返回当前的单位到单元格上
+                                    aExcelSet[index].UnitOfEntry = element.UNITOFENTRY;
                                 }
                             }
                             if (element.STATUS === 'E') {
