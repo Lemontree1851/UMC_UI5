@@ -68,7 +68,11 @@ function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter,Sp
 			// 	var b = this.readProductOldID(oFilterData.Material);
 			// }
 			// Promise.all([this.readData(aFilters), b]).then((results) => {
-			Promise.all([this.readData(aFilters)]).then((results) => {
+
+
+			// Promise.all([this.readData(aFilters)]).then((results) => {
+
+			Promise.all([this.readData(aFilters)]).then((results) => {	
 				that.getModel("local").setProperty("/data", results[0].results);
 				that.buildListResultUITable(oTable, results[0].results[0]);
 			}).catch(() => {
@@ -82,6 +86,10 @@ function (Base, Column, Text, MessageToast, Filter, FilterOperator, formatter,Sp
 			return new Promise((resolve, reject) => {
 				that.getModel().read("/OFSOCOMPARISON", {
 					filters: aFilters,
+					urlParameters: {
+						"$top": 999999999
+					},
+
 					// urlParameters: {
 					// 	"$expand": "toResults"
 					// },
