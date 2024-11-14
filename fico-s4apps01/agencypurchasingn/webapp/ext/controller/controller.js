@@ -24,17 +24,7 @@ sap.ui.define([
             var sTitle, items = [];
             var aContexts = that._controller.extensionAPI.getSelectedContexts();
             aContexts.forEach(element => {
-                // "/MaterialRequisition(MaterialRequisitionNo='TEST20240821000',ItemNo='20')"
-                // let aSplitArray = element.getPath().split("'");
-                // items.push({
-                //     MaterialRequisitionNo: aSplitArray[1],
-                //     ItemNo: aSplitArray[3]
-                // });
-
                 items.push(element.getObject(element.getPath()));
-
-
-
             });
             var oRequestData = {
                 items: items,
@@ -65,21 +55,6 @@ sap.ui.define([
 
         _callOData: function (bEvent, oRequestData, that) {
             var aPromise = [];
-            // if (bEvent === "POSTING" || bEvent === "CANCELPOSTING") {
-            //     // var items = _myFunction._removeDuplicates(oRequestData.items, ["TaxCode"]);
-            //     var items = oRequestData.items;
-            //     items.forEach(item => {
-            //         aPromise.push(_myFunction._callODataAction(bEvent, {
-            //             header: { TaxCode: item.TaxCode },
-            //             user: oRequestData.user,
-            //             username: oRequestData.username,
-            //             datetime: oRequestData.datetime
-            //         }, that));
-            //     });
-            // } else {
-            //     aPromise.push(_myFunction._callODataAction(bEvent, oRequestData, that));
-            // }
-
             aPromise.push(_myFunction._callODataAction(bEvent, oRequestData, that));
             try {
                     _myBusyDialog.open();
@@ -106,93 +81,11 @@ sap.ui.define([
                                 // aContexts[index].setProperty(sPath + "/Status", element.STATUS)
                             }
                         });
-
-
-                        
-                        //             if (bEvent === "QUERY" && result.MESSAGEITEMS.length === 0) {
-                        //                 that.getModel("local").setProperty("/ItemdataSet", {
-                        //                     Plant: result.HEADER.PLANT,
-                        //                     Type: result.HEADER.TYPE,
-                        //                     MaterialRequisitionNo: result.HEADER.MATERIAL_REQUISITION_NO,
-                        //                     HeaderCreatedDate: new Date(result.HEADER.CREATED_DATE),
-                        //                     CostCenter: result.HEADER.COST_CENTER,
-                        //                     CostCenterName: result.HEADER.COST_CENTER_NAME,
-                        //                     Customer: result.HEADER.CUSTOMER,
-                        //                     CustomerName: result.HEADER.CUSTOMER_NAME,
-                        //                     Receiver: result.HEADER.RECEIVER,
-                        //                     RequisitionDate: new Date(result.HEADER.REQUISITION_DATE),
-                        //                     LineWarehouseStatus: result.HEADER.LINE_WAREHOUSE_STATUS === "X" ? true : false,
-                        //                     LocalLastChangedAtS: result.HEADER.LOCAL_LAST_CHANGED_AT_S,
-                        //                 });
-                        //                 var items = [];
-                        //                 result.ITEMS.forEach(element => {
-                        //                     var iAmount = parseFloat(element.STANDARD_PRICE) * parseFloat(element.QUANTITY);
-                        //                     items.push({
-                        //                         ItemNo: element.ITEM_NO,
-                        //                         ManufacturingOrder: element.MANUFACTURING_ORDER,
-                        //                         Product: element.PRODUCT,
-                        //                         Material: element.MATERIAL,
-                        //                         MaterialDescription: element.MATERIAL_DESCRIPTION,
-                        //                         Quantity: element.QUANTITY,
-                        //                         BaseUnit: element.BASE_UNIT,
-                        //                         StorageLocation: element.STORAGE_LOCATION,
-                        //                         StorageLocationName: element.STORAGE_LOCATION_NAME,
-                        //                         Location: element.LOCATION,
-                        //                         Remark: element.REMARK,
-                        //                         StandardPrice: element.STANDARD_PRICE,
-                        //                         TotalAmount: iAmount,
-                        //                         Currency: element.CURRENCY,
-                        //                         OrderIsClosed: element.ORDER_IS_CLOSED,
-                        //                         LocalLastChangedAtS: element.LOCAL_LAST_CHANGED_AT_S,
-                        //                         DeleteFlag: iAmount >= 100000 ? "W" : ""
-                        //                     });
-                        //                 });
-                        //                 that.getModel("local").setProperty("/itemSet", items);
-                        //                 sap.ui.getCore().byId("idMaterialRequisitionNo").setEditable(false);
-                        //                 sap.ui.getCore().byId("idSaveBtn").setVisible(true);
-                        //             } else if (bEvent === "QUERY") {
-                        //                 // has error message
-                        //                 sap.ui.getCore().byId("idSaveBtn").setVisible(false);
-                        //             } else if (bEvent === "SAVE") {
-                        //                 that.getModel("local").setProperty("/headSet/MaterialRequisitionNo", result.HEADER.MATERIAL_REQUISITION_NO);
-                        //             } else if (bEvent === "PRINT") {
-                        //                 result.ITEMS.forEach(element => {
-                        //                     aPrintRecords.push({ RecordUUID: element.RECORDUUID });
-                        //                 });
-                        //                 aPrintRecords = _myFunction._removeDuplicates(aPrintRecords, ["RecordUUID"]);
-                        //             }
-                        //             result.MESSAGEITEMS.forEach(element => {
-                        //                 aMessageItems.push({
-                        //                     type: element.TYPE,
-                        //                     title: element.TITLE,
-                        //                     description: element.DESCRIPTION,
-                        //                     subtitle: element.SUBTITLE
-                        //                 });
-                        //             });
                     }
-                    //         that.getModel("local").setProperty("/MessageItems", aMessageItems);
-                    //         _myMessageView.setModel(that.getModel("local"));
-                    //         // bEvent = "PRINT"
-                    //         aPrintRecords.forEach(element => {
-                    //             // 'PrintRecord(RecordUUID=2d218e58-501b-1eef-99b5-8604583014eb,IsActiveEntity=true)'
-                    //             var sPath = "PrintRecord(RecordUUID=" + element.RecordUUID + ",IsActiveEntity=true)";
-                    //             var sURL = that.getModel("Print").getServiceUrl() + sPath + '/PDFContent';
-                    //             sap.m.URLHelper.redirect(sURL, true);
-                    //         });
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
                     _myBusyDialog.close();
-                    // var aMessageItems = that.getModel("local").getProperty("/MessageItems");
-                    // if (aMessageItems.length > 0) {
-                    //     _myMessageView.navigateBack();
-                    //     that.routing.getView().addDependent(_myMessageDialog);
-                    //     _myMessageDialog.open();
-                    // }
-                    // if (bEvent !== "SAVE" && bEvent !== "QUERY") {
-                    //     // refresh
-                    //     that.getModel().refresh();
-                    // }
                 });
             } catch (error) {
                 MessageBox.error(error);
