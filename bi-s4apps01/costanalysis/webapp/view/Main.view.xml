@@ -19,7 +19,7 @@
         <f:header>
             <f:DynamicPageHeader pinnable="true">
                 <f:content>
-                    <RadioButtonGroup columns="2" selectedIndex="{local>/selectIndex}">
+                    <RadioButtonGroup columns="2" selectedIndex="{local>/selectIndex}" id="RadioButton">
                         <RadioButton text="{i18n>COSTANALYSISCOM}" selected="true"/>
                         <RadioButton text="{i18n>COSTANALYSISPROCESS}"/>
                     </RadioButtonGroup>
@@ -44,7 +44,7 @@
                                 </smartFilterBar:ControlConfiguration>
 
                                 <!-- <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/> -->
-                                <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
+                                <!-- <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <DatePicker valueFormat="MM" displayFormat="MM" value="{
                                             'path':'local>/zMonth',
@@ -54,7 +54,29 @@
                                             }
                                         }"/>
                                     </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration> -->
+                                <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
+                                    <smartFilterBar:customControl>
+                                        <MultiComboBox id="sfbRep02SelFiscalMonth1" >
+                                            <items>
+                                                <core:Item id="idRep02Month01" key="01" text="01"></core:Item>
+                                                <core:Item id="idRep02Month02" key="02" text="02"></core:Item>
+                                                <core:Item id="idRep02Month03" key="03" text="03"></core:Item>
+                                                <core:Item id="idRep02Month04" key="04" text="04"></core:Item>
+                                                <core:Item id="idRep02Month05" key="05" text="05"></core:Item>
+                                                <core:Item id="idRep02Month06" key="06" text="06"></core:Item>
+                                                <core:Item id="idRep02Month07" key="07" text="07"></core:Item>
+                                                <core:Item id="idRep02Month08" key="08" text="08"></core:Item>
+                                                <core:Item id="idRep02Month09" key="09" text="09"></core:Item>
+                                                <core:Item id="idRep02Month10" key="10" text="10"></core:Item>
+                                                <core:Item id="idRep02Month11" key="11" text="11"></core:Item>
+                                                <core:Item id="idRep02Month12" key="12" text="12"></core:Item>
+                                            </items>
+                                        </MultiComboBox>
+                                    </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
+
+
                                 <smartFilterBar:ControlConfiguration index='40' key="Material" label="{i18n>Material}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
         
@@ -78,7 +100,7 @@
                                         }"/>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
+                                <!-- <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <DatePicker valueFormat="MM" displayFormat="MM" value="{
                                             'path':'local>/zMonth',
@@ -87,6 +109,26 @@
                                                 'pattern': 'MM'
                                             }
                                         }"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration> -->
+                                <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
+                                    <smartFilterBar:customControl>
+                                        <MultiComboBox id="sfbRep02SelFiscalMonth2" >
+                                            <items>
+                                                <core:Item id="idRep02Month101" key="01" text="01"></core:Item>
+                                                <core:Item id="idRep02Month102" key="02" text="02"></core:Item>
+                                                <core:Item id="idRep02Month103" key="03" text="03"></core:Item>
+                                                <core:Item id="idRep02Month104" key="04" text="04"></core:Item>
+                                                <core:Item id="idRep02Month105" key="05" text="05"></core:Item>
+                                                <core:Item id="idRep02Month106" key="06" text="06"></core:Item>
+                                                <core:Item id="idRep02Month107" key="07" text="07"></core:Item>
+                                                <core:Item id="idRep02Month108" key="08" text="08"></core:Item>
+                                                <core:Item id="idRep02Month109" key="09" text="09"></core:Item>
+                                                <core:Item id="idRep02Month110" key="10" text="10"></core:Item>
+                                                <core:Item id="idRep02Month111" key="11" text="11"></core:Item>
+                                                <core:Item id="idRep02Month112" key="12" text="12"></core:Item>
+                                            </items>
+                                        </MultiComboBox>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
                                 <smartFilterBar:ControlConfiguration index='40' key="Product" label="{i18n>Product}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>

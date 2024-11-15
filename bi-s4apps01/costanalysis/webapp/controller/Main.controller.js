@@ -64,12 +64,47 @@ function (Base,formatter, BusyDialog, MessageBox, MessageToast, Filter, FilterOp
                 oEvent.getParameter("bindingParams").filters.push(oYear);
             }
 
-            if(this.getModel("local").getProperty("/zMonth").length != 0){
-                var sMonth = this.getModel("local").getProperty("/zMonth").getMonth() + 1;
-                var oMonth = {oValue1:sMonth, oValue2: null, sOperator: "EQ", sPath: "zMonth", _bMultiFilter:false};
+            // if(this.getModel("local").getProperty("/zMonth").length != 0){
+            //     var sMonth = this.getModel("local").getProperty("/zMonth").getMonth() + 1;
+            //     var oMonth = {oValue1:sMonth, oValue2: null, sOperator: "EQ", sPath: "zMonth", _bMultiFilter:false};
 
-                oEvent.getParameter("bindingParams").filters.push(oMonth);
-            } 
+            //     oEvent.getParameter("bindingParams").filters.push(oMonth);
+            // } 
+
+            if(this.getModel("local").getProperty("/selectIndex") == 0){
+                var oMonth = this.byId("sfbRep02SelFiscalMonth1");
+                if(oMonth){
+                    var aMonth = oMonth.getSelectedKeys();
+                    if(aMonth.length != 0){
+                        aMonth.forEach((e)=>{
+                            var oMonth = {oValue1:e, oValue2: null, sOperator: "EQ", sPath: "zMonth", _bMultiFilter:false};
+
+                            oEvent.getParameter("bindingParams").filters.push(oMonth);
+                        })
+                    }
+
+                }
+
+            }
+            else{
+                var oMonth = this.byId("sfbRep02SelFiscalMonth2");
+                if(oMonth){
+                    var aMonth = oMonth.getSelectedKeys();
+                    if(aMonth.length != 0){
+                        aMonth.forEach((e)=>{
+                            var oMonth = {oValue1:e, oValue2: null, sOperator: "EQ", sPath: "zMonth", _bMultiFilter:false};
+
+                            oEvent.getParameter("bindingParams").filters.push(oMonth);
+                        })
+                    }
+
+                }
+
+            }
+
+
+
+
 		}, 
     });
 });
