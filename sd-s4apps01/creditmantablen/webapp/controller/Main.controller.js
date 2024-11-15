@@ -52,7 +52,7 @@ sap.ui.define([
 					this._BusyDialog.close();
                 } else {
 					this._BusyDialog.close();
-                    MessageBox.error("No Data");
+                    MessageBox.error("対象データが無いです。");
 					that.getModel("local").setProperty("/data", results[0].results);
 					that.buildListResultUITable(oTable, results[0].results[0]);	
 
