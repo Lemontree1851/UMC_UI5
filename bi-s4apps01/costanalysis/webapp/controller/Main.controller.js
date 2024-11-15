@@ -57,24 +57,19 @@ function (Base,formatter, BusyDialog, MessageBox, MessageToast, Filter, FilterOp
  
         },
 		onBeforeRebindTable: function (oEvent) {
+            if(this.getModel("local").getProperty("/zYear").length != 0){
+                var sYear = this.getModel("local").getProperty("/zYear").getFullYear();
+                var oYear = {oValue1:sYear, oValue2: null, sOperator: "EQ", sPath: "zYear", _bMultiFilter:false};
 
-            var sYear = this.getModel("local").getProperty("/zYear").getFullYear();
-            var oYear = {oValue1:sYear, oValue2: null, sOperator: "EQ", sPath: "zYear", _bMultiFilter:false};
+                oEvent.getParameter("bindingParams").filters.push(oYear);
+            }
 
-            oEvent.getParameter("bindingParams").filters.push(oYear);
+            if(this.getModel("local").getProperty("/zMonth").length != 0){
+                var sMonth = this.getModel("local").getProperty("/zMonth").getMonth() + 1;
+                var oMonth = {oValue1:sMonth, oValue2: null, sOperator: "EQ", sPath: "zMonth", _bMultiFilter:false};
 
-            var sMonth = this.getModel("local").getProperty("/zMonth").getMonth() + 1;
-            var oMonth = {oValue1:sMonth, oValue2: null, sOperator: "EQ", sPath: "zMonth", _bMultiFilter:false};
-
-            oEvent.getParameter("bindingParams").filters.push(oMonth);
-
-
-
-
-
-		},
-
-
-
+                oEvent.getParameter("bindingParams").filters.push(oMonth);
+            } 
+		}, 
     });
 });
