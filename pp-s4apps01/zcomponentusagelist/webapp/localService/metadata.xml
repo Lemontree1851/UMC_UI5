@@ -82,7 +82,7 @@
                 <Property Name="BillOfMaterialItemUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="AlternativeItemStrategy" Type="Edm.String" MaxLength="1"/>
                 <Property Name="AlternativeItemPriority" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative"/>
-                <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" MaxLength="100"/>
+                <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" MaxLength="900"/>
                 <Property Name="NoDisplayNonProduct" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="DisplayPurchasingInfo" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
             </EntityType>

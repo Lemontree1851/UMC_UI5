@@ -154,7 +154,7 @@
                         <Text text="{AlternativeItemPriority}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="18rem" label="{i18n>BOMSubItemInstallationPoint}" sortProperty="BOMSubItemInstallationPoint" filterProperty="BOMSubItemInstallationPoint">
+                <table:Column width="30rem" label="{i18n>BOMSubItemInstallationPoint}" sortProperty="BOMSubItemInstallationPoint" filterProperty="BOMSubItemInstallationPoint">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BOMSubItemInstallationPoint", "leadingProperty":"BOMSubItemInstallationPoint"}'/>
                     </table:customData>
