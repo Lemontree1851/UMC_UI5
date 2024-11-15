@@ -96,7 +96,7 @@
                 <Property Name="BOMItemSorter" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="IsMaterialProvision" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="ChangeNumber" Type="Edm.String" Nullable="false" MaxLength="12"/>
-                <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" Nullable="false" MaxLength="900"/>
                 <Property Name="BillOfMaterialSubItemQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
                 <Property Name="BOMItemText2" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="BOMItemDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
