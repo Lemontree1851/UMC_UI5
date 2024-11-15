@@ -116,7 +116,7 @@ sap.ui.define([
                     // oItem.IntcoIntActlTransfOfCtrlDteTme = oItem.IntcoIntActlTransfOfCtrlDteTme.slice(0,8);
                     aExcelSet.push(oItem);
                 }
-                this.checkDate(aExcelSet);
+                // this.checkDate(aExcelSet);
                 this._LocalData.setProperty("/excelSet", aExcelSet)
 
                 let postDocs = this.preparePostBatchBody();
@@ -187,12 +187,15 @@ sap.ui.define([
         // },
         preparePostBatchBody: function () {
             let aExcelSet = this._LocalData.getProperty("/excelSet");
-            // this.checkDate(aExcelSet);
+            this.checkDate(aExcelSet);
             let copyExcelSet = [];
             aExcelSet.forEach(item => {
                 let postDoc = JSON.parse(JSON.stringify(item));
                 if (postDoc.IntcoIntActlTransfOfCtrlDteTme == "NULL") {
                     postDoc.IntcoIntActlTransfOfCtrlDteTme = "1"
+                }
+                if (postDoc.IntcoExtActlTransfOfCtrlDteTme == "NULL") {
+                    postDoc.IntcoExtActlTransfOfCtrlDteTme = "1"
                 }
                 copyExcelSet.push(postDoc);
             }, this)
