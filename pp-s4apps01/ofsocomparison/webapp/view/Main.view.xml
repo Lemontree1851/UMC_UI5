@@ -117,10 +117,14 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <table:Table id="tablelist" rows="{local>/data}" rowMode="Auto" visible="{= ${local>/data}.length > 0}" rowsUpdated="onUITableRowsUpdated" selectionMode="None">
+            <!-- <table:Table id="tablelist" rows="{local>/data}" rowMode="Auto" visible="{= ${local>/data}.length > 0}" rowsUpdated="onUITableRowsUpdated" selectionMode="None"> -->
+            <table:Table id="tablelist" rows="{local>/data}" selectionMode="MultiToggle" rowMode="Auto">
                 <table:extension>
-                    <OverflowToolbar style="Clear">
-                        <Title text="{i18n>Results}"/>
+                    <!-- <OverflowToolbar style="Clear"> -->
+                    <OverflowToolbar>
+                        <!-- <Title text="{i18n>Results}"/> -->
+                        <Text text="{i18n>Results}" visible="{= ${local>/data}.length === 0}"/>
+                        <Text text="{i18n>Results}({= ${local>/data}.length})" visible="{= ${local>/data}.length > 0}"/>
                         <ToolbarSpacer></ToolbarSpacer>
                         <Button icon="sap-icon://excel-attachment" press="onDataExport" />
                     </OverflowToolbar>
