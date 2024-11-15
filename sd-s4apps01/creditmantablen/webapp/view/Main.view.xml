@@ -72,10 +72,12 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <table:Table id="tablelist" rows="{local>/data}" rowMode="Auto" visible="{= ${local>/data}.length > 0}" rowsUpdated="onUITableRowsUpdated" selectionMode="None">
+            <table:Table id="tablelist" rows="{local>/data}" rowMode="Auto" rowsUpdated="onUITableRowsUpdated" selectionMode="None">
                 <table:extension>
-                    <OverflowToolbar style="Clear">
-                        <Title text="{i18n>Results}"/>
+                    <OverflowToolbar>
+                        <!-- <Title text="{i18n>Results}"/> -->
+                        <Text text="{i18n>Results}" visible="{= ${local>/data}.length === 0}"/>
+                        <Text text="{i18n>Results}({= ${local>/data}.length})" visible="{= ${local>/data}.length > 0}"/>
                         <ToolbarSpacer></ToolbarSpacer>
                     </OverflowToolbar>
                 </table:extension>
