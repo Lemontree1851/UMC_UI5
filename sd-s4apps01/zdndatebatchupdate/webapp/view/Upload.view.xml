@@ -217,6 +217,15 @@
                                 wrapping="false"/>
                         </t:template>
                     </t:Column>
+
+                    <!-- 受注タイプ(Old) -->
+                    <t:Column width="8rem" label="{i18n>YY1_SalesDocType_DLH}" >
+                        <t:template>
+                            <Text
+                                text="{local>YY1_SalesDocType_DLH}" 
+                                wrapping="false"/>
+                        </t:template>
+                    </t:Column>
                 </t:columns>
             </t:Table>
         </Panel>

@@ -645,6 +645,25 @@
                                 />
                             </t:template>
                         </t:Column>
+                        <t:Column
+                            width="8rem"
+                            label="{i18n>YY1_SalesDocType_DLH}"
+                            sortProperty="YY1_SalesDocType_DLH"
+                            filterProperty="YY1_SalesDocType_DLH"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"YY1_SalesDocType_DLH", "leadingProperty":"YY1_SalesDocType_DLH", "sortProperty":"YY1_SalesDocType_DLH", "filterProperty": "YY1_SalesDocType_DLH"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{YY1_SalesDocType_DLH}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
                     </t:columns>
                 </t:Table>
             </smartTable:SmartTable>

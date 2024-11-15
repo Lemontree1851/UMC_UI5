@@ -101,10 +101,11 @@ sap.ui.define([
                         DeliveryDate: aSheet1[i]["DeliveryDate"] || "",
                         ActualGoodsMovementDate: aSheet1[i]["ActualGoodsMovementDate"] || "",
                         OverallGoodsMovementStatus: aSheet1[i]["OverallGoodsMovementStatus"] || "",
-                        IntcoExtPlndTransfOfCtrlDteTme: aSheet1[i]["IntcoExtPlndTransfOfCtrlDteTme"].toString() || "",
-                        IntcoExtActlTransfOfCtrlDteTme: aSheet1[i]["IntcoExtActlTransfOfCtrlDteTme"].toString() || "",
-                        IntcoIntPlndTransfOfCtrlDteTme: aSheet1[i]["IntcoIntPlndTransfOfCtrlDteTme"].toString() || "",
-                        IntcoIntActlTransfOfCtrlDteTme: aSheet1[i]["IntcoIntActlTransfOfCtrlDteTme"].toString() || "",
+                        IntcoExtPlndTransfOfCtrlDteTme: aSheet1[i]["IntcoExtPlndTransfOfCtrlDteTme"] ? aSheet1[i]["IntcoExtPlndTransfOfCtrlDteTme"].toString().toUpperCase() : "" || "",
+                        IntcoExtActlTransfOfCtrlDteTme: aSheet1[i]["IntcoExtActlTransfOfCtrlDteTme"] ? aSheet1[i]["IntcoExtActlTransfOfCtrlDteTme"].toString().toUpperCase() : "" || "",
+                        IntcoIntPlndTransfOfCtrlDteTme: aSheet1[i]["IntcoIntPlndTransfOfCtrlDteTme"] ? aSheet1[i]["IntcoIntPlndTransfOfCtrlDteTme"].toString().toUpperCase() : "" || "",
+                        IntcoIntActlTransfOfCtrlDteTme: aSheet1[i]["IntcoIntActlTransfOfCtrlDteTme"] ? aSheet1[i]["IntcoIntActlTransfOfCtrlDteTme"].toString().toUpperCase() : "" || "",
+                        YY1_SalesDocType_DLH: aSheet1[i]["YY1_SalesDocType_DLH"] || "",
                     };
                     //因为有些数据读出来是数值类型，但odta要求字符类型，通过此种方式将所有值转换成字符类型
                     oItem = JSON.parse(JSON.stringify(oItem));
@@ -114,11 +115,6 @@ sap.ui.define([
                     // oItem.IntcoIntPlndTransfOfCtrlDteTme = oItem.IntcoIntPlndTransfOfCtrlDteTme.slice(0,8);
                     // oItem.IntcoIntActlTransfOfCtrlDteTme = oItem.IntcoIntActlTransfOfCtrlDteTme.slice(0,8);
                     aExcelSet.push(oItem);
-                    // if(this.checkInconsistencies(aExcelSet)) {
-                    //     this.byId("idCheckButton").setEnabled(false);
-                    // } else {
-                    //     this.byId("idCheckButton").setEnabled(true);
-                    // }
                 }
                 this.checkDate(aExcelSet);
                 this._LocalData.setProperty("/excelSet", aExcelSet)
@@ -138,7 +134,8 @@ sap.ui.define([
                 aExcelSet[i].Status = "";
                 aExcelSet[i].Message = "";
 
-                if(!regPos.test(obj.IntcoExtActlTransfOfCtrlDteTme) || !regPos.test(obj.IntcoIntActlTransfOfCtrlDteTme) || obj.IntcoExtActlTransfOfCtrlDteTme.length !== 8 || obj.IntcoIntActlTransfOfCtrlDteTme.length !== 8){
+                if((!regPos.test(obj.IntcoExtActlTransfOfCtrlDteTme) || !regPos.test(obj.IntcoIntActlTransfOfCtrlDteTme) || obj.IntcoExtActlTransfOfCtrlDteTme.length !== 8 || obj.IntcoIntActlTransfOfCtrlDteTme.length !== 8)
+                    && obj.IntcoExtActlTransfOfCtrlDteTme !== "NULL" && obj.IntcoIntActlTransfOfCtrlDteTme !== "NULL"){
                     if(obj.IntcoExtActlTransfOfCtrlDteTme.length !== 0 && obj.IntcoIntActlTransfOfCtrlDteTme.length !== 0){
                         aExcelSet[i].Status = "E";
                         aExcelSet[i].Message = this._ResourceBundle.getText("msgDate"); 
@@ -194,7 +191,9 @@ sap.ui.define([
             let copyExcelSet = [];
             aExcelSet.forEach(item => {
                 let postDoc = JSON.parse(JSON.stringify(item));
-                postDoc.DeliveryDate = postDoc.DeliveryDate.replace(/-/g, "");
+                if (postDoc.IntcoIntActlTransfOfCtrlDteTme == "NULL") {
+                    postDoc.IntcoIntActlTransfOfCtrlDteTme = "1"
+                }
                 copyExcelSet.push(postDoc);
             }, this)
             let postDocs = [JSON.stringify(copyExcelSet)];
