@@ -164,7 +164,7 @@ sap.ui.define([
 				Promise.all(aPromise).then((oData) => {
 					//refresh search
 					oData.forEach((item) => {
-						let result = JSON.parse(oData["processLogic"].Zzkey);
+						let result = JSON.parse(item["processLogic"].Zzkey);
 						result.forEach(function (line) {
 							if (line.STATUS === 'S') {
 								that.getView().byId("SFBCalculation").search();
@@ -198,7 +198,7 @@ sap.ui.define([
 							},
 							method: "POST",
 							urlParameters: {
-								Zzkey: " ",
+								Zzkey: "",
 								CompanyCode: part,
 								FiscalYear: sYear,
 								Period: sMonat,
