@@ -203,19 +203,18 @@ sap.ui.define([
                                 JSON.parse(object.Zzkey).forEach(element => {
                                     for (var index = 0; index < aExcelSet.length; index++) {
                                         if (aExcelSet[index].Row === element.ROW) {
-                                            if (element.STATUS === 'S') {
-                                                MessageBox.success(element.Message);
-                                            } else {
-                                                MessageBox.error(element.MESSAGE);
-                                            }
+                                            aExcelSet[index].Status = element.STATUS;
+                                            aExcelSet[index].Message = element.MESSAGE;
                                         }
-                                        break;
                                     }
                                 });
+                                this.getModel("local").setProperty("/excelSet", aExcelSet);
+                                this.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                                this._BusyDialog.close();
                             }
                         }
                     }).catch((error) => {
-                        MessageBox.error(error);
+                        MessageBox.error(error.message);
                     }).finally(() => {
                         this._BusyDialog.close();
                     });
