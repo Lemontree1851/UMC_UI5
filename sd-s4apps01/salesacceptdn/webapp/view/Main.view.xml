@@ -200,12 +200,12 @@
                         </t:template>
                     </t:Column>
                     <t:Column
-                        width="8rem"
-                        label="{i18n>Product}"
+                        width="9rem"
+                        label="{i18n>ProductByPurchase}"
                     >
                         <t:template>
                             <Text
-                                text="{local>Product}"
+                                text="{local>ProductByPurchase}"
                             />
                         </t:template>
                     </t:Column>
@@ -311,7 +311,7 @@
                     </t:Column>
                     <t:Column width="8rem" label="{i18n>ShipToPartyName}">
                         <t:template>
-                            <Text text="{local>ShipToPartyName}" />
+                            <Text text="{local>ShipToPartyName}" tooltip="{local>ShipToPartyName}" wrapping="false" />
                         </t:template>
                     </t:Column>
                     <t:Column width="8rem" label="{i18n>StorageLocation}">

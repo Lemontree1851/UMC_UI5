@@ -20,7 +20,7 @@ sap.ui.define([
             if (v === "E") {
                 return "sap-icon://status-negative";
             }
-            return "sap-icon://status-negative";
+            return "sap-icon://status-inactive";
         },
 
         setResult: function (v) {
