@@ -21,7 +21,7 @@
         >
             <upload:UploadSet
                 id="idUploadSet"
-                items="{Attach>DocumentInfoRecordToAttachmentNavigation}"
+                items="{ path : 'Template>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_PURCHASEREQ' } }"
                 multiple="false"
                 mode="None"
                 uploadEnabled="false"
@@ -31,12 +31,9 @@
                 <upload:items>
                     <upload:UploadSetItem
                         id="idUploadSetItem"
-                        fileName="{Attach>FileName}"
-                        mediaType="{Attach>MimeType}"
-                        url="{
-                            path: 'Attach>__metadata/media_src',
-                            formatter: '.getMediaUrl'
-                        }"
+                        fileName="{Template>TemplateName}"
+                        mediaType="{Template>TemplateMimeType}"
+                        url="{Template>TemplateContent}"
                         visibleEdit="false"
                         visibleRemove="false"
                     />

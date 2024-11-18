@@ -55,6 +55,15 @@
                     "odataVersion": "4.0"
                 }
             },
+            "zui_dtimp_conf_o4": {
+                "uri": "/sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/",
+                "type": "OData",
+                "settings": {
+                "annotations": [],
+                "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
+                "odataVersion": "4.0"
+                }
+            },
             "annotation": {
                 "type": "ODataAnnotation",
                 "uri": "annotations/annotation.xml",
@@ -159,7 +168,17 @@
                     "autoExpandSelect": true,
                     "earlyRequests": true
                 }
-            }
+            },
+            "Template": {
+                "dataSource": "zui_dtimp_conf_o4",
+                "preload": true,
+                "settings": {
+                "synchronizationMode": "None",
+                "operationMode": "Server",
+                "autoExpandSelect": true,
+                "earlyRequests": true
+                }
+      }
         },
         "resources": {
             "css": [
