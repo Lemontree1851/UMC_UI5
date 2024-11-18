@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
-	<Dialog id="AnswerDialog" title="{i18n>DialogTitle}" contentWidth="50rem" contentHeight="10rem" draggable="true">
+	<Dialog id="AnswerDialogq" title="{i18n>DialogTitle}" contentWidth="50rem" contentHeight="10rem" draggable="true">
  		        
-               <TextArea id ="textArea" placeholder="Enter Text" growing="true" growingMaxLines="7" height="9rem"  width="100%"/>
+               <TextArea id ="textArea1" placeholder="Enter Text" growing="true" growingMaxLines="7" height="9rem"  width="100%"/>
 		<beginButton>
 
 			<Button id="confirmButton" text="{i18n>bConfirm}" press="onDialogConfirm"/>

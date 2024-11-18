@@ -353,15 +353,18 @@ xmlns:m="sap.m"
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>
-                 <xuap:ObjectPageSection id="id0ObjectPageSection1">
+
+                
+   <xuap:ObjectPageSection id="id0ObjectPageSection55">
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection
-                            id="id0ObjectPageSubSection1"
+                            id="id0ObjectPageSubSection55"
                             title="{i18n>attachment}"
                         >
                             <upload:UploadSet
-                                id="idUploadSet1"
+                                id="idUploadSet"
                                 items="{Attach>DocumentInfoRecordToAttachmentNavigation}"
+                                
                                 multiple="false"
                                 mode="None"
                                 uploadEnabled="true"
@@ -373,9 +376,9 @@ xmlns:m="sap.m"
                             >
                                 <upload:items>
                                     <upload:UploadSetItem
-                                        id="idUploadSetItem1"
+                                        id="idUploadSetItem"
                                         fileName="{Attach>FileName}"
-                                        mediaType="{Attach>MimeType}"
+                                        mediaType="{Attach>MimeType6}"
                                         url="{
                                             path: 'Attach>__metadata/media_src',
                                             formatter: '.getMediaUrl'
@@ -1603,17 +1606,17 @@ xmlns:m="sap.m"
  
 <m:Toolbar id="idToolbar">
  
-<m:Label id="idLabel" text="Axis orientation"/>
-<m:Select id="idSelect" change="orientationChanged">
-<core:Item id="idItem1" key="Vertical" text="Vertical"/>
-<core:Item id="idItem2" key="Horizontal" text="Horizontal"/>
-</m:Select>
+<!-- <m:Label id="idLabel" text="Axis orientation"/> -->
+<!-- <m:Select id="idSelect" change="orientationChanged"> -->
+<!-- <core:Item id="idItem1" key="Vertical" text="Vertical"/> -->
+<!-- <core:Item id="idItem2" key="Horizontal" text="Horizontal"/> -->
+<!-- </m:Select> -->
 <m:CheckBox id="idShowHeader" text="Scrollbar" select="onScrollbarSelected" selected="false"/>
 </m:Toolbar>
 <r:Timeline id="idTimeline"   content="{/ApprovalHistory}"  filterList="{/ApprovalHistory}" showIcons="false"
 textHeight="100px" >
 <r:content>
-<r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{Zseq}" userName="{Operator}" select="onPressItems"
+<r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{CurrentNode}" userName="{Operator}" select="onPressItems"
 filterValue="{Operator}" > </r:TimelineItem>
 </r:content>
 <r:filterList>
@@ -1641,7 +1644,7 @@ filterValue="{Operator}" > </r:TimelineItem>
                     press="onMessagePopoverPress"
                 />
                 <ToolbarSpacer id="id0ToolbarSpacer" />
-                                <Button
+                 <Button
                     id="idButtonAccept"
                     visible="true"
                     text="{i18n>idButtonAccept}"
@@ -1653,7 +1656,7 @@ filterValue="{Operator}" > </r:TimelineItem>
                     visible="true"
                     text="{i18n>idButtonReject}"
                     type="Emphasized"
-                    press="onButtonAcceptReject"
+                    press="onDialogRejectPress"
                 />
             </OverflowToolbar>
             

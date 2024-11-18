@@ -42,7 +42,7 @@
                     >
                         <smartFilterBar:controlConfiguration>
                             <smartFilterBar:ControlConfiguration
-                                id="idControlConfiguration"
+                                id="idControlConfigurationPrNo"
                                 key="PrNo"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>PrNo}"
@@ -51,7 +51,7 @@
                             />
 
                             <smartFilterBar:ControlConfiguration
-                                id="idControlConfiguration2"
+                                id="idControlConfigurationapply_time"
                                 key="apply_time"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>apply_time}"
@@ -67,7 +67,7 @@
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                           <smartFilterBar:ControlConfiguration
-                                id="idControlConfiguration3"
+                                id="idControlConfigurationPrType"
                                 key="PrType"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>PrType}"
@@ -76,47 +76,47 @@
                             />
 
 
-                            <smartFilterBar:ControlConfiguration
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id0ControlConfiguration"
                                 key="Supplier"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Supplier}"
                                 mandatory="notMandatory"
                                 index="5"
-                            />
-                            <smartFilterBar:ControlConfiguration
+                            /> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id1ControlConfiguration"
                                 key="PurchaseGrp"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>PurchaseGrp}"
                                 mandatory="notMandatory"
                                 index="10"
-                            />
+                            /> -->
                             <smartFilterBar:ControlConfiguration
-                                id="id2ControlConfiguration"
+                                id="id2ControlConfigurationPrBy"
                                 key="PrBy"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>PrBy}"
                                 mandatory="notMandatory"
                                 index="15"
                             />
-                            <smartFilterBar:ControlConfiguration
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id3ControlConfiguration"
                                 key="Plant"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Plant}"
                                 mandatory="notMandatory"
                                 index="20"
-                            />
-                            <smartFilterBar:ControlConfiguration
+                            /> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id4ControlConfiguration"
                                 key="MatID"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>MatID}"
                                 mandatory="notMandatory"
                                 index="25"
-                            />
-                            <smartFilterBar:ControlConfiguration
+                            /> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id5ControlConfiguration"
                                 key="CreatedAt"
                                 visibleInAdvancedArea="true"
@@ -131,8 +131,8 @@
                                         displayFormat="yyyy-MM-dd"
                                     />
                                 </smartFilterBar:customControl>
-                            </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration
+                            </smartFilterBar:ControlConfiguration> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id6ControlConfiguration"
                                 key="CostCenter"
                                 visibleInAdvancedArea="true"
@@ -147,8 +147,9 @@
                                 label="{i18n>AssetNo}"
                                 mandatory="notMandatory"
                                 index="40"
-                            />
+                            /> -->
                             <smartFilterBar:ControlConfiguration
+                                id="idApproveStatus"
                                 key="ApproveStatus"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>ApproveStatus}"
@@ -165,21 +166,29 @@
                                     </Select>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id8ControlConfiguration"
                                 key="WbsElemnt"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>WbsElemnt}"
                                 mandatory="notMandatory"
                                 index="45"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="id9ControlConfiguration"
+                            /> -->
+                            <!-- <smartFilterBar:ControlConfiguration
+                                id="id9ControlConfigurationKyoten"
                                 key="Kyoten"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Kyoten}"
                                 mandatory="notMandatory"
                                 index="50"
+                            /> -->
+                            <smartFilterBar:ControlConfiguration
+                                id="id10ControlConfigurationEmailAddress"
+                                key="EmailAddress"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>EmailAddress}"
+                                mandatory="notMandatory"
+                                index="55"
                             />
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
@@ -199,15 +208,20 @@
                 beforeRebindTable="onBeforeRebindTable"
             >
                 <smartTable:customToolbar>
-                    <OverflowToolbar>
-                        <ToolbarSpacer />
-                        <Button
-                            icon="sap-icon://document"
+                    <OverflowToolbar id="OverflowToolbar1">
+                        <ToolbarSpacer id="ToolbarSpacer1"/>
+                        <Button id="ButtonAccept"
                             type="Transparent"
-                            text="{i18n>DisplayView.CreateBtn}"
-                            press="createPurchseOrder"
+                            text="{i18n>ButtonAccept}"
+                            press="onDialogAcceptPress"
+                        />
+                         <Button id="ButtonReject"
+                            type="Transparent"
+                            text="{i18n>ButtonReject}"
+                            press="onDialogRejectPress"
                         />
                     </OverflowToolbar>
+                    
                 </smartTable:customToolbar>
                 <t:Table
                     id="idPurchaseReqTable"
@@ -253,7 +267,7 @@
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                        <!-- <t:Column
                             width="5rem"
                             label="{i18n>Result}"
                             sortProperty="ResultText"
@@ -272,7 +286,7 @@
                                 }"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                         <t:Column
                             width="12rem"
                             label="{i18n>Message}"
@@ -357,12 +371,13 @@
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                        <!-- <t:Column
                             id="id1Column"
                             width="8rem"
                             label="{i18n>OrderType}"
                             sortProperty="OrderType"
                             filterProperty="OrderType"
+
                         >
                             <t:customData>
                                 <core:CustomData
@@ -377,8 +392,8 @@
                                     text="{OrderType}"
                                 />
                             </t:template>
-                        </t:Column>
-                        <t:Column
+                        </t:Column> -->
+                        <!-- <t:Column
                             id="id2Column"
                             width="8rem"
                             label="{i18n>Supplier}"
@@ -398,7 +413,7 @@
                                     text="{Supplier}"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                         <t:Column
                             id="id3Column"
                             width="8rem"
@@ -462,7 +477,7 @@
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                        <!-- <t:Column
                             id="id6Column"
                             width="8rem"
                             label="{i18n>Plant}"
@@ -482,8 +497,8 @@
                                     text="{Plant}"
                                 />
                             </t:template>
-                        </t:Column>
-                        <t:Column
+                        </t:Column> -->
+                        <!-- <t:Column
                             id="id7Column"
                             width="8rem"
                             label="{i18n>Currency}"
@@ -503,8 +518,8 @@
                                     text="{Currency}"
                                 />
                             </t:template>
-                        </t:Column>
-                        <t:Column
+                        </t:Column> -->
+                        <!-- <t:Column
                             id="id8Column"
                             width="8rem"
                             label="{i18n>ItemCategory}"
@@ -524,8 +539,8 @@
                                     text="{ItemCategory}"
                                 />
                             </t:template>
-                        </t:Column>
-                        <t:Column
+                        </t:Column> -->
+                        <!-- <t:Column
                             id="id9Column"
                             width="8rem"
                             label="{i18n>AccountType}"
@@ -545,8 +560,8 @@
                                     text="{AccountType}"
                                 />
                             </t:template>
-                        </t:Column>
-                        <t:Column
+                        </t:Column> -->
+                        <!-- <t:Column
                             id="id10Column"
                             width="8rem"
                             label="{i18n>MatID}"
@@ -909,7 +924,7 @@
                                     wrapping="false"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                         <t:Column
                             id="id27Column"
                             width="8rem"
@@ -931,7 +946,7 @@
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                        <!-- <t:Column
                             id="id28Column"
                             width="8rem"
                             label="{i18n>TrackNo}"
@@ -972,8 +987,8 @@
                                     text="{Ean}"
                                 />
                             </t:template>
-                        </t:Column>
-                        <t:Column
+                        </t:Column> -->
+                        <!-- <t:Column
                             id="id30Column"
                             width="8rem"
                             label="{i18n>CustomerRec}"
@@ -1014,8 +1029,8 @@
                                     text="{AssetOri}"
                                 />
                             </t:template>
-                        </t:Column>
-                        <t:Column
+                        </t:Column> -->
+                        <!-- <t:Column
                             id="id32Column"
                             width="8rem"
                             label="{i18n>MemoText}"
@@ -1037,8 +1052,8 @@
                                     wrapping="false"
                                 />
                             </t:template>
-                        </t:Column>
-                        <t:Column
+                        </t:Column> -->
+                        <!-- <t:Column
                             id="id33Column"
                             width="8rem"
                             label="{i18n>BuyPurpoose}"
@@ -1058,7 +1073,7 @@
                                     text="{BuyPurpoose}"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                         <t:Column
                             width="8rem"
                             label="{i18n>ApproveStatus}"
@@ -1077,7 +1092,7 @@
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                        <!-- <t:Column
                             id="id34Column"
                             width="8rem"
                             label="{i18n>IsLink}"
@@ -1139,7 +1154,7 @@
                                     text="{PurchaseOrderItem}"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column>-->
                         <t:Column
                             width="6rem"
                             label="{i18n>ApplyDepart}"
@@ -1157,7 +1172,7 @@
                                     text="{ApplyDepart}"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> 
                         <t:Column
                             id="id37Column"
                             width="6rem"
@@ -1179,7 +1194,7 @@
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                        <!-- <t:Column
                             id="id39Column"
                             width="6rem"
                             label="{i18n>CreatedAt}"
@@ -1202,7 +1217,7 @@
                                     }"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                         <t:Column
                             width="6rem"
                             label="{i18n>ApplyDate}"
@@ -1291,6 +1306,24 @@
                             <t:template>
                                 <Text
                                     text="{ApplicationId}"
+                                />
+                            </t:template>
+                        </t:Column>
+                         <t:Column
+                            width="6rem"
+                            label="{i18n>EmailAddress}"
+                            sortProperty="EmailAddress"
+                            filterProperty="EmailAddress"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"EmailAddress", "leadingProperty":"EmailAddress", "sortProperty":"EmailAddress", "filterProperty": "EmailAddress"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{EmailAddress}"
                                 />
                             </t:template>
                         </t:Column>

@@ -42,6 +42,13 @@
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
         <Schema Namespace="cds_zui_prworkflow_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_DocInfoRecdDocTypeStdVHType" sap:label="Document Info Record Document Type" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DocumentInfoRecordDocType"/>
+                </Key>
+                <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:text="DocumentInfoRecordDocType_Text" sap:label="Document Type"/>
+                <Property Name="DocumentInfoRecordDocType_Text" Type="Edm.String" MaxLength="20" sap:label="Description" sap:quickinfo="Description of Document Type" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
             <EntityType Name="PurchaseReqWFType" sap:label="Projection View for ZR_PRWORKFLOW" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="ApplyDepart"/>
@@ -55,15 +62,15 @@
                 <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="PrType" Type="Edm.String" MaxLength="4"/>
                 <Property Name="OrderType" Type="Edm.String" MaxLength="4"/>
-                <Property Name="Supplier" Type="Edm.String" MaxLength="10"/>
-                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
                 <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
                 <Property Name="PurchaseGrp" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="3"/>
                 <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
                 <Property Name="AccountType" Type="Edm.String" MaxLength="1"/>
-                <Property Name="MatID" Type="Edm.String" MaxLength="40"/>
+                <Property Name="MatID" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="MatDesc" Type="Edm.String" MaxLength="80"/>
                 <Property Name="MaterialGroup" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Quantity" Type="Edm.Decimal" Precision="18" Scale="3"/>
@@ -111,6 +118,49 @@
                 <Property Name="WorkflowId" Type="Edm.String" MaxLength="20"/>
                 <Property Name="InstanceId" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
                 <Property Name="ApplicationId" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative"/>
+                <Property Name="EmailAddress" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="PurchaseReqWFDocInfoType" sap:label="Projection View for ZR_PRWORKFLOWDOCINFO" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DocumentInfoRecordDocType"/>
+                    <PropertyRef Name="DocumentInfoRecordDocNumber"/>
+                    <PropertyRef Name="DocumentInfoRecordDocVersion"/>
+                    <PropertyRef Name="DocumentInfoRecordDocPart"/>
+                </Key>
+                <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Document Type" sap:value-list="standard"/>
+                <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" Nullable="false" MaxLength="25" sap:display-format="UpperCase" sap:label="Document" sap:quickinfo="Document Number"/>
+                <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Document Version"/>
+                <Property Name="DocumentInfoRecordDocPart" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Document Part"/>
+                <Property Name="DocumentInfoRecord" Type="Edm.String" MaxLength="70" sap:label="DIR Key Concatenated" sap:quickinfo="Document Info Record key in concatenated form"/>
+                <Property Name="DocumentDescription" Type="Edm.String" MaxLength="40" sap:label="Document Description"/>
+                <Property Name="ExternalDocumentStatus" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Document Status" sap:quickinfo="Status of a document (language-dependent)"/>
+                <Property Name="DocumentStatusName" Type="Edm.String" MaxLength="16" sap:label="Status Text" sap:quickinfo="Description of document status"/>
+                <Property Name="DocInfoRecdIsMarkedForDeletion" Type="Edm.Boolean" sap:label="Deletion indicator" sap:quickinfo="Deletion Indicator"/>
+            </EntityType>
+            <EntityType Name="ApprovalHistoryType" sap:label="Workflow Approval History" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="WorkflowId"/>
+                    <PropertyRef Name="InstanceId"/>
+                    <PropertyRef Name="Zseq"/>
+                    <PropertyRef Name="ApplicationId"/>
+                    <PropertyRef Name="CurrentNode"/>
+                    <PropertyRef Name="UserZseq"/>
+                </Key>
+                <Property Name="WorkflowId" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="InstanceId" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="Zseq" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
+                <Property Name="ApplicationId" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative"/>
+                <Property Name="CurrentNode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
+                <Property Name="UserZseq" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
+                <Property Name="NextNode" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative"/>
+                <Property Name="Operator" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ApprovalStatus" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Remark" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
+                <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time"/>
+                <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
+                <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
+                <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
             </EntityType>
             <EntityType Name="PurchaseReqWFItemType" sap:label="Projection View for ZR_PRWORKFLOWITEM" sap:content-version="1">
                 <Key>
@@ -122,15 +172,15 @@
                 <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative"/>
                 <Property Name="PrType" Type="Edm.String" MaxLength="4"/>
                 <Property Name="OrderType" Type="Edm.String" MaxLength="4"/>
-                <Property Name="Supplier" Type="Edm.String" MaxLength="10"/>
-                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
                 <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
                 <Property Name="PurchaseGrp" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="3"/>
                 <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
                 <Property Name="AccountType" Type="Edm.String" MaxLength="1"/>
-                <Property Name="MatID" Type="Edm.String" MaxLength="40"/>
+                <Property Name="MatID" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="MatDesc" Type="Edm.String" MaxLength="80"/>
                 <Property Name="MaterialGroup" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Quantity" Type="Edm.Decimal" Precision="18" Scale="3"/>
@@ -186,15 +236,15 @@
                 <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative"/>
                 <Property Name="PrType" Type="Edm.String" MaxLength="4"/>
                 <Property Name="OrderType" Type="Edm.String" MaxLength="4"/>
-                <Property Name="Supplier" Type="Edm.String" MaxLength="10"/>
-                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
                 <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
                 <Property Name="PurchaseGrp" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="3"/>
                 <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
                 <Property Name="AccountType" Type="Edm.String" MaxLength="1"/>
-                <Property Name="MatID" Type="Edm.String" MaxLength="40"/>
+                <Property Name="MatID" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="MatDesc" Type="Edm.String" MaxLength="80"/>
                 <Property Name="MaterialGroup" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Quantity" Type="Edm.Decimal" Precision="18" Scale="3"/>
@@ -249,27 +299,6 @@
                 <Property Name="ApplyDepart" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="PrNo" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="AmountSum" Type="Edm.Decimal" Precision="34" sap:variable-scale="true"/>
-            </EntityType>
-            <EntityType Name="ApprovalHistoryType" sap:label="Workflow Approval History" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="WorkflowId"/>
-                    <PropertyRef Name="InstanceId"/>
-                    <PropertyRef Name="Zseq"/>
-                </Key>
-                <Property Name="WorkflowId" Type="Edm.String" Nullable="false" MaxLength="20"/>
-                <Property Name="InstanceId" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
-                <Property Name="Zseq" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
-                <Property Name="ApplicationId" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative"/>
-                <Property Name="CurrentNode" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative"/>
-                <Property Name="NextNode" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative"/>
-                <Property Name="Operator" Type="Edm.String" MaxLength="100"/>
-                <Property Name="ApprovalStatus" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Remark" Type="Edm.String" MaxLength="1000"/>
-                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
-                <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time"/>
-                <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
-                <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
-                <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -510,11 +539,13 @@
                 </ReferentialConstraint>
             </Association>
             <EntityContainer Name="cds_zui_prworkflow_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="I_DocInfoRecdDocTypeStdVH" EntityType="cds_zui_prworkflow_o2.I_DocInfoRecdDocTypeStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="PurchaseReqWF" EntityType="cds_zui_prworkflow_o2.PurchaseReqWFType" sap:content-version="1" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc"/>
+                <EntitySet Name="PurchaseReqWFDocInfo" EntityType="cds_zui_prworkflow_o2.PurchaseReqWFDocInfoType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ApprovalHistory" EntityType="cds_zui_prworkflow_o2.ApprovalHistoryType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="PurchaseReqWFItem" EntityType="cds_zui_prworkflow_o2.PurchaseReqWFItemType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="PurchaseReqWFLink" EntityType="cds_zui_prworkflow_o2.PurchaseReqWFLinkType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="PurchaseReqWFSum" EntityType="cds_zui_prworkflow_o2.PurchaseReqWFSumType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
-                <EntitySet Name="ApprovalHistory" EntityType="cds_zui_prworkflow_o2.ApprovalHistoryType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_prworkflow_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_prworkflow_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_prworkflow_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -574,8 +605,33 @@
                     <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
                     <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
                 </FunctionImport>
+                <FunctionImport Name="RejectPRWF" ReturnType="cds_zui_prworkflow_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFDocInfoType/DocumentInfoRecordDocType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Document Type"/>
+                        <PropertyValue Property="CollectionPath" String="I_DocInfoRecdDocTypeStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="DocumentInfoRecordDocType"/>
+                                    <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.cds_zui_prworkflow_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
@@ -595,6 +651,23 @@
                 <Annotation Term="Common.CreatedBy" Path="LocalCreatedBy"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.cds_zui_prworkflow_o2_Entities/ApprovalHistory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.cds_zui_prworkflow_o2_Entities/I_DocInfoRecdDocTypeStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Bool="false"/>
@@ -648,6 +721,23 @@
                 <Annotation Term="Capabilities.UpdateRestrictions">
                     <Record>
                         <PropertyValue Property="Updatable" Path="Update_mc"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.cds_zui_prworkflow_o2_Entities/PurchaseReqWFDocInfo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
                     </Record>
                 </Annotation>
             </Annotations>
@@ -757,6 +847,9 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Ean" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/EmailAddress" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Free" xmlns="http://docs.oasis-open.org/odata/ns/edm">
