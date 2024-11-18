@@ -256,9 +256,10 @@ sap.ui.define([
 		},
 
 		addColumn: function(sColName,oObj){
+			var sBindingPath = `{path:'local>${sColName}', type:'pp.ofpartition.controller.CustomDecimal'}`;
 			// 生成input控件
 			var oText = new sap.m.Input({
-							value : "{local>" + sColName + "}",
+							value : sBindingPath,
 					    	tooltip:"{local>" + sColName + "}"
 						});
 			var sLabel = sColName.slice(7);

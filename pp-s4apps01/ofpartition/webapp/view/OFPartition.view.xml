@@ -12,6 +12,7 @@
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:sv="sap.ui.comp.smartvariants"
     height="100%"
+    core:require="{ CustomeDecimal: 'pp/ofpartition/controller/CustomDecimal' }"
     busyIndicatorDelay="0"
 >
     <f:DynamicPage id="idDynamicPage">
@@ -67,7 +68,7 @@
                                 key="Plant"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Plant}"
-                                mandatory="notMandatory"
+                                mandatory="mandatory"
                                 index="4"
                             />
                             <smartFilterBar:ControlConfiguration
