@@ -8,7 +8,7 @@ sap.ui.define([
 ], function (Base, formatter, xlsx, BusyDialog, MessageBox, MessageToast) {
     "use strict";
 
-    return Base.extend("poposting.controller.Main", {
+    return Base.extend("mm.poposting.controller.Main", {
         formatter: formatter,
 
         onInit: function () {

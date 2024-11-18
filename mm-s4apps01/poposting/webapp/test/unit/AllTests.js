@@ -1,5 +1,5 @@
 sap.ui.define([
-	"poposting/test/unit/controller/Main.controller"
+	"mm/poposting/test/unit/controller/Main.controller"
 ], function () {
 	"use strict";
 });

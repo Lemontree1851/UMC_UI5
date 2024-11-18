@@ -5,12 +5,12 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "poposting/model/models"
+        "mm/poposting/model/models"
     ],
     function (UIComponent, Device, models) {
         "use strict";
 
-        return UIComponent.extend("poposting.Component", {
+        return UIComponent.extend("mm.poposting.Component", {
             metadata: {
                 manifest: "json"
             },

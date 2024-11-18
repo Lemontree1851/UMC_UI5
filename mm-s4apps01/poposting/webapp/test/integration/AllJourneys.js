@@ -7,7 +7,7 @@ sap.ui.define([
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
-		viewNamespace: "poposting.view.",
+		viewNamespace: "mm.poposting.view.",
 		autoWait: true
 	});
 });
