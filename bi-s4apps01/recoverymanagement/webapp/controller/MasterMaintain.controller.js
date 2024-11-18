@@ -9,7 +9,7 @@ sap.ui.define([
     function (Controller, MessageToast, MessageBox, Filter, FilterOperator, recoveryFormatter) {
         "use strict";
 
-        return Controller.extend("recoverymanagement.controller.MasterMaintain", {
+        return Controller.extend("bi.recoverymanagement.controller.MasterMaintain", {
             formatter: recoveryFormatter,
             _getI18nBundle: function () {
                 return this.getView().getModel("i18n").getResourceBundle();
@@ -156,7 +156,7 @@ sap.ui.define([
             },
 
             onCreate: function (oEvent) {
-                //this.openDialog(this, 'recoverymanagement.view.Create');
+                //this.openDialog(this, 'bi.recoverymanagement.view.Create');
                 var oModel = this.getView().getModel();
                 var sYear = new Date(Date.now()).getFullYear();
                 var oBindingContext = oModel.createEntry("/ZC_BI003_REPORT_001", {
@@ -166,7 +166,7 @@ sap.ui.define([
                 });
 
                 this.loadFragment({
-                    name: 'recoverymanagement.fragment.Create'
+                    name: 'bi.recoverymanagement.fragment.Create'
                 }).then(function (oDialog) {
                     oDialog.setBindingContext(oBindingContext);
                     oDialog.open();
@@ -191,7 +191,7 @@ sap.ui.define([
                 var oBindingContext = oTable.getContextByIndex(aIndex[0]);
 
                 this.loadFragment({
-                    name: 'recoverymanagement.fragment.Edit'
+                    name: 'bi.recoverymanagement.fragment.Edit'
                 }).then(function (oDialog) {
                     oDialog.setBindingContext(oBindingContext);
                     oDialog.open();

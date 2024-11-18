@@ -40,7 +40,7 @@ sap.ui.define([
 								"tileType": "sap.ushell.ui.tile.StaticTile",
 								"properties": {
 									"title": "Recovery Management",
-									"targetURL": "#recoverymanagement-display"
+									"targetURL": "#birecoverymanagement-display"
 								}
 							}]
 						}]
@@ -51,8 +51,8 @@ sap.ui.define([
 				"adapter": {
 					"config": {
 						"inbounds": {
-							"recoverymanagement-display": {
-								"semanticObject": "recoverymanagement",
+							"birecoverymanagement-display": {
+								"semanticObject": "birecoverymanagement",
 								"action": "display",
 								"description": "Recovery Management",
 								"title": "Recovery Management",
@@ -61,8 +61,8 @@ sap.ui.define([
 								},
 								"resolutionResult": {
 									"applicationType": "SAPUI5",
-									"additionalInformation": "SAPUI5.Component=recoverymanagement",
-									"url": sap.ui.require.toUrl("recoverymanagement")
+									"additionalInformation": "SAPUI5.Component=bi.recoverymanagement",
+									"url": sap.ui.require.toUrl("bi/recoverymanagement")
 								}
 							}
 						}

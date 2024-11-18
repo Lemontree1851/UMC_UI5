@@ -1,7 +1,7 @@
 {
   "_version": "1.64.0",
   "sap.app": {
-    "id": "recoverymanagement",
+    "id": "bi.recoverymanagement",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -82,7 +82,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "recoverymanagement.i18n.i18n"
+          "bundleName": "bi.recoverymanagement.i18n.i18n"
         }
       },
       "": {
@@ -105,7 +105,7 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "recoverymanagement.view",
+        "viewPath": "bi.recoverymanagement.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
@@ -130,7 +130,7 @@
       }
     },
     "rootView": {
-      "viewName": "recoverymanagement.view.App",
+      "viewName": "bi.recoverymanagement.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

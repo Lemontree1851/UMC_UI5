@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"recoverymanagement/controller/MainView.controller"
+	bi/recoverymanagement/controller/MainView.controller"
 ], function (Controller) {
 	"use strict";
 

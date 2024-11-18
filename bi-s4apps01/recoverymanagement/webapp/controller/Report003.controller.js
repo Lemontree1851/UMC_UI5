@@ -7,7 +7,7 @@ sap.ui.define([
 function (Controller, Filter, FilterOperator, recoveryFormatter) {
     "use strict";
 
-    return Controller.extend("recoverymanagement.controller.Report003", {
+    return Controller.extend("bi.recoverymanagement.controller.Report003", {
         formatter: recoveryFormatter,
         onInit: function () {
             this._setInitialValue();

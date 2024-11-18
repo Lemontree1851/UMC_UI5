@@ -4,7 +4,7 @@ sap.ui.define([
 function (Controller) {
     "use strict";
 
-    return Controller.extend("recoverymanagement.controller.MainView", {
+    return Controller.extend("bi.recoverymanagement.controller.MainView", {
         onInit: function () {
 
         }
