@@ -234,7 +234,7 @@
                         <Text text="{UnderlyingPurchaseOrderItem}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>OrderQuantity}" sortProperty="OrderQuantity" filterProperty="OrderQuantity">
+                <table:Column width="12rem" label="{i18n>OrderQuantity}" sortProperty="OrderQuantity" filterProperty="OrderQuantity" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"OrderQuantity", "leadingProperty":"OrderQuantity"}'/>
                     </table:customData>
@@ -386,7 +386,7 @@
                         <Text text="{TransactionCurrency}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>PriceDetnExchangeRate}" sortProperty="PriceDetnExchangeRate" filterProperty="PriceDetnExchangeRate">
+                <table:Column width="12rem" label="{i18n>PriceDetnExchangeRate}" sortProperty="PriceDetnExchangeRate" filterProperty="PriceDetnExchangeRate" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PriceDetnExchangeRate", "leadingProperty":"PriceDetnExchangeRate"}'/>
                     </table:customData>
@@ -402,7 +402,7 @@
                         <Text text="{path:'ExchangeRateDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionRateValuePPR0}" sortProperty="ConditionRateValuePPR0" filterProperty="ConditionRateValuePPR0">
+                <table:Column width="12rem" label="{i18n>ConditionRateValuePPR0}" sortProperty="ConditionRateValuePPR0" filterProperty="ConditionRateValuePPR0" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValuePPR0", "leadingProperty":"ConditionRateValuePPR0"}'/>
                     </table:customData>
@@ -418,7 +418,7 @@
                         <Text text="{ConditionCurrencyPPR0}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionAmountPPR0}" sortProperty="ConditionAmountPPR0" filterProperty="ConditionAmountPPR0">
+                <table:Column width="12rem" label="{i18n>ConditionAmountPPR0}" sortProperty="ConditionAmountPPR0" filterProperty="ConditionAmountPPR0" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountPPR0", "leadingProperty":"ConditionAmountPPR0"}'/>
                     </table:customData>
@@ -426,15 +426,15 @@
                         <Text text="{ConditionAmountPPR0} {TransactionCurrency}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionRateValueTTX1}" sortProperty="ConditionRateValueTTX1" filterProperty="ConditionRateValueTTX1">
+                <table:Column width="12rem" label="{i18n>ConditionRateValueTTX1}" sortProperty="ConditionRateValueTTX1" filterProperty="ConditionRateValueTTX1" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueTTX1", "leadingProperty":"ConditionRateValueTTX1"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ConditionRateValueTTX1}" wrapping="false" />
+                        <Text text="{path:'ConditionRateValueTTX1', formatter:'.formatter.formatNumber'}%" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionAmountTTX1}" sortProperty="ConditionAmountTTX1" filterProperty="ConditionAmountTTX1">
+                <table:Column width="12rem" label="{i18n>ConditionAmountTTX1}" sortProperty="ConditionAmountTTX1" filterProperty="ConditionAmountTTX1" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountTTX1", "leadingProperty":"ConditionAmountTTX1"}'/>
                     </table:customData>
@@ -442,7 +442,7 @@
                         <Text text="{ConditionAmountTTX1} {TransactionCurrency}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8rem" label="{i18n>ConditionRateValueZPFC}" sortProperty="ConditionRateValueZPFC" filterProperty="ConditionRateValueZPFC">
+                <table:Column width="8rem" label="{i18n>ConditionRateValueZPFC}" sortProperty="ConditionRateValueZPFC" filterProperty="ConditionRateValueZPFC" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPFC", "leadingProperty":"ConditionRateValueZPFC"}'/>
                     </table:customData>
@@ -458,7 +458,7 @@
                         <Text text="{ConditionCurrencyZPFC}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionAmountZPFC}" sortProperty="ConditionAmountZPFC" filterProperty="ConditionAmountZPFC">
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPFC}" sortProperty="ConditionAmountZPFC" filterProperty="ConditionAmountZPFC" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPFC", "leadingProperty":"ConditionAmountZPFC"}'/>
                     </table:customData>
@@ -466,7 +466,7 @@
                         <Text text="{ConditionAmountZPFC} {TransactionCurrency}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionRateValueZPST}" sortProperty="ConditionRateValueZPST" filterProperty="ConditionRateValueZPST">
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPST}" sortProperty="ConditionRateValueZPST" filterProperty="ConditionRateValueZPST" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPST", "leadingProperty":"ConditionRateValueZPST"}'/>
                     </table:customData>
@@ -482,7 +482,7 @@
                         <Text text="{ConditionCurrencyZPST}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionAmountZPST}" sortProperty="ConditionAmountZPST" filterProperty="ConditionAmountZPST">
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPST}" sortProperty="ConditionAmountZPST" filterProperty="ConditionAmountZPST" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPST", "leadingProperty":"ConditionAmountZPST"}'/>
                     </table:customData>
@@ -490,7 +490,7 @@
                         <Text text="{ConditionAmountZPST} {TransactionCurrency}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionRateValueZPIN}" sortProperty="ConditionRateValueZPIN" filterProperty="ConditionRateValueZPIN">
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPIN}" sortProperty="ConditionRateValueZPIN" filterProperty="ConditionRateValueZPIN" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPIN", "leadingProperty":"ConditionRateValueZPIN"}'/>
                     </table:customData>
@@ -506,7 +506,7 @@
                         <Text text="{ConditionCurrencyZPIN}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionAmountZPIN}" sortProperty="ConditionAmountZPIN" filterProperty="ConditionAmountZPIN">
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPIN}" sortProperty="ConditionAmountZPIN" filterProperty="ConditionAmountZPIN" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPIN", "leadingProperty":"ConditionAmountZPIN"}'/>
                     </table:customData>
@@ -514,7 +514,7 @@
                         <Text text="{ConditionAmountZPIN} {TransactionCurrency}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionRateValueZPSB}" sortProperty="ConditionRateValueZPSB" filterProperty="ConditionRateValueZPSB">
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPSB}" sortProperty="ConditionRateValueZPSB" filterProperty="ConditionRateValueZPSB" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPSB", "leadingProperty":"ConditionRateValueZPSB"}'/>
                     </table:customData>
@@ -530,7 +530,7 @@
                         <Text text="{ConditionCurrencyZPSB}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionAmountZPSB}" sortProperty="ConditionAmountZPSB" filterProperty="ConditionAmountZPSB">
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPSB}" sortProperty="ConditionAmountZPSB" filterProperty="ConditionAmountZPSB" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPSB", "leadingProperty":"ConditionAmountZPSB"}'/>
                     </table:customData>
@@ -538,7 +538,7 @@
                         <Text text="{ConditionAmountZPSB} {TransactionCurrency}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionRateValueZPSS}" sortProperty="ConditionRateValueZPSS" filterProperty="ConditionRateValueZPSS">
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPSS}" sortProperty="ConditionRateValueZPSS" filterProperty="ConditionRateValueZPSS" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPSS", "leadingProperty":"ConditionRateValueZPSS"}'/>
                     </table:customData>
@@ -554,7 +554,7 @@
                         <Text text="{ConditionCurrencyZPSS}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionAmountZPSS}" sortProperty="ConditionAmountZPSS" filterProperty="ConditionAmountZPSS">
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPSS}" sortProperty="ConditionAmountZPSS" filterProperty="ConditionAmountZPSS" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPSS", "leadingProperty":"ConditionAmountZPSS"}'/>
                     </table:customData>
@@ -562,7 +562,7 @@
                         <Text text="{ConditionAmountZPSS} {TransactionCurrency}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionRateValueZPCM}" sortProperty="ConditionRateValueZPCM" filterProperty="ConditionRateValueZPCM">
+                <table:Column width="12rem" label="{i18n>ConditionRateValueZPCM}" sortProperty="ConditionRateValueZPCM" filterProperty="ConditionRateValueZPCM" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPCM", "leadingProperty":"ConditionRateValueZPCM"}'/>
                     </table:customData>
@@ -578,7 +578,7 @@
                         <Text text="{ConditionCurrencyZPCM}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionAmountZPCM}" sortProperty="ConditionAmountZPCM" filterProperty="ConditionAmountZPCM">
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPCM}" sortProperty="ConditionAmountZPCM" filterProperty="ConditionAmountZPCM" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPCM", "leadingProperty":"ConditionAmountZPCM"}'/>
                     </table:customData>
@@ -586,7 +586,7 @@
                         <Text text="{ConditionAmountZPCM} {TransactionCurrency}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8rem" label="{i18n>ConditionRateValueZPGP}" sortProperty="ConditionRateValueZPGP" filterProperty="ConditionRateValueZPGP">
+                <table:Column width="8rem" label="{i18n>ConditionRateValueZPGP}" sortProperty="ConditionRateValueZPGP" filterProperty="ConditionRateValueZPGP" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValueZPGP", "leadingProperty":"ConditionRateValueZPGP"}'/>
                     </table:customData>
@@ -602,7 +602,7 @@
                         <Text text="{ConditionCurrencyZPGP}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ConditionAmountZPGP}" sortProperty="ConditionAmountZPGP" filterProperty="ConditionAmountZPGP">
+                <table:Column width="12rem" label="{i18n>ConditionAmountZPGP}" sortProperty="ConditionAmountZPGP" filterProperty="ConditionAmountZPGP" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionAmountZPGP", "leadingProperty":"ConditionAmountZPGP"}'/>
                     </table:customData>
@@ -618,7 +618,7 @@
                         <Text text="{YY1_ItemRemarks_1_SDI}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>DeliveredQtyInOrderQtyUnit}" sortProperty="DeliveredQtyInOrderQtyUnit" filterProperty="DeliveredQtyInOrderQtyUnit">
+                <table:Column width="12rem" label="{i18n>DeliveredQtyInOrderQtyUnit}" sortProperty="DeliveredQtyInOrderQtyUnit" filterProperty="DeliveredQtyInOrderQtyUnit" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"DeliveredQtyInOrderQtyUnit", "leadingProperty":"DeliveredQtyInOrderQtyUnit"}'/>
                     </table:customData>
@@ -626,7 +626,7 @@
                         <Text text="{DeliveredQtyInOrderQtyUnit} {OrderQuantityUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>OpenConfdDelivQtyInOrdQtyUnit}" sortProperty="OpenConfdDelivQtyInOrdQtyUnit" filterProperty="OpenConfdDelivQtyInOrdQtyUnit">
+                <table:Column width="12rem" label="{i18n>OpenConfdDelivQtyInOrdQtyUnit}" sortProperty="OpenConfdDelivQtyInOrdQtyUnit" filterProperty="OpenConfdDelivQtyInOrdQtyUnit" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"OpenConfdDelivQtyInOrdQtyUnit", "leadingProperty":"OpenConfdDelivQtyInOrdQtyUnit"}'/>
                     </table:customData>
@@ -634,7 +634,7 @@
                         <Text text="{OpenConfdDelivQtyInOrdQtyUnit} {OrderQuantityUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ComplDeliveredQtyInBaseUnit}" sortProperty="ComplDeliveredQtyInBaseUnit" filterProperty="ComplDeliveredQtyInBaseUnit">
+                <table:Column width="12rem" label="{i18n>ComplDeliveredQtyInBaseUnit}" sortProperty="ComplDeliveredQtyInBaseUnit" filterProperty="ComplDeliveredQtyInBaseUnit" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ComplDeliveredQtyInBaseUnit", "leadingProperty":"ComplDeliveredQtyInBaseUnit"}'/>
                     </table:customData>
@@ -642,7 +642,7 @@
                         <Text text="{ComplDeliveredQtyInBaseUnit} {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>NoComplDeliveredQtyInBaseUnit}" sortProperty="NoComplDeliveredQtyInBaseUnit" filterProperty="NoComplDeliveredQtyInBaseUnit">
+                <table:Column width="12rem" label="{i18n>NoComplDeliveredQtyInBaseUnit}" sortProperty="NoComplDeliveredQtyInBaseUnit" filterProperty="NoComplDeliveredQtyInBaseUnit" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"NoComplDeliveredQtyInBaseUnit", "leadingProperty":"NoComplDeliveredQtyInBaseUnit"}'/>
                     </table:customData>
@@ -650,7 +650,7 @@
                         <Text text="{NoComplDeliveredQtyInBaseUnit} {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>InternalTansferQtyInBaseUnit}" sortProperty="InternalTansferQtyInBaseUnit" filterProperty="InternalTansferQtyInBaseUnit">
+                <table:Column width="12rem" label="{i18n>InternalTansferQtyInBaseUnit}" sortProperty="InternalTansferQtyInBaseUnit" filterProperty="InternalTansferQtyInBaseUnit" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"InternalTansferQtyInBaseUnit", "leadingProperty":"InternalTansferQtyInBaseUnit"}'/>
                     </table:customData>
@@ -658,7 +658,7 @@
                         <Text text="{InternalTansferQtyInBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>NoInternalTansferQtyInBaseUnit}" sortProperty="NoInternalTansferQtyInBaseUnit" filterProperty="NoInternalTansferQtyInBaseUnit">
+                <table:Column width="12rem" label="{i18n>NoInternalTansferQtyInBaseUnit}" sortProperty="NoInternalTansferQtyInBaseUnit" filterProperty="NoInternalTansferQtyInBaseUnit" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"NoInternalTansferQtyInBaseUnit", "leadingProperty":"NoInternalTansferQtyInBaseUnit"}'/>
                     </table:customData>
@@ -666,23 +666,23 @@
                         <Text text="{NoInternalTansferQtyInBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>EnternalTansferQtyInBaseUnit}" sortProperty="EnternalTansferQtyInBaseUnit" filterProperty="EnternalTansferQtyInBaseUnit">
+                <table:Column width="12rem" label="{i18n>ExternalTansferQtyInBaseUnit}" sortProperty="ExternalTansferQtyInBaseUnit" filterProperty="ExternalTansferQtyInBaseUnit" hAlign="End">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"EnternalTansferQtyInBaseUnit", "leadingProperty":"EnternalTansferQtyInBaseUnit"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ExternalTansferQtyInBaseUnit", "leadingProperty":"ExternalTansferQtyInBaseUnit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{EnternalTansferQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                        <Text text="{ExternalTansferQtyInBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>NoEnternalTansferQtyInBaseUnit}" sortProperty="NoEnternalTansferQtyInBaseUnit" filterProperty="NoEnternalTansferQtyInBaseUnit">
+                <table:Column width="12rem" label="{i18n>NoExternalTansferQtyInBaseUnit}" sortProperty="NoExternalTansferQtyInBaseUnit" filterProperty="NoExternalTansferQtyInBaseUnit" hAlign="End">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"NoEnternalTansferQtyInBaseUnit", "leadingProperty":"NoEnternalTansferQtyInBaseUnit"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NoExternalTansferQtyInBaseUnit", "leadingProperty":"NoExternalTansferQtyInBaseUnit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{NoEnternalTansferQtyInBaseUnit} {BaseUnit}" wrapping="false" />
+                        <Text text="{NoExternalTansferQtyInBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>BillingQuantityInBaseUnit}" sortProperty="BillingQuantityInBaseUnit" filterProperty="BillingQuantityInBaseUnit">
+                <table:Column width="12rem" label="{i18n>BillingQuantityInBaseUnit}" sortProperty="BillingQuantityInBaseUnit" filterProperty="BillingQuantityInBaseUnit" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantityInBaseUnit", "leadingProperty":"BillingQuantityInBaseUnit"}'/>
                     </table:customData>
@@ -690,7 +690,7 @@
                         <Text text="{BillingQuantityInBaseUnit} {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8rem" label="{i18n>NoBillingQuantityInBaseUnit}" sortProperty="NoBillingQuantityInBaseUnit" filterProperty="NoBillingQuantityInBaseUnit">
+                <table:Column width="8rem" label="{i18n>NoBillingQuantityInBaseUnit}" sortProperty="NoBillingQuantityInBaseUnit" filterProperty="NoBillingQuantityInBaseUnit" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"NoBillingQuantityInBaseUnit", "leadingProperty":"NoBillingQuantityInBaseUnit"}'/>
                     </table:customData>
@@ -754,12 +754,36 @@
                         <Text text="{YY1_SalesDocType_SDH}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>YY1_ManagementNo_SDI}" sortProperty="YY1_ManagementNo_SDI" filterProperty="YY1_ManagementNo_SDI">
+                <table:Column width="15rem" label="{i18n>YY1_ManagementNo_SDI}" sortProperty="YY1_ManagementNo_SDI" filterProperty="YY1_ManagementNo_SDI">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ManagementNo_SDI", "leadingProperty":"YY1_ManagementNo_SDI"}'/>
                     </table:customData>
                     <table:template>
                         <Text text="{YY1_ManagementNo_SDI}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>YY1_ManagementNo_1_SDI}" sortProperty="YY1_ManagementNo_1_SDI" filterProperty="YY1_ManagementNo_1_SDI">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ManagementNo_1_SDI", "leadingProperty":"YY1_ManagementNo_1_SDI"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_ManagementNo_1_SDI}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>YY1_ManagementNo_2_SDI}" sortProperty="YY1_ManagementNo_2_SDI" filterProperty="YY1_ManagementNo_2_SDI">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ManagementNo_2_SDI", "leadingProperty":"YY1_ManagementNo_2_SDI"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_ManagementNo_2_SDI}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>YY1_ManagementNo_3_SDI}" sortProperty="YY1_ManagementNo_3_SDI" filterProperty="YY1_ManagementNo_3_SDI">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ManagementNo_3_SDI", "leadingProperty":"YY1_ManagementNo_3_SDI"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_ManagementNo_3_SDI}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>

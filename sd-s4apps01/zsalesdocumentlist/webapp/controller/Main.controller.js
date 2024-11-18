@@ -1,9 +1,12 @@
 sap.ui.define([
+    "../model/formatter",
     "sap/ui/core/mvc/Controller"
-], function (Controller) {
+], function (formatter, Controller) {
     "use strict";
 
     return Controller.extend("sd.zsalesdocumentlist.controller.Main", {
+        formatter: formatter,
+        
         onInit: function () {
 
         },

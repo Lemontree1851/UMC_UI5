@@ -56,6 +56,7 @@ sap.ui.define([
         },
 
         _renderingColumns: function (object) {
+            var aEndColumns = [];
             for (const key in object) {
                 if (key === "BaseUnit" || key === "Currency") {
                     continue;
@@ -159,13 +160,53 @@ sap.ui.define([
                     visible: bvisible,
                     template: oTemplate
                 });
-                this._oTable.addColumn(oColumn);
+
+                // 未来、合計 最後に置いてください
+                if (key === "FutureQty" || key === "TotalQty") {
+                    aEndColumns.push(oColumn);
+                } else {
+                    this._oTable.addColumn(oColumn);
+                }
             }
+            aEndColumns.forEach(oColumn => {
+                this._oTable.addColumn(oColumn);
+            });
         },
 
         removeAllColumns: function () {
             this._oTable.removeAllColumns();
             this.getModel("local").setProperty("/resultSet", []);
+        },
+
+        onSummary: function () {
+            var aMainData = [];
+            var aItemData = [];
+            var aAllData = this.getModel("local").getProperty("/resultSet");
+            // 項目「EOLグループ」に値が入っている明細行
+            var aProcessObject = aAllData.filter(obj => obj.EOLGroup !== "");
+            if (aProcessObject.length === 0) {
+                this.getModel("local").setProperty("/resultSet", []);
+                return;
+            }
+            // 合計できた内容を項目「主品目」がXなっている明細行に表示する
+            aProcessObject.forEach(element => {
+                if (element.IsMainProduct) {
+                    aMainData.push(element);
+                } else {
+                    aItemData.push(element);
+                }
+            });
+            for (var m = 0; m < aMainData.length; m++) {
+
+                for (var n = 0; n < aItemData.length; n++) {
+                    if (aItemData[n].EOLGroup !== aMainData[m].EOLGroup) {
+                        continue;
+                    }
+                    for (const field in aItemData[n]) {
+
+                    }
+                }
+            }
         }
     });
 });

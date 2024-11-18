@@ -5,9 +5,9 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
-    "sap/ui/table/rowmodes/Fixed",
+    "sap/ui/table/Column",
 ],
-    function (Base, formatter, Filter, FilterOperator, BusyDialog, MessageBox, Fixed) {
+    function (Base, formatter, Filter, FilterOperator, BusyDialog, MessageBox, Column) {
         "use strict";
 
         return Base.extend("pp.productionplan.controller.Main", {
@@ -16,6 +16,8 @@ sap.ui.define([
             onInit: function () {
                 this._LocalData = this.getOwnerComponent().getModel("local");
                 this._oDataModel = this.getOwnerComponent().getModel();
+                this._oDataModel.setRefreshAfterChange(false);
+
                 this._BusyDialog = new BusyDialog();
                 if (sap.ushell && sap.ushell.Container) {
                     this._UserInfo = sap.ushell.Container.getService("UserInfo").getUser();
@@ -113,52 +115,50 @@ sap.ui.define([
             },
 
             onUITableRowsUpdated: function (oEvent) {
-                var oTable = oEvent.getSource();
-                var aRows = oTable.getRows();
-                var sType = "";
-                var sColor = "";
-                var sColor = "";
+                let oTable = oEvent.getSource();
+                let aRows = oTable.getRows();
+                let sType = "";
+                let sColor = "";
+
+                let s1 = "";
                 let sNum = Number(this.byId("zdays").getValue());
                 sNum = 16 + sNum;
-                if (aRows && aRows.length > 0) {
-                    for (var i = 0; i < aRows.length; i++) {
-                        var c7Cell = aRows[i].getCells()[7];
-                        if (c7Cell) {
-                            sType = c7Cell.getText();
-                            if (sType === "W") {
-                                for (var j = 18; j < sNum; j++) {
-                                    var cColor = aRows[i].getCells()[j];
-                                    var oItems = cColor.getItems();
-                                    var sValue = oItems[1].getValue();
-                                    sColor = sValue;
-                                    switch (sValue.charAt(0)) {
-                                        case "R":
-                                            cColor.addStyleClass("redCell");
-                                            oItems[0].setText(sColor.slice(1));
-                                            break;
-                                        case "Y":
-                                            cColor.addStyleClass("yellowCell");
-                                            oItems[0].setText(sColor.slice(1));
-                                            break;
-                                        case "G":
-                                            cColor.addStyleClass("greenCell");
-                                            oItems[0].setText(sColor.slice(1));
-                                            break;
-                                        default:
-
-                                    };
-                                }
-                            } else {
-                                for (var j = 18; j < sNum; j++) {
-                                    var cColor1 = aRows[i].getCells()[j];
-                                    cColor1.addStyleClass("whiteCell");
-                                }
+                aRows.forEach(function (oRow, index) {
+                    let c7Cell = oRow.getCells()[7];
+                    sType = c7Cell.getText();
+                    if (sType === "W") {
+                        for (let j = 18; j < sNum; j++) {
+                            let cColor = oRow.getCells()[j];
+                            let CellId = cColor.getId();
+                            let oItems = cColor.getItems();
+                            let sValue = oItems[1].getValue();
+                            sColor = sValue;
+                            s1 = sValue.charAt(0);
+                            switch (s1) {
+                                case "R":
+                                    oItems[0].setText(sColor.slice(1));
+                                    $("#" + CellId).parent().parent().css("background-color", "#ff0000");
+                                    break;
+                                case "Y":
+                                    oItems[0].setText(sColor.slice(1));
+                                    $("#" + CellId).parent().parent().css("background-color", "#FFFF00");
+                                    break;
+                                case "G":
+                                    oItems[0].setText(sColor.slice(1));
+                                    $("#" + CellId).parent().parent().css("background-color", "#008000");
+                                    break;
                             }
+
+                        }
+                    } else {
+                        for (let j = 18; j < sNum; j++) {
+                            let cColor = oRow.getCells()[j];
+                            let CellId = cColor.getId();
+                            $("#" + CellId).parent().parent().css("background-color", "");
+
                         }
                     }
-                }
-
-
+                });
             },
 
             onEdit: function (oEvent) {
@@ -248,9 +248,10 @@ sap.ui.define([
             },
 
             onRefresh: function (oEvent) {
-                //this.getView().byId("smartFilterBar").search();
-                var oModel = this._oDataModel;
-                oModel.refresh(true);
+                this._oDataModel.refresh(true);
+                //刷新没有清空输入值有change的字段，手动清空
+                this.resetInput();
+
             },
 
             onWeb1: function (oEvent) {
@@ -341,10 +342,10 @@ sap.ui.define([
                 aPromise.push(this.callAction(postDocs, bEvent, ""));
 
                 Promise.all(aPromise).then((oData) => {
-                    //refresh search
-                    //that.getView().byId("smartFilterBar").search();
-                    var oModel = this._oDataModel;
-                    oModel.refresh(true);
+                    this._oDataModel.refresh(true);
+                    //刷新没有清空输入值有change的字段，手动清空
+                    this.resetInput();
+
                     oData.forEach((item) => {
                         let result = JSON.parse(item["processLogic"].Zzkey);
                         result.forEach(function (line) {
@@ -411,7 +412,44 @@ sap.ui.define([
                     }.bind(this)
 
                 );
-            }
+            },
+            resetInput: function () {
+                let oTable = this.byId("ReportTable");
+                let aColumns = oTable.getColumns();
+                let aRows = oTable.getRows();
+                let sType = "";
+                let sNum = Number(this.byId("zdays").getValue());
+                sNum = 17 + sNum;
+                if (aRows && aRows.length > 0) {
+                    for (let i = 0; i < aRows.length; i++) {
+                        let c7Cell = aRows[i].getCells()[7];
+                        if (c7Cell) {
+                            sType = c7Cell.getText();
+                            if (sType === "I" || sType === "P") {
+                                for (let j = 21; j < sNum; j++) {
+                                    let oFirstColumn = aColumns[j];
+                                    let sColumnText = oFirstColumn.getLabel().getText();
+                                    let sDay = sColumnText.slice(-1);
+                                    if (sDay === "日" || sDay === "土") {
+                                        let idx = j - 3;
+                                        //如果是天数的第一列，不要清空，因为是总和
+                                        if (idx !== 18) {
+                                            let cEdit = aRows[i].getCells()[idx];
+                                            let oItems = cEdit.getItems();
+                                            if (cEdit) {
+                                                oItems[0].setText("");
+                                                oItems[1].setValue("");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            },
+
 
         });
     });
