@@ -51,7 +51,7 @@
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
-			<smartTable:SmartTable id="smartTable_Mast" smartVariant="__SVM01" persistencyKey="PurInfoMasterST" entitySet="PurInfoMaster" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="false" showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable">
+			<smartTable:SmartTable id="smartTable_Mast" smartVariant="__SVM01" persistencyKey="PurInfoMasterST" entitySet="PurInfoMaster" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable">
 
 				<table:Table id="Table_Calc" selectionMode="None" selectionBehavior="Row" rowMode="Auto">
 					<table:columns>
@@ -159,7 +159,7 @@
 								<Label text="{i18n>condition_validity_start_date}"/>
 							</table:label>
 							<table:template>
-								<Label text="{condition_validity_start_date}"/>
+								<Label text="{ path:'condition_validity_start_date', formatter:'.formatter.formatDate' }"/>
 							</table:template>
 						</table:Column>
 
@@ -171,7 +171,7 @@
 								<Label text="{i18n>condition_validity_end_date}"/>
 							</table:label>
 							<table:template>
-								<Label text="{condition_validity_end_date}"/>
+								<Label text="{ path:'condition_validity_end_date', formatter:'.formatter.formatDate' }"/>
 							</table:template>
 						</table:Column>
 
@@ -259,18 +259,6 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="OrganizationBPName1En" width="10rem" visible="true" autoResizable="true" sortProperty="organizationbpname1_en" filterProperty="organizationbpname1_en">
-							<table:customData>
-								<core:CustomData key="p13nData" value='\{"columnKey":"organizationbpname1_en", "leadingProperty":"organizationbpname1_en", "sortProperty": "organizationbpname1_en", "filterProperty": "organizationbpname1_en"}'/>
-							</table:customData>
-							<table:label>
-								<Label text="{i18n>organizationbpname1_en}"/>
-							</table:label>
-							<table:template>
-								<Label text="{organizationbpname1_en}"/>
-							</table:template>
-						</table:Column>
-
 						<table:Column id="PurchasingGroup" width="10rem" visible="true" autoResizable="true" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroup", "leadingProperty":"PurchasingGroup", "sortProperty": "PurchasingGroup", "filterProperty": "PurchasingGroup"}'/>
@@ -315,7 +303,7 @@
 								<Label text="{i18n>CreationDate_1}"/>
 							</table:label>
 							<table:template>
-								<Label text="{CreationDate_1}"/>
+								<Label text="{ path:'CreationDate_1', formatter:'.formatter.formatDate' }"/>
 							</table:template>
 						</table:Column>
 
@@ -339,7 +327,7 @@
 								<Label text="{i18n>CreationDate_2}"/>
 							</table:label>
 							<table:template>
-								<Label text="{CreationDate_2}"/>
+								<Label text="{ path:'CreationDate_2', formatter:'.formatter.formatDate' }"/>
 							</table:template>
 						</table:Column>
 
@@ -388,6 +376,18 @@
 							</table:label>
 							<table:template>
 								<Label text="{ManufacturerNumber}"/>
+							</table:template>
+						</table:Column>
+
+						<table:Column id="OrganizationBPName1En" width="10rem" visible="true" autoResizable="true" sortProperty="organizationbpname1_en" filterProperty="organizationbpname1_en">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"organizationbpname1_en", "leadingProperty":"organizationbpname1_en", "sortProperty": "organizationbpname1_en", "filterProperty": "organizationbpname1_en"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>organizationbpname1_en}"/>
+							</table:label>
+							<table:template>
+								<Label text="{organizationbpname1_en}"/>
 							</table:template>
 						</table:Column>
 
@@ -475,7 +475,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="orderpriceunittoorderunitnmrtr" width="6rem" visible="true" autoResizable="true" sortProperty="orderpriceunittoorderunitnmrtr" filterProperty="orderpriceunittoorderunitnmrtr">
+						<!-- <table:Column id="orderpriceunittoorderunitnmrtr" width="6rem" visible="true" autoResizable="true" sortProperty="orderpriceunittoorderunitnmrtr" filterProperty="orderpriceunittoorderunitnmrtr">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"orderpriceunittoorderunitnmrtr", "leadingProperty":"orderpriceunittoorderunitnmrtr", "sortProperty": "orderpriceunittoorderunitnmrtr", "filterProperty": "orderpriceunittoorderunitnmrtr"}'/>
 							</table:customData>
@@ -484,6 +484,18 @@
 							</table:label>
 							<table:template>
 								<Label text="{orderpriceunittoorderunitnmrtr}"/>
+							</table:template>
+						</table:Column> -->
+
+						<table:Column id="rate" width="6rem" visible="true" autoResizable="true" sortProperty="Rate" filterProperty="Rate">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"Rate", "leadingProperty":"Rate", "sortProperty": "Rate", "filterProperty": "Rate"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>Rate}"/>
+							</table:label>
+							<table:template>
+								<Label text="{Rate}"/>
 							</table:template>
 						</table:Column>
 
@@ -667,18 +679,6 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="PlusDay" width="7rem" visible="true" autoResizable="true" sortProperty="PlusDay" filterProperty="PlusDay">
-							<table:customData>
-								<core:CustomData key="p13nData" value='\{"columnKey":"PlusDay", "leadingProperty":"PlusDay", "sortProperty": "PlusDay", "filterProperty": "PlusDay"}'/>
-							</table:customData>
-							<table:label>
-								<Label text="{i18n>PlusDay}"/>
-							</table:label>
-							<table:template>
-								<Label text="{PlusDay}"/>
-							</table:template>
-						</table:Column>
-
 						<table:Column id="PurchasingInfoRecordCategory" width="10rem" visible="true" autoResizable="true" sortProperty="PurchasingInfoRecordCategory" filterProperty="PurchasingInfoRecordCategory">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"PurchasingInfoRecordCategory", "leadingProperty":"PurchasingInfoRecordCategory", "sortProperty": "PurchasingInfoRecordCategory", "filterProperty": "PurchasingInfoRecordCategory"}'/>
@@ -750,19 +750,6 @@
 								<Label text="{loginflag}"/>
 							</table:template>
 						</table:Column>
-
-						<table:Column id="rate" width="6rem" visible="true" autoResizable="true" sortProperty="Rate" filterProperty="Rate">
-							<table:customData>
-								<core:CustomData key="p13nData" value='\{"columnKey":"Rate", "leadingProperty":"Rate", "sortProperty": "Rate", "filterProperty": "Rate"}'/>
-							</table:customData>
-							<table:label>
-								<Label text="{i18n>Rate}"/>
-							</table:label>
-							<table:template>
-								<Label text="{rate}"/>
-							</table:template>
-						</table:Column>
-
 					</table:columns>
 				</table:Table>
 			</smartTable:SmartTable>
