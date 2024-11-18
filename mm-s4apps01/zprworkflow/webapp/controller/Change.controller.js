@@ -34,6 +34,7 @@ sap.ui.define([
         formatter : formatter,
         onInit: function (oEvent) {
             // this._BusyDialog = new BusyDialog();
+			console.log("Change Controller Init");
 			var TimelineFilterType = suiteLibrary.TimelineFilterType;
 			this._BusyDialog = new BusyDialog();
 			this._LocalData = this.getOwnerComponent().getModel("local");
@@ -165,6 +166,8 @@ sap.ui.define([
 			this.byId("idSmartForm").setEditable(false);
 			this.byId("idPage").setShowFooter(true);
 			this._bindTimelineAggregation();
+			this.byId('idSmartTable1').rebindTable();
+			this._oDataModel.refresh(true);
 		},
 		_onRouteMatched1 : function (oEvent) {
             this.getView().getModel().resetChanges();
@@ -188,33 +191,25 @@ sap.ui.define([
 			// this.byId("idSmartForm").setEditable(false);
 			// this.byId("idPage").setShowFooter(false);
 		},
-		
+		onRowActionItemPress : function(oEvent){
+			var oItem, oCtx;
+
+			oItem = oEvent.getSource();
+			oCtx = oItem.getBindingContext();
+			this.getRouter().navTo("Attachments",{
+				contextPath : oCtx.getProperty("UUID"),
+				contextPrNo: oCtx.getProperty("PrNo")
+			});
+		},
  
 		onBeforeRebindTable: function (oEvent) {
 			 
- 
 			this._oDataModel.resetChanges();
 			var oFilter = oEvent.getParameter("bindingParams").filters;
 			var oNewFilter, aNewFilter = [];
 			oFilter.push(new sap.ui.model.Filter("PrNo", "EQ", this._InsNo));
-
-//			var oCreatedAt = this.byId("idDatePicker").getDateValue();
-//			if (oCreatedAt) {
-	//			aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
-//			}
-//
-//			var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
-//			if(sApproveStatus !== "0") {
-//				aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
-//			}
-			
-//			oNewFilter = new Filter({
-//				filters:aNewFilter,
-//				and:true
-//			});
-//			if (aNewFilter.length > 0) {
-//				oFilter.push(oNewFilter);
-//			}
+			console.log(oFilter);
+ 
 		},
 		_onBindingChange : function (oEvent) {
 			// No data for the binding

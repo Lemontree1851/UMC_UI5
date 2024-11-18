@@ -68,26 +68,25 @@ sap.ui.define([
 		},
 
 		onBeforeRebindTable: function (oEvent) {
-//			this._oDataModel.resetChanges();
-//			var oFilter = oEvent.getParameter("bindingParams").filters;
-//			var oNewFilter, aNewFilter = [];
-//			var oCreatedAt = this.byId("idDatePicker").getDateValue();
-//			if (oCreatedAt) {
-	//			aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
-//			}
-//
-//			var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
-//			if(sApproveStatus !== "0") {
-//				aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
-//			}
-			
-//			oNewFilter = new Filter({
-//				filters:aNewFilter,
-//				and:true
-//			});
-//			if (aNewFilter.length > 0) {
-//				oFilter.push(oNewFilter);
-//			}
+// 			this._oDataModel.resetChanges();
+// 			var oFilter = oEvent.getParameter("bindingParams").filters;
+// 			var oNewFilter, aNewFilter = [];
+// //			var oCreatedAt = this.byId("idDatePicker").getDateValue();
+// //			if (oCreatedAt) {
+// 	//			aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
+// //			}
+// //
+// //			var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
+// //			if(sApproveStatus !== "0") {
+// //				aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
+// //			}
+//             aNewFilter.push(new Filter("EmailAddress", "EQ", "13")); 
+// 			oNewFilter = new Filter({
+// 				filters:aNewFilter 
+// 			});
+// 			if (aNewFilter.length > 0) {
+// 				oFilter.push(oNewFilter);
+// 			}
 		},
 
 		createPurchseOrder: function (oEvent) {

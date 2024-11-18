@@ -51,10 +51,10 @@
                             />
 
                             <smartFilterBar:ControlConfiguration
-                                id="idControlConfigurationapply_time"
-                                key="apply_time"
+                                id="idControlConfigurationapply_date"
+                                key="apply_date"
                                 visibleInAdvancedArea="true"
-                                label="{i18n>apply_time}"
+                                label="{i18n>apply_date}"
                                 mandatory="notMandatory"
                                 index="3"
                             >
@@ -148,7 +148,7 @@
                                 mandatory="notMandatory"
                                 index="40"
                             /> -->
-                            <smartFilterBar:ControlConfiguration
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="idApproveStatus"
                                 key="ApproveStatus"
                                 visibleInAdvancedArea="true"
@@ -165,7 +165,7 @@
                                         <core:ListItem key="4" text="{i18n>Status4Text}" />
                                     </Select>
                                 </smartFilterBar:customControl>
-                            </smartFilterBar:ControlConfiguration>
+                            </smartFilterBar:ControlConfiguration> -->
                             <!-- <smartFilterBar:ControlConfiguration
                                 id="id8ControlConfiguration"
                                 key="WbsElemnt"
@@ -329,7 +329,7 @@
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                        <!-- <t:Column
                             id="id38Column"
                             width="8rem"
                             label="{i18n>PrItem}"
@@ -349,7 +349,7 @@
                                     text="{PrItem}"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                         <t:Column
                             id="id0Column"
                             width="8rem"
@@ -414,7 +414,7 @@
                                 />
                             </t:template>
                         </t:Column> -->
-                        <t:Column
+                        <!-- <t:Column
                             id="id3Column"
                             width="8rem"
                             label="{i18n>CompanyCode}"
@@ -434,7 +434,7 @@
                                     text="{CompanyCode}"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                         <t:Column
                             id="id4Column"
                             width="8rem"

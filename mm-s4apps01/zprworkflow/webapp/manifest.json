@@ -189,6 +189,11 @@
                     "name": "PurchaseReq",
                     "pattern": "PurchaseReq/{contextPath}/{contextPrNo}/{contextApplyDepart}/{contextInstanceId}/{contextApplicationId}",
                     "target": "PurchaseReq"
+                },
+                {
+                    "name": "Attachments",
+                    "pattern": "Attachments/{contextPath}/{contextPrNo}",
+                    "target": "Attachments"
                 }
             ],
             "targets": {
@@ -205,6 +210,13 @@
                     "clearControlAggregation": false,
                     "viewId": "PurchaseReq",
                     "viewName": "Change"
+                },              
+                "Attachments": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Attachments",
+                    "viewName": "Attach"
                 },
                 "notFound": {
                     "id": "notFound",
