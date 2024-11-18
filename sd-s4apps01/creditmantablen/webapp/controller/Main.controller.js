@@ -95,21 +95,21 @@ sap.ui.define([
 					template: new Text({
 						text: "{local>Customer}"
 					}),
-					width: "10rem"
+					width: "8rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>CustomerName}",
 					template: new Text({
 						text: "{local>CustomerName}"
 					}),
-					width: "10rem"
+					width: "30rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>LimitAmount}",
 					template: new Text({
 						text: "{local>LimitAmount}"
 					}),
-					width: "10rem",
+					width: "6rem",
 					hAlign: "End"
 				}));
 				oTable.addColumn(new Column({
@@ -117,14 +117,14 @@ sap.ui.define([
 					template: new Text({
 						text: "{local>Termstext1}"
 					}),
-					width: "10rem"
+					width: "8rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>Termstext2}",
 					template: new Text({
 						text: "{local>Termstext2}"
 					}),
-					width: "10rem"
+					width: "12rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>text}",
