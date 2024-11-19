@@ -112,6 +112,11 @@ sap.ui.define([
                     newFilter = new sap.ui.model.Filter("exOut", sap.ui.model.FilterOperator.EQ, "X");
                     mBindingParams.filters.push(newFilter);
                 };
+
+                if (this._oDataModel.hasPendingChanges()) {
+                    // 重置未保存的更改
+                    this._oDataModell.resetChanges();
+                }
             },
 
             onUITableRowsUpdated: function (oEvent) {
@@ -146,6 +151,9 @@ sap.ui.define([
                                 case "G":
                                     oItems[0].setText(sColor.slice(1));
                                     $("#" + CellId).parent().parent().css("background-color", "#008000");
+                                    break;
+                                default:
+                                    $("#" + CellId).parent().parent().css("background-color", "");
                                     break;
                             }
 
