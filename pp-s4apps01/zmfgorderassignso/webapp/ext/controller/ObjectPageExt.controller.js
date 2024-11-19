@@ -407,7 +407,7 @@ sap.ui.define([
                 }
             });
             // if (iSumAssignQty > parseFloat(this._iMaxQuantity)) {
-            if (iSumAssignQty !== oRow.AssignQty) {
+            if (iSumAssignQty !== parseFloat(oRow.AssignQty)) {
                 aMessageItems.push({
                     type: "Error",
                     title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),
