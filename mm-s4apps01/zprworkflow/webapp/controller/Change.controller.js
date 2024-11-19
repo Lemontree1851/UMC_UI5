@@ -318,7 +318,9 @@ sap.ui.define([
 			}.bind(this));
 			return promise;
 		},
-		onDialogPress: function () {			
+		onDialogPress: function () {	
+			console.log("onDialogPress");
+ 
             if (!this.Dialog) {
                 var oView = this.getView();
 				if (!this.Dialog) {
@@ -343,13 +345,15 @@ sap.ui.define([
                 oDialog.open();
             }.bind(this));
         },
-		onDialogRejectPress: function () {			
-            if (!this.Dialog) {
+		onDialogRejectPress: function () {	
+			console.log("onDialogPress");	
+ 
+            if (!this.DialogReject) {
                 var oView = this.getView();
-				if (!this.Dialog) {
+				if (!this.DialogReject) {
 					var oView = this.getView();
-					if (!this.Dialog) {
-						this.Dialog = Fragment.load({
+					if (!this.DialogReject) {
+						this.DialogReject = Fragment.load({
 							id: oView.getId(),
 							name: "mm.zprworkflow.fragment.DialogReject",
 							controller: this
@@ -360,11 +364,11 @@ sap.ui.define([
 						}.bind(this));
 					}
 				}
-				this.Dialog.then(function(oDialog) {
+				this.DialogReject.then(function(oDialog) {
 					oDialog.open();
 				}.bind(this));
             }
-            this.Dialog.then(function(oDialog) {
+            this.DialogReject.then(function(oDialog) {
                 oDialog.open();
             }.bind(this));
         },
@@ -528,9 +532,8 @@ sap.ui.define([
 					this._LocalData.setProperty("/recordCheckSuccessed", false);
                     //messages.showSuccess(this._ResourceBundle.getText("msgDeleteSuccessed"));
 					//MessageToast.show(this._ResourceBundle.getText("msgSaveSuccessed"))
-					this.byId("AnswerDialog").close();
- 
-
+					if(this.byId("AnswerDialogq")){this.byId("AnswerDialogq").close();}
+					if(this.byId("AnswerDialog")){this.byId("AnswerDialog").close();}
                     result.forEach(function (line) {
 						if(line.TYPE == 'S'){
 							messages.showSuccess(line.MESSAGE);

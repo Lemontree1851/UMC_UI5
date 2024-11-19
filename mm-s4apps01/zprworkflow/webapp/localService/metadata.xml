@@ -53,11 +53,13 @@
                 <Key>
                     <PropertyRef Name="ApplyDepart"/>
                     <PropertyRef Name="PrNo"/>
+                    <PropertyRef Name="UserZseq"/>
                 </Key>
                 <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ApplyDepart" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="PrNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="UserZseq" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
                 <Property Name="UUID" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="PrType" Type="Edm.String" MaxLength="4"/>
@@ -946,6 +948,9 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/UnitPrice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/UserZseq" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/WbsElemnt" xmlns="http://docs.oasis-open.org/odata/ns/edm">

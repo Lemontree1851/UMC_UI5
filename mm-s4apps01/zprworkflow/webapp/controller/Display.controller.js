@@ -227,12 +227,12 @@ sap.ui.define([
 			if (aSelectedItems.length === 0) {
 				return;
 			}		
-            if (!this.Dialog) {
+            if (!this.DialogReject) {
                 var oView = this.getView();
-				if (!this.Dialog) {
+				if (!this.DialogReject) {
 					var oView = this.getView();
-					if (!this.Dialog) {
-						this.Dialog = Fragment.load({
+					if (!this.DialogReject) {
+						this.DialogReject = Fragment.load({
 							id: oView.getId(),
 							name: "mm.zprworkflow.fragment.DialogReject",
 							controller: this
@@ -243,11 +243,11 @@ sap.ui.define([
 						}.bind(this));
 					}
 				}
-				this.Dialog.then(function(oDialog) {
+				this.DialogReject.then(function(oDialog) {
 					oDialog.open();
 				}.bind(this));
             }
-            this.Dialog.then(function(oDialog) {
+            this.DialogReject.then(function(oDialog) {
                 oDialog.open();
             }.bind(this));
         },
