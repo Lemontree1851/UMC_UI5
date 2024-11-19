@@ -17,7 +17,7 @@
                 <Button icon="sap-icon://save" text="{i18n>ReCalculate}" type="Transparent" press="onPressBtn('ReCalculate')"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
-        <table:Table id="idTable" selectionMode="None" rowMode="Auto">
+        <table:Table id="idTable" selectionMode="None" fixedColumnCount="6" rowMode="Auto">
             <table:columns>
                 <table:Column width="5rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
                     <table:customData>
