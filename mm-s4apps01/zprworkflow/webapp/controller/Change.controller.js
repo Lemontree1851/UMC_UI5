@@ -11,6 +11,7 @@ sap.ui.define([
 	"sap/suite/ui/commons/library",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/Filter",
+ 
 
 ], function(
     BaseController,
@@ -22,12 +23,16 @@ sap.ui.define([
 	Fragment,
 	Dialog,
 	BusyDialog,
+	mobileLibrary, 
 	suiteLibrary,
 	FilterOperator,
 	Filter,
-	JSONModel
+	JSONModel,
+ 
+
 ) {
 	"use strict";
+	// shortcut for sap.m.DialogType
 
 	return BaseController.extend("mm.zprworkflow.controller.Change", {
 		
@@ -35,7 +40,7 @@ sap.ui.define([
         onInit: function (oEvent) {
             // this._BusyDialog = new BusyDialog();
 			console.log("Change Controller Init");
-			var TimelineFilterType = suiteLibrary.TimelineFilterType;
+ 
 			this._BusyDialog = new BusyDialog();
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
@@ -45,8 +50,7 @@ sap.ui.define([
  
 			this.byId('idSmartTable1').rebindTable();
 			this._oDataModel.refresh(true);
-			// oRouter.attachBeforeRouteMatched(this._onBeforeRouteMatched, this);
-
+ 
 			// set message model
 			this.getView().setModel(Messaging.getMessageModel(), "message");
 
@@ -54,57 +58,7 @@ sap.ui.define([
 			Messaging.registerObject(this.getView(), true);
 			this._timeline = this.byId("idTimeline");
 			this._timeline.setEnableScroll(false);
-
- /*
-
-			
-			var oModel = this.getView().getModel(); // Assuming you have the model set in your view
-			var oTimeline = this.byId("idTimeline");
-			
-			var oFilter = new sap.ui.model.Filter("Zseq", sap.ui.model.FilterOperator.EQ, "1");
-			
-			//this._timeline.bindElement({
-			//	 path: "/ApprovalHistory" 
-				 
-			//});
-
-			var sSelectedItem = oEvent.getParameter("selected"),
-				filter = null,
-				aSelectedDataItems = [];
-		 
-				filter = new Filter({
-					path: "Operator",
-					value: "1",
-					operator: FilterOperator.EQ
-				});
-
-				aSelectedDataItems = ["1"];
-			 
-
-			this._timeline.setModelFilter({
-				type: TimelineFilterType.Data,
-				filter: filter
-			});
-			this._timeline.setCurrentFilter(aSelectedDataItems);
-			*/
-/*
-			var oNewDataModel = new sap.ui.model.json.JSONModel({
-				// Your new data here
-			});
-			
-			// Find the Timeline control using the ID
-			var oTimeline = this.getView().byId("idTimeline");
-			
-			oTimeline.bindElement({
-				path : "/ApprovalHistory",
-			});
-			oTimeline.updateBindings(true);
-*/
- 
-
-
-
-
+			//this._timeline.setAlignment("Left");
 
         },
 		getMediaUrl: function (sUrlString) {
@@ -142,7 +96,7 @@ sap.ui.define([
 			oView.bindElement({
 				path : "/PurchaseReqWFLink(guid'" + oArgs.contextPath + "')",
 				events : {
-					change: this._onBindingChange.bind(this),
+					//change: this._onBindingChange.bind(this),
 					dataRequested: function (oEvent) {
 						oView.setBusy(true);
 					},
@@ -151,46 +105,14 @@ sap.ui.define([
 					}.bind(this)
 				}
 			});
-		//	oView.bindElement({
-		//		path : "/PurchaseReqWFSum(ApplyDepart='" + oArgs.contextApplyDepart + "',PrNo='" + oArgs.contextPrNo + "')",
-			//	events : {
-			//		change: this._onBindingChange.bind(this),
-			//		dataRequested: function (oEvent) {
-			//			oView.setBusy(true);
-			//		},
-		//			dataReceived: function (oEvent) {
-			//			oView.setBusy(false);
-			//		}.bind(this)
-		//		}
-			//});
+ 
 			this.byId("idSmartForm").setEditable(false);
 			this.byId("idPage").setShowFooter(true);
 			this._bindTimelineAggregation();
 			this.byId('idSmartTable1').rebindTable();
 			this._oDataModel.refresh(true);
 		},
-		_onRouteMatched1 : function (oEvent) {
-            this.getView().getModel().resetChanges();
-			// var oArgs, oView;
 
-			// oArgs = oEvent.getParameter("arguments");
-			// oView = this.getView();
-
-			// oView.bindElement({
-			// 	path : "/PurchaseReq(guid'" + oArgs.contextPath + "')",
-			// 	events : {
-			// 		change: this._onBindingChange.bind(this),
-			// 		dataRequested: function (oEvent) {
-			// 			oView.setBusy(true);
-			// 		},
-			// 		dataReceived: function (oEvent) {
-			// 			oView.setBusy(false);
-			// 		}
-			// 	}
-			// });
-			// this.byId("idSmartForm").setEditable(false);
-			// this.byId("idPage").setShowFooter(false);
-		},
 		onRowActionItemPress : function(oEvent){
 			var oItem, oCtx;
 
@@ -320,7 +242,7 @@ sap.ui.define([
 		},
 		onDialogPress: function () {	
 			console.log("onDialogPress");
- 
+
             if (!this.Dialog) {
                 var oView = this.getView();
 				if (!this.Dialog) {
@@ -333,6 +255,7 @@ sap.ui.define([
 						}).then(function (oDialog){
 							this.getView().addDependent(oDialog);
 							// oDialog.setModel(oView.getModel());
+ 
 							return oDialog;
 						}.bind(this));
 					}
@@ -341,8 +264,11 @@ sap.ui.define([
 					oDialog.open();
 				}.bind(this));
             }
+			
             this.Dialog.then(function(oDialog) {
                 oDialog.open();
+				var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
+				oTextArea.setValue(""); 
             }.bind(this));
         },
 		onDialogRejectPress: function () {	
@@ -370,6 +296,9 @@ sap.ui.define([
             }
             this.DialogReject.then(function(oDialog) {
                 oDialog.open();
+				oDialog.open();
+				var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
+				oTextArea.setValue(""); 
             }.bind(this));
         },
         onDialogClose: function(){
@@ -392,31 +321,9 @@ sap.ui.define([
 			const sDocumentInfoRecordDocNumber = item.DocumentInfoRecordDocNumber;
 			const sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
 			sDocumentInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')";
-			const sPath1 = "Attach>/A_DocumentInfoRecordAttch";
-
-			//const sPath2 = "Attach>/A_DocumentInfoRecordAttch?$filter=DocumentInfoRecordDocNumber%20eq%20%27EKO241000900001B96414F517%27";
-
-			//const sPath3 = "Attach>/A_DocumentInfoRecordAttch?$filter=DocumentInfoRecordDocNumber eq 'EKO241000900001B96414F517'";
-
-  
+ 
 			oUploadSet.bindElement(sPath);
-   
-			// 设置uploadUrl
-			// const sUploadUrl = `/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch(
-			// 	DocumentInfoRecordDocType='${item.DocumentInfoRecordDocType}',
-			// 	DocumentInfoRecordDocNumber='${item.DocumentInfoRecordDocNumber}',
-			// 	DocumentInfoRecordDocVersion='${item.DocumentInfoRecordDocVersion}',
-			// 	DocumentInfoRecordDocPart='${item.DocumentInfoRecordDocPart}')`;
-			const sUploadUrl = "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
-				sDocumentInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')/DocumentInfoRecordToAttachmentNavigation";
-
-				const sUploadUrl1 = "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch?$filter=DocumentInfoRecordDocNumber%20ge%20%27EKO2410009000010000000000%27%20and%20DocumentInfoRecordDocNumber%20le%20%27EKO241000900001ZZZZZZZZZZ%27%20";
-				const sUploadUrl2 = "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch?$filter=DocumentInfoRecordDocNumber%20eq%20%27EKO241000900001B96414F517%27%";
-				const sUploadUrl3 = "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch?$filter=DocumentInfoRecordDocNumber eq 'EKO241000900001B96414F517'";
-
-
-
-				//oUploadSet.setUploadUrl(sUploadUrl1);
+ 
 		},
 		_saveAttachment: function (oUploadSet, sFileName) {
 			const csrfToken = this._oDataModel.securityTokenAvailable();
@@ -530,8 +437,7 @@ sap.ui.define([
 					}
                     let result = JSON.parse(oData[sAction].Zzkey);
 					this._LocalData.setProperty("/recordCheckSuccessed", false);
-                    //messages.showSuccess(this._ResourceBundle.getText("msgDeleteSuccessed"));
-					//MessageToast.show(this._ResourceBundle.getText("msgSaveSuccessed"))
+ 
 					if(this.byId("AnswerDialogq")){this.byId("AnswerDialogq").close();}
 					if(this.byId("AnswerDialog")){this.byId("AnswerDialog").close();}
                     result.forEach(function (line) {
@@ -625,6 +531,6 @@ sap.ui.define([
 			}
 
 			return this.MessageDialog;
-		}
+		} 
 	});
 });

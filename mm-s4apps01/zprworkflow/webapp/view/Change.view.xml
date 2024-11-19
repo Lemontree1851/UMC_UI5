@@ -355,7 +355,7 @@ xmlns:m="sap.m"
                 </xuap:ObjectPageSection>
 
                 
-   <xuap:ObjectPageSection id="id0ObjectPageSection55">
+   <!-- <xuap:ObjectPageSection id="id0ObjectPageSection55">
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection
                             id="id0ObjectPageSubSection55"
@@ -390,7 +390,7 @@ xmlns:m="sap.m"
                             </upload:UploadSet>
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
-                </xuap:ObjectPageSection>
+                </xuap:ObjectPageSection> -->
 
 
 
@@ -1127,9 +1127,49 @@ xmlns:m="sap.m"
                                 />
                             </t:template>
                         </t:Column>
+                        <t:Column
+                            id="id7Column"
+                            width="8rem"
+                            label="{i18n>Currency}"
+                            sortProperty="Currency"
+                            filterProperty="Currency"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id7CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idCurrencyText"
+                                    text="{Currency}"
+                                />
+                            </t:template>
+                        </t:Column>
 
-
-
+                        <t:Column
+                            id="id8Column"
+                            width="8rem"
+                            label="{i18n>amount1}"
+                            sortProperty="amount1"
+                            filterProperty="amount1"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id8CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"amount1", "leadingProperty":"amount1", "sortProperty":"amount1", "filterProperty": "amount1"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idamount1Text"
+                                    text="{amount1}"
+                                />
+                            </t:template>
+                        </t:Column>
                         <!-- <t:Column
                             id="id0Column"
                             width="8rem"
@@ -1257,27 +1297,7 @@ xmlns:m="sap.m"
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            id="id7Column"
-                            width="8rem"
-                            label="{i18n>Currency}"
-                            sortProperty="Currency"
-                            filterProperty="Currency"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id7CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idCurrencyText"
-                                    text="{Currency}"
-                                />
-                            </t:template>
-                        </t:Column>
+
                         <t:Column
                             id="id8Column"
                             width="8rem"
@@ -1634,8 +1654,15 @@ xmlns:m="sap.m"
 <!-- <core:Item id="idItem1" key="Vertical" text="Vertical"/> -->
 <!-- <core:Item id="idItem2" key="Horizontal" text="Horizontal"/> -->
 <!-- </m:Select> -->
+
+ 
 <m:CheckBox id="idShowHeader" text="Scrollbar" select="onScrollbarSelected" selected="false"/>
 </m:Toolbar>
+
+
+
+
+
 <r:Timeline id="idTimeline"   content="{/ApprovalHistory}"  filterList="{/ApprovalHistory}" showIcons="false"
 textHeight="100px" >
 <r:content>
@@ -1646,6 +1673,7 @@ filterValue="{Operator}" > </r:TimelineItem>
 <r:TimelineFilterListItem id="idTimelineFilterListItem" key="{Operator}" text="{Operator}"> </r:TimelineFilterListItem>
 </r:filterList>
 </r:Timeline>
+ 
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>
@@ -1681,7 +1709,7 @@ filterValue="{Operator}" > </r:TimelineItem>
                     type="Emphasized"
                     press="onDialogRejectPress"
                 />
-            </OverflowToolbar>
+             </OverflowToolbar>
             
         </footer>
     </Page>

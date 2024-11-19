@@ -1,14 +1,14 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
-	<Dialog id="AnswerDialog" title="{i18n>DialogTitleReject}" contentWidth="50rem" contentHeight="10rem" draggable="true">
+	<Dialog id="AnswerDialog" title="{i18n>DialogTitleReject}"  draggable="true" initialFocus="textArea1" type="Message">
  		        
-               <TextArea id ="textArea" placeholder="Enter Text" growing="true" growingMaxLines="7" height="9rem"  width="100%"/>
+        <TextArea id ="textArea" placeholder="{i18n>RejectPlaceholder}" growing="true" growingMaxLines="7" width="100%"/>
 		<beginButton>
 
-			<Button id="confirmButtonReject" text="{i18n>bConfirm}" press="onDialogConfirmReject"/>
+		<Button id="confirmButtonReject" text="{i18n>bConfirm}" press="onDialogConfirmReject"/>
 		</beginButton>
+		
 		<endButton>
-		       
-			<Button id="cancelButtonReject" text="{i18n>bCancel}" press="onDialogCloseReject"/>
+		<Button id="cancelButtonReject" text="{i18n>bCancel}" press="onDialogCloseReject"/>
 		</endButton>
 	</Dialog>
 </core:FragmentDefinition>

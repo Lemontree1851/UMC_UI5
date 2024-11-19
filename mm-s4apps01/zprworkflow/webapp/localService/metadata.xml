@@ -57,7 +57,7 @@
                 </Key>
                 <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ApplyDepart" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ApplyDepart" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="PrNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="UserZseq" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
                 <Property Name="UUID" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)" sap:creatable="false" sap:updatable="false"/>
@@ -69,7 +69,7 @@
                 <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
                 <Property Name="PurchaseGrp" Type="Edm.String" MaxLength="3"/>
                 <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
                 <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
                 <Property Name="AccountType" Type="Edm.String" MaxLength="1"/>
                 <Property Name="MatID" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
@@ -169,7 +169,7 @@
                     <PropertyRef Name="UUID"/>
                 </Key>
                 <Property Name="UUID" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
-                <Property Name="ApplyDepart" Type="Edm.String" MaxLength="2"/>
+                <Property Name="ApplyDepart" Type="Edm.String" MaxLength="3"/>
                 <Property Name="PrNo" Type="Edm.String" MaxLength="10"/>
                 <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative"/>
                 <Property Name="PrType" Type="Edm.String" MaxLength="4"/>
@@ -179,7 +179,7 @@
                 <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
                 <Property Name="PurchaseGrp" Type="Edm.String" MaxLength="3"/>
                 <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
                 <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
                 <Property Name="AccountType" Type="Edm.String" MaxLength="1"/>
                 <Property Name="MatID" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
@@ -187,7 +187,7 @@
                 <Property Name="MaterialGroup" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Quantity" Type="Edm.Decimal" Precision="18" Scale="3"/>
                 <Property Name="Unit" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Price" Type="Edm.Decimal" Precision="18" Scale="3"/>
+                <Property Name="Price" Type="Edm.Decimal" Precision="18" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="UnitPrice" Type="Edm.Decimal" Precision="18" Scale="3"/>
                 <Property Name="DeliveryDate" Type="Edm.String" MaxLength="8"/>
                 <Property Name="Location" Type="Edm.String" MaxLength="4"/>
@@ -227,13 +227,14 @@
                 <Property Name="LocalLastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Local Instance Last Changed By User"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
                 <Property Name="LatCahangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
+                <Property Name="amount1" Type="Edm.Decimal" Precision="34" Scale="0" sap:unit="Currency" sap:variable-scale="true"/>
             </EntityType>
             <EntityType Name="PurchaseReqWFLinkType" sap:label="Projection View for ZR_PRWORKFLOWLINK" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="UUID"/>
                 </Key>
                 <Property Name="UUID" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
-                <Property Name="ApplyDepart" Type="Edm.String" MaxLength="2"/>
+                <Property Name="ApplyDepart" Type="Edm.String" MaxLength="3"/>
                 <Property Name="PrNo" Type="Edm.String" MaxLength="10"/>
                 <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative"/>
                 <Property Name="PrType" Type="Edm.String" MaxLength="4"/>
@@ -243,7 +244,7 @@
                 <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
                 <Property Name="PurchaseGrp" Type="Edm.String" MaxLength="3"/>
                 <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
                 <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
                 <Property Name="AccountType" Type="Edm.String" MaxLength="1"/>
                 <Property Name="MatID" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
@@ -288,19 +289,10 @@
                 <Property Name="LocalLastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Local Instance Last Changed By User"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
                 <Property Name="LatCahangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
-                <Property Name="AmountSum" Type="Edm.Decimal" Precision="34" sap:variable-scale="true"/>
+                <Property Name="AmountSum" Type="Edm.Decimal" Precision="34" Scale="0" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="WorkflowId" Type="Edm.String" MaxLength="20"/>
                 <Property Name="InstanceId" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
                 <Property Name="ApplicationId" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative"/>
-            </EntityType>
-            <EntityType Name="PurchaseReqWFSumType" sap:label="Projection View for ZR_PRWORKFLOWSUM" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="ApplyDepart"/>
-                    <PropertyRef Name="PrNo"/>
-                </Key>
-                <Property Name="ApplyDepart" Type="Edm.String" Nullable="false" MaxLength="2"/>
-                <Property Name="PrNo" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="AmountSum" Type="Edm.Decimal" Precision="34" sap:variable-scale="true"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -547,7 +539,6 @@
                 <EntitySet Name="ApprovalHistory" EntityType="cds_zui_prworkflow_o2.ApprovalHistoryType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="PurchaseReqWFItem" EntityType="cds_zui_prworkflow_o2.PurchaseReqWFItemType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="PurchaseReqWFLink" EntityType="cds_zui_prworkflow_o2.PurchaseReqWFLinkType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
-                <EntitySet Name="PurchaseReqWFSum" EntityType="cds_zui_prworkflow_o2.PurchaseReqWFSumType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_prworkflow_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_prworkflow_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_prworkflow_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -597,6 +588,11 @@
                     <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
                     <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
                 </FunctionImport>
+                <FunctionImport Name="Application" ReturnType="cds_zui_prworkflow_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
                 <FunctionImport Name="batchProcess" ReturnType="cds_zui_prworkflow_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
                     <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
                     <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
@@ -608,6 +604,11 @@
                     <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
                 </FunctionImport>
                 <FunctionImport Name="RejectPRWF" ReturnType="cds_zui_prworkflow_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
+                <FunctionImport Name="Revoke" ReturnType="cds_zui_prworkflow_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
                     <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
                     <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
                     <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
@@ -761,23 +762,6 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.cds_zui_prworkflow_o2_Entities/PurchaseReqWFLink" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record>
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record>
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record>
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.cds_zui_prworkflow_o2_Entities/PurchaseReqWFSum" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Bool="false"/>

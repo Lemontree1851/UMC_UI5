@@ -220,6 +220,8 @@ sap.ui.define([
             }
             this.Dialog.then(function(oDialog) {
                 oDialog.open();
+				var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
+				oTextArea.setValue(""); 
             }.bind(this));
         },
 		onDialogRejectPress: function () {	
@@ -249,6 +251,8 @@ sap.ui.define([
             }
             this.DialogReject.then(function(oDialog) {
                 oDialog.open();
+				var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
+				oTextArea.setValue(""); 
             }.bind(this));
         },
         onDialogClose: function(){
