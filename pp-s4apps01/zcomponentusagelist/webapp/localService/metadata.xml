@@ -84,7 +84,6 @@
                 <Property Name="AlternativeItemPriority" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative"/>
                 <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" MaxLength="900"/>
                 <Property Name="NoDisplayNonProduct" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
-                <Property Name="DisplayPurchasingInfo" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -427,10 +426,6 @@
                             <Collection>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="NoDisplayNonProduct"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="DisplayPurchasingInfo"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                             </Collection>

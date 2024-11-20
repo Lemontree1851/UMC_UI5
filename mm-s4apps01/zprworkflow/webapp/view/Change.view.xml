@@ -68,13 +68,13 @@ xmlns:m="sap.m"
                                             value="{PrNo}"
                                         />
                                     </smartForm:GroupElement>
-                                    <smartForm:GroupElement id="id35GroupElement">
+                                    <!-- <smartForm:GroupElement id="id35GroupElement">
                                         <smartField:SmartField
                                             id="idPrItemSmartField"
                                             textLabel="{i18n>PrItem}"
                                             value="{PrItem}"
                                         />
-                                    </smartForm:GroupElement>
+                                    </smartForm:GroupElement> -->
                                     <smartForm:GroupElement id="id0GroupElement">
                                         <smartField:SmartField
                                             id="idPrTypeSmartField"
@@ -82,14 +82,14 @@ xmlns:m="sap.m"
                                             value="{PrType}"
                                         />
                                     </smartForm:GroupElement>
-                                    <smartForm:GroupElement id="id1GroupElement">
+                                    <!-- <smartForm:GroupElement id="id1GroupElement">
                                         <smartField:SmartField
                                             id="idOrderTypeSmartField"
                                             textLabel="{i18n>OrderType}"
                                             value="{OrderType}"
                                         />
-                                    </smartForm:GroupElement>
-                                    <smartForm:GroupElement id="id2GroupElement">
+                                    </smartForm:GroupElement> -->
+                                    <!-- <smartForm:GroupElement id="id2GroupElement">
                                         <smartField:SmartField
                                             id="idSupplierSmartField"
                                             textLabel="{i18n>Supplier}"
@@ -102,7 +102,7 @@ xmlns:m="sap.m"
                                             textLabel="{i18n>CompanyCode}"
                                             value="{CompanyCode}"
                                         />
-                                    </smartForm:GroupElement>
+                                    </smartForm:GroupElement> -->
                                     <smartForm:GroupElement id="id4GroupElement">
                                         <smartField:SmartField
                                             id="idPurchaseOrgSmartField"
@@ -117,7 +117,7 @@ xmlns:m="sap.m"
                                             value="{PurchaseGrp}"
                                         />
                                     </smartForm:GroupElement>
-                                    <smartForm:GroupElement id="id6GroupElement">
+                                    <!-- <smartForm:GroupElement id="id6GroupElement">
                                         <smartField:SmartField
                                             id="idPlantSmartField"
                                             textLabel="{i18n>Plant}"
@@ -200,8 +200,8 @@ xmlns:m="sap.m"
                                             textLabel="{i18n>DeliveryDate}"
                                             value="{DeliveryDate}"
                                         />
-                                    </smartForm:GroupElement>
-                                    <smartForm:GroupElement id="id18GroupElement">
+                                    </smartForm:GroupElement> -->
+                                    <!-- <smartForm:GroupElement id="id18GroupElement">
                                         <smartField:SmartField
                                             id="idLocationSmartField"
                                             textLabel="{i18n>Location}"
@@ -263,7 +263,7 @@ xmlns:m="sap.m"
                                             textLabel="{i18n>ItemText}"
                                             value="{ItemText}"
                                         />
-                                    </smartForm:GroupElement>
+                                    </smartForm:GroupElement> -->
                                     <smartForm:GroupElement id="id27GroupElement">
                                         <smartField:SmartField
                                             id="idPrBySmartField"
@@ -271,7 +271,7 @@ xmlns:m="sap.m"
                                             value="{PrBy}"
                                         />
                                     </smartForm:GroupElement>
-                                    <smartForm:GroupElement id="id28GroupElement">
+                                    <!-- <smartForm:GroupElement id="id28GroupElement">
                                         <smartField:SmartField
                                             id="idTrackNoSmartField"
                                             textLabel="{i18n>TrackNo}"
@@ -333,7 +333,7 @@ xmlns:m="sap.m"
                                             textLabel="{i18n>PurchaseOrderItem}"
                                             value="{PurchaseOrderItem}"
                                         />
-                                    </smartForm:GroupElement>
+                                    </smartForm:GroupElement> -->
                                     <smartForm:GroupElement id="id38GroupElement">
                                         <smartField:SmartField
                                             id="idKyotenSmartField"
@@ -353,18 +353,21 @@ xmlns:m="sap.m"
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>
-                 <xuap:ObjectPageSection id="id0ObjectPageSection1">
+
+                
+   <!-- <xuap:ObjectPageSection id="id0ObjectPageSection55">
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection
-                            id="id0ObjectPageSubSection1"
+                            id="id0ObjectPageSubSection55"
                             title="{i18n>attachment}"
                         >
                             <upload:UploadSet
-                                id="idUploadSet1"
+                                id="idUploadSet"
                                 items="{Attach>DocumentInfoRecordToAttachmentNavigation}"
+                                
                                 multiple="false"
                                 mode="None"
-                                uploadEnabled="true"
+                                uploadEnabled="false"
                                 instantUpload="false"
                                 beforeItemAdded="onBeforeItemAdded"
                                 uploadCompleted="onUploadCompleted"
@@ -373,9 +376,9 @@ xmlns:m="sap.m"
                             >
                                 <upload:items>
                                     <upload:UploadSetItem
-                                        id="idUploadSetItem1"
+                                        id="idUploadSetItem"
                                         fileName="{Attach>FileName}"
-                                        mediaType="{Attach>MimeType}"
+                                        mediaType="{Attach>MimeType6}"
                                         url="{
                                             path: 'Attach>__metadata/media_src',
                                             formatter: '.getMediaUrl'
@@ -387,7 +390,7 @@ xmlns:m="sap.m"
                             </upload:UploadSet>
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
-                </xuap:ObjectPageSection>
+                </xuap:ObjectPageSection> -->
 
 
 
@@ -396,7 +399,7 @@ xmlns:m="sap.m"
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection
                             id="id0ObjectPageSubSection3"
-                            title="{i18n>attachment}"
+                            title="{i18n>amountsumpage}"
                         >
                              <smartForm:SmartForm
                                 id="idSmartForm3"
@@ -414,9 +417,9 @@ xmlns:m="sap.m"
                                             value="{AmountSum}"
                                         />
                                     </smartForm:GroupElement>
-</smartForm:Group>
+                        </smartForm:Group>
 
- </smartForm:SmartForm>
+                        </smartForm:SmartForm>
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>
@@ -439,7 +442,7 @@ xmlns:m="sap.m"
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection
                             id="id0ObjectPageSubSection2"
-                            title="{i18n>attachment}"
+                            title="{i18n>detailpage}"
                         >
 
 
@@ -464,9 +467,9 @@ xmlns:m="sap.m"
 
                             <smartFilterBar:ControlConfiguration
                                 id="idControlConfiguration2"
-                                key="apply_time"
+                                key="apply_date"
                                 visibleInAdvancedArea="true"
-                                label="{i18n>apply_time}"
+                                label="{i18n>apply_date}"
                                 mandatory="notMandatory"
                                 index="3"
                             >
@@ -488,22 +491,22 @@ xmlns:m="sap.m"
                             />
 
 
-                            <smartFilterBar:ControlConfiguration
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id0ControlConfiguration"
                                 key="Supplier"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Supplier}"
                                 mandatory="notMandatory"
                                 index="5"
-                            />
-                            <smartFilterBar:ControlConfiguration
+                            /> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id1ControlConfiguration"
                                 key="PurchaseGrp"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>PurchaseGrp}"
                                 mandatory="notMandatory"
                                 index="10"
-                            />
+                            /> -->
                             <smartFilterBar:ControlConfiguration
                                 id="id2ControlConfiguration"
                                 key="PrBy"
@@ -512,23 +515,23 @@ xmlns:m="sap.m"
                                 mandatory="notMandatory"
                                 index="15"
                             />
-                            <smartFilterBar:ControlConfiguration
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id3ControlConfiguration"
                                 key="Plant"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Plant}"
                                 mandatory="notMandatory"
                                 index="20"
-                            />
-                            <smartFilterBar:ControlConfiguration
+                            /> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id4ControlConfiguration"
                                 key="MatID"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>MatID}"
                                 mandatory="notMandatory"
                                 index="25"
-                            />
-                            <smartFilterBar:ControlConfiguration
+                            /> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id5ControlConfiguration"
                                 key="CreatedAt"
                                 visibleInAdvancedArea="true"
@@ -543,8 +546,8 @@ xmlns:m="sap.m"
                                         displayFormat="yyyy-MM-dd"
                                     />
                                 </smartFilterBar:customControl>
-                            </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration
+                            </smartFilterBar:ControlConfiguration> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id6ControlConfiguration"
                                 key="CostCenter"
                                 visibleInAdvancedArea="true"
@@ -559,8 +562,8 @@ xmlns:m="sap.m"
                                 label="{i18n>AssetNo}"
                                 mandatory="notMandatory"
                                 index="40"
-                            />
-                            <smartFilterBar:ControlConfiguration
+                            /> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 key="ApproveStatus"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>ApproveStatus}"
@@ -576,23 +579,23 @@ xmlns:m="sap.m"
                                         <core:ListItem key="4" text="{i18n>Status4Text}" />
                                     </Select>
                                 </smartFilterBar:customControl>
-                            </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration
+                            </smartFilterBar:ControlConfiguration> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id8ControlConfiguration"
                                 key="WbsElemnt"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>WbsElemnt}"
                                 mandatory="notMandatory"
                                 index="45"
-                            />
-                            <smartFilterBar:ControlConfiguration
+                            /> -->
+                            <!-- <smartFilterBar:ControlConfiguration
                                 id="id9ControlConfiguration"
                                 key="Kyoten"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Kyoten}"
                                 mandatory="notMandatory"
                                 index="50"
-                            />
+                            /> -->
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
            <smartTable:SmartTable
@@ -616,7 +619,18 @@ xmlns:m="sap.m"
                         <rm:Auto id="idAuto" />
                     </t:rowMode>
                     <t:rowActionTemplate>
- 
+                        <t:RowAction
+                            id="idRowAction"
+                            visible="true"
+                        >
+                            <t:items>
+                                <t:RowActionItem
+                                    id="idRowActionItem"
+                                    type="Navigation"
+                                    press="onRowActionItemPress"
+                                />
+                            </t:items>
+                        </t:RowAction>
                     </t:rowActionTemplate>
                     <t:columns>
                         
@@ -664,48 +678,6 @@ xmlns:m="sap.m"
                             </t:template>
                         </t:Column>
                         <t:Column
-                            id="id0Column"
-                            width="8rem"
-                            label="{i18n>PrType}"
-                            sortProperty="PrType"
-                            filterProperty="PrType"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id0CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"PrType", "leadingProperty":"PrType", "sortProperty":"PrType", "filterProperty": "PrType"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idPrTypeText"
-                                    text="{PrType}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id1Column"
-                            width="8rem"
-                            label="{i18n>OrderType}"
-                            sortProperty="OrderType"
-                            filterProperty="OrderType"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id1CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"OrderType", "leadingProperty":"OrderType", "sortProperty":"OrderType", "filterProperty": "OrderType"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idOrderTypeText"
-                                    text="{OrderType}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
                             id="id2Column"
                             width="8rem"
                             label="{i18n>Supplier}"
@@ -726,154 +698,7 @@ xmlns:m="sap.m"
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            id="id3Column"
-                            width="8rem"
-                            label="{i18n>CompanyCode}"
-                            sortProperty="CompanyCode"
-                            filterProperty="CompanyCode"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id3CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idCompanyCodeText"
-                                    text="{CompanyCode}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id4Column"
-                            width="8rem"
-                            label="{i18n>PurchaseOrg}"
-                            sortProperty="PurchaseOrg"
-                            filterProperty="PurchaseOrg"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id4CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"PurchaseOrg", "leadingProperty":"PurchaseOrg", "sortProperty":"PurchaseOrg", "filterProperty": "PurchaseOrg"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idPurchaseOrgText"
-                                    text="{PurchaseOrg}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id5Column"
-                            width="8rem"
-                            label="{i18n>PurchaseGrp}"
-                            sortProperty="PurchaseGrp"
-                            filterProperty="PurchaseGrp"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id5CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"PurchaseGrp", "leadingProperty":"PurchaseGrp", "sortProperty":"PurchaseGrp", "filterProperty": "PurchaseGrp"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idPurchaseGrpText"
-                                    text="{PurchaseGrp}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id6Column"
-                            width="8rem"
-                            label="{i18n>Plant}"
-                            sortProperty="Plant"
-                            filterProperty="Plant"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id6CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idPlantText"
-                                    text="{Plant}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id7Column"
-                            width="8rem"
-                            label="{i18n>Currency}"
-                            sortProperty="Currency"
-                            filterProperty="Currency"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id7CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idCurrencyText"
-                                    text="{Currency}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id8Column"
-                            width="8rem"
-                            label="{i18n>ItemCategory}"
-                            sortProperty="ItemCategory"
-                            filterProperty="ItemCategory"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id8CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"ItemCategory", "leadingProperty":"ItemCategory", "sortProperty":"ItemCategory", "filterProperty": "ItemCategory"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idItemCategoryText"
-                                    text="{ItemCategory}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id9Column"
-                            width="8rem"
-                            label="{i18n>AccountType}"
-                            sortProperty="AccountType"
-                            filterProperty="AccountType"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id9CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"AccountType", "leadingProperty":"AccountType", "sortProperty":"AccountType", "filterProperty": "AccountType"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idAccountTypeText"
-                                    text="{AccountType}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
+                         <t:Column
                             id="id10Column"
                             width="8rem"
                             label="{i18n>MatID}"
@@ -917,7 +742,7 @@ xmlns:m="sap.m"
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                         <t:Column
                             id="id12Column"
                             width="8rem"
                             label="{i18n>MaterialGroup}"
@@ -938,7 +763,7 @@ xmlns:m="sap.m"
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                         <t:Column
                             id="id13Column"
                             width="8rem"
                             label="{i18n>Quantity}"
@@ -1046,7 +871,7 @@ xmlns:m="sap.m"
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                          <t:Column
                             id="id18Column"
                             width="8rem"
                             label="{i18n>Location}"
@@ -1064,48 +889,6 @@ xmlns:m="sap.m"
                                 <Text
                                     id="idLocationText"
                                     text="{Location}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id19Column"
-                            width="8rem"
-                            label="{i18n>ReturnItem}"
-                            sortProperty="ReturnItem"
-                            filterProperty="ReturnItem"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id19CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"ReturnItem", "leadingProperty":"ReturnItem", "sortProperty":"ReturnItem", "filterProperty": "ReturnItem"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idReturnItemText"
-                                    text="{ReturnItem}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id20Column"
-                            width="8rem"
-                            label="{i18n>Free}"
-                            sortProperty="Free"
-                            filterProperty="Free"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id20CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"Free", "leadingProperty":"Free", "sortProperty":"Free", "filterProperty": "Free"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idFreeText"
-                                    text="{Free}"
                                 />
                             </t:template>
                         </t:Column>
@@ -1238,48 +1021,6 @@ xmlns:m="sap.m"
                             </t:template>
                         </t:Column>
                         <t:Column
-                            id="id27Column"
-                            width="8rem"
-                            label="{i18n>PrBy}"
-                            sortProperty="PrBy"
-                            filterProperty="PrBy"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id27CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"PrBy", "leadingProperty":"PrBy", "sortProperty":"PrBy", "filterProperty": "PrBy"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idPrByText"
-                                    text="{PrBy}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            id="id28Column"
-                            width="8rem"
-                            label="{i18n>TrackNo}"
-                            sortProperty="TrackNo"
-                            filterProperty="TrackNo"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    id="id28CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"TrackNo", "leadingProperty":"TrackNo", "sortProperty":"TrackNo", "filterProperty": "TrackNo"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idTrackNoText"
-                                    text="{TrackNo}"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
                             id="id29Column"
                             width="8rem"
                             label="{i18n>Ean}"
@@ -1386,6 +1127,311 @@ xmlns:m="sap.m"
                                 />
                             </t:template>
                         </t:Column>
+                        <t:Column
+                            id="id7Column"
+                            width="8rem"
+                            label="{i18n>Currency}"
+                            sortProperty="Currency"
+                            filterProperty="Currency"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id7CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idCurrencyText"
+                                    text="{Currency}"
+                                />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column
+                            id="id8Column"
+                            width="8rem"
+                            label="{i18n>amount1}"
+                            sortProperty="amount1"
+                            filterProperty="amount1"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id8CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"amount1", "leadingProperty":"amount1", "sortProperty":"amount1", "filterProperty": "amount1"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idamount1Text"
+                                    text="{amount1}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <!-- <t:Column
+                            id="id0Column"
+                            width="8rem"
+                            label="{i18n>PrType}"
+                            sortProperty="PrType"
+                            filterProperty="PrType"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id0CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"PrType", "leadingProperty":"PrType", "sortProperty":"PrType", "filterProperty": "PrType"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idPrTypeText"
+                                    text="{PrType}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            id="id1Column"
+                            width="8rem"
+                            label="{i18n>OrderType}"
+                            sortProperty="OrderType"
+                            filterProperty="OrderType"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id1CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"OrderType", "leadingProperty":"OrderType", "sortProperty":"OrderType", "filterProperty": "OrderType"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idOrderTypeText"
+                                    text="{OrderType}"
+                                />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column
+                            id="id3Column"
+                            width="8rem"
+                            label="{i18n>CompanyCode}"
+                            sortProperty="CompanyCode"
+                            filterProperty="CompanyCode"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id3CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idCompanyCodeText"
+                                    text="{CompanyCode}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            id="id4Column"
+                            width="8rem"
+                            label="{i18n>PurchaseOrg}"
+                            sortProperty="PurchaseOrg"
+                            filterProperty="PurchaseOrg"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id4CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"PurchaseOrg", "leadingProperty":"PurchaseOrg", "sortProperty":"PurchaseOrg", "filterProperty": "PurchaseOrg"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idPurchaseOrgText"
+                                    text="{PurchaseOrg}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            id="id5Column"
+                            width="8rem"
+                            label="{i18n>PurchaseGrp}"
+                            sortProperty="PurchaseGrp"
+                            filterProperty="PurchaseGrp"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id5CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"PurchaseGrp", "leadingProperty":"PurchaseGrp", "sortProperty":"PurchaseGrp", "filterProperty": "PurchaseGrp"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idPurchaseGrpText"
+                                    text="{PurchaseGrp}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            id="id6Column"
+                            width="8rem"
+                            label="{i18n>Plant}"
+                            sortProperty="Plant"
+                            filterProperty="Plant"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id6CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idPlantText"
+                                    text="{Plant}"
+                                />
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column
+                            id="id8Column"
+                            width="8rem"
+                            label="{i18n>ItemCategory}"
+                            sortProperty="ItemCategory"
+                            filterProperty="ItemCategory"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id8CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"ItemCategory", "leadingProperty":"ItemCategory", "sortProperty":"ItemCategory", "filterProperty": "ItemCategory"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idItemCategoryText"
+                                    text="{ItemCategory}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            id="id9Column"
+                            width="8rem"
+                            label="{i18n>AccountType}"
+                            sortProperty="AccountType"
+                            filterProperty="AccountType"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id9CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"AccountType", "leadingProperty":"AccountType", "sortProperty":"AccountType", "filterProperty": "AccountType"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idAccountTypeText"
+                                    text="{AccountType}"
+                                />
+                            </t:template>
+                        </t:Column>
+                       
+                       
+                       
+                      
+                        <t:Column
+                            id="id19Column"
+                            width="8rem"
+                            label="{i18n>ReturnItem}"
+                            sortProperty="ReturnItem"
+                            filterProperty="ReturnItem"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id19CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"ReturnItem", "leadingProperty":"ReturnItem", "sortProperty":"ReturnItem", "filterProperty": "ReturnItem"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idReturnItemText"
+                                    text="{ReturnItem}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            id="id20Column"
+                            width="8rem"
+                            label="{i18n>Free}"
+                            sortProperty="Free"
+                            filterProperty="Free"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id20CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"Free", "leadingProperty":"Free", "sortProperty":"Free", "filterProperty": "Free"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idFreeText"
+                                    text="{Free}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        
+                      
+                        <t:Column
+                            id="id27Column"
+                            width="8rem"
+                            label="{i18n>PrBy}"
+                            sortProperty="PrBy"
+                            filterProperty="PrBy"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id27CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"PrBy", "leadingProperty":"PrBy", "sortProperty":"PrBy", "filterProperty": "PrBy"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idPrByText"
+                                    text="{PrBy}"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            id="id28Column"
+                            width="8rem"
+                            label="{i18n>TrackNo}"
+                            sortProperty="TrackNo"
+                            filterProperty="TrackNo"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id28CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"TrackNo", "leadingProperty":"TrackNo", "sortProperty":"TrackNo", "filterProperty": "TrackNo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idTrackNoText"
+                                    text="{TrackNo}"
+                                />
+                            </t:template>
+                        </t:Column>
+                       
+                      
                         <t:Column
                             width="8rem"
                             label="{i18n>ApproveStatus}"
@@ -1583,8 +1629,8 @@ xmlns:m="sap.m"
                                     text="{IsApprove}"
                                 />
                             </t:template>
-                        </t:Column>
-                    </t:columns>
+                        </t:Column>-->
+                    </t:columns> 
                 </t:Table>
             </smartTable:SmartTable>
                         </xuap:ObjectPageSubSection>
@@ -1596,30 +1642,38 @@ xmlns:m="sap.m"
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection
                             id="id0ObjectPageSubSection"
-                            title="{i18n>attachment}"
+                            title="{i18n>historypage}"
                              
                         >
 
  
 <m:Toolbar id="idToolbar">
  
-<m:Label id="idLabel" text="Axis orientation"/>
-<m:Select id="idSelect" change="orientationChanged">
-<core:Item id="idItem1" key="Vertical" text="Vertical"/>
-<core:Item id="idItem2" key="Horizontal" text="Horizontal"/>
-</m:Select>
+<!-- <m:Label id="idLabel" text="Axis orientation"/> -->
+<!-- <m:Select id="idSelect" change="orientationChanged"> -->
+<!-- <core:Item id="idItem1" key="Vertical" text="Vertical"/> -->
+<!-- <core:Item id="idItem2" key="Horizontal" text="Horizontal"/> -->
+<!-- </m:Select> -->
+
+ 
 <m:CheckBox id="idShowHeader" text="Scrollbar" select="onScrollbarSelected" selected="false"/>
 </m:Toolbar>
+
+
+
+
+
 <r:Timeline id="idTimeline"   content="{/ApprovalHistory}"  filterList="{/ApprovalHistory}" showIcons="false"
 textHeight="100px" >
 <r:content>
-<r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{Zseq}" userName="{Operator}" select="onPressItems"
+<r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{CurrentNode}" userName="{Operator}" select="onPressItems"
 filterValue="{Operator}" > </r:TimelineItem>
 </r:content>
 <r:filterList>
 <r:TimelineFilterListItem id="idTimelineFilterListItem" key="{Operator}" text="{Operator}"> </r:TimelineFilterListItem>
 </r:filterList>
 </r:Timeline>
+ 
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>
@@ -1641,7 +1695,7 @@ filterValue="{Operator}" > </r:TimelineItem>
                     press="onMessagePopoverPress"
                 />
                 <ToolbarSpacer id="id0ToolbarSpacer" />
-                                <Button
+                 <Button
                     id="idButtonAccept"
                     visible="true"
                     text="{i18n>idButtonAccept}"
@@ -1653,9 +1707,9 @@ filterValue="{Operator}" > </r:TimelineItem>
                     visible="true"
                     text="{i18n>idButtonReject}"
                     type="Emphasized"
-                    press="onButtonAcceptReject"
+                    press="onDialogRejectPress"
                 />
-            </OverflowToolbar>
+             </OverflowToolbar>
             
         </footer>
     </Page>

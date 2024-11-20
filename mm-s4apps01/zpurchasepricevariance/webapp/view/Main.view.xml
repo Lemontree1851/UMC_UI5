@@ -19,13 +19,14 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_PURCHASEPRICEVARIANCE" useToolbar="false" smartVariant="__SVM01" persistencyKey="PurchasePriceVarianceSFB">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="PurchaseOrder" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}"/>
-                                <smartFilterBar:ControlConfiguration index='20' key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
-                                <smartFilterBar:ControlConfiguration index='30' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
-                                <smartFilterBar:ControlConfiguration index='40' key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
-                                <smartFilterBar:ControlConfiguration index='50' key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
-                                <smartFilterBar:ControlConfiguration index='60' key="PurgDocPriceDate" visibleInAdvancedArea="true" label="{i18n>PurgDocPriceDate}"/>
-                                <smartFilterBar:ControlConfiguration index='70' key="IsCompletelyDelivered" label="{i18n>ExcludeDeliveredPO}" visibleInAdvancedArea="true">
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" visibleInAdvancedArea="true" controlType="dropDownList" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="PurchaseOrder" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="PurgDocPriceDate" visibleInAdvancedArea="true" label="{i18n>PurgDocPriceDate}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="IsCompletelyDelivered" label="{i18n>ExcludeDeliveredPO}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <CheckBox selected="{local>/ExcludeDeliveredPO}"/>
                                     </smartFilterBar:customControl>

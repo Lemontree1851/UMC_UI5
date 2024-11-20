@@ -5,7 +5,7 @@ sap.ui.getCore().attachInit(function () {
 	"use strict";
 
 	sap.ui.require([
-		"recoverymanagement/test/unit/AllTests"
+		"bi/recoverymanagement/test/unit/AllTests"
 	], function () {
 		QUnit.start();
 	});

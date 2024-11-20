@@ -5,12 +5,12 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "recoverymanagement/model/models"
+        "bi/recoverymanagement/model/models"
     ],
     function (UIComponent, Device, models) {
         "use strict";
 
-        return UIComponent.extend("recoverymanagement.Component", {
+        return UIComponent.extend("bi.recoverymanagement.Component", {
             metadata: {
                 manifest: "json"
             },

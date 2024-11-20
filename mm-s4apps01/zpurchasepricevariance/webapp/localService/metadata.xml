@@ -314,7 +314,6 @@
                 <Property Name="PricingDateControl" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Pricing Date Control" sap:quickinfo="Price Determination (Pricing) Date Control"/>
                 <Property Name="PurgDocPriceDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:label="Price Date" sap:quickinfo="Date of Price Determination"/>
                 <Property Name="IsCompletelyDelivered" Type="Edm.Boolean" sap:label="Delivery Completed" sap:quickinfo="&quot;Delivery Completed&quot; Indicator"/>
-                <Property Name="CurrentPrice" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true"/>
                 <Property Name="PricingDateControl2" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Pricing Date Control" sap:quickinfo="Price Determination (Pricing) Date Control"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="PurchaseOrderStr" Type="Edm.String" MaxLength="15"/>
@@ -332,8 +331,9 @@
                 <Property Name="ConditionValidityEndDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ConditionQuantity" Type="Edm.Decimal" Precision="5" Scale="0" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ConditionQuantityUnit" Type="Edm.String" MaxLength="3" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
-                <Property Name="NewPrice" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Difference" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CurrentPrice" Type="Edm.Decimal" Precision="11" Scale="5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NewPrice" Type="Edm.Decimal" Precision="11" Scale="5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Difference" Type="Edm.Decimal" Precision="11" Scale="5" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -1430,6 +1430,7 @@
                                 <PropertyPath>ConditionValidityEndDate</PropertyPath>
                                 <PropertyPath>ConditionQuantity</PropertyPath>
                                 <PropertyPath>ConditionQuantityUnit</PropertyPath>
+                                <PropertyPath>CurrentPrice</PropertyPath>
                                 <PropertyPath>NewPrice</PropertyPath>
                                 <PropertyPath>Difference</PropertyPath>
                             </Collection>
@@ -1451,6 +1452,7 @@
                                 <PropertyPath>ConditionValidityEndDate</PropertyPath>
                                 <PropertyPath>ConditionQuantity</PropertyPath>
                                 <PropertyPath>ConditionQuantityUnit</PropertyPath>
+                                <PropertyPath>CurrentPrice</PropertyPath>
                                 <PropertyPath>NewPrice</PropertyPath>
                                 <PropertyPath>Difference</PropertyPath>
                             </Collection>

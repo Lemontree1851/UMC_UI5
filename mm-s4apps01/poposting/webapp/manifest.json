@@ -1,7 +1,7 @@
 {
     "_version": "1.64.0",
     "sap.app": {
-        "id": "poposting",
+        "id": "mm.poposting",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -91,7 +91,7 @@
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
-                    "bundleName": "poposting.i18n.i18n"
+                    "bundleName": "mm.poposting.i18n.i18n"
                 }
             },
             "": {
@@ -136,7 +136,7 @@
                 "routerClass": "sap.m.routing.Router",
                 "viewType": "XML",
                 "async": true,
-                "viewPath": "poposting.view",
+                "viewPath": "mm.poposting.view",
                 "controlAggregation": "pages",
                 "controlId": "app",
                 "clearControlAggregation": false
@@ -161,7 +161,7 @@
             }
         },
         "rootView": {
-            "viewName": "poposting.view.App",
+            "viewName": "mm.poposting.view.App",
             "type": "XML",
             "async": true,
             "id": "App"

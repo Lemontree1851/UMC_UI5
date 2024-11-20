@@ -11,6 +11,8 @@ sap.ui.define([
 	"sap/suite/ui/commons/library",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/Filter",
+ 
+
 ], function(
     BaseController,
     formatter,
@@ -21,19 +23,24 @@ sap.ui.define([
 	Fragment,
 	Dialog,
 	BusyDialog,
+	mobileLibrary, 
 	suiteLibrary,
 	FilterOperator,
 	Filter,
-	JSONModel
+	JSONModel,
+ 
+
 ) {
 	"use strict";
+	// shortcut for sap.m.DialogType
 
 	return BaseController.extend("mm.zprworkflow.controller.Change", {
 		
         formatter : formatter,
         onInit: function (oEvent) {
             // this._BusyDialog = new BusyDialog();
-			var TimelineFilterType = suiteLibrary.TimelineFilterType;
+			console.log("Change Controller Init");
+ 
 			this._BusyDialog = new BusyDialog();
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
@@ -43,8 +50,7 @@ sap.ui.define([
  
 			this.byId('idSmartTable1').rebindTable();
 			this._oDataModel.refresh(true);
-			// oRouter.attachBeforeRouteMatched(this._onBeforeRouteMatched, this);
-
+ 
 			// set message model
 			this.getView().setModel(Messaging.getMessageModel(), "message");
 
@@ -52,58 +58,7 @@ sap.ui.define([
 			Messaging.registerObject(this.getView(), true);
 			this._timeline = this.byId("idTimeline");
 			this._timeline.setEnableScroll(false);
-			console.log("onInit",this._InsNo1);
-			
- /*
-
-			
-			var oModel = this.getView().getModel(); // Assuming you have the model set in your view
-			var oTimeline = this.byId("idTimeline");
-			
-			var oFilter = new sap.ui.model.Filter("Zseq", sap.ui.model.FilterOperator.EQ, "1");
-			
-			//this._timeline.bindElement({
-			//	 path: "/ApprovalHistory" 
-				 
-			//});
-
-			var sSelectedItem = oEvent.getParameter("selected"),
-				filter = null,
-				aSelectedDataItems = [];
-		 
-				filter = new Filter({
-					path: "Operator",
-					value: "1",
-					operator: FilterOperator.EQ
-				});
-
-				aSelectedDataItems = ["1"];
-			 
-
-			this._timeline.setModelFilter({
-				type: TimelineFilterType.Data,
-				filter: filter
-			});
-			this._timeline.setCurrentFilter(aSelectedDataItems);
-			*/
-/*
-			var oNewDataModel = new sap.ui.model.json.JSONModel({
-				// Your new data here
-			});
-			
-			// Find the Timeline control using the ID
-			var oTimeline = this.getView().byId("idTimeline");
-			
-			oTimeline.bindElement({
-				path : "/ApprovalHistory",
-			});
-			oTimeline.updateBindings(true);
-*/
- 
-
-
-
-
+			//this._timeline.setAlignment("Left");
 
         },
 		getMediaUrl: function (sUrlString) {
@@ -128,12 +83,20 @@ sap.ui.define([
 			this._InsNo2 = oArgs.contextPath;
  			this._InsNo3 = oArgs.contextInstanceId;
  			this._InsNo4 = oArgs.contextApplicationId;
-            console.log("/PurchaseReqWFSum(ApplyDepart='" + oArgs.contextApplyDepart + "',PrNo='" + oArgs.contextPrNo + "')");
- //"/PurchaseReqWFItem(guid'" + oArgs.contextPath + "')",
+
+			 if (sap.ushell && sap.ushell.Container) {
+				 this._UserFullName = sap.ushell.Container.getService("UserInfo").getUser().getFullName();
+				 this._UserEmail = sap.ushell.Container.getService("UserInfo").getUser().getEmail();
+				  
+			 };
+			 //console.log("/PurchaseReqWFSum(ApplyDepart='" + oArgs.contextApplyDepart + "',PrNo='" + oArgs.contextPrNo + "')");
+  //"/PurchaseReqWFItem(guid'" + oArgs.contextPath + "')",
+
+
 			oView.bindElement({
 				path : "/PurchaseReqWFLink(guid'" + oArgs.contextPath + "')",
 				events : {
-					change: this._onBindingChange.bind(this),
+					//change: this._onBindingChange.bind(this),
 					dataRequested: function (oEvent) {
 						oView.setBusy(true);
 					},
@@ -142,72 +105,33 @@ sap.ui.define([
 					}.bind(this)
 				}
 			});
-		//	oView.bindElement({
-		//		path : "/PurchaseReqWFSum(ApplyDepart='" + oArgs.contextApplyDepart + "',PrNo='" + oArgs.contextPrNo + "')",
-			//	events : {
-			//		change: this._onBindingChange.bind(this),
-			//		dataRequested: function (oEvent) {
-			//			oView.setBusy(true);
-			//		},
-		//			dataReceived: function (oEvent) {
-			//			oView.setBusy(false);
-			//		}.bind(this)
-		//		}
-			//});
+ 
 			this.byId("idSmartForm").setEditable(false);
 			this.byId("idPage").setShowFooter(true);
 			this._bindTimelineAggregation();
+			this.byId('idSmartTable1').rebindTable();
+			this._oDataModel.refresh(true);
 		},
-		_onRouteMatched1 : function (oEvent) {
-            this.getView().getModel().resetChanges();
-			// var oArgs, oView;
 
-			// oArgs = oEvent.getParameter("arguments");
-			// oView = this.getView();
+		onRowActionItemPress : function(oEvent){
+			var oItem, oCtx;
 
-			// oView.bindElement({
-			// 	path : "/PurchaseReq(guid'" + oArgs.contextPath + "')",
-			// 	events : {
-			// 		change: this._onBindingChange.bind(this),
-			// 		dataRequested: function (oEvent) {
-			// 			oView.setBusy(true);
-			// 		},
-			// 		dataReceived: function (oEvent) {
-			// 			oView.setBusy(false);
-			// 		}
-			// 	}
-			// });
-			// this.byId("idSmartForm").setEditable(false);
-			// this.byId("idPage").setShowFooter(false);
+			oItem = oEvent.getSource();
+			oCtx = oItem.getBindingContext();
+			this.getRouter().navTo("Attachments",{
+				contextPath : oCtx.getProperty("UUID"),
+				contextPrNo: oCtx.getProperty("PrNo")
+			});
 		},
-		
  
 		onBeforeRebindTable: function (oEvent) {
 			 
- 
 			this._oDataModel.resetChanges();
 			var oFilter = oEvent.getParameter("bindingParams").filters;
 			var oNewFilter, aNewFilter = [];
-            console.log("onBeforeRebindTable",this._InsNo);
 			oFilter.push(new sap.ui.model.Filter("PrNo", "EQ", this._InsNo));
-
-//			var oCreatedAt = this.byId("idDatePicker").getDateValue();
-//			if (oCreatedAt) {
-	//			aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
-//			}
-//
-//			var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
-//			if(sApproveStatus !== "0") {
-//				aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
-//			}
-			
-//			oNewFilter = new Filter({
-//				filters:aNewFilter,
-//				and:true
-//			});
-//			if (aNewFilter.length > 0) {
-//				oFilter.push(oNewFilter);
-//			}
+			console.log(oFilter);
+ 
 		},
 		_onBindingChange : function (oEvent) {
 			// No data for the binding
@@ -224,7 +148,6 @@ sap.ui.define([
 				this.getInfoRecord(item).then(function (res) {
 					this._bindUploadSetUrl(oUploadSet,res);
 				}.bind(this)).catch(function () {
-					console.log("666666666666666666666666");
 					oUploadSet.unbindElement("Attach");
 					oUploadSet.setUploadUrl();
 				});
@@ -261,6 +184,7 @@ sap.ui.define([
 				// 创建采购申请的文档信息记录
 				var item = this.getView().getBindingContext().getObject();
 				var sInfoRecordDocNumber = item.PrNo + item.PrItem.padStart(5,"0") + item.UUID.slice(-10).toUpperCase();
+				
 				this.createInfoRecord(sInfoRecordDocNumber).then( function (res) {
 					this._bindUploadSetUrl(oUploadSet,res);
 					this._saveAttachment(oUploadSet, sFileName);
@@ -276,7 +200,6 @@ sap.ui.define([
 		},
 		getInfoRecord: function (item) {
 			var sInfoRecordDocNumber = item.PrNo + item.PrItem.padStart(5,"0") + item.UUID.slice(-10).toUpperCase();
-			console.log("sInfoRecordDocNumber",sInfoRecordDocNumber);
 			var oInfoRecordModel = this.getView().getModel("InfoRecord");
 			const sPath = "/A_DocumentInfoRecord(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
 				sInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')";
@@ -317,7 +240,9 @@ sap.ui.define([
 			}.bind(this));
 			return promise;
 		},
-		onDialogPress: function () {			
+		onDialogPress: function () {	
+			console.log("onDialogPress");
+
             if (!this.Dialog) {
                 var oView = this.getView();
 				if (!this.Dialog) {
@@ -330,6 +255,7 @@ sap.ui.define([
 						}).then(function (oDialog){
 							this.getView().addDependent(oDialog);
 							// oDialog.setModel(oView.getModel());
+ 
 							return oDialog;
 						}.bind(this));
 					}
@@ -338,35 +264,66 @@ sap.ui.define([
 					oDialog.open();
 				}.bind(this));
             }
+			
             this.Dialog.then(function(oDialog) {
                 oDialog.open();
+				var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
+				oTextArea.setValue(""); 
             }.bind(this));
         },
-    
+		onDialogRejectPress: function () {	
+			console.log("onDialogPress");	
+ 
+            if (!this.DialogReject) {
+                var oView = this.getView();
+				if (!this.DialogReject) {
+					var oView = this.getView();
+					if (!this.DialogReject) {
+						this.DialogReject = Fragment.load({
+							id: oView.getId(),
+							name: "mm.zprworkflow.fragment.DialogReject",
+							controller: this
+						}).then(function (oDialog){
+							this.getView().addDependent(oDialog);
+							// oDialog.setModel(oView.getModel());
+							return oDialog;
+						}.bind(this));
+					}
+				}
+				this.DialogReject.then(function(oDialog) {
+					oDialog.open();
+				}.bind(this));
+            }
+            this.DialogReject.then(function(oDialog) {
+                oDialog.open();
+				oDialog.open();
+				var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
+				oTextArea.setValue(""); 
+            }.bind(this));
+        },
         onDialogClose: function(){
-			var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
-			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
-			console.log("onDialogClose",sValue);
-            this.byId("AnswerDialog").close();
+
+            this.byId("AnswerDialogq").close();
         },
 
         onDialogConfirm: function() {
             this.AcceptPRWF();
         },
+		onDialogCloseReject: function(){
+
+            this.byId("AnswerDialog").close();
+        },
+
+        onDialogConfirmReject: function() {
+            this.RejectPRWF();
+        },
 		_bindUploadSetUrl: function (oUploadSet, item) {
 			const sDocumentInfoRecordDocNumber = item.DocumentInfoRecordDocNumber;
 			const sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
 			sDocumentInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')";
+ 
 			oUploadSet.bindElement(sPath);
-			// 设置uploadUrl
-			// const sUploadUrl = `/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch(
-			// 	DocumentInfoRecordDocType='${item.DocumentInfoRecordDocType}',
-			// 	DocumentInfoRecordDocNumber='${item.DocumentInfoRecordDocNumber}',
-			// 	DocumentInfoRecordDocVersion='${item.DocumentInfoRecordDocVersion}',
-			// 	DocumentInfoRecordDocPart='${item.DocumentInfoRecordDocPart}')`;
-			const sUploadUrl = "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
-				sDocumentInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')/DocumentInfoRecordToAttachmentNavigation";
-			oUploadSet.setUploadUrl(sUploadUrl);
+ 
 		},
 		_saveAttachment: function (oUploadSet, sFileName) {
 			const csrfToken = this._oDataModel.securityTokenAvailable();
@@ -409,10 +366,38 @@ sap.ui.define([
 				return;
 			}
 			this.postAction("AcceptPRWF", JSON.stringify(aSelectedItems));
+			this._bindTimelineAggregation();
 
 		},
+		RejectPRWF: function () {
+			var aSelectedItems = this.preparePostBodyReject();
+			if (aSelectedItems.length === 0) {
+				return;
+			}
+			this.postAction("RejectPRWF", JSON.stringify(aSelectedItems));
+			this._bindTimelineAggregation();
 
+		},
 		preparePostBody:function () {
+			var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
+			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
+			var aData = [];
+
+			var item = {
+				"PrNo": this._InsNo,
+				"ApplyDepart": this._InsNo1,
+				"InstanceId":this._InsNo3,
+				"ApplicationId":this._InsNo4 ,
+				"WorkflowId":"purchaserequisition",
+				"Remark": sValue,
+				"UserEmail":this._UserEmail,
+				"UserFullName":this._UserFullName 
+			};
+			aData.push(item);
+ 
+			return aData;
+		},
+		preparePostBodyReject:function () {
 			var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
 			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
 			var aData = [];
@@ -420,13 +405,17 @@ sap.ui.define([
 			var item = {
 				"PrNo": this._InsNo,
 				"ApplyDepart": this._InsNo1,
+				"InstanceId":this._InsNo3,
+				"ApplicationId":this._InsNo4 ,
+				"WorkflowId":"purchaserequisition",
 				"Remark": sValue,
+				"UserEmail":this._UserEmail,
+				"UserFullName":this._UserFullName 
 			};
 			aData.push(item);
  
 			return aData;
 		},
-
 		postAction: function (sAction, postData) {
 			this._BusyDialog.open();
             var oModel = this._oDataModel;
@@ -448,22 +437,18 @@ sap.ui.define([
 					}
                     let result = JSON.parse(oData[sAction].Zzkey);
 					this._LocalData.setProperty("/recordCheckSuccessed", false);
-                    messages.showSuccess(this._ResourceBundle.getText("msgDeleteSuccessed"));
-					MessageToast.show(this._ResourceBundle.getText("msgSaveSuccessed"))
-					this.byId("AnswerDialog").close();
-					/*
+ 
+					if(this.byId("AnswerDialogq")){this.byId("AnswerDialogq").close();}
+					if(this.byId("AnswerDialog")){this.byId("AnswerDialog").close();}
                     result.forEach(function (line) {
-                        aDataKey.forEach(function(key, index){
-							var lineData = this._oDataModel.getProperty("/" + key);
-							if (lineData.UUID.replace(/-/g, '') === this.base64ToHex(line.UUID)) {
-								// lineCount++;
-								this._oDataModel.setProperty("/" + key + "/Type", line.TYPE);
-								this._oDataModel.setProperty("/" + key + "/Message", line.MESSAGE);
-								this._oDataModel.setProperty("/" + key + "/PurchaseOrder", line.PURCHASEORDER);
-								this._oDataModel.setProperty("/" + key + "/PurchaseOrderItem", line.PURCHASEORDERITEM);
-							}
-						},this);
-                    },this);*/
+						if(line.TYPE == 'S'){
+							messages.showSuccess(line.MESSAGE);
+						}else{
+							messages.showError(line.MESSAGE);
+						}
+                    },this);
+
+
 					this._BusyDialog.close();
                 }.bind(this),
                 error: function (oError) {
@@ -484,7 +469,7 @@ sap.ui.define([
 			return result.toLowerCase();
 		},
 		onPressItems : function(evt) {
-			MessageToast.show("The TimelineItem is pressed.");
+			//MessageToast.show("The TimelineItem is pressed.");
 		},
  
 		orientationChanged: function (oEvent) {
@@ -509,15 +494,11 @@ sap.ui.define([
 			var oFilter1 = new sap.ui.model.Filter("WorkflowId", sap.ui.model.FilterOperator.EQ, "purchaserequisition");
 			var oFilter2 = new sap.ui.model.Filter("InstanceId", sap.ui.model.FilterOperator.EQ, this._InsNo3);
 			var oFilter3 = new sap.ui.model.Filter("ApplicationId", sap.ui.model.FilterOperator.EQ, ApplicationId);
-			afilters.push(oFilter1);
-			afilters.push( oFilter2);
-			
-			afilters.push(oFilter3);
-			console.log("afilters",afilters);
-			//afilters.push(oFilter1, oFilter2, oFilter3);
+			afilters.push(oFilter1, oFilter2, oFilter3);
 			this._timeline.bindAggregation("content", {
 				path: "/ApprovalHistory",
 				filters:afilters,
+				//sorter: new sap.ui.model.Sorter("ZSEQ", true), 
 				template: this.byId("idTemplateItem").clone()
 			});
 		},
@@ -550,6 +531,6 @@ sap.ui.define([
 			}
 
 			return this.MessageDialog;
-		}
+		} 
 	});
 });

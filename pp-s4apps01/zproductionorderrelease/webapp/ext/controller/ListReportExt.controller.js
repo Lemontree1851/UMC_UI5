@@ -156,12 +156,13 @@ sap.ui.define([
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
-                    var aMessageItems = that.getView().getModel("local").getProperty("/MessageItems");
-                    if (aMessageItems.length > 0) {
-                        that._myMessageView.navigateBack();
-                        that.getView().addDependent(that._myMessageDialog);
-                        that._myMessageDialog.open();
-                    }
+                    // var aMessageItems = that.getView().getModel("local").getProperty("/MessageItems");
+                    // if (aMessageItems.length > 0) {
+                    //     that._myMessageView.navigateBack();
+                    //     that.getView().addDependent(that._myMessageDialog);
+                    //     that._myMessageDialog.open();
+                    // }
+                    
                     // refresh
                     // that.getView().getModel().refresh();
                 });

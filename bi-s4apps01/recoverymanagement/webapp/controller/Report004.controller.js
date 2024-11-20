@@ -6,7 +6,7 @@ sap.ui.define([
 function (Controller, Filter, FilterOperator) {
     "use strict";
 
-    return Controller.extend("recoverymanagement.controller.Report004", {
+    return Controller.extend("bi.recoverymanagement.controller.Report004", {
         onInit: function () {
             this._setInitialValue();
         },

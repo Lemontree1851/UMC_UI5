@@ -1,13 +1,10 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
-	<Dialog id="AnswerDialog" title="{i18n>DialogTitle}" contentWidth="50rem" contentHeight="10rem" draggable="true">
- 		        
-               <TextArea id ="textArea" placeholder="Enter Text" growing="true" growingMaxLines="7" height="9rem"  width="100%"/>
+	<Dialog id="AnswerDialogq" title="{i18n>DialogTitle}" draggable="true" initialFocus="textArea1" type="Message">    
+        <TextArea id ="textArea1" placeholder="{i18n>AcceptPlaceholder}" growing="true" growingMaxLines="7"  width="100%"/>
 		<beginButton>
-
 			<Button id="confirmButton" text="{i18n>bConfirm}" press="onDialogConfirm"/>
 		</beginButton>
 		<endButton>
-		       
 			<Button id="cancelButton" text="{i18n>bCancel}" press="onDialogClose"/>
 		</endButton>
 	</Dialog>

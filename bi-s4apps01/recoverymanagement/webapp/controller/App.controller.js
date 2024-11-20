@@ -5,7 +5,7 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("recoverymanagement.controller.App", {
+      return BaseController.extend("bi.recoverymanagement.controller.App", {
         onInit: function() {
         }
       });

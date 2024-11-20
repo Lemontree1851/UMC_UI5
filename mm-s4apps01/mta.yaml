@@ -80,8 +80,8 @@ modules:
       name: mmzpurchasepricevariance
       target-path: resources/
     - artifacts:
-      - poposting.zip
-      name: poposting
+      - mmpoposting.zip
+      name: mmpoposting
       target-path: resources/
     - artifacts:  
       - mmpurinfomasterlist.zip
@@ -172,7 +172,7 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
-- name: poposting
+- name: mmpoposting
   type: html5
   path: poposting
   build-parameters:

@@ -44,14 +44,14 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - recoverymanagement.zip
-      name: recoverymanagement
+      - birecoverymanagement.zip
+      name: birecoverymanagement
       target-path: resources/
     - artifacts:
       - bicostanalysis.zip
       name: bicostanalysis
       target-path: resources/
-- name: recoverymanagement
+- name: birecoverymanagement
   type: html5
   path: recoverymanagement
   build-parameters:

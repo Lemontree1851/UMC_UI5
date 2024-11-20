@@ -72,7 +72,7 @@ sap.ui.define([
             var sTitle, items = [];
             var aContexts = that._controller.extensionAPI.getSelectedContexts();
             aContexts.forEach(element => {
-                if (element.getObject(element.getPath()).STATUS == "") {
+                if (element.getObject(element.getPath()).Status == "") {
                     items.push(element.getObject(element.getPath()));
                 }
             });

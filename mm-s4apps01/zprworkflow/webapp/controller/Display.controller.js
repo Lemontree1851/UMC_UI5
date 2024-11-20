@@ -3,13 +3,15 @@ sap.ui.define([
     "../model/formatter",
     "./messages",
 	"sap/ui/model/Filter",
-	"sap/m/BusyDialog"
+	"sap/m/BusyDialog",
+	"sap/ui/core/Fragment"
 ], function(
     BaseController,
     formatter,
     messages,
 	Filter,
-	BusyDialog
+	BusyDialog,
+	Fragment
 ) {
 	"use strict";
 
@@ -22,15 +24,17 @@ sap.ui.define([
             this._BusyDialog = new BusyDialog();
             var oRouter = this.getRouter();
 			oRouter.getRoute("RouteMain").attachMatched(this._onRouteMatched, this);
+			if (sap.ushell && sap.ushell.Container) {
+				this._UserFullName = sap.ushell.Container.getService("UserInfo").getUser().getFullName();
+				this._UserEmail = sap.ushell.Container.getService("UserInfo").getUser().getEmail();
+				 
+			};
         },
         onRowActionItemPress : function(oEvent){
 			var oItem, oCtx;
 
 			oItem = oEvent.getSource();
 			oCtx = oItem.getBindingContext();
-			console.log(oCtx.getProperty("PrNo"));
-			console.log(oCtx.getProperty("ApplyDepart"));
-			console.log(oCtx.getProperty("UUID"));
 			this.getRouter().navTo("PurchaseReq",{
 				contextPath : oCtx.getProperty("UUID"),
 				contextPrNo: oCtx.getProperty("PrNo"),
@@ -64,26 +68,25 @@ sap.ui.define([
 		},
 
 		onBeforeRebindTable: function (oEvent) {
-//			this._oDataModel.resetChanges();
-//			var oFilter = oEvent.getParameter("bindingParams").filters;
-//			var oNewFilter, aNewFilter = [];
-//			var oCreatedAt = this.byId("idDatePicker").getDateValue();
-//			if (oCreatedAt) {
-	//			aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
-//			}
-//
-//			var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
-//			if(sApproveStatus !== "0") {
-//				aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
-//			}
-			
-//			oNewFilter = new Filter({
-//				filters:aNewFilter,
-//				and:true
-//			});
-//			if (aNewFilter.length > 0) {
-//				oFilter.push(oNewFilter);
-//			}
+// 			this._oDataModel.resetChanges();
+// 			var oFilter = oEvent.getParameter("bindingParams").filters;
+// 			var oNewFilter, aNewFilter = [];
+// //			var oCreatedAt = this.byId("idDatePicker").getDateValue();
+// //			if (oCreatedAt) {
+// 	//			aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
+// //			}
+// //
+// //			var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
+// //			if(sApproveStatus !== "0") {
+// //				aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
+// //			}
+//             aNewFilter.push(new Filter("EmailAddress", "EQ", "13")); 
+// 			oNewFilter = new Filter({
+// 				filters:aNewFilter 
+// 			});
+// 			if (aNewFilter.length > 0) {
+// 				oFilter.push(oNewFilter);
+// 			}
 		},
 
 		createPurchseOrder: function (oEvent) {
@@ -94,8 +97,22 @@ sap.ui.define([
 			this.postAction("createPurchaseOrder", JSON.stringify(aSelectedItems));
 
 		},
+		onAcceptPress: function (oEvent) {
 
-		preparePostBody:function () {
+			this.postAction("AcceptPRWF", JSON.stringify(aSelectedItems));
+
+		},
+		onRejectPress: function (oEvent) {
+			var aSelectedItems = this.preparePostBody();
+			if (aSelectedItems.length === 0) {
+				return;
+			}
+			this.postAction("RejectPRWF", JSON.stringify(aSelectedItems));
+
+		},
+		preparePostBody:function (stextarea) {
+			//var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
+			//var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
 			var aData = [];
 			var postDocs = [];
 			// 根据id值获取table 
@@ -109,12 +126,16 @@ sap.ui.define([
 			function _getData(iSelected, index) { //sSelected为选中的行
 				let key = oTable.getContextByIndex(iSelected).getPath();
 				let lineData = this._oDataModel.getProperty(key); //根据选中的行获取到ODATA键值，然后再获取到具体属性值
+				lineData.Remark =  stextarea;
+				lineData.WorkflowId = "purchaserequisition";
+				lineData.UserEmail = this._UserEmail;
+				lineData.UserFullName = this._UserFullName; 
 				let postData = JSON.parse(JSON.stringify(lineData));
 				aData.push(postData);
 			}
 			return aData;
 		},
-
+ 
 		removeDuplicates: function(arr) {
 			const map = new Map();
 			arr.forEach(item => map.set(item.PrNo));
@@ -147,8 +168,8 @@ sap.ui.define([
 								// lineCount++;
 								this._oDataModel.setProperty("/" + key + "/Type", line.TYPE);
 								this._oDataModel.setProperty("/" + key + "/Message", line.MESSAGE);
-								this._oDataModel.setProperty("/" + key + "/PurchaseOrder", line.PURCHASEORDER);
-								this._oDataModel.setProperty("/" + key + "/PurchaseOrderItem", line.PURCHASEORDERITEM);
+								//this._oDataModel.setProperty("/" + key + "/ResultText", line.RESULTTEXT);
+ 
 							}
 						},this);
                     },this);
@@ -171,7 +192,99 @@ sap.ui.define([
 				result += hex;
 			}
 			return result.toLowerCase();
-		}
+		},
+		onDialogAcceptPress: function () {
+			var aSelectedItems = this.preparePostBody();
+			if (aSelectedItems.length === 0) {
+				return;
+			}			
+            if (!this.Dialog) {
+                var oView = this.getView();
+				if (!this.Dialog) {
+					var oView = this.getView();
+					if (!this.Dialog) {
+						this.Dialog = Fragment.load({
+							id: oView.getId(),
+							name: "mm.zprworkflow.fragment.Dialog",
+							controller: this
+						}).then(function (oDialog){
+							this.getView().addDependent(oDialog);
+							// oDialog.setModel(oView.getModel());
+							return oDialog;
+						}.bind(this));
+					}
+				}
+				this.Dialog.then(function(oDialog) {
+					oDialog.open();
+				}.bind(this));
+            }
+            this.Dialog.then(function(oDialog) {
+                oDialog.open();
+				var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
+				oTextArea.setValue(""); 
+            }.bind(this));
+        },
+		onDialogRejectPress: function () {	
+			var aSelectedItems = this.preparePostBody();
+			if (aSelectedItems.length === 0) {
+				return;
+			}		
+            if (!this.DialogReject) {
+                var oView = this.getView();
+				if (!this.DialogReject) {
+					var oView = this.getView();
+					if (!this.DialogReject) {
+						this.DialogReject = Fragment.load({
+							id: oView.getId(),
+							name: "mm.zprworkflow.fragment.DialogReject",
+							controller: this
+						}).then(function (oDialog){
+							this.getView().addDependent(oDialog);
+							// oDialog.setModel(oView.getModel());
+							return oDialog;
+						}.bind(this));
+					}
+				}
+				this.DialogReject.then(function(oDialog) {
+					oDialog.open();
+				}.bind(this));
+            }
+            this.DialogReject.then(function(oDialog) {
+                oDialog.open();
+				var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
+				oTextArea.setValue(""); 
+            }.bind(this));
+        },
+        onDialogClose: function(){
+
+            this.byId("AnswerDialogq").close();
+        },
+
+        onDialogConfirm: function() {
+			var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
+			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
+			var aSelectedItems = this.preparePostBody(sValue);
+			if (aSelectedItems.length === 0) {
+				return;
+			}
+            this.postAction("AcceptPRWF", JSON.stringify(aSelectedItems));
+			this.byId("AnswerDialogq").close();
+        },
+		onDialogCloseReject: function(){
+
+            this.byId("AnswerDialog").close();
+        },
+
+        onDialogConfirmReject: function() {
+			var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
+			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
+			var aSelectedItems = this.preparePostBody(sValue);
+			if (aSelectedItems.length === 0) {
+				return;
+			}
+			this.postAction("RejectPRWF", JSON.stringify(aSelectedItems));
+			this.byId("AnswerDialog").close();
+        }
 
 	});
 });

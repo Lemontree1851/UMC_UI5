@@ -392,6 +392,7 @@ sap.ui.define([
                         SalesOrder: element.SalesOrder,
                         SalesOrderItem: element.SalesOrderItem, // string
                         SalesOrderItemI: element.SalesOrderItemI, // numc
+                        Material: element.Material,
                         AssignQty: element.AssignQty
                     });
                     iSumAssignQty += parseFloat(element.AssignQty);
@@ -407,7 +408,7 @@ sap.ui.define([
                 }
             });
             // if (iSumAssignQty > parseFloat(this._iMaxQuantity)) {
-            if (iSumAssignQty !== oRow.AssignQty) {
+            if (iSumAssignQty !== parseFloat(oRow.AssignQty)) {
                 aMessageItems.push({
                     type: "Error",
                     title: this.getView().getModel("i18n").getResourceBundle().getText("Error"),

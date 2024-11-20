@@ -167,6 +167,7 @@ sap.ui.define([
                 }
             }
             //----------------------------Custom Logic----------------------------------------
+            this._oInput.setValueState("None");
             this._oVHD.close();
         },
 

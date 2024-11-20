@@ -40,7 +40,7 @@ sap.ui.define([
 								"tileType": "sap.ushell.ui.tile.StaticTile",
 								"properties": {
 									"title": "PO Goods Receive",
-									"targetURL": "#poposting-display"
+									"targetURL": "#mmpoposting-display"
 								}
 							}]
 						}]
@@ -51,8 +51,8 @@ sap.ui.define([
 				"adapter": {
 					"config": {
 						"inbounds": {
-							"poposting-display": {
-								"semanticObject": "poposting",
+							"mmpoposting-display": {
+								"semanticObject": "mmpoposting",
 								"action": "display",
 								"description": "PO Goods Receive",
 								"title": "PO Goods Receive",
@@ -61,8 +61,8 @@ sap.ui.define([
 								},
 								"resolutionResult": {
 									"applicationType": "SAPUI5",
-									"additionalInformation": "SAPUI5.Component=poposting",
-									"url": sap.ui.require.toUrl("poposting")
+									"additionalInformation": "SAPUI5.Component=mm.poposting",
+									"url": sap.ui.require.toUrl("mm/poposting")
 								}
 							}
 						}
