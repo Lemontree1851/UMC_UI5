@@ -199,7 +199,7 @@
 								<Label text="{i18n>NetPriceAmount}"/>
 							</table:label>
 							<table:template>
-								<Label text="{NetPriceAmount}"/>
+								<Label text="{ path:'NetPriceAmount',formatter:'.formatter.formatNumber' }" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
@@ -247,7 +247,7 @@
 								<Label text="{i18n>ConditionRateValue}"/>
 							</table:label>
 							<table:template>
-								<Label text="{ConditionRateValue}"/>
+								<Label text="{ path:'ConditionRateValue',formatter:'.formatter.formatNumber' }" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
@@ -283,7 +283,7 @@
 								<Label text="{i18n>ConditionScaleQuantity}"/>
 							</table:label>
 							<table:template>
-								<Label text="{ConditionScaleQuantity}"/>
+								<Label text="{ path:'ConditionScaleQuantity',formatter:'.formatter.formatNumber' }" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
@@ -463,7 +463,7 @@
 								<Label text="{i18n>standardpurchaseorderquantity}"/>
 							</table:label>
 							<table:template>
-								<Label text="{standardpurchaseorderquantity}"/>
+								<Label text="{ parts: [ 'standardpurchaseorderquantity', 'Currency_plnt' ],formatter:'.formatter.formatFloat'}" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
@@ -475,7 +475,7 @@
 								<Label text="{i18n>Taxprice}"/>
 							</table:label>
 							<table:template>
-								<Label text="{Taxprice}"/>
+								<Label text="{ parts: [ 'Taxprice', 'Currency_plnt' ],formatter:'.formatter.formatFloat'}" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
@@ -487,7 +487,7 @@
 								<Label text="{i18n>UnitPrice_plnt}"/>
 							</table:label>
 							<table:template>
-								<Label text="{UnitPrice_plnt}"/>
+								<Label text="{ path:'UnitPrice_plnt',formatter:'.formatter.formatNumber'}" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
@@ -499,7 +499,7 @@
 								<Label text="{i18n>UnitPrice_standard}"/>
 							</table:label>
 							<table:template>
-								<Label text="{UnitPrice_standard}"/>
+								<Label text="{ parts: [ 'UnitPrice_standard', 'Currency_standard' ],formatter:'.formatter.formatFloat'}" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
@@ -511,7 +511,7 @@
 								<Label text="{i18n>PriceUnitQty}"/>
 							</table:label>
 							<table:template>
-								<Label text="{PriceUnitQty}"/>
+								<Label text="{ path:'PriceUnitQty',formatter:'.formatter.formatNumber'}" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
@@ -631,7 +631,7 @@
 								<Label text="{i18n>MinimumPurchaseOrderQuantity}"/>
 							</table:label>
 							<table:template>
-								<Label text="{MinimumPurchaseOrderQuantity}"/>
+								<Label text="{ path:'MinimumPurchaseOrderQuantity',formatter:'.formatter.formatNumber' }" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
@@ -643,7 +643,7 @@
 								<Label text="{i18n>MaximumOrderQuantity}"/>
 							</table:label>
 							<table:template>
-								<Label text="{MaximumOrderQuantity}"/>
+								<Label text="{ path:'MaximumOrderQuantity',formatter:'.formatter.formatNumber' }" wrapping="false"/>
 							</table:template>
 						</table:Column>
 
