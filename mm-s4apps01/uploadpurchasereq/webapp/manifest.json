@@ -64,6 +64,14 @@
                 "odataVersion": "4.0"
                 }
             },
+            "WorkFlow": {
+                "uri": "/sap/opu/odata/sap/ZUI_PRWORKFLOW_O2/",
+                "type": "OData",
+                "settings": {
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
             "annotation": {
                 "type": "ODataAnnotation",
                 "uri": "annotations/annotation.xml",
@@ -178,7 +186,16 @@
                 "autoExpandSelect": true,
                 "earlyRequests": true
                 }
-      }
+            },
+            "WorkFlow": {
+                "dataSource": "WorkFlow",
+                "preload": true,
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline"
+                }
+            }
         },
         "resources": {
             "css": [
@@ -210,7 +227,7 @@
                 },
                 {
                     "name": "PurchaseReq",
-                    "pattern": "PurchaseReq/{contextPath}",
+                    "pattern": "PurchaseReq/{contextPath}/{contextPrNo}/{contextApplyDepart}/{contextInstanceId}/{contextApplicationId}",
                     "target": "PurchaseReq"
                 }
             ],

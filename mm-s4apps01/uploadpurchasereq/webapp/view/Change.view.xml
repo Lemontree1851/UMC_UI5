@@ -10,6 +10,8 @@
     xmlns:smartField="sap.ui.comp.smartfield"
     xmlns:u="sap.ui.unified"
     xmlns:upload="sap.m.upload"
+    xmlns:r="sap.suite.ui.commons"
+    xmlns:core="sap.ui.core"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
 >
     <Page
@@ -400,6 +402,27 @@
                                     />
                                 </upload:items>
                             </upload:UploadSet>
+                        </xuap:ObjectPageSubSection>
+                    </xuap:subSections>
+                </xuap:ObjectPageSection>
+                <xuap:ObjectPageSection>
+                    <xuap:subSections>
+                        <xuap:ObjectPageSubSection
+                            title="{i18n>history}"
+                        >
+                            <Toolbar id="idToolbar">
+                                <CheckBox text="Scrollbar" select="onScrollbarSelected" />
+                            </Toolbar>
+                            <r:Timeline id="idTimeline" content="{/ApprovalHistory}" filterList="{/ApprovalHistory}" showIcons="false" alignment="Center"
+                                textHeight="100px">
+                                <r:content>
+                                    <r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{Zseq}" userName="{Operator}"
+                                        filterValue="{Operator}" />
+                                </r:content>
+                                <r:filterList>
+                                    <r:TimelineFilterListItem key="{Operator}" text="{Operator}" />
+                                </r:filterList>
+                            </r:Timeline>
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>

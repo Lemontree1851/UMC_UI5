@@ -175,7 +175,7 @@
                 persistencyKey="uploadPurchaseReqTable"
                 header="{i18n>tableHeaderTitle}"
                 placeToolbarInTable="true"
-                requestAtLeastFields="UUID"
+                requestAtLeastFields="UUID,WorkflowId,InstanceId,ApplicationId"
                 beforeRebindTable="onBeforeRebindTable"
             >
                 <smartTable:customToolbar>
@@ -186,6 +186,16 @@
                             type="Transparent"
                             text="{i18n>DisplayView.CreateBtn}"
                             press="createPurchseOrder"
+                        />
+                        <Button
+                            type="Transparent"
+                            text="{i18n>DisplayView.Application}"
+                            press="applicationApproval"
+                        />
+                        <Button
+                            type="Transparent"
+                            text="{i18n>DisplayView.Revoke}"
+                            press="revokeApproval"
                         />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
@@ -1238,7 +1248,7 @@
                             </t:template>
                         </t:Column>
                         <t:Column
-                            width="8rem"
+                            width="10rem"
                             label="{i18n>SupplierMat}"
                             sortProperty="SupplierMat"
                             filterProperty="SupplierMat"
@@ -1252,6 +1262,8 @@
                             <t:template>
                                 <Text
                                     text="{SupplierMat}"
+                                    tooltip="{SupplierMat}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>

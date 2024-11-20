@@ -31,6 +31,9 @@ sap.ui.define([
 
 			// activate automatic message generation for complete view
 			Messaging.registerObject(this.getView(), true);
+
+			this._timeline = this.byId("idTimeline");
+			this._timeline.setEnableScroll(false);
         },
 		getMediaUrl: function (sUrlString) {
 			if (sUrlString) {
@@ -48,7 +51,8 @@ sap.ui.define([
 
 			oArgs = oEvent.getParameter("arguments");
 			oView = this.getView();
-
+ 			this._InsNo3 = oArgs.contextInstanceId;
+ 			this._InsNo4 = oArgs.contextApplicationId;
 			oView.bindElement({
 				path : "/PurchaseReq(guid'" + oArgs.contextPath + "')",
 				events : {
@@ -63,6 +67,7 @@ sap.ui.define([
 			});
 			this.byId("idSmartForm").setEditable(false);
 			this.byId("idPage").setShowFooter(false);
+			this._bindTimelineAggregation();
 		},
 		
 		// 应该在未保存返回时提醒，但目前如果使用launchPad自带的返回无法终止导航，所以暂时没有使用
@@ -263,6 +268,40 @@ sap.ui.define([
 			}
 
 			return this.MessageDialog;
-		}
+		},
+		onScrollbarSelected: function (oEvent) {
+			var bSelected = oEvent.getParameter("selected");
+			this._timeline.setEnableScroll(bSelected);
+			this._setMessage();
+
+			// in production you would probably want to use something like ScrollContainer
+			// but for demo purpose we want to keep it simple
+			// this allows scrolling for horizontal mode without EnableScrollbar ON
+			document.querySelector('section').style.overflow = "auto";
+			this._bindTimelineAggregation();
+		},
+		_bindTimelineAggregation: function () {
+ 
+			var afilters = [];
+			var ApplicationId = "00" + this._InsNo4;
+			var oFilter1 = new sap.ui.model.Filter("WorkflowId", sap.ui.model.FilterOperator.EQ, "purchaserequisition");
+			var oFilter2 = new sap.ui.model.Filter("InstanceId", sap.ui.model.FilterOperator.EQ, this._InsNo3);
+			var oFilter3 = new sap.ui.model.Filter("ApplicationId", sap.ui.model.FilterOperator.EQ, ApplicationId);
+			afilters.push(oFilter1);
+			afilters.push( oFilter2);
+			
+			afilters.push(oFilter3);
+			console.log("afilters",afilters);
+			//afilters.push(oFilter1, oFilter2, oFilter3);
+			this._timeline.bindAggregation("content", {
+				path: "/ApprovalHistory",
+				filters:afilters,
+				template: this.byId("idTemplateItem").clone()
+			});
+		},
+
+		_timelineHasGrowing: function () {
+			return this._timeline.getGrowingThreshold() !== 0;
+		},
 	});
 });
