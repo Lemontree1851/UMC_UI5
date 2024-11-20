@@ -10,10 +10,18 @@
     xmlns:smartform="sap.ui.comp.smartform" 
     xmlns:t="sap.ui.table">
   <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
+      <f:title>
+			  <f:DynamicPageTitle>
+				  <f:heading>
+					  <sv:SmartVariantManagement id="__SVM01" persistencyKey="SVM_ProductionPlan" showShare="true" showExecuteOnSelection="true" entitySet="ProductionPlan"/>
+				  </f:heading>
+			  </f:DynamicPageTitle>
+		  </f:title>
+      
       <f:header>
         <f:DynamicPageHeader pinnable="true">
             <f:content>
-              <smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="headFilterBar" entitySet="ProductionPlan" useToolbar="false">
+              <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="ProductionPlan" persistencyKey="headFilterBar"  useToolbar="false" search="onSearch" smartVariant="__SVM01">
                     <smartFilterBar:controlConfiguration>
                         <smartFilterBar:ControlConfiguration index="10" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory"/>
                         <smartFilterBar:ControlConfiguration index="20" key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}" mandatory="mandatory"/>
