@@ -178,10 +178,10 @@ sap.ui.define([
                     this.authCheck(user, username)
                 } else {
                     var oTable = this.byId("ReportTable");
+                    let sNum = Number(this.byId("zdays").getValue());
+                    sNum = 17 + sNum;
                     var aRows = oTable.getRows();
                     var sType = "";
-                    let sNum = Number(this.byId("zdays").getValue());
-                    sNum = 16 + sNum;
                     if (aRows && aRows.length > 0) {
                         for (var i = 0; i < aRows.length; i++) {
                             var c7Cell = aRows[i].getCells()[7];
@@ -191,14 +191,33 @@ sap.ui.define([
                                     for (var j = 18; j < sNum; j++) {
                                         var cEdit = aRows[i].getCells()[j];
                                         var oItems = cEdit.getItems();
-                                        if (cEdit) {
-                                            oItems[1].setEditable(true);
+                                        oItems[1].setEditable(true);
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    oTable.attachEvent("rowsUpdated", function () {
+                        if (aRows && aRows.length > 0) {
+                            for (var i = 0; i < aRows.length; i++) {
+                                var c7Cell = aRows[i].getCells()[7];
+                                if (c7Cell) {
+                                    var sType = c7Cell.getText();
+                                    if (sType === "I" || sType === "P") {
+                                        for (var j = 18; j < sNum; j++) {
+                                            var cEdit = aRows[i].getCells()[j];
+                                            if (cEdit && cEdit.getItems) {
+                                                var oItems = cEdit.getItems();
+                                                if (oItems && oItems[1]) {
+                                                    oItems[1].setEditable(true); // 动态设置编辑状态
+                                                }
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
+                    });
                 };
             },
 
@@ -223,10 +242,10 @@ sap.ui.define([
                             return;
                         } else {
                             var oTable = this.byId("ReportTable");
-                            var aRows = oTable.getRows();
-                            var sType = "";
                             let sNum = Number(this.byId("zdays").getValue());
                             sNum = 17 + sNum;
+                            var aRows = oTable.getRows();
+                            var sType = "";
                             if (aRows && aRows.length > 0) {
                                 for (var i = 0; i < aRows.length; i++) {
                                     var c7Cell = aRows[i].getCells()[7];
@@ -243,7 +262,29 @@ sap.ui.define([
                                         }
                                     }
                                 }
-                            }
+                            };
+                            oTable.attachEvent("rowsUpdated", function () {
+                                var aRows = oTable.getRows();
+                                if (aRows && aRows.length > 0) {
+                                    for (var i = 0; i < aRows.length; i++) {
+                                        var c7Cell = aRows[i].getCells()[7];
+                                        if (c7Cell) {
+                                            var sType = c7Cell.getText();
+                                            if (sType === "I" || sType === "P") {
+                                                for (var j = 18; j < sNum; j++) {
+                                                    var cEdit = aRows[i].getCells()[j];
+                                                    if (cEdit && cEdit.getItems) {
+                                                        var oItems = cEdit.getItems();
+                                                        if (oItems && oItems[1]) {
+                                                            oItems[1].setEditable(true); // 动态设置编辑状态
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
                         };
                     });
 
