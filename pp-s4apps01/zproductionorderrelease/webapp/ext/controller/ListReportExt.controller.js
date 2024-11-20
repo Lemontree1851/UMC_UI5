@@ -3,6 +3,7 @@ sap.ui.define([
 ], function (MessageBox) {
     'use strict';
 
+    var globalThis;
     return {
 
         onInit: function () {
@@ -15,7 +16,7 @@ sap.ui.define([
                 subtitle: '{subtitle}',
                 counter: 1
             });
-             this._myMessageView = new sap.m.MessageView({
+            this._myMessageView = new sap.m.MessageView({
                 showDetailsPageHeader: false,
                 itemSelect: function () {
                     oBackButton.setVisible(true);
@@ -58,6 +59,13 @@ sap.ui.define([
             // *************************************************
         },
 
+        onAfterRendering: function () {
+            globalThis = this;
+            document.querySelector('[id*="btnGo"]').addEventListener('click', function (event) {
+                globalThis.getView().getModel().resetChanges();
+            });
+        },
+
         onRelease: function () {
             this.getView().getModel("local").setProperty("/MessageItems", []);
             this._processRequest("RELEASE");
@@ -72,7 +80,7 @@ sap.ui.define([
                 var sPath = element.getPath();
                 var MfgOrderPlannedTotalQty = that.getView().getModel().getProperty(sPath + "/MfgOrderPlannedTotalQty");
                 var ProductType = that.getView().getModel().getProperty(sPath + "/ProductType");
-                var Material = that.getView().getModel().getProperty(sPath + "/Material"); 
+                var Material = that.getView().getModel().getProperty(sPath + "/Material");
                 items.push({
                     Plant: aSplitArray[1],
                     ManufacturingOrder: aSplitArray[3],
@@ -134,7 +142,7 @@ sap.ui.define([
                             if (aContexts[index]) { // 确保索引不越界
                                 var sPath = aContexts[index].getPath(); // 获取选中条目的路径
                                 // 设置对应的 Message 和 Criticality
-                                that.getView().getModel().setProperty(sPath + "/Message", element.MESSAGE); 
+                                that.getView().getModel().setProperty(sPath + "/Message", element.MESSAGE);
                                 that.getView().getModel().setProperty(sPath + "/Criticality", element.CRITICALITY);
                             }
                         });
@@ -162,7 +170,7 @@ sap.ui.define([
                     //     that.getView().addDependent(that._myMessageDialog);
                     //     that._myMessageDialog.open();
                     // }
-                    
+
                     // refresh
                     // that.getView().getModel().refresh();
                 });
