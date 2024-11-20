@@ -392,6 +392,7 @@ sap.ui.define([
                         SalesOrder: element.SalesOrder,
                         SalesOrderItem: element.SalesOrderItem, // string
                         SalesOrderItemI: element.SalesOrderItemI, // numc
+                        Material: element.Material,
                         AssignQty: element.AssignQty
                     });
                     iSumAssignQty += parseFloat(element.AssignQty);
