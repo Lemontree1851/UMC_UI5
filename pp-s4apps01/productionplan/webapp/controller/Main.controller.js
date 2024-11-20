@@ -118,6 +118,38 @@ sap.ui.define([
                     this._oDataModell.resetChanges();
                 }
             },
+            
+            onSearch: function () {
+                var that = this;
+                var oFilters = this.byId("smartFilterBar").getFilters();
+                var aFilters = oFilters[0].aFilters;
+                var oDays = this.byId("zdays").getValue();
+                aFilters.push(new Filter("zday", FilterOperator.EQ, oDays));
+                var sOption = this.byId("ch_bom").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("Expand", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_plan").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("PlanCheck", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_theory").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("Theory", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_ecn").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("ECN", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_wo").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("WO", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_out").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("exOut", FilterOperator.EQ, "X"));
+                };
+            },
 
             onUITableRowsUpdated: function (oEvent) {
                 let oTable = oEvent.getSource();
