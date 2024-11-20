@@ -61,9 +61,15 @@ sap.ui.define([
 
         onAfterRendering: function () {
             globalThis = this;
-            document.querySelector('[id*="btnGo"]').addEventListener('click', function (event) {
-                globalThis.getView().getModel().resetChanges();
-            });
+            var timerId = setInterval(function () {
+                var button = document.querySelector('[id*="btnGo"]');
+                if (button) {
+                    button.addEventListener('click', function () {
+                        globalThis.getView().getModel().resetChanges();
+                    });
+                    clearInterval(timerId);
+                }
+            }, 1000);
         },
 
         onRelease: function () {
