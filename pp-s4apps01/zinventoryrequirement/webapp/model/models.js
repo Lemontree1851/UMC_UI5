@@ -17,6 +17,10 @@ sap.ui.define([
         // Create local Model
         createLocalModel: function () {
             var oModel = new JSONModel({
+                visible: {
+                    Summary: "X",
+                    PurchaseList: ""
+                },
                 filter: {
                     DisplayUnit: "D",      // 日単位
                     DisplayDimension: "H", // 横表示

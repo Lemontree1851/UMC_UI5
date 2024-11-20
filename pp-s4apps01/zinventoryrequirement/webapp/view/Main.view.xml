@@ -37,7 +37,7 @@
                                         </Select>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='110' key="PeriodEndDate" visibleInAdvancedArea="true" label="{i18n>PeriodEndDate}"/>
+                                <smartFilterBar:ControlConfiguration index='110' key="PeriodEndDate" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>PeriodEndDate}"/>
                                 <smartFilterBar:ControlConfiguration index='120' key="DisplayDimension" visibleInAdvancedArea="true" label="{i18n>DisplayDimension}">
                                     <smartFilterBar:customControl>
                                         <Select change="removeAllColumns" forceSelection="true" selectedKey="{local>/filter/DisplayDimension}">

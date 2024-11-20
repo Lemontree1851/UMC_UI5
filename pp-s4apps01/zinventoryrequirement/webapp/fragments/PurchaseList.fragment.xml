@@ -1,0 +1,80 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table">
+    <Dialog title="{i18n>PurchaseList}">
+        <Panel expandable="false" expanded="true" width="auto">
+            <table:Table id="idPurchaseListTable" rows="{local>/PurchaseList}" selectionMode="Multi" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:extension>
+                    <OverflowToolbar>
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExportPurchaseList" visible="{= ${local>/PurchaseList}.length > 0}"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column width="10rem" label="{i18n>Supplier}">
+                        <table:template>
+                            <Text text="{local>Supplier}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>SupplierName}">
+                        <table:template>
+                            <Text text="{local>SupplierName}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>Product}">
+                        <table:template>
+                            <Text text="{local>Product}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>ProductDescription}">
+                        <table:template>
+                            <Text text="{local>ProductDescription}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>SupplierMaterialNumber}">
+                        <table:template>
+                            <Text text="{local>SupplierMaterialNumber}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>ProductManufacturerNumber}">
+                        <table:template>
+                            <Text text="{local>ProductManufacturerNumber}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>OrderDate}">
+                        <table:template>
+                            <Text text="{ path:'local>OrderDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>OrderQuantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>OrderQuantity',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>RequestDate}">
+                        <table:template>
+                            <Text text="{ path:'local>RequestDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>Balance}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>Balance',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>MaterialPlannedDeliveryDurn}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>MaterialPlannedDeliveryDurn',formatter:'.formatter.formatNumber' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>MinimumPurchaseOrderQty}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>MinimumPurchaseOrderQty',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>
