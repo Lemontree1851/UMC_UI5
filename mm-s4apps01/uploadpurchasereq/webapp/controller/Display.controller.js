@@ -30,12 +30,17 @@ sap.ui.define([
 
 			oItem = oEvent.getSource();
 			oCtx = oItem.getBindingContext();
-
+			oCtx.getProperty("InstanceId")
+			var InstanceId = oCtx.getProperty("InstanceId");
+			// 某些情况下InstanceId会为空，但是router中不允许，所以给一个默认值
+			if (!InstanceId) {
+				InstanceId = "00000000-0000-0000-0000-000000000000";
+			}
 			this.getRouter().navTo("PurchaseReq",{
 				contextPath : oCtx.getProperty("UUID"),
 				contextPrNo: oCtx.getProperty("PrNo"),
 				contextApplyDepart: oCtx.getProperty("ApplyDepart"),
-				contextInstanceId: oCtx.getProperty("InstanceId"),
+				contextInstanceId: InstanceId,
 				contextApplicationId: oCtx.getProperty("ApplicationId"),
 			});
 		},
@@ -219,6 +224,8 @@ sap.ui.define([
 								this._oDataModel.setProperty("/" + key + "/ApproveStatus", line.APPROVESTATUS);
 								this._oDataModel.setProperty("/" + key + "/WorkflowId", line.WORKFLOWID);
 								this._oDataModel.setProperty("/" + key + "/InstanceId", line.INSTANCEID);
+								this._oDataModel.setProperty("/" + key + "/ApplyDate", line.APPLYDATE);
+								this._oDataModel.setProperty("/" + key + "/ApplyTime", line.APPLYTIME);
 							}
 						},this);
                     },this);
@@ -242,7 +249,7 @@ sap.ui.define([
 			}
 			var sUser = sap.ushell.Container.getService("UserInfo").getUser().getFullName();
 			var sEmail = sap.ushell.Container.getService("UserInfo").getUser().getEmail();
-			sEmail = 'kun.zou@sh.shin-china.com';
+			var sTimeZone = this.getUTCOffset();
 			listItems.forEach(_getData,this); //根据选择的行获取具体的数据
 			function _getData(iSelected, index) { //sSelected为选中的行
 				let key = oTable.getContextByIndex(iSelected).getPath();
@@ -250,9 +257,23 @@ sap.ui.define([
 				let postData = JSON.parse(JSON.stringify(lineData));
 				postData.userfullname = sUser;
 				postData.useremail = sEmail;
+				postData.timezone = sTimeZone;
 				aData.push(postData);
 			}
 			return this.removeDuplicates(aData);
-		}
+		},
+		getUTCOffset: function () {
+			const date = new Date();
+			const offsetMinutes = -date.getTimezoneOffset(); // 与 UTC 的分钟偏移量
+			const hours = Math.floor(offsetMinutes / 60);
+			const minutes = Math.abs(offsetMinutes % 60);
+		  
+			// 格式化为简短 UTC±HHMM 格式
+			const sign = hours >= 0 ? '+' : '-';
+			const formattedOffset = minutes === 0 
+				? `UTC${sign}${Math.abs(hours)}` 
+				: `UTC${sign}${Math.abs(hours)}${minutes}`;
+			return formattedOffset;
+		  }
 	});
 });

@@ -69,7 +69,7 @@ sap.ui.define([
         time: function (value) {
             if (value) {
                 let localDate = new Date(value);
-                if (!isNaN(localDate.getTime())) {
+                if (!isNaN(localDate.getTime()) && value.ms) {
                     var timeFormat = DateFormat.getTimeInstance({
                         pattern: "HH:mm:ss"
                     });
