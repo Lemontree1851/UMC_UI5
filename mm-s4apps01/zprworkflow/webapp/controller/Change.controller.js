@@ -39,8 +39,7 @@ sap.ui.define([
         formatter : formatter,
         onInit: function (oEvent) {
             // this._BusyDialog = new BusyDialog();
-			console.log("Change Controller Init");
- 
+
 			this._BusyDialog = new BusyDialog();
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
@@ -130,8 +129,7 @@ sap.ui.define([
 			var oFilter = oEvent.getParameter("bindingParams").filters;
 			var oNewFilter, aNewFilter = [];
 			oFilter.push(new sap.ui.model.Filter("PrNo", "EQ", this._InsNo));
-			console.log(oFilter);
- 
+
 		},
 		_onBindingChange : function (oEvent) {
 			// No data for the binding
@@ -241,7 +239,6 @@ sap.ui.define([
 			return promise;
 		},
 		onDialogPress: function () {	
-			console.log("onDialogPress");
 
             if (!this.Dialog) {
                 var oView = this.getView();
@@ -272,8 +269,7 @@ sap.ui.define([
             }.bind(this));
         },
 		onDialogRejectPress: function () {	
-			console.log("onDialogPress");	
- 
+
             if (!this.DialogReject) {
                 var oView = this.getView();
 				if (!this.DialogReject) {
