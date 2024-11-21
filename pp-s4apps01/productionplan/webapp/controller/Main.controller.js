@@ -113,12 +113,13 @@ sap.ui.define([
                     mBindingParams.filters.push(newFilter);
                 };
 
-                if (this._oDataModel.hasPendingChanges()) {
+                var oModel = this.getOwnerComponent().getModel();
+                if (oModel.hasPendingChanges()) {
                     // 重置未保存的更改
-                    this._oDataModell.resetChanges();
+                    oModel.resetChanges();
                 }
             },
-            
+
             onSearch: function () {
                 var that = this;
                 var oFilters = this.byId("smartFilterBar").getFilters();
@@ -149,6 +150,11 @@ sap.ui.define([
                 if (sOption === true) {
                     aFilters.push(new Filter("exOut", FilterOperator.EQ, "X"));
                 };
+                var oModel = this.getOwnerComponent().getModel();
+                if (oModel.hasPendingChanges()) {
+                    // 重置未保存的更改
+                    oModel.resetChanges();
+                }
             },
 
             onUITableRowsUpdated: function (oEvent) {
@@ -328,13 +334,6 @@ sap.ui.define([
 
             },
 
-            onRefresh: function (oEvent) {
-                this._oDataModel.refresh(true);
-                //刷新没有清空输入值有change的字段，手动清空
-                this.resetInput();
-
-            },
-
             onWeb1: function (oEvent) {
                 let currentPath = window.location.href;
                 let parts = currentPath.split(".");
@@ -424,7 +423,7 @@ sap.ui.define([
 
                 Promise.all(aPromise).then((oData) => {
                     this._oDataModel.refresh(true);
-                    //刷新没有清空输入值有change的字段，手动清空
+                    //手动清空休息日的输入
                     this.resetInput();
 
                     oData.forEach((item) => {
@@ -530,7 +529,37 @@ sap.ui.define([
                 }
 
             },
-
+            _applySearchFilter: function (sQuery) {
+                var that = this;
+                var oFilters = this.byId("smartFilterBar").getFilters();
+                var aFilters = oFilters[0].aFilters;
+                var oDays = this.byId("zdays").getValue();
+                aFilters.push(new Filter("zday", FilterOperator.EQ, oDays));
+                var sOption = this.byId("ch_bom").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("Expand", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_plan").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("PlanCheck", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_theory").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("Theory", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_ecn").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("ECN", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_wo").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("WO", FilterOperator.EQ, "X"));
+                };
+                sOption = this.byId("ch_out").getSelected();
+                if (sOption === true) {
+                    aFilters.push(new Filter("exOut", FilterOperator.EQ, "X"));
+                };
+            }
 
         });
     });
