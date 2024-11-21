@@ -20,7 +20,11 @@
                 "uri": "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/",
                 "type": "OData",
                 "settings": {
-                    "localUri": "localService/S4/API_CV_ATTACHMENT_SRV/metadata.xml"
+                    "annotations": [
+                        "API_CV_ATTACHMENT_SRV_Annotation"
+                    ],
+                    "localUri": "localService/S4/API_CV_ATTACHMENT_SRV/metadata.xml",
+                    "odataVersion": "2.0"
                 }
             },
             "API_DMS_PROCESS_SRV": {
@@ -59,9 +63,9 @@
                 "uri": "/sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/",
                 "type": "OData",
                 "settings": {
-                "annotations": [],
-                "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
-                "odataVersion": "4.0"
+                    "annotations": [],
+                    "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
+                    "odataVersion": "4.0"
                 }
             },
             "WorkFlow": {
@@ -77,6 +81,13 @@
                 "uri": "annotations/annotation.xml",
                 "settings": {
                     "localUri": "annotations/annotation.xml"
+                }
+            },
+            "API_CV_ATTACHMENT_SRV_Annotation": {
+                "uri": "/destinations/UMC_Dev_Customizing_BTP/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_CV_ATTACHMENT_ANNO_MDL',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/S4/API_CV_ATTACHMENT_SRV/API_CV_ATTACHMENT_SRV_Annotation.xml"
                 }
             }
         },
@@ -168,7 +179,7 @@
                     "defaultCountMode": "Inline"
                 }
             },
-            "PurchaseOrder":{
+            "PurchaseOrder": {
                 "dataSource": "PurchaseOrder",
                 "preload": true,
                 "settings": {
@@ -181,10 +192,10 @@
                 "dataSource": "zui_dtimp_conf_o4",
                 "preload": true,
                 "settings": {
-                "synchronizationMode": "None",
-                "operationMode": "Server",
-                "autoExpandSelect": true,
-                "earlyRequests": true
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
                 }
             },
             "WorkFlow": {

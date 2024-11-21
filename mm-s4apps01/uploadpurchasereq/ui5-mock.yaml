@@ -1,5 +1,3 @@
-# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
-
 specVersion: "3.1"
 metadata:
   name: mm.uploadpurchasereq
@@ -9,7 +7,7 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ignoreCertError: false
         ui5:
           path:
             - /resources
@@ -18,6 +16,8 @@ server:
         backend:
           - path: /sap
             url: https://my412552-api.s4hana.cloud.sap
+            destination: UMC_Dev_Customizing_BTP
+            authenticationType: BasicAuthentication
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -30,7 +30,17 @@ server:
         mountPath: /
         services:
           - urlPath: /sap/opu/odata/sap/ZUI_UPLOADPR_O2
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/data
             generateMockData: true
-        annotations: []
+            metadataXmlPath: ./webapp/localService/metadata.xml
+            mockdataRootPath: ./webapp/localService/data
+          - urlPath: /sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/
+            metadataPath: ./webapp/localService/S4/API_CV_ATTACHMENT_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/S4/API_CV_ATTACHMENT_SRV/mockdata
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/undefined
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_UPLOADPR_O2_VAN',Version='0001')/$value/
+          - localPath: ./webapp/annotations/annotation.xml
+            urlPath: annotations/annotation.xml
+          - localPath: ./webapp/localService/S4/API_CV_ATTACHMENT_SRV/API_CV_ATTACHMENT_SRV_Annotation.xml
+            urlPath: /destinations/UMC_Dev_Customizing_BTP/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_CV_ATTACHMENT_ANNO_MDL',Version='0001')/$value/
