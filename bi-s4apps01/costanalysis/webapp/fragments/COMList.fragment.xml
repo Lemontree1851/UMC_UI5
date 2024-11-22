@@ -60,7 +60,7 @@
                         <Text text="{Product}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>ProductDescription}" sortProperty="ProductDescription" filterProperty="ProductDescription">
+                <table:Column width="10rem" label="{i18n>ProductDescription}" sortProperty="ProductDescription" filterProperty="ProductDescription">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProductDescription", "leadingProperty":"ProductDescription"}'/>
                     </table:customData>
@@ -76,12 +76,28 @@
                         <Text text="{Material}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>MaterialDescription}" sortProperty="MaterialDescription" filterProperty="MaterialDescription">
+                <table:Column width="10rem" label="{i18n>MaterialDescription}" sortProperty="MaterialDescription" filterProperty="MaterialDescription">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDescription", "leadingProperty":"MaterialDescription"}'/>
                     </table:customData>
                     <table:template>
                         <Text text="{MaterialDescription}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="6rem" label="{i18n>profitcenter}" sortProperty="profitcenter" filterProperty="profitcenter">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"profitcenter", "leadingProperty":"profitcenter"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{profitcenter}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>profitcentername}" sortProperty="profitcentername" filterProperty="profitcentername">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"profitcentername", "leadingProperty":"profitcentername"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{profitcentername}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="6rem" label="{i18n>Quantity}" sortProperty="Quantity" filterProperty="Quantity">
