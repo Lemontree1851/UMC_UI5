@@ -35,7 +35,7 @@
 								<smartFilterBar:ControlConfiguration index="4" id="matnr" key="material" visibleInAdvancedArea="true" label="{i18n>material}"/>
 								<smartFilterBar:ControlConfiguration index="5" id="suppliermaterialBar" key="suppliermaterialnumber" visibleInAdvancedArea="true" label="{i18n>suppliermaterialnumber}"/>
 								<smartFilterBar:ControlConfiguration index="6" id="SupplierBar" key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
-								<smartFilterBar:ControlConfiguration index="7" id="PurchasingGroupBar" key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+								<smartFilterBar:ControlConfiguration index="7" id="PurchasingGroupBar" key="PurchasingGroup" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="true" label="{i18n>PurchasingGroup}"/>
 								<smartFilterBar:ControlConfiguration index="8" id="CreationDate_1Bar" key="CreationDate_1" visibleInAdvancedArea="true" label="{i18n>CreationDate_1}"/>
 								<smartFilterBar:ControlConfiguration index="9" id="CreationDate_2Bar" key="CreationDate_2" visibleInAdvancedArea="true" label="{i18n>CreationDate_2}"/>
 								<smartFilterBar:ControlConfiguration index="10" id="ManufacturerNumberBar" key="ManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ManufacturerNumber}"/>
@@ -43,7 +43,7 @@
 								<smartFilterBar:ControlConfiguration index="12" id="latestofferBar" key="latestoffer" visibleInAdvancedArea="true" label="{i18n>latestoffer}"/>
 								<smartFilterBar:ControlConfiguration index="13" id="SupplierIsFixedBar" key="SupplierIsFixed" visibleInAdvancedArea="true" label="{i18n>SupplierIsFixed}"/>
 								<smartFilterBar:ControlConfiguration index="14" id="IncotermsClassificationBar" key="IncotermsClassification" visibleInAdvancedArea="true" label="{i18n>IncotermsClassification}"/>
-								<smartFilterBar:ControlConfiguration index="15" id="PlusDayBar" key="PlusDay" visibleInAdvancedArea="true" label="{i18n>PlusDay}"/>
+								<smartFilterBar:ControlConfiguration index="15" id="PlusDayBar" key="PlusDay" visibleInAdvancedArea="true" hasValueHelpDialog="false" label="{i18n>PlusDay}"/>
 								<!-- visible="false" -->
 								<smartFilterBar:ControlConfiguration index="999" key="BaseUnit" visible="false"/>
 								<smartFilterBar:ControlConfiguration index="999" key="condition_validity_end_date" visible="false"/>
@@ -259,7 +259,7 @@
 								<Label text="{i18n>MaterialPriceUnitQty}"/>
 							</table:label>
 							<table:template>
-								<Label text="{MaterialPriceUnitQty}"/>
+								<Label text="{ path:'MaterialPriceUnitQty',formatter:'.formatter.formatNumber'}" wrapping="false"/>
 							</table:template>
 						</table:Column>
 

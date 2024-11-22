@@ -25,7 +25,7 @@ sap.ui.define([
             if (sZTYPE1 === true) {
                 newFilter = new sap.ui.model.Filter("Ztype1", sap.ui.model.FilterOperator.EQ, "X");
             } else {
-                newFilter = new sap.ui.model.Filter("Ztype1", sap.ui.model.FilterOperator.EQ, " ");
+                newFilter = new sap.ui.model.Filter("Ztype1", sap.ui.model.FilterOperator.EQ, "");
             }
             mBindingParams.filters.push(newFilter);
             var sZTYPE2 = this.byId("ZTYPE2").getSelected();
@@ -33,7 +33,7 @@ sap.ui.define([
             if (sZTYPE2 === true) {
                 newFilter = new sap.ui.model.Filter("Ztype2", sap.ui.model.FilterOperator.EQ, "X");
             } else {
-                newFilter = new sap.ui.model.Filter("Ztype2", sap.ui.model.FilterOperator.EQ, " ");
+                newFilter = new sap.ui.model.Filter("Ztype2", sap.ui.model.FilterOperator.EQ, "");
             }
             mBindingParams.filters.push(newFilter);
             // var purchasinginforecord = this.byId("purchasinginfo").getValue();
