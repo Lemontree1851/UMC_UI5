@@ -12,9 +12,14 @@ sap.ui.define([
 
     return {
 
-        onValueHelpRequested: function (oEvent, that, sPath, aVHFields) {
+        onValueHelpRequested: function (oEvent, that, sPath, aVHFields, aFilterFields) {
             that._oInput = oEvent.getSource();
             that._aVHFields = aVHFields;
+            if (aFilterFields) {
+                that._aFilterFields = aFilterFields;
+            } else {
+                that._aFilterFields = aVHFields;
+            }
             that._oBasicSearchField = new SearchField();
             that.loadFragment({
                 name: "pp.zpickinglist.fragments.ValueHelpDialog"
@@ -47,7 +52,7 @@ sap.ui.define([
                 // Custom Logic End
 
                 // Set filter group items
-                that._aVHFields.forEach(fieldName => {
+                that._aFilterFields.forEach(fieldName => {
                     var oFilterGroupItem = new FilterGroupItem({
                         groupName: "__$INTERNAL$",
                         visibleInFilterBar: true,
@@ -164,6 +169,8 @@ sap.ui.define([
                     var sPath = "/ZC_MaterialStockVH(Material='" + sMaterial + "',Plant='" + sPlant + "',StorageLocation='" + aTokens[0].getProperty("key") + "')";
                     var oVHRow = this.getModel().getProperty(sPath);
                     this.getModel().setProperty(sInputPath + "Stock", oVHRow["StockQuantity"]);
+                    this.getModel().setProperty(sItemPath + "/M_CARD_Quantity", oVHRow["M_CARD_Quantity"]);
+                    this.getModel().setProperty(sItemPath + "/M_CARD", oVHRow["M_CARD"]);
                 }
             }
             //----------------------------Custom Logic----------------------------------------

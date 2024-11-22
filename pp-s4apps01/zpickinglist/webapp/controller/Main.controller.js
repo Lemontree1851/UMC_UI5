@@ -374,6 +374,8 @@ sap.ui.define([
                     this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName, oResponse["StorageLocation"]);
                     this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Name", oResponse["StorageLocationName"]);
                     this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Stock", oResponse["StockQuantity"]);
+                    this.getModel().setProperty(sRowBindingPath + "/M_CARD_Quantity", oResponse["M_CARD_Quantity"]);
+                    this.getModel().setProperty(sRowBindingPath + "/M_CARD", oResponse["M_CARD"]);
                 }
             }.bind(this), function (oError) {
                 if (sODataPath === "/ZC_MaterialStockVH") {

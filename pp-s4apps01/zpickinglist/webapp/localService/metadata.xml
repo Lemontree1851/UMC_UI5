@@ -109,7 +109,7 @@
                 <Key>
                     <PropertyRef Name="value_low"/>
                 </Key>
-                <Property Name="value_low" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Lower Value" sap:quickinfo="Values for Domains: Single Value/Lower Limit"/>
+                <Property Name="value_low" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="text" sap:label="Lower Value" sap:quickinfo="Values for Domains: Single Value/Lower Limit"/>
                 <Property Name="text" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
             </EntityType>
             <EntityType Name="ZC_MaterialStockVHType" sap:label="Material Stock Value Help" sap:content-version="1">
@@ -124,6 +124,8 @@
                 <Property Name="StorageLocationName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name"/>
                 <Property Name="StockQuantity" Type="Edm.Decimal" Precision="31" Scale="14" sap:unit="MaterialBaseUnit"/>
                 <Property Name="MaterialBaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="M_CARD_Quantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="MaterialBaseUnit" sap:label="Quantity" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="M_CARD" Type="Edm.String" MaxLength="40" sap:label="Material Description" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="ZC_MRPControllerVHType" sap:label="MRP Controller Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -199,7 +201,7 @@
                 <Property Name="TotalTransferQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
                 <Property Name="M_CARD_Quantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
                 <Property Name="M_CARD" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
-                <Property Name="DeleteFlag" Type="Edm.Boolean" sap:label="Deletion indicator" sap:quickinfo="Asset class marked for deletion" sap:value-list="fixed-values"/>
+                <Property Name="DeleteFlag" Type="Edm.String" MaxLength="1" sap:value-list="fixed-values"/>
                 <Property Name="CreatedDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval"/>
                 <Property Name="CreatedTime" Type="Edm.Time" Precision="0"/>
                 <Property Name="CreatedByUser" Type="Edm.String" MaxLength="50"/>
@@ -1016,7 +1018,7 @@
             <Annotations Target="cds_zui_pickinglist_o2.ZC_PICKINGLIST_TABType/DeleteFlag" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
                     <Record>
-                        <PropertyValue Property="Label" String="Deletion indicator"/>
+                        <PropertyValue Property="Label" String=""/>
                         <PropertyValue Property="CollectionPath" String="ZC_BOOLEAN_VH"/>
                         <PropertyValue Property="SearchSupported" Bool="false"/>
                         <PropertyValue Property="Parameters">
@@ -1024,9 +1026,6 @@
                                 <Record Type="Common.ValueListParameterInOut">
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="DeleteFlag"/>
                                     <PropertyValue Property="ValueListProperty" String="value_low"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="text"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -1179,9 +1178,29 @@
                         <PropertyValue Property="Deletable" Bool="false"/>
                     </Record>
                 </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>M_CARD_Quantity</PropertyPath>
+                                <PropertyPath>M_CARD</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
                 <Annotation Term="Capabilities.InsertRestrictions">
                     <Record>
                         <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>M_CARD_Quantity</PropertyPath>
+                                <PropertyPath>M_CARD</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.UpdateRestrictions">

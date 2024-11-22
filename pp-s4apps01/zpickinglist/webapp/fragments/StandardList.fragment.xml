@@ -114,7 +114,7 @@
                     <table:template>
                         <!-- editable="{= ${local>/std_mode} === 'edit'}" -->
                         <Input value="{StorageLocationFrom}" change="handleChange" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/ZC_MaterialStockVH', ['Plant','StorageLocation','StorageLocationName','StockQuantity'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_MaterialStockVH', length: 4 }">
+                        $event, $controller, '/ZC_MaterialStockVH', ['Plant','StorageLocation','StorageLocationName','StockQuantity','M_CARD_Quantity'], ['Plant','StorageLocation','StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_MaterialStockVH', length: 4 }">
                             <suggestionColumns>
                                 <Column>
                                     <Label text="{i18n>StorageLocation}"/>
@@ -125,12 +125,16 @@
                                 <Column>
                                     <Label text="{i18n>StockQuantity}"/>
                                 </Column>
+                                <Column>
+                                    <Label text="{i18n>M_CARD_Quantity}"/>
+                                </Column>
                             </suggestionColumns>
                             <suggestionRows>
                                 <ColumnListItem>
                                     <Label text="{StorageLocation}" />
                                     <Label text="{StorageLocationName}" />
                                     <Label text="{StockQuantity}" />
+                                    <Label text="{M_CARD_Quantity}" />
                                 </ColumnListItem>
                             </suggestionRows>
                         </Input>
