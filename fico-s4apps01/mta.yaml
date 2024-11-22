@@ -99,6 +99,10 @@ modules:
       - ficozbindglaccountlist.zip
       name: ficozbindglaccountlist
       target-path: resources/
+    - artifacts:
+      - ficozagencypurchasingn.zip
+      name: ficozagencypurchasingn
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -186,7 +190,7 @@ modules:
   build-parameters:
     build-result: dist
     builder: custom
-    commands: 
+    commands:
     - npm run build:cf
     supported-platforms: []
 - name: ficozbindglupload
@@ -204,7 +208,7 @@ modules:
   build-parameters:
     build-result: dist
     builder: custom
-    commands:   
+    commands:
     - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaylist
@@ -219,6 +223,15 @@ modules:
 - name: ficozbindglaccountlist
   type: html5
   path: zbindglaccountlist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozagencypurchasingn
+  type: html5
+  path: zagencypurchasingn
   build-parameters:
     build-result: dist
     builder: custom
