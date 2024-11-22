@@ -9,7 +9,7 @@
     xmlns:smartField="sap.ui.comp.smartfield" 
     xmlns:smartform="sap.ui.comp.smartform" 
     xmlns:t="sap.ui.table">
-  <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
+  <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true" >
       <f:title>
 			  <f:DynamicPageTitle>
 				  <f:heading>
@@ -47,7 +47,7 @@
 		<smartTable:SmartTable id="smartTable" entitySet="ProductionPlan" smartFilterId="smartFilterBar" tableType="Table"
 				showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}"
 				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showFullScreenButton="true"
-				beforeExport="onBeforeExport">
+				beforeExport="onBeforeExport" fitContainer="false">
 			<smartTable:customToolbar>
 				<OverflowToolbar width="100%">
 					<ToolbarSpacer/>
@@ -61,7 +61,7 @@
             <Button id="web6" icon="sap-icon://internet-browser" text="{i18n>web6ButtonText}" tooltip="{i18n>web6ButtonText}" press="onWeb6"/>  
         </OverflowToolbar>
 			</smartTable:customToolbar>
-            <t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" >
+            <t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" rowMode="Auto" >
                 <t:Column id="Plant" label="{i18n>Plant}" width="4rem" sortProperty="Plant" filterProperty="Plant" visible="true" autoResizable="true">
                     <t:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>
