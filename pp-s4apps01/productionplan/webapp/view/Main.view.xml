@@ -1319,7 +1319,7 @@
                       </VBox>
                     </t:template>
                 </t:Column>
-                <t:Column id="Message" label="{i18n>Message}" width="10rem" sortProperty="Message" filterProperty="Message" visible="true" autoResizable="true">
+                <t:Column id="Message" label="{i18n>Message}" width="10rem" sortProperty="Message" filterProperty="Message" visible="false" autoResizable="true">
                     <t:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Message", "leadingProperty":"Message", "sortProperty":"Message", "filterProperty": "Message"}'/>
                     </t:customData>

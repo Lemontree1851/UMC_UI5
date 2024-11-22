@@ -422,10 +422,7 @@ sap.ui.define([
                 aPromise.push(this.callAction(postDocs, bEvent, ""));
 
                 Promise.all(aPromise).then((oData) => {
-                    this._oDataModel.refresh(true);
-                    //手动清空休息日的输入
-                    this.resetInput();
-
+                    that.getView().byId("smartFilterBar").search();
                     oData.forEach((item) => {
                         let result = JSON.parse(item["processLogic"].Zzkey);
                         result.forEach(function (line) {
@@ -493,42 +490,7 @@ sap.ui.define([
 
                 );
             },
-            resetInput: function () {
-                let oTable = this.byId("ReportTable");
-                let aColumns = oTable.getColumns();
-                let aRows = oTable.getRows();
-                let sType = "";
-                let sNum = Number(this.byId("zdays").getValue());
-                sNum = 17 + sNum;
-                if (aRows && aRows.length > 0) {
-                    for (let i = 0; i < aRows.length; i++) {
-                        let c7Cell = aRows[i].getCells()[7];
-                        if (c7Cell) {
-                            sType = c7Cell.getText();
-                            if (sType === "I" || sType === "P") {
-                                for (let j = 21; j < sNum; j++) {
-                                    let oFirstColumn = aColumns[j];
-                                    let sColumnText = oFirstColumn.getLabel().getText();
-                                    let sDay = sColumnText.slice(-1);
-                                    if (sDay === "日" || sDay === "土") {
-                                        let idx = j - 3;
-                                        //如果是天数的第一列，不要清空，因为是总和
-                                        if (idx !== 18) {
-                                            let cEdit = aRows[i].getCells()[idx];
-                                            let oItems = cEdit.getItems();
-                                            if (cEdit) {
-                                                oItems[0].setText("");
-                                                oItems[1].setValue("");
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-            },
+            
             _applySearchFilter: function (sQuery) {
                 var that = this;
                 var oFilters = this.byId("smartFilterBar").getFilters();
