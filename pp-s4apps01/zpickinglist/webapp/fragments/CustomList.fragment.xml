@@ -104,7 +104,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"TotalTransferQuantity", "leadingProperty":"TotalTransferQuantity"}'/>
                     </table:customData>
                     <table:template>
-                        <Input value="{TotalTransferQuantity}" description="{BaseUnit}" width="150%" editable="{= ${local>/tab_mode} === 'edit'}"/>
+                        <Input value="{TotalTransferQuantity}" description="{BaseUnit}" width="150%" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ${PostingStatus} !== '転記済'}"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>StorageLocationFrom}" sortProperty="StorageLocationFrom" filterProperty="StorageLocationFrom">
@@ -112,7 +112,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"StorageLocationFrom", "leadingProperty":"StorageLocationFrom"}'/>
                     </table:customData>
                     <table:template>
-                        <Input value="{StorageLocationFrom}" change="handleChange" editable="{= ${local>/tab_mode} === 'edit'}" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
+                        <Input value="{StorageLocationFrom}" change="handleChange" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ${PostingStatus} !== '転記済'}" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
                         $event, $controller, '/ZC_MaterialStockVH', ['Plant','StorageLocation','StorageLocationName','StockQuantity'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_MaterialStockVH', length: 4 }">
                             <suggestionColumns>
                                 <Column>

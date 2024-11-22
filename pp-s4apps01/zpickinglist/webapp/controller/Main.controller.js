@@ -128,6 +128,15 @@ sap.ui.define([
                 while (iLen--) {
                     var sPath = this._oTable.getContextByIndex(aSelectedItems[iLen]).getPath();
                     var oRow = this.getModel().getObject(sPath);
+                    if (oRow.PostingStatus === "転記済") {
+                        // 入出庫予定 {0} 明細 {1} は転記待データではありません。
+                        aMessageItems.push({
+                            type: "Error",
+                            title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                            description: this.getModel("i18n").getResourceBundle().getText("Message8", [oRow.Reservation, oRow.ReservationItem]),
+                            subtitle: this.getModel("i18n").getResourceBundle().getText("Message8", [oRow.Reservation, oRow.ReservationItem])
+                        });
+                    }
                     aItems.push(oRow);
                     if (oRow.DetailsJson) {
                         aDetails.push(JSON.parse(oRow.DetailsJson));
