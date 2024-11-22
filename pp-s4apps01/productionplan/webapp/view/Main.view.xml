@@ -8,7 +8,7 @@
   	xmlns:mvc="sap.ui.core.mvc" 
     xmlns:smartField="sap.ui.comp.smartfield" 
     xmlns:smartform="sap.ui.comp.smartform" 
-    xmlns:t="sap.ui.table">
+    xmlns:t="sap.ui.table" height="100%">
   <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true" >
       <f:title>
 			  <f:DynamicPageTitle>
@@ -46,8 +46,7 @@
     <f:content>
 		<smartTable:SmartTable id="smartTable" entitySet="ProductionPlan" smartFilterId="smartFilterBar" tableType="Table"
 				showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}"
-				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showFullScreenButton="true"
-				beforeExport="onBeforeExport" fitContainer="false">
+				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" fitContainer="false" height="100%">
 			<smartTable:customToolbar>
 				<OverflowToolbar width="100%">
 					<ToolbarSpacer/>
