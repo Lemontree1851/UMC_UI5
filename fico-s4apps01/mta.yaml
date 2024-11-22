@@ -56,10 +56,6 @@ modules:
       name: ficopaidpaydocument
       target-path: resources/
     - artifacts:
-      - ficoagencypurchasingn.zip
-      name: ficoagencypurchasingn
-      target-path: resources/
-    - artifacts:
       - ficofixedassetprint.zip
       name: ficofixedassetprint
       target-path: resources/
@@ -124,15 +120,6 @@ modules:
 - name: ficopaidpaydocument
   type: html5
   path: paidpaydocument
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficoagencypurchasingn
-  type: html5
-  path: agencypurchasingn
   build-parameters:
     build-result: dist
     builder: custom
