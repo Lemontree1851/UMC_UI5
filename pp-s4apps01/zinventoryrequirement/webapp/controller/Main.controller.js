@@ -247,15 +247,18 @@ sap.ui.define([
                     var iExcuteTimes = 1;
                     for (const field in aProcessObject[j]) {
                         if (field.substring(0, 3) === "YMD" || field.substring(0, 2) === "YW" || field.substring(0, 2) === "YM") {
-                            var oRequestDate;
+                            var oRequestDate, oOrderDate;
                             if (field.substring(0, 3) === "YMD") {
                                 oRequestDate = new Date(field.substring(3, 7) + "/" + field.substring(7, 9) + "/" + field.substring(9, 11));
+                                oOrderDate = new Date(field.substring(3, 7) + "/" + field.substring(7, 9) + "/" + field.substring(9, 11));
                             } else if (field.substring(0, 2) === "YW") {
                                 // 周的第一天
                                 oRequestDate = this.getFirstDayOfWeek(field.substring(2, 6), field.substring(6, 8));
+                                oOrderDate = this.getFirstDayOfWeek(field.substring(2, 6), field.substring(6, 8));
                             } else if (field.substring(0, 2) === "YM") {
                                 // 月的第二个工作日
                                 oRequestDate = this.getSecondWorkday(field.substring(2, 6), field.substring(6, 8));
+                                oOrderDate = this.getFirstDayOfWeek(field.substring(2, 6), field.substring(6, 8));
                             }
 
                             // 找 R.BALANCE < 0 的第一列(所以只执行一次)
@@ -276,7 +279,7 @@ sap.ui.define([
                                     ProductDescription: aProcessObject[j].ProductDescription,
                                     SupplierMaterialNumber: aProcessObject[j].SupplierMaterialNumber,
                                     ProductManufacturerNumber: aProcessObject[j].ProductManufacturerNumber,
-                                    OrderDate: this.formatDateStr(this.getNDaysBefore(oRequestDate, parseFloat(aProcessObject[j].MaterialPlannedDeliveryDurn))),
+                                    OrderDate: this.formatDateStr(this.getNDaysBefore(oOrderDate, parseFloat(aProcessObject[j].MaterialPlannedDeliveryDurn))),
                                     OrderQuantity: iOrderQuantity,
                                     RequestDate: this.formatDateStr(oRequestDate),
                                     Balance: iBalance,
@@ -288,6 +291,7 @@ sap.ui.define([
 
                             if (iExcuteTimes === 0) {
                                 iBalance = parseFloat(oDemandRow[field]) + iAvailableQty;
+                                iAvailableQty += parseFloat(oDemandRow[field]);
                                 if (iBalance < 0) {
                                     // 基数 = Balance / 最低発注数量 向上取整
                                     iCardinality = Math.ceil(Math.abs(iBalance) / parseFloat(aProcessObject[j].MinimumPurchaseOrderQty));
@@ -303,7 +307,7 @@ sap.ui.define([
                                         ProductDescription: aProcessObject[j].ProductDescription,
                                         SupplierMaterialNumber: aProcessObject[j].SupplierMaterialNumber,
                                         ProductManufacturerNumber: aProcessObject[j].ProductManufacturerNumber,
-                                        OrderDate: this.formatDateStr(this.getNDaysBefore(oRequestDate, parseFloat(aProcessObject[j].MaterialPlannedDeliveryDurn))),
+                                        OrderDate: this.formatDateStr(this.getNDaysBefore(oOrderDate, parseFloat(aProcessObject[j].MaterialPlannedDeliveryDurn))),
                                         OrderQuantity: iOrderQuantity,
                                         RequestDate: this.formatDateStr(oRequestDate),
                                         Balance: iBalance,
