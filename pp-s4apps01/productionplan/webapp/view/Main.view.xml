@@ -117,6 +117,14 @@
                         <Text text="{Mdv01}"/>
                     </t:template>
                 </t:Column>
+                <t:Column id="Sobmx" label="{i18n>Sobmx}" width="4rem" sortProperty="Sobmx" filterProperty="Sobmx" visible="true" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Sobmx", "leadingProperty":"Sobmx", "sortProperty":"Sobmx", "filterProperty": "Sobmx"}'/>
+                    </t:customData>
+                    <t:template>
+                        <Text text="{Sobmx}"/>
+                    </t:template>
+                </t:Column>
                 <t:Column id="PlanType" label="{i18n>PlanType}" width="6rem" sortProperty="PlanType" filterProperty="PlanType" visible="true" autoResizable="true">
                     <t:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PlanType", "leadingProperty":"PlanType", "sortProperty":"PlanType", "filterProperty": "PlanType"}'/>

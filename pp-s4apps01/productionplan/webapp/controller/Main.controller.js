@@ -161,16 +161,34 @@ sap.ui.define([
                 let oTable = oEvent.getSource();
                 let aRows = oTable.getRows();
                 let sType = "";
+                let sSobmx = "";
                 let sColor = "";
 
                 let s1 = "";
                 let sNum = Number(this.byId("zdays").getValue());
-                sNum = 16 + sNum;
+                sNum = 17 + sNum;
                 aRows.forEach(function (oRow, index) {
-                    let c7Cell = oRow.getCells()[7];
+                    let c7Cell = oRow.getCells()[8];
                     sType = c7Cell.getText();
+                    if (sType === 'I') {
+                        $("#" + oRow.getId()).css("background-color", "#FFFDBF");
+                    } else if (sType === 'O') {
+                        $("#" + oRow.getId()).css("background-color", "#C6F9C1");
+                    } else if (sType === 'P') {
+                        let c6Cell = oRow.getCells()[7];
+                        sSobmx = c6Cell.getText();
+                        if (sSobmx === '52') {
+                            $("#" + oRow.getId()).css("background-color", "#fc794a");
+                        } else {
+                            $("#" + oRow.getId()).css("background-color", "");
+                        }
+                    } else {
+                        $("#" + oRow.getId()).css("background-color", "");
+                    };    
+                        
+
                     if (sType === "W") {
-                        for (let j = 18; j < sNum; j++) {
+                        for (let j = 19; j < sNum; j++) {
                             let cColor = oRow.getCells()[j];
                             let CellId = cColor.getId();
                             let oItems = cColor.getItems();
@@ -197,7 +215,7 @@ sap.ui.define([
 
                         }
                     } else {
-                        for (let j = 18; j < sNum; j++) {
+                        for (let j = 19; j < sNum; j++) {
                             let cColor = oRow.getCells()[j];
                             let CellId = cColor.getId();
                             $("#" + CellId).parent().parent().css("background-color", "");
@@ -217,16 +235,16 @@ sap.ui.define([
                 } else {
                     var oTable = this.byId("ReportTable");
                     let sNum = Number(this.byId("zdays").getValue());
-                    sNum = 17 + sNum;
+                    sNum = 18 + sNum;
                     var aRows = oTable.getRows();
                     var sType = "";
                     if (aRows && aRows.length > 0) {
                         for (var i = 0; i < aRows.length; i++) {
-                            var c7Cell = aRows[i].getCells()[7];
+                            var c7Cell = aRows[i].getCells()[8];
                             if (c7Cell) {
                                 sType = c7Cell.getText();
                                 if (sType === "I" || sType === "P") {
-                                    for (var j = 18; j < sNum; j++) {
+                                    for (var j = 19; j < sNum; j++) {
                                         var cEdit = aRows[i].getCells()[j];
                                         var oItems = cEdit.getItems();
                                         oItems[1].setEditable(true);
@@ -238,11 +256,11 @@ sap.ui.define([
                     oTable.attachEvent("rowsUpdated", function () {
                         if (aRows && aRows.length > 0) {
                             for (var i = 0; i < aRows.length; i++) {
-                                var c7Cell = aRows[i].getCells()[7];
+                                var c7Cell = aRows[i].getCells()[8];
                                 if (c7Cell) {
                                     var sType = c7Cell.getText();
                                     if (sType === "I" || sType === "P") {
-                                        for (var j = 18; j < sNum; j++) {
+                                        for (var j = 19; j < sNum; j++) {
                                             var cEdit = aRows[i].getCells()[j];
                                             if (cEdit && cEdit.getItems) {
                                                 var oItems = cEdit.getItems();
@@ -281,16 +299,16 @@ sap.ui.define([
                         } else {
                             var oTable = this.byId("ReportTable");
                             let sNum = Number(this.byId("zdays").getValue());
-                            sNum = 17 + sNum;
+                            sNum = 18 + sNum;
                             var aRows = oTable.getRows();
                             var sType = "";
                             if (aRows && aRows.length > 0) {
                                 for (var i = 0; i < aRows.length; i++) {
-                                    var c7Cell = aRows[i].getCells()[7];
+                                    var c7Cell = aRows[i].getCells()[8];
                                     if (c7Cell) {
                                         sType = c7Cell.getText();
                                         if (sType === "I" || sType === "P") {
-                                            for (var j = 18; j < sNum; j++) {
+                                            for (var j = 19; j < sNum; j++) {
                                                 var cEdit = aRows[i].getCells()[j];
                                                 var oItems = cEdit.getItems();
                                                 if (cEdit) {
@@ -305,11 +323,11 @@ sap.ui.define([
                                 var aRows = oTable.getRows();
                                 if (aRows && aRows.length > 0) {
                                     for (var i = 0; i < aRows.length; i++) {
-                                        var c7Cell = aRows[i].getCells()[7];
+                                        var c7Cell = aRows[i].getCells()[8];
                                         if (c7Cell) {
                                             var sType = c7Cell.getText();
                                             if (sType === "I" || sType === "P") {
-                                                for (var j = 18; j < sNum; j++) {
+                                                for (var j = 19; j < sNum; j++) {
                                                     var cEdit = aRows[i].getCells()[j];
                                                     if (cEdit && cEdit.getItems) {
                                                         var oItems = cEdit.getItems();
@@ -490,7 +508,7 @@ sap.ui.define([
 
                 );
             },
-            
+
 
         });
     });

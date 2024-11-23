@@ -214,6 +214,7 @@
                 <Property Name="D097" Type="Edm.String" MaxLength="20"/>
                 <Property Name="D098" Type="Edm.String" MaxLength="20"/>
                 <Property Name="D099" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Sobmx" Type="Edm.String" MaxLength="2"/>
                 <Property Name="Status" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Message" Type="Edm.String" sap:display-format="UpperCase" sap:label="Zzkey" sap:quickinfo="String Type"/>
             </EntityType>
@@ -1054,6 +1055,9 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_productionplan_o2.ProductionPlanType/Rounding" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_productionplan_o2.ProductionPlanType/Sobmx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_productionplan_o2.ProductionPlanType/Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
