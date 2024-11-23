@@ -315,20 +315,6 @@ sap.ui.define([
                         }
                     }
                 }
-                aPurchaseList.push({
-                    Supplier: aProcessObject[j].Supplier,
-                    SupplierName: aProcessObject[j].SupplierName,
-                    Product: aProcessObject[j].Product,
-                    ProductDescription: aProcessObject[j].ProductDescription,
-                    SupplierMaterialNumber: aProcessObject[j].SupplierMaterialNumber,
-                    ProductManufacturerNumber: aProcessObject[j].ProductManufacturerNumber,
-                    OrderDate: this.formatDateStr(this.getNDaysBefore(oRequestDate, parseFloat(aProcessObject[j].MaterialPlannedDeliveryDurn))),
-                    OrderQuantity: iOrderQuantity,
-                    RequestDate: this.formatDateStr(oRequestDate),
-                    Balance: iBalance,
-                    MaterialPlannedDeliveryDurn: aProcessObject[j].MaterialPlannedDeliveryDurn,
-                    MinimumPurchaseOrderQty: aProcessObject[j].MinimumPurchaseOrderQty,
-                });
             }
             this.getModel("local").setProperty("/PurchaseList", aPurchaseList);
             this.showPurchaseListDialog();
