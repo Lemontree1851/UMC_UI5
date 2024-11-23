@@ -315,6 +315,20 @@ sap.ui.define([
                         }
                     }
                 }
+                aPurchaseList.push({
+                    Supplier: aProcessObject[j].Supplier,
+                    SupplierName: aProcessObject[j].SupplierName,
+                    Product: aProcessObject[j].Product,
+                    ProductDescription: aProcessObject[j].ProductDescription,
+                    SupplierMaterialNumber: aProcessObject[j].SupplierMaterialNumber,
+                    ProductManufacturerNumber: aProcessObject[j].ProductManufacturerNumber,
+                    OrderDate: this.formatDateStr(this.getNDaysBefore(oRequestDate, parseFloat(aProcessObject[j].MaterialPlannedDeliveryDurn))),
+                    OrderQuantity: iOrderQuantity,
+                    RequestDate: this.formatDateStr(oRequestDate),
+                    Balance: iBalance,
+                    MaterialPlannedDeliveryDurn: aProcessObject[j].MaterialPlannedDeliveryDurn,
+                    MinimumPurchaseOrderQty: aProcessObject[j].MinimumPurchaseOrderQty,
+                });
             }
             this.getModel("local").setProperty("/PurchaseList", aPurchaseList);
             this.showPurchaseListDialog();
@@ -343,8 +357,19 @@ sap.ui.define([
             }.bind(this));
         },
 
+        onExport: function () {
+            var oTable = this.byId("idListTable");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("title");
+            this._exportExcel(oTable, sFileName);
+        },
+
         onExportPurchaseList: function () {
             var oTable = sap.ui.getCore().byId("idPurchaseListTable");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("PurchaseList");
+            this._exportExcel(oTable, sFileName);
+        },
+
+        _exportExcel: function (oTable, sFileName) {
             var sPath = oTable.getBindingPath("rows");
             var aExcelSet = this.getModel("local").getProperty(sPath) ? this.getModel("local").getProperty(sPath) : [];
             var aExcelCol = [];
@@ -352,31 +377,46 @@ sap.ui.define([
             for (var i = 0; i < aTableCol.length; i++) {
                 if (aTableCol[i].getVisible()) {
                     var sLabelText = aTableCol[i].getAggregation("label").getText();
-                    var sType, sTextAlign, sUnitProperty;
-                    switch (aTableCol[i].mBindingInfos.label.parts[0].path) {
-                        //  Date
-                        case "OrderDate":
-                        case "RequestDate":
-                            sType = sap.ui.export.EdmType.Date;
-                            break;
-                        //  Number 分隔符 没有小数位
+                    var sType, sTextAlign, bDelimiter, iScale;
+                    var sFieldName = aTableCol[i].getAggregation("template").mBindingInfos.text.parts[0].path;
+                    switch (sFieldName) {
+                        //  Number 分隔符
+                        case "SupplierPrice":
+                        case "StandardPrice":
+                        case "RequiredQty":
+                        case "StockQty":
+                        case "SuppliedQty":
+                        case "AvailableStock":
+                        case "RemainingQty":
+                        case "SafetyStock":
+                        case "ShipmentNoticeQty":
+                        case "PastQty":
+                        case "FutureQty":
+                        case "TotalQty":
                         case "OrderQuantity":
                         case "Balance":
                         case "MinimumPurchaseOrderQty":
-                            sType = sap.ui.export.EdmType.Number;
-                            sTextAlign = "End";
-                            sUnitProperty = "BaseUnit";
-                            break;
-                        //  Number 分隔符 没有小数位
                         case "MaterialPlannedDeliveryDurn":
                             sType = sap.ui.export.EdmType.Number;
+                            bDelimiter = true;
+                            iScale = 3;
+                            sTextAlign = "End";
+                            break;
+                        case "MaterialPlannedDeliveryDurn":
+                            sType = sap.ui.export.EdmType.Number;
+                            bDelimiter = true;
                             sTextAlign = "End";
                             break;
                         default:
                             sType = sap.ui.export.EdmType.String;
                             sTextAlign = "Begin";
-                            sUnitProperty = "";
                             break;
+                    }
+                    if (sFieldName.substring(0, 3) === "YMD" || sFieldName.substring(0, 2) === "YW" || sFieldName.substring(0, 2) === "YM") {
+                        sType = sap.ui.export.EdmType.Number;
+                        bDelimiter = true;
+                        iScale = 3;
+                        sTextAlign = "End";
                     }
                     var oExcelCol = {
                         label: sLabelText,
@@ -384,7 +424,8 @@ sap.ui.define([
                         property: aTableCol[i].getAggregation("template").getBindingPath("text"),
                         width: parseFloat(aTableCol[i].getWidth()),
                         textAlign: sTextAlign,
-                        unitProperty: sUnitProperty
+                        delimiter: bDelimiter,
+                        scale: iScale
                     };
                     aExcelCol.push(oExcelCol);
                 }
@@ -398,7 +439,7 @@ sap.ui.define([
                     }
                 },
                 dataSource: aExcelSet,
-                fileName: this.getModel("i18n").getResourceBundle().getText("PurchaseList") + "_" + this.getCurrentDateTime() + ".xlsx"
+                fileName: sFileName + "_" + this.getCurrentDateTime() + ".xlsx"
             };
             // export excel file
             new Spreadsheet(oSettings).build();
