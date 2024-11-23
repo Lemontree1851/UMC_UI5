@@ -334,6 +334,44 @@ sap.ui.define([
                 }
                 return result;
             }, []);
+        },
+
+        getFirstDayOfWeek: function (year, week) {
+            // 使用Intl.DateTimeFormat获取周的第一天（ISO 8601规定周一为一周的开始）
+            var weekday = new Intl.DateTimeFormat('en', { weekday: 'short' }).format(new Date(year, 0, 1));
+            var firstDayIndex = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].indexOf(weekday.toLowerCase());
+            // 计算该周的第一天
+            var date = new Date(year, 0, 1); // 该年的1月1日
+            date.setDate(date.getDate() + (week - 1) * 7 - (date.getDay() - firstDayIndex + 7) % 7);
+            return date;
+        },
+
+        getSecondWorkday: function (year, month) {
+            var date = new Date(year, month - 1, 1);// 月份是从0开始的，所以减1
+            var count = 0;
+            while (count < 2) {
+                date.setDate(date.getDate() + 1); // 递增日期
+                if (date.getDay() > 0 && date.getDay() < 6) { // 判断是否为工作日（排除周六和周日）
+                    count++; // 工作日计数器递增
+                }
+            }
+            // 返回第二个工作日
+            return date;
+        },
+
+        getNDaysBefore: function (date, n) {
+            date.setDate(date.getDate() - n); // 减去n天
+            return date;
+        },
+
+        formatDateStr: function (date, format) {
+            var iYear = date.getFullYear();
+            var iMonth = date.getMonth() + 1;
+            var iDate = date.getDate();
+            if (format === undefined) {
+                format = "/";
+            }
+            return iYear + format + this._pad2(iMonth) + format + this._pad2(iDate);
         }
     })
 });

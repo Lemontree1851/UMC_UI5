@@ -232,34 +232,88 @@ sap.ui.define([
 
         onPurchaseList: function () {
             var aMainData = this.getModel("local").getProperty("/resultSet");
-            var aGroupKey = this._removeDuplicates(aMainData, ["Product"]);
+            var aProcessObject = aMainData.filter(obj => obj.Classification == "5.DEMAND" || obj.Classification == "R.BALANCE");
             var aPurchaseList = [];
             this._myBusyDialog.open();
-            for (var i = 0; i < aGroupKey.length; i++) {
-                // 品目
-                var sProduct = aGroupKey[i].Product;
-                // 最小発注数
-                var sMinimumPurchaseOrderQty = aGroupKey[i].MinimumPurchaseOrderQty;
-                // 納入予定日数
-                var sMaterialPlannedDeliveryDurn = aGroupKey[i].MaterialPlannedDeliveryDurn;
+            for (var j = 0; j < aProcessObject.length; j++) {
+                if (aProcessObject[j].Classification == "5.DEMAND") {
+                    // 5.DEMAND
+                    var oDemandRow = aProcessObject[j];
+                    // 利用可能数量
+                    var iAvailableQty = 0;
+                    continue;
+                }
+                if (aProcessObject[j].Classification == "R.BALANCE") {
+                    var iExcuteTimes = 1;
+                    for (const field in aProcessObject[j]) {
+                        if (field.substring(0, 3) === "YMD" || field.substring(0, 2) === "YW" || field.substring(0, 2) === "YM") {
+                            var oRequestDate;
+                            if (field.substring(0, 3) === "YMD") {
+                                oRequestDate = new Date(field.substring(3, 7) + "/" + field.substring(7, 9) + "/" + field.substring(9, 11));
+                            } else if (field.substring(0, 2) === "YW") {
+                                // 周的第一天
+                                oRequestDate = this.getFirstDayOfWeek(field.substring(2, 6), field.substring(6, 8));
+                            } else if (field.substring(0, 2) === "YM") {
+                                // 月的第二个工作日
+                                oRequestDate = this.getSecondWorkday(field.substring(2, 6), field.substring(6, 8));
+                            }
 
-                for (var j = 0; j < aMainData.length; j++) {
-                    var oRow = aMainData[j];
+                            // 找 R.BALANCE < 0 的第一列(所以只执行一次)
+                            if (iExcuteTimes > 0 && parseFloat(aProcessObject[j][field]) < 0) {
+                                iExcuteTimes -= 1;
+                                var iBalance = parseFloat(aProcessObject[j][field]) + iAvailableQty;
+                                // 基数 = Balance / 最低発注数量 向上取整
+                                var iCardinality = Math.ceil(Math.abs(iBalance) / parseFloat(aProcessObject[j].MinimumPurchaseOrderQty));
+                                // 発注数 = 最低発注数量 * 基数
+                                var iOrderQuantity = parseFloat(aProcessObject[j].MinimumPurchaseOrderQty) * iCardinality;
+                                // 利用可能数量
+                                iAvailableQty = iOrderQuantity + iBalance;
 
-                    aPurchaseList.push({
-                        Supplier: "",
-                        SupplierName: "",
-                        Product: "",
-                        ProductDescription: "",
-                        SupplierMaterialNumber: "",
-                        ProductManufacturerNumber: "",
-                        OrderDate: "",
-                        OrderQuantity: "",
-                        RequestDate: "",
-                        Balance: "",
-                        MaterialPlannedDeliveryDurn: "",
-                        MinimumPurchaseOrderQty: ""
-                    });
+                                aPurchaseList.push({
+                                    Supplier: aProcessObject[j].Supplier,
+                                    SupplierName: aProcessObject[j].SupplierName,
+                                    Product: aProcessObject[j].Product,
+                                    ProductDescription: aProcessObject[j].ProductDescription,
+                                    SupplierMaterialNumber: aProcessObject[j].SupplierMaterialNumber,
+                                    ProductManufacturerNumber: aProcessObject[j].ProductManufacturerNumber,
+                                    OrderDate: this.formatDateStr(this.getNDaysBefore(oRequestDate, parseFloat(aProcessObject[j].MaterialPlannedDeliveryDurn))),
+                                    OrderQuantity: iOrderQuantity,
+                                    RequestDate: this.formatDateStr(oRequestDate),
+                                    Balance: iBalance,
+                                    MaterialPlannedDeliveryDurn: aProcessObject[j].MaterialPlannedDeliveryDurn,// 納入予定日数
+                                    MinimumPurchaseOrderQty: aProcessObject[j].MinimumPurchaseOrderQty,// 最低発注数量
+                                });
+                                continue;
+                            }
+
+                            if (iExcuteTimes === 0) {
+                                iBalance = parseFloat(oDemandRow[field]) + iAvailableQty;
+                                if (iBalance < 0) {
+                                    // 基数 = Balance / 最低発注数量 向上取整
+                                    iCardinality = Math.ceil(Math.abs(iBalance) / parseFloat(aProcessObject[j].MinimumPurchaseOrderQty));
+                                    // 発注数 = 最低発注数量 * 基数
+                                    iOrderQuantity = parseFloat(aProcessObject[j].MinimumPurchaseOrderQty) * iCardinality;
+                                    // 利用可能数量
+                                    iAvailableQty = iOrderQuantity + iBalance;
+
+                                    aPurchaseList.push({
+                                        Supplier: aProcessObject[j].Supplier,
+                                        SupplierName: aProcessObject[j].SupplierName,
+                                        Product: aProcessObject[j].Product,
+                                        ProductDescription: aProcessObject[j].ProductDescription,
+                                        SupplierMaterialNumber: aProcessObject[j].SupplierMaterialNumber,
+                                        ProductManufacturerNumber: aProcessObject[j].ProductManufacturerNumber,
+                                        OrderDate: this.formatDateStr(this.getNDaysBefore(oRequestDate, parseFloat(aProcessObject[j].MaterialPlannedDeliveryDurn))),
+                                        OrderQuantity: iOrderQuantity,
+                                        RequestDate: this.formatDateStr(oRequestDate),
+                                        Balance: iBalance,
+                                        MaterialPlannedDeliveryDurn: aProcessObject[j].MaterialPlannedDeliveryDurn,
+                                        MinimumPurchaseOrderQty: aProcessObject[j].MinimumPurchaseOrderQty,
+                                    });
+                                }
+                            }
+                        }
+                    }
                 }
             }
             this.getModel("local").setProperty("/PurchaseList", aPurchaseList);
