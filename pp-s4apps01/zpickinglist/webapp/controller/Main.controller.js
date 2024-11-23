@@ -429,6 +429,7 @@ sap.ui.define([
                     case "PostingQuantity":
                         oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.delimiter = true;
+                        oColumn.scale = 3;
                         oColumn.textAlign = "End";
                         oColumn.unitProperty = "BaseUnit";
                         break;
@@ -446,8 +447,9 @@ sap.ui.define([
             for (var i = 0; i < aTableCol.length; i++) {
                 if (aTableCol[i].getVisible()) {
                     var sLabelText = aTableCol[i].getAggregation("label").getText();
-                    var sType, sTextAlign, sUnitProperty;
-                    switch (aTableCol[i].mBindingInfos.label.parts[0].path) {
+                    var sType, sTextAlign, sUnitProperty, bDelimiter, iScale;
+                    var sFieldName = aTableCol[i].getAggregation("template").mBindingInfos.text.parts[0].path;
+                    switch (sFieldName) {
                         //  Date
                         // case "RequisitionDate":
                         //     sType = sap.ui.export.EdmType.Date;
@@ -461,6 +463,8 @@ sap.ui.define([
                         case "ShortQuantity":
                         case "ConfirmedAvailableQuantity":
                             sType = sap.ui.export.EdmType.Number;
+                            bDelimiter = true;
+                            iScale = 3;
                             sTextAlign = "End";
                             sUnitProperty = "BaseUnit";
                             break;
@@ -476,7 +480,9 @@ sap.ui.define([
                         property: aTableCol[i].getAggregation("template").getBindingPath("text"),
                         width: parseFloat(aTableCol[i].getWidth()),
                         textAlign: sTextAlign,
-                        unitProperty: sUnitProperty
+                        unitProperty: sUnitProperty,
+                        delimiter: bDelimiter,
+                        scale: iScale
                     };
                     aExcelCol.push(oExcelCol);
                 }
