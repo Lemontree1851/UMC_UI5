@@ -118,7 +118,7 @@ sap.ui.define([
                                             aExcelSet[index].Status = element.STATUS;
                                             aExcelSet[index].Message = element.MESSAGE;
 
-                                            if (element.STATUS = 'S') {
+                                            if (element.STATUS === 'S') {
                                                 oResult.iSuccess += 1;
                                             } else {
                                                 oResult.iFailed += 1;
