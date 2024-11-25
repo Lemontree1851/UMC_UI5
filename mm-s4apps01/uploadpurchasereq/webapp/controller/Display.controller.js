@@ -267,13 +267,32 @@ sap.ui.define([
 			const offsetMinutes = -date.getTimezoneOffset(); // 与 UTC 的分钟偏移量
 			const hours = Math.floor(offsetMinutes / 60);
 			const minutes = Math.abs(offsetMinutes % 60);
-		  
+			
 			// 格式化为简短 UTC±HHMM 格式
 			const sign = hours >= 0 ? '+' : '-';
 			const formattedOffset = minutes === 0 
 				? `UTC${sign}${Math.abs(hours)}` 
 				: `UTC${sign}${Math.abs(hours)}${minutes}`;
 			return formattedOffset;
-		  }
+		},
+		onBeforeExport: function (oEvent) {
+			// var that = this;
+            // var mExcelSettings = oEvent.getParameter("exportSettings");
+
+            // mExcelSettings.fileName = tabName + '_' + this.toDateTime(new Date());
+
+            // mExcelSettings.workbook.columns.forEach(function(oColumn) {
+            //     switch (oColumn.property) {
+            //     //千分位 并且是数值类型能求和，如果关联 货币就无法求和
+            //         case "Sagaku": 
+            //             oColumn.type = sap.ui.export.EdmType.Number;
+            //             // oColumn.unitProperty = 'Waers';
+            //             oColumn.textAlign = 'end';
+            //             oColumn.width = 20;
+            //             oColumn.delimiter = true;//控制千分位
+            //             break;
+            //     }
+            // });
+        },
 	});
 });

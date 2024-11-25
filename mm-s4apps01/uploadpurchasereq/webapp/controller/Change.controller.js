@@ -199,13 +199,6 @@ sap.ui.define([
 				sDocumentInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')";
 			oUploadSet.bindElement(sPath);
 			// 设置uploadUrl
-			// const sUploadUrl = `/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch(
-			// 	DocumentInfoRecordDocType='${item.DocumentInfoRecordDocType}',
-			// 	DocumentInfoRecordDocNumber='${item.DocumentInfoRecordDocNumber}',
-			// 	DocumentInfoRecordDocVersion='${item.DocumentInfoRecordDocVersion}',
-			// 	DocumentInfoRecordDocPart='${item.DocumentInfoRecordDocPart}')`;
-			// const sUploadUrl = "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
-			// 	sDocumentInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')/DocumentInfoRecordToAttachmentNavigation";
 			const sUploadUrl = this.getView().getModel("Attach").sServiceUrl + "/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
 				sDocumentInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')/DocumentInfoRecordToAttachmentNavigation";
 			oUploadSet.setUploadUrl(sUploadUrl);
@@ -293,8 +286,6 @@ sap.ui.define([
 			afilters.push(oFilter2);
 
 			afilters.push(oFilter3);
-			console.log("afilters", afilters);
-			//afilters.push(oFilter1, oFilter2, oFilter3);
 			this._timeline.bindAggregation("content", {
 				path: "/ApprovalHistory",
 				filters: afilters,

@@ -38,7 +38,7 @@ sap.ui.define([
                 return "失敗";
             }
             if (v === "W") {
-                return "に警告";
+                return "警告";
             }
             return "";
         },
@@ -51,7 +51,7 @@ sap.ui.define([
         date: function (value) {
             if (value) {
                 let localDate = new Date(value);
-                if (!isNaN(localDate.getTime())) {
+                if (!isNaN(localDate.getTime()) && value.ms) {
                     var oDateFormat = DateFormat.getDateTimeInstance({
                         pattern: "yyyy/MM/dd"
                     });
@@ -133,6 +133,12 @@ sap.ui.define([
             } else {
                 return v;
             }
+        },
+        additionalText: function(key,text) {
+            if (text) {
+                return `${text} (${key})`;
+            }
+            return key;
         }
 
     };

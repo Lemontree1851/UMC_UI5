@@ -177,6 +177,7 @@
                 placeToolbarInTable="true"
                 requestAtLeastFields="UUID,WorkflowId,InstanceId,ApplicationId"
                 beforeRebindTable="onBeforeRebindTable"
+                beforeExport="onBeforeExport"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar>
@@ -239,7 +240,10 @@
                                         path: 'Type',
                                         formatter: '.formatter.setState'
                                     }"
-                                    icon="sap-icon://status-negative"
+                                    icon="{
+                                        path: 'Type',
+                                        formatter: '.formatter.setStateIcon'
+                                    }"
                                 />
                             </t:template>
                         </t:Column>
@@ -337,13 +341,15 @@
                                 <core:CustomData
                                     id="id0CustomData"
                                     key="p13nData"
-                                    value='\{"columnKey":"PrType", "leadingProperty":"PrType", "sortProperty":"PrType", "filterProperty": "PrType"}'
+                                    value='\{"columnKey":"PrType", "leadingProperty":"PrType", "additionalProperty":"PrTypeText", "sortProperty":"PrType", "filterProperty": "PrType"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
                                     id="idPrTypeText"
-                                    text="{PrType}"
+                                    text="{parts:['PrType','PrTypeText'], formatter:'.formatter.additionalText'}"
+                                    tooltip="{PrTypeText}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>
@@ -358,13 +364,15 @@
                                 <core:CustomData
                                     id="id1CustomData"
                                     key="p13nData"
-                                    value='\{"columnKey":"OrderType", "leadingProperty":"OrderType", "sortProperty":"OrderType", "filterProperty": "OrderType"}'
+                                    value='\{"columnKey":"OrderType", "leadingProperty":"OrderType", "additionalProperty":"OrderTypeText", "sortProperty":"OrderType", "filterProperty": "OrderType"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
                                     id="idOrderTypeText"
-                                    text="{OrderType}"
+                                    text="{parts:['OrderType','OrderTypeText'], formatter:'.formatter.additionalText'}"
+                                    tooltip="{OrderTypeText}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>
@@ -1039,13 +1047,15 @@
                                 <core:CustomData
                                     id="id33CustomData"
                                     key="p13nData"
-                                    value='\{"columnKey":"BuyPurpoose", "leadingProperty":"BuyPurpoose", "sortProperty":"BuyPurpoose", "filterProperty": "BuyPurpoose"}'
+                                    value='\{"columnKey":"BuyPurpoose", "leadingProperty":"BuyPurpoose", "additionalProperty":"BuyPurposeText", "sortProperty":"BuyPurpoose", "filterProperty": "BuyPurpoose"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
                                     id="idBuyPurpooseText"
-                                    text="{BuyPurpoose}"
+                                    text="{parts:['BuyPurpoose','BuyPurposeText'], formatter:'.formatter.additionalText'}"
+                                    tooltip="{BuyPurposeText}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>
@@ -1058,12 +1068,14 @@
                             <t:customData>
                                 <core:CustomData
                                     key="p13nData"
-                                    value='\{"columnKey":"ApproveStatus", "leadingProperty":"ApproveStatus", "sortProperty":"ApproveStatus", "filterProperty": "ApproveStatus"}'
+                                    value='\{"columnKey":"ApproveStatus", "leadingProperty":"ApproveStatus", "additionalProperty":"ApproveStatusText", "sortProperty":"ApproveStatus", "filterProperty": "ApproveStatus"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
-                                    text="{ApproveStatus}"
+                                text="{parts:['ApproveStatus','ApproveStatusText'], formatter:'.formatter.additionalText'}"
+                                tooltip="{ApproveStatusText}"
+                                wrapping="false"
                                 />
                             </t:template>
                         </t:Column>
@@ -1131,7 +1143,7 @@
                             </t:template>
                         </t:Column>
                         <t:Column
-                            width="6rem"
+                            width="10rem"
                             label="{i18n>ApplyDepart}"
                             sortProperty="ApplyDepart"
                             filterProperty="ApplyDepart"
@@ -1139,12 +1151,14 @@
                             <t:customData>
                                 <core:CustomData
                                     key="p13nData"
-                                    value='\{"columnKey":"ApplyDepart", "leadingProperty":"ApplyDepart", "sortProperty":"ApplyDepart", "filterProperty": "ApplyDepart"}'
+                                    value='\{"columnKey":"ApplyDepart", "leadingProperty":"ApplyDepart", "additionalProperty":"ApplyDepartText", "sortProperty":"ApplyDepart", "filterProperty": "ApplyDepart"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
-                                    text="{ApplyDepart}"
+                                    text="{parts:['ApplyDepart','ApplyDepartText'], formatter:'.formatter.additionalText'}"
+                                    tooltip="{ApplyDepartText}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>
@@ -1159,13 +1173,15 @@
                                 <core:CustomData
                                     id="id37CustomData"
                                     key="p13nData"
-                                    value='\{"columnKey":"Kyoten", "leadingProperty":"Kyoten", "sortProperty":"Kyoten", "filterProperty": "Kyoten"}'
+                                    value='\{"columnKey":"Kyoten", "leadingProperty":"Kyoten", "additionalProperty":"KyotenText", "sortProperty":"Kyoten", "filterProperty": "Kyoten"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
                                     id="idKyotenText"
-                                    text="{Kyoten}"
+                                    text="{parts:['Kyoten','KyotenText'], formatter:'.formatter.additionalText'}"
+                                    tooltip="{KyotenText}"
+                                    wrapping="false"
                                 />
                             </t:template>
                         </t:Column>
@@ -1180,7 +1196,7 @@
                                 <core:CustomData
                                     id="id39CustomData"
                                     key="p13nData"
-                                    value='\{"columnKey":"CreatedAt", "leadingProperty":"CreatedAt", "sortProperty":"CreatedAt", "filterProperty": "CreatedAt"}'
+                                    value='\{"columnKey":"CreatedAt", "leadingProperty":"CreatedAt", "sortProperty":"CreatedAt", "filterProperty": "CreatedAt", "type":"date"}'
                                 />
                             </t:customData>
                             <t:template>

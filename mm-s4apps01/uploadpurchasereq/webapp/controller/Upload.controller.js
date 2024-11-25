@@ -223,18 +223,6 @@ sap.ui.define([
             }
         },
 
-        onButtonCheckPress: function () {
-            let postDocs = this.preparePostBody();
-            let oModel = this._oDataModel,
-                aDeferredGroups = oModel.getDeferredGroups();
-            aDeferredGroups = aDeferredGroups.concat(["UploadHead0"]);
-            oModel.setDeferredGroups(aDeferredGroups);
-            for (var i = 0; i < postDocs.length; i++) {
-                this.postCreate(postDocs[i], i);
-            }
-            oModel.submitChanges({ groupId: "UploadHead0" });
-        },
-
         onButtonPress: function (oEvent, sAction) {
             let postDocs = this.preparePostBatchBody();
             for (var i = 0; i < postDocs.length; i++) {
@@ -242,19 +230,6 @@ sap.ui.define([
             }
         },
 
-        preparePostBody: function () {
-            let aExcelSet = this._LocalData.getProperty("/excelSet"),
-                postDocs = [],
-                postDoc,
-                post = [];
-
-            aExcelSet.forEach(function (line) {
-                post.push(JSON.parse(JSON.stringify(line)));
-            }, this);
-
-            postDocs = post;
-            return postDocs;
-        },
         preparePostBatchBody: function () {
             let aExcelSet = this._LocalData.getProperty("/excelSet");
             let copyExcelSet = [];
@@ -308,29 +283,6 @@ sap.ui.define([
                 }.bind(this)
             });
             // oModel.submitChanges({ groupId: "myId" });
-        },
-        postCreate: function (postData, i) {
-            delete postData.Type;
-            delete postData.Message;
-            let mParameters = {
-                groupId: "UploadHead" + Math.floor(i / 100),
-                // changeSetId: i,
-                success: function (oData) {
-                    // var aExcelSet = this._LocalData.getProperty("/excelSet");
-                    // aExcelSet.forEach(function (line) {
-                    // 	line.Type = oData.Type;
-                    // 	line.Message = oData.Message;
-                    // });
-                }.bind(this),
-                error: function (oError) {
-                    // var aExcelSet = this._LocalData.getProperty("/excelSet");
-                    // aExcelSet.forEach(function (line) {
-                    // 	line.Type = "E";
-                    // 	line.Message = messages.parseErrors(oError,line.Datanumber);
-                    // });
-                }.bind(this)
-            };
-            this.getOwnerComponent().getModel().create("/PurchaseReq", postData, mParameters);
         },
 
         onExport: function (oEvent) {

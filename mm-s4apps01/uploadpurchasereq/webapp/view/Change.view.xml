@@ -413,10 +413,10 @@
                             <Toolbar id="idToolbar">
                                 <CheckBox text="Scrollbar" select="onScrollbarSelected" />
                             </Toolbar>
-                            <r:Timeline id="idTimeline" content="{/ApprovalHistory}" filterList="{/ApprovalHistory}" showIcons="false" alignment="Center"
+                            <r:Timeline id="idTimeline" content="{/ApprovalHistory}" filterList="{/ApprovalHistory}" showIcons="false"
                                 textHeight="100px">
                                 <r:content>
-                                    <r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{Zseq}" userName="{Operator}"
+                                    <r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{title}" userName="{Operator}"
                                         filterValue="{Operator}" />
                                 </r:content>
                                 <r:filterList>
