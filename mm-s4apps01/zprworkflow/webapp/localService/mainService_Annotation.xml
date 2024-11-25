@@ -29,10 +29,43 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="zui_prworkflow_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ApproveStatusText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/PrTypeText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ApplyDepartText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/OrderTypeText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/BuyPurposeText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/KyotenText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/KnttpText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/CostCenterName">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Delete_mc">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Update_mc">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFItemType/BuyPurposeText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFLinkType/PrTypeText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFLinkType/KyotenText">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
             <Annotations Target="_Entities"/>

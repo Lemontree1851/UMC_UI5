@@ -1117,13 +1117,13 @@ xmlns:m="sap.m"
                                 <core:CustomData
                                     id="id33CustomData"
                                     key="p13nData"
-                                    value='\{"columnKey":"BuyPurpoose", "leadingProperty":"BuyPurpoose", "sortProperty":"BuyPurpoose", "filterProperty": "BuyPurpoose"}'
+                                    value='\{"columnKey":"BuyPurpoose", "leadingProperty":"BuyPurpoose", "sortProperty":"BuyPurpoose", "filterProperty": "BuyPurpoose","additionalProperty":"BuyPurposeText"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
                                     id="idBuyPurpooseText"
-                                    text="{BuyPurpoose}"
+                                    text="{BuyPurpoose} - {BuyPurposeText}"
                                 />
                             </t:template>
                         </t:Column>
@@ -1666,7 +1666,7 @@ xmlns:m="sap.m"
 <r:Timeline id="idTimeline"   content="{/ApprovalHistory}"  filterList="{/ApprovalHistory}" showIcons="false"
 textHeight="100px" >
 <r:content>
-<r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{CurrentNode}" userName="{Operator}" select="onPressItems"
+<r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{title}" userName="{Operator}" select="onPressItems"
 filterValue="{Operator}" > </r:TimelineItem>
 </r:content>
 <r:filterList>

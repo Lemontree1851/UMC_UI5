@@ -189,6 +189,7 @@
                                 label="{i18n>EmailAddress}"
                                 mandatory="notMandatory"
                                 index="55"
+                                visible="false"
                             />
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
@@ -204,7 +205,7 @@
                 persistencyKey="uploadPurchaseReqTable"
                 header="{i18n>tableHeaderTitle}"
                 placeToolbarInTable="true"
-                requestAtLeastFields="UUID"
+                requestAtLeastFields="UUID,WorkflowId,InstanceId,ApplicationId"
                 beforeRebindTable="onBeforeRebindTable"
             >
                 <smartTable:customToolbar>
@@ -356,19 +357,21 @@
                             label="{i18n>PrType}"
                             sortProperty="PrType"
                             filterProperty="PrType"
+                            
                         >
                             <t:customData>
                                 <core:CustomData
                                     id="id0CustomData"
                                     key="p13nData"
-                                    value='\{"columnKey":"PrType", "leadingProperty":"PrType", "sortProperty":"PrType", "filterProperty": "PrType"}'
+                                    value='\{"columnKey":"PrType", "leadingProperty":"PrType", "sortProperty":"PrType", "filterProperty": "PrType","additionalProperty":"PrTypeText"}'
+                                    
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
-                                    id="idPrTypeText"
-                                    text="{PrType}"
-                                />
+                                id="idPrTypeText"
+                                text="{PrType} - {PrTypeText} " 
+                               />
                             </t:template>
                         </t:Column>
                         <!-- <t:Column
@@ -1083,12 +1086,12 @@
                             <t:customData>
                                 <core:CustomData
                                     key="p13nData"
-                                    value='\{"columnKey":"ApproveStatus", "leadingProperty":"ApproveStatus", "sortProperty":"ApproveStatus", "filterProperty": "ApproveStatus"}'
+                                    value='\{"columnKey":"ApproveStatus", "leadingProperty":"ApproveStatus", "sortProperty":"ApproveStatus", "filterProperty": "ApproveStatus","additionalProperty":"ApproveStatusText"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
-                                    text="{ApproveStatus}"
+                                    text="{ApproveStatus} - {ApproveStatusText}"
                                 />
                             </t:template>
                         </t:Column>
@@ -1156,7 +1159,7 @@
                             </t:template>
                         </t:Column>-->
                         <t:Column
-                            width="6rem"
+                            width="10rem"
                             label="{i18n>ApplyDepart}"
                             sortProperty="ApplyDepart"
                             filterProperty="ApplyDepart"
@@ -1164,12 +1167,14 @@
                             <t:customData>
                                 <core:CustomData
                                     key="p13nData"
-                                    value='\{"columnKey":"ApplyDepart", "leadingProperty":"ApplyDepart", "sortProperty":"ApplyDepart", "filterProperty": "ApplyDepart"}'
+                                    value='\{"columnKey":"ApplyDepart", "leadingProperty":"ApplyDepart", "sortProperty":"ApplyDepart", "filterProperty": "ApplyDepart" ,"additionalProperty":"ApplyDepartText"}'
                                 />
                             </t:customData>
                             <t:template>
+                               
                                 <Text
-                                    text="{ApplyDepart}"
+                                id="idApplyDepartText"
+                                text="{ApplyDepart} - {ApplyDepartText}" 
                                 />
                             </t:template>
                         </t:Column> 
@@ -1184,13 +1189,13 @@
                                 <core:CustomData
                                     id="id37CustomData"
                                     key="p13nData"
-                                    value='\{"columnKey":"Kyoten", "leadingProperty":"Kyoten", "sortProperty":"Kyoten", "filterProperty": "Kyoten"}'
+                                    value='\{"columnKey":"Kyoten", "leadingProperty":"Kyoten", "sortProperty":"Kyoten", "filterProperty": "Kyoten","additionalProperty":"KyotenText"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
                                     id="idKyotenText"
-                                    text="{Kyoten}"
+                                    text="{Kyoten} - {KyotenText}"
                                 />
                             </t:template>
                         </t:Column>
@@ -1272,11 +1277,12 @@
                                 />
                             </t:template>
                         </t:Column>
-                                                <t:Column
+                                                <!-- <t:Column
                             width="6rem"
                             label="{i18n>InstanceId}"
                             sortProperty="InstanceId"
                             filterProperty="InstanceId"
+                            visible="false"
                         >
                             <t:customData>
                                 <core:CustomData
@@ -1296,6 +1302,7 @@
                             label="{i18n>ApplicationId}"
                             sortProperty="ApplicationId"
                             filterProperty="ApplicationId"
+                            
                         >
                             <t:customData>
                                 <core:CustomData
@@ -1314,6 +1321,7 @@
                             label="{i18n>EmailAddress}"
                             sortProperty="EmailAddress"
                             filterProperty="EmailAddress"
+                            visible="false"
                         >
                             <t:customData>
                                 <core:CustomData
@@ -1326,7 +1334,7 @@
                                     text="{EmailAddress}"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                     </t:columns>
                 </t:Table>
             </smartTable:SmartTable>

@@ -57,13 +57,13 @@
                 </Key>
                 <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ApplyDepart" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ApplyDepart" Type="Edm.String" Nullable="false" MaxLength="3" sap:text="ApplyDepartText"/>
                 <Property Name="PrNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="UserZseq" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
                 <Property Name="UUID" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="PrType" Type="Edm.String" MaxLength="4"/>
-                <Property Name="OrderType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="PrType" Type="Edm.String" MaxLength="4" sap:text="PrTypeText"/>
+                <Property Name="OrderType" Type="Edm.String" MaxLength="4" sap:text="OrderTypeText"/>
                 <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
                 <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
                 <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
@@ -71,7 +71,7 @@
                 <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
                 <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
-                <Property Name="AccountType" Type="Edm.String" MaxLength="1"/>
+                <Property Name="AccountType" Type="Edm.String" MaxLength="1" sap:text="KnttpText"/>
                 <Property Name="MatID" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="MatDesc" Type="Edm.String" MaxLength="80"/>
                 <Property Name="MaterialGroup" Type="Edm.String" MaxLength="10"/>
@@ -84,7 +84,7 @@
                 <Property Name="ReturnItem" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Free" Type="Edm.String" MaxLength="1"/>
                 <Property Name="GlAccount" Type="Edm.String" MaxLength="10"/>
-                <Property Name="CostCenter" Type="Edm.String" MaxLength="14"/>
+                <Property Name="CostCenter" Type="Edm.String" MaxLength="14" sap:text="CostCenterName"/>
                 <Property Name="WbsElemnt" Type="Edm.String" MaxLength="20"/>
                 <Property Name="AssetNo" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Tax" Type="Edm.String" MaxLength="2"/>
@@ -95,12 +95,12 @@
                 <Property Name="CustomerRec" Type="Edm.String" MaxLength="1"/>
                 <Property Name="AssetOri" Type="Edm.String" MaxLength="20"/>
                 <Property Name="MemoText" Type="Edm.String" MaxLength="200"/>
-                <Property Name="BuyPurpoose" Type="Edm.String" MaxLength="2"/>
+                <Property Name="BuyPurpoose" Type="Edm.String" MaxLength="2" sap:text="BuyPurposeText"/>
                 <Property Name="IsLink" Type="Edm.String" MaxLength="1"/>
-                <Property Name="ApproveStatus" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ApproveStatus" Type="Edm.String" MaxLength="1" sap:text="ApproveStatusText"/>
                 <Property Name="PurchaseOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
                 <Property Name="PurchaseOrderItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
-                <Property Name="Kyoten" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Kyoten" Type="Edm.String" MaxLength="2" sap:text="KyotenText"/>
                 <Property Name="IsApprove" Type="Edm.String" MaxLength="1"/>
                 <Property Name="DocumentInfoRecordDocType" Type="Edm.String" MaxLength="3"/>
                 <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" MaxLength="25"/>
@@ -121,6 +121,14 @@
                 <Property Name="InstanceId" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
                 <Property Name="ApplicationId" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative"/>
                 <Property Name="EmailAddress" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ApproveStatusText" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PrTypeText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ApplyDepartText" Type="Edm.String" MaxLength="120" sap:label="Name" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="OrderTypeText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="BuyPurposeText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="KyotenText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="KnttpText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CostCenterName" Type="Edm.String" MaxLength="20" sap:label="Cost Center Name" sap:creatable="false" sap:updatable="false"/>
             </EntityType>
             <EntityType Name="PurchaseReqWFDocInfoType" sap:label="Projection View for ZR_PRWORKFLOWDOCINFO" sap:content-version="1">
                 <Key>
@@ -163,6 +171,7 @@
                 <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
                 <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
+                <Property Name="title" Type="Edm.String" MaxLength="35"/>
             </EntityType>
             <EntityType Name="PurchaseReqWFItemType" sap:label="Projection View for ZR_PRWORKFLOWITEM" sap:content-version="1">
                 <Key>
@@ -187,7 +196,7 @@
                 <Property Name="MaterialGroup" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Quantity" Type="Edm.Decimal" Precision="18" Scale="3"/>
                 <Property Name="Unit" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Price" Type="Edm.Decimal" Precision="18" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Price" Type="Edm.Decimal" Precision="34" Scale="0" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="UnitPrice" Type="Edm.Decimal" Precision="18" Scale="3"/>
                 <Property Name="DeliveryDate" Type="Edm.String" MaxLength="8"/>
                 <Property Name="Location" Type="Edm.String" MaxLength="4"/>
@@ -205,7 +214,7 @@
                 <Property Name="CustomerRec" Type="Edm.String" MaxLength="1"/>
                 <Property Name="AssetOri" Type="Edm.String" MaxLength="20"/>
                 <Property Name="MemoText" Type="Edm.String" MaxLength="200"/>
-                <Property Name="BuyPurpoose" Type="Edm.String" MaxLength="2"/>
+                <Property Name="BuyPurpoose" Type="Edm.String" MaxLength="2" sap:text="BuyPurposeText"/>
                 <Property Name="IsLink" Type="Edm.String" MaxLength="1"/>
                 <Property Name="ApproveStatus" Type="Edm.String" MaxLength="1"/>
                 <Property Name="PurchaseOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
@@ -227,7 +236,8 @@
                 <Property Name="LocalLastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Local Instance Last Changed By User"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
                 <Property Name="LatCahangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
-                <Property Name="amount1" Type="Edm.Decimal" Precision="34" Scale="0" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="BuyPurposeText" Type="Edm.String" MaxLength="120"/>
+                <Property Name="amount1" Type="Edm.Decimal" Precision="34" sap:variable-scale="true"/>
             </EntityType>
             <EntityType Name="PurchaseReqWFLinkType" sap:label="Projection View for ZR_PRWORKFLOWLINK" sap:content-version="1">
                 <Key>
@@ -237,7 +247,7 @@
                 <Property Name="ApplyDepart" Type="Edm.String" MaxLength="3"/>
                 <Property Name="PrNo" Type="Edm.String" MaxLength="10"/>
                 <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative"/>
-                <Property Name="PrType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="PrType" Type="Edm.String" MaxLength="4" sap:text="PrTypeText"/>
                 <Property Name="OrderType" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
                 <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
@@ -275,7 +285,7 @@
                 <Property Name="ApproveStatus" Type="Edm.String" MaxLength="1"/>
                 <Property Name="PurchaseOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
                 <Property Name="PurchaseOrderItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
-                <Property Name="Kyoten" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Kyoten" Type="Edm.String" MaxLength="2" sap:text="KyotenText"/>
                 <Property Name="IsApprove" Type="Edm.String" MaxLength="1"/>
                 <Property Name="DocumentInfoRecordDocType" Type="Edm.String" MaxLength="3"/>
                 <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" MaxLength="25"/>
@@ -293,6 +303,8 @@
                 <Property Name="WorkflowId" Type="Edm.String" MaxLength="20"/>
                 <Property Name="InstanceId" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
                 <Property Name="ApplicationId" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative"/>
+                <Property Name="PrTypeText" Type="Edm.String" MaxLength="120"/>
+                <Property Name="KyotenText" Type="Edm.String" MaxLength="120"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -794,6 +806,9 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ApproveStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ApproveStatusText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/AssetNo" xmlns="http://docs.oasis-open.org/odata/ns/edm">

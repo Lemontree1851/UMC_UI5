@@ -35,12 +35,17 @@ sap.ui.define([
 
 			oItem = oEvent.getSource();
 			oCtx = oItem.getBindingContext();
+			var InstanceId = oCtx.getProperty("InstanceId");
+			// 某些情况下InstanceId会为空，但是router中不允许，所以给一个默认值
+			if (!InstanceId) {
+				InstanceId = "00000000-0000-0000-0000-000000000000";
+			}
 			this.getRouter().navTo("PurchaseReq",{
 				contextPath : oCtx.getProperty("UUID"),
 				contextPrNo: oCtx.getProperty("PrNo"),
 				contextApplyDepart: oCtx.getProperty("ApplyDepart"),
 
-				contextInstanceId: oCtx.getProperty("InstanceId"),
+				contextInstanceId: InstanceId,
 				contextApplicationId: oCtx.getProperty("ApplicationId"),
 			});
 		},
@@ -68,6 +73,9 @@ sap.ui.define([
 		},
 
 		onBeforeRebindTable: function (oEvent) {
+			this._oDataModel.resetChanges();
+			var oFilter = oEvent.getParameter("bindingParams").filters;
+			oFilter.push(new sap.ui.model.Filter("EmailAddress", "EQ", this._UserEmail));
 // 			this._oDataModel.resetChanges();
 // 			var oFilter = oEvent.getParameter("bindingParams").filters;
 // 			var oNewFilter, aNewFilter = [];
