@@ -101,30 +101,118 @@ sap.ui.define([
                 var aPromise = [];
                 var aExcelSet = this.getModel("local").getProperty("/excelSet");
                 var aGroupKey = this.removeDuplicates(aExcelSet, ["PurchaseOrder"]);
-                var aGroupItems;
-                for (var m = 0; m < aGroupKey.length; m++) {
-                    const sPurchaseOrder = aGroupKey[m].PurchaseOrder;
-                    
+                //var aGroupItems;
+
+                this._BusyDialog.open();
+                this.processOneBatchRequest(bEvent, 0, aExcelSet, aGroupKey, aPromise);
+                // for (var m = 0; m < aGroupKey.length; m++) {
+                //     const sPurchaseOrder = aGroupKey[m].PurchaseOrder;
+
+                //     aGroupItems = [];
+                //     for (var n = 0; n < aExcelSet.length; n++) {
+                //         if (aExcelSet[n].PurchaseOrder === sPurchaseOrder){
+                //             aExcelSet[n].ScheduleLineDeliveryDate = formatter.odataDate(aExcelSet[n].ScheduleLineDeliveryDate);
+                //             aExcelSet[n].PurgDocPriceDate = formatter.odataDate(aExcelSet[n].PurgDocPriceDate);
+                //             aGroupItems.push(aExcelSet[n]);
+                //         }
+                //     }
+                //     aPromise.push(this._callODataAction(bEvent, aGroupItems));
+                // };
+
+                // try {
+                //     this._BusyDialog.open();
+                //     Promise.all(aPromise).then((aContext) => {
+                //         var oResult = {
+                //             iSuccess: 0,
+                //             iFailed: 0
+                //         };
+                //         this._BusyDialog.close();
+                //         var aExcelSet = this.getModel("local").getProperty("/excelSet");
+                //         for (const activeContext of aContext) {
+                //             var boundContext = activeContext.getBoundContext();
+                //             var object = boundContext.getObject();
+                //             JSON.parse(object.Zzkey).forEach(element => {
+                //                 for (var index = 0; index < aExcelSet.length; index++) {
+                //                     if (aExcelSet[index].Row === element.ROW) {
+                //                         aExcelSet[index].Status = element.STATUS;
+                //                         aExcelSet[index].Message = element.MESSAGE;
+
+                //                         if (element.STATUS = 'S'){
+                //                             oResult.iSuccess += 1;
+                //                         }else{
+                //                             oResult.iFailed += 1;
+                //                         }
+                //                     }
+                //                 }
+                //             });
+                //         }
+                //         this.getModel("local").setProperty("/excelSet", aExcelSet);
+                //         this.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                //     }).catch((error) => {
+                //         MessageBox.error(error.message);
+                //     }).finally(() => {
+                //         this._BusyDialog.close();
+                //     });
+                // } catch (error) {
+                //     MessageBox.error(error);
+                //     this._BusyDialog.close();
+                // }
+            },
+            processOneBatchRequest: function (bEvent, batchOfCount, postDocs, postKeys, postArray) {
+                let that = this;
+                let batchArray = [];
+                let iItemCount = postKeys.length;
+                let iPerCount = 10;
+                let iDoCount = Math.ceil(iItemCount / iPerCount);
+                let iBegin = batchOfCount * iPerCount;
+                let iEnd = 0;
+                let aGroupItems;
+                if (batchOfCount === iDoCount - 1) {
+                    iEnd = iBegin + (iItemCount - iBegin);
+                } else {
+                    iEnd = iBegin + iPerCount;
+                };
+
+                for (let j = iBegin; j < iEnd; j++) {
+                    const sPurchaseOrder = postKeys[j].PurchaseOrder;
+
                     aGroupItems = [];
-                    for (var n = 0; n < aExcelSet.length; n++) {
-                        if (aExcelSet[n].PurchaseOrder === sPurchaseOrder){
-                            aExcelSet[n].ScheduleLineDeliveryDate = formatter.odataDate(aExcelSet[n].ScheduleLineDeliveryDate);
-                            aExcelSet[n].PurgDocPriceDate = formatter.odataDate(aExcelSet[n].PurgDocPriceDate);
-                            aGroupItems.push(aExcelSet[n]);
+                    for (var n = 0; n < postDocs.length; n++) {
+                        if (postDocs[n].PurchaseOrder === sPurchaseOrder) {
+                            if (!postDocs[n].ScheduleLineDeliveryDate) {
+                                postDocs[n].ScheduleLineDeliveryDate = formatter.odataDate(postDocs[n].ScheduleLineDeliveryDate);
+                            };
+                            if (!postDocs[n].PurgDocPriceDate) {
+                                postDocs[n].PurgDocPriceDate = formatter.odataDate(postDocs[n].PurgDocPriceDate);
+                            };
+                            aGroupItems.push(postDocs[n]);
                         }
                     }
-                    aPromise.push(this._callODataAction(bEvent, aGroupItems));
+                    batchArray.push(that._callODataAction(bEvent, aGroupItems));
                 };
-    
+
+                postArray = postArray.concat(batchArray);
+                batchOfCount++;
+                if (batchOfCount < iDoCount) {
+                    Promise.all(batchArray).finally(function () {
+                        that.processOneBatchRequest(bEvent, batchOfCount, postDocs, postKeys, postArray);
+                    });
+                } else {
+                    that.processMessage(postArray);
+                };
+
+            },
+
+            processMessage: function (aPromise) {
+                let that = this;
                 try {
-                    this._BusyDialog.open();
                     Promise.all(aPromise).then((aContext) => {
                         var oResult = {
                             iSuccess: 0,
                             iFailed: 0
                         };
-                        this._BusyDialog.close();
-                        var aExcelSet = this.getModel("local").getProperty("/excelSet");
+                        that._BusyDialog.close();
+                        var aExcelSet = that.getModel("local").getProperty("/excelSet");
                         for (const activeContext of aContext) {
                             var boundContext = activeContext.getBoundContext();
                             var object = boundContext.getObject();
@@ -133,29 +221,30 @@ sap.ui.define([
                                     if (aExcelSet[index].Row === element.ROW) {
                                         aExcelSet[index].Status = element.STATUS;
                                         aExcelSet[index].Message = element.MESSAGE;
-    
-                                        if (element.STATUS = 'S'){
+
+                                        if (element.STATUS === 'S') {
                                             oResult.iSuccess += 1;
-                                        }else{
+                                        } else {
                                             oResult.iFailed += 1;
                                         }
                                     }
                                 }
                             });
                         }
-                        this.getModel("local").setProperty("/excelSet", aExcelSet);
-                        this.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                        that.getModel("local").setProperty("/excelSet", aExcelSet);
+                        that.getModel("local").setProperty("/logInfo", this.getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
                     }).catch((error) => {
-                        MessageBox.error(error.message);
+                        console.log(error);
+                        MessageBox.error((error.message));
                     }).finally(() => {
-                        this._BusyDialog.close();
+                        that._BusyDialog.close();
                     });
                 } catch (error) {
-                    MessageBox.error(error);
-                    this._BusyDialog.close();
+                    MessageBox.error(error.message);
+                    that._BusyDialog.close();
                 }
             },
-    
+
             _callODataAction: function (bEvent, aRequestData) {
                 return new Promise((resolve, reject) => {
                     var uploadProcess = this.getModel().bindContext("/POChange/com.sap.gateway.srvd.zui_pochange_o4.v0001.processLogic(...)");
@@ -169,13 +258,13 @@ sap.ui.define([
                     });
                 });
             },
-    
+
             onExport: function () {
                 // this._callOData("EXPORT");
                 var oTable = this.getView().byId("tableSourceList");
                 var sPath = oTable.getBindingPath("rows");
                 var aExcelSet = this.getModel("local").getProperty(sPath);
-                
+
                 if (aExcelSet.length === 0) {
                     MessageBox.error(this.getI18nBundle().getText("msgNoDataExport"));
                     return;
@@ -191,7 +280,7 @@ sap.ui.define([
                             label: sLabelText,
                             // 数据类型，即设置excel该列的数据类型
                             type: "string",
-                        
+
                             // 获取数据的绑定路径，即设置excel该列的字段路径
                             property: sTemplatePath,
                             // 获取表格的width属性，即设置excel该列的长度
@@ -212,7 +301,7 @@ sap.ui.define([
                     dataSource: aExcelSet, // 传入参数，数据源
                     fileName: "Export_" + this.getResourceBundle().getText("title") + formatter.formatDate(new Date()) + ".xlsx" // 文件名，需要加上后缀
                 };
-                
+
                 // 导出excel
                 new Spreadsheet(oSettings).build();
             }
