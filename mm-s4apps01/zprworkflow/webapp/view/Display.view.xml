@@ -51,20 +51,14 @@
                             />
 
                             <smartFilterBar:ControlConfiguration
-                                id="idControlConfigurationapply_date"
-                                key="apply_date"
+                                id="idControlConfigurationApplyDate"
+                                key="ApplyDate"
                                 visibleInAdvancedArea="true"
-                                label="{i18n>apply_date}"
+                                label="{i18n>ApplyDate}"
                                 mandatory="notMandatory"
-                                index="3"
+                                index="2"
                             >
-                                <smartFilterBar:customControl>
-                                    <DatePicker
-                                        id="idDatePicker2"
-                                        valueFormat="yyyyMMdd"
-                                        displayFormat="yyyy-MM-dd"
-                                    />
-                                </smartFilterBar:customControl>
+ 
                             </smartFilterBar:ControlConfiguration>
                           <smartFilterBar:ControlConfiguration
                                 id="idControlConfigurationPrType"
@@ -72,10 +66,10 @@
                                 visibleInAdvancedArea="true"
                                 label="{i18n>PrType}"
                                 mandatory="notMandatory"
-                                index="1"
-                            />
-
-
+                                index="3"
+                            >
+ 
+                            </smartFilterBar:ControlConfiguration>
                             <!-- <smartFilterBar:ControlConfiguration
                                 id="id0ControlConfiguration"
                                 key="Supplier"
@@ -98,7 +92,7 @@
                                 visibleInAdvancedArea="true"
                                 label="{i18n>PrBy}"
                                 mandatory="notMandatory"
-                                index="15"
+                                index="4"
                             />
                             <!-- <smartFilterBar:ControlConfiguration
                                 id="id3ControlConfiguration"
@@ -1236,8 +1230,22 @@
                                 />
                             </t:customData>
                             <t:template>
-                                <Text
+                                <!-- <Text
                                     text="{path:'ApplyDate', formatter:'.formatter.date'}"
+                                /> -->
+                               <Text
+                                    id="idApplyDateText"
+                                    text="{
+                                        path: 'ApplyDate',
+                                        type: 'sap.ui.model.type.Date',
+                                            'formatOptions': {
+                                                'pattern': 'yyyy-MM-dd'
+                                            }
+
+
+
+
+                                    }"
                                 />
                             </t:template>
                         </t:Column>
@@ -1259,7 +1267,7 @@
                                 />
                             </t:template>
                         </t:Column>
-                        <t:Column
+                        <!-- <t:Column
                             width="6rem"
                             label="{i18n>IsApprove}"
                             sortProperty="IsApprove"
@@ -1276,7 +1284,7 @@
                                     text="{IsApprove}"
                                 />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                                                 <!-- <t:Column
                             width="6rem"
                             label="{i18n>InstanceId}"

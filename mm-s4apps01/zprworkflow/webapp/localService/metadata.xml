@@ -61,74 +61,24 @@
                 <Property Name="PrNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="UserZseq" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
                 <Property Name="UUID" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="PrType" Type="Edm.String" MaxLength="4" sap:text="PrTypeText"/>
-                <Property Name="OrderType" Type="Edm.String" MaxLength="4" sap:text="OrderTypeText"/>
-                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
-                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
                 <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
                 <Property Name="PurchaseGrp" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
-                <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
-                <Property Name="AccountType" Type="Edm.String" MaxLength="1" sap:text="KnttpText"/>
-                <Property Name="MatID" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
-                <Property Name="MatDesc" Type="Edm.String" MaxLength="80"/>
-                <Property Name="MaterialGroup" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Quantity" Type="Edm.Decimal" Precision="18" Scale="3"/>
-                <Property Name="Unit" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Price" Type="Edm.Decimal" Precision="18" Scale="3"/>
-                <Property Name="UnitPrice" Type="Edm.Decimal" Precision="18" Scale="3"/>
-                <Property Name="DeliveryDate" Type="Edm.String" MaxLength="8"/>
-                <Property Name="Location" Type="Edm.String" MaxLength="4"/>
-                <Property Name="ReturnItem" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Free" Type="Edm.String" MaxLength="1"/>
-                <Property Name="GlAccount" Type="Edm.String" MaxLength="10"/>
-                <Property Name="CostCenter" Type="Edm.String" MaxLength="14" sap:text="CostCenterName"/>
-                <Property Name="WbsElemnt" Type="Edm.String" MaxLength="20"/>
-                <Property Name="AssetNo" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Tax" Type="Edm.String" MaxLength="2"/>
-                <Property Name="ItemText" Type="Edm.String" MaxLength="200"/>
                 <Property Name="PrBy" Type="Edm.String" MaxLength="10"/>
-                <Property Name="TrackNo" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Ean" Type="Edm.String" MaxLength="20"/>
-                <Property Name="CustomerRec" Type="Edm.String" MaxLength="1"/>
-                <Property Name="AssetOri" Type="Edm.String" MaxLength="20"/>
-                <Property Name="MemoText" Type="Edm.String" MaxLength="200"/>
-                <Property Name="BuyPurpoose" Type="Edm.String" MaxLength="2" sap:text="BuyPurposeText"/>
-                <Property Name="IsLink" Type="Edm.String" MaxLength="1"/>
-                <Property Name="ApproveStatus" Type="Edm.String" MaxLength="1" sap:text="ApproveStatusText"/>
-                <Property Name="PurchaseOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
-                <Property Name="PurchaseOrderItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
+                <Property Name="ApproveStatus" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Kyoten" Type="Edm.String" MaxLength="2" sap:text="KyotenText"/>
-                <Property Name="IsApprove" Type="Edm.String" MaxLength="1"/>
-                <Property Name="DocumentInfoRecordDocType" Type="Edm.String" MaxLength="3"/>
-                <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" MaxLength="25"/>
-                <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" MaxLength="2"/>
-                <Property Name="DocumentInfoRecordDocPart" Type="Edm.String" MaxLength="3"/>
-                <Property Name="ApplyDate" Type="Edm.String" MaxLength="8"/>
+                <Property Name="ApplyDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="ApplyTime" Type="Edm.String" MaxLength="6"/>
-                <Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Type" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Message Type" sap:quickinfo="Message type: S Success, E Error, W Warning, I Info, A Abort"/>
-                <Property Name="ResultText" Type="Edm.String" MaxLength="256"/>
                 <Property Name="Message" Type="Edm.String" MaxLength="1033"/>
-                <Property Name="LocalCreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="LocalCreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="LocalLastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Local Instance Last Changed By User" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="LatCahangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="WorkflowId" Type="Edm.String" MaxLength="20"/>
                 <Property Name="InstanceId" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
                 <Property Name="ApplicationId" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative"/>
                 <Property Name="EmailAddress" Type="Edm.String" MaxLength="50"/>
-                <Property Name="ApproveStatusText" Type="Edm.String" MaxLength="3"/>
-                <Property Name="PrTypeText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ApplyDepartText" Type="Edm.String" MaxLength="120" sap:label="Name" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="OrderTypeText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="BuyPurposeText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="KyotenText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="KnttpText" Type="Edm.String" MaxLength="120" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="CostCenterName" Type="Edm.String" MaxLength="20" sap:label="Cost Center Name" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ApproveStatusText" Type="Edm.String" MaxLength="120" sap:label="ステータステキスト" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="PrTypeText" Type="Edm.String" MaxLength="120" sap:label="購買申請タイプテキスト" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ApplyDepartText" Type="Edm.String" MaxLength="120" sap:label="依頼部署テキスト" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="KyotenText" Type="Edm.String" MaxLength="120" sap:label="拠点テキスト" sap:creatable="false" sap:updatable="false"/>
             </EntityType>
             <EntityType Name="PurchaseReqWFDocInfoType" sap:label="Projection View for ZR_PRWORKFLOWDOCINFO" sap:content-version="1">
                 <Key>
@@ -171,26 +121,19 @@
                 <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
                 <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
-                <Property Name="title" Type="Edm.String" MaxLength="35"/>
+                <Property Name="title" Type="Edm.String" MaxLength="38"/>
+                <Property Name="nodename" Type="Edm.String" MaxLength="35"/>
             </EntityType>
             <EntityType Name="PurchaseReqWFItemType" sap:label="Projection View for ZR_PRWORKFLOWITEM" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="UUID"/>
                 </Key>
                 <Property Name="UUID" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
-                <Property Name="ApplyDepart" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ApplyDepart" Type="Edm.String" MaxLength="3" sap:label="ステータス"/>
                 <Property Name="PrNo" Type="Edm.String" MaxLength="10"/>
                 <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative"/>
-                <Property Name="PrType" Type="Edm.String" MaxLength="4"/>
-                <Property Name="OrderType" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
-                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
-                <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
-                <Property Name="PurchaseGrp" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
-                <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
-                <Property Name="AccountType" Type="Edm.String" MaxLength="1"/>
                 <Property Name="MatID" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="MatDesc" Type="Edm.String" MaxLength="80"/>
                 <Property Name="MaterialGroup" Type="Edm.String" MaxLength="10"/>
@@ -200,44 +143,19 @@
                 <Property Name="UnitPrice" Type="Edm.Decimal" Precision="18" Scale="3"/>
                 <Property Name="DeliveryDate" Type="Edm.String" MaxLength="8"/>
                 <Property Name="Location" Type="Edm.String" MaxLength="4"/>
-                <Property Name="ReturnItem" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Free" Type="Edm.String" MaxLength="1"/>
                 <Property Name="GlAccount" Type="Edm.String" MaxLength="10"/>
                 <Property Name="CostCenter" Type="Edm.String" MaxLength="14"/>
                 <Property Name="WbsElemnt" Type="Edm.String" MaxLength="20"/>
                 <Property Name="AssetNo" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Tax" Type="Edm.String" MaxLength="2"/>
                 <Property Name="ItemText" Type="Edm.String" MaxLength="200"/>
-                <Property Name="PrBy" Type="Edm.String" MaxLength="10"/>
-                <Property Name="TrackNo" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Ean" Type="Edm.String" MaxLength="20"/>
                 <Property Name="CustomerRec" Type="Edm.String" MaxLength="1"/>
                 <Property Name="AssetOri" Type="Edm.String" MaxLength="20"/>
                 <Property Name="MemoText" Type="Edm.String" MaxLength="200"/>
-                <Property Name="BuyPurpoose" Type="Edm.String" MaxLength="2" sap:text="BuyPurposeText"/>
-                <Property Name="IsLink" Type="Edm.String" MaxLength="1"/>
-                <Property Name="ApproveStatus" Type="Edm.String" MaxLength="1"/>
-                <Property Name="PurchaseOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
-                <Property Name="PurchaseOrderItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
-                <Property Name="Kyoten" Type="Edm.String" MaxLength="2"/>
-                <Property Name="IsApprove" Type="Edm.String" MaxLength="1"/>
-                <Property Name="DocumentInfoRecordDocType" Type="Edm.String" MaxLength="3"/>
-                <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" MaxLength="25"/>
-                <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" MaxLength="2"/>
-                <Property Name="DocumentInfoRecordDocPart" Type="Edm.String" MaxLength="3"/>
-                <Property Name="ApplyDate" Type="Edm.String" MaxLength="8"/>
-                <Property Name="ApplyTime" Type="Edm.String" MaxLength="6"/>
-                <Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
-                <Property Name="Type" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Message Type" sap:quickinfo="Message type: S Success, E Error, W Warning, I Info, A Abort"/>
-                <Property Name="ResultText" Type="Edm.String" MaxLength="256"/>
-                <Property Name="Message" Type="Edm.String" MaxLength="1033"/>
-                <Property Name="LocalCreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
-                <Property Name="LocalCreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time"/>
-                <Property Name="LocalLastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Local Instance Last Changed By User"/>
-                <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
-                <Property Name="LatCahangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
-                <Property Name="BuyPurposeText" Type="Edm.String" MaxLength="120"/>
-                <Property Name="amount1" Type="Edm.Decimal" Precision="34" sap:variable-scale="true"/>
+                <Property Name="BuyPurpoose" Type="Edm.String" MaxLength="2"/>
+                <Property Name="BuyPurposeText" Type="Edm.String" MaxLength="120" sap:label="購入目的テキスト"/>
+                <Property Name="amount1" Type="Edm.Decimal" Precision="34" Scale="0" sap:unit="Currency" sap:variable-scale="true"/>
             </EntityType>
             <EntityType Name="PurchaseReqWFLinkType" sap:label="Projection View for ZR_PRWORKFLOWLINK" sap:content-version="1">
                 <Key>
@@ -650,17 +568,7 @@
             <Annotations Target="cds_zui_prworkflow_o2.cds_zui_prworkflow_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFItemType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.ChangedAt" Path="LatCahangedAt"/>
-                <Annotation Term="Common.CreatedAt" Path="LocalCreatedAt"/>
-                <Annotation Term="Common.CreatedBy" Path="LocalCreatedBy"/>
-            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFLinkType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.ChangedAt" Path="LatCahangedAt"/>
-                <Annotation Term="Common.CreatedAt" Path="LocalCreatedAt"/>
-                <Annotation Term="Common.CreatedBy" Path="LocalCreatedBy"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ChangedAt" Path="LatCahangedAt"/>
                 <Annotation Term="Common.CreatedAt" Path="LocalCreatedAt"/>
                 <Annotation Term="Common.CreatedBy" Path="LocalCreatedBy"/>
@@ -790,9 +698,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/AccountType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ApplicationId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -808,97 +713,16 @@
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ApproveStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ApproveStatusText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/AssetNo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/AssetOri" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/BuyPurpoose" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/CostCenter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/CustomerRec" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/DeliveryDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/DocumentInfoRecordDocNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/DocumentInfoRecordDocPart" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/DocumentInfoRecordDocType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/DocumentInfoRecordDocVersion" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Ean" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/EmailAddress" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Free" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/GlAccount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/InstanceId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/IsApprove" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/IsLink" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ItemCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ItemText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Kyoten" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Location" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/MatDesc" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/MatID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/MaterialGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/MemoText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Message" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/OrderType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/PrBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -907,52 +731,16 @@
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/PrType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Price" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/PurchaseGrp" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/PurchaseOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/PurchaseOrderItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/PurchaseOrg" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Quantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ResultText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/ReturnItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Tax" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/TrackNo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Type" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/Unit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/UnitPrice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/UserZseq" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/WbsElemnt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_prworkflow_o2.PurchaseReqWFType/WorkflowId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
