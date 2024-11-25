@@ -77,24 +77,26 @@ sap.ui.define([
 			var oFilter = oEvent.getParameter("bindingParams").filters;
 			oFilter.push(new sap.ui.model.Filter("EmailAddress", "EQ", this._UserEmail));
 // 			this._oDataModel.resetChanges();
-// 			var oFilter = oEvent.getParameter("bindingParams").filters;
-// 			var oNewFilter, aNewFilter = [];
-// //			var oCreatedAt = this.byId("idDatePicker").getDateValue();
-// //			if (oCreatedAt) {
-// 	//			aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
-// //			}
-// //
-// //			var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
-// //			if(sApproveStatus !== "0") {
-// //				aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
-// //			}
-//             aNewFilter.push(new Filter("EmailAddress", "EQ", "13")); 
-// 			oNewFilter = new Filter({
-// 				filters:aNewFilter 
-// 			});
-// 			if (aNewFilter.length > 0) {
-// 				oFilter.push(oNewFilter);
-// 			}
+ 			var oFilter = oEvent.getParameter("bindingParams").filters;
+ 			var oNewFilter, aNewFilter = [];
+			var oApplyDate = this.byId("idDatePicker").getDateValue();
+			if (oApplyDate) {
+				var year = oApplyDate.getFullYear();
+				var month = (oApplyDate.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+				var day = oApplyDate.getDate().toString().padStart(2, '0');
+				var formattedDate = `${year}${month}${day}`;
+				if (oApplyDate) {
+					console.log("ApplyDate",formattedDate)	;
+				    aNewFilter.push(new Filter("ApplyDate", "EQ", formattedDate)); 
+				}
+			}
+
+ 			oNewFilter = new Filter({
+ 				filters:aNewFilter 
+ 			});
+ 			if (aNewFilter.length > 0) {
+				oFilter.push(oNewFilter);
+ 			}
 		},
 
 		createPurchseOrder: function (oEvent) {
@@ -292,7 +294,14 @@ sap.ui.define([
 			}
 			this.postAction("RejectPRWF", JSON.stringify(aSelectedItems));
 			this.byId("AnswerDialog").close();
-        }
+        },
+		formatDate: function(date) {
+			var year = date.getFullYear();
+			var month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+			var day = date.getDate().toString().padStart(2, '0');
+			
+			return `${year}${month}${day}`;
+		}
 
 	});
 });

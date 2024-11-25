@@ -67,7 +67,7 @@
                 <Property Name="PrBy" Type="Edm.String" MaxLength="10"/>
                 <Property Name="ApproveStatus" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Kyoten" Type="Edm.String" MaxLength="2" sap:text="KyotenText"/>
-                <Property Name="ApplyDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="ApplyDate" Type="Edm.String" MaxLength="8"/>
                 <Property Name="ApplyTime" Type="Edm.String" MaxLength="6"/>
                 <Property Name="Type" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Message Type" sap:quickinfo="Message type: S Success, E Error, W Warning, I Info, A Abort"/>
                 <Property Name="Message" Type="Edm.String" MaxLength="1033"/>

@@ -52,13 +52,20 @@
 
                             <smartFilterBar:ControlConfiguration
                                 id="idControlConfigurationApplyDate"
-                                key="ApplyDate"
+                                key="ApplyDate1"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>ApplyDate}"
                                 mandatory="notMandatory"
                                 index="2"
+                                
                             >
- 
+                                 <smartFilterBar:customControl>
+                                    <DatePicker
+                                        id="idDatePicker"
+                                        valueFormat="yyyyMMdd"
+                                        displayFormat="yyyy-MM-dd"
+                                    />
+                                </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                           <smartFilterBar:ControlConfiguration
                                 id="idControlConfigurationPrType"
@@ -1230,10 +1237,10 @@
                                 />
                             </t:customData>
                             <t:template>
-                                <!-- <Text
+                                 <Text
                                     text="{path:'ApplyDate', formatter:'.formatter.date'}"
-                                /> -->
-                               <Text
+                                /> 
+                               <!-- <Text
                                     id="idApplyDateText"
                                     text="{
                                         path: 'ApplyDate',
@@ -1241,12 +1248,9 @@
                                             'formatOptions': {
                                                 'pattern': 'yyyy-MM-dd'
                                             }
-
-
-
-
+ 
                                     }"
-                                />
+                                /> -->
                             </t:template>
                         </t:Column>
                         <t:Column
