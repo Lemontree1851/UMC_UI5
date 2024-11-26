@@ -138,7 +138,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth1}",
 					label: titleVariable.zymonth1,
 					template: new Text({
-						text: "{local>zmonth1}"
+						text: "{local>zmonth1}" + "{local>zpercent1}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -148,7 +148,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth2}",
 					label: titleVariable.zymonth2,
 					template: new Text({
-						text: "{local>zmonth2}"
+						text: "{local>zmonth2}" + "{local>zpercent2}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -158,7 +158,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth3}",
 					label: titleVariable.zymonth3,
 					template: new Text({
-						text: "{local>zmonth3}"
+						text: "{local>zmonth3}" + "{local>zpercent3}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -168,7 +168,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth4}",
 					label: titleVariable.zymonth4,
 					template: new Text({
-						text: "{local>zmonth4}"
+						text: "{local>zmonth4}" + "{local>zpercent4}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -178,7 +178,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth5}",
 					label: titleVariable.zymonth5,
 					template: new Text({
-						text: "{local>zmonth5}"
+						text: "{local>zmonth5}" + "{local>zpercent5}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -188,7 +188,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth6}",
 					label: titleVariable.zymonth6,
 					template: new Text({
-						text: "{local>zmonth6}"
+						text: "{local>zmonth6}" + "{local>zpercent6}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -198,7 +198,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth7}",
 					label: titleVariable.zymonth7,
 					template: new Text({
-						text: "{local>zmonth7}"
+						text: "{local>zmonth7}" + "{local>zpercent7}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -208,7 +208,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth8}",
 					label: titleVariable.zymonth8,
 					template: new Text({
-						text: "{local>zmonth8}"
+						text: "{local>zmonth8}" + "{local>zpercent8}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -218,7 +218,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth9}",
 					label: titleVariable.zymonth9,
 					template: new Text({
-						text: "{local>zmonth9}"
+						text: "{local>zmonth9}" + "{local>zpercent9}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -228,7 +228,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth10}",
 					label: titleVariable.zymonth10,
 					template: new Text({
-						text: "{local>zmonth10}"
+						text: "{local>zmonth10}" + "{local>zpercent10}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -238,7 +238,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth11}",
 					label: titleVariable.zymonth11,
 					template: new Text({
-						text: "{local>zmonth11}"
+						text: "{local>zmonth11}" + "{local>zpercent11}"
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -248,7 +248,7 @@ sap.ui.define([
 					// label: "{i18n>zmonth12}",
 					label: titleVariable.zymonth12,
 					template: new Text({
-						text: "{local>zmonth12}"
+						text: "{local>zmonth12}" + "{local>zpercent12}"
 					}),
 					width: "10rem",
 					hAlign: "End"
