@@ -32,7 +32,11 @@ sap.ui.define([
 					}
 				}
 			} catch (err) {
-				messages = oError.statusCode + "：" + oError.statusText + "\n" + oError.message + "，\n";
+				if(oError.statusCode) {
+					messages = oError.statusCode + "：" + oError.statusText + "\n" + oError.message + "，\n";
+				} else {
+					messages = oError.message + "，\n";
+				}
 			} finally {
 				return messages.slice(0, messages.length - 2);
 			}

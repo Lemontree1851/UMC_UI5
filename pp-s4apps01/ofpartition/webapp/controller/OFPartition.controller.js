@@ -81,14 +81,14 @@ sap.ui.define([
 					this.getEntityContentOnePage(iItemCount, 0, aFilter, sParamtetrsOfSelect, splitRange);
 				} else {
 					this._LocalData.setProperty("/OFPartition", []);
-					this.byId("reportTable1").setBusy(false);
+					this.byId("idDynamicPage").setBusy(false);
 				}
 			}.bind(this));
         },
 
 		getEntityCount: function (aFilter, splitRange) {
 			var that = this;
-			that.byId("reportTable1").setBusy(true);
+			that.byId("idDynamicPage").setBusy(true);
 			var promise = new Promise(function (resolve, reject) {
 				var mParameters = {
 					filters: aFilter,
@@ -100,7 +100,7 @@ sap.ui.define([
 					error: function (oError) {
 						var iItemCount = 0;
 						resolve(iItemCount);
-						that.byId("reportTable1").setBusy(false);
+						that.byId("idDynamicPage").setBusy(false);
 						var sErrorMessage;
 						try {
 							var oJsonMessage = JSON.parse(oError.responseText);
@@ -121,7 +121,7 @@ sap.ui.define([
 			sParamtetrsOfSelect = sParamtetrsOfSelect ? sParamtetrsOfSelect : "";
 			var that = this;
 			this.aHttpRequest = [];
-			that.byId("reportTable1").setBusy(true);
+			that.byId("idDynamicPage").setBusy(true);
 			that.dataFinished = false;
 			var aPromise = [];
 
@@ -145,7 +145,7 @@ sap.ui.define([
 					error: function (oError) {
 						//手动中止的导致的错误不需要处理
 						if (!oError.aborted) {
-							that.byId("reportTable1").setBusy(false);
+							that.byId("idDynamicPage").setBusy(false);
 							var sErrorMessage;
 							try {
 								var oJsonMessage = JSON.parse(oError.responseText);
@@ -188,7 +188,7 @@ sap.ui.define([
 					that.aHttpRequest = [];
 					that._LocalData.refresh();
 					that.dataFinished = true;
-					// that.byId("reportTable1").setBusy(false);
+					// that.byId("idDynamicPage").setBusy(false);
 				}
             });
 			// aPromise.push(promise);
@@ -196,7 +196,7 @@ sap.ui.define([
 
 		onRowsUpdated:function(){
 			if (this.dataFinished) {
-				this.byId("reportTable1").setBusy(false);
+				this.byId("idDynamicPage").setBusy(false);
 			}
 		},
 
@@ -302,7 +302,6 @@ sap.ui.define([
 			var aPromise = [];
 			var that = this;
 			var processDate = this.getDates();
-			that.byId("reportTable1").setBusy(true);
 			aSelectedItem.forEach( function (line){
 				var promise = new Promise((resolve, reject) => {
 					var createPrintRecord = this.getOwnerComponent().getModel("pir").bindContext("/ZC_CREATEPIR/com.sap.gateway.srvd.zui_createpir_o4.v0001.processOFPartition(...)");
@@ -319,6 +318,7 @@ sap.ui.define([
 					// var uuidx16 = context.getObject().Uuid.replace(/-/g, '');
 					// createPrintRecord.setParameter("ProvidedKeys", JSON.stringify({ Uuid: uuidx16.toUpperCase() }));
 					// createPrintRecord.setParameter("ResultIsActiveEntity", true);
+					that.byId("idDynamicPage").setBusy(true);
 					createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then((odata) => {
 						var object = createPrintRecord.getBoundContext().getObject(); //获取返回的数据
 						// 更新message
@@ -341,7 +341,7 @@ sap.ui.define([
 						that._LocalData.setProperty("/OFPartition", aOFPartition);
 						resolve(createPrintRecord);
 					}).catch((oError) => {
-						console.log(oError.error);
+						messages.showError(messages.parseErrors(oError));
 						reject(oError);
 					});
 				});
@@ -351,7 +351,7 @@ sap.ui.define([
 			Promise.all(aPromise).then(function () {
 
 			}).finally(function () {
-				that.byId("reportTable1").setBusy(false);
+				that.byId("idDynamicPage").setBusy(false);
 			});
 		},
 		  
@@ -374,12 +374,14 @@ sap.ui.define([
 
 		transformBack: function (data) {
 			const result = [];
-		
+			let isFisrtDate = true;
 			// 遍历所有的 ReqDate 列，合并回原始形式
 			Object.keys(data).forEach(key => {
 				if (key.startsWith('ReqDate')) {
 					const date = key.replace('ReqDate', ''); // 获取后面的日期
-					if(Number(data[`ReqDate${date}`]) > 0) {
+					// 本来只取数量大于0的数据，但特殊情况下，全部为0也要至少保证一条数据，所以使用isFisrtDate控制
+					if(Number(data[`ReqDate${date}`]) > 0 || isFisrtDate) {
+						isFisrtDate = false;
 						result.push({
 							Customer: data.Customer,
 							Plant: data.Plant,
