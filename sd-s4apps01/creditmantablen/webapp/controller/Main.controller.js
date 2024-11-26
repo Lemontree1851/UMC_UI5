@@ -124,7 +124,7 @@ sap.ui.define([
 					template: new Text({
 						text: "{local>Termstext2}"
 					}),
-					width: "12rem"
+					width: "15rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>text}",
