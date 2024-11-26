@@ -378,7 +378,7 @@ sap.ui.define([
 			var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
 			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
 			var aData = [];
-
+			var sTimeZone = this.getUTCOffset();
 			var item = {
 				"PrNo": this._InsNo,
 				"ApplyDepart": this._InsNo1,
@@ -387,7 +387,8 @@ sap.ui.define([
 				"WorkflowId":"purchaserequisition",
 				"Remark": sValue,
 				"UserEmail":this._UserEmail,
-				"UserFullName":this._UserFullName 
+				"UserFullName":this._UserFullName ,
+				"timezone":sTimeZone
 			};
 			aData.push(item);
  
@@ -397,7 +398,7 @@ sap.ui.define([
 			var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
 			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
 			var aData = [];
-
+			var sTimeZone = this.getUTCOffset();
 			var item = {
 				"PrNo": this._InsNo,
 				"ApplyDepart": this._InsNo1,
@@ -406,7 +407,8 @@ sap.ui.define([
 				"WorkflowId":"purchaserequisition",
 				"Remark": sValue,
 				"UserEmail":this._UserEmail,
-				"UserFullName":this._UserFullName 
+				"UserFullName":this._UserFullName,
+				"timezone":sTimeZone
 			};
 			aData.push(item);
  

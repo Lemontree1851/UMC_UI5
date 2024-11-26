@@ -125,6 +125,7 @@ sap.ui.define([
 			//var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
 			var aData = [];
 			var postDocs = [];
+			var sTimeZone = this.getUTCOffset();
 			// 根据id值获取table 
 			var oTable = this.getView().byId("idPurchaseReqTable");
 			var listItems = oTable.getSelectedIndices();
@@ -140,6 +141,7 @@ sap.ui.define([
 				lineData.WorkflowId = "purchaserequisition";
 				lineData.UserEmail = this._UserEmail;
 				lineData.UserFullName = this._UserFullName; 
+				lineData.timezone = sTimeZone;
 				let postData = JSON.parse(JSON.stringify(lineData));
 				aData.push(postData);
 			}
