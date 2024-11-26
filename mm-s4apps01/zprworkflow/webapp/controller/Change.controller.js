@@ -485,6 +485,19 @@ sap.ui.define([
 			document.querySelector('section').style.overflow = "auto";
 			this._bindTimelineAggregation();
 		},
+		getUTCOffset: function () {
+			const date = new Date();
+			const offsetMinutes = -date.getTimezoneOffset(); // 与 UTC 的分钟偏移量
+			const hours = Math.floor(offsetMinutes / 60);
+			const minutes = Math.abs(offsetMinutes % 60);
+			
+			// 格式化为简短 UTC±HHMM 格式
+			const sign = hours >= 0 ? '+' : '-';
+			const formattedOffset = minutes === 0 
+				? `UTC${sign}${Math.abs(hours)}` 
+				: `UTC${sign}${Math.abs(hours)}${minutes}`;
+			return formattedOffset;
+		},
 		_bindTimelineAggregation: function () {
  
 			var afilters = [];
