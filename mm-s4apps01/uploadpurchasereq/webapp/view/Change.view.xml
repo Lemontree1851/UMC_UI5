@@ -39,7 +39,7 @@
                                 id="idSmartForm"
                                 app:defaultCheckBoxDisplayBehaviour="YesNo"
                                 app:defaultDropDownDisplayBehaviour="idAndDescription"
-                                editable="{local>/objectPageEditable}"
+                                editable="{parts:['local>/objectPageEditable','ApproveStatus','IsApprove'], formatter:'.formatter.ToggleEditable'}"
                                 editTogglable="true"
                                 title="{Name}"
                                 validationMode="Async"

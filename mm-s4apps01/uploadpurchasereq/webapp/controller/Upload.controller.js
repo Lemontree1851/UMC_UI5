@@ -149,7 +149,7 @@ sap.ui.define([
             if (aExcelSet.length <= 1) return false;
 
             // 取第一个对象的这四个属性作为比较基准
-            const { ApplyDepart, PrType, OrderType, Kyoten, CompanyCode } = aExcelSet[0];
+            const { ApplyDepart, PrType, OrderType, Kyoten, CompanyCode, BuyPurpoose, AccountType, CostCenter } = aExcelSet[0];
 
             // 先检查公司代码是否一致
             for (let i = 1; i < aExcelSet.length; i++) {
@@ -164,19 +164,22 @@ sap.ui.define([
                 // 遍历数组，检查每个对象的这四个属性是否与基准一致
                 for (let i = 1; i < aExcelSet.length; i++) {
                     const obj = aExcelSet[i];
-                    if (obj.CompanyCode === "1400") {
+                    if (obj.CompanyCode === "1100") {
                         if (
                             obj.ApplyDepart !== ApplyDepart ||
-                            obj.OrderType !== OrderType
+                            obj.PrType !== PrType ||
+                            obj.OrderType !== OrderType ||
+                            obj.Kyoten !== Kyoten ||
+                            obj.BuyPurpoose !== BuyPurpoose
                         ) {
                             isInconsistencies = true; // 发现不一致，返回 true
                         }
                     } else {
                         if (
                             obj.ApplyDepart !== ApplyDepart ||
-                            obj.PrType !== PrType ||
                             obj.OrderType !== OrderType ||
-                            obj.Kyoten !== Kyoten
+                            obj.AccountType !== AccountType ||
+                            obj.CostCenter !== CostCenter
                         ) {
                             isInconsistencies = true; // 发现不一致，返回 true
                         }

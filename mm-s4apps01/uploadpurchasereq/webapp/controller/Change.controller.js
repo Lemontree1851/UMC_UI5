@@ -110,6 +110,7 @@ sap.ui.define([
 			}
 		},
 		onSmartFormEditToggled: function (oEvent) {
+			this.getView().getElementBinding().refresh();
 			if (oEvent.getSource().getEditable()) {
 				this._LocalData.setProperty("/objectPageEditable", true);
 			} else {
