@@ -68,6 +68,7 @@
                 <Property Name="SupplierInvoice" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="SupplierInvoiceItem" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="buzei" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="PurchaseOrderItemUniqueID" Type="Edm.String" Nullable="false" MaxLength="15"/>
                 <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="PurchasingOrganization" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -98,7 +99,7 @@
                 <Property Name="Quantity1" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
                 <Property Name="TaxExcludedPrice" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="variable"/>
                 <Property Name="TaxCode" Type="Edm.String" Nullable="false" MaxLength="2"/>
-                <Property Name="TaxRate" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="variable"/>
+                <Property Name="TaxRate" Type="Edm.String" Nullable="false" MaxLength="9"/>
                 <Property Name="AccountingDocumentCreationDate" Type="Edm.Date"/>
                 <Property Name="DocumentDate" Type="Edm.Date"/>
                 <Property Name="PostingDate" Type="Edm.Date"/>
@@ -170,6 +171,9 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/buzei">
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchaseOrderItemUniqueID">
+                <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchaseOrderItemUniqueID}"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/CompanyCode">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;CompanyCode}"/>
@@ -351,7 +355,6 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/TaxRate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;TaxRate}"/>
-                <Annotation Term="SAP__measures.ISOCurrency" Path="DocumentCurrency"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/AccountingDocumentCreationDate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;AccountingDocumentCreationDate}"/>
@@ -653,15 +656,20 @@
                 </Annotation>
                 <Annotation Term="SAP__UI.SelectionFields">
                     <Collection>
-                        <PropertyPath>PurchaseOrder</PropertyPath>
-                        <PropertyPath>Supplier</PropertyPath>
-                        <PropertyPath>PurchasingGroup</PropertyPath>
-                        <PropertyPath>Material</PropertyPath>
                         <PropertyPath>Plant</PropertyPath>
-                        <PropertyPath>PurgDocPriceDate</PropertyPath>
-                        <PropertyPath>IsCompletelyDelivered</PropertyPath>
-                        <PropertyPath>NetAmount</PropertyPath>
+                        <PropertyPath>PurchasingOrganization</PropertyPath>
+                        <PropertyPath>PurchasingGroup</PropertyPath>
+                        <PropertyPath>Supplier</PropertyPath>
+                        <PropertyPath>PurchaseOrder</PropertyPath>
+                        <PropertyPath>PurchaseOrderItemUniqueID</PropertyPath>
+                        <PropertyPath>MaterialGroup</PropertyPath>
+                        <PropertyPath>Material</PropertyPath>
                         <PropertyPath>DocumentCurrency</PropertyPath>
+                        <PropertyPath>SupplierMaterialNumber</PropertyPath>
+                        <PropertyPath>DocumentDate</PropertyPath>
+                        <PropertyPath>PostingDate</PropertyPath>
+                        <PropertyPath>InvoiceDocumentDate</PropertyPath>
+                        <PropertyPath>InvoiceDocumentPostingDate</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
