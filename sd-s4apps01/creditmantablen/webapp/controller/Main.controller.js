@@ -344,6 +344,10 @@ sap.ui.define([
 						var pCell = pRow.getCells()[0],
 							cCell = aRows[i].getCells()[0],
 							c1Cell = aRows[i].getCells()[1];
+
+						var pCella = pRow.getCells()[0],
+							cCella = aRows[i].getCells()[0];
+
 						if (pCell && cCell) {
 							if (cCell.getText() === pCell.getText()) {
 								$("#" + cCell.getId()).css("visibility", "hidden");
@@ -383,7 +387,7 @@ sap.ui.define([
 							cCell = aRows[i].getCells()[2],
 							c1Cell = aRows[i].getCells()[3];
 						if (pCell && cCell) {
-							if (cCell.getText() === pCell.getText()) {
+							if (cCell.getText() === pCell.getText() && cCella.getText() === pCella.getText()) {
 								$("#" + cCell.getId()).css("visibility", "hidden");
 								$("#" + pRow.getId() + "-col2").css("border-bottom-style", "hidden");
 							} else {
@@ -398,11 +402,12 @@ sap.ui.define([
 								$("#" + pRow.getId() + "-col3").css("border-bottom-style", "");
 							}
 						}
+
 						var pCell = pRow.getCells()[3],
 							cCell = aRows[i].getCells()[3],
 							c1Cell = aRows[i].getCells()[4];
 						if (pCell && cCell) {
-							if (cCell.getText() === pCell.getText()) {
+							if (cCell.getText() === pCell.getText() && cCella.getText() === pCella.getText()) {
 								$("#" + cCell.getId()).css("visibility", "hidden");
 								$("#" + pRow.getId() + "-col3").css("border-bottom-style", "hidden");
 							} else {
@@ -417,11 +422,12 @@ sap.ui.define([
 								$("#" + pRow.getId() + "-col4").css("border-bottom-style", "");
 							}
 						}
+
 						var pCell = pRow.getCells()[4],
 							cCell = aRows[i].getCells()[4],
 							c1Cell = aRows[i].getCells()[5];
 						if (pCell && cCell) {
-							if (cCell.getText() === pCell.getText()) {
+							if (cCell.getText() === pCell.getText() && cCella.getText() === pCella.getText()) {
 								$("#" + cCell.getId()).css("visibility", "hidden");
 								$("#" + pRow.getId() + "-col4").css("border-bottom-style", "hidden");
 							} else {
