@@ -51,6 +51,10 @@ modules:
       - bicostanalysis.zip
       name: bicostanalysis
       target-path: resources/
+    - artifacts:
+      - bilongterminventory.zip
+      name: bilongterminventory
+      target-path: resources/
 - name: birecoverymanagement
   type: html5
   path: recoverymanagement
@@ -67,6 +71,16 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bilongterminventory
+  type: html5
+  path: longterminventory
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:

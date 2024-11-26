@@ -1,0 +1,9 @@
+<mvc:View controllerName="bi.longterminventory.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" showHeader="false" title="{i18n>title}">
+        <content> 
+            <mvc:XMLView id="idReportView" viewName="bi.longterminventory.view.Report" /> 
+        </content>
+    </Page>
+</mvc:View>
