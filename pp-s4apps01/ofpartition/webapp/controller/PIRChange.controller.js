@@ -219,6 +219,7 @@ sap.ui.define([
 					// var uuidx16 = context.getObject().Uuid.replace(/-/g, '');
 					// createPrintRecord.setParameter("ProvidedKeys", JSON.stringify({ Uuid: uuidx16.toUpperCase() }));
 					// createPrintRecord.setParameter("ResultIsActiveEntity", true);
+					that._BusyDialog.open();
 					createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then((odata) => {
 						resolve(createPrintRecord);
 						var object = createPrintRecord.getBoundContext().getObject(); //获取返回的数据
@@ -241,7 +242,7 @@ sap.ui.define([
 						});
 						that._LocalData.setProperty("/excelSet", aOFPartition);
 					}).catch((oError) => {
-						console.log(oError.error);
+						messages.showError(messages.parseErrors(oError));
 						reject(oError);
 					});
 				});
@@ -250,6 +251,8 @@ sap.ui.define([
 
 			Promise.all(aPromise).then(function () {
 
+			}).finally(function () {
+				that._BusyDialog.close();
 			});
         },
         preparePostBody: function() {

@@ -10,6 +10,9 @@ sap.ui.define([
             if (v === "E") {
                 return "Error";
             }
+            if (v === "W") {
+                return "Warning";
+            }
             return "None";
         },
 
@@ -20,7 +23,10 @@ sap.ui.define([
             if (v === "E") {
                 return "sap-icon://status-negative";
             }
-            return "sap-icon://status-negative";
+            if (v === "W") {
+                return "sap-icon://status-critical";
+            }
+            return "sap-icon://status-inactive";
         },
 
         setResult: function (v) {
