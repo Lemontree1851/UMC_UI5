@@ -12,15 +12,15 @@
                 <smartfilterbar:controlConfiguration>
                     <smartfilterbar:ControlConfiguration id="sfbConfigCompanyCode" key="CompanyCode" label="{i18n>company}" /> 
 
-                    <smartfilterbar:ControlConfiguration id="sfbConfigFiscalYear" key="FiscalYear" label="{i18n>fiscalYear}">
+                    <smartfilterbar:ControlConfiguration id="sfbConfigFiscalYear" key="FiscalYear" label="{i18n>fiscalYear}" mandatory="mandatory" >
                         <smartfilterbar:customControl>
-                            <DatePicker id="sfbDPRecoveryYear" displayFormat="yyyy" valueFormat="yyyy" />
+                            <DatePicker id="sfbDPRecoveryYear" displayFormat="yyyy" valueFormat="yyyy" required="true" />
                         </smartfilterbar:customControl>
                     </smartfilterbar:ControlConfiguration>
 
-                    <smartfilterbar:ControlConfiguration id="sfbConfigFiscalMonth" key="Period" label="{i18n>fiscalMonth}">
+                    <smartfilterbar:ControlConfiguration id="sfbConfigFiscalMonth" key="Period" label="{i18n>fiscalMonth}" mandatory="mandatory">
                         <smartfilterbar:customControl>
-                           <MultiComboBox id="sfbSelFiscalMonth" >
+                           <MultiComboBox id="sfbSelFiscalMonth" required="true">
                              <items>
                                 <core:Item id="idMonth01" key="01" text="01"></core:Item>
                                 <core:Item id="idMonth02" key="02" text="02"></core:Item>
