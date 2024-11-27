@@ -55,6 +55,10 @@ modules:
       - bilongterminventory.zip
       name: bilongterminventory
       target-path: resources/
+    - artifacts:
+      - bizfutureanalysis.zip
+      name: bizfutureanalysis
+      target-path: resources/
 - name: birecoverymanagement
   type: html5
   path: recoverymanagement
@@ -81,6 +85,15 @@ modules:
     builder: custom
     commands:
     - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: bizfutureanalysis
+  type: html5
+  path: zfutureanalysis
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
     - npm run build:cf
     supported-platforms: []
 resources:

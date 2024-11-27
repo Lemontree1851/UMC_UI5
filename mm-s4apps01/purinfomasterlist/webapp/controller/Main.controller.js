@@ -110,14 +110,32 @@ sap.ui.define([
                     case "CreationDate_2":
                         oColumn.type = sap.ui.export.EdmType.Date;
                         break;
+                    //  Currency 分隔符 小数位
+                    // case "NetPriceAmount":
+                    // case "ConditionRateValue":
+                    // case "UnitPrice_plnt":
+                    //     oColumn.type = sap.ui.export.EdmType.Currency;
+                    //     oColumn.delimiter = true;
+                    //     oColumn.textAlign = "End";
+                    //     break;
+                    case "standardpurchaseorderquantity":
+                    case "Taxprice":
+                    case "UnitPrice_standard":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.scale = 3
+                        oColumn.delimiter = true;
+                        oColumn.textAlign = "End";
+                        break;
                     //  Number 分隔符 没有小数位
+                    case "MaterialPriceUnitQty":
+                    case "PriceUnitQty":
                     case "NetPriceAmount":
                     case "ConditionRateValue":
                     case "ConditionScaleQuantity":
-                    case "standardpurchaseorderquantity":
-                    case "Taxprice":
+                    // case "standardpurchaseorderquantity":
+                    // case "Taxprice":
                     case "UnitPrice_plnt":
-                    case "UnitPrice_standard":
+                    // case "UnitPrice_standard":
                     case "MaterialPlannedDeliveryDurn":
                     case "MinimumPurchaseOrderQuantity":
                     case "MaximumOrderQuantity":
@@ -125,7 +143,7 @@ sap.ui.define([
                         oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.delimiter = true;
                         oColumn.textAlign = "End";
-                        oColumn.unitProperty = "BaseUnit";
+                        // oColumn.unitProperty = "BaseUnit";
                         break;
                 }
             });
