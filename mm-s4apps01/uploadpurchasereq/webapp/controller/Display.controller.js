@@ -156,6 +156,7 @@ sap.ui.define([
 								this._oDataModel.setProperty("/" + key + "/Message", line.MESSAGE);
 								this._oDataModel.setProperty("/" + key + "/PurchaseOrder", line.PURCHASEORDER);
 								this._oDataModel.setProperty("/" + key + "/PurchaseOrderItem", line.PURCHASEORDERITEM);
+								this._oDataModel.setProperty("/" + key + "/ApproveStatus", line.APPROVESTATUS);
 							}
 						},this);
                     },this);
