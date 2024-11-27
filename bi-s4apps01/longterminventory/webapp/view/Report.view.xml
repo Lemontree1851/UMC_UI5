@@ -8,7 +8,7 @@
     xmlns:f="sap.f"
     xmlns:sv="sap.ui.comp.smartvariants"
     xmlns:core="sap.ui.core" displayBlock="true" busyIndicatorDelay="0">
-            <smartfilterbar:SmartFilterBar id="reportFilter" entitySet="ZC_BI006_LONGTERM_INVENTORY" smartVariant="__SVM02" persistencyKey="report02FilterPersistent" useToolbar="false">
+            <smartfilterbar:SmartFilterBar id="reportFilter" entitySet="ZI_BI006_REPORT" smartVariant="__SVM02" persistencyKey="report02FilterPersistent" useToolbar="false">
                 <smartfilterbar:controlConfiguration>
                     <smartfilterbar:ControlConfiguration id="sfbConfigCompanyCode" key="CompanyCode" label="{i18n>company}" /> 
 
@@ -45,7 +45,7 @@
                 </smartfilterbar:controlConfiguration>
             </smartfilterbar:SmartFilterBar> 
 
-            <smarttable:SmartTable id="table" smartVariant="__SVM02" smartFilterId="reportFilter" beforeRebindTable="onBeforeRebindTable" entitySet="ZC_BI006_LONGTERM_INVENTORY" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" tableType="Table">
+            <smarttable:SmartTable id="table" smartVariant="__SVM02" smartFilterId="reportFilter" beforeRebindTable="onBeforeRebindTable" entitySet="ZI_BI006_REPORT" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" tableType="Table">
 
                 <table:Table id="tableReport02" threshold="20" selectionMode="None" fixedColumnCount="3" >
                     <table:rowMode>
@@ -58,7 +58,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode",  "additionalProperty":"CompanyCodeName", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfCompany" value="{CompanyCode}" wrapping="false" editable="false"/>
+                                <Text id="sfCompany" text="{parts: [{path: 'CompanyCode'}, {path: 'CompanyCodeName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                             </table:template>
                         </table:Column>
 
@@ -67,7 +67,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Type",  "leadingProperty":"Type", "sortProperty":"Type", "filterProperty": "Type"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfType" value="{Type}" wrapping="false" editable="false" />
+                                <Text id="sfType" text="{Type}" wrapping="false" />
                             </table:template>
                         </table:Column>                        
 
@@ -76,7 +76,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYearMonth",  "leadingProperty":"FiscalYearMonth", "sortProperty":"FiscalYearMonth", "filterProperty": "FiscalYearMonth"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfFiscalYearMonth" value="{FiscalYearMonth}" wrapping="false" editable="false" />
+                                <Text id="sfFiscalYearMonth" text="{FiscalYearMonth}" wrapping="false" />
                             </table:template>
                         </table:Column>
 
@@ -85,7 +85,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "additionalProperty":"ProfitCenterName", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfProfitCenter" value="{ProfitCenter}" wrapping="false" editable="true" />
+                                <Text id="sfProfitCenter" text="{parts: [{path: 'ProfitCenter'}, {path: 'ProfitCenterName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                             </table:template>
                         </table:Column>
 
@@ -94,7 +94,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ProductType", "additionalProperty":"ProductTypeName", "leadingProperty":"ProductType", "sortProperty":"ProductType", "filterProperty": "ProductType"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfProductType" value="{ProductType}" wrapping="false" editable="true" />
+                                <Text id="sfProductType" text="{parts: [{path: 'ProductType'}, {path: 'ProductTypeName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                             </table:template>
                         </table:Column>
 
@@ -103,7 +103,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Plant",  "additionalProperty":"PlantName", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfPlant" value="{Plant}" wrapping="false" editable="false"/>
+                                <Text id="sfPlant" text="{parts: [{path: 'Plant'}, {path: 'PlantName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                             </table:template>
                         </table:Column>
 
@@ -112,7 +112,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Product", "additionalProperty":"ProductName", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfProduct" value="{Product}" wrapping="false" editable="true" />
+                                <Text id="sfProduct" text="{parts: [{path: 'Product'}, {path: 'ProductName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                             </table:template>
                         </table:Column>
 
@@ -121,7 +121,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "additionalProperty":"CustomerName", "leadingProperty":"Customer", "sortProperty":"Customer", "filterProperty": "Customer"}'/>
                             </table:customData>
                             <table:template>
-                                <smartfield:SmartField id="sfCustomer" value="{Customer}" wrapping="false" editable="true" />
+                                <Text id="sfCustomer" text="{parts: [{path: 'Customer'}, {path: 'CustomerName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                             </table:template>
                         </table:Column>
 
