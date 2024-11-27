@@ -77,7 +77,7 @@ sap.ui.define([
                 var aSheet1 = XLSX.utils.sheet_to_row_object_array(oSheet1, {raw: false});
                 // for循环每一行的内容添加到数据集当中,数据从第excel的3行开始（第一行默认为技术字段，不读取，第二行为说明行，JS中从0开始，所以从1开始读）
                 var pritem = 0;
-                for (var i = 7; i < aSheet1.length; i++) {
+                for (var i = 6; i < aSheet1.length; i++) {
                     pritem++;
                     oItem = {
                         Type: "",
