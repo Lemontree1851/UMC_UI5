@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="com.sap.gateway.srvd.zui_bi005_o4.v0001" Alias="SAP__self">
+            <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
+            <EntityType Name="ZC_BI005_REPORTType">
+                <Key>
+                    <PropertyRef Name="YearMonth"/>
+                    <PropertyRef Name="Type"/>
+                    <PropertyRef Name="Companycode"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Product"/>
+                    <PropertyRef Name="Customer"/>
+                </Key>
+                <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CompanycodeText" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="PlantText" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="MaterialType" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="MaterialTypeText" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="CustomerText" Type="Edm.String" Nullable="false" MaxLength="81"/>
+                <Property Name="BalanceOpenning" Type="Edm.Decimal" Nullable="false" Precision="13"/>
+                <Property Name="Supply" Type="Edm.Decimal" Nullable="false" Precision="13"/>
+                <Property Name="Demand" Type="Edm.Decimal" Nullable="false" Precision="13"/>
+                <Property Name="BalanceClosing" Type="Edm.Decimal" Nullable="false" Precision="13"/>
+                <Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StandardPrice" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
+                <Property Name="ActualPrice" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
+                <Property Name="ClosingInventoryTotal" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
+                <Property Name="CompanyCodeCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="ZC_BI005_REPORT" EntityType="com.sap.gateway.srvd.zui_bi005_o4.v0001.ZC_BI005_REPORTType"/>
+            </EntityContainer>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/YearMonth">
+                <Annotation Term="SAP__common.Label" String="会計年月"/>
+                <Annotation Term="SAP__common.QuickInfo" String="会計年月"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/Type">
+                <Annotation Term="SAP__common.Label" String="タイプ"/>
+                <Annotation Term="SAP__common.QuickInfo" String="タイプ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/Companycode">
+                <Annotation Term="SAP__common.Label" String="会社コード"/>
+                <Annotation Term="SAP__common.QuickInfo" String="会社コード"/>
+                <Annotation Term="SAP__common.Text" Path="CompanycodeText"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/Plant">
+                <Annotation Term="SAP__common.Label" String="プラント"/>
+                <Annotation Term="SAP__common.QuickInfo" String="プラント"/>
+                <Annotation Term="SAP__common.Text" Path="PlantText"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/Product">
+                <Annotation Term="SAP__common.Label" String="製品"/>
+                <Annotation Term="SAP__common.QuickInfo" String="製品"/>
+                <Annotation Term="SAP__common.Text" Path="ProductDescription"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Material"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/Customer">
+                <Annotation Term="SAP__common.Label" String="得意先"/>
+                <Annotation Term="SAP__common.QuickInfo" String="得意先"/>
+                <Annotation Term="SAP__common.Text" Path="CustomerText"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/CompanycodeText">
+                <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
+                <Annotation Term="SAP__common.QuickInfo" String="会社コードテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/PlantText">
+                <Annotation Term="SAP__common.Label" String="プラントテキスト"/>
+                <Annotation Term="SAP__common.QuickInfo" String="プラントテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/ProductDescription">
+                <Annotation Term="SAP__common.Label" String="製品テキスト"/>
+                <Annotation Term="SAP__common.QuickInfo" String="製品テキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/MaterialType">
+                <Annotation Term="SAP__common.Label" String="品目タイプ"/>
+                <Annotation Term="SAP__common.QuickInfo" String="品目タイプ"/>
+                <Annotation Term="SAP__common.Text" Path="MaterialTypeText"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="MTyp"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/MaterialTypeText">
+                <Annotation Term="SAP__common.Label" String="品目タイプテキスト"/>
+                <Annotation Term="SAP__common.QuickInfo" String="品目タイプテキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/CustomerText">
+                <Annotation Term="SAP__common.Label" String="得意先テキスト"/>
+                <Annotation Term="SAP__common.QuickInfo" String="得意先テキスト"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/BalanceOpenning">
+                <Annotation Term="SAP__common.Label" String="Balance（期首）"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Balance（期首）"/>
+                <Annotation Term="SAP__measures.Unit" Path="Unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/Supply">
+                <Annotation Term="SAP__common.Label" String="Supply"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Supply"/>
+                <Annotation Term="SAP__measures.Unit" Path="Unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/Demand">
+                <Annotation Term="SAP__common.Label" String="Demand"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Demand"/>
+                <Annotation Term="SAP__measures.Unit" Path="Unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/BalanceClosing">
+                <Annotation Term="SAP__common.Label" String="Balance（期末）"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Balance（期末）"/>
+                <Annotation Term="SAP__measures.Unit" Path="Unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/Unit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="数量単位"/>
+                <Annotation Term="SAP__common.QuickInfo" String="数量単位"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/StandardPrice">
+                <Annotation Term="SAP__common.Label" String="標準原価"/>
+                <Annotation Term="SAP__common.QuickInfo" String="標準原価"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="CompanyCodeCurrency"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/ActualPrice">
+                <Annotation Term="SAP__common.Label" String="実際原価"/>
+                <Annotation Term="SAP__common.QuickInfo" String="実際原価"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="CompanyCodeCurrency"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/ClosingInventoryTotal">
+                <Annotation Term="SAP__common.Label" String="期末在庫金額"/>
+                <Annotation Term="SAP__common.QuickInfo" String="期末在庫金額"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="CompanyCodeCurrency"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType/CompanyCodeCurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.Label" String="通貨"/>
+                <Annotation Term="SAP__common.QuickInfo" String="通貨"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_BI005_REPORTType">
+                <Annotation Term="SAP__common.Label" String="先々在庫推移分析"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ZC_BI005_REPORT">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BalanceOpenning"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Supply"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Demand"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BalanceClosing"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="StandardPrice"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ActualPrice"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ClosingInventoryTotal"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
