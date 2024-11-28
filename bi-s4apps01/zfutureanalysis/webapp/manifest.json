@@ -12,8 +12,8 @@
     "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
-      "version": "1.15.5",
-      "toolsId": "b3c7f949-6c2a-4703-89ee-1bbba6156430"
+      "version": "1.15.6",
+      "toolsId": "a256cc94-7d2e-42a8-8439-0ad2dd8be74c"
     },
     "dataSources": {
       "mainService": {
@@ -126,13 +126,6 @@
             "settings": {
               "contextPath": "/ZC_BI005_REPORT",
               "variantManagement": "Page",
-              "navigation": {
-                "ZC_BI005_REPORT": {
-                  "detail": {
-                    "route": "ZC_BI005_REPORTObjectPage"
-                  }
-                }
-              },
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {

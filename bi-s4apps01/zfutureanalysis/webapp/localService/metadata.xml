@@ -86,8 +86,8 @@
                 <EntitySet Name="ZC_BI005_REPORT" EntityType="com.sap.gateway.srvd.zui_bi005_o4.v0001.ZC_BI005_REPORTType"/>
             </EntityContainer>
             <Annotations Target="SAP__self.ZC_BI005_REPORTType/YearMonth">
-                <Annotation Term="SAP__common.Label" String="会計年月"/>
-                <Annotation Term="SAP__common.QuickInfo" String="会計年月"/>
+                <Annotation Term="SAP__common.Label" String="予測年月"/>
+                <Annotation Term="SAP__common.QuickInfo" String="予測年月"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
             </Annotations>
             <Annotations Target="SAP__self.ZC_BI005_REPORTType/Type">
@@ -98,23 +98,43 @@
                 <Annotation Term="SAP__common.Label" String="会社コード"/>
                 <Annotation Term="SAP__common.QuickInfo" String="会社コード"/>
                 <Annotation Term="SAP__common.Text" Path="CompanycodeText"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_companycodevh/0001;ps='srvd-zui_bi005_o4-0001';va='com.sap.gateway.srvd.zui_bi005_o4.v0001.et-zc_bi005_report.companycode'/$metadata</String>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ZC_BI005_REPORTType/Plant">
                 <Annotation Term="SAP__common.Label" String="プラント"/>
                 <Annotation Term="SAP__common.QuickInfo" String="プラント"/>
                 <Annotation Term="SAP__common.Text" Path="PlantText"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plantstdvh/0001;ps='srvd-zui_bi005_o4-0001';va='com.sap.gateway.srvd.zui_bi005_o4.v0001.et-zc_bi005_report.plant'/$metadata</String>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ZC_BI005_REPORTType/Product">
                 <Annotation Term="SAP__common.Label" String="製品"/>
                 <Annotation Term="SAP__common.QuickInfo" String="製品"/>
                 <Annotation Term="SAP__common.Text" Path="ProductDescription"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_bommaterialvh/0001;ps='srvd-zui_bi005_o4-0001';va='com.sap.gateway.srvd.zui_bi005_o4.v0001.et-zc_bi005_report.product'/$metadata</String>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="SAP__common.Heading" String="Material"/>
             </Annotations>
             <Annotations Target="SAP__self.ZC_BI005_REPORTType/Customer">
                 <Annotation Term="SAP__common.Label" String="得意先"/>
                 <Annotation Term="SAP__common.QuickInfo" String="得意先"/>
                 <Annotation Term="SAP__common.Text" Path="CustomerText"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_businesspartnervh/0001;ps='srvd-zui_bi005_o4-0001';va='com.sap.gateway.srvd.zui_bi005_o4.v0001.et-zc_bi005_report.customer'/$metadata</String>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ZC_BI005_REPORTType/CompanycodeText">
                 <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
@@ -192,6 +212,76 @@
             </Annotations>
             <Annotations Target="SAP__self.ZC_BI005_REPORTType">
                 <Annotation Term="SAP__common.Label" String="先々在庫推移分析"/>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Companycode"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Type"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="YearMonth"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MaterialType"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MaterialTypeText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Product"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductDescription"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CustomerText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BalanceOpenning"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Supply"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Demand"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BalanceClosing"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Unit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="StandardPrice"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ActualPrice"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ClosingInventoryTotal"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CompanyCodeCurrency"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Companycode</PropertyPath>
+                        <PropertyPath>YearMonth</PropertyPath>
+                        <PropertyPath>Product</PropertyPath>
+                        <PropertyPath>Customer</PropertyPath>
+                        <PropertyPath>Plant</PropertyPath>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.Container/ZC_BI005_REPORT">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
