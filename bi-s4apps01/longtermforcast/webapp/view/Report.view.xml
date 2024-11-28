@@ -1,4 +1,4 @@
-<mvc:View controllerName="bi.longterminventory.controller.Report"
+<mvc:View controllerName="bi.longtermforcast.controller.Report"
     xmlns:rowmodes="sap.ui.table.rowmodes" xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
@@ -8,7 +8,7 @@
     xmlns:f="sap.f"
     xmlns:sv="sap.ui.comp.smartvariants"
     xmlns:core="sap.ui.core" displayBlock="true" busyIndicatorDelay="0">
-            <smartfilterbar:SmartFilterBar id="reportFilter" entitySet="ZI_BI006_REPORT" smartVariant="__SVM02" persistencyKey="report02FilterPersistent" useToolbar="false">
+            <smartfilterbar:SmartFilterBar id="reportFilter" entitySet="ZI_BI007_REPORT" smartVariant="__SVM02" persistencyKey="report02FilterPersistent" useToolbar="false">
                 <smartfilterbar:controlConfiguration>
                     <smartfilterbar:ControlConfiguration id="sfbConfigCompanyCode" key="CompanyCode" label="{i18n>company}" /> 
 
@@ -20,7 +20,7 @@
 
                     <smartfilterbar:ControlConfiguration id="sfbConfigFiscalMonth" key="Period" label="{i18n>fiscalMonth}" mandatory="mandatory">
                         <smartfilterbar:customControl>
-                           <MultiComboBox id="sfbSelFiscalMonth" required="true">
+                           <ComboBox id="sfbSelFiscalMonth" required="true">
                              <items>
                                 <core:Item id="idMonth01" key="01" text="01"></core:Item>
                                 <core:Item id="idMonth02" key="02" text="02"></core:Item>
@@ -35,7 +35,7 @@
                                 <core:Item id="idMonth11" key="11" text="11"></core:Item>
                                 <core:Item id="idMonth12" key="12" text="12"></core:Item>
                              </items>
-                           </MultiComboBox>
+                           </ComboBox>
                         </smartfilterbar:customControl>
                     </smartfilterbar:ControlConfiguration> 
 
@@ -45,7 +45,7 @@
                 </smartfilterbar:controlConfiguration>
             </smartfilterbar:SmartFilterBar> 
 
-            <smarttable:SmartTable id="table" header="{i18n>appTitle}" smartVariant="__SVM02" smartFilterId="reportFilter" beforeRebindTable="onBeforeRebindTable" entitySet="ZI_BI006_REPORT" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" tableType="Table">
+            <smarttable:SmartTable id="table" header="{i18n>appTitle}" smartVariant="__SVM02" smartFilterId="reportFilter" beforeRebindTable="onBeforeRebindTable" entitySet="ZI_BI007_REPORT" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" tableType="Table">
 
                 <table:Table id="tableReport02" threshold="20" selectionMode="None" fixedColumnCount="3" >
                     <table:rowMode>
@@ -62,7 +62,7 @@
                             </table:template>
                         </table:Column>
 
-                        <table:Column id="idType" width="6em" label="{i18n>type}" sortProperty="Type" filterProperty="Type" visible="true">
+                        <table:Column id="idType" width="10em" label="{i18n>type}" sortProperty="Type" filterProperty="Type" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Type",  "leadingProperty":"Type", "sortProperty":"Type", "filterProperty": "Type"}'/>
                             </table:customData>

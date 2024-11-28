@@ -59,6 +59,10 @@ modules:
       - bizfutureanalysis.zip
       name: bizfutureanalysis
       target-path: resources/
+    - artifacts:
+      - bilongtermforcast.zip
+      name: bilongtermforcast
+      target-path: resources/
 - name: birecoverymanagement
   type: html5
   path: recoverymanagement
@@ -93,6 +97,16 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bilongtermforcast
+  type: html5
+  path: longtermforcast
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
