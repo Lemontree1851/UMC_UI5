@@ -10,6 +10,7 @@
     xmlns:core="sap.ui.core"
     xmlns:t="sap.ui.table"
     xmlns:rowmodes="sap.ui.table.rowmodes"
+    xmlns:smartfield = "sap.ui.comp.smartfield"
 >
     <f:DynamicPage id="idDynamicPage">
         <f:title>
@@ -38,6 +39,7 @@
                         smartVariant="idSmartVariantManagement"
                     >
                         <smartFilterBar:controlConfiguration>
+                        <!-- filterbar部分的设置使用后端Metadata extension ZC_SALESORDER_U -->
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -53,6 +55,8 @@
                 smartVariant="idSmartVariantManagement"
                 header="{i18n>tableHeaderTitle}"
                 placeToolbarInTable="true"
+                editable="true"
+                beforeRebindTable="onBeforeRebindTable"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar id="idOverflowToolbar">
@@ -66,53 +70,139 @@
                 </smartTable:customToolbar>
                 <t:Table
                     id="idReportTable"
-                    selectionMode="None"
                     selectionBehavior="Row"
                 >
                     <t:rowMode >
-                        <rowmodes:Auto ></rowmodes:Auto>
+                        <rowmodes:Auto id="_IDGenAuto" ></rowmodes:Auto>
                     </t:rowMode>
+                    <t:Column id="_IDGenColumn"
+                        width="4rem"
+                        label="{/#SalesOrderForDNType/Type/@sap:label}"
+                        sortProperty="Type"
+                        filterProperty="Type"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"Type", "leadingProperty":"Type", "sortProperty":"Type", "filterProperty": "Type"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <ObjectStatus id="_IDGenObjectStatus"
+                                state="{
+                                    path: 'Type',
+                                    formatter: '.formatter.setState'
+                                }"
+                                icon="{
+                                    path: 'Type',
+                                    formatter: '.formatter.setStateIcon'
+                                }"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn2"
+                        width="5rem"
+                        label="{/#SalesOrderForDNType/Status/@sap:label}"
+                        sortProperty="Status"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"Status", "leadingProperty":"Status", "sortProperty":"Status", "filterProperty": "Status"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText2"
+                                text="{
+                                path: 'Type',
+                                formatter: '.formatter.setResult'
+                            }"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn3"
+                        width="12rem"
+                        label="{/#SalesOrderForDNType/Message/@sap:label}"
+                        sortProperty="Message"
+                        filterProperty="Message"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"Message", "leadingProperty":"Message", "sortProperty":"Message", "filterProperty": "Message"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText3"
+                                text="{Message}"
+                                tooltip="{Message}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
                     <t:Column
                         id="idColumn"
                         width="8rem"
-                        label="{/#SalesOrderForDNType/SalesOrder/@sap:label}"
-                        sortProperty="SalesOrder"
-                        filterProperty="SalesOrder"
+                        label="{/#SalesOrderForDNType/SalesDocument/@sap:label}"
+                        sortProperty="SalesDocument"
+                        filterProperty="SalesDocument"
                         visible="true"
                     >
                         <t:customData>
                             <core:CustomData
                                 id="idCustomData"
                                 key="p13nData"
-                                value='\{"columnKey":"SalesOrder", "leadingProperty":"SalesOrder", "sortProperty":"SalesOrder", "filterProperty": "SalesOrder"}'
+                                value='\{"columnKey":"SalesDocument", "leadingProperty":"SalesDocument", "sortProperty":"SalesDocument", "filterProperty": "SalesDocument"}'
                             />
                         </t:customData>
                         <t:template>
                             <Text
-                                id="idSalesOrderText"
-                                text="{SalesOrder}"
+                                id="idSalesDocumentText"
+                                text="{SalesDocument}"
                             />
                         </t:template>
                     </t:Column>
                     <t:Column
                         id="id0Column"
                         width="8rem"
-                        label="{/#SalesOrderForDNType/SalesOrderItem/@sap:label}"
-                        sortProperty="SalesOrderItem"
-                        filterProperty="SalesOrderItem"
+                        label="{/#SalesOrderForDNType/SalesDocumentItem/@sap:label}"
+                        sortProperty="SalesDocumentItem"
+                        filterProperty="SalesDocumentItem"
                         visible="true"
                     >
                         <t:customData>
                             <core:CustomData
                                 id="id0CustomData"
                                 key="p13nData"
-                                value='\{"columnKey":"SalesOrderItem", "leadingProperty":"SalesOrderItem", "sortProperty":"SalesOrderItem", "filterProperty": "SalesOrderItem"}'
+                                value='\{"columnKey":"SalesDocumentItem", "leadingProperty":"SalesDocumentItem", "sortProperty":"SalesDocumentItem", "filterProperty": "SalesDocumentItem"}'
                             />
                         </t:customData>
                         <t:template>
                             <Text
-                                id="idSalesOrderItemText"
-                                text="{SalesOrderItem}"
+                                id="idSalesDocumentItemText"
+                                text="{SalesDocumentItem}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="id2Column"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/SalesDocumentType/@sap:label}"
+                        sortProperty="SalesDocumentType"
+                        filterProperty="SalesDocumentType"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                id="id2CustomData"
+                                key="p13nData"
+                                value='\{"columnKey":"SalesDocumentType", "leadingProperty":"SalesDocumentType", "sortProperty":"SalesDocumentType", "filterProperty": "SalesDocumentType"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text
+                                id="idSalesDocumentTypeText"
+                                text="{SalesDocumentType}"
                             />
                         </t:template>
                     </t:Column>
@@ -138,47 +228,22 @@
                             />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        id="id2Column"
+                    <t:Column id="_IDGenColumn1"
                         width="8rem"
-                        label="{/#SalesOrderForDNType/SalesOrderType/@sap:label}"
-                        sortProperty="SalesOrderType"
-                        filterProperty="SalesOrderType"
+                        label="{/#SalesOrderForDNType/SalesGroup/@sap:label}"
+                        sortProperty="SalesGroup"
+                        filterProperty="SalesGroup"
                         visible="true"
                     >
                         <t:customData>
                             <core:CustomData
-                                id="id2CustomData"
                                 key="p13nData"
-                                value='\{"columnKey":"SalesOrderType", "leadingProperty":"SalesOrderType", "sortProperty":"SalesOrderType", "filterProperty": "SalesOrderType"}'
+                                value='\{"columnKey":"SalesGroup", "leadingProperty":"SalesGroup", "sortProperty":"SalesGroup", "filterProperty": "SalesGroup"}'
                             />
                         </t:customData>
                         <t:template>
-                            <Text
-                                id="idSalesOrderTypeText"
-                                text="{SalesOrderType}"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        id="id3Column"
-                        width="8rem"
-                        label="{/#SalesOrderForDNType/CreationDate/@sap:label}"
-                        sortProperty="CreationDate"
-                        filterProperty="CreationDate"
-                        visible="true"
-                    >
-                        <t:customData>
-                            <core:CustomData
-                                id="id3CustomData"
-                                key="p13nData"
-                                value='\{"columnKey":"CreationDate", "leadingProperty":"CreationDate", "sortProperty":"CreationDate", "filterProperty": "CreationDate"}'
-                            />
-                        </t:customData>
-                        <t:template>
-                            <Text
-                                id="idCreationDateText"
-                                text="{CreationDate}"
+                            <Text id="_IDGenText"
+                                text="{SalesGroup}"
                             />
                         </t:template>
                     </t:Column>
@@ -204,6 +269,50 @@
                             />
                         </t:template>
                     </t:Column>
+                    <t:Column id="_IDGenColumn4"
+                        width="12rem"
+                        label="{/#SalesOrderForDNType/ShippingPointName/@sap:label}"
+                        sortProperty="ShippingPointName"
+                        filterProperty="ShippingPointName"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"ShippingPointName", "leadingProperty":"ShippingPointName", "sortProperty":"ShippingPointName", "filterProperty": "ShippingPointName"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText4"
+                                text="{ShippingPointName}"
+                                tooltip="{ShippingPointName}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="id3Column"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/CreationDate/@sap:label}"
+                        sortProperty="CreationDate"
+                        filterProperty="CreationDate"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                id="id3CustomData"
+                                key="p13nData"
+                                value='\{"columnKey":"CreationDate", "leadingProperty":"CreationDate", "sortProperty":"CreationDate", "filterProperty": "CreationDate"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text
+                                id="idCreationDateText"
+                                text="{path:'CreationDate', type:'sap.ui.model.type.Date'}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    
                     <t:Column
                         id="id5Column"
                         width="8rem"
@@ -228,7 +337,7 @@
                     </t:Column>
                     <t:Column
                         id="id6Column"
-                        width="8rem"
+                        width="12rem"
                         label="{/#SalesOrderForDNType/CustomerName/@sap:label}"
                         sortProperty="CustomerName"
                         filterProperty="CustomerName"
@@ -245,6 +354,54 @@
                             <Text
                                 id="idCustomerNameText"
                                 text="{CustomerName}"
+                                tooltip="{CustomerName}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="id16Column"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/ShipToParty/@sap:label}"
+                        sortProperty="ShipToParty"
+                        filterProperty="ShipToParty"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                id="id16CustomData"
+                                key="p13nData"
+                                value='\{"columnKey":"ShipToParty", "leadingProperty":"ShipToParty", "sortProperty":"ShipToParty", "filterProperty": "ShipToParty"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text
+                                id="idShipToPartyText"
+                                text="{ShipToParty}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        id="id17Column"
+                        width="12rem"
+                        label="{/#SalesOrderForDNType/ShipToPartyName/@sap:label}"
+                        sortProperty="ShipToPartyName"
+                        filterProperty="ShipToPartyName"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                id="id17CustomData"
+                                key="p13nData"
+                                value='\{"columnKey":"ShipToPartyName", "leadingProperty":"ShipToPartyName", "sortProperty":"ShipToPartyName", "filterProperty": "ShipToPartyName"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text
+                                id="idShipToPartyNameText"
+                                text="{ShipToPartyName}"
+                                tooltip="{ShipToPartyName}"
+                                wrapping="false"
                             />
                         </t:template>
                     </t:Column>
@@ -270,9 +427,30 @@
                             />
                         </t:template>
                     </t:Column>
+                    <t:Column id="_IDGenColumn5"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/BillingToPartyName/@sap:label}"
+                        sortProperty="BillingToPartyName"
+                        filterProperty="BillingToPartyName"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"BillingToPartyName", "leadingProperty":"BillingToPartyName", "sortProperty":"BillingToPartyName", "filterProperty": "BillingToPartyName"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText5"
+                                text="{BillingToPartyName}"
+                                tooltip="{BillingToPartyName}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
                     <t:Column
                         id="id8Column"
-                        width="8rem"
+                        width="10rem"
                         label="{/#SalesOrderForDNType/PurchaseOrderByCustomer/@sap:label}"
                         sortProperty="PurchaseOrderByCustomer"
                         filterProperty="PurchaseOrderByCustomer"
@@ -289,6 +467,8 @@
                             <Text
                                 id="idPurchaseOrderByCustomerText"
                                 text="{PurchaseOrderByCustomer}"
+                                tooltip="{PurchaseOrderByCustomer}"
+                                wrapping="false"
                             />
                         </t:template>
                     </t:Column>
@@ -360,7 +540,7 @@
                     </t:Column>
                     <t:Column
                         id="id12Column"
-                        width="8rem"
+                        width="10rem"
                         label="{/#SalesOrderForDNType/Material/@sap:label}"
                         sortProperty="Material"
                         filterProperty="Material"
@@ -377,12 +557,14 @@
                             <Text
                                 id="idMaterialText"
                                 text="{Material}"
+                                tooltip="{Material}"
+                                wrapping="false"
                             />
                         </t:template>
                     </t:Column>
                     <t:Column
                         id="id13Column"
-                        width="8rem"
+                        width="12rem"
                         label="{/#SalesOrderForDNType/MaterialByCustomer/@sap:label}"
                         sortProperty="MaterialByCustomer"
                         filterProperty="MaterialByCustomer"
@@ -399,6 +581,8 @@
                             <Text
                                 id="idMaterialByCustomerText"
                                 text="{MaterialByCustomer}"
+                                tooltip="{MaterialByCustomer}"
+                                wrapping="false"
                             />
                         </t:template>
                     </t:Column>
@@ -424,6 +608,84 @@
                             />
                         </t:template>
                     </t:Column>
+                    <t:Column id="_IDGenColumn6"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/TransitPlant/@sap:label}"
+                        sortProperty="TransitPlant"
+                        filterProperty="TransitPlant"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"TransitPlant", "leadingProperty":"TransitPlant", "sortProperty":"TransitPlant", "filterProperty": "TransitPlant"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText6"
+                                text="{TransitPlant}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn7"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/StorageLocation/@sap:label}"
+                        sortProperty="StorageLocation"
+                        filterProperty="StorageLocation"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"StorageLocation", "leadingProperty":"StorageLocation", "sortProperty":"StorageLocation", "filterProperty": "StorageLocation"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText7"
+                                text="{StorageLocation}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn8"
+                        width="12rem"
+                        label="{/#SalesOrderForDNType/StorageLocationName/@sap:label}"
+                        sortProperty="StorageLocationName"
+                        filterProperty="StorageLocationName"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"StorageLocationName", "leadingProperty":"StorageLocationName", "sortProperty":"StorageLocationName", "filterProperty": "StorageLocationName"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText8"
+                                text="{StorageLocationName}"
+                                tooltip="{StorageLocationName}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn9"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/Route/@sap:label}"
+                        sortProperty="Route"
+                        filterProperty="Route"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"Route", "leadingProperty":"Route", "sortProperty":"Route", "filterProperty": "Route"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText9"
+                                text="{Route}"
+                            />
+                        </t:template>
+                    </t:Column>
                     <t:Column
                         id="id15Column"
                         width="8rem"
@@ -446,69 +708,43 @@
                             />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        id="id16Column"
-                        width="8rem"
-                        label="{/#SalesOrderForDNType/ShipToParty/@sap:label}"
-                        sortProperty="ShipToParty"
-                        filterProperty="ShipToParty"
+                    <t:Column id="_IDGenColumn10"
+                        width="12rem"
+                        label="{/#SalesOrderForDNType/ShippingTypeName/@sap:label}"
+                        sortProperty="ShippingTypeName"
+                        filterProperty="ShippingTypeName"
                         visible="true"
                     >
                         <t:customData>
                             <core:CustomData
-                                id="id16CustomData"
                                 key="p13nData"
-                                value='\{"columnKey":"ShipToParty", "leadingProperty":"ShipToParty", "sortProperty":"ShipToParty", "filterProperty": "ShipToParty"}'
+                                value='\{"columnKey":"ShippingTypeName", "leadingProperty":"ShippingTypeName", "sortProperty":"ShippingTypeName", "filterProperty": "ShippingTypeName"}'
                             />
                         </t:customData>
                         <t:template>
-                            <Text
-                                id="idShipToPartyText"
-                                text="{ShipToParty}"
+                            <Text id="_IDGenText10"
+                                text="{ShippingTypeName}"
+                                tooltip="{ShippingTypeName}"
+                                wrapping="false"
                             />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        id="id17Column"
-                        width="8rem"
-                        label="{/#SalesOrderForDNType/ShipToPartyName/@sap:label}"
-                        sortProperty="ShipToPartyName"
-                        filterProperty="ShipToPartyName"
+                    <t:Column id="_IDGenColumn11"
+                        width="10rem"
+                        label="{/#SalesOrderForDNType/RequestedDeliveryDate/@sap:label}"
+                        sortProperty="RequestedDeliveryDate"
+                        filterProperty="RequestedDeliveryDate"
                         visible="true"
                     >
                         <t:customData>
                             <core:CustomData
-                                id="id17CustomData"
                                 key="p13nData"
-                                value='\{"columnKey":"ShipToPartyName", "leadingProperty":"ShipToPartyName", "sortProperty":"ShipToPartyName", "filterProperty": "ShipToPartyName"}'
+                                value='\{"columnKey":"RequestedDeliveryDate", "leadingProperty":"RequestedDeliveryDate", "sortProperty":"RequestedDeliveryDate", "filterProperty": "RequestedDeliveryDate"}'
                             />
                         </t:customData>
                         <t:template>
-                            <Text
-                                id="idShipToPartyNameText"
-                                text="{ShipToPartyName}"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        id="id18Column"
-                        width="8rem"
-                        label="{/#SalesOrderForDNType/DeliveryDate/@sap:label}"
-                        sortProperty="DeliveryDate"
-                        filterProperty="DeliveryDate"
-                        visible="true"
-                    >
-                        <t:customData>
-                            <core:CustomData
-                                id="id18CustomData"
-                                key="p13nData"
-                                value='\{"columnKey":"DeliveryDate", "leadingProperty":"DeliveryDate", "sortProperty":"DeliveryDate", "filterProperty": "DeliveryDate"}'
-                            />
-                        </t:customData>
-                        <t:template>
-                            <Text
-                                id="idDeliveryDateText"
-                                text="{DeliveryDate}"
+                            <Text id="_IDGenText11"
+                                text="{path:'RequestedDeliveryDate', type:'sap.ui.model.type.Date'}"
                             />
                         </t:template>
                     </t:Column>
@@ -620,6 +856,150 @@
                                 id="idConfdOrderQtyText"
                                 text="{ConfdOrderQty}"
                             />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn12"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/DeliveredQty/@sap:label}"
+                        sortProperty="DeliveredQty"
+                        filterProperty="DeliveredQty"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"DeliveredQty", "leadingProperty":"DeliveredQty", "sortProperty":"DeliveredQty", "filterProperty": "DeliveredQty"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText12"
+                                text="{DeliveredQty}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn13"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/RemainingQty/@sap:label}"
+                        sortProperty="RemainingQty"
+                        filterProperty="RemainingQty"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"RemainingQty", "leadingProperty":"RemainingQty", "sortProperty":"RemainingQty", "filterProperty": "RemainingQty"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText13"
+                                text="{RemainingQty}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn14"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/CurrDeliveryQty/@sap:label}"
+                        sortProperty="CurrDeliveryQty"
+                        filterProperty="CurrDeliveryQty"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"CurrDeliveryQty", "leadingProperty":"CurrDeliveryQty", "sortProperty":"CurrDeliveryQty", "filterProperty": "CurrDeliveryQty"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <smartfield:SmartField 
+                                id="_IDGenSmartField"
+                                value="{path:'CurrDeliveryQty'}"
+                                change='onInputChange'/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn15"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/CurrStorageLocation/@sap:label}"
+                        sortProperty="CurrStorageLocation"
+                        filterProperty="CurrStorageLocation"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"CurrStorageLocation", "leadingProperty":"CurrStorageLocation", "sortProperty":"CurrStorageLocation", "filterProperty": "CurrStorageLocation"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <smartfield:SmartField id="_IDGenSmartField1" mandatory='true' value='{CurrStorageLocation}' change='onInputChange' />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn16"
+                        width="8rem"
+                        label="{/#SalesOrderForDNType/CurrShippingType/@sap:label}"
+                        sortProperty="CurrShippingType"
+                        filterProperty="CurrShippingType"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"CurrShippingType", "leadingProperty":"CurrShippingType", "sortProperty":"CurrShippingType", "filterProperty": "CurrShippingType"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <smartfield:SmartField id="_IDGenSmartField2" value='{CurrShippingType}' change='onInputChange'  >
+                            </smartfield:SmartField>
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn17"
+                        width="10rem"
+                        label="{/#SalesOrderForDNType/CurrPlannedGoodsIssueDate/@sap:label}"
+                        sortProperty="CurrPlannedGoodsIssueDate"
+                        filterProperty="CurrPlannedGoodsIssueDate"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"CurrPlannedGoodsIssueDate", "leadingProperty":"CurrPlannedGoodsIssueDate", "sortProperty":"CurrPlannedGoodsIssueDate", "filterProperty": "CurrPlannedGoodsIssueDate"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <smartfield:SmartField id="_IDGenSmartField3" value="{path:'CurrPlannedGoodsIssueDate', type:'sap.ui.model.type.Date',formatOptions: {UTC: false} }" change='onInputChange'/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn18"
+                        width="10rem"
+                        label="{/#SalesOrderForDNType/CurrDeliveryDate/@sap:label}"
+                        sortProperty="CurrDeliveryDate"
+                        filterProperty="CurrDeliveryDate"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"CurrDeliveryDate", "leadingProperty":"CurrDeliveryDate", "sortProperty":"CurrDeliveryDate", "filterProperty": "CurrDeliveryDate"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <smartfield:SmartField id="_IDGenSmartField4" value="{CurrDeliveryDate}" change='onInputChange'/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="_IDGenColumn19"
+                        width="10rem"
+                        label="{/#SalesOrderForDNType/DeliveryDocument/@sap:label}"
+                        sortProperty="DeliveryDocument"
+                        filterProperty="DeliveryDocument"
+                        visible="true"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"DeliveryDocument", "leadingProperty":"DeliveryDocument", "sortProperty":"DeliveryDocument", "filterProperty": "DeliveryDocument"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <Text id="_IDGenText14" text='{DeliveryDocument}' />
                         </t:template>
                     </t:Column>
                 </t:Table>

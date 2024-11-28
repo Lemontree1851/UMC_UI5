@@ -39,6 +39,19 @@
 					"localUri": "annotation/annotation.xml"
 				}
 			}
+    },
+    "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "batchcreationdn",
+                "action": "display",
+                "icon": "sap-icon://request"
+            }
+        }
     }
   },
   "sap.ui": {
@@ -58,6 +71,7 @@
     }
   },
   "sap.ui5": {
+    "handleValidation":true,
     "flexEnabled": true,
     "dependencies": {
       "minUI5Version": "1.120.17",
