@@ -15,7 +15,9 @@ sap.ui.define([
 
         _setInitialValue: function () {
             var oMonth = this.byId("sfbSelFiscalMonth");
-            var oYear = this.byId("sfbDPRecoveryYear");
+            var oYear = this.byId("sfbDPFiscalYear");
+            var oForcastYear = this.byId("sfbDPForcastYear");
+            var oForcastMonth = this.byId("sfbSelForcastMonth");
             var dNow = new Date(Date.now());
             var nMonth = dNow.getMonth() + 1;
             var nYear = dNow.getFullYear();
@@ -32,12 +34,34 @@ sap.ui.define([
 
             oMonth.setSelectedKey(sMonth);
             oYear.setValue(sYear);
+
+            var sForcastMonth = '', sForcastYear = '';
+            if (sMonth === '12') {
+                sForcastMonth = '01';
+                sForcastYear = sYear + 1;
+            } else {
+                sForcastMonth = String(Number(sMonth) + 1).padStart(2, '0');
+                sForcastYear = sYear;
+            }
+
+            oForcastMonth.setSelectedKeys([sForcastMonth]);
+            oForcastYear.setValue(sForcastYear);
+        },
+
+        onBaseFiscalMonthChange: function(oEvent){
+            debugger;
+        },
+
+        _setForcastSelection:function(sBaseYear, sBaseMonth){
+
         },
 
         onBeforeRebindTable: function (oEvent) {
             var oParameters = oEvent.getParameter("bindingParams");
-            var oYear = this.byId("sfbDPRecoveryYear");
+            var oYear = this.byId("sfbDPFiscalYear");
             var oMonth = this.byId("sfbSelFiscalMonth");
+            var oForcastYear = this.byId("sfbDPForcastYear");
+            var oForcastMonth = this.byId("sfbSelForcastMonth");
 
             //Filter
             if (oYear) {
@@ -45,9 +69,22 @@ sap.ui.define([
                 if (sYear !== '') {
                     oParameters.filters.push(
                         new Filter(
-                            "FiscalYear",
+                            "BaseFiscalYear",
                             FilterOperator.EQ,
                             sYear
+                        )
+                    );
+                }
+            }
+
+            if (oForcastYear) {
+                var sForcastYear = oForcastYear.getValue();
+                if (sForcastYear !== '') {
+                    oParameters.filters.push(
+                        new Filter(
+                            "ForcastFiscalYear",
+                            FilterOperator.EQ,
+                            sForcastYear
                         )
                     );
                 }
@@ -57,10 +94,23 @@ sap.ui.define([
                 var sMonth = oMonth.getSelectedKey();
                 oParameters.filters.push(
                     new Filter(
-                        "Period",
+                        "BasePeriod",
                         FilterOperator.EQ,
                         sMonth
                     ));
+            }
+
+            if (oForcastMonth) {
+                var aForcastMonth = oForcastMonth.getSelectedKeys();
+                aForcastMonth.forEach(element => {
+                    oParameters.filters.push(
+                        new Filter(
+                            "ForcastFiscalPeriod",
+                            FilterOperator.EQ,
+                            element
+                        )
+                    );
+                });
             }
         }
     });

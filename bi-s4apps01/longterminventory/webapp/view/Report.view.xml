@@ -14,7 +14,7 @@
 
                     <smartfilterbar:ControlConfiguration id="sfbConfigFiscalYear" key="FiscalYear" label="{i18n>fiscalYear}" mandatory="mandatory" >
                         <smartfilterbar:customControl>
-                            <DatePicker id="sfbDPRecoveryYear" displayFormat="yyyy" valueFormat="yyyy" required="true" />
+                            <DatePicker id="sfbDPFiscalYear" displayFormat="yyyy" valueFormat="yyyy" required="true" />
                         </smartfilterbar:customControl>
                     </smartfilterbar:ControlConfiguration>
 

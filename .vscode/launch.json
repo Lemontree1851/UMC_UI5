@@ -82,10 +82,10 @@
       }
     },
     {
-      "name": "Start poposting",
+      "name": "Start longtermforcast",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}/mm-s4apps01/poposting",
+      "cwd": "${workspaceFolder}/bi-s4apps01/longtermforcast",
       "runtimeExecutable": "npx",
       "windows": {
         "runtimeExecutable": "npx.cmd"
@@ -96,7 +96,7 @@
       ],
       "args": [
         "--open",
-        "test/flpSandbox.html#poposting-display"
+        "test/flpSandbox.html#bilongtermforcast-display"
       ],
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
@@ -104,14 +104,14 @@
       "env": {
         "DEBUG": "--inspect",
         "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/mm-s4apps01/poposting\"}"
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/bi-s4apps01/longtermforcast\"}"
       }
     },
     {
-      "name": "Start poposting Local",
+      "name": "Start longtermforcast Local",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}/mm-s4apps01/poposting",
+      "cwd": "${workspaceFolder}/bi-s4apps01/longtermforcast",
       "runtimeExecutable": "npx",
       "windows": {
         "runtimeExecutable": "npx.cmd"
@@ -124,21 +124,21 @@
         "--config",
         "./ui5-local.yaml",
         "--open",
-        "test/flpSandbox.html#poposting-display"
+        "test/flpSandbox.html#bilongtermforcast-display"
       ],
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "outputCapture": "std",
       "env": {
         "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/mm-s4apps01/poposting\"}"
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/bi-s4apps01/longtermforcast\"}"
       }
     },
     {
-      "name": "Start poposting Mock",
+      "name": "Start longtermforcast Mock",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}/mm-s4apps01/poposting",
+      "cwd": "${workspaceFolder}/bi-s4apps01/longtermforcast",
       "runtimeExecutable": "npx",
       "windows": {
         "runtimeExecutable": "npx.cmd"
@@ -151,174 +151,14 @@
         "--config",
         "./ui5-mock.yaml",
         "--open",
-        "test/flpSandbox.html#poposting-display"
+        "test/flpSandbox.html#bilongtermforcast-display"
       ],
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "outputCapture": "std",
       "env": {
         "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/mm-s4apps01/poposting\"}"
-      }
-    },
-    {
-      "name": "Start purinfomasterlist",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/mm-s4apps01/purinfomasterlist",
-      "runtimeExecutable": "npx",
-      "windows": {
-        "runtimeExecutable": "npx.cmd"
-      },
-      "runtimeArgs": [
-        "fiori",
-        "run"
-      ],
-      "args": [
-        "--open",
-        "test/flpSandbox.html#mmpurinfomasterlist-display"
-      ],
-      "console": "internalConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "outputCapture": "std",
-      "env": {
-        "DEBUG": "--inspect",
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/mm-s4apps01/purinfomasterlist\"}"
-      }
-    },
-    {
-      "name": "Start purinfomasterlist Local",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/mm-s4apps01/purinfomasterlist",
-      "runtimeExecutable": "npx",
-      "windows": {
-        "runtimeExecutable": "npx.cmd"
-      },
-      "runtimeArgs": [
-        "fiori",
-        "run"
-      ],
-      "args": [
-        "--config",
-        "./ui5-local.yaml",
-        "--open",
-        "test/flpSandbox.html#mmpurinfomasterlist-display"
-      ],
-      "console": "internalConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "outputCapture": "std",
-      "env": {
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/mm-s4apps01/purinfomasterlist\"}"
-      }
-    },
-    {
-      "name": "Start purinfomasterlist Mock",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/mm-s4apps01/purinfomasterlist",
-      "runtimeExecutable": "npx",
-      "windows": {
-        "runtimeExecutable": "npx.cmd"
-      },
-      "runtimeArgs": [
-        "fiori",
-        "run"
-      ],
-      "args": [
-        "--config",
-        "./ui5-mock.yaml",
-        "--open",
-        "test/flpSandbox.html#mmpurinfomasterlist-display"
-      ],
-      "console": "internalConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "outputCapture": "std",
-      "env": {
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/mm-s4apps01/purinfomasterlist\"}"
-      }
-    },
-    {
-      "name": "Start zecn",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/pp-s4apps01/zecn",
-      "runtimeExecutable": "npx",
-      "windows": {
-        "runtimeExecutable": "npx.cmd"
-      },
-      "runtimeArgs": [
-        "fiori",
-        "run"
-      ],
-      "args": [
-        "--open",
-        "test/flpSandbox.html#zecnzecn-tile"
-      ],
-      "console": "internalConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "outputCapture": "std",
-      "env": {
-        "DEBUG": "--inspect",
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/pp-s4apps01/zecn\"}"
-      }
-    },
-    {
-      "name": "Start zecn Local",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/pp-s4apps01/zecn",
-      "runtimeExecutable": "npx",
-      "windows": {
-        "runtimeExecutable": "npx.cmd"
-      },
-      "runtimeArgs": [
-        "fiori",
-        "run"
-      ],
-      "args": [
-        "--config",
-        "./ui5-local.yaml",
-        "--open",
-        "test/flpSandbox.html#zecnzecn-tile"
-      ],
-      "console": "internalConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "outputCapture": "std",
-      "env": {
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/pp-s4apps01/zecn\"}"
-      }
-    },
-    {
-      "name": "Start zecn Mock",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/pp-s4apps01/zecn",
-      "runtimeExecutable": "npx",
-      "windows": {
-        "runtimeExecutable": "npx.cmd"
-      },
-      "runtimeArgs": [
-        "fiori",
-        "run"
-      ],
-      "args": [
-        "--config",
-        "./ui5-mock.yaml",
-        "--open",
-        "test/flpSandbox.html#zecnzecn-tile"
-      ],
-      "console": "internalConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "outputCapture": "std",
-      "env": {
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/pp-s4apps01/zecn\"}"
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/UMC_UI5/bi-s4apps01/longtermforcast\"}"
       }
     }
   ]

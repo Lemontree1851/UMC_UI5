@@ -15,7 +15,7 @@ sap.ui.define([
 
         _setInitialValue:function(){
             var oMonth = this.byId("sfbSelFiscalMonth");
-            var oYear = this.byId("sfbDPRecoveryYear");
+            var oYear = this.byId("sfbDPFiscalYear");
             var dNow = new Date(Date.now());
             var nMonth = dNow.getMonth() + 1;
             var nYear = dNow.getFullYear();
@@ -36,7 +36,7 @@ sap.ui.define([
 
         onBeforeRebindTable: function (oEvent) {
             var oParameters = oEvent.getParameter("bindingParams");
-            var oYear = this.byId("sfbDPRecoveryYear");
+            var oYear = this.byId("sfbDPFiscalYear");
             var oMonth = this.byId("sfbSelFiscalMonth"); 
 
             //Filter
