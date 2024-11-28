@@ -16,13 +16,9 @@ server:
             - /test-resources
           url: https://ui5.sap.com
         backend:
-          # - path: /sap
-          #   url: https://my412552-api.s4hana.cloud.sap
-          #   destination: UMC_Dev_Customizing_BTP
-          #   authenticationType: BasicAuthentication
           - path: /sap
-            url: https://my417497-api.s4hana.cloud.sap
-            destination: UMC_PPL_TEST
+            url: https://my412552-api.s4hana.cloud.sap
+            destination: UMC_Dev_Customizing_BTP
             authenticationType: BasicAuthentication
     - name: fiori-tools-appreload
       afterMiddleware: compression
