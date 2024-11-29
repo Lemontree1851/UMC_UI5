@@ -208,6 +208,7 @@
                 placeToolbarInTable="true"
                 requestAtLeastFields="UUID,WorkflowId,InstanceId,ApplicationId"
                 beforeRebindTable="onBeforeRebindTable"
+                enableCopy="false"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar id="OverflowToolbar1">

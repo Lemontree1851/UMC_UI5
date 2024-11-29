@@ -202,7 +202,7 @@ sap.ui.define([
 			const sPath = "/A_DocumentInfoRecord(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
 				sInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')";
 			var promise = new Promise (function (resolve, reject) {
-				var mParameters = {
+				var mParameters = {	
 					success: function (oData) {
 						resolve(oData);
 						 

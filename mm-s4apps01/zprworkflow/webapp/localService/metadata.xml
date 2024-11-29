@@ -156,6 +156,7 @@
                 <Property Name="BuyPurpoose" Type="Edm.String" MaxLength="2"/>
                 <Property Name="BuyPurposeText" Type="Edm.String" MaxLength="120" sap:label="購入目的テキスト"/>
                 <Property Name="amount1" Type="Edm.Decimal" Precision="34" Scale="0" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="zattachment" Type="Edm.String" MaxLength="4" sap:label="添付ファイル" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="PurchaseReqWFLinkType" sap:label="Projection View for ZR_PRWORKFLOWLINK" sap:content-version="1">
                 <Key>
@@ -670,9 +671,27 @@
                         <PropertyValue Property="Deletable" Bool="false"/>
                     </Record>
                 </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>zattachment</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
                 <Annotation Term="Capabilities.InsertRestrictions">
                     <Record>
                         <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>zattachment</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.UpdateRestrictions">

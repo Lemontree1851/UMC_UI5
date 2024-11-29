@@ -609,6 +609,7 @@ xmlns:m="sap.m"
                 requestAtLeastFields="UUID"
                 enableAutoBinding="true" 
                 beforeRebindTable="onBeforeRebindTable"
+                enableCopy="false"
             >
  
                 <t:Table
@@ -1167,6 +1168,27 @@ xmlns:m="sap.m"
                                 <Text
                                     id="idamount1Text"
                                     text="{amount1}"
+                                />
+                            </t:template>
+                        </t:Column>
+                                                <t:Column
+                            id="id9Column"
+                            width="8rem"
+                            label="{i18n>zattachment}"
+                            sortProperty="zattachment"
+                            filterProperty="zattachment"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id9CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"zattachment", "leadingProperty":"zattachment", "sortProperty":"zattachment", "filterProperty": "zattachment"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idzattachmentText"
+                                    text="{zattachment}"
                                 />
                             </t:template>
                         </t:Column>
