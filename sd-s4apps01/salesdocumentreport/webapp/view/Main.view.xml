@@ -6,40 +6,76 @@
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:sv="sap.ui.comp.smartvariants"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:table="sap.ui.table">
+	xmlns:smartField="sap.ui.comp.smartfield" 
+    xmlns:smartform="sap.ui.comp.smartform" 
+	xmlns:table="sap.ui.table" height="100%">
 
 	<smartFilterBar:SmartFilterBar id="idSmartFilterBar" useToolbar="false" entitySet="SalesReport" persistencyKey="SalesReportSFB">
-    <smartFilterBar:controlConfiguration>
-        <smartFilterBar:ControlConfiguration index="1" id="SalesOrganizationBar" key="SalesOrganization" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}"/>
-        <smartFilterBar:ControlConfiguration index="2" id="YearDateBar" key="YearDate" visibleInAdvancedArea="true" label="{i18n>YearDate}"/>
-        <smartFilterBar:ControlConfiguration index="3" id="CustomerBar" key="Customer" visibleInAdvancedArea="true" label="{i18n>CustomerBar}"/>
-        <smartFilterBar:ControlConfiguration index="4" id="ProductBar" key="Product" visibleInAdvancedArea="true" label="{i18n>ProductBar}"/>   
-        <smartFilterBar:ControlConfiguration index="5" id="plantypeBar" key="plantype" visibleInAdvancedArea="true" label="{i18n>plantype}">	
+		<smartFilterBar:controlConfiguration>
+			<!-- Sales Organization Bar -->
+			<smartFilterBar:ControlConfiguration index="1" id="SalesOrganizationBar" key="SalesOrganization" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}">
+				<!-- 可以添加默认聚合内容，如果有需要 -->
+			</smartFilterBar:ControlConfiguration>
+
+			<!-- Customer Bar -->
+			<smartFilterBar:ControlConfiguration index="3" id="CustomerBar" key="Customer" visibleInAdvancedArea="true" label="{i18n>CustomerBar}">
+				<!-- 可以添加默认聚合内容，如果有需要 -->
+			</smartFilterBar:ControlConfiguration>
+
+			<!-- Product Bar -->
+			<smartFilterBar:ControlConfiguration index="4" id="ProductBar" key="Product" visibleInAdvancedArea="true" label="{i18n>ProductBar}">
+				<!-- 可以添加默认聚合内容，如果有需要 -->
+			</smartFilterBar:ControlConfiguration>
+
+			<!-- Plantype Bar with custom Select control -->
+			<smartFilterBar:ControlConfiguration index="5" id="plantypeBar" key="plantype" visibleInAdvancedArea="true" label="{i18n>plantype}">
+				<smartFilterBar:customControl>
+					<Select id="idplantype" selectedKey="">
+						<core:Item id="A" key="A" text="A"/>
+						<core:Item id="B" key="B" text="B"/>
+					</Select>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+
+        <!-- Year Date Bar with custom Select control -->
+        <smartFilterBar:ControlConfiguration index="2" id="YearDateBar" key="YearDate" visibleInAdvancedArea="true" label="{i18n>YearDate}">
             <smartFilterBar:customControl>
-                <Select id="idplantype" selectedKey="">
-                    <core:Item id="A" key="A" text="A"/>
-                    <core:Item id="B" key="B" text="B"/>
+                <Select id="idMonat" selectedKey="">
+                    <core:Item id="01" key="01" text="01"/>
+                    <core:Item id="02" key="02" text="02"/>
+                    <core:Item id="03" key="03" text="03"/>
+                    <core:Item id="04" key="04" text="04"/>
+                    <core:Item id="05" key="05" text="05"/>
+                    <core:Item id="06" key="06" text="06"/>
+                    <core:Item id="07" key="07" text="07"/>
+                    <core:Item id="08" key="08" text="08"/>
+                    <core:Item id="09" key="09" text="09"/>
+                    <core:Item id="10" key="10" text="10"/>
+                    <core:Item id="11" key="11" text="11"/>
+                    <core:Item id="12" key="12" text="12"/>
                 </Select>
-            </smartFilterBar:customControl>  
+            </smartFilterBar:customControl>
         </smartFilterBar:ControlConfiguration>
-		 <smartFilterBar:ControlConfiguration id="ConditionRateValueConfig"         key="ConditionRateValue"         visible="false" index="99"/>
-         <smartFilterBar:ControlConfiguration id="ContributionProfitConfig"         key="ContributionProfit"         visible="false" index="99"/>
-		 <smartFilterBar:ControlConfiguration id="ContributionProfitTotalConfig"    key="ContributionProfitTotal"    visible="false" index="99"/>
-         <smartFilterBar:ControlConfiguration id="CreatedByUserConfig"              key="CreatedByUser"              visible="false" index="99"/>
-		 <smartFilterBar:ControlConfiguration id="MatlAccountAssignmentGroupConfig" key="MatlAccountAssignmentGroup" visible="false" index="99"/>
-         <smartFilterBar:ControlConfiguration id="ProductGroupConfig"               key="ProductGroup"               visible="false" index="99"/>
-		 <smartFilterBar:ControlConfiguration id="MaterialCost2000Config"           key="MaterialCost2000"           visible="false" index="99"/>
-         <smartFilterBar:ControlConfiguration id="ManufacturingcostConfig"          key="Manufacturingcost"          visible="false" index="99"/>
-		 <smartFilterBar:ControlConfiguration id="CustomerNameConfig"               key="CustomerName"               visible="false" index="99"/>
-		 <smartFilterBar:ControlConfiguration id="GrossProfitConfig"                key="GrossProfit"                visible="false" index="99"/>
-         <smartFilterBar:ControlConfiguration id="PlantNameConfig"                  key="PlantName"                  visible="false" index="99"/>
-		 <smartFilterBar:ControlConfiguration id="GrossProfitTotalConfig"           key="GrossProfitTotal"           visible="false" index="99"/>
-		 <smartFilterBar:ControlConfiguration id="salesplanamountindspcrcyConfig"   key="salesplanamountindspcrcy"   visible="false" index="99"/>
-		 <smartFilterBar:ControlConfiguration id="ProfitCenterConfig"               key="ProfitCenter"               visible="false" index="99"/>
-         <smartFilterBar:ControlConfiguration id="SalesAmountConfig"                key="SalesAmount"                visible="false" index="99"/>
-	     <smartFilterBar:ControlConfiguration id="SalesOfficeConfig"                key="SalesOffice"                visible="false" index="99"/>
-         <smartFilterBar:ControlConfiguration id="SalesGroupConfig"                 key="SalesGroup"                 visible="false" index="99"/>
-		 <smartFilterBar:ControlConfiguration id="ProductNameConfig"                key="ProductName"               visible="false" index="99"/>
+
+        <!-- 隐藏的 ControlConfigurations -->
+        <smartFilterBar:ControlConfiguration id="ConditionRateValueConfig" key="ConditionRateValue" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="ContributionProfitConfig" key="ContributionProfit" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="ContributionProfitTotalConfig" key="ContributionProfitTotal" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="CreatedByUserConfig" key="CreatedByUser" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="MatlAccountAssignmentGroupConfig" key="MatlAccountAssignmentGroup" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="ProductGroupConfig" key="ProductGroup" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="MaterialCost2000Config" key="MaterialCost2000" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="ManufacturingcostConfig" key="Manufacturingcost" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="CustomerNameConfig" key="CustomerName" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="GrossProfitConfig" key="GrossProfit" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="PlantNameConfig" key="PlantName" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="GrossProfitTotalConfig" key="GrossProfitTotal" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="salesplanamountindspcrcyConfig" key="salesplanamountindspcrcy" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="ProfitCenterConfig" key="ProfitCenter" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="SalesAmountConfig" key="SalesAmount" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="SalesOfficeConfig" key="SalesOffice" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="SalesGroupConfig" key="SalesGroup" visible="false" index="99"/>
+        <smartFilterBar:ControlConfiguration id="ProductNameConfig" key="ProductName" visible="false" index="99"/>
     </smartFilterBar:controlConfiguration>
 </smartFilterBar:SmartFilterBar>
 
@@ -298,6 +334,666 @@
 								<Label text="{GrossProfitTotal}"/>
 							</table:template>
 						</table:Column>
+
+				 <table:Column id="ConditionRateValue01" label="{local>/ConditionRateValue01}" width="5rem" sortProperty="ConditionRateValue01" filterProperty="ConditionRateValue01"  autoResizable="true">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue01", "leadingProperty":"ConditionRateValue01", "sortProperty":"ConditionRateValue01", "filterProperty": "ConditionRateValue01"}'/>
+                    </table:customData>
+                    <table:template>
+                     <Label text="{ConditionRateValue01}}"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- <t:Column id="D002" label="{local>/ConditionRateValue02}" width="5rem" sortProperty="ConditionRateValue02" filterProperty="ConditionRateValue02" visible="{= ${local>/zdays} >= 2 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue02", "leadingProperty":"ConditionRateValue02", "sortProperty":"ConditionRateValue02", "filterProperty": "ConditionRateValue02"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox002">
+                        <Text id="D002T" text="{ConditionRateValue02}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D002I" value="{ConditionRateValue02}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue02')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D003" label="{local>/ConditionRateValue03}" width="5rem" sortProperty="ConditionRateValue03" filterProperty="ConditionRateValue03" visible="{= ${local>/zdays} >= 3 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue03", "leadingProperty":"ConditionRateValue03", "sortProperty":"ConditionRateValue03", "filterProperty": "ConditionRateValue03"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox003">
+                        <Text id="D003T" text="{ConditionRateValue03}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D003I" value="{ConditionRateValue03}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue03')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D004" label="{local>/ConditionRateValue04}" width="5rem" sortProperty="ConditionRateValue04" filterProperty="ConditionRateValue04" visible="{= ${local>/zdays} >= 4 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue04", "leadingProperty":"ConditionRateValue04", "sortProperty":"ConditionRateValue04", "filterProperty": "ConditionRateValue04"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox004">
+                        <Text id="D004T" text="{ConditionRateValue04}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D004I" value="{ConditionRateValue04}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue04')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D005" label="{local>/ConditionRateValue05}" width="5rem" sortProperty="ConditionRateValue05" filterProperty="ConditionRateValue05" visible="{= ${local>/zdays} >= 5 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue05", "leadingProperty":"ConditionRateValue05", "sortProperty":"ConditionRateValue05", "filterProperty": "ConditionRateValue05"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox005">
+                        <Text id="D005T" text="{ConditionRateValue05}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D005I" value="{ConditionRateValue05}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue05')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D006" label="{local>/ConditionRateValue06}" width="5rem" sortProperty="ConditionRateValue06" filterProperty="ConditionRateValue06" visible="{= ${local>/zdays} >= 6 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue06", "leadingProperty":"ConditionRateValue06", "sortProperty":"ConditionRateValue06", "filterProperty": "ConditionRateValue06"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox006">
+                        <Text id="D006T" text="{ConditionRateValue06}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D006I" value="{ConditionRateValue06}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue06')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D007" label="{local>/ConditionRateValue07}" width="5rem" sortProperty="ConditionRateValue07" filterProperty="ConditionRateValue07" visible="{= ${local>/zdays} >= 7 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue07", "leadingProperty":"ConditionRateValue07", "sortProperty":"ConditionRateValue07", "filterProperty": "ConditionRateValue07"}'/>
+                    </t:customData>
+                    <t:template>
+                       <VBox id="VBox007">
+                        <Text id="D007T" text="{ConditionRateValue07}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D007I" value="{ConditionRateValue07}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue07')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D008" label="{local>/ConditionRateValue08}" width="5rem" sortProperty="ConditionRateValue08" filterProperty="ConditionRateValue08" visible="{= ${local>/zdays} >= 8 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue08", "leadingProperty":"ConditionRateValue08", "sortProperty":"ConditionRateValue08", "filterProperty": "ConditionRateValue08"}'/>
+                    </t:customData>
+                    <t:template>
+                       <VBox id="VBox008">
+                        <Text id="D008T" text="{ConditionRateValue08}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D008I" value="{ConditionRateValue08}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue08')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D009" label="{local>/ConditionRateValue09}" width="5rem" sortProperty="ConditionRateValue09" filterProperty="ConditionRateValue09" visible="{= ${local>/zdays} >= 9 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue09", "leadingProperty":"ConditionRateValue09", "sortProperty":"ConditionRateValue09", "filterProperty": "ConditionRateValue09"}'/>
+                    </t:customData>
+                    <t:template>
+                       <VBox id="VBox009">
+                        <Text id="D009T" text="{ConditionRateValue09}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D009I" value="{ConditionRateValue09}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue09')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D010" label="{local>/ConditionRateValue10}" width="5rem" sortProperty="ConditionRateValue10" filterProperty="ConditionRateValue10" visible="{= ${local>/zdays} >= 10 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue10", "leadingProperty":"ConditionRateValue10", "sortProperty":"ConditionRateValue10", "filterProperty": "ConditionRateValue10"}'/>
+                    </t:customData>
+                    <t:template>
+                       <VBox id="VBox010">
+                        <Text id="D010T" text="{ConditionRateValue10}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D010I" value="{ConditionRateValue10}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue10')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D011" label="{local>/ConditionRateValue11}" width="5rem" sortProperty="ConditionRateValue11" filterProperty="ConditionRateValue11" visible="{= ${local>/zdays} >= 11 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue11", "leadingProperty":"ConditionRateValue11", "sortProperty":"ConditionRateValue11", "filterProperty": "ConditionRateValue11"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox011">
+                        <Text id="D011T" text="{ConditionRateValue11}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D011I" value="{ConditionRateValue11}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue11')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D012" label="{local>/ConditionRateValue12}" width="5rem" sortProperty="ConditionRateValue12" filterProperty="ConditionRateValue12" visible="{= ${local>/zdays} >= 12 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue12", "leadingProperty":"ConditionRateValue12", "sortProperty":"ConditionRateValue12", "filterProperty": "ConditionRateValue12"}'/>
+                    </t:customData>
+                    <t:template>
+                       <VBox id="VBox012">
+                        <Text id="D012T" text="{ConditionRateValue12}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D012I" value="{ConditionRateValue12}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'ConditionRateValue12')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column> --> 
+
+                <!-- <t:Column id="D013" label="{local>/Date013}" width="5rem" sortProperty="D013" filterProperty="D013" visible="{= ${local>/zdays} >= 13 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D013", "leadingProperty":"D013", "sortProperty":"D013", "filterProperty": "D013"}'/>
+                    </t:customData>
+                    <t:template>
+                       <VBox id="VBox013">
+                        <Text id="D013T" text="{D013}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D013I" value="{D013}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D013')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D014" label="{local>/Date014}" width="5rem" sortProperty="D014" filterProperty="D014" visible="{= ${local>/zdays} >= 14 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D014", "leadingProperty":"D014", "sortProperty":"D014", "filterProperty": "D014"}'/>
+                    </t:customData>
+                    <t:template>
+                       <VBox id="VBox014">
+                        <Text id="D014T" text="{D014}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D014I" value="{D014}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D014')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D015" label="{local>/Date015}" width="5rem" sortProperty="D015" filterProperty="D015" visible="{= ${local>/zdays} >= 15 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D015", "leadingProperty":"D015", "sortProperty":"D015", "filterProperty": "D015"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox015">
+                        <Text id="D015T" text="{D015}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D015I" value="{D015}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D015')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D016" label="{local>/Date016}" width="5rem" sortProperty="D016" filterProperty="D016" visible="{= ${local>/zdays} >= 16 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D016", "leadingProperty":"D016", "sortProperty":"D016", "filterProperty": "D016"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox016">
+                        <Text id="D016T" text="{D016}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D016I" value="{D016}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D016')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D017" label="{local>/Date017}" width="5rem" sortProperty="D017" filterProperty="D017" visible="{= ${local>/zdays} >= 17 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D017", "leadingProperty":"D017", "sortProperty":"D017", "filterProperty": "D017"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox017">
+                        <Text id="D017T" text="{D017}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D017I" value="{D017}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D017')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D018" label="{local>/Date018}" width="5rem" sortProperty="D018" filterProperty="D018" visible="{= ${local>/zdays} >= 18 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D018", "leadingProperty":"D018", "sortProperty":"D018", "filterProperty": "D018"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox018">
+                        <Text id="D018T" text="{D018}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D018I" value="{D018}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D018')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D019" label="{local>/Date019}" width="5rem" sortProperty="D019" filterProperty="D019" visible="{= ${local>/zdays} >= 19 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D019", "leadingProperty":"D019", "sortProperty":"D019", "filterProperty": "D019"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox019">
+                        <Text id="D019T" text="{D019}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D019I" value="{D019}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D019')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D020" label="{local>/Date020}" width="5rem" sortProperty="D020" filterProperty="D020" visible="{= ${local>/zdays} >= 20 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D020", "leadingProperty":"D020", "sortProperty":"D020", "filterProperty": "D020"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox020">
+                        <Text id="D020T" text="{D020}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D020I" value="{D020}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D020')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D021" label="{local>/Date021}" width="5rem" sortProperty="D021" filterProperty="D021" visible="{= ${local>/zdays} >= 21 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D021", "leadingProperty":"D021", "sortProperty":"D021", "filterProperty": "D021"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox021">
+                        <Text id="D021T" text="{D021}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D021I" value="{D021}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D021')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D022" label="{local>/Date022}" width="5rem" sortProperty="D022" filterProperty="D022" visible="{= ${local>/zdays} >= 22 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D022", "leadingProperty":"D022", "sortProperty":"D022", "filterProperty": "D022"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox022">
+                        <Text id="D022T" text="{D022}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D022I" value="{D022}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D022')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D023" label="{local>/Date023}" width="5rem" sortProperty="D023" filterProperty="D023" visible="{= ${local>/zdays} >= 23 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D023", "leadingProperty":"D023", "sortProperty":"D023", "filterProperty": "D023"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox023">
+                        <Text id="D023T" text="{D023}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D023I" value="{D023}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D023')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D024" label="{local>/Date024}" width="5rem" sortProperty="D024" filterProperty="D024" visible="{= ${local>/zdays} >= 24 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D024", "leadingProperty":"D024", "sortProperty":"D024", "filterProperty": "D024"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox024">
+                        <Text id="D024T" text="{D024}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D024I" value="{D024}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D024')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D025" label="{local>/Date025}" width="5rem" sortProperty="D025" filterProperty="D025" visible="{= ${local>/zdays} >= 25 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D025", "leadingProperty":"D025", "sortProperty":"D025", "filterProperty": "D025"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox025">
+                        <Text id="D025T" text="{D025}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D025I" value="{D025}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D025')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D026" label="{local>/Date026}" width="5rem" sortProperty="D026" filterProperty="D026" visible="{= ${local>/zdays} >= 26 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D026", "leadingProperty":"D026", "sortProperty":"D026", "filterProperty": "D026"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox026">
+                        <Text id="D026T" text="{D026}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D026I" value="{D026}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D026')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D027" label="{local>/Date027}" width="5rem" sortProperty="D027" filterProperty="D027" visible="{= ${local>/zdays} >= 27 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D027", "leadingProperty":"D027", "sortProperty":"D027", "filterProperty": "D027"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox027">
+                        <Text id="D027T" text="{D027}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D027I" value="{D027}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D027')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D028" label="{local>/Date028}" width="5rem" sortProperty="D028" filterProperty="D028" visible="{= ${local>/zday} >= 28 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D028", "leadingProperty":"D028", "sortProperty":"D028", "filterProperty": "D028"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox028">
+                        <Text id="D028T" text="{D028}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D028I" value="{D028}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D028')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D029" label="{local>/Date029}" width="5rem" sortProperty="D029" filterProperty="D029" visible="{= ${local>/zdays} >= 29 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D029", "leadingProperty":"D029", "sortProperty":"D029", "filterProperty": "D029"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox029">
+                        <Text id="D029T" text="{D029}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D029I" value="{D029}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D029')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D030" label="{local>/Date030}" width="5rem" sortProperty="D030" filterProperty="D030" visible="{= ${local>/zdays} >= 30 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D030", "leadingProperty":"D030", "sortProperty":"D030", "filterProperty": "D030"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox030">
+                        <Text id="D030T" text="{D030}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D030I" value="{D030}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D030')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D031" label="{local>/Date031}" width="5rem" sortProperty="D031" filterProperty="D031" visible="{= ${local>/zdays} >= 31 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D031", "leadingProperty":"D031", "sortProperty":"D031", "filterProperty": "D031"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox031">
+                        <Text id="D031T" text="{D031}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D031I" value="{D031}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D031')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D032" label="{local>/Date032}" width="5rem" sortProperty="D032" filterProperty="D032" visible="{= ${local>/zdays} >= 32 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D032", "leadingProperty":"D032", "sortProperty":"D032", "filterProperty": "D032"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox032">
+                        <Text id="D032T" text="{D032}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D032I" value="{D032}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D032')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D033" label="{local>/Date033}" width="5rem" sortProperty="D033" filterProperty="D033" visible="{= ${local>/zdays} >= 33 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D033", "leadingProperty":"D033", "sortProperty":"D033", "filterProperty": "D033"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox033">
+                        <Text id="D033T" text="{D033}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D033I" value="{D033}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D033')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D034" label="{local>/Date034}" width="5rem" sortProperty="D034" filterProperty="D034" visible="{= ${local>/zdays} >= 34 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D034", "leadingProperty":"D034", "sortProperty":"D034", "filterProperty": "D034"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox034">
+                        <Text id="D034T" text="{D034}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D034I" value="{D034}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D034')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D035" label="{local>/Date035}" width="5rem" sortProperty="D035" filterProperty="D035" visible="{= ${local>/zdays} >= 35 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D035", "leadingProperty":"D035", "sortProperty":"D035", "filterProperty": "D035"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox035">
+                        <Text id="D035T" text="{D035}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D035I" value="{D035}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D035')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D036" label="{local>/Date036}" width="5rem" sortProperty="D036" filterProperty="D036" visible="{= ${local>/zdays} >= 36 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D036", "leadingProperty":"D036", "sortProperty":"D036", "filterProperty": "D036"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox036">
+                        <Text id="D036T" text="{D036}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D036I" value="{D036}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D036')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D037" label="{local>/Date037}" width="5rem" sortProperty="D037" filterProperty="D037" visible="{= ${local>/zdays} >= 37 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D037", "leadingProperty":"D037", "sortProperty":"D037", "filterProperty": "D037"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox037">
+                        <Text id="D037T" text="{D037}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D037I" value="{D037}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D037')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D038" label="{local>/Date038}" width="5rem" sortProperty="D038" filterProperty="D038" visible="{= ${local>/zdays} >= 38 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D038", "leadingProperty":"D038", "sortProperty":"D038", "filterProperty": "D038"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox038">
+                        <Text id="D038T" text="{D038}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D038I" value="{D038}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D038')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D039" label="{local>/Date039}" width="5rem" sortProperty="D039" filterProperty="D039" visible="{= ${local>/zdays} >= 39 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D039", "leadingProperty":"D039", "sortProperty":"D039", "filterProperty": "D039"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox039">
+                        <Text id="D039T" text="{D039}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D039I" value="{D039}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D039')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D040" label="{local>/Date040}" width="5rem" sortProperty="D040" filterProperty="D040" visible="{= ${local>/zdays} >= 40 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D040", "leadingProperty":"D040", "sortProperty":"D040", "filterProperty": "D040"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox040">
+                        <Text id="D040T" text="{D040}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D040I" value="{D040}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D040')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D041" label="{local>/Date041}" width="5rem" sortProperty="D041" filterProperty="D041" visible="{= ${local>/zdays} >= 41 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D041", "leadingProperty":"D041", "sortProperty":"D041", "filterProperty": "D041"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox041">
+                        <Text id="D041T" text="{D041}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D041I" value="{D041}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D041')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D042" label="{local>/Date042}" width="5rem" sortProperty="D042" filterProperty="D042" visible="{= ${local>/zdays} >= 42 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D042", "leadingProperty":"D042", "sortProperty":"D042", "filterProperty": "D042"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox042">
+                        <Text id="D042T" text="{D042}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D042I" value="{D042}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D042')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D043" label="{local>/Date043}" width="5rem" sortProperty="D043" filterProperty="D043" visible="{= ${local>/zdays} >= 43 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D043", "leadingProperty":"D043", "sortProperty":"D043", "filterProperty": "D043"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox043">
+                        <Text id="D043T" text="{D043}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D043I" value="{D043}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D043')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D044" label="{local>/Date044}" width="5rem" sortProperty="D044" filterProperty="D044" visible="{= ${local>/zdays} >= 44 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D044", "leadingProperty":"D044", "sortProperty":"D044", "filterProperty": "D044"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox044">
+                        <Text id="D044T" text="{D044}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D044I" value="{D044}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D044')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D045" label="{local>/Date045}" width="5rem" sortProperty="D045" filterProperty="D045" visible="{= ${local>/zdays} >= 45 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D045", "leadingProperty":"D045", "sortProperty":"D045", "filterProperty": "D045"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox045">
+                        <Text id="D045T" text="{D045}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D045I" value="{D045}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D045')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D046" label="{local>/Date046}" width="5rem" sortProperty="D046" filterProperty="D046" visible="{= ${local>/zdays} >= 46 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D046", "leadingProperty":"D046", "sortProperty":"D046", "filterProperty": "D046"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox046">
+                        <Text id="D046T" text="{D046}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D046I" value="{D046}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D046')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D047" label="{local>/Date047}" width="5rem" sortProperty="D047" filterProperty="D047" visible="{= ${local>/zdays} >= 47 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D047", "leadingProperty":"D047", "sortProperty":"D047", "filterProperty": "D047"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox047">
+                        <Text id="D047T" text="{D047}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D047I" value="{D047}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D047')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D048" label="{local>/Date048}" width="5rem" sortProperty="D048" filterProperty="D048" visible="{= ${local>/zdays} >= 48 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D048", "leadingProperty":"D048", "sortProperty":"D048", "filterProperty": "D048"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox048">
+                        <Text id="D048T" text="{D048}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D048I" value="{D048}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D048')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D049" label="{local>/Date049}" width="5rem" sortProperty="D049" filterProperty="D049" visible="{= ${local>/zdays} >= 49 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D049", "leadingProperty":"D049", "sortProperty":"D049", "filterProperty": "D049"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox049">
+                        <Text id="D049T" text="{D049}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D049I" value="{D049}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D049')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D050" label="{local>/Date050}" width="5rem" sortProperty="D050" filterProperty="D050" visible="{= ${local>/zdays} >= 50 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D050", "leadingProperty":"D050", "sortProperty":"D050", "filterProperty": "D050"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox050">
+                        <Text id="D050T" text="{D050}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D050I" value="{D050}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D050')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D051" label="{local>/Date051}" width="5rem" sortProperty="D051" filterProperty="D051" visible="{= ${local>/zdays} >= 51 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D051", "leadingProperty":"D051", "sortProperty":"D051", "filterProperty": "D051"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox051">
+                        <Text id="D051T" text="{D051}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D051I" value="{D051}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D051')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D052" label="{local>/Date052}" width="5rem" sortProperty="D052" filterProperty="D052" visible="{= ${local>/zdays} >= 52 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D052", "leadingProperty":"D052", "sortProperty":"D052", "filterProperty": "D052"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox052">
+                        <Text id="D052T" text="{D052}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D052I" value="{D052}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D052')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D053" label="{local>/Date053}" width="5rem" sortProperty="D053" filterProperty="D053" visible="{= ${local>/zdays} >= 53 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D053", "leadingProperty":"D053", "sortProperty":"D053", "filterProperty": "D053"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox053">
+                        <Text id="D053T" text="{D053}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D053I" value="{D053}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D053')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D054" label="{local>/Date054}" width="5rem" sortProperty="D054" filterProperty="D054" visible="{= ${local>/zdays} >= 54 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D054", "leadingProperty":"D054", "sortProperty":"D054", "filterProperty": "D054"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox054">
+                        <Text id="D054T" text="{D054}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D054I" value="{D054}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D054')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D055" label="{local>/Date055}" width="5rem" sortProperty="D055" filterProperty="D055" visible="{= ${local>/zdays} >= 55 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D055", "leadingProperty":"D055", "sortProperty":"D055", "filterProperty": "D055"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox055">
+                        <Text id="D055T" text="{D055}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D055I" value="{D055}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D055')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D056" label="{local>/Date056}" width="5rem" sortProperty="D056" filterProperty="D056" visible="{= ${local>/zdays} >= 56 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D056", "leadingProperty":"D056", "sortProperty":"D056", "filterProperty": "D056"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox056">
+                        <Text id="D056T" text="{D056}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D056I" value="{D056}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D056')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D057" label="{local>/Date057}" width="5rem" sortProperty="D057" filterProperty="D057" visible="{= ${local>/zdays} >= 57 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D057", "leadingProperty":"D057", "sortProperty":"D057", "filterProperty": "D057"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox057">
+                        <Text id="D057T" text="{D057}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D057I" value="{D057}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D057')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D058" label="{local>/Date058}" width="5rem" sortProperty="D058" filterProperty="D058" visible="{= ${local>/zdays} >= 58 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D058", "leadingProperty":"D058", "sortProperty":"D058", "filterProperty": "D058"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox058">
+                        <Text id="D058T" text="{D058}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D058I" value="{D058}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D058')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D059" label="{local>/Date059}" width="5rem" sortProperty="D059" filterProperty="D059" visible="{= ${local>/zdays} >= 59 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D059", "leadingProperty":"D059", "sortProperty":"D059", "filterProperty": "D059"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox059">
+                        <Text id="D059T" text="{D059}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D059I" value="{D059}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D059')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column>
+                <t:Column id="D060" label="{local>/Date060}" width="5rem" sortProperty="D060" filterProperty="D060" visible="{= ${local>/zdays} >= 60 ? true : false }" autoResizable="true">
+                    <t:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"D060", "leadingProperty":"D060", "sortProperty":"D060", "filterProperty": "D060"}'/>
+                    </t:customData>
+                    <t:template>
+                      <VBox id="VBox060">
+                        <Text id="D060T" text="{D060}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
+                        <Input id="D060I" value="{D060}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="false" change="onInputChange($event,'D060')"/>
+                      </VBox>
+                    </t:template>
+                </t:Column> -->
 
 					</table:columns>
 				</table:Table>

@@ -76,6 +76,10 @@ modules:
       name: sdzsalesdocumentlist
       target-path: resources/
     - artifacts:
+      - sdsalesdocumentreport.zip
+      name: sdsalesdocumentreport
+      target-path: resources/
+    - artifacts:
       - sdzdndatebatchupdate.zip
       name: sdzdndatebatchupdate
       target-path: resources/
@@ -136,6 +140,15 @@ modules:
 - name: sdzsalesdocumentlist
   type: html5
   path: zsalesdocumentlist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdsalesdocumentreport
+  type: html5
+  path: salesdocumentreport
   build-parameters:
     build-result: dist
     builder: custom
