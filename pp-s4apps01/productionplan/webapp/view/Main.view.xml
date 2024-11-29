@@ -59,6 +59,16 @@
           </OverflowToolbar>
         </smartTable:customToolbar>
         <t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" rowMode="Auto" enableColumnFreeze="true" paste="onPaste">
+          <t:extension>
+            <OverflowToolbar id="toolbar" style="Clear">
+              <ToolbarSpacer/>
+              <Button>
+                <dependents>
+                  <plugins.PasteProvider pasteFor="table" />
+                </dependents>
+              </Button>
+            </OverflowToolbar>
+          </t:extension>
           <t:Column id="Plant" label="{i18n>Plant}" width="4rem" sortProperty="Plant" filterProperty="Plant" visible="true" autoResizable="true">
             <t:customData>
               <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>

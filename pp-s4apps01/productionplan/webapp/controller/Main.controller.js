@@ -6,11 +6,13 @@ sap.ui.define([
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
     "sap/ui/table/Column",
-    "sap/m/plugins/CellSelector"
-], function (Base, formatter, Filter, FilterOperator, BusyDialog, MessageBox, Column, CellSelector) {
+    "sap/m/plugins/CellSelector",
+    "sap/m/plugins/CopyProvider"
+], function (Base, formatter, Filter, FilterOperator, BusyDialog, MessageBox, Column, CellSelector, CopyProvider) {
     "use strict";
 
     let oCellSelector;
+    let oCopyProvider;
     return Base.extend("pp.productionplan.controller.Main", {
         formatter: formatter,
 
@@ -27,15 +29,42 @@ sap.ui.define([
 
             this.onUpdateTitle();
 
+            // BEGIN 复制粘贴功能(必须)
             if (window.isSecureContext) {
                 const oTable = this.byId("ReportTable");
                 oCellSelector = new CellSelector();
-                oTable.addDependent(oCellSelector)
+                oTable.addDependent(oCellSelector);
+
+                oCopyProvider = new CopyProvider({ extractData: this.extractData, copy: this.onCopy });
+                oTable.addDependent(oCopyProvider);
+
+                const oToolbar = this.byId("toolbar");
+                oToolbar.addContent(oCopyProvider.getCopyButton());
             }
+            // END 复制粘贴功能(必须)
         },
 
         /**
-         * 粘贴功能
+         * 复制功能(必须)
+         * ADD BY XINLEI XU 2024/11/29
+         * @param {*} oRowContext 
+         * @param {*} oColumn 
+         * @returns 
+         */
+        extractData: function (oRowContext, oColumn) {
+            const oValue = oRowContext.getProperty(oColumn.getSortProperty());
+            return oColumn.__type ? oColumn.__type.formatValue(oValue, "string") : oValue;
+        },
+
+        /**
+         * 复制功能(必须)
+         * ADD BY XINLEI XU 2024/11/29
+         * @param {*} oEvent 
+         */
+        onCopy: function (oEvent) { },
+
+        /**
+         * 粘贴功能(必须)
          * ADD BY XINLEI XU 2024/11/29
          * @param {*} oEvent 
          */
