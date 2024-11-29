@@ -48,14 +48,6 @@ sap.ui.define([
             oForcastYear.setValue(sForcastYear);
         },
 
-        onBaseFiscalMonthChange: function(oEvent){
-            debugger;
-        },
-
-        _setForcastSelection:function(sBaseYear, sBaseMonth){
-
-        },
-
         onBeforeRebindTable: function (oEvent) {
             var oParameters = oEvent.getParameter("bindingParams");
             var oYear = this.byId("sfbDPFiscalYear");
