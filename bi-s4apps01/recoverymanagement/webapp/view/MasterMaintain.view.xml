@@ -22,7 +22,7 @@
                 </smartfilterbar:controlConfiguration>
             </smartfilterbar:SmartFilterBar> 
 
-            <smarttable:SmartTable id="table1" smartVariant="__SVM01" entitySet="ZC_BI003_REPORT_001" beforeRebindTable="onBeforeRebindTable" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" smartFilterId="docFilter" tableType="Table">
+            <smarttable:SmartTable id="table1" header="{i18n>title1}" smartVariant="__SVM01" entitySet="ZC_BI003_REPORT_001" beforeRebindTable="onBeforeRebindTable" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" smartFilterId="docFilter" tableType="Table">
                 <smarttable:customToolbar>
                     <OverflowToolbar id="overFlowToolbar">
                         <ToolbarSpacer id="toolbarSpacer" />
