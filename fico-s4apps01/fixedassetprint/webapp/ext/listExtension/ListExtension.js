@@ -16,7 +16,7 @@ sap.ui.define([
             for (const context of aSelectedContexts) {
                 var promise = new Promise((resolve, reject) => {
                     var createPrintRecord = that.getModel("Print").bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
-                    createPrintRecord.setParameter("TemplateID", "YY1_FIXEDASSET");
+                    createPrintRecord.setParameter("TemplateID", "YY1_FIXPRINTS");
                     createPrintRecord.setParameter("IsExternalProvidedData", false);
                     createPrintRecord.setParameter("ExternalProvidedData", atob(""));
                     var CompanyCode = context.getObject().CompanyCode.replace(/-/g, '');

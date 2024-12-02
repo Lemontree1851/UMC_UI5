@@ -42,6 +42,9 @@
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
     </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
     </edmx:Reference>
@@ -59,6 +62,7 @@
                 <Property Name="MasterFixedAsset" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="FixedAsset" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="ValidityEndDate" Type="Edm.Date" Nullable="false"/>
+                <Property Name="CompanyCodeName" Type="Edm.String" Nullable="false" MaxLength="25"/>
                 <Property Name="AssetAdditionalDescription" Type="Edm.String" Nullable="false" MaxLength="50"/>
                 <Property Name="InventoryNote" Type="Edm.String" Nullable="false" MaxLength="15"/>
                 <Property Name="FixedAssetDescription" Type="Edm.String" Nullable="false" MaxLength="50"/>
@@ -68,14 +72,18 @@
                 <Property Name="CostCenterName" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="AssetCapitalizationDate" Type="Edm.Date"/>
                 <Property Name="AssetAccountDetermination" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="AssetAccountDeterminationDesc" Type="Edm.String" Nullable="false" MaxLength="50"/>
                 <Property Name="DepreciationStartDate" Type="Edm.Date"/>
                 <Property Name="DepreciationKeyName" Type="Edm.String" Nullable="false" MaxLength="50"/>
                 <Property Name="LeasedAssetNote" Type="Edm.String" Nullable="false" MaxLength="50"/>
                 <Property Name="PlannedUsefulLifeInYears" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="OriginalAcquisitionAmount" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="variable"/>
+                <Property Name="OriginalAcquisitionAmount" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="variable"/>
                 <Property Name="InvestmentReason" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="AssetTypeName" Type="Edm.String" Nullable="false" MaxLength="15"/>
                 <Property Name="JP_PrptyTxRptSpclDepr" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="YY1_FIXEDASSET1_FAA" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="OriginalAcquisitionCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="DepreciationKey" Type="Edm.String" Nullable="false" MaxLength="4"/>
             </EntityType>
             <EntityContainer Name="Container">
                 <EntitySet Name="FIXEDASSETPRINT" EntityType="com.sap.gateway.srvd.zui_fixedassetprint.v0001.FIXEDASSETPRINTType"/>
@@ -131,6 +139,10 @@
                 <Annotation Term="SAP__common.Label" String="Planned Useful Life"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Planned Useful Life in Years"/>
             </Annotations>
+            <Annotations Target="SAP__self.FIXEDASSETPRINTType/OriginalAcquisitionAmount">
+                <Annotation Term="SAP__common.Label" String="取得価額"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="OriginalAcquisitionCurrency"/>
+            </Annotations>
             <Annotations Target="SAP__self.FIXEDASSETPRINTType/InvestmentReason">
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Investment Reason"/>
@@ -145,12 +157,32 @@
             <Annotations Target="SAP__self.FIXEDASSETPRINTType/JP_PrptyTxRptSpclDepr">
                 <Annotation Term="SAP__common.Label" String="特例コード"/>
             </Annotations>
+            <Annotations Target="SAP__self.FIXEDASSETPRINTType/YY1_FIXEDASSET1_FAA">
+                <Annotation Term="SAP__common.Label" String="不動産所有区分"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FIXEDASSETPRINTType/OriginalAcquisitionCurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.Label" String="货币"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Original Acquisition Value Currency"/>
+            </Annotations>
+            <Annotations Target="SAP__self.FIXEDASSETPRINTType/DepreciationKey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Depreciation Key"/>
+                <Annotation Term="SAP__common.Heading" String="DepKy"/>
+            </Annotations>
             <Annotations Target="SAP__self.FIXEDASSETPRINTType">
                 <Annotation Term="SAP__common.Label" String="Fixed Asset Print"/>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="InventoryNote"/>
+                            <PropertyValue Property="Value" Path="CompanyCode"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CompanyCodeName"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="FixedAssetDescription"/>
@@ -171,31 +203,19 @@
                             <PropertyValue Property="Value" Path="AssetCapitalizationDate"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="AssetAccountDetermination"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="DepreciationStartDate"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="DepreciationKeyName"/>
+                            <PropertyValue Property="Value" Path="AssetAccountDetermination"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="LeasedAssetNote"/>
+                            <PropertyValue Property="Value" Path="AssetAccountDeterminationDesc"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="PlannedUsefulLifeInYears"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="OriginalAcquisitionAmount"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="InvestmentReason"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="AssetTypeName"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="JP_PrptyTxRptSpclDepr"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -234,7 +254,10 @@
                         <PropertyValue Property="NonFilterableProperties">
                             <Collection>
                                 <PropertyPath>DepreciationKeyName</PropertyPath>
+                                <PropertyPath>OriginalAcquisitionAmount</PropertyPath>
                                 <PropertyPath>JP_PrptyTxRptSpclDepr</PropertyPath>
+                                <PropertyPath>YY1_FIXEDASSET1_FAA</PropertyPath>
+                                <PropertyPath>OriginalAcquisitionCurrency</PropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -244,7 +267,10 @@
                         <PropertyValue Property="NonSortableProperties">
                             <Collection>
                                 <PropertyPath>DepreciationKeyName</PropertyPath>
+                                <PropertyPath>OriginalAcquisitionAmount</PropertyPath>
                                 <PropertyPath>JP_PrptyTxRptSpclDepr</PropertyPath>
+                                <PropertyPath>YY1_FIXEDASSET1_FAA</PropertyPath>
+                                <PropertyPath>OriginalAcquisitionCurrency</PropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -274,6 +300,12 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                    </Record>
+                </Annotation>
                 <Annotation Term="SAP__aggregation.ApplySupported">
                     <Record>
                         <PropertyValue Property="Transformations">
@@ -338,6 +370,10 @@
                 <Annotation Term="SAP__common.Label" String="Valid To"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Date Validity Ends"/>
             </Annotations>
+            <Annotations Target="SAP__self.FIXEDASSETPRINTType/CompanyCodeName">
+                <Annotation Term="SAP__common.Label" String="Company Name"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name of Company Code or Company"/>
+            </Annotations>
             <Annotations Target="SAP__self.FIXEDASSETPRINTType/AssetAdditionalDescription">
                 <Annotation Term="SAP__common.Label" String="Description (2)"/>
                 <Annotation Term="SAP__common.Heading" String="Asset description (2)"/>
@@ -356,16 +392,17 @@
                 <Annotation Term="SAP__common.Heading" String="Cap.Date"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Asset Capitalization Date"/>
             </Annotations>
+            <Annotations Target="SAP__self.FIXEDASSETPRINTType/AssetAccountDeterminationDesc">
+                <Annotation Term="SAP__common.Label" String="Acct Dtrmn Name"/>
+                <Annotation Term="SAP__common.Heading" String="Name of Account Determination"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name of Account Determination"/>
+            </Annotations>
             <Annotations Target="SAP__self.FIXEDASSETPRINTType/DepreciationStartDate">
                 <Annotation Term="SAP__common.Label" String="Depreciation Calculation Start Date"/>
             </Annotations>
             <Annotations Target="SAP__self.FIXEDASSETPRINTType/LeasedAssetNote">
                 <Annotation Term="SAP__common.Label" String="Supplementary text"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Leasing data text"/>
-            </Annotations>
-            <Annotations Target="SAP__self.FIXEDASSETPRINTType/OriginalAcquisitionAmount">
-                <Annotation Term="SAP__common.Label" String="Original Value"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Original Acquisition Value"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

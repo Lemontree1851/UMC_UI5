@@ -1,5 +1,3 @@
-# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
-
 specVersion: "3.1"
 metadata:
   name: fico.fixedassetprint
@@ -9,7 +7,7 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ignoreCertError: false
         ui5:
           path:
             - /resources
@@ -18,6 +16,8 @@ server:
         backend:
           - path: /sap
             url: https://my412552-api.s4hana.cloud.sap
+            destination: UMC_Dev_Customizing_BTP
+            authenticationType: BasicAuthentication
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -30,8 +30,16 @@ server:
         mountPath: /
         services:
           - urlPath: /sap/opu/odata4/sap/zui_fixedassetprint/srvd/sap/zui_fixedassetprint/0001
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/data
+            generateMockData: true
+            metadataXmlPath: ./webapp/localService/metadata.xml
+            mockdataRootPath: ./webapp/localService/data
+          - urlPath: /sap/opu/odata4/sap/zui_fixedassetprint/srvd/sap/zui_fixedassetprint/0001/
+            generateMockData: true
+            metadataXmlPath: ./webapp/localService/metadata.xml
+            mockdataRootPath: ./webapp/localService/mockdata
+          - urlPath: /sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/
+            metadataPath: ./webapp/localService/ZUI_PRT_RECORD_O4/metadata.xml
+            mockdataPath: ./webapp/localService/ZUI_PRT_RECORD_O4/mockdata
             generateMockData: true
         annotations:
           - localPath: ./webapp/annotations/annotation.xml

@@ -42,6 +42,9 @@
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
     </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
     </edmx:Reference>
@@ -84,7 +87,7 @@
                 <Property Name="DataMimeType" Type="Edm.String" Nullable="false" MaxLength="128"/>
                 <Property Name="DataFileName" Type="Edm.String" Nullable="false" MaxLength="128"/>
                 <Property Name="ExternalProvidedData" Type="Edm.Stream"/>
-                <Property Name="ProvidedKeys" Type="Edm.String" Nullable="false" MaxLength="256"/>
+                <Property Name="ProvidedKeys" Type="Edm.String" Nullable="false"/>
                 <Property Name="PDFMimeType" Type="Edm.String" Nullable="false" MaxLength="128"/>
                 <Property Name="PDFFileName" Type="Edm.String" Nullable="false" MaxLength="128"/>
                 <Property Name="PDFContent" Type="Edm.Stream"/>
@@ -105,6 +108,15 @@
             </EntityType>
             <ComplexType Name="PrintRecordOperationControl">
                 <Property Name="Edit" Type="Edm.Boolean" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="ZZR_MERGER_PARAMETER">
+                <Property Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
+                <Property Name="TemplateID" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="Zzkey" Type="Edm.String" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="ZZR_SENDEMAIL_PARAMETER">
+                <Property Name="RecordUUID" Type="Edm.Guid"/>
+                <Property Name="Zzkey" Type="Edm.String" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="EntityControl">
                 <Property Name="Deletable" Type="Edm.Boolean" Nullable="false"/>
@@ -127,18 +139,24 @@
                 <Parameter Name="PreserveChanges" Type="Edm.Boolean" Nullable="false"/>
                 <ReturnType Type="com.sap.gateway.srvd.zui_prt_record_o4.v0001.PrintRecordType" Nullable="false"/>
             </Action>
+            <Action Name="mergerPDF" IsBound="true">
+                <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_prt_record_o4.v0001.PrintRecordType)" Nullable="false"/>
+                <Parameter Name="TemplateID" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
+                <ReturnType Type="com.sap.gateway.srvd.zui_prt_record_o4.v0001.ZZR_MERGER_PARAMETER" Nullable="false"/>
+            </Action>
             <Action Name="Prepare" IsBound="true">
                 <Parameter Name="_it" Type="com.sap.gateway.srvd.zui_prt_record_o4.v0001.PrintRecordType" Nullable="false"/>
             </Action>
             <Action Name="Discard" IsBound="true">
                 <Parameter Name="_it" Type="com.sap.gateway.srvd.zui_prt_record_o4.v0001.PrintRecordType" Nullable="false"/>
             </Action>
-            <Action Name="sendEmail" EntitySetPath="_it" IsBound="true">
+            <Action Name="sendEmail" IsBound="true">
                 <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_prt_record_o4.v0001.PrintRecordType)" Nullable="false"/>
-                <Parameter Name="ResultIsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
                 <Parameter Name="RecordUUID" Type="Edm.Guid" Nullable="true"/>
                 <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
-                <ReturnType Type="com.sap.gateway.srvd.zui_prt_record_o4.v0001.PrintRecordType" Nullable="false"/>
+                <ReturnType Type="com.sap.gateway.srvd.zui_prt_record_o4.v0001.ZZR_SENDEMAIL_PARAMETER" Nullable="false"/>
             </Action>
             <Action Name="Activate" EntitySetPath="_it" IsBound="true">
                 <Parameter Name="_it" Type="com.sap.gateway.srvd.zui_prt_record_o4.v0001.PrintRecordType" Nullable="false"/>
@@ -150,7 +168,7 @@
                 <Parameter Name="TemplateID" Type="Edm.String" Nullable="false" MaxLength="15"/>
                 <Parameter Name="IsExternalProvidedData" Type="Edm.Boolean" Nullable="false"/>
                 <Parameter Name="ExternalProvidedData" Type="Edm.Binary" Nullable="false"/>
-                <Parameter Name="ProvidedKeys" Type="Edm.String" Nullable="false" MaxLength="256"/>
+                <Parameter Name="ProvidedKeys" Type="Edm.String" Nullable="false"/>
                 <ReturnType Type="com.sap.gateway.srvd.zui_prt_record_o4.v0001.PrintRecordType" Nullable="false"/>
             </Action>
             <EntityContainer Name="Container">
@@ -160,6 +178,11 @@
                     <NavigationPropertyBinding Path="SiblingEntity" Target="PrintRecord"/>
                 </EntitySet>
             </EntityContainer>
+            <Annotations Target="SAP__self.ZZR_MERGER_PARAMETER/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
             <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftEntityType">
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__UI.Hidden"/>
@@ -296,6 +319,8 @@
             </Annotations>
             <Annotations Target="SAP__self.PrintRecordType/ProvidedKeys">
                 <Annotation Term="SAP__common.Label" String="Provided Keys"/>
+                <Annotation Term="SAP__common.Heading" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
             </Annotations>
             <Annotations Target="SAP__self.PrintRecordType/PDFMimeType">
                 <Annotation Term="SAP__core.IsMediaType"/>
@@ -327,6 +352,158 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Created By"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Created By User"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrintRecordType">
+                <Annotation Term="SAP__common.CreatedBy" Path="CreatedBy"/>
+                <Annotation Term="SAP__common.CreatedAt" Path="CreatedAt"/>
+                <Annotation Term="SAP__common.Label" String="Projection View for ZZR_PRT_RECORD"/>
+                <Annotation Term="SAP__UI.Facets">
+                    <Collection>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Record"/>
+                            <PropertyValue Property="ID" String="idIdentification"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Print Record"/>
+                        <PropertyValue Property="TypeNamePlural" String="Print Record"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="TemplateName"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="RecordUUID"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TemplateUUID"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TemplateID"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TemplateName"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="IsExternalProvidedData"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ExternalProvidedData"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ProvidedKeys"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="PDFContent"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedAt"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TemplateID"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TemplateName"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="14rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="IsExternalProvidedData"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ExternalProvidedData"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ProvidedKeys"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="15rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="PDFContent"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="20rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Low"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedAt"/>
+                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Low"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.PresentationVariant">
+                    <Record>
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="SAP__common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="CreatedAt"/>
+                                    <PropertyValue Property="Descending" Bool="true"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@SAP__UI.LineItem</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>TemplateID</PropertyPath>
+                        <PropertyPath>TemplateName</PropertyPath>
+                        <PropertyPath>CreatedBy</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
             <Annotations Target="SAP__self.PrintRecordType/CreatedAt">
                 <Annotation Term="SAP__core.Computed"/>
@@ -394,13 +571,12 @@
                         <PropertyValue Property="EditAction" String="com.sap.gateway.srvd.zui_prt_record_o4.v0001.Edit"/>
                         <PropertyValue Property="PreparationAction" String="com.sap.gateway.srvd.zui_prt_record_o4.v0001.Prepare"/>
                         <PropertyValue Property="DiscardAction" String="com.sap.gateway.srvd.zui_prt_record_o4.v0001.Discard"/>
+                        <PropertyValue Property="ActivationAction" String="com.sap.gateway.srvd.zui_prt_record_o4.v0001.Activate"/>
                         <PropertyValue Property="AdditionalNewActions">
                             <Collection>
-                                <String>com.sap.gateway.srvd.zui_prt_record_o4.v0001.sendEmail</String>
                                 <String>com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord</String>
                             </Collection>
                         </PropertyValue>
-                        <PropertyValue Property="ActivationAction" String="com.sap.gateway.srvd.zui_prt_record_o4.v0001.Activate"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
@@ -473,119 +649,47 @@
                     </Collection>
                 </Annotation>
             </Annotations>
+            <Annotations Target="SAP__self.Edit(SAP__self.PrintRecordType)/PreserveChanges">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="TRUE"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"/>
+            </Annotations>
             <Annotations Target="SAP__self.Edit(SAP__self.PrintRecordType)">
                 <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/Edit"/>
             </Annotations>
-            <Annotations Target="SAP__self.PrintRecordType">
-                <Annotation Term="SAP__common.Label" String="Projection View for ZZR_PRT_RECORD"/>
-                <Annotation Term="SAP__UI.Facets">
-                    <Collection>
-                        <Record Type="SAP__UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="Record"/>
-                            <PropertyValue Property="ID" String="idIdentification"/>
-                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__UI.HeaderInfo">
-                    <Record>
-                        <PropertyValue Property="TypeName" String="Record"/>
-                        <PropertyValue Property="TypeNamePlural" String="Records"/>
-                        <PropertyValue Property="Title">
-                            <Record Type="SAP__UI.DataField">
-                                <PropertyValue Property="Value" Path="TemplateName"/>
-                            </Record>
-                        </PropertyValue>
-                        <PropertyValue Property="Description">
-                            <Record Type="SAP__UI.DataField">
-                                <PropertyValue Property="Value" Path="RecordUUID"/>
-                            </Record>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__UI.Identification">
-                    <Collection>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="TemplateUUID"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="TemplateID"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="TemplateName"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="IsExternalProvidedData"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="ExternalProvidedData"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="ProvidedKeys"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="PDFContent"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="CreatedBy"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="CreatedAt"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__UI.LineItem">
-                    <Collection>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="TemplateID"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="TemplateName"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
-                            <Annotation Term="SAP__HTML5.CssDefaults">
-                                <Record>
-                                    <PropertyValue Property="width" String="14rem"/>
-                                </Record>
-                            </Annotation>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="IsExternalProvidedData"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="ExternalProvidedData"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="ProvidedKeys"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
-                            <Annotation Term="SAP__HTML5.CssDefaults">
-                                <Record>
-                                    <PropertyValue Property="width" String="14rem"/>
-                                </Record>
-                            </Annotation>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="PDFContent"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="CreatedBy"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
-                            <Annotation Term="SAP__HTML5.CssDefaults">
-                                <Record>
-                                    <PropertyValue Property="width" String="14rem"/>
-                                </Record>
-                            </Annotation>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="CreatedAt"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            <Annotations Target="SAP__self.mergerPDF(Collection(SAP__self.PrintRecordType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.mergerPDF(Collection(SAP__self.PrintRecordType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
+            <Annotations Target="SAP__self.sendEmail(Collection(SAP__self.PrintRecordType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 Byte UUID in 16 Bytes (Raw Format)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.sendEmail(Collection(SAP__self.PrintRecordType))/Zzkey">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.createPrintRecord(Collection(SAP__self.PrintRecordType))/IsExternalProvidedData">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.createPrintRecord(Collection(SAP__self.PrintRecordType))/ExternalProvidedData">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="File Content"/>
+            </Annotations>
+            <Annotations Target="SAP__self.createPrintRecord(Collection(SAP__self.PrintRecordType))/ProvidedKeys">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
             </Annotations>
             <Annotations Target="SAP__self.Container">
                 <Annotation Term="SAP__aggregation.ApplySupported">
@@ -717,6 +821,18 @@
                 <Annotation Term="SAP__common.Heading" String="Dynamic Action Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Action Property"/>
             </Annotations>
+            <Annotations Target="SAP__self.ZZR_MERGER_PARAMETER/Zzkey">
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZZR_SENDEMAIL_PARAMETER/RecordUUID">
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 Byte UUID in 16 Bytes (Raw Format)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZZR_SENDEMAIL_PARAMETER/Zzkey">
+                <Annotation Term="SAP__common.Label" String="Zzkey"/>
+                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
             <Annotations Target="SAP__self.EntityControl/Deletable">
                 <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
@@ -727,32 +843,9 @@
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
             </Annotations>
-            <Annotations Target="SAP__self.Edit(SAP__self.PrintRecordType)/PreserveChanges">
-                <Annotation Term="SAP__common.Label" String="TRUE"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"/>
-            </Annotations>
-            <Annotations Target="SAP__self.sendEmail(Collection(SAP__self.PrintRecordType))/ResultIsActiveEntity">
-                <Annotation Term="SAP__common.Label" String="Result is active"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.sendEmail(Collection(SAP__self.PrintRecordType))/RecordUUID">
-                <Annotation Term="SAP__common.Label" String="UUID"/>
-                <Annotation Term="SAP__common.QuickInfo" String="16 Byte UUID in 16 Bytes (Raw Format)"/>
-            </Annotations>
-            <Annotations Target="SAP__self.sendEmail(Collection(SAP__self.PrintRecordType))/Zzkey">
-                <Annotation Term="SAP__common.Label" String="Zzkey"/>
-                <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
-            </Annotations>
             <Annotations Target="SAP__self.createPrintRecord(Collection(SAP__self.PrintRecordType))/ResultIsActiveEntity">
                 <Annotation Term="SAP__common.Label" String="Result is active"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document"/>
-            </Annotations>
-            <Annotations Target="SAP__self.createPrintRecord(Collection(SAP__self.PrintRecordType))/IsExternalProvidedData">
-                <Annotation Term="SAP__common.Label" String="Truth Value"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
-            </Annotations>
-            <Annotations Target="SAP__self.createPrintRecord(Collection(SAP__self.PrintRecordType))/ExternalProvidedData">
-                <Annotation Term="SAP__common.Label" String="File Content"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
