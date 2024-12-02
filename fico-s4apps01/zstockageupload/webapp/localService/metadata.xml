@@ -53,6 +53,7 @@
             <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
             <EntityType Name="STOCKAGEUPLOADType">
                 <Key>
+                    <PropertyRef Name="InventoryType"/>
                     <PropertyRef Name="Ledger"/>
                     <PropertyRef Name="CalendarYear"/>
                     <PropertyRef Name="CalendarMonth"/>
@@ -62,6 +63,7 @@
                     <PropertyRef Name="Age"/>
                     <PropertyRef Name="IsActiveEntity"/>
                 </Key>
+                <Property Name="InventoryType" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="Ledger" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="CalendarYear" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="CalendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
@@ -74,6 +76,7 @@
                 <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="BaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="ProductName" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="CompanyCodeName" Type="Edm.String" Nullable="false" MaxLength="25"/>
                 <Property Name="PlantName" Type="Edm.String" Nullable="false" MaxLength="30"/>
@@ -171,14 +174,18 @@
                 <Annotation Term="SAP__common.Label" String="UUID"/>
                 <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
             </Annotations>
+            <Annotations Target="SAP__self.STOCKAGEUPLOADType/InventoryType">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+            </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/Ledger">
                 <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/i_ledgercompanycodecrcyroles/0001;ps='srvd-zui_stockageupload-0001';va='com.sap.gateway.srvd.zui_stockageupload.v0001.et-zc_stockageupload.ledger'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/zc_ledgervh/0001;ps='srvd-zui_stockageupload-0001';va='com.sap.gateway.srvd.zui_stockageupload.v0001.et-zc_stockageupload.ledger'/$metadata</String>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
                 <Annotation Term="SAP__common.Label" String="Ledger"/>
                 <Annotation Term="SAP__common.Heading" String="Ld"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Ledger in General Ledger Accounting"/>
@@ -252,6 +259,12 @@
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.Label" String="Changed On"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time"/>
+            </Annotations>
+            <Annotations Target="SAP__self.STOCKAGEUPLOADType/BaseUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
             </Annotations>
             <Annotations Target="SAP__self.STOCKAGEUPLOADType/ProductName">
                 <Annotation Term="SAP__core.Computed"/>
@@ -418,6 +431,72 @@
                 <Annotation Term="SAP__common.Label" String="UUID"/>
                 <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
             </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
             <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftEntityType">
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__UI.Hidden"/>
@@ -504,66 +583,6 @@
                 <Annotation Term="SAP__core.OptimisticConcurrency">
                     <Collection/>
                 </Annotation>
-            </Annotations>
-            <Annotations Target="SAP__self.Container">
-                <Annotation Term="SAP__aggregation.ApplySupported">
-                    <Record>
-                        <PropertyValue Property="Transformations">
-                            <Collection>
-                                <String>aggregate</String>
-                                <String>groupby</String>
-                                <String>filter</String>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
-                <Annotation Term="SAP__capabilities.FilterFunctions">
-                    <Collection>
-                        <String>eq</String>
-                        <String>ne</String>
-                        <String>gt</String>
-                        <String>ge</String>
-                        <String>lt</String>
-                        <String>le</String>
-                        <String>and</String>
-                        <String>or</String>
-                        <String>contains</String>
-                        <String>startswith</String>
-                        <String>endswith</String>
-                        <String>any</String>
-                        <String>all</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.SupportedFormats">
-                    <Collection>
-                        <String>application/json</String>
-                        <String>application/pdf</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__PDF.Features">
-                    <Record>
-                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
-                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
-                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
-                        <PropertyValue Property="Border" Bool="true"/>
-                        <PropertyValue Property="CoverPage" Bool="true"/>
-                        <PropertyValue Property="FitToPage" Bool="true"/>
-                        <PropertyValue Property="FontName" Bool="true"/>
-                        <PropertyValue Property="FontSize" Bool="true"/>
-                        <PropertyValue Property="Margin" Bool="true"/>
-                        <PropertyValue Property="Padding" Bool="true"/>
-                        <PropertyValue Property="Signature" Bool="true"/>
-                        <PropertyValue Property="HeaderFooter" Bool="true"/>
-                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
-                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
-                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
-                        <PropertyValue Property="Treeview" Bool="true"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
-                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
             </Annotations>
             <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftUUID">
                 <Annotation Term="SAP__UI.Hidden"/>

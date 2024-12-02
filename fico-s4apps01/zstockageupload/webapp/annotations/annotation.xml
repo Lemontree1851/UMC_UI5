@@ -68,6 +68,10 @@
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="InventoryType"/>
+                            <PropertyValue Property="Label" String="{@i18n>inventorytype}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Ledger"/>
                             <PropertyValue Property="Label" String="{@i18n>ledger}"/>
                         </Record>
@@ -101,6 +105,10 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProductName"/>
                             <PropertyValue Property="Label" String="{@i18n>productDescription}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BaseUnit"/>
+                            <PropertyValue Property="Label" String="{@i18n>baseUnitOfMeasure}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>qty}"/>

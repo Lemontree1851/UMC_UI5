@@ -60,6 +60,7 @@ sap.ui.define([
                         "Status": "",
                         "Message": "",
                         "Row": i - 2,
+                        "InventoryType": aSheetData[i]["InventoryType"] === undefined ? "" : aSheetData[i]["InventoryType"],
                         "Ledger": aSheetData[i]["Ledger"] === undefined ? "" : aSheetData[i]["Ledger"],
                         "CompanyCode": aSheetData[i]["CompanyCode"] === undefined ? "" : aSheetData[i]["CompanyCode"],
                         "CalendarYear": aSheetData[i]["CalendarYear"] === undefined ? "" : aSheetData[i]["CalendarYear"],
