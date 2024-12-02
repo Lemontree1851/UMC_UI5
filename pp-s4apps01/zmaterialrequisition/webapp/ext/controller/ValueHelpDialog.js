@@ -295,8 +295,8 @@ sap.ui.define([
                                     if (iAmount >= parseFloat(config.Amount)) {
                                         this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
                                         // this.getModel("local").setProperty(sItemPath + "Status", "Error");
-                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#ff3333");
-                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#ff3333");
+                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#f2bfc0");
+                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
                                     } else {
                                         // this.getModel("local").setProperty(sItemPath + "Status", "None");
                                         $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
