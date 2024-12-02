@@ -105,14 +105,14 @@
                 <Property Name="ECN" Type="Edm.String" MaxLength="1"/>
                 <Property Name="WO" Type="Edm.String" MaxLength="1"/>
                 <Property Name="exOut" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Capacity" Type="Edm.String" MaxLength="30"/>
+                <Property Name="Capacity" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Remark" Type="Edm.String" MaxLength="20"/>
-                <Property Name="StockQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Unit" sap:label="Unrestricted" sap:quickinfo="Valuated Unrestricted-Use Stock"/>
-                <Property Name="Rounding" Type="Edm.String" MaxLength="30"/>
-                <Property Name="Delta" Type="Edm.String" MaxLength="30"/>
-                <Property Name="HistorySO" Type="Edm.String" MaxLength="30"/>
-                <Property Name="FutureSO" Type="Edm.String" MaxLength="30"/>
-                <Property Name="BalanceQTY" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="Unit"/>
+                <Property Name="StockQty" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Rounding" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Delta" Type="Edm.String" MaxLength="20"/>
+                <Property Name="HistorySO" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FutureSO" Type="Edm.String" MaxLength="20"/>
+                <Property Name="BalanceQTY" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Unit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="Summary" Type="Edm.String" MaxLength="20"/>
                 <Property Name="D001" Type="Edm.String" MaxLength="20"/>

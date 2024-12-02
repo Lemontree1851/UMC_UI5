@@ -82,6 +82,7 @@ sap.ui.define([
                         iColNum2 = 0;
                     var sRowPath = oTable.getContextByIndex(index).getPath();
                     var sType = that._oDataModel.getProperty(sRowPath + "/PlanType");
+                    var sSobmx = that._oDataModel.getProperty(sRowPath + "/Sobmx");
                     iRowNum += 1;
                     // 行可编辑
                     if (sType === "I" || sType === "P") {
@@ -325,49 +326,7 @@ sap.ui.define([
                 let username = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
 
                 this.authCheck(user, username)
-            } else {
-                var oTable = this.byId("ReportTable");
-                let sNum = Number(this.byId("zdays").getValue());
-                sNum = 18 + sNum;
-                var aRows = oTable.getRows();
-                var sType = "";
-                if (aRows && aRows.length > 0) {
-                    for (var i = 0; i < aRows.length; i++) {
-                        var c7Cell = aRows[i].getCells()[8];
-                        if (c7Cell) {
-                            sType = c7Cell.getText();
-                            if (sType === "I" || sType === "P") {
-                                for (var j = 19; j < sNum; j++) {
-                                    var cEdit = aRows[i].getCells()[j];
-                                    var oItems = cEdit.getItems();
-                                    oItems[1].setEditable(true);
-                                }
-                            }
-                        }
-                    }
-                };
-                oTable.attachEvent("rowsUpdated", function () {
-                    if (aRows && aRows.length > 0) {
-                        for (var i = 0; i < aRows.length; i++) {
-                            var c7Cell = aRows[i].getCells()[8];
-                            if (c7Cell) {
-                                var sType = c7Cell.getText();
-                                if (sType === "I" || sType === "P") {
-                                    for (var j = 19; j < sNum; j++) {
-                                        var cEdit = aRows[i].getCells()[j];
-                                        if (cEdit && cEdit.getItems) {
-                                            var oItems = cEdit.getItems();
-                                            if (oItems && oItems[1]) {
-                                                oItems[1].setEditable(true); // 动态设置编辑状态
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            };
+            }
         },
 
         onInputChange: function (oEvent, sProperty) {
@@ -395,20 +354,29 @@ sap.ui.define([
                         sNum = 18 + sNum;
                         var aRows = oTable.getRows();
                         var sType = "";
+                        var sSobmx = "";
                         if (aRows && aRows.length > 0) {
                             for (var i = 0; i < aRows.length; i++) {
                                 var c7Cell = aRows[i].getCells()[8];
+                                var c6Cell = aRows[i].getCells()[7];
                                 if (c7Cell) {
                                     sType = c7Cell.getText();
+                                    sSobmx = c6Cell.getText();
                                     if (sType === "I" || sType === "P") {
+
                                         for (var j = 19; j < sNum; j++) {
                                             var cEdit = aRows[i].getCells()[j];
                                             var oItems = cEdit.getItems();
                                             if (cEdit) {
-                                                oItems[1].setEditable(true);
+                                                if (sSobmx === "52") {
+                                                    oItems[1].setEditable(false); // 动态设置编辑状态
+                                                } else {
+                                                    oItems[1].setEditable(true);
+                                                }
                                             }
+
                                         }
-                                    }
+                                    };
                                 }
                             }
                         };
@@ -417,19 +385,27 @@ sap.ui.define([
                             if (aRows && aRows.length > 0) {
                                 for (var i = 0; i < aRows.length; i++) {
                                     var c7Cell = aRows[i].getCells()[8];
+                                    var c6Cell = aRows[i].getCells()[7];
                                     if (c7Cell) {
                                         var sType = c7Cell.getText();
+                                        var sSobmx = c6Cell.getText();
                                         if (sType === "I" || sType === "P") {
+
                                             for (var j = 19; j < sNum; j++) {
                                                 var cEdit = aRows[i].getCells()[j];
                                                 if (cEdit && cEdit.getItems) {
                                                     var oItems = cEdit.getItems();
                                                     if (oItems && oItems[1]) {
-                                                        oItems[1].setEditable(true); // 动态设置编辑状态
+                                                        if (sSobmx === "52") {
+                                                            oItems[1].setEditable(false); // 动态设置编辑状态
+                                                        } else {
+                                                            oItems[1].setEditable(true);
+                                                        }
                                                     }
+
                                                 }
                                             }
-                                        }
+                                        };
                                     }
                                 }
                             }
