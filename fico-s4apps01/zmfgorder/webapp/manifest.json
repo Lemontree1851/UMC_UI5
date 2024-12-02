@@ -137,10 +137,7 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "GridTable",
-                    "quickVariantSelection": {
-                      "showCounts": true
-                    }
+                    "type": "GridTable"
                   }
                 },
                 "/MFGORDER1/@com.sap.vocabularies.UI.v1.LineItem#tableView44": {
@@ -166,14 +163,21 @@
                       "showCounts": false
                     }
                   }
+                },
+                "@com.sap.vocabularies.UI.v1.LineItem#tableView44": {
+                  "tableSettings": {
+                    "type": "GridTable",
+                    "quickVariantSelection": {
+                      "showCounts": false
+                    }
+                  }
                 }
               },
               "views": {
                 "paths": [
                   {
-                    "key": "tableView",
-                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView44",
-                    "entitySet": "MFGORDER1"
+                    "key": "tableView66",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView44"
                   },
                   {
                     "key": "tableView1",
@@ -215,3 +219,4 @@
     "service": "fico-s4apps01"
   }
 }
+
