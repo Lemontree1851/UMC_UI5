@@ -101,13 +101,12 @@ sap.ui.define([
                 var aPromise = [];
                 var aExcelSet = this.getModel("local").getProperty("/excelSet");
                 var aGroupKey = this.removeDuplicates(aExcelSet, ["PurchaseOrder"]);
-                //var aGroupItems;
-
+                var aGroupItems;
                 this._BusyDialog.open();
                 this.processOneBatchRequest(bEvent, 0, aExcelSet, aGroupKey, aPromise);
+                //this._BusyDialog.open();
                 // for (var m = 0; m < aGroupKey.length; m++) {
                 //     const sPurchaseOrder = aGroupKey[m].PurchaseOrder;
-
                 //     aGroupItems = [];
                 //     for (var n = 0; n < aExcelSet.length; n++) {
                 //         if (aExcelSet[n].PurchaseOrder === sPurchaseOrder){
@@ -116,9 +115,9 @@ sap.ui.define([
                 //             aGroupItems.push(aExcelSet[n]);
                 //         }
                 //     }
+
                 //     aPromise.push(this._callODataAction(bEvent, aGroupItems));
                 // };
-
                 // try {
                 //     this._BusyDialog.open();
                 //     Promise.all(aPromise).then((aContext) => {
@@ -137,9 +136,9 @@ sap.ui.define([
                 //                         aExcelSet[index].Status = element.STATUS;
                 //                         aExcelSet[index].Message = element.MESSAGE;
 
-                //                         if (element.STATUS = 'S'){
+                //                         if (element.STATUS = 'S') {
                 //                             oResult.iSuccess += 1;
-                //                         }else{
+                //                         } else {
                 //                             oResult.iFailed += 1;
                 //                         }
                 //                     }
@@ -162,7 +161,8 @@ sap.ui.define([
                 let that = this;
                 let batchArray = [];
                 let iItemCount = postKeys.length;
-                let iPerCount = 10;
+                //如果传多条到后台，BOI只对最后一次的PO提交commit，所以每次传一条，循环调BOI
+                let iPerCount = 1;
                 let iDoCount = Math.ceil(iItemCount / iPerCount);
                 let iBegin = batchOfCount * iPerCount;
                 let iEnd = 0;
