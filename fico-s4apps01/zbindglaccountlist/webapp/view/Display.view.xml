@@ -41,7 +41,29 @@
                         class="sapUiResponsiveMargin"
                     >
                         <smartFilterBar:controlConfiguration>
-
+                           <!-- <smartFilterBar:ControlConfiguration
+                                id="idGLAccount"
+                                key="GLAccount"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>GLAccount}"
+                                mandatory="notMandatory"
+                                index="3"
+                                visible="true"
+                            >
+ 
+                            </smartFilterBar:ControlConfiguration>  -->
+                         <smartFilterBar:ControlConfiguration
+                                id="idSumStatus"
+                                key="SumStatus"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>SumStatus}"
+                                mandatory="notMandatory"
+                                index="41"
+                            > 
+                                <smartFilterBar:customControl>
+                                <CheckBox id="idCheckbox"  />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration> 
  
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
@@ -70,6 +92,28 @@
                     <t:rowMode>
                         <rm:Auto id="idAuto" />
                     </t:rowMode>
+
+                    <!-- <t:columns>
+                        <t:Column
+                            width="4rem"
+                            label="{i18n>GLAccount}"
+                            sortProperty="GLAccount"
+                            filterProperty="GLAccount"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"GLAccount", "leadingProperty":"GLAccount", "sortProperty":"GLAccount, "filterProperty": "GLAccount"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{GLAccount}"
+                                />
+                            </t:template>
+                        </t:Column>
+
+                        </t:columns> -->
 
  
                 </t:Table>

@@ -4,13 +4,16 @@ sap.ui.define([
     "./messages",
 	"../lib/xlsx",
 	"sap/ui/model/Filter",
-	"sap/m/BusyDialog"
+	"sap/m/BusyDialog",
+	"sap/ui/core/Fragment"
 ], function(
     BaseController,
     formatter,
     messages,
+	xlsx, 
 	Filter,
-	BusyDialog
+	BusyDialog,
+	Fragment
 ) {
 	"use strict";
 
@@ -59,10 +62,35 @@ sap.ui.define([
 
 // In your Display.controller.js
 onBeforeRebindTable: function (oEvent) {
+	console.log(Filter); 
     var oBindingParams = oEvent.getParameter("bindingParams");
-    oBindingParams.parameters.custom = {
+	oBindingParams.parameters.custom = {
         rowClass: this._getRowClass
     };
+	var oFilter = oEvent.getParameter("bindingParams").filters;
+	var SumCheck = this.byId("idCheckbox");
+ 
+	console.log(SumCheck.getSelected());
+	var oNewFilter, aNewFilter = [];
+    if (SumCheck.getSelected()) {
+
+		this.sumchecks = false;
+
+		aNewFilter.push(new Filter("GLAccount", "EQ", "合計")); 
+		oNewFilter = new Filter({
+			filters:aNewFilter 
+		});
+		if (aNewFilter.length > 0) {
+		   oFilter.push(oNewFilter);
+		}
+
+	}
+	else{
+		this.sumchecks = true;
+	}
+
+
+
 },
 _getRowClass: function (oContext) {
     // Example logic to determine the row class
@@ -80,100 +108,24 @@ onUITableRowsUpdated: function (oEvent) {
 	var sType = "";
 	var oContext = null;
 	var oRowData = null;
-	if (aRows && aRows.length > 0) {
+	if (aRows && aRows.length > 0 ) {
 		var pRow = {};
 		for (var i = 0; i < aRows.length; i++) {
 			// // 第一行加颜色
 			 var c2Cell = aRows[i].getCells()[2];
 			 if (c2Cell) {
 			 	sType = c2Cell.getText();
-			 	if (sType === "合計") { 
+			 	if (sType === "合計" && this.sumchecks) { 
 			 		$("#" + aRows[i].getId()).css("background-color", "#FFFF00");
 					 $("#" + aRows[i].getId() + "-fixed").css("background-color", "#FFFF00");
 			 	}
 				else{$("#" + aRows[i].getId()).css("background-color", "");
 					$("#" + aRows[i].getId() + "-fixed").css("background-color", "");
 				}
-			 }
-/*
-			if (i > 0 && i < aRows.length) {
-
-				var pCell = pRow.getCells()[0],
-					cCell = aRows[i].getCells()[0],
-					c1Cell = aRows[i].getCells()[1];
-				if (pCell && cCell) {
-					if (cCell.getText() === pCell.getText()) {
-						$("#" + cCell.getId()).css("visibility", "hidden");
-						$("#" + pRow.getId() + "-col0").css("border-bottom-style", "hidden");
-					} else {
-						$("#" + cCell.getId()).removeAttr("style");
-						$("#" + pRow.getId() + "-col0").css("border-bottom-style", "");
-					}
-				}
-				if (c1Cell) {
-					if (!c1Cell.getText()) {
-						$("#" + pRow.getId() + "-col1").css("border-bottom-style", "hidden");
-					} else {
-						$("#" + pRow.getId() + "-col1").css("border-bottom-style", "");
-					}
-				}
-				var pCell = pRow.getCells()[1],
-					cCell = aRows[i].getCells()[1],
-					c1Cell = aRows[i].getCells()[2];
-				if (pCell && cCell) {
-					if (cCell.getText() === pCell.getText()) {
-						$("#" + cCell.getId()).css("visibility", "hidden");
-						$("#" + pRow.getId() + "-col1").css("border-bottom-style", "hidden");
-					} else {
-						$("#" + cCell.getId()).removeAttr("style");
-						$("#" + pRow.getId() + "-col1").css("border-bottom-style", "");
-					}
-				}
-				if (c1Cell) {
-					if (!c1Cell.getText()) {
-						$("#" + pRow.getId() + "-col2").css("border-bottom-style", "hidden");
-					} else {
-						$("#" + pRow.getId() + "-col2").css("border-bottom-style", "");
-					}
-				}
-				var pCell = pRow.getCells()[2],
-					cCell = aRows[i].getCells()[2],
-					c1Cell = aRows[i].getCells()[3];
-				if (pCell && cCell) {
-					if (cCell.getText() === pCell.getText()) {
-						$("#" + cCell.getId()).css("visibility", "hidden");
-						$("#" + pRow.getId() + "-col2").css("border-bottom-style", "hidden");
-					} else {
-						$("#" + cCell.getId()).removeAttr("style");
-						$("#" + pRow.getId() + "-col2").css("border-bottom-style", "");
-					}
-				}
-				if (c1Cell) {
-					if (!c1Cell.getText()) {
-						$("#" + pRow.getId() + "-col3").css("border-bottom-style", "hidden");
-					} else {
-						$("#" + pRow.getId() + "-col3").css("border-bottom-style", "");
-					}
-				}
-				var pCell = pRow.getCells()[3],
-					cCell = aRows[i].getCells()[3],
-					c1Cell = aRows[i].getCells()[4];
-				if (pCell && cCell) {
-					if (cCell.getText() === pCell.getText()) {
-						$("#" + cCell.getId()).css("visibility", "hidden");
-						$("#" + pRow.getId() + "-col3").css("border-bottom-style", "hidden");
-					} else {
-						$("#" + cCell.getId()).removeAttr("style");
-						$("#" + pRow.getId() + "-col3").css("border-bottom-style", "");
-					}
-				}
-				
  
-			}
-			pRow = aRows[i];*/
-			
 		}
 	}
+}
 },
 		createPurchseOrder: function (oEvent) {
 			var aSelectedItems = this.preparePostBody();
