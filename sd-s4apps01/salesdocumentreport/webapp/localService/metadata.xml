@@ -67,6 +67,81 @@
                 <Property Name="ConditionRateValue" Type="Edm.String" MaxLength="10"/>
                 <Property Name="MaterialCost2000" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Manufacturingcost" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SalesAmount" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfit" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfit" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy" Type="Edm.String" MaxLength="20"/>
+                <Property Name="CustomerAccountAssignmentGroup" Type="Edm.String" MaxLength="14"/>
+                <Property Name="FirstSalesSpecProductGroup" Type="Edm.String" MaxLength="3"/>
+                <Property Name="SecondSalesSpecProductGroup" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ThirdSalesSpecProductGroup" Type="Edm.String" MaxLength="3"/>
+                <Property Name="AccountDetnProductGroup" Type="Edm.String" MaxLength="3"/>
+                <Property Name="SplitRange" Type="Edm.String" MaxLength="13" sap:display-format="UpperCase" sap:label="char13" sap:quickinfo="Character field 13 digits"/>
+                <Property Name="ConditionRateValuetest" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Unit" sap:label="Quantity"/>
+                <Property Name="Unit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="RequirementDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="ConditionRateValue01" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue02" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue03" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue04" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue05" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue06" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue07" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue08" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue09" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue10" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue11" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ConditionRateValue12" Type="Edm.String" MaxLength="10"/>
+                <Property Name="salesplanamountindspcrcy01" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy02" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy03" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy04" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy05" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy06" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy07" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy08" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy09" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy10" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy11" Type="Edm.String" MaxLength="20"/>
+                <Property Name="salesplanamountindspcrcy12" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount01" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount02" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount03" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount04" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount05" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount06" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount07" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount08" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount09" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount10" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount11" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SalesAmount12" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal01" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal02" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal03" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal04" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal05" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal06" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal07" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal08" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal09" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal10" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal11" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ContributionProfitTotal12" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal01" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal02" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal03" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal04" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal05" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal06" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal07" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal08" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal09" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal10" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal11" Type="Edm.String" MaxLength="20"/>
+                <Property Name="GrossProfitTotal12" Type="Edm.String" MaxLength="20"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>

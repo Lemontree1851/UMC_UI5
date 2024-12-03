@@ -1,11 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
+    "../model/formatter",
+    "./messages",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
 ],
-    function (Controller, Filter, FilterOperator, BusyDialog, MessageBox) {
+    function (Controller, formatter, messages,Filter, FilterOperator, BusyDialog, MessageBox) {
         "use strict";
 
         return Controller.extend("sd.salesdocumentreport.controller.Main", {
@@ -13,8 +15,11 @@ sap.ui.define([
             onInit: function () {
                 this._LocalData = this.getOwnerComponent().getModel("local");
                 this._oDataModel = this.getOwnerComponent().getModel();
-                this._updateColumnHeaders();
-
+                //this._updateColumnHeaders();
+                this.aHttpRequest = [];
+                this.dataFinished = true;
+                this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+                this._BusyDialog = new BusyDialog();
             },
 
             onBeforeRebindTable: function (oEvent, arg1, arg2, arg3, arg4) {
@@ -64,6 +69,410 @@ sap.ui.define([
                 this._updateColumnHeaders(monthArray);
             },
             
+            onSearch: function (oEvent) {
+                var aResultTemp = this._LocalData.getProperty("/SalesReport");
+                this.delColumns(aResultTemp);
+
+                this.errorPopup = false;
+                var aFilter = this.getView().byId("idSmartFilterBar").getFilters();
+                var oNewFilter, aNewFilter = [];
+
+                // 获取分割范围
+                var oDateRange = this.byId("idDateRangeSelection");
+                if (oDateRange.getValue()) {
+                    var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
+                    var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
+                    var splitRange = splitStart + "-" + splitEnd;
+                    aNewFilter.push(new Filter("SplitRange", "EQ", splitRange)); 
+                }
+
+                oNewFilter = new Filter({
+                    filters:aNewFilter,
+                    and:true
+                });
+                if (aNewFilter.length > 0) {
+                    aFilter.push(oNewFilter);
+                }
+                if (!aFilter) {
+                    aFilter = [];
+                }
+                // this.getFilter(aFilter)
+                    //中止之前的请求,防止上次正在请求的数据请求完成后错误的添加到此次请求中
+                this.aHttpRequest.forEach(function (req) {
+                    req.abort();
+                });
+                
+                this.getEntityCount(aFilter, splitRange).then(function (iItemCount) {
+                    if (iItemCount > 0) {
+                        //设置要查询的字段
+                        let sParamtetrsOfSelect = "SalesOrganization,Customer,YearDate,Product,plantype,CustomerName,ProfitCenter,PlantName,SalesOffice,SalesGroup,CreatedByUser,MatlAccountAssignmentGroup,ProductGroup,ProductName,MaterialCost2000,Manufacturingcost,ContributionProfit,GrossProfit,CustomerAccountAssignmentGroup,FirstSalesSpecProductGroup,SecondSalesSpecProductGroup,ThirdSalesSpecProductGroup,AccountDetnProductGroup,ConditionRateValue_n,salesplanamountindspcrcy_n,SalesAmount_n,ContributionProfitTotal_n,GrossProfitTotal_n";
+                        //获取数据
+                        this._LocalData.setProperty("/SalesReport", []);
+                        this._LocalData.setProperty("/SalesReportTemp", []);
+                        this.getEntityContentOnePage(iItemCount, 0, aFilter, sParamtetrsOfSelect, splitRange);
+                        
+                    } else {
+                        this._LocalData.setProperty("/SalesReport", []);
+                        this.byId("idDynamicPage").setBusy(false);
+                    }
+                }.bind(this));
+            },
+            getEntityCount: function (aFilter, splitRange) {
+                var that = this;
+                that.byId("idDynamicPage").setBusy(true);
+                var promise = new Promise(function (resolve, reject) {
+                    var mParameters = {
+                        filters: aFilter,
+                        success: function (oData, response) {
+                            //如果后端统计条目数时不是使用的最终数据内表统计，那么这里的iItemCount并不一定准确，实际条目可能会少一些
+                            var iItemCount = Number(oData);
+                            resolve(iItemCount);
+                        },
+                        error: function (oError) {
+                            var iItemCount = 0;
+                            resolve(iItemCount);
+                            that.byId("idDynamicPage").setBusy(false);
+                            var sErrorMessage;
+                            try {
+                                var oJsonMessage = JSON.parse(oError.responseText);
+                                sErrorMessage = oJsonMessage.error.message.value;
+                            } catch (e) {
+                                sErrorMessage = oError.responseText;
+                            }
+                            MessageBox.error(sErrorMessage);
+                        }
+                    };
+                    that.getOwnerComponent().getModel().read("/SalesReport/$count", mParameters);
+                });
+                return promise;
+            },
+            getEntityContentOnePage: function (iTop, iSkip, aFilter, sParamtetrsOfSelect, splitRange) {
+                sParamtetrsOfSelect = sParamtetrsOfSelect ? sParamtetrsOfSelect : "";
+                var that = this;
+                this.aHttpRequest = [];
+                that.byId("idDynamicPage").setBusy(true);
+                that.dataFinished = false;
+                var aPromise = [];
+    
+                var aResult = that._LocalData.getProperty("/SalesReport");
+                var aResultTemp = that._LocalData.getProperty("/SalesReportTemp");
+                
+                var promise = new Promise(function (resolve, reject) {
+                    var mParameters = {
+                        filters: aFilter,
+                        urlParameters: {
+                            "$top": iTop,// iTop等于总数 超过5000条abap cloud会自动分页
+                            "$skiptoken": iSkip,
+                            "$select": sParamtetrsOfSelect
+                        },
+                        success: function (oData) {
+                            if (oData.results.length > 0) {
+                                aResultTemp.push.apply(aResultTemp, oData.results);
+                                that._LocalData.setProperty("/SalesReportTemp", aResultTemp);
+                            } 
+                            resolve(oData);
+                        },
+                        error: function (oError) {
+                            //手动中止的导致的错误不需要处理
+                            if (!oError.aborted) {
+                                that.byId("idDynamicPage").setBusy(false);
+                                var sErrorMessage;
+                                try {
+                                    var oJsonMessage = JSON.parse(oError.responseText);
+                                    sErrorMessage = oJsonMessage.error.message.value;
+                                } catch (e) {
+                                    sErrorMessage = oError.responseText;
+                                }
+                                sErrorMessage = sErrorMessage + that._ResourceBundle.getText("DataError");
+                                if(!that.errorPopup) {
+                                    MessageBox.error(sErrorMessage);
+                                    that.errorPopup = true;
+                                    that._LocalData.setProperty("/SalesReport", []);
+                                }
+                                that.aHttpRequest.forEach(function (req) {
+                                    req.abort();
+                                });
+                                reject();
+                            }
+                        }
+                    };
+                    that.getOwnerComponent().getModel().setUseBatch(false);
+                     that.aHttpRequest.push(that.getOwnerComponent().getModel().read("/SalesReport", mParameters));
+                });
+                promise.then(function (oData) {
+                    // 如果存在next参数，说明数据还未取完，需要再次取值
+                    if (oData.__next) {
+                        //abap cloud中odata每次最多只能取5000条，所以当还有数据时 iSkip加5000即可
+                        // 但这里会存在效率问题，虽然服务器强制分页，但是后端处理数据的逻辑中并没有考虑分页，那么相当于整个取值逻辑要重复执行好几次
+                        // 且需要前一页执行完毕之后才处理第二页
+                        iSkip = iSkip + 5000;
+                        that.getEntityContentOnePage(iTop, iSkip, aFilter, sParamtetrsOfSelect, splitRange);
+                    // 如果不存在next参数则说明数据已经取完
+                    } else {
+                        aResultTemp = that._LocalData.getProperty("/SalesReportTemp");
+                        aResult = that.transformData(aResultTemp);
+                        console.log("aResult",aResult);
+                        that._LocalData.setProperty("/SalesReport", aResult);
+                        that.addColumns();
+                       
+                        that.aHttpRequest = [];
+                        that._LocalData.refresh();
+                        that.dataFinished = true;
+                         
+                        // that.byId("idDynamicPage").setBusy(false);
+                    }
+                });
+                // aPromise.push(promise);
+            },
+    
+            onRowsUpdated:function(){
+                if (this.dataFinished) {
+                    this.byId("idDynamicPage").setBusy(false);
+                }
+            },
+    
+            transformData: function (data) {
+                // 创建一个对象来存储转换后的数据
+                let result = {};
+            
+                // 遍历数据数组
+                data.forEach(item => {
+                    // 使用SalesOrganization, Customer, "YearDate, Product, plantype作为key值组合
+                    const key = `${item.SalesOrganization}_${item.Customer}_${item.Product}_${item.plantype}`;
+            
+                    // 如果当前组合的key不存在于result中，则初始化它
+                    if (!result[key]) {
+                        result[key] = {
+                            // Type: item.Type,
+                            // Message: item.Message,
+                            SalesOrganization: item.SalesOrganization,
+                            Customer: item.Customer,
+                            YearDate: item.YearDate,
+                            Product: item.Product,
+                            plantype: item.plantype, 
+
+                            ProfitCenter: item.ProfitCenter,
+                            PlantName: item.PlantName,
+                            SalesOffice: item.SalesOffice,
+                            SalesGroup: item.SalesGroup,
+                            CreatedByUser: item.CreatedByUser,
+                            MatlAccountAssignmentGroup: item.MatlAccountAssignmentGroup,
+                            ProductGroup: item.ProductGroup,
+                            ProductName: item.ProductName,
+                            //ConditionRateValue: item.ConditionRateValue,
+                            MaterialCost2000: item.MaterialCost2000,
+                            Manufacturingcost: item.Manufacturingcost,
+                            //SalesAmount: item.SalesAmount,
+                            ContributionProfit: item.ContributionProfit,
+                            GrossProfit: item.GrossProfit,
+                            //ContributionProfitTotal: item.ContributionProfitTotal,
+                            //GrossProfitTotal: item.GrossProfitTotal,
+                            //salesplanamountindspcrcy: item.salesplanamountindspcrcy,
+                            CustomerAccountAssignmentGroup: item.CustomerAccountAssignmentGroup,
+                            FirstSalesSpecProductGroup: item.FirstSalesSpecProductGroup,
+                            SecondSalesSpecProductGroup: item.SecondSalesSpecProductGroup,
+                            ThirdSalesSpecProductGroup: item.ThirdSalesSpecProductGroup,
+                            AccountDetnProductGroup: item.AccountDetnProductGroup,
+
+                            ConditionRateValues: {},
+                            salesplanamountindspcrcys:{},
+                            SalesAmounts:{},
+                            ContributionProfitTotals:{},
+                            GrossProfitTotals:{}
+                        };
+                    }
+            
+                    // 将日期作为列名，使用ConditionRateValue填充
+                     
+ 
+                    let YearDate = item.YearDate.toString();
+                    
+                    const dateKey  = `ConditionRateValue${YearDate}`;
+                    const dateKey1 = `salesplanamountindspcrcy${YearDate}`;
+                    const dateKey2 = `SalesAmount${YearDate}`;
+                    const dateKey3 = `ContributionProfitTotal${YearDate}`;
+                    const dateKey4 = `GrossProfitTotal${YearDate}`;
+                    
+                    result[key].ConditionRateValues[dateKey] = item.ConditionRateValue_n;
+                    result[key].salesplanamountindspcrcys[dateKey1] = item.salesplanamountindspcrcy_n;
+                    result[key].SalesAmounts[dateKey2] = item.SalesAmount_n;
+                    result[key].ContributionProfitTotals[dateKey3] = item.ContributionProfitTotal_n;
+                    result[key].GrossProfitTotals[dateKey4] = item.GrossProfitTotal_n;
+                });
+            
+                // 将对象转化为数组形式，并将ConditionRateValues展开为列
+                return Object.values(result).map(item => {
+                    return {
+                        SalesOrganization: item.SalesOrganization,
+                        Customer: item.Customer,
+                        
+                        Product: item.Product,
+                        plantype: item.plantype, 
+
+                        ProfitCenter: item.ProfitCenter,
+                        PlantName: item.PlantName,
+                        SalesOffice: item.SalesOffice,
+                        SalesGroup: item.SalesGroup,
+                        CreatedByUser: item.CreatedByUser,
+                        MatlAccountAssignmentGroup: item.MatlAccountAssignmentGroup,
+                        ProductGroup: item.ProductGroup,
+                        ProductName: item.ProductName,
+                        //ConditionRateValue: item.ConditionRateValue,
+                        MaterialCost2000: item.MaterialCost2000,
+                        Manufacturingcost: item.Manufacturingcost,
+                        //SalesAmount: item.SalesAmount,
+                        ContributionProfit: item.ContributionProfit,
+                        GrossProfit: item.GrossProfit,
+                        //ContributionProfitTotal: item.ContributionProfitTotal,
+                        //GrossProfitTotal: item.GrossProfitTotal,
+                        //salesplanamountindspcrcy: item.salesplanamountindspcrcy,
+                        CustomerAccountAssignmentGroup: item.CustomerAccountAssignmentGroup,
+                        FirstSalesSpecProductGroup: item.FirstSalesSpecProductGroup,
+                        SecondSalesSpecProductGroup: item.SecondSalesSpecProductGroup,
+                        ThirdSalesSpecProductGroup: item.ThirdSalesSpecProductGroup,
+                        AccountDetnProductGroup: item.AccountDetnProductGroup,
+                        ...item.ConditionRateValues, // 展开动态生成的日期列
+                        ...item.salesplanamountindspcrcys,
+                        ...item.SalesAmounts,
+                        ...item.ContributionProfitTotals,
+                        ...item.GrossProfitTotals
+ 
+                    };
+                });
+            },
+    
+            addColumns: function () {
+                var ofpartition = this._LocalData.getProperty("/SalesReport");
+                console.log("ofpartition",ofpartition);
+                if (ofpartition.length > 0) {
+                    Object.keys(ofpartition[0]).forEach(function (key) {
+                        if (key.indexOf("ConditionRateValue") >= 0) {
+                            this.addColumn(key, this); 
+                        }
+                        if (key.indexOf("salesplanamountindspcrcy") >= 0) {
+                            this.addColumn(key, this);
+                        }
+                        if (key.indexOf("SalesAmount") >= 0) {
+                            
+                            this.addColumn(key, this);
+                        }
+                        if (key.indexOf("ContributionProfitTotal") >= 0) {
+                            this.addColumn(key, this);
+                        }
+                        if (key.indexOf("GrossProfitTotal") >= 0) {
+                            this.addColumn(key, this);
+                        }
+                    }.bind(this));
+                }
+            },
+            delColumns: function (aResultTemp) {
+                if (aResultTemp){
+                if (aResultTemp.length > 0) {
+                    Object.keys(aResultTemp[0]).forEach(function (key) {
+                        if (key.indexOf("ConditionRateValue") >= 0) {
+                            if (this.byId(key)){
+                                this.byId(key).destroyLabel();
+                                this.byId(key).destroyTemplate();
+                                this.byId(key).destroy(true);
+                            }
+                        }
+                        if (key.indexOf("salesplanamountindspcrcy") >= 0) {
+                            if (this.byId(key)){
+                                this.byId(key).destroyLabel();
+                                this.byId(key).destroyTemplate();
+                                this.byId(key).destroy(true);
+                            }
+                        }
+                        if (key.indexOf("SalesAmount") >= 0) {
+                            if (this.byId(key)){
+                                this.byId(key).destroyLabel();
+                                this.byId(key).destroyTemplate();
+                                this.byId(key).destroy(true);
+                            }
+                        }
+                        if (key.indexOf("ContributionProfitTotal") >= 0) {
+                            if (this.byId(key)){
+                                this.byId(key).destroyLabel();
+                                this.byId(key).destroyTemplate();
+                                this.byId(key).destroy(true);
+                            }
+                        }
+                        if (key.indexOf("GrossProfitTotal") >= 0) {
+                            if (this.byId(key)){
+                                this.byId(key).destroyLabel();
+                                this.byId(key).destroyTemplate();
+                                this.byId(key).destroy(true);
+                            }
+                        }
+                    }.bind(this));
+                }}
+            },
+            addColumn: function(sColName,oObj){
+                
+                var sBindingPath = `{path:'local>${sColName}', type:'sd.salesdocumentreport.controller.CustomDecimal'}`;
+                // 生成Text控件
+                var oText = new sap.m.Text({
+                                text: sBindingPath,
+                                tooltip:"{local>" + sColName + "}"
+                            });
+                var ConditionRateValueLabel = oObj._ResourceBundle.getText("ConditionRateValueLabel") + "(";
+                var salesplanamountindspcrcyLabel = oObj._ResourceBundle.getText("salesplanamountindspcrcyLabel") + "(";
+                var SalesAmountLabel = oObj._ResourceBundle.getText("SalesAmountLabel") + "(";
+                var ContributionProfitTotalLabel = oObj._ResourceBundle.getText("ContributionProfitTotalLabel") + "(";
+                var GrossProfitTotalLabel = oObj._ResourceBundle.getText("GrossProfitTotalLabel") + "(";
+
+
+                var sLabel = sColName;
+                sLabel = sLabel.replace("ConditionRateValue", ConditionRateValueLabel) ;
+                sLabel = sLabel.replace("salesplanamountindspcrcy", salesplanamountindspcrcyLabel);
+                sLabel = sLabel.replace("SalesAmount", SalesAmountLabel) ;
+                sLabel = sLabel.replace("ContributionProfitTotal", ContributionProfitTotalLabel) ;
+                sLabel = sLabel.replace("GrossProfitTotal", GrossProfitTotalLabel) ;
+
+                sLabel = sLabel + ")";
+ 
+                var oCustomDataValue = {columnKey: sColName, leadingProperty: sColName};
+                var sWidth = "12rem";
+                var shAlign = "Begin";
+                if (sColName.indexOf("ConditionRateValue") >= 0) {
+                    shAlign = "End";
+                }
+                if (sColName.indexOf("salesplanamountindspcrcy") >= 0) {
+                    shAlign = "End";
+                }
+                if (sColName.indexOf("SalesAmount") >= 0) {
+                    shAlign = "End";
+                }
+                if (sColName.indexOf("ContributionProfitTotal") >= 0) {
+                    shAlign = "End";
+                }
+                if (sColName.indexOf("GrossProfitTotal") >= 0) {
+                    shAlign = "End";
+                }
+                // 生成column id
+                var sId = oObj.getView().createId(sColName);
+                // 如果相同ID的column存在则删除(为了保证column的顺序，需要重新添加)
+                if (oObj.byId(sId)){
+                    oObj.byId(sId).destroyLabel();
+                    oObj.byId(sId).destroyTemplate();
+                    oObj.byId(sId).destroy(true);
+                }
+                // 往表中添加column
+                var oColumn = new sap.ui.table.Column({
+                        id: oObj.getView().createId(sColName),
+                        hAlign: shAlign,
+                        label: sLabel,
+                        width: sWidth,
+                        template: oText,
+                        
+                        // customData: new sap.ui.core.CustomData({
+                        // 				key: "p13nData",
+                        // 				value: oCustomDataValue
+                        // 			})
+                    });
+                oObj.getView().byId("Table_Calc").addColumn(oColumn);
+            },
+ 
             _updateColumnHeaders: function (monthArray) {
                 // 获取表格控件
               //  var oTable = this.getView().byId("idSmartFilterBar");  
