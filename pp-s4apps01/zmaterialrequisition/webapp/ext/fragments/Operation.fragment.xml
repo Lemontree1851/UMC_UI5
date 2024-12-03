@@ -125,7 +125,7 @@
             </HBox>
         </Panel>
         <Panel expandable="false" expanded="true" width="auto">
-            <table:Table id="idItemTable" rows="{local>/itemSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+            <table:Table id="idItemTable" rows="{local>/itemSet}" rowsUpdated="handler.onUITableRowsUpdated" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
                 <table:extension>
                     <OverflowToolbar>
                         <ToolbarSpacer/>

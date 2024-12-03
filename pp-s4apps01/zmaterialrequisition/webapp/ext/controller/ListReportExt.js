@@ -220,6 +220,33 @@ sap.ui.define([
             this.getModel("local").setProperty("/itemSet", items);
         },
 
+        onUITableRowsUpdated: function (oEvent) {
+            var oTable = oEvent.getSource();
+            var aRows = oTable.getRows();
+            var aConfig = this.getModel("local").getProperty("/Config");
+            var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+            var config = aConfig.find(element => element.Plant === sPlant);
+            aRows.forEach(function (oRow, index) {
+                var sAmount = "0",
+                    iAmount = 0;
+                oRow.getCells().forEach(oCell => {
+                    if (oCell.mBindingInfos.text) {
+                        if (oCell.mBindingInfos.text.parts[0].path === "TotalAmount") {
+                            sAmount = oCell.getText().split(' ')[0];
+                            iAmount = parseFloat(sAmount.replace(/,/g, ""));
+                        }
+                    }
+                });
+                if (iAmount >= parseFloat(config.Amount)) {
+                    $("#" + oRow.getId()).css("background-color", "#f2bfc0");
+                    $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
+                } else {
+                    $("#" + oRow.getId()).css("background-color", "#fff");
+                    $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
+                }
+            });
+        },
+
         onDelLine: function (oEvent) {
             var oTable = oEvent.getSource().getParent().getParent();
             var aSelectedIndices = oTable.getSelectedIndices();
@@ -339,7 +366,12 @@ sap.ui.define([
                     aFilters.push(new Filter({
                         path: "ManufacturingOrder",
                         operator: FilterOperator.EQ,
-                        value1: sValue
+                        value1: sValue.split('/')[0]
+                    }));
+                    aFilters.push(new Filter({
+                        path: "Item",
+                        operator: FilterOperator.EQ,
+                        value1: sValue.split('/')[1]
                     }));
                     break;
                 case "/ZC_ProductVH":
