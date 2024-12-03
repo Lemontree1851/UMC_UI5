@@ -111,7 +111,7 @@ sap.ui.define([
                     "companycode": sCompanyCode,
                     "fiscalyear": sFiscalYear,
                     "fiscalperiod": sFiscalPeriod,
-                    "ledger": sLedger 
+                    "ledger": sLedger
                 };
 
                 var oRequestData = {

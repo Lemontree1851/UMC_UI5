@@ -67,14 +67,14 @@
                     <PropertyRef Name="Plant"/>
                     <PropertyRef Name="FiscalYear"/>
                     <PropertyRef Name="FiscalPeriod"/>
-                    <PropertyRef Name="product"/>
+                    <PropertyRef Name="Product"/>
                 </Key>
                 <Property Name="Ledger" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Ledger" sap:quickinfo="Ledger in General Ledger Accounting" sap:creatable="false" sap:updatable="false" sap:value-list="fixed-values"/>
                 <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Posting Period" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="product" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
                 <Property Name="ProductType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Material Type"/>
                 <Property Name="ProductTypeName" Type="Edm.String" MaxLength="25"/>
@@ -87,85 +87,86 @@
                 <Property Name="BusinessPartnerName" Type="Edm.String" MaxLength="70"/>
                 <Property Name="ValuationQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
                 <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
-                <Property Name="ActualCost" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="InventoryAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="ValuationUnitPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="ValuationAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="ValuationAfterAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="ValuationLoss" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="ActualCost" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="InventoryAmount" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationUnitPrice" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationAmount" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationAfterAmount" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationLoss" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="QuantityMonth1" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth1" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth1" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth2" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth2" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth2" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth3" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth3" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth3" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth4" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth4" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth4" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth5" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth5" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth5" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth6" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth6" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth6" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth7" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth7" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth7" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth8" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth8" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth8" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth9" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth9" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth9" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth10" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth10" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth10" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth11" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth11" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth11" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth12" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth12" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth12" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth13" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth13" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth13" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth14" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth14" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth14" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth15" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth15" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth15" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth16" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth16" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth16" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth17" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth17" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth17" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth18" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth18" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth18" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth19" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth19" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth19" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth20" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth20" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth20" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth21" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth21" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth21" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth22" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth22" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth22" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth23" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth23" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth23" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth24" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth24" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth24" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth25" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth25" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth25" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth26" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth26" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth26" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth27" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth27" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth27" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth28" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth28" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth28" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth29" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth29" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth29" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth30" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth30" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth30" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth31" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth31" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth31" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth32" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth32" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth32" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth33" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth33" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth33" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth34" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth34" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth34" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth35" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth35" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth35" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth36" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
-                <Property Name="AmountMonth36" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="AmountMonth36" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="KeyDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="single-value"/>
             </EntityType>
             <EntityType Name="ZC_LedgerVHType" sap:label="Value Help for Ledger" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -577,6 +578,10 @@
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="FiscalPeriod"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="KeyDate"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                             </Collection>

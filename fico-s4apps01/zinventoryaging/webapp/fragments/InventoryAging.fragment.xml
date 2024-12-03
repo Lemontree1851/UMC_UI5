@@ -51,12 +51,12 @@
                         <Text text="{FiscalPeriod}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8rem" label="{i18n>product}" sortProperty="product" filterProperty="product">
+                <table:Column width="8rem" label="{i18n>Product}" sortProperty="Product" filterProperty="Product">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"product", "leadingProperty":"product"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{product}" wrapping="false" />
+                        <Text text="{Product}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>ProductDescription}" sortProperty="ProductDescription" filterProperty="ProductDescription">
