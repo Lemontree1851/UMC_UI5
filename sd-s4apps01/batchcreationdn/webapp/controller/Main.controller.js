@@ -3,11 +3,11 @@ sap.ui.define([
     "../model/formatter",
     "./messages",
     "sap/m/BusyDialog",
-    "sap/ui/core/message/Message",
-    "sap/ui/core/message/ControlMessageProcessor",
-    "sap/ui/core/Messaging"
+    "sap/ui/core/Messaging",
+    "sap/ui/core/Fragment",
+	"sap/m/Dialog"
 ],
-    function (Controller, formatter, messages, BusyDialog, Message, ControlMessageProcessor, Messaging) {
+    function (Controller, formatter, messages, BusyDialog, Messaging, Fragment, Dialog ) {
         "use strict";
         return Controller.extend("sd.batchcreationdn.controller.Main", {
             formatter: formatter,
@@ -34,8 +34,11 @@ sap.ui.define([
 
             onDNButtonPress: function (oEvent) {
                 if (Messaging.getMessageModel().getData().length !== 0) {
-                    this.byId(Messaging.getMessageModel().getData()[0].getControlId()).focus();
-                    return;
+                    var oErrorControlId = this.byId(Messaging.getMessageModel().getData()[0].getControlId());
+                    if (oErrorControlId) {
+                        oErrorControlId.focus();
+                        return;
+                    }
                 }
                 this.aSelectedData = [];
                 this.aSelectedData = this.getSelectedRows(oEvent);
@@ -70,6 +73,7 @@ sap.ui.define([
             callAction: function () {
                 var that = this;
                 var oModel = this._oDataModel;
+                oModel.resetChanges();
                 oModel.callFunction("/createDeliveryOrder", {
                     method: "POST",
                     urlParameters: {
@@ -84,6 +88,23 @@ sap.ui.define([
                             this._oDataModel.setProperty(sKey + "/Message", line.MESSAGE);
                             this._oDataModel.setProperty(sKey + "/DeliveryDocument", line.DELIVERYDOCUMENT);
                             this._oDataModel.setProperty(sKey + "/DeliveryDocumentItem", line.DELIVERYDOCUMENTITEM);
+                            //还原用户输入的数据
+                            let inputParam = that._LocalData.getProperty(sKey);
+                            if (inputParam) {
+                                this._oDataModel.setProperty(sKey + "/CurrDeliveryQty", inputParam.CurrDeliveryQty || "0");
+                                if (inputParam.CurrShippingType) {
+                                    this._oDataModel.setProperty(sKey + "/CurrShippingType", inputParam.CurrShippingType);
+                                }
+                                if (inputParam.CurrPlannedGoodsIssueDate) {
+                                    this._oDataModel.setProperty(sKey + "/CurrPlannedGoodsIssueDate", inputParam.CurrPlannedGoodsIssueDate);
+                                }
+                                if (inputParam.CurrPlannedGoodsIssueDate) {
+                                    this._oDataModel.setProperty(sKey + "/CurrDeliveryDate", inputParam.CurrDeliveryDate);
+                                }
+                                if (inputParam.CurrStorageLocation) {
+                                    this._oDataModel.setProperty(sKey + "/CurrStorageLocation", inputParam.CurrStorageLocation);
+                                }
+                            }
                         },this);
                         this._BusyDialog.close();
                     }.bind(this),
@@ -132,15 +153,8 @@ sap.ui.define([
                 aSelectedIndices.forEach(function (iIndex) {
                     var oContext = oTable.getContextByIndex(iIndex);
                     var oRowData = oModel.getProperty(oContext.getPath());
-                    var inputParam = that._LocalData.getProperty(oContext.getPath());
                     var oCopyRowData = JSON.parse(JSON.stringify(oRowData));
-                    if (inputParam) {
-                        oCopyRowData.CurrDeliveryQty = inputParam.CurrDeliveryQty || "0";
-                        oCopyRowData.CurrShippingType = inputParam.CurrShippingType;
-                        oCopyRowData.CurrPlannedGoodsIssueDate = !inputParam.CurrPlannedGoodsIssueDate || inputParam.CurrPlannedGoodsIssueDate.replaceAll('/',"");
-                        oCopyRowData.CurrDeliveryDate = !inputParam.CurrDeliveryDate || inputParam.CurrDeliveryDate.replaceAll('/',"");
-                        oCopyRowData.CurrStorageLocation = inputParam.CurrStorageLocation || "";
-                    }
+                    oCopyRowData.key = oContext.getPath();
                     aSelectedData.push(oCopyRowData);
                 });
 
@@ -150,11 +164,72 @@ sap.ui.define([
             onInputChange: function (oEvent) {
                 var sPath = oEvent.getSource().getBindingContext().getPath();
                 var sProperty = oEvent.getSource().getBindingPath("value");
+                //由于odata的setPoroperty并未真正修改model中的数据，填入的数据在resetchanges之后会消失
+                //所以用inputParam存储输入的数据，在创建DN之后用于还原用户输入的数据
                 var inputParam = this._LocalData.getProperty(sPath) || {};
-                inputParam = Object.assign(inputParam, {[sProperty]: oEvent.getParameter('value')});
+                switch (oEvent.getSource().getDataType()) {
+                    case 'Edm.DateTime':
+                    case 'Edm.Date':
+                        this._oDataModel.setProperty(sPath + "/" + sProperty, this.formatter.odataDate(oEvent.getParameter('value')));
+                        inputParam = Object.assign(inputParam, {[sProperty]: this.formatter.odataDate(oEvent.getParameter('value'))});
+                        break;
+                    default:
+                        this._oDataModel.setProperty(sPath + "/" + sProperty, oEvent.getParameter('value'));
+                        inputParam = Object.assign(inputParam, {[sProperty]: oEvent.getParameter('value')});
+                        break;
+                }
                 this._LocalData.setProperty(sPath,inputParam);
-                // this._oDataModel.setProperty(sPath + "/" + sProperty,  oEvent.getParameter('value'));
-                // this._oDataModel.setProperty(sPath + "/" + sProperty,  new Date("2024-12-12T06:00:00"));
+                
+            },
+            onDialogPress: function (oEvent) {	
+                this.aNeedUpdateData = this.getSelectedRows(oEvent);	
+                if(this.aNeedUpdateData.length === 0) {
+                    return;
+                }
+                if (!this.Dialog) {
+                    var oView = this.getView();
+                    if (!this.Dialog) {
+                        this.Dialog = Fragment.load({
+                            id: oView.getId(),
+                            name: "sd.batchcreationdn.view.BatchInput",
+                            controller: this
+                        }).then(function (oDialog){
+                            this.getView().addDependent(oDialog);
+                            this.byId("idSmartFormBatchInput").bindElement(this.aNeedUpdateData[0].key);
+                            return oDialog;
+                        }.bind(this));
+                    }
+                }
+                this.Dialog.then(function(oDialog) {
+                    oDialog.open();
+                }.bind(this));
+            },
+            
+            onDialogClose: function(){
+                this.byId("AnswerDialog").close();
+                this.aNeedUpdateData = [];
+            },
+            onChangeGoodsIssueDate: function () {
+                let that = this;
+                let sDate = this.byId("idInputParam1").getValue();
+                
+                that.aNeedUpdateData.forEach(function (line) {
+                    that._oDataModel.setProperty(line.key + "/CurrPlannedGoodsIssueDate", that.formatter.odataDate(sDate));
+                    let inputParam = that._LocalData.getProperty(line.key) || {};
+                    inputParam = Object.assign(inputParam, {"CurrPlannedGoodsIssueDate": that.formatter.odataDate(sDate)});
+                    that._LocalData.setProperty(line.key,inputParam);
+                });
+            },
+            onChangeStorageLoc: function () {
+                let that = this;
+                let sStorageLoc = this.byId("idInputParam2").getValue();
+                that.aNeedUpdateData.forEach(function (line) {
+                    let inputParam = that._LocalData.getProperty(line.key) || {};
+                    that._oDataModel.setProperty(line.key + "/CurrStorageLocation", sStorageLoc);
+                    inputParam = Object.assign(inputParam, {"CurrStorageLocation": sStorageLoc});
+                    that._LocalData.setProperty(line.key,inputParam);
+                });
             }
+
         });
     });

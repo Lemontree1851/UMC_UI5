@@ -85,17 +85,21 @@ sap.ui.define([
                 return value;
             }
         },
-
+        // 当odata属性为Date类型时，此函数可保证传输到后端的日期于前端（本地时间）一致，
+        //主要针对odata v2 Edm.DateTime类型
+        //前端UI绑定则需要搭配如下设置，将UTC设置为true（因为当前的时间就是UTC时间，所以UTC转UTC时间不会变化，如果不设置，或者false则会转换成本地时间）
+        //value="{path:'CurrPlannedGoodsIssueDate', type:'sap.ui.model.type.Date',formatOptions: {UTC: true} }"
+        //或者使用sap.ui.model.odata.type.Date 则可以省略formatOptions: {UTC: true}， 因为odatatype 默认会转换成UTC且无法通过formatOptions设置为false
         odataDate: function (v) {
-            var deliveryDate = new Date(v);
-            if ( isNaN(date.getTime()) ) {
+            var odataDate = new Date(v);
+            if ( isNaN(odataDate.getTime()) ) {
                 return "";
             }
             var oDateFormat = DateFormat.getDateTimeInstance({
                 pattern: "yyyy-MM-dd"
             });
-            var deliveryDateString = oDateFormat.format(deliveryDate, false);
-            return new deliveryDateString;
+            var odataDateString = oDateFormat.format(odataDate, false);
+            return new Date(odataDateString + "T00:00:00Z");
         },
 
         stringToDate: function (value) {

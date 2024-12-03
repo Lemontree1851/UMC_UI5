@@ -1,0 +1,52 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:smartField="sap.ui.comp.smartfield"
+	xmlns:layout="sap.ui.layout"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog id="AnswerDialog" title="{i18n>DialogTitle}" contentWidth="23rem" type="Message" draggable="true">
+		<smartForm:SmartForm
+			id="idSmartFormBatchInput"
+			app:defaultCheckBoxDisplayBehaviour="YesNo"
+			app:defaultDropDownDisplayBehaviour="idAndDescription"
+			editTogglable="false"
+			editable="true"
+			title="{Name}"
+			validationMode="Async"
+			editToggled="onSmartFormEditToggled"
+			binding="{/SalesOrderForDN(SalesDocument='11',SalesDocumentItem='10')}"
+			
+		>
+			<smartForm:layout>
+				<smartForm:ColumnLayout
+					id="idColumnLayout"
+					columnsM="1"
+					columnsL="1"
+					columnsXL="1"
+					
+				/>
+			</smartForm:layout>
+			<smartForm:Group id="idGroup" >
+				<smartForm:GroupElement id="id35GroupElement">
+					<smartField:SmartField
+						id="idInputParam1"
+						textLabel="{/#SalesOrderForDNType/CurrPlannedGoodsIssueDate/@sap:label}"
+						value="{CurrPlannedGoodsIssueDate}"
+					/>
+					<Button text="{i18n>bGoodsIssueDate}" type="Emphasized" press="onChangeGoodsIssueDate"/>
+				</smartForm:GroupElement>
+				<smartForm:GroupElement id="idGroupElement" >
+						<smartField:SmartField
+							id="idInputParam2"
+							textLabel="{/#SalesOrderForDNType/CurrStorageLocation/@sap:label}"
+							value="{CurrStorageLocation}"
+						/>
+						<Button text="{i18n>bStorageLoc}" type="Emphasized" press="onChangeStorageLoc"/>
+							
+				</smartForm:GroupElement>
+				
+			</smartForm:Group>
+		</smartForm:SmartForm>
+		<endButton>
+			<Button text="{i18n>bClose}" press="onDialogClose" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

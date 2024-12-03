@@ -62,6 +62,11 @@
                     <OverflowToolbar id="idOverflowToolbar">
                         <ToolbarSpacer id="idToolbarSpacer" />
                         <Button
+                            id="idBatchInput"
+                            text="{i18n>MainView.BatchInput}"
+                            press="onDialogPress"
+                        />
+                        <Button
                             id="idDNCreateButton"
                             text="{i18n>MainView.DNCreate}"
                             press="onDNButtonPress"
@@ -965,7 +970,7 @@
                             />
                         </t:customData>
                         <t:template>
-                            <smartfield:SmartField id="_IDGenSmartField3" value="{path:'CurrPlannedGoodsIssueDate', type:'sap.ui.model.type.Date',formatOptions: {UTC: false} }" change='onInputChange'/>
+                            <smartfield:SmartField id="_IDGenSmartField3" value="{path:'CurrPlannedGoodsIssueDate', type:'sap.ui.model.type.Date',formatOptions:{UTC:true} }" change='onInputChange'/>
                         </t:template>
                     </t:Column>
                     <t:Column id="_IDGenColumn18"
