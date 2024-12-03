@@ -181,7 +181,7 @@
                         <table:template>
                             <Input value="{local>Material}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                                 $event, $controller, '/ZC_ProductVH',
-                                ['Material','MaterialDescription','ProductType','StandardPrice','PriceUnitQty','Currency'],['Material','MaterialDescription','ProductType'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="true" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== '' &amp;&amp; (${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '50')}">
+                                ['Material','MaterialDescription','ProductType','StandardPrice','Currency'],['Material','MaterialDescription','ProductType'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="true" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== '' &amp;&amp; (${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '50')}">
                                 <suggestionColumns>
                                     <Column>
                                         <Label text="{i18n>Product}"/>
