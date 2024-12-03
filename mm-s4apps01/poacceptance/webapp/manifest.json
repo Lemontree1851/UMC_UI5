@@ -34,6 +34,19 @@
           "localUri": "annotations/annotation.xml"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "poacceptance-display": {
+          "semanticObject": "poacceptance",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
