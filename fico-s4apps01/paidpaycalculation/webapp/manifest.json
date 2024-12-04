@@ -27,6 +27,15 @@
                     "odataVersion": "2.0"
                 }
             },
+            "zui_tbc1001_o4": {
+                "uri": "/sap/opu/odata4/sap/zui_tbc1001_o4/srvd/sap/zui_tbc1001_o4/0001/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/zui_tbc1001_o4/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            },
             "mainService_Annotation": {
                 "uri": "/destinations/UMC_Dev_Customizing_BTP/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_PAIDPAYCALCULATION_O2_VAN',Version='0001')/$value/",
                 "type": "ODataAnnotation",
@@ -92,6 +101,16 @@
                 "dataSource": "mainService",
                 "preload": true,
                 "settings": {}
+            },
+            "AddonConfig": {
+                "dataSource": "zui_tbc1001_o4",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
             }
         },
         "resources": {
