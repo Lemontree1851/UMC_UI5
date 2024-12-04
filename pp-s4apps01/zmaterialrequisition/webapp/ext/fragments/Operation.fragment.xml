@@ -49,7 +49,7 @@
                     <Label text="{i18n>CostCenter}:" required="true"/>
                     <Input id="idCostCenter" value="{local>/headSet/CostCenter}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                         $event, $controller, '/ZC_CostCenterVH',
-                        ['CostCenter','CostCenterName','ControllingArea','ValidityEndDate','ValidityStartDate','CompanyCode'],['CostCenter','CostCenterName','CompanyCode'])" showSuggestion="true" suggestionRows="{ path: '/ZC_CostCenterVH', length: 10 }" required="true" width="13rem">
+                        ['CostCenter','CostCenterName','ControllingArea','ValidityEndDate','ValidityStartDate','CompanyCode'],['CostCenter','CostCenterName','CompanyCode'])" showSuggestion="true" suggest="handler.handleSuggest" suggestionRows="{ path: '/ZC_CostCenterVH', length: 10 }" required="true" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>CostCenter}"/>
@@ -57,11 +57,15 @@
                             <Column>
                                 <Label text="{i18n>CostCenterName}"/>
                             </Column>
+                            <Column>
+                                <Label text="{i18n>CompanyCode}"/>
+                            </Column>
                         </suggestionColumns>
                         <suggestionRows>
                             <ColumnListItem>
                                 <Label text="{CostCenter}" />
                                 <Label text="{CostCenterName}" />
+                                <Label text="{CompanyCode}" />
                             </ColumnListItem>
                         </suggestionRows>
                     </Input>
@@ -71,7 +75,7 @@
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>Customer}:" required="true"/>
                     <Input id="idCustomer" value="{local>/headSet/Customer}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/I_Customer_VH', ['Customer','CustomerName'])" showSuggestion="true" suggestionRows="{ path: '/I_Customer_VH', length: 10 }" required="true" width="13rem">
+                        $event, $controller, '/ZC_CustomerCompanyVH', ['Customer','CustomerName','CompanyCode'])" showSuggestion="true" suggest="handler.handleSuggest" suggestionRows="{ path: '/ZC_CustomerCompanyVH', length: 10 }" required="true" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>Customer}"/>
@@ -79,11 +83,15 @@
                             <Column>
                                 <Label text="{i18n>CustomerName}"/>
                             </Column>
+                            <Column>
+                                <Label text="{i18n>CompanyCode}"/>
+                            </Column>
                         </suggestionColumns>
                         <suggestionRows>
                             <ColumnListItem>
                                 <Label text="{Customer}" />
                                 <Label text="{CustomerName}" />
+                                <Label text="{CompanyCode}" />
                             </ColumnListItem>
                         </suggestionRows>
                     </Input>

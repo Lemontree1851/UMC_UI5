@@ -40,6 +40,15 @@ sap.ui.define([
 
                 var aFilters = [];
                 var headSet = that.getModel("local").getProperty("/headSet");
+                if (sPath === "/ZC_CostCenterVH" || sPath === "/ZC_CustomerCompanyVH") {
+                    if (headSet.Plant) {
+                        aFilters.push(new Filter({
+                            path: "CompanyCode",
+                            operator: FilterOperator.EQ,
+                            value1: headSet.Plant
+                        }));
+                    }
+                }
                 if (sPath === "/ZC_ApplicationReceiverVH") {
                     if (headSet.Plant) {
                         aFilters.push(new Filter({
@@ -172,6 +181,15 @@ sap.ui.define([
                 }));
             }
             var headSet = this.getModel("local").getProperty("/headSet");
+            if (this._sValueHelpPath === "/ZC_CostCenterVH" || this._sValueHelpPath === "/ZC_CustomerCompanyVH") {
+                if (headSet.Plant) {
+                    aFilters.push(new Filter({
+                        path: "CompanyCode",
+                        operator: FilterOperator.EQ,
+                        value1: headSet.Plant
+                    }));
+                }
+            }
             if (this._sValueHelpPath === "/ZC_ApplicationReceiverVH" || this._sValueHelpPath === "/ZC_ProductVH") {
                 if (headSet.Plant) {
                     aFilters.push(new Filter({
@@ -186,7 +204,7 @@ sap.ui.define([
                     aFilters.push(new Filter({
                         path: "Customer",
                         operator: FilterOperator.EQ,
-                        value1: headSet.Customer
+                        value1: headSet.Customer.padStart(10, '0')
                     }));
                 }
             }
