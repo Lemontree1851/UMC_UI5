@@ -179,12 +179,8 @@ sap.ui.define([
                     aGroupItems = [];
                     for (var n = 0; n < postDocs.length; n++) {
                         if (postDocs[n].PurchaseOrder === sPurchaseOrder) {
-                            if (!postDocs[n].ScheduleLineDeliveryDate) {
-                                postDocs[n].ScheduleLineDeliveryDate = formatter.odataDate(postDocs[n].ScheduleLineDeliveryDate);
-                            };
-                            if (!postDocs[n].PurgDocPriceDate) {
-                                postDocs[n].PurgDocPriceDate = formatter.odataDate(postDocs[n].PurgDocPriceDate);
-                            };
+                            postDocs[n].ScheduleLineDeliveryDate = formatter.odataDate(postDocs[n].ScheduleLineDeliveryDate);
+                            postDocs[n].PurgDocPriceDate = formatter.odataDate(postDocs[n].PurgDocPriceDate);
                             aGroupItems.push(postDocs[n]);
                         }
                     }
