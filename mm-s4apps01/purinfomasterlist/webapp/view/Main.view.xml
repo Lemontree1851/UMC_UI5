@@ -29,21 +29,21 @@
 							<!--filterChange="check">-->
 							<smartFilterBar:controlConfiguration>
 
-								<smartFilterBar:ControlConfiguration index="1" id="purchasinginfo" key="purchasinginforecord" visibleInAdvancedArea="true" label="{i18n>purchasinginforecord}"/>
-								<smartFilterBar:ControlConfiguration index="2" key="plant" visibleInAdvancedArea="true" label="{i18n>plant}"/>
-								<smartFilterBar:ControlConfiguration index="3" id="ekorg" key="purchasingorganization" visibleInAdvancedArea="true" label="{i18n>purchasingorganization}"/>
-								<smartFilterBar:ControlConfiguration index="4" id="matnr" key="material" visibleInAdvancedArea="true" label="{i18n>material}"/>
-								<smartFilterBar:ControlConfiguration index="5" id="suppliermaterialBar" key="suppliermaterialnumber" visibleInAdvancedArea="true" label="{i18n>suppliermaterialnumber}"/>
-								<smartFilterBar:ControlConfiguration index="6" id="SupplierBar" key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
-								<smartFilterBar:ControlConfiguration index="7" id="PurchasingGroupBar" key="PurchasingGroup" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="true" label="{i18n>PurchasingGroup}"/>
-								<smartFilterBar:ControlConfiguration index="8" id="CreationDate_1Bar" key="CreationDate_1" visibleInAdvancedArea="true" label="{i18n>CreationDate_1}"/>
-								<smartFilterBar:ControlConfiguration index="9" id="CreationDate_2Bar" key="CreationDate_2" visibleInAdvancedArea="true" label="{i18n>CreationDate_2}"/>
-								<smartFilterBar:ControlConfiguration index="10" id="ManufacturerNumberBar" key="ManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ManufacturerNumber}"/>
-								<smartFilterBar:ControlConfiguration index="11" id="ProductManufacturerNumberBar" key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
-								<smartFilterBar:ControlConfiguration index="12" id="latestofferBar" key="latestoffer" visibleInAdvancedArea="true" label="{i18n>latestoffer}"/>
-								<smartFilterBar:ControlConfiguration index="13" id="SupplierIsFixedBar" key="SupplierIsFixed" visibleInAdvancedArea="true" label="{i18n>SupplierIsFixed}"/>
-								<smartFilterBar:ControlConfiguration index="14" id="IncotermsClassificationBar" key="IncotermsClassification" visibleInAdvancedArea="true" label="{i18n>IncotermsClassification}"/>
-								<smartFilterBar:ControlConfiguration index="15" id="PlusDayBar" key="PlusDay" visibleInAdvancedArea="true" label="{i18n>PlusDay}"/>
+								<smartFilterBar:ControlConfiguration index="1" key="purchasinginforecord" visibleInAdvancedArea="true" label="{i18n>purchasinginforecord}"/>
+								<smartFilterBar:ControlConfiguration index="2" key="plant" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>plant}"/>
+								<smartFilterBar:ControlConfiguration index="3" key="purchasingorganization" visibleInAdvancedArea="true" label="{i18n>purchasingorganization}"/>
+								<smartFilterBar:ControlConfiguration index="4" key="material" visibleInAdvancedArea="true" label="{i18n>material}"/>
+								<smartFilterBar:ControlConfiguration index="5" key="suppliermaterialnumber" visibleInAdvancedArea="true" label="{i18n>suppliermaterialnumber}"/>
+								<smartFilterBar:ControlConfiguration index="6" key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+								<smartFilterBar:ControlConfiguration index="7" key="PurchasingGroup" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="true" label="{i18n>PurchasingGroup}"/>
+								<smartFilterBar:ControlConfiguration index="8" key="CreationDate_1" visibleInAdvancedArea="true" label="{i18n>CreationDate_1}"/>
+								<smartFilterBar:ControlConfiguration index="9" key="CreationDate_2" visibleInAdvancedArea="true" label="{i18n>CreationDate_2}"/>
+								<smartFilterBar:ControlConfiguration index="10" key="ManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ManufacturerNumber}"/>
+								<smartFilterBar:ControlConfiguration index="11" key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
+								<smartFilterBar:ControlConfiguration index="12" key="latestoffer" visibleInAdvancedArea="true" label="{i18n>latestoffer}"/>
+								<smartFilterBar:ControlConfiguration index="13" key="SupplierIsFixed" visibleInAdvancedArea="true" label="{i18n>SupplierIsFixed}"/>
+								<smartFilterBar:ControlConfiguration index="14" key="IncotermsClassification" visibleInAdvancedArea="true" label="{i18n>IncotermsClassification}"/>
+								<smartFilterBar:ControlConfiguration index="15" key="PlusDay" visibleInAdvancedArea="true" label="{i18n>PlusDay}"/>
 
 								<smartFilterBar:ControlConfiguration index="999" key="uuid" visible="false"/>
 								<smartFilterBar:ControlConfiguration index="999" key="BaseUnit" visible="false"/>
