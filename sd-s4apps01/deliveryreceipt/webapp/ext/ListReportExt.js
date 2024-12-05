@@ -166,6 +166,7 @@ sap.ui.define([
             var that = this;
             var oBusyDialog = new BusyDialog();
             var aRecordCreated = [];
+            var sFileName = _ResourceBundle.getText("appTitle") + new Date().getTime();
             var promise = new Promise((resolve, reject) => {
                 var createPrintRecord = _oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
                 createPrintRecord.setParameter("TemplateID", "YY1_SD018");
@@ -181,6 +182,7 @@ sap.ui.define([
                 // var uuidx16 = context.getObject().Uuid.replace(/-/g, '');
                 createPrintRecord.setParameter("ProvidedKeys", "");
                 createPrintRecord.setParameter("ResultIsActiveEntity", true);
+                createPrintRecord.setParameter("FileName", sFileName);
                 createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     resolve(createPrintRecord);
                 }).catch((oError) => {
