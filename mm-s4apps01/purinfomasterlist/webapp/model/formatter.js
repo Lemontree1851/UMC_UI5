@@ -39,9 +39,9 @@ sap.ui.define([
         // format Number, integer + thousandths
         formatNumber: function (n) {
             if (n) {
-                if (parseFloat(n) === 0) {
-                    return "";
-                }
+                // if (parseFloat(n) === 0) {
+                //     return "";
+                // }
                 var sign = "";
                 if (typeof n === "string") {
                     var bNegative = n.endsWith("-");
