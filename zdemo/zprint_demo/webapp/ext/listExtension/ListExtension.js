@@ -21,6 +21,7 @@ sap.ui.define([
                     createPrintRecord.setParameter("ExternalProvidedData", atob(""));
                     var uuidx16 = context.getObject().Uuid.replace(/-/g, '');
                     createPrintRecord.setParameter("ProvidedKeys", JSON.stringify({ Uuid: uuidx16.toUpperCase() }));
+                    createPrintRecord.setParameter("FileName", "Demo.pdf");
                     createPrintRecord.setParameter("ResultIsActiveEntity", true);
                     createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                         resolve(createPrintRecord);
@@ -142,6 +143,7 @@ sap.ui.define([
                     createPrintRecord.setParameter("ExternalProvidedData", atob(""));
                     var uuidx16 = context.getObject().Uuid.replace(/-/g, '');
                     createPrintRecord.setParameter("ProvidedKeys", JSON.stringify({ Uuid: uuidx16.toUpperCase() }));
+                    createPrintRecord.setParameter("FileName", "Demo.pdf");
                     createPrintRecord.setParameter("ResultIsActiveEntity", true);
                     createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                         resolve(createPrintRecord);

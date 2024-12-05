@@ -29,24 +29,74 @@
 							<!--filterChange="check">-->
 							<smartFilterBar:controlConfiguration>
 
-								<smartFilterBar:ControlConfiguration index="1" id="purchasinginfo" key="purchasinginforecord" visibleInAdvancedArea="true" label="{i18n>purchasinginforecord}"/>
-								<smartFilterBar:ControlConfiguration index="2" key="plant" visibleInAdvancedArea="true" label="{i18n>plant}"/>
-								<smartFilterBar:ControlConfiguration index="3" id="ekorg" key="purchasingorganization" visibleInAdvancedArea="true" label="{i18n>purchasingorganization}"/>
-								<smartFilterBar:ControlConfiguration index="4" id="matnr" key="material" visibleInAdvancedArea="true" label="{i18n>material}"/>
-								<smartFilterBar:ControlConfiguration index="5" id="suppliermaterialBar" key="suppliermaterialnumber" visibleInAdvancedArea="true" label="{i18n>suppliermaterialnumber}"/>
-								<smartFilterBar:ControlConfiguration index="6" id="SupplierBar" key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
-								<smartFilterBar:ControlConfiguration index="7" id="PurchasingGroupBar" key="PurchasingGroup" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="true" label="{i18n>PurchasingGroup}"/>
-								<smartFilterBar:ControlConfiguration index="8" id="CreationDate_1Bar" key="CreationDate_1" visibleInAdvancedArea="true" label="{i18n>CreationDate_1}"/>
-								<smartFilterBar:ControlConfiguration index="9" id="CreationDate_2Bar" key="CreationDate_2" visibleInAdvancedArea="true" label="{i18n>CreationDate_2}"/>
-								<smartFilterBar:ControlConfiguration index="10" id="ManufacturerNumberBar" key="ManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ManufacturerNumber}"/>
-								<smartFilterBar:ControlConfiguration index="11" id="ProductManufacturerNumberBar" key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
-								<smartFilterBar:ControlConfiguration index="12" id="latestofferBar" key="latestoffer" visibleInAdvancedArea="true" label="{i18n>latestoffer}"/>
-								<smartFilterBar:ControlConfiguration index="13" id="SupplierIsFixedBar" key="SupplierIsFixed" visibleInAdvancedArea="true" label="{i18n>SupplierIsFixed}"/>
-								<smartFilterBar:ControlConfiguration index="14" id="IncotermsClassificationBar" key="IncotermsClassification" visibleInAdvancedArea="true" label="{i18n>IncotermsClassification}"/>
-								<smartFilterBar:ControlConfiguration index="15" id="PlusDayBar" key="PlusDay" visibleInAdvancedArea="true" label="{i18n>PlusDay}"/>
+								<smartFilterBar:ControlConfiguration index="1" key="purchasinginforecord" visibleInAdvancedArea="true" label="{i18n>purchasinginforecord}"/>
+								<smartFilterBar:ControlConfiguration index="2" key="plant" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>plant}"/>
+								<smartFilterBar:ControlConfiguration index="3" key="purchasingorganization" visibleInAdvancedArea="true" label="{i18n>purchasingorganization}"/>
+								<smartFilterBar:ControlConfiguration index="4" key="material" visibleInAdvancedArea="true" label="{i18n>material}"/>
+								<smartFilterBar:ControlConfiguration index="5" key="suppliermaterialnumber" visibleInAdvancedArea="true" label="{i18n>suppliermaterialnumber}"/>
+								<smartFilterBar:ControlConfiguration index="6" key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+								<smartFilterBar:ControlConfiguration index="7" key="PurchasingGroup" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="true" label="{i18n>PurchasingGroup}"/>
+								<smartFilterBar:ControlConfiguration index="8" key="CreationDate_1" visibleInAdvancedArea="true" label="{i18n>CreationDate_1}"/>
+								<smartFilterBar:ControlConfiguration index="9" key="CreationDate_2" visibleInAdvancedArea="true" label="{i18n>CreationDate_2}"/>
+								<smartFilterBar:ControlConfiguration index="10" key="ManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ManufacturerNumber}"/>
+								<smartFilterBar:ControlConfiguration index="11" key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
+								<smartFilterBar:ControlConfiguration index="12" key="latestoffer" visibleInAdvancedArea="true" label="{i18n>latestoffer}"/>
+								<smartFilterBar:ControlConfiguration index="13" key="SupplierIsFixed" visibleInAdvancedArea="true" label="{i18n>SupplierIsFixed}"/>
+								<smartFilterBar:ControlConfiguration index="14" key="IncotermsClassification" visibleInAdvancedArea="true" label="{i18n>IncotermsClassification}"/>
+								<smartFilterBar:ControlConfiguration index="15" key="PlusDay" visibleInAdvancedArea="true" label="{i18n>PlusDay}"/>
 
-                                <smartFilterBar:ControlConfiguration key="BaseUnit"  visible="false"  index="99"/>
-
+								<smartFilterBar:ControlConfiguration index="999" key="uuid" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="BaseUnit" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="Ztype1" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="Ztype2" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="ProductName" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="condition_validity_start_date" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="condition_validity_end_date" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="ProductGroup" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="NetPriceAmount" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="Currency_plnt" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="ConditionRateValue" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="MaterialPriceUnitQty" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="PurgDocOrderQuantityUnit" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="ConditionScaleQuantity" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="organizationbpname1_ja" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="organizationbpname1_en" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="PurchasingGroupName" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="FirstSalesSpecProductGroup" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="CreatedByUser" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="OwnInventoryManagedProduct" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="ProductOID" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="OrganizationBPName1" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="standardpurchaseorderquantity" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="Taxprice" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="UnitPrice_plnt" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="UnitPrice_standard" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="PriceUnitQty" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="Currency_standard" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="orderpriceunittoorderunitnmrtr" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="MaterialPlannedDeliveryDurn" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="ShippingConditionName" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="IndustryStandardName" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="TaxCode" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="MinimumPurchaseOrderQuantity" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="MaximumOrderQuantity" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="PricingDateControl" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="SupplierMaterialGroup" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="SupplierCertOriginCountry" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="SupplierCertOriginRegion" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="UMCJPPurchasingPrice" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="DeliveryLT" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="PurchasingInfoRecordCategory" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="SupplierConfirmationControlKey" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="ValuationClass" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="SupplierSubrange" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="SupplierSubrangeName" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="loginflag" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="isdeleted" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="ismarkedfordeletion" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="productsalesorg" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="zvalue2" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="Rate" visible="false"/>
 							</smartFilterBar:controlConfiguration>
 						</smartFilterBar:SmartFilterBar>
 					</FlexBox>
@@ -54,7 +104,7 @@
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
-			<smartTable:SmartTable id="smartTable_Mast" smartVariant="__SVM01" persistencyKey="PurInfoMasterST" entitySet="PurInfoMaster" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable">
+			<smartTable:SmartTable id="smartTable_Mast" smartVariant="__SVM01" persistencyKey="PurInfoMasterST" entitySet="PurInfoMaster" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" requestAtLeastFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion" ignoredFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion">
 
 				<table:Table id="Table_Calc" selectionMode="None" selectionBehavior="Row" rowMode="Auto">
 					<table:columns>
@@ -478,7 +528,7 @@
 							</table:template>
 						</table:Column>
 
-							<table:Column id="rate" width="6rem" visible="true" autoResizable="true" sortProperty="Rate" filterProperty="Rate">
+						<table:Column id="rate" width="6rem" visible="true" autoResizable="true" sortProperty="Rate" filterProperty="Rate">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"Rate", "leadingProperty":"Rate", "sortProperty": "Rate", "filterProperty": "Rate"}'/>
 							</table:customData>

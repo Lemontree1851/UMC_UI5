@@ -226,25 +226,27 @@ sap.ui.define([
             var aConfig = this.getModel("local").getProperty("/Config");
             var sPlant = this.getModel("local").getProperty("/headSet/Plant");
             var config = aConfig.find(element => element.Plant === sPlant);
-            aRows.forEach(function (oRow, index) {
-                var sAmount = "0",
-                    iAmount = 0;
-                oRow.getCells().forEach(oCell => {
-                    if (oCell.mBindingInfos.text) {
-                        if (oCell.mBindingInfos.text.parts[0].path === "TotalAmount") {
-                            sAmount = oCell.getText().split(' ')[0];
-                            iAmount = parseFloat(sAmount.replace(/,/g, ""));
+            if (config) {
+                aRows.forEach(function (oRow, index) {
+                    var sAmount = "0",
+                        iAmount = 0;
+                    oRow.getCells().forEach(oCell => {
+                        if (oCell.mBindingInfos.text) {
+                            if (oCell.mBindingInfos.text.parts[0].path === "TotalAmount") {
+                                sAmount = oCell.getText().split(' ')[0];
+                                iAmount = parseFloat(sAmount.replace(/,/g, ""));
+                            }
                         }
+                    });
+                    if (iAmount >= parseFloat(config.Amount)) {
+                        $("#" + oRow.getId()).css("background-color", "#f2bfc0");
+                        $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
+                    } else {
+                        $("#" + oRow.getId()).css("background-color", "#fff");
+                        $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
                     }
                 });
-                if (iAmount >= parseFloat(config.Amount)) {
-                    $("#" + oRow.getId()).css("background-color", "#f2bfc0");
-                    $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
-                } else {
-                    $("#" + oRow.getId()).css("background-color", "#fff");
-                    $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
-                }
-            });
+            }
         },
 
         onDelLine: function (oEvent) {
@@ -350,6 +352,30 @@ sap.ui.define([
             // }
             switch (sODataPath) {
                 // Query
+                case "/ZC_CostCenterVH":
+                    aFilters.push(new Filter({
+                        path: "CostCenter",
+                        operator: FilterOperator.EQ,
+                        value1: sValue
+                    }));
+                    aFilters.push(new Filter({
+                        path: "CompanyCode",
+                        operator: FilterOperator.EQ,
+                        value1: sPlant
+                    }));
+                    break;
+                case "/ZC_CustomerCompanyVH":
+                    aFilters.push(new Filter({
+                        path: "Customer",
+                        operator: FilterOperator.EQ,
+                        value1: _myFunction._isNumeric(sValue) ? sValue.padStart(10, '0') : sValue
+                    }));
+                    aFilters.push(new Filter({
+                        path: "CompanyCode",
+                        operator: FilterOperator.EQ,
+                        value1: sPlant
+                    }));
+                    break;
                 case "/ZC_ApplicationReceiverVH":
                     aFilters.push(new Filter({
                         path: "Receiver",
@@ -366,7 +392,7 @@ sap.ui.define([
                     aFilters.push(new Filter({
                         path: "ManufacturingOrder",
                         operator: FilterOperator.EQ,
-                        value1: sValue.split('/')[0]
+                        value1: sValue.split('/')[0].padStart(10, '0')
                     }));
                     aFilters.push(new Filter({
                         path: "Item",
@@ -428,12 +454,22 @@ sap.ui.define([
                 aFieldName.forEach(field => {
                     this.getModel("local").setProperty("/headSet/" + field, "");
                 });
-                if (sODataPath === "/ZC_ApplicationReceiverVH") {
+                if (sODataPath === "/ZC_CostCenterVH" || sODataPath === "/ZC_CustomerCompanyVH" ||
+                    sODataPath === "/ZC_ApplicationReceiverVH") {
                     oContextBinding.requestContexts().then(function (aContext) {
                         _myBusyDialog.close();
                         for (const boundContext of aContext) {
                             var object = boundContext.getObject();
-                            if (object["Receiver"] === sValue) {
+                            aFieldName.forEach(field => {
+                                this.getModel("local").setProperty("/headSet/" + field, object[field]);
+                            });
+                            if (sODataPath === "/ZC_CostCenterVH" && object["CostCenter"] === sValue) {
+                                this._oControl.setValueState("None");
+                            }
+                            if (sODataPath === "/ZC_CustomerCompanyVH" && object["Customer"] === sValue) {
+                                this._oControl.setValueState("None");
+                            }
+                            if (sODataPath === "/ZC_ApplicationReceiverVH" && object["Receiver"] === sValue) {
                                 this._oControl.setValueState("None");
                             }
                         }
@@ -521,6 +557,15 @@ sap.ui.define([
             if (!sValue) {
                 this._oControl.setValueState("None");
             }
+        },
+
+        handleSuggest: function (oEvent) {
+            var aFilters = [];
+            var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+            if (sPlant) {
+                aFilters.push(new Filter("CompanyCode", FilterOperator.EQ, sPlant));
+            }
+            oEvent.getSource().getBinding("suggestionRows").filter(aFilters);
         },
 
         handleCalculate: function (oEvent) {
@@ -869,6 +914,10 @@ sap.ui.define([
         },
         _pad2: function (n) {
             return parseInt(n) < 10 ? "0" + parseInt(n) : n;
+        },
+
+        _isNumeric: function (str) {
+            return /^[0-9]+$/.test(str);
         }
     };
 });

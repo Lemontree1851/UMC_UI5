@@ -79,6 +79,7 @@
                     <PropertyRef Name="ValuationClass09"/>
                     <PropertyRef Name="UpperProduct10"/>
                     <PropertyRef Name="ValuationClass10"/>
+                    <PropertyRef Name="Ledge"/>
                 </Key>
                 <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -110,28 +111,45 @@
                 <Property Name="ValuationClass09" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="UpperProduct10" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="ValuationClass10" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Ledge" Type="Edm.String" Nullable="false" MaxLength="2" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Ztype" Type="Edm.String" MaxLength="1"/>
                 <Property Name="CustomerName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="SupplierName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="ProfitCenterName" Type="Edm.String" MaxLength="20" sap:label="Name" sap:quickinfo="General Name"/>
                 <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
                 <Property Name="Cost01" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity01" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="Cost02" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity02" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="Cost03" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity03" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="Cost04" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity04" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="Cost05" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity05" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="Cost06" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity06" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="Cost07" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity07" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="Cost08" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity08" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="Cost09" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity09" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="Cost10" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ValuationQuantity10" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
                 <Property Name="MaterialCost2000" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="MaterialCost3000" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="PurGrpAmount1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="PurGrpAmount2" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="PurGrpAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ChargeableAmount1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ChargeableAmount2" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ChargeableAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="PreviousStockAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="CurrentStockAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="CustomerRevenue1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="CustomerRevenue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Revenue1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="Revenue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ChargeableRate" Type="Edm.Decimal" Precision="9" Scale="5"/>
                 <Property Name="CurrentStockSemi" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
@@ -141,6 +159,7 @@
                 <Property Name="PaidMaterialCost" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="RevenueRate" Type="Edm.Decimal" Precision="9" Scale="5"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
+                <Property Name="Unit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -269,6 +288,7 @@
             <ComplexType Name="ZD_PARAFORPAIDPAYCALCU">
                 <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code"/>
                 <Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year"/>
+                <Property Name="Ledge" Type="Edm.String" MaxLength="2"/>
                 <Property Name="Period" Type="Edm.String" MaxLength="2" sap:label="Posting Period" sap:quickinfo="Fiscal Period"/>
                 <Property Name="Ztype" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Zzkey" Type="Edm.String" sap:label="Zzkey" sap:quickinfo="String Type"/>
@@ -435,6 +455,7 @@
                     <Parameter Name="FiscalYear" Type="Edm.String" Mode="In" MaxLength="4" Nullable="true" sap:label="Fiscal Year" sap:quickinfo="Fiscal Year"/>
                     <Parameter Name="Period" Type="Edm.String" Mode="In" MaxLength="2" Nullable="true" sap:label="Posting Period" sap:quickinfo="Fiscal Period"/>
                     <Parameter Name="Ztype" Type="Edm.String" Mode="In" MaxLength="1" Nullable="true"/>
+                    <Parameter Name="Ledge" Type="Edm.String" Mode="In" MaxLength="2" Nullable="true"/>
                 </FunctionImport>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
@@ -521,6 +542,12 @@
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ChargeableAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ChargeableAmount1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ChargeableAmount2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ChargeableRate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -575,6 +602,9 @@
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CustomerRevenue" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CustomerRevenue1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/MaterialCost2000" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -596,7 +626,16 @@
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/PurGrpAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/PurGrpAmount1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/PurGrpAmount2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Revenue" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Revenue1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/RevenueRate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -606,6 +645,39 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/SupplierName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Unit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity01" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity02" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity03" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity04" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity05" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity06" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity07" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity08" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity09" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationQuantity10" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Ztype" xmlns="http://docs.oasis-open.org/odata/ns/edm">

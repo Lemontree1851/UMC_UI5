@@ -44,26 +44,42 @@
         <Schema Namespace="cds_zui_purinfomasterlist_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
             <EntityType Name="PurInfoMasterType" sap:label="MM-018購買情報マスタ一覧" sap:content-version="1">
                 <Key>
+                    <PropertyRef Name="uuid"/>
                     <PropertyRef Name="purchasinginforecord"/>
                     <PropertyRef Name="plant"/>
                     <PropertyRef Name="purchasingorganization"/>
                     <PropertyRef Name="material"/>
                     <PropertyRef Name="suppliermaterialnumber"/>
                     <PropertyRef Name="Supplier"/>
+                    <PropertyRef Name="PurchasingGroup"/>
+                    <PropertyRef Name="ManufacturerNumber"/>
+                    <PropertyRef Name="ProductManufacturerNumber"/>
+                    <PropertyRef Name="latestoffer"/>
+                    <PropertyRef Name="SupplierIsFixed"/>
+                    <PropertyRef Name="IncotermsClassification"/>
+                    <PropertyRef Name="condition_validity_start_date"/>
+                    <PropertyRef Name="condition_validity_end_date"/>
                 </Key>
+                <Property Name="uuid" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
                 <Property Name="purchasinginforecord" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="purchasingorganization" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="purchasingorganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Purch. Organization" sap:quickinfo="Purchasing Organization"/>
                 <Property Name="material" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="suppliermaterialnumber" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="PurchasingGroup" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Purchasing Group"/>
+                <Property Name="ManufacturerNumber" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="ProductManufacturerNumber" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="latestoffer" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="SupplierIsFixed" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="IncotermsClassification" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="condition_validity_start_date" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date"/>
+                <Property Name="condition_validity_end_date" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date"/>
                 <Property Name="Ztype1" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Ztype2" Type="Edm.String" MaxLength="1"/>
                 <Property Name="ProductName" Type="Edm.String" MaxLength="40"/>
                 <Property Name="ProductGroup" Type="Edm.String" MaxLength="9"/>
                 <Property Name="NetPriceAmount" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Currency_plnt" sap:variable-scale="true"/>
-                <Property Name="condition_validity_start_date" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
-                <Property Name="condition_validity_end_date" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="Currency_plnt" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="ConditionRateValue" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Currency_plnt" sap:variable-scale="true"/>
                 <Property Name="MaterialPriceUnitQty" Type="Edm.Decimal" Precision="5" Scale="0"/>
@@ -71,7 +87,6 @@
                 <Property Name="ConditionScaleQuantity" Type="Edm.Decimal" Precision="15" Scale="0" sap:unit="BaseUnit"/>
                 <Property Name="organizationbpname1_ja" Type="Edm.String" MaxLength="40"/>
                 <Property Name="organizationbpname1_en" Type="Edm.String" MaxLength="40"/>
-                <Property Name="PurchasingGroup" Type="Edm.String" MaxLength="3"/>
                 <Property Name="PurchasingGroupName" Type="Edm.String" MaxLength="18"/>
                 <Property Name="FirstSalesSpecProductGroup" Type="Edm.String" MaxLength="3"/>
                 <Property Name="CreationDate_1" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
@@ -80,18 +95,14 @@
                 <Property Name="OwnInventoryManagedProduct" Type="Edm.String" MaxLength="40"/>
                 <Property Name="ProductOID" Type="Edm.String" MaxLength="40"/>
                 <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:semantics="unit-of-measure"/>
-                <Property Name="ManufacturerNumber" Type="Edm.String" MaxLength="10"/>
                 <Property Name="OrganizationBPName1" Type="Edm.String" MaxLength="40"/>
-                <Property Name="ProductManufacturerNumber" Type="Edm.String" MaxLength="40"/>
                 <Property Name="standardpurchaseorderquantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
                 <Property Name="Taxprice" Type="Edm.Decimal" Precision="15" Scale="3"/>
-                <Property Name="UnitPrice_plnt" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="Currency_plnt" sap:variable-scale="true"/>
+                <Property Name="UnitPrice_plnt" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="Currency_standard" sap:variable-scale="true"/>
                 <Property Name="UnitPrice_standard" Type="Edm.Decimal" Precision="15" Scale="3"/>
                 <Property Name="PriceUnitQty" Type="Edm.Decimal" Precision="5" Scale="0"/>
                 <Property Name="Currency_standard" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="orderpriceunittoorderunitnmrtr" Type="Edm.Decimal" Precision="5" Scale="0"/>
-                <Property Name="latestoffer" Type="Edm.String" MaxLength="1"/>
-                <Property Name="SupplierIsFixed" Type="Edm.String" MaxLength="1"/>
                 <Property Name="MaterialPlannedDeliveryDurn" Type="Edm.Decimal" Precision="3" Scale="0"/>
                 <Property Name="ShippingConditionName" Type="Edm.String" MaxLength="20"/>
                 <Property Name="IndustryStandardName" Type="Edm.String" MaxLength="18"/>
@@ -102,7 +113,6 @@
                 <Property Name="SupplierMaterialGroup" Type="Edm.String" MaxLength="18"/>
                 <Property Name="SupplierCertOriginCountry" Type="Edm.String" MaxLength="3"/>
                 <Property Name="SupplierCertOriginRegion" Type="Edm.String" MaxLength="3"/>
-                <Property Name="IncotermsClassification" Type="Edm.String" MaxLength="3"/>
                 <Property Name="UMCJPPurchasingPrice" Type="Edm.Decimal" Precision="13" Scale="0" sap:unit="BaseUnit"/>
                 <Property Name="DeliveryLT" Type="Edm.String" MaxLength="5"/>
                 <Property Name="PlusDay" Type="Edm.String" MaxLength="3"/>

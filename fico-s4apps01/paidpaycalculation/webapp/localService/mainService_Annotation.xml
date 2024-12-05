@@ -53,6 +53,9 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Supplier"/>
                         </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Ledge"/>
+                        </Record>
                     </Collection>
                 </Annotation>
                 <Annotation Term="UI.SelectionFields">
@@ -60,6 +63,7 @@
                         <PropertyPath>CompanyCode</PropertyPath>
                         <PropertyPath>FiscalYear</PropertyPath>
                         <PropertyPath>Period</PropertyPath>
+                        <PropertyPath>Ledge</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>

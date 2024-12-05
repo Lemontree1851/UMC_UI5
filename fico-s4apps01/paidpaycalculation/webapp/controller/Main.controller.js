@@ -26,33 +26,43 @@ sap.ui.define([
 					this.byId("UpperProduct01").setVisible(true);
 					this.byId("ValuationClass01").setVisible(true);
 					this.byId("Cost01").setVisible(true);
+					this.byId("ValuationQuantity01").setVisible(true);
 					this.byId("UpperProduct02").setVisible(true);
 					this.byId("ValuationClass02").setVisible(true);
 					this.byId("Cost02").setVisible(true);
+					this.byId("ValuationQuantity02").setVisible(true);
 					this.byId("UpperProduct03").setVisible(true);
 					this.byId("ValuationClass03").setVisible(true);
 					this.byId("Cost03").setVisible(true);
+					this.byId("ValuationQuantity03").setVisible(true);
 					this.byId("UpperProduct04").setVisible(true);
 					this.byId("ValuationClass04").setVisible(true);
 					this.byId("Cost04").setVisible(true);
+					this.byId("ValuationQuantity04").setVisible(true);
 					this.byId("UpperProduct05").setVisible(true);
 					this.byId("ValuationClass05").setVisible(true);
 					this.byId("Cost05").setVisible(true);
+					this.byId("ValuationQuantity05").setVisible(true);
 					this.byId("UpperProduct06").setVisible(true);
 					this.byId("ValuationClass06").setVisible(true);
 					this.byId("Cost06").setVisible(true);
+					this.byId("ValuationQuantity06").setVisible(true);
 					this.byId("UpperProduct07").setVisible(true);
 					this.byId("ValuationClass07").setVisible(true);
 					this.byId("Cost07").setVisible(true);
+					this.byId("ValuationQuantity07").setVisible(true);
 					this.byId("UpperProduct08").setVisible(true);
 					this.byId("ValuationClass08").setVisible(true);
 					this.byId("Cost08").setVisible(true);
+					this.byId("ValuationQuantity08").setVisible(true);
 					this.byId("UpperProduct09").setVisible(true);
 					this.byId("ValuationClass09").setVisible(true);
 					this.byId("Cost09").setVisible(true);
+					this.byId("ValuationQuantity09").setVisible(true);
 					this.byId("UpperProduct10").setVisible(true);
 					this.byId("ValuationClass10").setVisible(true);
 					this.byId("Cost10").setVisible(true);
+					this.byId("ValuationQuantity10").setVisible(true);
 					this.byId("MaterialCost2000").setVisible(true);
 					this.byId("MaterialCost3000").setVisible(true);
 
@@ -70,33 +80,43 @@ sap.ui.define([
 					this.byId("UpperProduct01").setVisible(false);
 					this.byId("ValuationClass01").setVisible(false);
 					this.byId("Cost01").setVisible(false);
+					this.byId("ValuationQuantity01").setVisible(false);
 					this.byId("UpperProduct02").setVisible(false);
 					this.byId("ValuationClass02").setVisible(false);
 					this.byId("Cost02").setVisible(false);
+					this.byId("ValuationQuantity02").setVisible(false);
 					this.byId("UpperProduct03").setVisible(false);
 					this.byId("ValuationClass03").setVisible(false);
 					this.byId("Cost03").setVisible(false);
+					this.byId("ValuationQuantity03").setVisible(false);
 					this.byId("UpperProduct04").setVisible(false);
 					this.byId("ValuationClass04").setVisible(false);
 					this.byId("Cost04").setVisible(false);
+					this.byId("ValuationQuantity04").setVisible(false);
 					this.byId("UpperProduct05").setVisible(false);
 					this.byId("ValuationClass05").setVisible(false);
 					this.byId("Cost05").setVisible(false);
+					this.byId("ValuationQuantity05").setVisible(false);
 					this.byId("UpperProduct06").setVisible(false);
 					this.byId("ValuationClass06").setVisible(false);
 					this.byId("Cost06").setVisible(false);
+					this.byId("ValuationQuantity06").setVisible(false);
 					this.byId("UpperProduct07").setVisible(false);
 					this.byId("ValuationClass07").setVisible(false);
 					this.byId("Cost07").setVisible(false);
+					this.byId("ValuationQuantity07").setVisible(false);
 					this.byId("UpperProduct08").setVisible(false);
 					this.byId("ValuationClass08").setVisible(false);
 					this.byId("Cost08").setVisible(false);
+					this.byId("ValuationQuantity08").setVisible(false);
 					this.byId("UpperProduct09").setVisible(false);
 					this.byId("ValuationClass09").setVisible(false);
 					this.byId("Cost09").setVisible(false);
+					this.byId("ValuationQuantity09").setVisible(false);
 					this.byId("UpperProduct10").setVisible(false);
 					this.byId("ValuationClass10").setVisible(false);
 					this.byId("Cost10").setVisible(false);
+					this.byId("ValuationQuantity10").setVisible(false);
 					this.byId("MaterialCost2000").setVisible(false);
 					this.byId("MaterialCost3000").setVisible(false);
 
@@ -129,6 +149,10 @@ sap.ui.define([
 					newFilter = new sap.ui.model.Filter("Ztype", sap.ui.model.FilterOperator.EQ, "B");
 				}
 				mBindingParams.filters.push(newFilter);
+
+				var sLedge = this.getView().byId("idLedge").getSelectedKey();
+				mBindingParams.filters.push(new sap.ui.model.Filter("Ledge", "EQ", sLedge));
+
 			},
 
 			onCalc: function (oEvent) {
@@ -143,6 +167,7 @@ sap.ui.define([
 				var sBukrs = this.getView().byId("SFBCalculation").getControlByKey("CompanyCode").getValue();
 				var sYear = new Date(this.byId("idGjahr").getValue()).getFullYear();
 				var sMonat = this.byId("idMonat").getSelectedKey();
+				var sLedge = this.getView().byId("idLedge").getSelectedKey();
 				if (sBukrs === 0 || sBukrs === "") {
 					MessageToast.show(that.getModel("i18n").getResourceBundle().getText("msgInputBukrs"));
 					return;
@@ -159,8 +184,8 @@ sap.ui.define([
 				}
 
 				var aPromise = [];
-				aPromise.push(this.callAction(sType, sBukrs, sYear, sMonat));
-			
+				aPromise.push(this.callAction(sType, sBukrs, sYear, sMonat, sLedge));
+
 				Promise.all(aPromise).then((oData) => {
 					//refresh search
 					oData.forEach((item) => {
@@ -184,9 +209,9 @@ sap.ui.define([
 
 			},
 
-			callAction: function (sType, sBukrs, sYear, sMonat) {
+			callAction: function (sType, sBukrs, sYear, sMonat, sLedge) {
 				let parts = sBukrs.split("(");
-				let part = parts[1].substring(0,4);
+				let part = parts[1].substring(0, 4);
 				return new Promise(
 					function (resolve, reject) {
 						var mParameter = {
@@ -202,7 +227,8 @@ sap.ui.define([
 								CompanyCode: part,
 								FiscalYear: sYear,
 								Period: sMonat,
-								Ztype: sType
+								Ztype: sType,
+								Ledge: sLedge
 							}
 						};
 

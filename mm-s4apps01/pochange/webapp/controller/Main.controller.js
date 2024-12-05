@@ -179,12 +179,8 @@ sap.ui.define([
                     aGroupItems = [];
                     for (var n = 0; n < postDocs.length; n++) {
                         if (postDocs[n].PurchaseOrder === sPurchaseOrder) {
-                            if (!postDocs[n].ScheduleLineDeliveryDate) {
-                                postDocs[n].ScheduleLineDeliveryDate = formatter.odataDate(postDocs[n].ScheduleLineDeliveryDate);
-                            };
-                            if (!postDocs[n].PurgDocPriceDate) {
-                                postDocs[n].PurgDocPriceDate = formatter.odataDate(postDocs[n].PurgDocPriceDate);
-                            };
+                            postDocs[n].ScheduleLineDeliveryDate = formatter.odataDate(postDocs[n].ScheduleLineDeliveryDate);
+                            postDocs[n].PurgDocPriceDate = formatter.odataDate(postDocs[n].PurgDocPriceDate);
                             aGroupItems.push(postDocs[n]);
                         }
                     }
@@ -279,7 +275,8 @@ sap.ui.define([
                             // 获取表格的列名，即设置excel的抬头
                             label: sLabelText,
                             // 数据类型，即设置excel该列的数据类型
-                            type: "string",
+                            type: (sTemplatePath === "ScheduleLineDeliveryDate" || sTemplatePath === "PurgDocPriceDate") ? "date" : "string",
+						    format: (sTemplatePath === "ScheduleLineDeliveryDate" || sTemplatePath === "PurgDocPriceDate") ? "yyyy/MM/dd" : "",
 
                             // 获取数据的绑定路径，即设置excel该列的字段路径
                             property: sTemplatePath,
