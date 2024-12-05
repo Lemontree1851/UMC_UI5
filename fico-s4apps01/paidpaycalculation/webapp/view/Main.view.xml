@@ -749,11 +749,10 @@
 						<Label text="{path:'PurGrpAmount', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
-				<table:Column id="ChargeableAmount1" width="6rem" visible="true" autoResizable="true" sortProperty="ChargeableAmount1"
-					filterProperty="ChargeableAmount1">
+				<table:Column id="ChargeableAmount1" width="6rem" visible="true" autoResizable="true" sortProperty="ChargeableAmount1" filterProperty="ChargeableAmount1">
 					<table:customData>
 						<core:CustomData key="p13nData"
-							value='\{"columnKey":ChargeableAmount1", "leadingProperty":"ChargeableAmount1", "sortProperty": "ChargeableAmount1", "filterProperty": "ChargeableAmount1"}'/>
+							value='\{"columnKey":"ChargeableAmount1", "leadingProperty":"ChargeableAmount1", "sortProperty": "ChargeableAmount1", "filterProperty": "ChargeableAmount1"}'/>
 					</table:customData>
 					<table:label>
 						<Label text="{i18n>ChargeableAmount1}"/>
@@ -762,11 +761,10 @@
 						<Label text="{path:'ChargeableAmount1', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
-				<table:Column id="ChargeableAmount2" width="6rem" visible="true" autoResizable="true" sortProperty="ChargeableAmount2"
-					filterProperty="ChargeableAmount2">
+				<table:Column id="ChargeableAmount2" width="6rem" visible="true" autoResizable="true" sortProperty="ChargeableAmount2" filterProperty="ChargeableAmount2">
 					<table:customData>
 						<core:CustomData key="p13nData"
-							value='\{"columnKey":ChargeableAmount2", "leadingProperty":"ChargeableAmount2", "sortProperty": "ChargeableAmount2", "filterProperty": "ChargeableAmount2"}'/>
+							value='\{"columnKey":"ChargeableAmount2", "leadingProperty":"ChargeableAmount2", "sortProperty": "ChargeableAmount2", "filterProperty": "ChargeableAmount"}'/>
 					</table:customData>
 					<table:label>
 						<Label text="{i18n>ChargeableAmount2}"/>
@@ -775,29 +773,16 @@
 						<Label text="{path:'ChargeableAmount2', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
-				<table:Column id="ChargeableAmount" width="6rem" visible="true" autoResizable="true" sortProperty="ChargeableAmount"
-					filterProperty="ChargeableAmount">
+				<table:Column id="ChargeableAmount" width="6rem" visible="true" autoResizable="true" sortProperty="ChargeableAmount" filterProperty="ChargeableAmount">
 					<table:customData>
 						<core:CustomData key="p13nData"
-							value='\{"columnKey":ChargeableAmount", "leadingProperty":"ChargeableAmount", "sortProperty": "ChargeableAmount", "filterProperty": "ChargeableAmount"}'/>
+							value='\{"columnKey":"ChargeableAmount", "leadingProperty":"ChargeableAmount", "sortProperty": "ChargeableAmount", "filterProperty": "ChargeableAmount"}'/>
 					</table:customData>
 					<table:label>
 						<Label text="{i18n>ChargeableAmount}"/>
 					</table:label>
 					<table:template>
 						<Label text="{path:'ChargeableAmount', formatter:'.formatter.formatFloat'}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="ChargeableRate" width="6rem" visible="false" autoResizable="true" sortProperty="ChargeableRate" filterProperty="ChargeableRate">
-					<table:customData>
-						<core:CustomData key="p13nData"
-							value='\{"columnKey":"ChargeableRate", "leadingProperty":"ChargeableRate", "sortProperty": "ChargeableRate", "filterProperty": "ChargeableRate"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>ChargeableRate}"/>
-					</table:label>
-					<table:template>
-						<Label text="{path:'ChargeableRate', formatter:'.formatter.formatFloat'}"/>
 					</table:template>
 				</table:Column>
 				<table:Column id="PreviousStockAmount" width="6rem" visible="true" autoResizable="true" sortProperty="PreviousStockAmount" filterProperty="PreviousStockAmount">
