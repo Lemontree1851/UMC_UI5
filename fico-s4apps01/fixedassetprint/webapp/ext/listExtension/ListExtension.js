@@ -23,14 +23,10 @@ sap.ui.define([
                     var MasterFixedAsset = "0000" + context.getObject().MasterFixedAsset;
                     var FixedAsset = "000" + context.getObject().FixedAsset.replace(/-/g, '');
                     var ValidityEndDate = context.getObject().ValidityEndDate.replace(/-/g, '');
-
-                    //MasterFixedAsset = padWithZeros(MasterFixedAsset, 12);
-                    //var MasterFixedAsset = "000010000000";
-                    //var FixedAsset = "0000".
-                    //console.log(FixedAsset);
+ 
 
                     createPrintRecord.setParameter("ProvidedKeys", JSON.stringify({ CompanyCode: CompanyCode.toUpperCase(), MasterFixedAsset: MasterFixedAsset.toUpperCase(),FixedAsset: FixedAsset.toUpperCase(),ValidityEndDate: ValidityEndDate.toUpperCase()}));
-                    //createPrintRecord.setParameter("ProvidedKeys", "");
+                    createPrintRecord.setParameter("FileName", "");
                     createPrintRecord.setParameter("ResultIsActiveEntity", true);
                     createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                         resolve(createPrintRecord);
