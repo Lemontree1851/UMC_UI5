@@ -18,16 +18,6 @@ function (JSONModel, Device) {
         createLocalModel: function () {
 			var oLocalModel = new JSONModel({
 
-
-				excelSet: [],
-				logInfo: "",
-
-				
-				tabBarSelKey: "Display",
-				tabBarShow:true,
-				buttonShow:false,
-				calcEditFalg:false,
-                forcastEditFalg:false,
             
 			});
 			return oLocalModel;
