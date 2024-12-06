@@ -106,7 +106,7 @@
 		<f:content>
 			<smartTable:SmartTable id="smartTable_Mast" smartVariant="__SVM01" persistencyKey="PurInfoMasterST" entitySet="PurInfoMaster" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" requestAtLeastFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion" ignoredFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion">
 
-				<table:Table id="Table_Calc" selectionMode="None" selectionBehavior="Row" rowMode="Auto">
+				<table:Table id="Table_Calc" selectionMode="MultiToggle" selectionBehavior="Row" rowMode="Auto">
 					<table:columns>
 						<table:Column id="purchasinginforecord" width="6rem" visible="true" autoResizable="true" sortProperty="purchasinginforecord" filterProperty="purchasinginforecord">
 							<table:customData>
@@ -192,7 +192,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="NetPriceAmount" width="10rem" visible="true" autoResizable="true" sortProperty="NetPriceAmount" filterProperty="NetPriceAmount">
+						<table:Column id="NetPriceAmount" width="10rem" visible="true" autoResizable="true" sortProperty="NetPriceAmount" filterProperty="NetPriceAmount" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"NetPriceAmount", "leadingProperty":"NetPriceAmount", "sortProperty": "NetPriceAmount", "filterProperty": "NetPriceAmount"}'/>
 							</table:customData>
@@ -240,7 +240,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="ConditionRateValue" width="6rem" visible="true" autoResizable="true" sortProperty="ConditionRateValue" filterProperty="ConditionRateValue">
+						<table:Column id="ConditionRateValue" width="10rem" visible="true" autoResizable="true" sortProperty="ConditionRateValue" filterProperty="ConditionRateValue" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue", "leadingProperty":"ConditionRateValue", "sortProperty": "ConditionRateValue", "filterProperty": "ConditionRateValue"}'/>
 							</table:customData>
@@ -276,7 +276,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="ConditionScaleQuantity" width="10rem" visible="true" autoResizable="true" sortProperty="ConditionScaleQuantity" filterProperty="ConditionScaleQuantity">
+						<table:Column id="ConditionScaleQuantity" width="10rem" visible="true" autoResizable="true" sortProperty="ConditionScaleQuantity" filterProperty="ConditionScaleQuantity" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"ConditionScaleQuantity", "leadingProperty":"ConditionScaleQuantity", "sortProperty": "ConditionScaleQuantity", "filterProperty": "ConditionScaleQuantity"}'/>
 							</table:customData>
@@ -444,7 +444,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="ProductManufacturerNumber" width="6rem" visible="true" autoResizable="true" sortProperty="ProductManufacturerNumber" filterProperty="ProductManufacturerNumber">
+						<table:Column id="ProductManufacturerNumber" width="10rem" visible="true" autoResizable="true" sortProperty="ProductManufacturerNumber" filterProperty="ProductManufacturerNumber">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"ProductManufacturerNumber", "leadingProperty":"ProductManufacturerNumber", "sortProperty": "ProductManufacturerNumber", "filterProperty": "ProductManufacturerNumber"}'/>
 							</table:customData>
@@ -456,7 +456,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="standardpurchaseorderquantity" width="6rem" visible="true" autoResizable="true" sortProperty="standardpurchaseorderquantity" filterProperty="standardpurchaseorderquantity">
+						<table:Column id="standardpurchaseorderquantity" width="10rem" visible="true" autoResizable="true" sortProperty="standardpurchaseorderquantity" filterProperty="standardpurchaseorderquantity" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"standardpurchaseorderquantity", "leadingProperty":"standardpurchaseorderquantity", "sortProperty": "standardpurchaseorderquantity", "filterProperty": "standardpurchaseorderquantity"}'/>
 							</table:customData>
@@ -468,7 +468,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="Taxprice" width="6rem" visible="true" autoResizable="true" sortProperty="Taxprice" filterProperty="Taxprice">
+						<table:Column id="Taxprice" width="10rem" visible="true" autoResizable="true" sortProperty="Taxprice" filterProperty="Taxprice" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"Taxprice", "leadingProperty":"Taxprice", "sortProperty": "Taxprice", "filterProperty": "Taxprice"}'/>
 							</table:customData>
@@ -480,7 +480,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="UnitPricePlnt" width="10rem" visible="true" autoResizable="true" sortProperty="UnitPrice_plnt" filterProperty="UnitPrice_plnt">
+						<table:Column id="UnitPricePlnt" width="10rem" visible="true" autoResizable="true" sortProperty="UnitPrice_plnt" filterProperty="UnitPrice_plnt" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"UnitPrice_plnt", "leadingProperty":"UnitPrice_plnt", "sortProperty": "UnitPrice_plnt", "filterProperty": "UnitPrice_plnt"}'/>
 							</table:customData>
@@ -492,7 +492,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="UnitPriceStandard" width="10rem" visible="true" autoResizable="true" sortProperty="UnitPrice_standard" filterProperty="UnitPrice_standard">
+						<table:Column id="UnitPriceStandard" width="10rem" visible="true" autoResizable="true" sortProperty="UnitPrice_standard" filterProperty="UnitPrice_standard" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"UnitPrice_standard", "leadingProperty":"UnitPrice_standard", "sortProperty": "UnitPrice_standard", "filterProperty": "UnitPrice_standard"}'/>
 							</table:customData>
@@ -528,7 +528,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="rate" width="6rem" visible="true" autoResizable="true" sortProperty="Rate" filterProperty="Rate">
+						<table:Column id="rate" width="10rem" visible="true" autoResizable="true" sortProperty="Rate" filterProperty="Rate" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"Rate", "leadingProperty":"Rate", "sortProperty": "Rate", "filterProperty": "Rate"}'/>
 							</table:customData>
@@ -576,7 +576,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="MaterialPlannedDeliveryDurn" width="10rem" visible="true" autoResizable="true" sortProperty="MaterialPlannedDeliveryDurn" filterProperty="MaterialPlannedDeliveryDurn">
+						<table:Column id="MaterialPlannedDeliveryDurn" width="10rem" visible="true" autoResizable="true" sortProperty="MaterialPlannedDeliveryDurn" filterProperty="MaterialPlannedDeliveryDurn" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"MaterialPlannedDeliveryDurn", "leadingProperty":"MaterialPlannedDeliveryDurn", "sortProperty": "MaterialPlannedDeliveryDurn", "filterProperty": "MaterialPlannedDeliveryDurn"}'/>
 							</table:customData>
@@ -584,7 +584,7 @@
 								<Label text="{i18n>MaterialPlannedDeliveryDurn}"/>
 							</table:label>
 							<table:template>
-								<Label text="{MaterialPlannedDeliveryDurn}"/>
+								<Label text="{ path:'MaterialPlannedDeliveryDurn',formatter:'.formatter.formatNumber' }"/>
 							</table:template>
 						</table:Column>
 
@@ -624,7 +624,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="MinimumPurchaseOrderQuantity" width="10rem" visible="true" autoResizable="true" sortProperty="MinimumPurchaseOrderQuantity" filterProperty="MinimumPurchaseOrderQuantity">
+						<table:Column id="MinimumPurchaseOrderQuantity" width="10rem" visible="true" autoResizable="true" sortProperty="MinimumPurchaseOrderQuantity" filterProperty="MinimumPurchaseOrderQuantity" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"MinimumPurchaseOrderQuantity", "leadingProperty":"MinimumPurchaseOrderQuantity", "sortProperty": "MinimumPurchaseOrderQuantity", "filterProperty": "MinimumPurchaseOrderQuantity"}'/>
 							</table:customData>
@@ -636,7 +636,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="MaximumOrderQuantity" width="10rem" visible="true" autoResizable="true" sortProperty="MaximumOrderQuantity" filterProperty="MaximumOrderQuantity">
+						<table:Column id="MaximumOrderQuantity" width="10rem" visible="true" autoResizable="true" sortProperty="MaximumOrderQuantity" filterProperty="MaximumOrderQuantity" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"MaximumOrderQuantity", "leadingProperty":"MaximumOrderQuantity", "sortProperty": "MaximumOrderQuantity", "filterProperty": "MaximumOrderQuantity"}'/>
 							</table:customData>
@@ -708,7 +708,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="UMCJPPurchasingPrice" width="12rem" visible="true" autoResizable="true" sortProperty="UMCJPPurchasingPrice" filterProperty="UMCJPPurchasingPrice">
+						<table:Column id="UMCJPPurchasingPrice" width="12rem" visible="true" autoResizable="true" sortProperty="UMCJPPurchasingPrice" filterProperty="UMCJPPurchasingPrice" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"UMCJPPurchasingPrice", "leadingProperty":"UMCJPPurchasingPrice", "sortProperty": "UMCJPPurchasingPrice", "filterProperty": "UMCJPPurchasingPrice"}'/>
 							</table:customData>
@@ -720,7 +720,7 @@
 							</table:template>
 						</table:Column>
 
-						<table:Column id="DeliveryLT" width="10rem" visible="true" autoResizable="true" sortProperty="DeliveryLT" filterProperty="DeliveryLT">
+						<table:Column id="DeliveryLT" width="10rem" visible="true" autoResizable="true" sortProperty="DeliveryLT" filterProperty="DeliveryLT" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"DeliveryLT", "leadingProperty":"DeliveryLT", "sortProperty": "DeliveryLT", "filterProperty": "DeliveryLT"}'/>
 							</table:customData>
@@ -728,7 +728,7 @@
 								<Label text="{i18n>DeliveryLT}"/>
 							</table:label>
 							<table:template>
-								<Label text="{DeliveryLT}"/>
+								<Label text="{ path:'DeliveryLT',formatter:'.formatter.formatNumber' }"/>
 							</table:template>
 						</table:Column>
 
