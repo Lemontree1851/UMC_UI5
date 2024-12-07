@@ -104,7 +104,7 @@
                             </smartFilterBar:ControlConfiguration>
 
                             <!-- Year Date Bar with custom Select control -->
-                            <smartFilterBar:ControlConfiguration
+                            <!-- <smartFilterBar:ControlConfiguration
                                 index="2"
                                 id="YearDateBar"
                                 key="YearDate"
@@ -178,7 +178,7 @@
                                         />
                                     </Select>
                                 </smartFilterBar:customControl>
-                            </smartFilterBar:ControlConfiguration>
+                            </smartFilterBar:ControlConfiguration> -->
                             <smartFilterBar:ControlConfiguration
                                 index="3"
                                 key="DateRange"
@@ -378,7 +378,7 @@
                         </table:template>
                     </table:Column>
 
-                    <table:Column
+                    <!-- <table:Column
                         width="10rem"
                         sortProperty="YearDate"
                         label="{i18n>YearDate}"
@@ -390,36 +390,7 @@
                                 wrapping="false"
                             />
                         </table:template>
-                    </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="Product"
-                        label="{i18n>Product}"
-                    >
-                        <table:template>
-                            <Text
-                                text="{local>Product}"
-                                tooltip="{local>Product}"
-                                wrapping="false"
-                            />
-                        </table:template>
-                    </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="plantype"
-                        label="{i18n>plantype}"
-                    >
-                        <table:template>
-                            <Text
-                                text="{local>plantype}"
-                                tooltip="{local>plantype}"
-                                wrapping="false"
-                            />
-                        </table:template>
-                    </table:Column>
-
+                    </table:Column> -->
                     <table:Column
                         width="10rem"
                         sortProperty="CustomerName"
@@ -433,7 +404,20 @@
                             />
                         </table:template>
                     </table:Column>
-
+                    
+                    <table:Column
+                        width="10rem"
+                        sortProperty="CustomerAccountAssignmentGroup"
+                        label="{i18n>CustomerAccountAssignmentGroup}"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>CustomerAccountAssignmentGroup}"
+                                tooltip="{local>CustomerAccountAssignmentGroup}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
                     <table:Column
                         width="10rem"
                         sortProperty="ProfitCenter"
@@ -447,7 +431,6 @@
                             />
                         </table:template>
                     </table:Column>
-
                     <table:Column
                         width="10rem"
                         sortProperty="PlantName"
@@ -461,7 +444,6 @@
                             />
                         </table:template>
                     </table:Column>
-
                     <table:Column
                         width="10rem"
                         sortProperty="SalesOffice"
@@ -503,7 +485,6 @@
                             />
                         </table:template>
                     </table:Column>
-
                     <table:Column
                         width="10rem"
                         sortProperty="MatlAccountAssignmentGroup"
@@ -517,6 +498,7 @@
                             />
                         </table:template>
                     </table:Column>
+                    
 
                     <table:Column
                         width="10rem"
@@ -527,6 +509,89 @@
                             <Text
                                 text="{local>ProductGroup}"
                                 tooltip="{local>ProductGroup}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        width="10rem"
+                        sortProperty="FirstSalesSpecProductGroup"
+                        label="{i18n>FirstSalesSpecProductGroup}"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>FirstSalesSpecProductGroup}"
+                                tooltip="{local>FirstSalesSpecProductGroup}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        width="10rem"
+                        sortProperty="SecondSalesSpecProductGroup"
+                        label="{i18n>SecondSalesSpecProductGroup}"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>SecondSalesSpecProductGroup}"
+                                tooltip="{local>SecondSalesSpecProductGroup}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        width="10rem"
+                        sortProperty="ThirdSalesSpecProductGroup"
+                        label="{i18n>ThirdSalesSpecProductGroup}"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>ThirdSalesSpecProductGroup}"
+                                tooltip="{local>ThirdSalesSpecProductGroup}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+                                        <table:Column
+                        width="10rem"
+                        sortProperty="AccountDetnProductGroup"
+                        label="{i18n>AccountDetnProductGroup}"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>AccountDetnProductGroup}"
+                                tooltip="{local>AccountDetnProductGroup}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+
+
+                    <!-- <table:Column
+                        width="10rem"
+                        sortProperty="plantype"
+                        label="{i18n>plantype}"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>plantype}"
+                                tooltip="{local>plantype}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column> -->
+                    <table:Column
+                        width="10rem"
+                        sortProperty="Product"
+                        label="{i18n>Product}"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>Product}"
+                                tooltip="{local>Product}"
                                 wrapping="false"
                             />
                         </table:template>
@@ -545,6 +610,7 @@
                             />
                         </table:template>
                     </table:Column>
+ 
 <!-- 
                     <table:Column
                         width="10rem"
@@ -576,6 +642,19 @@
 
                     <table:Column
                         width="10rem"
+                        sortProperty="ContributionProfit"
+                        label="{i18n>ContributionProfit}"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>ContributionProfit}"
+                                tooltip="{local>ContributionProfit}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="10rem"
                         sortProperty="Manufacturingcost"
                         label="{i18n>Manufacturingcost}"
                     >
@@ -602,19 +681,6 @@
                         </table:template>
                     </table:Column> -->
 
-                    <table:Column
-                        width="10rem"
-                        sortProperty="ContributionProfit"
-                        label="{i18n>ContributionProfit}"
-                    >
-                        <table:template>
-                            <Text
-                                text="{local>ContributionProfit}"
-                                tooltip="{local>ContributionProfit}"
-                                wrapping="false"
-                            />
-                        </table:template>
-                    </table:Column>
 
                     <table:Column
                         width="10rem"
@@ -672,75 +738,10 @@
                         </table:template>
                     </table:Column> -->
 
-                    <table:Column
-                        width="10rem"
-                        sortProperty="CustomerAccountAssignmentGroup"
-                        label="{i18n>CustomerAccountAssignmentGroup}"
-                    >
-                        <table:template>
-                            <Text
-                                text="{local>CustomerAccountAssignmentGroup}"
-                                tooltip="{local>CustomerAccountAssignmentGroup}"
-                                wrapping="false"
-                            />
-                        </table:template>
-                    </table:Column>
 
-                    <table:Column
-                        width="10rem"
-                        sortProperty="FirstSalesSpecProductGroup"
-                        label="{i18n>FirstSalesSpecProductGroup}"
-                    >
-                        <table:template>
-                            <Text
-                                text="{local>FirstSalesSpecProductGroup}"
-                                tooltip="{local>FirstSalesSpecProductGroup}"
-                                wrapping="false"
-                            />
-                        </table:template>
-                    </table:Column>
+                   
 
-                    <table:Column
-                        width="10rem"
-                        sortProperty="SecondSalesSpecProductGroup"
-                        label="{i18n>SecondSalesSpecProductGroup}"
-                    >
-                        <table:template>
-                            <Text
-                                text="{local>SecondSalesSpecProductGroup}"
-                                tooltip="{local>SecondSalesSpecProductGroup}"
-                                wrapping="false"
-                            />
-                        </table:template>
-                    </table:Column>
 
-                    <table:Column
-                        width="10rem"
-                        sortProperty="ThirdSalesSpecProductGroup"
-                        label="{i18n>ThirdSalesSpecProductGroup}"
-                    >
-                        <table:template>
-                            <Text
-                                text="{local>ThirdSalesSpecProductGroup}"
-                                tooltip="{local>ThirdSalesSpecProductGroup}"
-                                wrapping="false"
-                            />
-                        </table:template>
-                    </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="AccountDetnProductGroup"
-                        label="{i18n>AccountDetnProductGroup}"
-                    >
-                        <table:template>
-                            <Text
-                                text="{local>AccountDetnProductGroup}"
-                                tooltip="{local>AccountDetnProductGroup}"
-                                wrapping="false"
-                            />
-                        </table:template>
-                    </table:Column>
 
                     <!-- <table:Column
                         id="SalesOrganization"
