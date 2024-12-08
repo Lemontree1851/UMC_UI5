@@ -105,7 +105,7 @@ sap.ui.define([
                 this.getEntityCount(aFilter, splitRange).then(function (iItemCount) {
                     if (iItemCount > 0) {
                         //设置要查询的字段
-                        let sParamtetrsOfSelect = "SalesOrganization,Customer,YearDate,Product,plantype,CustomerName,ProfitCenter,PlantName,SalesOffice,SalesGroup,CreatedByUser,MatlAccountAssignmentGroup,ProductGroup,ProductName,MaterialCost2000,Manufacturingcost,ContributionProfit,GrossProfit,CustomerAccountAssignmentGroup,FirstSalesSpecProductGroup,SecondSalesSpecProductGroup,ThirdSalesSpecProductGroup,AccountDetnProductGroup,ConditionRateValue_n,salesplanamountindspcrcy_n,SalesAmount_n,ContributionProfitTotal_n,GrossProfitTotal_n";
+                        let sParamtetrsOfSelect = "SalesOrganization,Customer,YearDate,Product,plantype,CustomerName,ProfitCenter,PlantName,SalesOffice,SalesGroup,CreatedByUser,MatlAccountAssignmentGroup,ProductGroup,ProductName,MaterialCost2000,Manufacturingcost,ContributionProfit,GrossProfit,CustomerAccountAssignmentGroup,FirstSalesSpecProductGroup,SecondSalesSpecProductGroup,ThirdSalesSpecProductGroup,AccountDetnProductGroup,ConditionRateValue_n,salesplanamountindspcrcy_n,SalesAmount_n,ContributionProfitTotal_n,GrossProfitTotal_n,materialcost2000per_n,Manufacturingcostper_n";
                         //获取数据
                         this._LocalData.setProperty("/SalesReport", []);
                         this._LocalData.setProperty("/SalesReportTemp", []);
@@ -237,8 +237,8 @@ sap.ui.define([
             
                 // 遍历数据数组
                 data.forEach(item => {
-                    // 使用SalesOrganization, Customer, "YearDate, Product, plantype作为key值组合
-                    const key = `${item.SalesOrganization}_${item.Customer}_${item.Product}_${item.plantype}`;
+                    // 使用SalesOrganization, Customer, ProfitCenter ,salesoffice ,salesgroup , Product, plantype作为key值组合
+                    const key = `${item.SalesOrganization}_${item.Customer}_${item.ProfitCenter}_${item.salesoffice}_${item.salesgroup}_${item.Product}_${item.plantype}`;
             
                     // 如果当前组合的key不存在于result中，则初始化它
                     if (!result[key]) {
@@ -274,6 +274,8 @@ sap.ui.define([
                             ThirdSalesSpecProductGroup: item.ThirdSalesSpecProductGroup,
                             AccountDetnProductGroup: item.AccountDetnProductGroup,
 
+                            materialcost2000pers:{},
+                            Manufacturingcostpers:{},
                             ConditionRateValues: {},
                             salesplanamountindspcrcys:{},
                             SalesAmounts:{},
@@ -287,12 +289,16 @@ sap.ui.define([
  
                     let YearDate = item.YearDate.toString();
                     
+                    const dateKey5 = `materialcost2000per${YearDate}`;
+                    const dateKey6 = `Manufacturingcostper${YearDate}`;
                     const dateKey  = `ConditionRateValue${YearDate}`;
                     const dateKey1 = `salesplanamountindspcrcy${YearDate}`;
                     const dateKey2 = `SalesAmount${YearDate}`;
                     const dateKey3 = `ContributionProfitTotal${YearDate}`;
                     const dateKey4 = `GrossProfitTotal${YearDate}`;
                     
+                    result[key].materialcost2000pers[dateKey5] = item.materialcost2000per_n;
+                    result[key].Manufacturingcostpers[dateKey6] = item.Manufacturingcostper_n;
                     result[key].ConditionRateValues[dateKey] = item.ConditionRateValue_n;
                     result[key].salesplanamountindspcrcys[dateKey1] = item.salesplanamountindspcrcy_n;
                     result[key].SalesAmounts[dateKey2] = item.SalesAmount_n;
@@ -331,7 +337,10 @@ sap.ui.define([
                         SecondSalesSpecProductGroup: item.SecondSalesSpecProductGroup,
                         ThirdSalesSpecProductGroup: item.ThirdSalesSpecProductGroup,
                         AccountDetnProductGroup: item.AccountDetnProductGroup,
-                        ...item.ConditionRateValues, // 展开动态生成的日期列
+
+                        ...item.materialcost2000pers,// 展开动态生成的日期列
+                        ...item.Manufacturingcostpers,
+                        ...item.ConditionRateValues, 
                         ...item.salesplanamountindspcrcys,
                         ...item.SalesAmounts,
                         ...item.ContributionProfitTotals,
@@ -346,6 +355,12 @@ sap.ui.define([
                 console.log("ofpartition",ofpartition);
                 if (ofpartition.length > 0) {
                     Object.keys(ofpartition[0]).forEach(function (key) {
+                        if (key.indexOf("materialcost2000per") >= 0) {
+                            this.addColumn(key, this); 
+                        }
+                        if (key.indexOf("Manufacturingcostper") >= 0) {
+                            this.addColumn(key, this); 
+                        }
                         if (key.indexOf("ConditionRateValue") >= 0) {
                             this.addColumn(key, this); 
                         }
@@ -369,6 +384,21 @@ sap.ui.define([
                 if (aResultTemp){
                 if (aResultTemp.length > 0) {
                     Object.keys(aResultTemp[0]).forEach(function (key) {
+
+                        if (key.indexOf("materialcost2000per") >= 0) {
+                            if (this.byId(key)){
+                                this.byId(key).destroyLabel();
+                                this.byId(key).destroyTemplate();
+                                this.byId(key).destroy(true);
+                            }
+                        }
+                        if (key.indexOf("Manufacturingcostper") >= 0) {
+                            if (this.byId(key)){
+                                this.byId(key).destroyLabel();
+                                this.byId(key).destroyTemplate();
+                                this.byId(key).destroy(true);
+                            }
+                        }                       
                         if (key.indexOf("ConditionRateValue") >= 0) {
                             if (this.byId(key)){
                                 this.byId(key).destroyLabel();
@@ -415,6 +445,8 @@ sap.ui.define([
                                 text: sBindingPath,
                                 tooltip:"{local>" + sColName + "}"
                             });
+                var materialcost2000perLabel = oObj._ResourceBundle.getText("materialcost2000perLabel") + "(";
+                var ManufacturingcostperLabel = oObj._ResourceBundle.getText("ManufacturingcostperLabel") + "(";            
                 var ConditionRateValueLabel = oObj._ResourceBundle.getText("ConditionRateValueLabel") + "(";
                 var salesplanamountindspcrcyLabel = oObj._ResourceBundle.getText("salesplanamountindspcrcyLabel") + "(";
                 var SalesAmountLabel = oObj._ResourceBundle.getText("SalesAmountLabel") + "(";
@@ -423,6 +455,8 @@ sap.ui.define([
 
 
                 var sLabel = sColName;
+                sLabel = sLabel.replace("materialcost2000per", materialcost2000perLabel);
+                sLabel = sLabel.replace("Manufacturingcostper", ManufacturingcostperLabel);
                 sLabel = sLabel.replace("ConditionRateValue", ConditionRateValueLabel) ;
                 sLabel = sLabel.replace("salesplanamountindspcrcy", salesplanamountindspcrcyLabel);
                 sLabel = sLabel.replace("SalesAmount", SalesAmountLabel) ;
@@ -434,6 +468,12 @@ sap.ui.define([
                 var oCustomDataValue = {columnKey: sColName, leadingProperty: sColName};
                 var sWidth = "12rem";
                 var shAlign = "Begin";
+                if (sColName.indexOf("materialcost2000per") >= 0) {
+                    shAlign = "End";
+                }
+                if (sColName.indexOf("Manufacturingcostper") >= 0) {
+                    shAlign = "End";
+                }
                 if (sColName.indexOf("ConditionRateValue") >= 0) {
                     shAlign = "End";
                 }
