@@ -84,6 +84,10 @@ sap.ui.define([
                     var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
                     var splitRange = splitStart + "-" + splitEnd;
                     aNewFilter.push(new Filter("SplitRange", "EQ", splitRange)); 
+                    var oSelect = this.byId("idplantype"); // 通过ID获取Select控件
+                    var selectedKey = oSelect.getSelectedKey();  // 获取选中的key值
+                    aNewFilter.push(new Filter("plantype", "EQ", selectedKey)); 
+ 
                 }
 
                 oNewFilter = new Filter({
