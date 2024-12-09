@@ -147,7 +147,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate", "leadingProperty":"PostingDate", "sortProperty":"PostingDate", "filterProperty": "PostingDate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>PostingDate',formatter:'.formatter.formatDate' }"/>
+                <Text text="{ path:'PostingDate',formatter:'.formatter.formatDate' }"/>
               </t:template>
           </t:Column>
           <t:Column id="AcceptDate" label="{i18n>AcceptDate}" width="6rem" sortProperty="AcceptDate" filterProperty="AcceptDate" autoResizable="true">
@@ -155,7 +155,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"AcceptDate", "leadingProperty":"AcceptDate", "sortProperty":"AcceptDate", "filterProperty": "AcceptDate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>AcceptDate',formatter:'.formatter.formatDate' }"/>
+                <Text text="{ path:'AcceptDate',formatter:'.formatter.formatDate' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="AcceptQty" label="{i18n>AcceptQty}" width="6rem" sortProperty="AcceptQty" filterProperty="AcceptQty" autoResizable="true">
@@ -163,7 +163,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"AcceptQty", "leadingProperty":"AcceptQty", "sortProperty":"AcceptQty", "filterProperty": "AcceptQty"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>AcceptQty',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AcceptQty',formatter:'.formatter.formatFloat' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="BillingQuantity" label="{i18n>BillingQuantity}" width="6rem" sortProperty="BillingQuantity" filterProperty="BillingQuantity" autoResizable="true">
@@ -171,7 +171,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantity", "leadingProperty":"BillingQuantity", "sortProperty":"BillingQuantity", "filterProperty": "BillingQuantity"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>BillingQuantity',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'BillingQuantity',formatter:'.formatter.formatFloat' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="AcceptPrice" label="{i18n>AcceptPrice}" width="6rem" sortProperty="AcceptPrice" filterProperty="AcceptPrice" autoResizable="true">
@@ -179,7 +179,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"AcceptPrice", "leadingProperty":"AcceptPrice", "sortProperty":"AcceptPrice", "filterProperty": "AcceptPrice"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>AcceptPrice',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AcceptPrice',formatter:'.formatter.formatFloat' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="ConditionRateValue" label="{i18n>ConditionRateValue}" width="6rem" sortProperty="ConditionRateValue" filterProperty="ConditionRateValue" autoResizable="true">
@@ -187,7 +187,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue", "leadingProperty":"ConditionRateValue", "sortProperty":"ConditionRateValue", "filterProperty": "ConditionRateValue"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>ConditionRateValue',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'ConditionRateValue',formatter:'.formatter.formatFloat' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="ConditionCurrency" label="{i18n>ConditionCurrency}" width="4rem" sortProperty="ConditionCurrency" filterProperty="ConditionCurrency" autoResizable="true">
@@ -211,7 +211,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"AccceptAmount", "leadingProperty":"AccceptAmount", "sortProperty":"AccceptAmount", "filterProperty": "AccceptAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>AccceptAmount',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AccceptAmount',formatter:'.formatter.formatFloat' }"/>
               </t:template>
           </t:Column>
           <t:Column id="NetAmount" label="{i18n>NetAmount}" width="6rem" sortProperty="NetAmount" filterProperty="NetAmount" autoResizable="true">
@@ -219,7 +219,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"NetAmount", "leadingProperty":"NetAmount", "sortProperty":"NetAmount", "filterProperty": "NetAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>NetAmount',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'NetAmount',formatter:'.formatter.formatFloat' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="AccceptTaxAmount" label="{i18n>AccceptTaxAmount}" width="4rem" sortProperty="AccceptTaxAmount" filterProperty="AccceptTaxAmount" autoResizable="true">
@@ -227,7 +227,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"AccceptTaxAmount", "leadingProperty":"AccceptTaxAmount", "sortProperty":"AccceptTaxAmount", "filterProperty": "AccceptTaxAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>AccceptTaxAmount',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AccceptTaxAmount',formatter:'.formatter.formatFloat' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="TaxAmount" label="{i18n>TaxAmount}" width="4rem" sortProperty="TaxAmount" filterProperty="TaxAmount" autoResizable="true">
@@ -235,7 +235,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"TaxAmount", "leadingProperty":"TaxAmount", "sortProperty":"TaxAmount", "filterProperty": "TaxAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>TaxAmount',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'TaxAmount',formatter:'.formatter.formatFloat' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="Currency" label="{i18n>Currency}" width="4rem" sortProperty="Currency" filterProperty="Currency" autoResizable="true">
@@ -251,7 +251,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"AccountingExchangeRate", "leadingProperty":"AccountingExchangeRate", "sortProperty":"AccountingExchangeRate", "filterProperty": "AccountingExchangeRate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>AccountingExchangeRate',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AccountingExchangeRate',formatter:'.formatter.formatFloat' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="ExchangeRateDate" label="{i18n>ExchangeRateDate}" width="6rem" sortProperty="ExchangeRateDate" filterProperty="ExchangeRateDate" autoResizable="true">
@@ -259,7 +259,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ExchangeRateDate", "leadingProperty":"ExchangeRateDate", "sortProperty":"ExchangeRateDate", "filterProperty": "ExchangeRateDate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'local>ExchangeRateDate',formatter:'.formatter.formatDate' }"/>
+                <Text text="{ path:'ExchangeRateDate',formatter:'.formatter.formatDate' }"/>
               </t:template>
           </t:Column>
 			    <t:Column id="OutsideData" label="{i18n>OutsideData}" width="6rem" sortProperty="OutsideData" filterProperty="OutsideData" autoResizable="true">
