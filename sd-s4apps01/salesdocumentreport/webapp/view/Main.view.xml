@@ -102,83 +102,7 @@
                                     </Select>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
-
-                            <!-- Year Date Bar with custom Select control -->
-                            <!-- <smartFilterBar:ControlConfiguration
-                                index="2"
-                                id="YearDateBar"
-                                key="YearDate"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>YearDate}"
-                            >
-                                <smartFilterBar:customControl>
-                                    <Select
-                                        id="idMonat"
-                                        selectedKey=""
-                                    >
-                                        <core:Item
-                                            id="01"
-                                            key="01"
-                                            text="01"
-                                        />
-                                        <core:Item
-                                            id="02"
-                                            key="02"
-                                            text="02"
-                                        />
-                                        <core:Item
-                                            id="03"
-                                            key="03"
-                                            text="03"
-                                        />
-                                        <core:Item
-                                            id="04"
-                                            key="04"
-                                            text="04"
-                                        />
-                                        <core:Item
-                                            id="05"
-                                            key="05"
-                                            text="05"
-                                        />
-                                        <core:Item
-                                            id="06"
-                                            key="06"
-                                            text="06"
-                                        />
-                                        <core:Item
-                                            id="07"
-                                            key="07"
-                                            text="07"
-                                        />
-                                        <core:Item
-                                            id="08"
-                                            key="08"
-                                            text="08"
-                                        />
-                                        <core:Item
-                                            id="09"
-                                            key="09"
-                                            text="09"
-                                        />
-                                        <core:Item
-                                            id="10"
-                                            key="10"
-                                            text="10"
-                                        />
-                                        <core:Item
-                                            id="11"
-                                            key="11"
-                                            text="11"
-                                        />
-                                        <core:Item
-                                            id="12"
-                                            key="12"
-                                            text="12"
-                                        />
-                                    </Select>
-                                </smartFilterBar:customControl>
-                            </smartFilterBar:ControlConfiguration> -->
+ 
                             <smartFilterBar:ControlConfiguration
                                 index="3"
                                 key="DateRange"
@@ -194,6 +118,16 @@
                                         displayFormat="yyyyMM"
                                     />
                                 </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <!-- ConditionCurrency Bar -->
+                            <smartFilterBar:ControlConfiguration
+                                index="1"
+                                id="ConditionCurrencyBar"
+                                key="ConditionCurrency"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>ConditionCurrency}"
+                            >
+                                <!-- 可以添加默认聚合内容，如果有需要 -->
                             </smartFilterBar:ControlConfiguration>
                             <!-- 隐藏的 ControlConfigurations -->
                             <smartFilterBar:ControlConfiguration
