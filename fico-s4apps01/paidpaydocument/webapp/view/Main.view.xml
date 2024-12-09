@@ -1,54 +1,73 @@
-<mvc:View controllerName="fico.paidpaydocument.controller.Main"
-    displayBlock="true" 
+<mvc:View controllerName="fico.paidpaydocument.controller.Main" displayBlock="true" 
     xmlns:core="sap.ui.core" 
-    xmlns="sap.m"
-	xmlns:f="sap.f" 
-    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
-	xmlns:smartField="sap.ui.comp.smartfield"
-    xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:sv="sap.ui.comp.smartvariants" 
-    xmlns:mvc="sap.ui.core.mvc" 
-    xmlns:table="sap.ui.table">
+    xmlns="sap.m" 
+    xmlns:f="sap.f"
+  	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+    xmlns:smartTable="sap.ui.comp.smarttable" 
+    xmlns:sv="sap.ui.comp.smartvariants"
+  	xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:smartField="sap.ui.comp.smartfield" 
+    xmlns:smartform="sap.ui.comp.smartform" 
+    xmlns:t="sap.ui.table" height="100%" >
 	
-    <smartFilterBar:SmartFilterBar id="SFBCalculation" useToolbar="false" entitySet="PaidPayDocument" persistencyKey="DocumentBar">
-		<!--<RadioButtonGroup id="rbg1" columns="4" width="100%" class="sapUiMediumMarginBottom">-->
-		<RadioButton groupName="GroupA" id="Option1" text="{i18n>Option1}" selected="true" select="onButtonSelect"/>
-		<RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect"/>
-		<!--</RadioButtonGroup>-->
-		<!--filterChange="check">-->
-		<smartFilterBar:controlConfiguration>
-			<smartFilterBar:ControlConfiguration index="1" id="Company" key="CompanyCode" visibleInAdvancedArea="true" label="{i18n>Bukrs}"
-				filterType="single" mandatory="mandatory"/>
-			<smartFilterBar:ControlConfiguration index="2" id="Year" key="FiscalYear" visibleInAdvancedArea="true" label="{i18n>Gjahr}" mandatory="mandatory">
-				<smartFilterBar:customControl>
-					<DatePicker id="idGjahr" displayFormat="yyyy" />
-				</smartFilterBar:customControl>
-			</smartFilterBar:ControlConfiguration>
-			<smartFilterBar:ControlConfiguration index="3" id="Monat" key="Period" visibleInAdvancedArea="true" label="{i18n>Period}" mandatory="mandatory">
-				<smartFilterBar:customControl>
-					<Select id="idMonat">
-						<core:Item id = "01" key="01" text="01"/>
-						<core:Item id = "02" key="02" text="02"/>
-						<core:Item id = "03" key="03" text="03"/>
-						<core:Item id = "04" key="04" text="04"/>
-						<core:Item id = "05" key="05" text="05"/>
-						<core:Item id = "06" key="06" text="06"/>
-						<core:Item id = "07" key="07" text="07"/>
-						<core:Item id = "08" key="08" text="08"/>
-						<core:Item id = "09" key="09" text="09"/>
-						<core:Item id = "10" key="10" text="10"/>
-						<core:Item id = "11" key="11" text="11"/>
-						<core:Item id = "12" key="12" text="12"/>
-					</Select>
-				</smartFilterBar:customControl>
-			</smartFilterBar:ControlConfiguration>	
-		</smartFilterBar:controlConfiguration>
-	</smartFilterBar:SmartFilterBar>
+	<f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
+      <f:title>
+      <f:DynamicPageTitle>
+        <f:heading>
+          <sv:SmartVariantManagement id="__SVM01" persistencyKey="SVM_Document" showShare="true" showExecuteOnSelection="true" entitySet="PaidPayDocument"/>
+        </f:heading>
+      </f:DynamicPageTitle>
+    </f:title>
+    
+	<f:header>
+	  <f:DynamicPageHeader pinnable="true">
+        <f:content>
+          <smartFilterBar:SmartFilterBar id="SFBDocument" useToolbar="false" entitySet="PaidPayDocument" smartVariant="__SVM01" persistencyKey="DocumentBar" search="onSearch">
 
-    <smartTable:SmartTable id="smartTable_Doc" smartVariant="__SVM01" persistencyKey="smartTable_Doc" entitySet="PaidPayDocument"
-		smartFilterId="SFBCalculation" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="false" 
-		showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport"
-		beforeRebindTable="onBeforeRebindTable">
+		      <!--<RadioButtonGroup id="rbg1" columns="4" width="100%" class="sapUiMediumMarginBottom">-->
+		      <RadioButton groupName="GroupA" id="Option1" text="{i18n>Option1}" selected="true" select="onButtonSelect"/>
+		      <RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect"/>
+				<!--</RadioButtonGroup>-->
+				<!--filterChange="check">-->
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration index="1" id="Company" key="CompanyCode" visibleInAdvancedArea="true" label="{i18n>Bukrs}"
+						filterType="single" mandatory="mandatory"/>
+					<smartFilterBar:ControlConfiguration index="2" id="Year" key="FiscalYear" visibleInAdvancedArea="true" label="{i18n>Gjahr}" mandatory="mandatory">
+						<smartFilterBar:customControl>
+							<DatePicker id="idGjahr" displayFormat="yyyy" />
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration index="3" id="Monat" key="Period" visibleInAdvancedArea="true" label="{i18n>Period}" mandatory="mandatory">
+						<smartFilterBar:customControl>
+							<Select id="idMonat">
+								<core:Item id = "01" key="01" text="01"/>
+								<core:Item id = "02" key="02" text="02"/>
+								<core:Item id = "03" key="03" text="03"/>
+								<core:Item id = "04" key="04" text="04"/>
+								<core:Item id = "05" key="05" text="05"/>
+								<core:Item id = "06" key="06" text="06"/>
+								<core:Item id = "07" key="07" text="07"/>
+								<core:Item id = "08" key="08" text="08"/>
+								<core:Item id = "09" key="09" text="09"/>
+								<core:Item id = "10" key="10" text="10"/>
+								<core:Item id = "11" key="11" text="11"/>
+								<core:Item id = "12" key="12" text="12"/>
+							</Select>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
+					
+				</smartFilterBar:controlConfiguration>
+	        </smartFilterBar:SmartFilterBar>
+        </f:content>
+      </f:DynamicPageHeader>
+	</f:header>
+
+    <f:content>
+	  <smartTable:SmartTable id="smartTable_Doc" entitySet="PaidPayDocument" smartFilterId="SFBDocument" tableType="Table" 
+        showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" 
+        header="{i18n>Result}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
+        beforeExport="onBeforeExport" fitContainer="false" height="100%">
+
 		<smartTable:customToolbar>
 		  <OverflowToolbar id = "toolbar" width="100%">
 			<ToolbarSpacer/>
@@ -56,484 +75,398 @@
 			  <Button id="cancel" icon="sap-icon://create" text="{i18n>ButtonText2}" tooltip="{i18n>ButtonText2}" press="onCancel"/>
 		  </OverflowToolbar>
 		</smartTable:customToolbar>
-		<table:Table id="Table_Doc" selectionMode="MultiToggle" selectionBehavior="Row" > 
-			<table:columns>
-				<table:Column id="CompanyCode" width="6rem" visible="true" autoResizable="true" sortProperty="CompanyCode" filterProperty="CompanyCode">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty": "CompanyCode", "filterProperty": "CompanyCode"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>CompanyCode}"/>
-					</table:label>
-					<table:template>
-						<Label text="{CompanyCode}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="FiscalYear" width="6rem" visible="true" autoResizable="true" sortProperty="FiscalYear" filterProperty="FiscalYear">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"FiscalYear", "leadingProperty":"FiscalYear", "sortProperty": "FiscalYear", "filterProperty": "FiscalYear"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>FiscalYear}"/>
-					</table:label>
-					<table:template>
-						<Label text="{FiscalYear}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Period" width="6rem" visible="true" autoResizable="true" sortProperty="Period" filterProperty="Period">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Period", "leadingProperty":"Period", "sortProperty": "Period", "filterProperty": "Period"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Period}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Period}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Customer" width="6rem" visible="true" autoResizable="true" sortProperty="Customer" filterProperty="Customer">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer", "sortProperty": "Customer", "filterProperty": "Customer"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Customer}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Customer}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="CustomerName" width="6rem" visible="true" autoResizable="true" sortProperty="CustomerName" filterProperty="CustomerName">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName", "sortProperty": "CustomerName", "filterProperty": "CustomerName"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>CustomerName}"/>
-					</table:label>
-					<table:template>
-						<Label text="{CustomerName}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Supplier" width="6rem" visible="true" autoResizable="true" sortProperty="Supplier" filterProperty="Supplier">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier", "sortProperty": "Supplier", "filterProperty": "Supplier"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Supplier}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Supplier}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="SupplierName" width="6rem" visible="true" autoResizable="true" sortProperty="SupplierName" filterProperty="SupplierName">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"SupplierName", "leadingProperty":"SupplierName", "sortProperty": "SupplierName", "filterProperty": "SupplierName"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>SupplierName}"/>
-					</table:label>
-					<table:template>
-						<Label text="{SupplierName}"/>
-					</table:template>
-				</table:Column>				
-				<table:Column id="ProfitCenter" width="6rem" visible="true" autoResizable="true" sortProperty="ProfitCenter" filterProperty="ProfitCenter">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty": "ProfitCenter", "filterProperty": "ProfitCenter"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>ProfitCenter}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ProfitCenter}"/>
-					</table:template>
-				</table:Column>
 
-				<table:Column id="ProfitCenterName" width="6rem" visible="true" autoResizable="true" sortProperty="ProfitCenterName" filterProperty="ProfitCenterName">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenterName", "leadingProperty":"ProfitCenterName", "sortProperty": "ProfitCenterName", "filterProperty": "ProfitCenterName"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>ProfitCenterName}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ProfitCenterName}"/>
-					</table:template>
-				</table:Column>
+		<t:Table id="Table_Doc" selectionMode="MultiToggle" rowMode="Auto" >
+            <t:Column id="CompanyCode" label="{i18n>CompanyCode}" width="6rem" sortProperty="CompanyCode" filterProperty="CompanyCode" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{CompanyCode}"/>
+              </t:template>
+            </t:Column>	
+			
+			<t:Column id="FiscalYear" label="{i18n>FiscalYear}" width="6rem" sortProperty="FiscalYear" filterProperty="FiscalYear" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYear", "leadingProperty":"FiscalYear", "sortProperty":"FiscalYear", "filterProperty": "FiscalYear"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{FiscalYear}"/>
+              </t:template>
+            </t:Column>	
 
-				<table:Column id="PurchasingGroup" width="6rem" visible="true" autoResizable="true" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroup", "leadingProperty":"PurchasingGroup", "sortProperty": "PurchasingGroup", "filterProperty": "PurchasingGroup"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>PurchasingGroup}"/>
-					</table:label>
-					<table:template>
-						<Label text="{PurchasingGroup}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="PurGrpAmount" width="6rem" visible="true" autoResizable="true" sortProperty="PurGrpAmount" filterProperty="PurGrpAmount">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"PurGrpAmount", "leadingProperty":"PurGrpAmount", "sortProperty": "PurGrpAmount", "filterProperty": "PurGrpAmount"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>PurGrpAmount}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'PurGrpAmount', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="ChargeableAmount" width="6rem" visible="true" autoResizable="true" sortProperty="ChargeableAmount" filterProperty="ChargeableAmount">
-				  <table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"ChargeableAmount", "leadingProperty":"ChargeableAmount", "sortProperty": "ChargeableAmount", "filterProperty": "ChargeableAmount"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>ChargeableAmount}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'ChargeableAmount', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="ChargeableRate" width="6rem" visible="true" autoResizable="true" sortProperty="ChargeableRate" filterProperty="ChargeableRate">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"ChargeableRate", "leadingProperty":"ChargeableRate", "sortProperty": "ChargeableRate", "filterProperty": "ChargeableRate"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>ChargeableRate}"/>
-					</table:label>
-					<table:template>
-						<Label text="{path:'ChargeableRate', formatter:'.formatter.formatFloat'}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="PreviousStockAmount" width="6rem" visible="true" autoResizable="true" sortProperty="PreviousStockAmount" filterProperty="PreviousStockAmount">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"PreviousStockAmount", "leadingProperty":"PreviousStockAmount", "sortProperty": "PreviousStockAmount", "filterProperty": "PreviousStockAmount"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>PreviousStockAmount}"/>
-					</table:label>
-					<table:template>
-							<Text text="{ path:'PreviousStockAmount', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="CurrentStockAmount" width="6rem" visible="true" autoResizable="true" sortProperty="CurrentStockAmount" filterProperty="CurrentStockAmount">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockAmount", "leadingProperty":"CurrentStockAmount", "sortProperty": "CurrentStockAmount", "filterProperty": "CurrentStockAmount"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>CurrentStockAmount}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'CurrentStockAmount', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="CurrentStockSemi" width="6rem" visible="true" autoResizable="true" sortProperty="CurrentStockSemi" filterProperty="CurrentStockSemi">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockSemi", "leadingProperty":"CurrentStockSemi", "sortProperty": "CurrentStockSemi", "filterProperty": "CurrentStockSemi"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>CurrentStockSemi}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'CurrentStockSemi', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="CurrentStockFin" width="6rem" visible="true" autoResizable="true" sortProperty="CurrentStockFin" filterProperty="CurrentStockFin">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockFin", "leadingProperty":"CurrentStockFin", "sortProperty": "CurrentStockFin", "filterProperty": "CurrentStockFin"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>CurrentStockFin}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'CurrentStockFin', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="CurrentStockTotal" width="6rem" visible="true" autoResizable="true" sortProperty="CurrentStockTotal" filterProperty="CurrentStockTotal">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockTotal", "leadingProperty":"CurrentStockTotal", "sortProperty": "CurrentStockTotal", "filterProperty": "CurrentStockTotal"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>CurrentStockTotal}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'CurrentStockTotal', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="StockChangeAmount" width="6rem" visible="true" autoResizable="true" sortProperty="StockChangeAmount" filterProperty="StockChangeAmount">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"StockChangeAmount", "leadingProperty":"StockChangeAmount", "sortProperty": "StockChangeAmount", "filterProperty": "StockChangeAmount"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>StockChangeAmount}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'StockChangeAmount', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="PaidMaterialCost" width="6rem" visible="true" autoResizable="true" sortProperty="PaidMaterialCost" filterProperty="PaidMaterialCost">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"PaidMaterialCost", "leadingProperty":"PaidMaterialCost", "sortProperty": "PaidMaterialCost", "filterProperty": "PaidMaterialCost"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>PaidMaterialCost}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'PaidMaterialCost', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="CustomerRevenue" width="6rem" visible="true" autoResizable="true" sortProperty="CustomerRevenue" filterProperty="CustomerRevenue">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"CustomerRevenue", "leadingProperty":"CustomerRevenue", "sortProperty": "CustomerRevenue", "filterProperty": "CustomerRevenue"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>CustomerRevenue}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'CustomerRevenue', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Revenue" width="6rem" visible="true" autoResizable="true" sortProperty="Revenue" filterProperty="ExpensesKtext">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Revenue", "leadingProperty":"Revenue", "sortProperty": "Revenue", "filterProperty": "Revenue"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Revenue}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'Revenue', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="RevenueRate" width="10rem" visible="true" autoResizable="true" sortProperty="RevenueRate" filterProperty="RevenueRate">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"RevenueRate", "leadingProperty":"RevenueRate", "sortProperty": "RevenueRate", "filterProperty": "RevenueRate"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>RevenueRate}"/>
-					</table:label>
-					<table:template>
-						<Label text="{path:'RevenueRate', formatter:'.formatter.formatFloat'}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Currency" width="4rem" visible="false" autoResizable="true" sortProperty="Currency" filterProperty="Currency">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty": "Currency", "filterProperty": "Currency"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Currency}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Currency}"/>
-					</table:template>
-				</table:Column>
-	            <table:Column id="Gjahr1" width="4rem" visible="true" autoResizable="true" sortProperty="Gjahr1" filterProperty="Gjahr1">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Gjahr1", "leadingProperty":"Gjahr1", "sortProperty": "Gjahr1", "filterProperty": "Gjahr1"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Gjahr1}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'Gjahr1', formatter:'.formatter.formatNumber' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Belnr1" width="6rem" visible="true" autoResizable="true" sortProperty="Belnr1" filterProperty="Belnr1">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Belnr1", "leadingProperty":"Belnr1", "sortProperty": "Belnr1", "filterProperty": "Belnr1"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Belnr1}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Belnr1}"/>
-					</table:template>
-				</table:Column>
-			    <table:Column id="Gjahr2" width="4rem" visible="true" autoResizable="true" sortProperty="Gjahr2" filterProperty="Gjahr2">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Gjahr2", "leadingProperty":"Gjahr2", "sortProperty": "Gjahr2", "filterProperty": "Gjahr2"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Gjahr2}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'Gjahr2', formatter:'.formatter.formatNumber' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Belnr2" width="6rem" visible="true" autoResizable="true" sortProperty="Belnr2" filterProperty="Belnr2">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Belnr2", "leadingProperty":"Belnr2", "sortProperty": "Belnr2", "filterProperty": "Belnr2"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Belnr2}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Belnr2}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Gjahr3" width="4rem" visible="true" autoResizable="true" sortProperty="Gjahr3" filterProperty="Gjahr3">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Gjahr3", "leadingProperty":"Gjahr3", "sortProperty": "Gjahr3", "filterProperty": "Gjahr1"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Gjahr3}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'Gjahr3', formatter:'.formatter.formatNumber' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Belnr3" width="6rem" visible="true" autoResizable="true" sortProperty="Belnr3" filterProperty="Belnr3">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Belnr3", "leadingProperty":"Belnr3", "sortProperty": "Belnr3", "filterProperty": "Belnr3"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Belnr3}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Belnr3}"/>
-					</table:template>
-				</table:Column>
-                <table:Column id="Gjahr4" width="4rem" visible="true" autoResizable="true" sortProperty="Gjahr4" filterProperty="Gjahr4">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Gjahr4", "leadingProperty":"Gjahr4", "sortProperty": "Gjahr4", "filterProperty": "Gjahr4"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Gjahr4}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'Gjahr4', formatter:'.formatter.formatNumber' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Belnr4" width="6rem" visible="true" autoResizable="true" sortProperty="Belnr4" filterProperty="Belnr4">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Belnr4", "leadingProperty":"Belnr4", "sortProperty": "Belnr4", "filterProperty": "Belnr4"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Belnr4}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Belnr4}"/>
-					</table:template>
-				</table:Column>
-                <table:Column id="AP" width="4rem" visible="false" autoResizable="true" sortProperty="AP" filterProperty="AP">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"AP", "leadingProperty":"AP", "sortProperty": "AP", "filterProperty": "AP"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>AP}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'local>AP', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="AR" width="6rem" visible="false" autoResizable="true" sortProperty="AR" filterProperty="AR">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"AR", "leadingProperty":"AR", "sortProperty": "AR", "filterProperty": "AR"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>AR}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'local>AR', formatter:'.formatter.formatFloat' }"/>
-					</table:template>
-				</table:Column>
-                <table:Column id="Gjahr5" width="4rem" visible="false" autoResizable="true" sortProperty="Gjahr5" filterProperty="Gjahr5">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Gjahr5", "leadingProperty":"Gjahr5", "sortProperty": "Gjahr5", "filterProperty": "Gjahr5"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Gjahr5}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'Gjahr5', formatter:'.formatter.formatNumber' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Belnr5" width="6rem" visible="false" autoResizable="true" sortProperty="Belnr5" filterProperty="Belnr5">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Belnr5", "leadingProperty":"Belnr5", "sortProperty": "Belnr5", "filterProperty": "Belnr5"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Belnr5}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Belnr5}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Gjahr6" width="4rem" visible="false" autoResizable="true" sortProperty="Gjahr6" filterProperty="Gjahr6">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Gjahr6", "leadingProperty":"Gjahr6", "sortProperty": "Gjahr6", "filterProperty": "Gjahr6"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Gjahr6}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'Gjahr6', formatter:'.formatter.formatNumber' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Belnr6" width="6rem" visible="false" autoResizable="true" sortProperty="Belnr6" filterProperty="Belnr6">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Belnr6", "leadingProperty":"Belnr6", "sortProperty": "Belnr6", "filterProperty": "Belnr6"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Belnr6}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Belnr6}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Gjahr7" width="4rem" visible="false" autoResizable="true" sortProperty="Gjahr7" filterProperty="Gjahr7">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Gjahr7", "leadingProperty":"Gjahr7", "sortProperty": "Gjahr7", "filterProperty": "Gjahr7"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Gjahr7}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'Gjahr7', formatter:'.formatter.formatNumber' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Belnr7" width="6rem" visible="false" autoResizable="true" sortProperty="Belnr7" filterProperty="Belnr7">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Belnr7", "leadingProperty":"Belnr7", "sortProperty": "Belnr7", "filterProperty": "Belnr7"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Belnr7}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Belnr7}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Gjahr8" width="4rem" visible="false" autoResizable="true" sortProperty="Gjahr8" filterProperty="Gjahr8">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Gjahr8", "leadingProperty":"Gjahr8", "sortProperty": "Gjahr8", "filterProperty": "Gjahr8"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Gjahr8}"/>
-					</table:label>
-					<table:template>
-						<Label text="{ path:'Gjahr8', formatter:'.formatter.formatNumber' }"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Belnr8" width="6rem" visible="false" autoResizable="true" sortProperty="Belnr8" filterProperty="Belnr8">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Belnr8", "leadingProperty":"Belnr8", "sortProperty": "Belnr8", "filterProperty": "Belnr8"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Belnr8}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Belnr8}"/>
-					</table:template>
-				</table:Column>
-				<table:Column id="Message" width="6rem" visible="true" autoResizable="true" sortProperty="Message" filterProperty="Message">
-					<table:customData>
-						<core:CustomData key="p13nData" value='\{"columnKey":"Message", "leadingProperty":"Message", "sortProperty": "Message", "filterProperty": "Message"}'/>
-					</table:customData>
-					<table:label>
-						<Label text="{i18n>Message}"/>
-					</table:label>
-					<table:template>
-						<Label text="{Message}"/>
-					</table:template>
-				</table:Column>
-			</table:columns>
-		</table:Table>
-	</smartTable:SmartTable>
+			<t:Column id="Period" label="{i18n>Period}" width="6rem" sortProperty="Period" filterProperty="Period" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Period", "leadingProperty":"Period", "sortProperty":"Period", "filterProperty": "Period"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Period}"/>
+              </t:template>
+            </t:Column>	
+			
+            <t:Column id="Customer" label="{i18n>Customer}" width="6rem" sortProperty="Customer" filterProperty="Customer" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer", "sortProperty":"Customer", "filterProperty": "Customer"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Customer}"/>
+              </t:template>
+            </t:Column>	
+
+			<t:Column id="CustomerName" label="{i18n>CustomerName}" width="6rem" sortProperty="CustomerName" filterProperty="CustomerName" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName", "sortProperty":"CustomerName", "filterProperty": "CustomerName"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{CustomerName}"/>
+              </t:template>
+            </t:Column>	
+		
+            <t:Column id="Supplier" label="{i18n>Supplier}" width="6rem" sortProperty="Supplier" filterProperty="Supplier" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier", "sortProperty":"Supplier", "filterProperty": "Supplier"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Supplier}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="SupplierName" label="{i18n>SupplierName}" width="6rem" sortProperty="SupplierName" filterProperty="SupplierName" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"SupplierName", "leadingProperty":"SupplierName", "sortProperty":"SupplierName", "filterProperty": "SupplierName"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{SupplierName}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="ProfitCenter" label="{i18n>ProfitCenter}" width="6rem" sortProperty="ProfitCenter" filterProperty="ProfitCenter" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{ProfitCenter}"/>
+              </t:template>
+            </t:Column>
+			
+            <t:Column id="ProfitCenterName" label="{i18n>ProfitCenterName}" width="6rem" sortProperty="ProfitCenterName" filterProperty="ProfitCenterName" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenterName", "leadingProperty":"ProfitCenterName", "sortProperty":"ProfitCenterName", "filterProperty": "ProfitCenterName"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{ProfitCenterName}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="PurchasingGroup" label="{i18n>PurchasingGroup}" width="6rem" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroup", "leadingProperty":"PurchasingGroup", "sortProperty":"PurchasingGroup", "filterProperty": "PurchasingGroup"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{PurchasingGroup}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="PurGrpAmount" label="{i18n>PurGrpAmount}" width="6rem" sortProperty="PurGrpAmount" filterProperty="PurGrpAmount" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"PurGrpAmount", "leadingProperty":"PurGrpAmount", "sortProperty":"PurGrpAmount", "filterProperty": "PurGrpAmount"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'PurGrpAmount', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+	        <t:Column id="ChargeableAmount" label="{i18n>ChargeableAmount}" width="6rem" sortProperty="ChargeableAmount" filterProperty="ChargeableAmount" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableAmount", "leadingProperty":"ChargeableAmount", "sortProperty":"ChargeableAmount", "filterProperty": "ChargeableAmount"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'ChargeableAmount', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+		    <t:Column id="ChargeableRate" label="{i18n>ChargeableRate}" width="6rem" sortProperty="ChargeableRate" filterProperty="ChargeableRate" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableRate", "leadingProperty":"ChargeableRate", "sortProperty":"ChargeableRate", "filterProperty": "ChargeableRate"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'ChargeableRate', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="PreviousStockAmount" label="{i18n>PreviousStockAmount}" width="6rem" sortProperty="PreviousStockAmount" filterProperty="PreviousStockAmount" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"PreviousStockAmount", "leadingProperty":"PreviousStockAmount", "sortProperty":"PreviousStockAmount", "filterProperty": "PreviousStockAmount"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'PreviousStockAmount', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+            
+			<t:Column id="CurrentStockAmount" label="{i18n>CurrentStockAmount}" width="6rem" sortProperty="CurrentStockAmount" filterProperty="CurrentStockAmount" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockAmount", "leadingProperty":"CurrentStockAmount", "sortProperty":"CurrentStockAmount", "filterProperty": "CurrentStockAmount"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'CurrentStockAmount', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+	        <t:Column id="CurrentStockSemi" label="{i18n>CurrentStockSemi}" width="6rem" sortProperty="CurrentStockSemi" filterProperty="CurrentStockSemi" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockSemi", "leadingProperty":"CurrentStockSemi", "sortProperty":"CurrentStockSemi", "filterProperty": "CurrentStockSemi"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'CurrentStockSemi', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+		
+            <t:Column id="CurrentStockFin" label="{i18n>CurrentStockFin}" width="6rem" sortProperty="CurrentStockFin" filterProperty="CurrentStockFin" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockFin", "leadingProperty":"CurrentStockFin", "sortProperty":"CurrentStockFin", "filterProperty": "CurrentStockFin"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'CurrentStockFin', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+		
+		    <t:Column id="CurrentStockTotal" label="{i18n>CurrentStockTotal}" width="6rem" sortProperty="CurrentStockTotal" filterProperty="CurrentStockTotal" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockTotal", "leadingProperty":"CurrentStockTotal", "sortProperty":"CurrentStockTotal", "filterProperty": "CurrentStockTotal"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'CurrentStockTotal', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="StockChangeAmount" label="{i18n>StockChangeAmount}" width="6rem" sortProperty="StockChangeAmount" filterProperty="StockChangeAmount" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"StockChangeAmount", "leadingProperty":"StockChangeAmount", "sortProperty":"StockChangeAmount", "filterProperty": "StockChangeAmount"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'StockChangeAmount', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="PaidMaterialCost" label="{i18n>PaidMaterialCost}" width="6rem" sortProperty="PaidMaterialCost" filterProperty="PaidMaterialCost" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"PaidMaterialCost", "leadingProperty":"PaidMaterialCost", "sortProperty":"PaidMaterialCost", "filterProperty": "PaidMaterialCost"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'PaidMaterialCost', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="CustomerRevenue" label="{i18n>CustomerRevenue}" width="6rem" sortProperty="CustomerRevenue" filterProperty="CustomerRevenue" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CustomerRevenue", "leadingProperty":"CustomerRevenue", "sortProperty":"CustomerRevenue", "filterProperty": "CustomerRevenue"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'CustomerRevenue', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="Revenue" label="{i18n>Revenue}" width="6rem" sortProperty="Revenue" filterProperty="Revenue" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Revenue", "leadingProperty":"Revenue", "sortProperty":"Revenue", "filterProperty": "Revenue"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'Revenue', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+		    
+			<t:Column id="RevenueRate" label="{i18n>RevenueRate}" width="6rem" sortProperty="RevenueRate" filterProperty="RevenueRate" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"RevenueRate", "leadingProperty":"RevenueRate", "sortProperty":"RevenueRate", "filterProperty": "RevenueRate"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'RevenueRate', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+	        <t:Column id="Currency" label="{i18n>Currency}" width="6rem" sortProperty="Currency" filterProperty="Currency" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Currency}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="Gjahr1" label="{i18n>Gjahr1}" width="6rem" sortProperty="Gjahr1" filterProperty="Gjahr1" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Gjahr1", "leadingProperty":"Gjahr1", "sortProperty":"Gjahr1", "filterProperty": "Gjahr1"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Gjahr1}"/>
+              </t:template>
+            </t:Column>
+            
+			<t:Column id="Belnr1" label="{i18n>Belnr1}" width="6rem" sortProperty="Belnr1" filterProperty="Belnr1" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Belnr1", "leadingProperty":"Belnr1", "sortProperty":"Belnr1", "filterProperty": "Belnr1"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Belnr1}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="Gjahr2" label="{i18n>Gjahr2}" width="6rem" sortProperty="Gjahr2" filterProperty="Gjahr2" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Gjahr2", "leadingProperty":"Gjahr2", "sortProperty":"Gjahr2", "filterProperty": "Gjahr2"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Gjahr2}"/>
+              </t:template>
+            </t:Column>
+	
+            <t:Column id="Belnr2" label="{i18n>Belnr2}" width="6rem" sortProperty="Belnr2" filterProperty="Belnr2" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Belnr2", "leadingProperty":"Belnr2", "sortProperty":"Belnr2", "filterProperty": "Belnr2"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Belnr2}"/>
+              </t:template>
+            </t:Column>
+	
+		    <t:Column id="Gjahr3" label="{i18n>Gjahr3}" width="6rem" sortProperty="Gjahr3" filterProperty="Gjahr3" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Gjahr3", "leadingProperty":"Gjahr3", "sortProperty":"Gjahr3", "filterProperty": "Gjahr3"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Gjahr3}"/>
+              </t:template>
+            </t:Column>
+	
+            <t:Column id="Belnr3" label="{i18n>Belnr3}" width="6rem" sortProperty="Belnr3" filterProperty="Belnr3" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Belnr3", "leadingProperty":"Belnr3", "sortProperty":"Belnr3", "filterProperty": "Belnr3"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Belnr3}"/>
+              </t:template>
+            </t:Column>
+
+	        <t:Column id="Gjahr4" label="{i18n>Gjahr4}" width="6rem" sortProperty="Gjahr4" filterProperty="Gjahr4" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Gjahr4", "leadingProperty":"Gjahr4", "sortProperty":"Gjahr4", "filterProperty": "Gjahr4"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Gjahr4}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="Belnr4" label="{i18n>Belnr4}" width="6rem" sortProperty="Belnr4" filterProperty="Belnr4" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Belnr4", "leadingProperty":"Belnr4", "sortProperty":"Belnr4", "filterProperty": "Belnr4"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Belnr4}"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="AP" label="{i18n>AP}" visible="false" width="6rem" sortProperty="AP" filterProperty="AP" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"AP", "leadingProperty":"AP", "sortProperty":"AP", "filterProperty": "AP"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'AP', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+            
+			<t:Column id="AR" label="{i18n>AR}" visible="false" width="6rem" sortProperty="AR" filterProperty="AR" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"AR", "leadingProperty":"AR", "sortProperty":"AR", "filterProperty": "AR"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'AR', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+	        <t:Column id="Gjahr5" label="{i18n>Gjahr5}" visible="false" width="6rem" sortProperty="Gjahr5" filterProperty="Gjahr5" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Gjahr5", "leadingProperty":"Gjahr5", "sortProperty":"Gjahr5", "filterProperty": "Gjahr5"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Gjahr5}"/>
+              </t:template>
+            </t:Column>
+			
+            <t:Column id="Belnr5" label="{i18n>Belnr5}" visible="false" width="6rem" sortProperty="Belnr5" filterProperty="Belnr5" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Belnr5", "leadingProperty":"Belnr5", "sortProperty":"Belnr5", "filterProperty": "Belnr5"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Belnr5}"/>
+              </t:template>
+            </t:Column>
+            
+			<t:Column id="Gjahr6" label="{i18n>Gjahr6}" visible="false" width="6rem" sortProperty="Gjahr6" filterProperty="Gjahr6" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Gjahr6", "leadingProperty":"Gjahr6", "sortProperty":"Gjahr6", "filterProperty": "Gjahr6"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Gjahr6}"/>
+              </t:template>
+            </t:Column>
+		
+	        <t:Column id="Belnr6" label="{i18n>Belnr6}" visible="false" width="6rem" sortProperty="Belnr6" filterProperty="Belnr6" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Belnr6", "leadingProperty":"Belnr6", "sortProperty":"Belnr6", "filterProperty": "Belnr6"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Belnr6}"/>
+              </t:template>
+            </t:Column>
+	        
+			<t:Column id="Gjahr7" label="{i18n>Gjahr7}" visible="false" width="6rem" sortProperty="Gjahr7" filterProperty="Gjahr7" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Gjahr7", "leadingProperty":"Gjahr7", "sortProperty":"Gjahr7", "filterProperty": "Gjahr7"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Gjahr7}"/>
+              </t:template>
+            </t:Column>
+			
+		    <t:Column id="Belnr7" label="{i18n>Belnr7}" visible="false" width="6rem" sortProperty="Belnr7" filterProperty="Belnr7" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Belnr7", "leadingProperty":"Belnr7", "sortProperty":"Belnr7", "filterProperty": "Belnr7"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Belnr7}"/>
+              </t:template>
+            </t:Column>
+            
+			<t:Column id="Gjahr8" label="{i18n>Gjahr8}" visible="false" width="6rem" sortProperty="Gjahr8" filterProperty="Gjahr8" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Gjahr8", "leadingProperty":"Gjahr8", "sortProperty":"Gjahr8", "filterProperty": "Gjahr8"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Gjahr8}"/>
+              </t:template>
+            </t:Column>
+	
+            <t:Column id="Belnr8" label="{i18n>Belnr8}" visible="false" width="6rem" sortProperty="Belnr8" filterProperty="Belnr8" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Belnr8", "leadingProperty":"Belnr8", "sortProperty":"Belnr8", "filterProperty": "Belnr8"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Belnr8}"/>
+              </t:template>
+            </t:Column>
+	
+	        <t:Column id="Message" label="{i18n>Message}" width="10rem" sortProperty="Message" filterProperty="Message" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Message", "leadingProperty":"Message", "sortProperty":"Message", "filterProperty": "Message"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{Message}"/>
+              </t:template>
+            </t:Column>
+
+
+		</t:Table>
+	  </smartTable:SmartTable>
+    </f:content>   
+  </f:DynamicPage>
 </mvc:View>
