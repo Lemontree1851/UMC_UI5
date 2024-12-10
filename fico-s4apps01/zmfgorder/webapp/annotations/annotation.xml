@@ -12,6 +12,7 @@
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="orderid"/>
+                            <PropertyValue Property="Label" String="{@i18n>orderid}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="YearMonth"/>
@@ -254,9 +255,11 @@
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="orderid"/>
+                            <PropertyValue Property="Label" String="{@i18n>orderid1}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="orderitem"/>
+                            <PropertyValue Property="Label" String="{@i18n>orderitem}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="YearMonth"/>
@@ -339,9 +342,11 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AccountingDocument"/>
+                            <PropertyValue Property="Label" String="{@i18n>accountingdocument}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="LedgerGLLineItem"/>
+                            <PropertyValue Property="Label" String="{@i18n>ledgergllineitem}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
@@ -388,6 +393,7 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AccountingDocumentType"/>
+                            <PropertyValue Property="Label" String="{@i18n>key4}"/>
                         </Record>
 </Collection>
                 </Annotation>
