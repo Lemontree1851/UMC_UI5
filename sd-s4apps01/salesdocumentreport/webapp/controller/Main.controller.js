@@ -257,6 +257,7 @@ sap.ui.define([
 
                             ProfitCenter: item.ProfitCenter,
                             PlantName: item.PlantName,
+                            CustomerName: item.CustomerName,
                             SalesOffice: item.SalesOffice,
                             SalesGroup: item.SalesGroup,
                             CreatedByUser: item.CreatedByUser,
@@ -321,6 +322,7 @@ sap.ui.define([
 
                         ProfitCenter: item.ProfitCenter,
                         PlantName: item.PlantName,
+                        CustomerName: item.CustomerName,
                         SalesOffice: item.SalesOffice,
                         SalesGroup: item.SalesGroup,
                         CreatedByUser: item.CreatedByUser,
