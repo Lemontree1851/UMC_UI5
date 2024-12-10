@@ -42,15 +42,12 @@
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
         <Schema Namespace="cds_zui_salesdocumentreport_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-            <EntityType Name="I_CurrencyTextType" sap:label="Currency Text" sap:value-list="true" sap:content-version="1">
+            <EntityType Name="I_CurrencyStdVHType" sap:label="Currency" sap:value-list="true" sap:content-version="1">
                 <Key>
-                    <PropertyRef Name="Language"/>
                     <PropertyRef Name="Currency"/>
                 </Key>
-                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
-                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="CurrencyName" Type="Edm.String" MaxLength="40" sap:label="Description"/>
-                <Property Name="CurrencyShortName" Type="Edm.String" MaxLength="15" sap:label="Short Text"/>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="UpperCase" sap:text="Currency_Text" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="Currency_Text" Type="Edm.String" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false"/>
             </EntityType>
             <EntityType Name="I_ProductStdVHType" sap:label="Product Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -127,7 +124,7 @@
                 <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="50"/>
                 <Property Name="plantype" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="YearDate" Type="Edm.String" Nullable="false" MaxLength="6"/>
-                <Property Name="CustomerName" Type="Edm.String" MaxLength="80" sap:display-format="NonNegative"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="PlantName" Type="Edm.String" MaxLength="30"/>
                 <Property Name="MatlAccountAssignmentGroup" Type="Edm.String" MaxLength="2"/>
                 <Property Name="ProductGroup" Type="Edm.String" MaxLength="9"/>
@@ -399,7 +396,7 @@
                 </ReferentialConstraint>
             </Association>
             <EntityContainer Name="cds_zui_salesdocumentreport_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
-                <EntitySet Name="I_CurrencyText" EntityType="cds_zui_salesdocumentreport_o2.I_CurrencyTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_CurrencyStdVH" EntityType="cds_zui_salesdocumentreport_o2.I_CurrencyStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_ProductStdVH" EntityType="cds_zui_salesdocumentreport_o2.I_ProductStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_SalesOrganization" EntityType="cds_zui_salesdocumentreport_o2.I_SalesOrganizationType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ZC_Customer_VH" EntityType="cds_zui_salesdocumentreport_o2.ZC_Customer_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
@@ -559,7 +556,7 @@
                 <Annotation Term="Common.ValueList">
                     <Record>
                         <PropertyValue Property="Label" String=""/>
-                        <PropertyValue Property="CollectionPath" String="I_CurrencyText"/>
+                        <PropertyValue Property="CollectionPath" String="I_CurrencyStdVH"/>
                         <PropertyValue Property="SearchSupported" Bool="true"/>
                         <PropertyValue Property="Parameters">
                             <Collection>
@@ -568,13 +565,7 @@
                                     <PropertyValue Property="ValueListProperty" String="Currency"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="Language"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="CurrencyName"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="CurrencyShortName"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -584,7 +575,7 @@
             <Annotations Target="cds_zui_salesdocumentreport_o2.cds_zui_salesdocumentreport_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
-            <Annotations Target="cds_zui_salesdocumentreport_o2.cds_zui_salesdocumentreport_o2_Entities/I_CurrencyText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_salesdocumentreport_o2.cds_zui_salesdocumentreport_o2_Entities/I_CurrencyStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Bool="false"/>
