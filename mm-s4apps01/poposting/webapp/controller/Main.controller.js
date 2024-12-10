@@ -41,19 +41,19 @@ sap.ui.define([
                     var item = {
                         "Status": "",
                         "Message": "",
-                        "MaterialDocument":"",
-                        "MaterialDocumentYear":"",
-                        "MaterialDocumentItem":"",
+                        "MaterialDocument": "",
+                        "MaterialDocumentYear": "",
+                        "MaterialDocumentItem": "",
                         "Row": i - 1,
-                        "DocumentDate": aSheetData[i]["DOCUMENTDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : new Date(this.formatDateString(aSheetData[i]["DOCUMENTDATE"])),
-                        "PostingDate": aSheetData[i]["POSTINGDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : new Date(this.formatDateString(aSheetData[i]["POSTINGDATE"])),
+                        "DocumentDate": aSheetData[i]["DOCUMENTDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.formatDateToUtc(aSheetData[i]["DOCUMENTDATE"]),
+                        "PostingDate": aSheetData[i]["POSTINGDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.formatDateToUtc(aSheetData[i]["POSTINGDATE"]),
                         "MaterialDocumentHeaderText": aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"] === undefined ? "" : aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"],
                         "OrderKey": aSheetData[i]["PURCHASEORDER"] === undefined ? "" : aSheetData[i]["PURCHASEORDER"],
                         "QuantityInEntryUnit": aSheetData[i]["QUANTITYINENTRY"] === undefined ? "" : aSheetData[i]["QUANTITYINENTRY"],
                         "Batch": aSheetData[i]["BATCH"] === undefined ? "" : aSheetData[i]["BATCH"],
                         "Plant": aSheetData[i]["PLANT"] === undefined ? "" : aSheetData[i]["PLANT"],
                         "StorageLocation": aSheetData[i]["STORAGELOCATION"] === undefined ? "" : aSheetData[i]["STORAGELOCATION"]
-                        
+
                     };
                     aExcelSet.push(item);
                 }
@@ -62,6 +62,18 @@ sap.ui.define([
                 this.byId("idFileUploader").clear();
                 this._BusyDialog.close();
             }.bind(this);
+        },
+
+        formatDateToUtc: function (sDate) {
+            // Excel起始日期是1900年1月1日（JavaScript的Date以1970年为基准）
+            const oExcelEpoch = new Date(Date.UTC(1899, 11, 30)); // 1899-12-30，Excel从1开始计算
+            const iMillisecondsInDay = 24 * 60 * 60 * 1000;
+
+            // 计算日期
+            const oDate = new Date(oExcelEpoch.getTime() + Number(sDate) * iMillisecondsInDay);
+
+            // 转换为UTC字符串
+            return oDate.toISOString();
         },
 
         onClear: function () {
@@ -121,9 +133,9 @@ sap.ui.define([
                                         aExcelSet[index].Status = element.STATUS;
                                         aExcelSet[index].Message = element.MESSAGE;
                                         aExcelSet[index].DocumentDate = element.DOCUMENTDATE,
-                                        aExcelSet[index].PostingDate = element.POSTINGDATE,
-                                        aExcelSet[index].Plant = element.PLANT,
-                                        aExcelSet[index].StorageLocation = element.STORAGELOCATION
+                                            aExcelSet[index].PostingDate = element.POSTINGDATE,
+                                            aExcelSet[index].Plant = element.PLANT,
+                                            aExcelSet[index].StorageLocation = element.STORAGELOCATION
                                         aExcelSet[index].MaterialDocument = element.MATERIALDOCUMENT
                                         aExcelSet[index].MaterialDocumentYear = element.MATERIALDOCUMENTYEAR
                                         aExcelSet[index].MaterialDocumentItem = element.MATERIALDOCUMENTITEM
