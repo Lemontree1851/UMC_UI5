@@ -86,6 +86,7 @@
                     <PropertyRef Name="SalesDocument"/>
                     <PropertyRef Name="SalesDocumentItem"/>
                     <PropertyRef Name="BillingDocument"/>
+                    <PropertyRef Name="CustomerPO"/>
                 </Key>
                 <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -94,35 +95,35 @@
                 <Property Name="PeriodType" Type="Edm.String" Nullable="false" MaxLength="1" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="AcceptPeriod" Type="Edm.String" Nullable="false" MaxLength="2" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="SalesDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Sales Document" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="SalesDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="Sales Document Item" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="SalesDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="BillingDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="CustomerPO" Type="Edm.String" MaxLength="35"/>
+                <Property Name="CustomerPO" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="AcceptPeriodFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="AcceptPeriodTo" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="SalesDocumentType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Document Type"/>
                 <Property Name="SalesDocumentTypeText" Type="Edm.String" MaxLength="25" sap:label="Name" sap:quickinfo="Name of the controlling area"/>
-                <Property Name="Product" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="Product" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="SalesDocumentItemText" Type="Edm.String" MaxLength="40" sap:label="Item Description" sap:quickinfo="Short Text for Sales Order Item"/>
                 <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Posting Date" sap:quickinfo="Posting Date in the Document"/>
                 <Property Name="AcceptDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
-                <Property Name="AcceptQty" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="AcceptQty" Type="Edm.String" MaxLength="20"/>
                 <Property Name="BillingQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
-                <Property Name="AcceptPrice" Type="Edm.Decimal" Precision="14" Scale="3"/>
-                <Property Name="ConditionRateValue" Type="Edm.Decimal" Precision="14" Scale="3"/>
+                <Property Name="AcceptPrice" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ConditionRateValue" Type="Edm.String" MaxLength="20"/>
                 <Property Name="ConditionCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="ConditionQuantity" Type="Edm.Decimal" Precision="5" Scale="0"/>
-                <Property Name="AccceptAmount" Type="Edm.Decimal" Precision="14" Scale="3"/>
-                <Property Name="NetAmount" Type="Edm.Decimal" Precision="14" Scale="3"/>
-                <Property Name="AccceptTaxAmount" Type="Edm.Decimal" Precision="14" Scale="3"/>
-                <Property Name="TaxAmount" Type="Edm.Decimal" Precision="14" Scale="3"/>
+                <Property Name="ConditionQuantity" Type="Edm.String" MaxLength="5"/>
+                <Property Name="AccceptAmount" Type="Edm.String" MaxLength="20"/>
+                <Property Name="NetAmount" Type="Edm.String" MaxLength="20"/>
+                <Property Name="AccceptTaxAmount" Type="Edm.String" MaxLength="20"/>
+                <Property Name="TaxAmount" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="AccountingExchangeRate" Type="Edm.String" MaxLength="9"/>
                 <Property Name="ExchangeRateDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="OutsideData" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Remarks" Type="Edm.String" MaxLength="100"/>
-                <Property Name="ProcessStatus" Type="Edm.String" MaxLength="2"/>
-                <Property Name="ReasonCategory" Type="Edm.String" MaxLength="2"/>
-                <Property Name="Reason" Type="Edm.String" MaxLength="2"/>
+                <Property Name="ProcessStatus" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ReasonCategory" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Reason" Type="Edm.String" MaxLength="20"/>
                 <Property Name="CustomerName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="PeriodTypeText" Type="Edm.String" MaxLength="30"/>
                 <Property Name="AcceptPeriodText" Type="Edm.String" MaxLength="30"/>
@@ -255,9 +256,11 @@
                 <Property Name="FIELD_VALUE" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="DESCRIPTION" Type="Edm.String"/>
             </EntityType>
-            <ComplexType Name="ZR_UPLOAD_PARAMETER">
+            <ComplexType Name="ZD_PARAFORACCEPT">
+                <Property Name="AcceptPeriod" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Event" Type="Edm.String" MaxLength="20"/>
-                <Property Name="RecordUUID" Type="Edm.String" MaxLength="36" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                <Property Name="PeriodType" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Ztype" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Zzkey" Type="Edm.String" sap:label="Zzkey" sap:quickinfo="String Type"/>
             </ComplexType>
             <ComplexType Name="SAP__FitToPage">
@@ -416,10 +419,12 @@
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage"/>
                     <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage"/>
                 </AssociationSet>
-                <FunctionImport Name="processLogic" ReturnType="cds_zui_salesacceptance_result_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
-                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                <FunctionImport Name="processLogic" ReturnType="cds_zui_salesacceptance_result_o2.ZD_PARAFORACCEPT" m:HttpMethod="POST">
                     <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
-                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                    <Parameter Name="Ztype" Type="Edm.String" Mode="In" MaxLength="1" Nullable="true"/>
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="PeriodType" Type="Edm.String" Mode="In" MaxLength="10" Nullable="true"/>
+                    <Parameter Name="AcceptPeriod" Type="Edm.String" Mode="In" MaxLength="10" Nullable="true"/>
                 </FunctionImport>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>

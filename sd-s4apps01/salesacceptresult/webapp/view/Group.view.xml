@@ -8,7 +8,7 @@
   	xmlns:mvc="sap.ui.core.mvc" 
     xmlns:smartField="sap.ui.comp.smartfield" 
     xmlns:smartform="sap.ui.comp.smartform" 
-    xmlns:t="sap.ui.table">
+    xmlns:t="sap.ui.table" height="100%">
 
   <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
     <f:header>
@@ -40,11 +40,11 @@
 		</f:DynamicPageHeader>
 	</f:header>
 	<f:content>
-	    <VBox>
-           <smartTable:SmartTable id="smartTable" entitySet="SalesAcceptanceResult" smartFilterId="smartFilterBar" tableType="Table"
+
+    <smartTable:SmartTable id="smartTable" entitySet="SalesAcceptanceResult" smartFilterId="smartFilterBar" tableType="Table"
 				showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}"
 				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-				beforeExport="onBeforeExport">
+				beforeExport="onBeforeExport" fitContainer="false" height="100%">
             <smartTable:customToolbar>
 			<OverflowToolbar width="100%">
 			  <ToolbarSpacer/>
@@ -53,7 +53,7 @@
             </OverflowToolbar>
 		    </smartTable:customToolbar>
 
-		<t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" >
+		<t:Table id="ReportTable" rowMode="Auto" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" >
             <t:Column id="CustomerPO" label="{i18n>CustomerPO}" width="10rem" sortProperty="CustomerPO" filterProperty="CustomerPO" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerPO", "leadingProperty":"CustomerPO", "sortProperty":"CustomerPO", "filterProperty": "CustomerPO"}'/>
@@ -280,7 +280,7 @@
             </t:Column>
 		    </t:Table>
         </smartTable:SmartTable>
-      </VBox>
+
 	  </f:content>
   </f:DynamicPage>
 </mvc:View>

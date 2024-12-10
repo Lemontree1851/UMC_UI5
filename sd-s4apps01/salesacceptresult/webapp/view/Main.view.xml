@@ -8,7 +8,7 @@
   	xmlns:mvc="sap.ui.core.mvc" 
     xmlns:smartField="sap.ui.comp.smartfield" 
     xmlns:smartform="sap.ui.comp.smartform" 
-    xmlns:t="sap.ui.table">
+    xmlns:t="sap.ui.table" height="100%">
 
   <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
     <f:header>
@@ -40,8 +40,8 @@
 		</f:DynamicPageHeader>
 	</f:header>
 	<f:content>
-    <VBox>
-			<FlexBox id="Title" wrap="Wrap" fitContainer="true" alignItems="Start">
+    <VBox fitContainer="true">
+			<FlexBox id="Title" wrap="Wrap" fitContainer="true" alignItems="Start" >
 				<VBox id="VBox1" renderType="Bare" class="sapUiSmallMarginBottom">
 					<Label id="Label1" text="{i18n>Customer}:" class="sapUiLargeMarginEnd sapUiSmallMarginBegin"/>
 					<Text id="Text1" text="{local>/head/CustomerName}" class="sapUiLargeMarginEnd sapUiSmallMarginBegin"/>
@@ -67,7 +67,7 @@
       <smartTable:SmartTable id="smartTable" entitySet="SalesAcceptanceResult" smartFilterId="smartFilterBar" tableType="Table"
 				showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}"
 				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-				beforeExport="onBeforeExport" requestAtLeastFields="CustomerName,PeriodTypeText,AcceptPeriodText,AcceptPeriodFromText,AcceptPeriodToText">
+				beforeExport="onBeforeExport" requestAtLeastFields="CustomerName,PeriodTypeText,AcceptPeriodText,AcceptPeriodFromText,AcceptPeriodToText" fitContainer="false" height="100%">
         <smartTable:customToolbar>
 			<OverflowToolbar width="100%">
 			  <ToolbarSpacer/>
@@ -76,8 +76,8 @@
  
       </OverflowToolbar>
 		</smartTable:customToolbar>
-
-		<t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" >
+    
+		<t:Table id="ReportTable" rowMode="Auto" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" >
           <t:Column id="CustomerPO" label="{i18n>CustomerPO}" width="10rem" sortProperty="CustomerPO" filterProperty="CustomerPO" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerPO", "leadingProperty":"CustomerPO", "sortProperty":"CustomerPO", "filterProperty": "CustomerPO"}'/>
@@ -270,12 +270,12 @@
                 <Text text="{ OutsideData }"/>
               </t:template>
           </t:Column>
-			    <t:Column id="Remarks" label="{i18n>Remarks}" width="20rem" sortProperty="Remarks" filterProperty="Remarks" autoResizable="true">
+			    <t:Column id="Remarks" label="{i18n>Remarks}" width="20rem" sortProperty="Remarks" filterProperty="Remarks" autoResizable="true" e="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Remarks ", "leadingProperty":"Remarks", "sortProperty":"Remarks", "filterProperty": "Remarks"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ Remarks }"/>
+                <Input id="RemarksI" value="{Remarks}" editable="true" change="onChange($event,'Remarks')"/>
               </t:template>
           </t:Column>
 			    <t:Column id="ProcessStatus" label="{i18n>ProcessStatus}" width="10rem" sortProperty="ProcessStatus" filterProperty="ProcessStatus" autoResizable="true">
@@ -316,7 +316,7 @@
             </t:Column>
 		      </t:Table>
         </smartTable:SmartTable>
-      </VBox>
+       </VBox>
 	  </f:content>
   </f:DynamicPage>
 </mvc:View>

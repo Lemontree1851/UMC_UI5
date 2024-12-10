@@ -61,6 +61,11 @@ sap.ui.define([
                 value1: "1"
             });
             filters.push(oLayer);
+            var oModel = this.getOwnerComponent().getModel();
+            if (oModel.hasPendingChanges()) {
+                // 重置未保存的更改
+                oModel.resetChanges();
+            }
         },
 
         onChange: function (oEvent, sProperty) {
@@ -133,8 +138,8 @@ sap.ui.define([
                             Zzkey: postData,
                             Ztype: "1",  //第一页面的保存
                             Event: bEvent,
-                            periodtype: aLTEXT1,
-                            acceptperiod: aLTEXT2
+                            PeriodType: aLTEXT1,
+                            AcceptPeriod: aLTEXT2
                         }
                     };
 
