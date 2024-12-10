@@ -124,7 +124,7 @@ sap.ui.define([
                     // datetime: this._getCurrentDateTime()
                 }
 
-                MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("ConfirmMessage", [sTitle]), {
+                MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("ConfirmMessage"), {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                     emphasizedAction: MessageBox.Action.OK,
                     onClose: function (sAction) {

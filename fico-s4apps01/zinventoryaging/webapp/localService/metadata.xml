@@ -74,7 +74,7 @@
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Posting Period" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
                 <Property Name="ProductType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Material Type"/>
                 <Property Name="ProductTypeName" Type="Edm.String" MaxLength="25"/>
@@ -166,7 +166,6 @@
                 <Property Name="AmountMonth35" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth36" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
                 <Property Name="AmountMonth36" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="KeyDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="single-value"/>
             </EntityType>
             <EntityType Name="ZC_LedgerVHType" sap:label="Value Help for Ledger" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -578,10 +577,6 @@
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="FiscalPeriod"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="KeyDate"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                             </Collection>
