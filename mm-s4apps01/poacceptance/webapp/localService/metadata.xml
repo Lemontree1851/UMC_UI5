@@ -79,8 +79,9 @@
                 <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="SupplierName" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="MaterialGroup" Type="Edm.String" Nullable="false" MaxLength="9"/>
-                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="SupplierMaterialNumber" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="CustomerMaterial" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="ProductManufacturerNumber" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="PurchaseOrderItemText" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="NetPrice1" Type="Edm.String" Nullable="false" MaxLength="13"/>
@@ -142,43 +143,51 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchaseOrderItem">
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Item"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Item Number of Purchasing Document"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchaseOrderItemUniqueID">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchaseOrderItemUniqueID}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/MaterialDocument">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;MaterialDocument}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Mat. Doc."/>
                 <Annotation Term="SAP__common.QuickInfo" String="Number of Material Document"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/MaterialDocumentItem">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;MaterialDocumentItem}"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Item"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Item in Material Document"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/SupplierInvoice">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;SupplierInvoice}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Doc. No."/>
                 <Annotation Term="SAP__common.QuickInfo" String="Document Number of an Invoice Document"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/SupplierInvoiceItem">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;SupplierInvoiceItem}"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="InvItem"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Document Item in Invoice Document"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/buzei">
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/CompanyCode">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;CompanyCode}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="CoCd"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Company Code"/>
             </Annotations>
@@ -206,6 +215,7 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchaseOrderType">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchaseOrderType}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchasingGroup">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchasingGroup}"/>
@@ -220,6 +230,7 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchasingGroupName">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchasingGroupName}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Description"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Description of purchasing group"/>
             </Annotations>
@@ -236,6 +247,7 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/SupplierName">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;SupplierName}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/MaterialGroup">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;MaterialGroup}"/>
@@ -261,113 +273,139 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/SupplierMaterialNumber">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;SupplierMaterialNumber}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZR_POACCEPTANCEType/CustomerMaterial">
+                <Annotation Term="SAP__common.Label" String="{@i18n&gt;CustomerMaterial}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/ProductManufacturerNumber">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;ProductManufacturerNumber}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="MPN"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Manufacturer Part Number"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchaseOrderItemText">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchaseOrderItemText}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Short Text"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Short Text"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/NetPrice1">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;NetPrice1}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/DocumentCurrency">
                 <Annotation Term="SAP__common.IsCurrency"/>
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;DocumentCurrency}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Crcy"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Currency Key"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchaseOrderDate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchaseOrderDate}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Chngd On"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Last Changed On"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/ScheduleLineDeliveryDate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;ScheduleLineDeliveryDate}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Deliv. Date"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Item Delivery Date"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/OrderQuantity">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;OrderQuantity}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Quantity"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Quantity"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchaseOrderQuantityUnit">
                 <Annotation Term="SAP__common.IsUnit"/>
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchaseOrderQuantityUnit}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="OUn"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Purchase Order Unit of Measure"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/NetAmount">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;NetAmount}"/>
                 <Annotation Term="SAP__measures.ISOCurrency" Path="DocumentCurrency"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/NetPriceQuantity">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;NetPriceQuantity}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="per"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Price unit"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/AccountAssignmentCategory">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;AccountAssignmentCategory}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="A"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Account Assignment Category"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/CostCenter">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;CostCenter}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Cost Ctr"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Cost Center"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/GLAccount">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;GLAccount}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="G/L Acct"/>
                 <Annotation Term="SAP__common.QuickInfo" String="G/L Account Number"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/ProfitCenter">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;ProfitCenter}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Profit Ctr"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Profit Center"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/RequirementTracking">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;RequirementTracking}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="TrackingNo"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Requirement Tracking Number"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/RequisitionerName">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;RequisitionerName}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Requisnr."/>
                 <Annotation Term="SAP__common.QuickInfo" String="Name of requisitioner/requester"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/Quantity1">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;Quantity1}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Quantity"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Quantity"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/TaxExcludedPrice">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;TaxExcludedPrice}"/>
                 <Annotation Term="SAP__measures.ISOCurrency" Path="DocumentCurrency"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/TaxCode">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;TaxCode}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Tx"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Tax on Sales/Purchases Code"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/TaxRate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;TaxRate}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/AccountingDocumentCreationDate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;AccountingDocumentCreationDate}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Doc. Date"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Document Date in Document"/>
             </Annotations>
@@ -383,47 +421,56 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurgHistDocumentCreationTime">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurgHistDocumentCreationTime}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Time"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Time"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/MaterialDocumentHeaderText">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;MaterialDocumentHeaderText}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Document Header Text"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Document Header Text"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/FiscalYear">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;FiscalYear}"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Year"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Fiscal Year"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/DueCalculationBaseDate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;DueCalculationBaseDate}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Bline Date"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Baseline Date for Due Date Calculation"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/InvoicingParty">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;InvoicingParty}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Supplier"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Account Number of Supplier"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/Quantity2">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;Quantity2}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Quantity"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Quantity"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/InvoiceAmtInPurOrdTransacCrcy">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;InvoiceAmtInPurOrdTransacCrcy}"/>
                 <Annotation Term="SAP__measures.ISOCurrency" Path="DocumentCurrency"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/VAT1">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;VAT1}"/>
                 <Annotation Term="SAP__measures.ISOCurrency" Path="DocumentCurrency"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/InvoiceAmount">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;InvoiceAmount}"/>
                 <Annotation Term="SAP__measures.ISOCurrency" Path="DocumentCurrency"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/InvoiceDocumentPostingDate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;InvoiceDocumentPostingDate}"/>
@@ -437,41 +484,51 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/ExchangeRate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;ExchangeRate}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/NetPrice2">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;NetPrice2}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/NetPrice3">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;NetPrice3}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/NetAmount3">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;NetAmount3}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/VAT2">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;VAT2}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/AccountingDocument">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;AccountingDocument}"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Doc. No."/>
                 <Annotation Term="SAP__common.QuickInfo" String="Document Number of an Accounting Document"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/DeliveryDate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;DeliveryDate}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Deliv. Date"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Item Delivery Date"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/DlvQty">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;DlvQty}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Quantity"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Quantity"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurgDocPriceDate">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurgDocPriceDate}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Date"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/IsCompletelyDelivered">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;IsCompletelyDelivered}"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="Truth Value"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
             </Annotations>
@@ -523,6 +580,9 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="SupplierMaterialNumber"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CustomerMaterial"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="ProductManufacturerNumber"/>
