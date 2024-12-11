@@ -75,11 +75,10 @@
                                         </MultiComboBox>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-
-
-                                <smartFilterBar:ControlConfiguration index='40' key="Material" label="{i18n>Material}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
+ 
+                                <smartFilterBar:ControlConfiguration index='40' key="Product"  label="{i18n>Product}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
-        
+                                <smartFilterBar:ControlConfiguration index='60' key="Material" label="{i18n>Material}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
                             
