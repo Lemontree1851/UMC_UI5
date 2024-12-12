@@ -562,13 +562,13 @@
 
                     <table:Column
                         width="10rem"
-                        sortProperty="MaterialCost2000"
-                        label="{i18n>MaterialCost2000}"
+                        sortProperty="MaterialCost2000_n"
+                        label="{i18n>MaterialCost2000_n}"
                     >
                         <table:template>
                             <Text
-                                text="{local>MaterialCost2000}"
-                                tooltip="{local>MaterialCost2000}"
+                                text="{local>MaterialCost2000_n}"
+                                tooltip="{local>MaterialCost2000_n}"
                                 wrapping="false"
                             />
                         </table:template>
@@ -589,13 +589,13 @@
                     </table:Column> -->
                     <table:Column
                         width="10rem"
-                        sortProperty="Manufacturingcost"
-                        label="{i18n>Manufacturingcost}"
+                        sortProperty="Manufacturingcost_n"
+                        label="{i18n>Manufacturingcost_n}"
                     >
                         <table:template>
                             <Text
-                                text="{local>Manufacturingcost}"
-                                tooltip="{local>Manufacturingcost}"
+                                text="{local>Manufacturingcost_n}"
+                                tooltip="{local>Manufacturingcost_n}"
                                 wrapping="false"
                             />
                         </table:template>
