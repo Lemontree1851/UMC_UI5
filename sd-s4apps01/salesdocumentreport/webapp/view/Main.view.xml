@@ -562,13 +562,13 @@
 
                     <table:Column
                         width="10rem"
-                        sortProperty="MaterialCost2000_n"
-                        label="{i18n>MaterialCost2000_n}"
+                        sortProperty="materialcost2000_n"
+                        label="{i18n>materialcost2000_n}"
                     >
                         <table:template>
                             <Text
-                                text="{local>MaterialCost2000_n}"
-                                tooltip="{local>MaterialCost2000_n}"
+                                text="{local>materialcost2000_n}"
+                                tooltip="{local>materialcost2000_n}"
                                 wrapping="false"
                             />
                         </table:template>
