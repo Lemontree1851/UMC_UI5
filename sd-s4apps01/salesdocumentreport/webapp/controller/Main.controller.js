@@ -109,7 +109,7 @@ sap.ui.define([
                 this.getEntityCount(aFilter, splitRange).then(function (iItemCount) {
                     if (iItemCount > 0) {
                         //设置要查询的字段
-                        let sParamtetrsOfSelect = "SalesOrganization,Customer,YearDate,Product,plantype,CustomerName,ProfitCenter,PlantName,SalesOffice,SalesGroup,CreatedByUser,MatlAccountAssignmentGroup,ProductGroup,ProductName,MaterialCost2000,Manufacturingcost,ContributionProfit,GrossProfit,CustomerAccountAssignmentGroup,FirstSalesSpecProductGroup,SecondSalesSpecProductGroup,ThirdSalesSpecProductGroup,AccountDetnProductGroup,ConditionRateValue_n,salesplanamountindspcrcy_n,SalesAmount_n,ContributionProfitTotal_n,GrossProfitTotal_n,materialcost2000per_n,Manufacturingcostper_n";
+                        let sParamtetrsOfSelect = "SalesOrganization,Customer,YearDate,Product,plantype,CustomerName,ProfitCenter,PlantName,SalesOffice,SalesGroup,CreatedByUser,MatlAccountAssignmentGroup,ProductGroup,ProductName,MaterialCost2000,Manufacturingcost,ContributionProfit,GrossProfit,CustomerAccountAssignmentGroup,FirstSalesSpecProductGroup,SecondSalesSpecProductGroup,ThirdSalesSpecProductGroup,AccountDetnProductGroup,ConditionRateValue_n,salesplanamountindspcrcy_n,SalesAmount_n,ContributionProfitTotal_n,GrossProfitTotal_n,materialcost2000per_n,Manufacturingcostper_n,materialcost2000_n,Manufacturingcost_n";
                         //获取数据
                         this._LocalData.setProperty("/SalesReport", []);
                         this._LocalData.setProperty("/SalesReportTemp", []);
@@ -265,8 +265,8 @@ sap.ui.define([
                             ProductGroup: item.ProductGroup,
                             ProductName: item.ProductName,
                             //ConditionRateValue: item.ConditionRateValue,
-                            MaterialCost2000: item.MaterialCost2000,
-                            Manufacturingcost: item.Manufacturingcost,
+                            MaterialCost2000_n: item.MaterialCost2000_n,
+                            Manufacturingcost_n: item.Manufacturingcost_n,
                             //SalesAmount: item.SalesAmount,
                             ContributionProfit: item.ContributionProfit,
                             GrossProfit: item.GrossProfit,
@@ -330,8 +330,8 @@ sap.ui.define([
                         ProductGroup: item.ProductGroup,
                         ProductName: item.ProductName,
                         //ConditionRateValue: item.ConditionRateValue,
-                        MaterialCost2000: item.MaterialCost2000,
-                        Manufacturingcost: item.Manufacturingcost,
+                        MaterialCost2000_n: item.MaterialCost2000_n,
+                        Manufacturingcost_n: item.Manufacturingcost_n,
                         //SalesAmount: item.SalesAmount,
                         ContributionProfit: item.ContributionProfit,
                         GrossProfit: item.GrossProfit,
