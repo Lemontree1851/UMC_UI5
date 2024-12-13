@@ -42,6 +42,15 @@
           "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "AuthorityService": {
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -116,6 +125,16 @@
           "earlyRequests": true
         }
       },
+      "Authority": {
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
@@ -131,6 +150,15 @@
           "uri": "./ext/css/Style.css"
         }
       ]
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ListReport.ListReportController": {
+            "controllerName": "pp.zmaterialrequisition.ext.controller.ListReport"
+          }
+        }
+      }
     },
     "routing": {
       "config": {},
@@ -158,62 +186,63 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "GridTable"
+                    "type": "GridTable",
+                    "selectAll": true
                   },
                   "actions": {
                     "create": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.openOperationDialog",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Edit}",
                       "requiresSelection": false,
                       "text": "{@i18n>Operation}"
                     },
                     "delete": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onDelete",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Delete}",
                       "requiresSelection": true,
                       "text": "{@i18n>Delete}"
                     },
                     "resent": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onResent",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Resent}",
                       "requiresSelection": true,
                       "text": "{@i18n>Resent}"
                     },
                     "print": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onPrint",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Print}",
                       "requiresSelection": true,
                       "text": "{@i18n>Print}"
                     },
                     "approval": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onApproval",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Approval}",
                       "requiresSelection": true,
                       "text": "{@i18n>Approval}"
                     },
                     "cancelapproval": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onCancelApproval",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/CancelApproval}",
                       "requiresSelection": true,
                       "text": "{@i18n>CancelApproval}"
                     },
                     "posting": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onPosting",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Posting}",
                       "requiresSelection": true,
                       "text": "{@i18n>Posting}"
                     },
                     "cancelposting": {
                       "press": "pp.zmaterialrequisition.ext.controller.ListReportExt.onCancelPosting",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/CancelPosting}",
                       "requiresSelection": true,
                       "text": "{@i18n>CancelPosting}"
                     }

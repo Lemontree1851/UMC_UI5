@@ -14,7 +14,7 @@ sap.ui.define([
         ValueHelpDialog: ValueHelpDialog,
         formatter: formatter,
 
-        init: function () {
+        init: function (oModels) {
             _myFunction = sap.ui.require("pp/zmaterialrequisition/ext/controller/ListReportExt");
             _myBusyDialog = new BusyDialog();
             _UserInfo = sap.ushell.Container.getService("UserInfo");
@@ -67,6 +67,95 @@ sap.ui.define([
                 verticalScrolling: false
             });
             // *************************************************
+            var oDataModel = oModels.undefined;
+            var oLocalModel = oModels.local;
+            var oI18nModel = oModels.i18n;
+            this._getConfig(oDataModel, oLocalModel);
+
+            // Authority Check
+            var oAuthorityModel = oModels.Authority;
+            this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel);
+        },
+
+        _getConfig: function (oDataModel, oLocalModel) {
+            var aFilters = [];
+            aFilters.push(new Filter({
+                path: "ZID",
+                operator: FilterOperator.EQ,
+                value1: "ZPP010"
+            }));
+            var oContextBinding = oDataModel.bindList("/ZC_TBC1001", undefined, undefined, aFilters, {});
+            oContextBinding.requestContexts().then(function (aContext) {
+                var aConfig = [];
+                for (const boundContext of aContext) {
+                    var object = boundContext.getObject();
+                    aConfig.push({
+                        Plant: object.Zvalue1,
+                        Amount: object.Zvalue2
+                    });
+                }
+                oLocalModel.setProperty("/Config", aConfig);
+            });
+        },
+
+        _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel) {
+            var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
+            var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
+            sEmail = "xinlei.xu@sh.shin-china.com"
+            var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: oI18nModel.getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.oErrorMessageDialog.open();
+                }
+                oLocalModel.setProperty("/authorityCheck", {
+                    button: {
+                        Edit: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Edit"),
+                        Delete: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Delete"),
+                        Resent: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Email"),
+                        Print: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Print"),
+                        Approval: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Approval"),
+                        CancelApproval: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-ApproveCancle"),
+                        Posting: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Posting"),
+                        CancelPosting: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-PostingCancle")
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: oI18nModel.getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.oErrorMessageDialog.open();
+            }.bind(this));
         },
 
         openOperationDialog: function () {
@@ -100,44 +189,24 @@ sap.ui.define([
                     }
                     _myBusyDialog.open();
 
-                    var aFilters = [];
-                    aFilters.push(new Filter({
-                        path: "ZID",
-                        operator: FilterOperator.EQ,
-                        value1: "ZPP010"
-                    }));
-                    var oContextBinding = that.getModel().bindList("/ZC_TBC1001", undefined, undefined, aFilters, {});
-                    oContextBinding.requestContexts().then(function (aContext) {
-                        var aConfig = [];
-                        for (const boundContext of aContext) {
-                            var object = boundContext.getObject();
-                            aConfig.push({
-                                Plant: object.Zvalue1,
-                                Amount: object.Zvalue2
-                            });
-                        }
-                        that.getModel("local").setProperty("/Config", aConfig);
-
-                        Fragment.load({
-                            name: "pp.zmaterialrequisition.ext.fragments.Operation",
-                            controller: that
-                        }).then(function (oDialog) {
-                            //ダイアログがロードされたら
-                            that._oOperationDialog = oDialog;
-                            //ダイアログからモデルを使用できるようにする
-                            that.routing.getView().addDependent(that._oOperationDialog);
-                            that._oOperationDialog.addButton(new sap.m.Button({
-                                text: "{i18n>CloseBtn}",
-                                press: function () {
-                                    that.getModel("local").setProperty("/headSet", {});
-                                    that.getModel("local").setProperty("/itemSet", []);
-                                    that._oOperationDialog.destroy();
-                                }
-                            }));
-                            _myBusyDialog.close();
-                            that._oOperationDialog.open();
-                        }.bind(that));
-
+                    Fragment.load({
+                        name: "pp.zmaterialrequisition.ext.fragments.Operation",
+                        controller: that
+                    }).then(function (oDialog) {
+                        //ダイアログがロードされたら
+                        that._oOperationDialog = oDialog;
+                        //ダイアログからモデルを使用できるようにする
+                        that.routing.getView().addDependent(that._oOperationDialog);
+                        that._oOperationDialog.addButton(new sap.m.Button({
+                            text: "{i18n>CloseBtn}",
+                            press: function () {
+                                that.getModel("local").setProperty("/headSet", {});
+                                that.getModel("local").setProperty("/itemSet", []);
+                                that._oOperationDialog.destroy();
+                            }
+                        }));
+                        _myBusyDialog.close();
+                        that._oOperationDialog.open();
                     }.bind(that));
                 },
                 dependentOn: this.routing.getView()
@@ -313,6 +382,22 @@ sap.ui.define([
                         } else {
                             sValue = this._oControl.getValue();
                             this._oControl.setEditable(true);
+                        }
+                        if (sInputBindingPath === '/headSet/Plant') {
+                            var aAuthorityPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+                            if (sValue) {
+                                if (!aAuthorityPlantSet.some(data => data.Plant === sValue)) {
+                                    this.getModel("local").setProperty("/headSet/Plant", "");
+                                    this._oControl.setEditable(true);
+                                    this._oControl.setValueState("Error");
+                                    this._oControl.setValueStateText(this.getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [sValue]));
+                                    _myBusyDialog.close();
+                                    return;
+                                }
+                            } else {
+                                this._oControl.setValueState("None");
+                                this._oControl.setValueStateText("");
+                            }
                         }
                     }
                     break;
@@ -705,6 +790,7 @@ sap.ui.define([
             }
             try {
                 _myBusyDialog.open();
+                that.getModel("local").setProperty("/MessageItems", []);
                 Promise.all(aPromise).then((aContext) => {
                     _myBusyDialog.close();
                     var aMessageItems = [];
@@ -713,6 +799,15 @@ sap.ui.define([
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
                         var result = JSON.parse(object.Zzkey);
+
+                        if (bEvent === "QUERY") {
+                            var aAuthorityPlantSet = that.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+                            if (!aAuthorityPlantSet.some(data => data.Plant === result.HEADER.PLANT)) {
+                                MessageBox.error(that.getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [result.HEADER.PLANT]));
+                                return;
+                            }
+                        }
+
                         if (bEvent === "QUERY" && result.MESSAGEITEMS.length === 0) {
                             that.getModel("local").setProperty("/headSet", {
                                 Plant: result.HEADER.PLANT,
