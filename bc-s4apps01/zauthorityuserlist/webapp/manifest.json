@@ -115,11 +115,6 @@
           "pattern": "User({key}):?query:",
           "name": "UserObjectPage",
           "target": "UserObjectPage"
-        },
-        {
-          "name": "User__AssignRoleObjectPage",
-          "pattern": "User({key})/_AssignRole({_AssignRoleKey}):?query:",
-          "target": "User__AssignRoleObjectPage"
         }
       ],
       "targets": {
@@ -156,24 +151,7 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/User",
-              "navigation": {
-                "_AssignRole": {
-                  "detail": {
-                    "route": "User__AssignRoleObjectPage"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "User__AssignRoleObjectPage": {
-          "type": "Component",
-          "id": "User__AssignRoleObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "navigation": {},
-              "contextPath": "/User/_AssignRole"
+              "navigation": {}
             }
           }
         }
