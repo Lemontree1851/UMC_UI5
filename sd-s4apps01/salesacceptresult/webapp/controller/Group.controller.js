@@ -15,9 +15,13 @@ sap.ui.define([
             this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._BusyDialog = new BusyDialog();
-
+            
             var oRouter = this.getOwnerComponent().getRouter();
             oRouter.getRoute("Group").attachPatternMatched(this._onRouteMatched, this);
+
+            var i18nModel = this.getOwnerComponent().getModel("i18n");
+            var header = i18nModel.getResourceBundle().getText("groupHeaderTitle", [0]);
+            
         },
 
         _onRouteMatched: function (oEvent) {
@@ -26,7 +30,7 @@ sap.ui.define([
             var oFilter = JSON.parse(sAllData);  // 将过滤条件从 JSON 字符串解析为对象
 
             this._fetchData(oFilter);
-
+            
         },
         _fetchData: function (oFilter) {
             var oModel = this.getView().getModel().getData();
@@ -68,6 +72,22 @@ sap.ui.define([
                 value1: "2"
             });
             filters.push(oLayer);
+
+            var oBinding = oEvent.getParameter("bindingParams");
+            oBinding.events = {
+                "dataReceived": function (oEvent) {
+                    var oReceivedData = oEvent.getParameter('data');
+                    var iCount = 0;
+                    oReceivedData.results.forEach(function (line) {
+                       if (line.SalesDocument !== ""){
+                          iCount = iCount + 1;
+                       }
+                    });
+                    var headerText = this.getModel("i18n").getResourceBundle().getText("groupHeaderTitle", [iCount]);
+                    // 更新 SmartTable 的 header 文本
+                    this.setHeader(headerText);
+                },
+              };
         },
 
         onSave: function () {

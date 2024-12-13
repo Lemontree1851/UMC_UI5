@@ -77,7 +77,7 @@
       </OverflowToolbar>
 		</smartTable:customToolbar>
     
-		<t:Table id="ReportTable" rowMode="Auto" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" >
+		<t:Table id="ReportTable" rowMode="Auto" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" enableColumnFreeze="true">
           <t:Column id="CustomerPO" label="{i18n>CustomerPO}" width="10rem" sortProperty="CustomerPO" filterProperty="CustomerPO" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerPO", "leadingProperty":"CustomerPO", "sortProperty":"CustomerPO", "filterProperty": "CustomerPO"}'/>

@@ -42,7 +42,7 @@
 	<f:content>
 
     <smartTable:SmartTable id="smartTable" entitySet="SalesAcceptanceResult" smartFilterId="smartFilterBar" tableType="Table"
-				showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}"
+				showRowCount="false" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" 
 				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
 				beforeExport="onBeforeExport" fitContainer="false" height="100%">
             <smartTable:customToolbar>
@@ -53,7 +53,7 @@
             </OverflowToolbar>
 		    </smartTable:customToolbar>
 
-		<t:Table id="ReportTable" rowMode="Auto" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" >
+		<t:Table id="ReportTable" rowMode="Auto" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" enableColumnFreeze="true">
             <t:Column id="CustomerPO" label="{i18n>CustomerPO}" width="10rem" sortProperty="CustomerPO" filterProperty="CustomerPO" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerPO", "leadingProperty":"CustomerPO", "sortProperty":"CustomerPO", "filterProperty": "CustomerPO"}'/>
