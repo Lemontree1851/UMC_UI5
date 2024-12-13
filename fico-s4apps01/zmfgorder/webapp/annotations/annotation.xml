@@ -1,4 +1,7 @@
 <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
         <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
     </edmx:Reference>
@@ -106,6 +109,50 @@
                                 <PropertyValue Property="Visualizations">
                                     <Collection>
                                         <AnnotationPath>@UI.LineItem#tableView44</AnnotationPath>
+                                    </Collection>
+                                </PropertyValue>
+                                <PropertyValue Property="SortOrder">
+                                    <Collection>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="orderid"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="YearMonth"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="Companycode"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="Plant"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="Product"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="producedproduct"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="BusinessPartner"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="ProfitCenter"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="CostCenter"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
+                                        <Record Type="Common.SortOrderType">
+                                            <PropertyValue Property="Property" PropertyPath="ActivityType"/>
+                                            <PropertyValue Property="Descending" Bool="false"/>
+                                        </Record>
                                     </Collection>
                                 </PropertyValue>
                             </Record>
