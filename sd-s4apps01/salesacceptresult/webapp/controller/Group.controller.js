@@ -18,9 +18,6 @@ sap.ui.define([
             
             var oRouter = this.getOwnerComponent().getRouter();
             oRouter.getRoute("Group").attachPatternMatched(this._onRouteMatched, this);
-
-            var i18nModel = this.getOwnerComponent().getModel("i18n");
-            var header = i18nModel.getResourceBundle().getText("groupHeaderTitle", [0]);
             
         },
 
@@ -31,6 +28,8 @@ sap.ui.define([
 
             this._fetchData(oFilter);
             
+            this._oDataModel.setRefreshAfterChange(false);
+            this._oDataModel.refresh();    
         },
         _fetchData: function (oFilter) {
             var oModel = this.getView().getModel().getData();

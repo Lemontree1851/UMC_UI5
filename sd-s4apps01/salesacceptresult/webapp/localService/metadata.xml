@@ -87,6 +87,7 @@
                     <PropertyRef Name="SalesDocumentItem"/>
                     <PropertyRef Name="BillingDocument"/>
                     <PropertyRef Name="CustomerPO"/>
+                    <PropertyRef Name="ProcessStatus"/>
                 </Key>
                 <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -98,6 +99,7 @@
                 <Property Name="SalesDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="BillingDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="CustomerPO" Type="Edm.String" Nullable="false" MaxLength="35"/>
+                <Property Name="ProcessStatus" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="AcceptPeriodFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="AcceptPeriodTo" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="SalesDocumentType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Document Type"/>
@@ -107,7 +109,7 @@
                 <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Posting Date" sap:quickinfo="Posting Date in the Document"/>
                 <Property Name="AcceptDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="AcceptQty" Type="Edm.String" MaxLength="20"/>
-                <Property Name="BillingQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantity"/>
+                <Property Name="BillingQuantity" Type="Edm.String" MaxLength="20"/>
                 <Property Name="AcceptPrice" Type="Edm.String" MaxLength="20"/>
                 <Property Name="ConditionRateValue" Type="Edm.String" MaxLength="20"/>
                 <Property Name="ConditionCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
@@ -121,7 +123,6 @@
                 <Property Name="ExchangeRateDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="OutsideData" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Remarks" Type="Edm.String" MaxLength="100"/>
-                <Property Name="ProcessStatus" Type="Edm.String" MaxLength="20"/>
                 <Property Name="ReasonCategory" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Reason" Type="Edm.String" MaxLength="20"/>
                 <Property Name="CustomerName" Type="Edm.String" MaxLength="80"/>
