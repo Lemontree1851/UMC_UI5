@@ -280,6 +280,20 @@
                             visible="{= ${local>/SalesReport}.length > 0}"
                         />
                         <ToolbarSpacer id="idToolbarSpacer" />
+                        <Button 
+                            icon="sap-icon://excel-attachment"
+                            type="Transparent"
+                            press="onExport"
+                            text="{i18n>onExport}"
+                            visible="{= ${local>/SalesReport}.length > 0}"  
+                        />
+                                                <Button 
+                            icon="sap-icon://excel-attachment"
+                            type="Transparent"
+                            press="onExportBI"
+                            text="{i18n>onBIExport}"
+                            visible="{= ${local>/SalesReport}.length > 0}"  
+                        />
                     </OverflowToolbar>
                 </t:extension>
 
@@ -601,6 +615,135 @@
                         </table:template>
                     </table:Column>
 
+                    <table:Column
+                        width="10rem"
+                        sortProperty="GLAccount1"
+                        label="{i18n>GLAccount1}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>GLAccount1}"
+                                tooltip="{local>GLAccount1}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="10rem"
+                        sortProperty="GLAccountName1"
+                        label="{i18n>GLAccountName1}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>GLAccountName1}"
+                                tooltip="{local>GLAccountName1}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column
+                        width="10rem"
+                        sortProperty="GLAccount2"
+                        label="{i18n>GLAccount2}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>GLAccount2}"
+                                tooltip="{local>GLAccount2}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="10rem"
+                        sortProperty="GLAccountName2"
+                        label="{i18n>GLAccountName2}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>GLAccountName2}"
+                                tooltip="{local>GLAccountName2}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>    
+                    
+                    <table:Column
+                        width="10rem"
+                        sortProperty="GLAccount3"
+                        label="{i18n>GLAccount3}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>GLAccount3}"
+                                tooltip="{local>GLAccount3}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="10rem"
+                        sortProperty="GLAccountName3"
+                        label="{i18n>GLAccountName3}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>GLAccountName3}"
+                                tooltip="{local>GLAccountName3}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>  
+
+                    <table:Column
+                        width="10rem"
+                        sortProperty="DisplayCurrency1"
+                        label="{i18n>DisplayCurrency1}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>DisplayCurrency1}"
+                                tooltip="{local>DisplayCurrency1}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column> 
+                    <table:Column
+                        width="10rem"
+                        sortProperty="currency"
+                        label="{i18n>currency}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>currency}"
+                                tooltip="{local>currency}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>  
+                    <table:Column
+                        width="10rem"
+                        sortProperty="currency1"
+                        label="{i18n>currency1}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>currency1}"
+                                tooltip="{local>currency1}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>                                   
                     <!-- <table:Column
                         width="10rem"
                         sortProperty="SalesAmount"
