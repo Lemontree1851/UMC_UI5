@@ -55,10 +55,11 @@ displayFormat="yyyy/MM/dd"
  
                 </VBox>
 
-                <VBox class="sapUiSmallMarginEnd">
+                <VBox class="sapUiSmallMarginEnd" >
                     <Label text="{i18n>Customer}:" required="false"/>
-                    <MultiInput id="idCustomer" value="{local>/headSet/Customer}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/ZC_SupplierCompanyVH', ['SupplierCompany','SupplierCompanyName'])" showSuggestion="true" suggestionRows="{ path: '/ZC_SupplierCompanyVH', length: 10 }" required="false" width="13rem">
+                    
+                    <MultiInput id="idCustomer" editable="true" value="{local>/headSet/Customer}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/ZC_SupplierCompanyVH', ['SupplierCompany','SupplierCompanyName','CompanyCode'])" showSuggestion="true" suggestionRows="{ path: '/ZC_SupplierCompanyVH', length: 10 }" required="false" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>Customer}"/>
@@ -69,10 +70,11 @@ displayFormat="yyyy/MM/dd"
                         </suggestionColumns>
                         <suggestionRows>
                             <ColumnListItem>
-                                <Label text="{Customer}" />
-                                <Label text="{CustomerName}" />
+                                <Label text="{SupplierCompany}" />
+                                <Label text="{SupplierCompanyName}" />
                             </ColumnListItem>
                         </suggestionRows>
+                        
                     </MultiInput>
                     
                     <Label text="{i18n>CustomerName}:"  visible = "false"/>
@@ -92,15 +94,16 @@ displayFormat="yyyy/MM/dd"
                         </suggestionColumns>
                         <suggestionRows>
                             <ColumnListItem>
-                                <Label text="{PaymentMethod1}" />
+                                <Label text="{PaymentMethod}" />
                                 <Label text="{PaymentMethodName}" />
                             </ColumnListItem>
                         </suggestionRows>
                     </MultiInput>
                     <Label text="{i18n>PaymentMethodName1}:" visible = "false"/>
                     <Input value="{local>/headSet/PaymentMethodName}"  width="13rem"  visible = "false"/>
-                </VBox>
 
+                  </VBox>
+ 
             </HBox>
             <OverflowToolbar>
                 <ToolbarSpacer/>
@@ -120,7 +123,8 @@ displayFormat="yyyy/MM/dd"
                             <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}"/>
                             <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelSet}.length > 0}"/>
                             <Button id="idJobButton" icon="sap-icon://pending" type="Transparent" text="{i18n>jobBtn}" press="onJob" visible="{= ${local>/excelSet}.length > 0}"/>
-                        </OverflowToolbar>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>ExportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}"/>
+                       </OverflowToolbar>
                     </table:extension>
                     <table:columns>
                         <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">

@@ -1,22 +1,24 @@
 sap.ui.define([
     "../controller/ValueHelpDialog",
+    "../controller/ValueHelpDialog1",
     "../model/formatter",
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
     "sap/ui/core/Fragment",
     "sap/m/Token"
-], function (ValueHelpDialog, formatter, BusyDialog, MessageBox, Fragment, Token) {
+], function (ValueHelpDialog,ValueHelpDialog1, formatter, BusyDialog, MessageBox, Fragment, Token) {
     'use strict';
 
     var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog;
     return {
         ValueHelpDialog: ValueHelpDialog,
+        ValueHelpDialog1: ValueHelpDialog1,
         formatter: formatter,
 
         init: function () {
 
             console.log("listnini")
-            
+
             _myFunction = sap.ui.require("fico/zpaymentmethod/ext/controller/ListReportExt");
             _myBusyDialog = new BusyDialog();
             // *************************************************
@@ -69,8 +71,8 @@ sap.ui.define([
             });
             // *************************************************
 
-            
-  
+
+
         },
 
         openOperationDialog: function () {
@@ -127,7 +129,7 @@ sap.ui.define([
 
         onSearch: function () {
             var oControl1 = sap.ui.getCore();
-            console.log("11coreplant"+oControl1);
+            console.log("11coreplant" + oControl1);
             var that = this;
             var oControl = sap.ui.getCore().byId("idMaterialRequisitionNo");
             var sMaterialRequisitionNo = oControl.getValue();
@@ -229,48 +231,65 @@ sap.ui.define([
         handleChange: function (oEvent) {
 
             console.log("handleChange");
- 
+
             this._oControl = oEvent.getSource();
             var sInputBindingPath = this._oControl.mBindingInfos.value.parts[0].path;
             console.log(sInputBindingPath);
-    
+
             switch (sInputBindingPath) {
                 case "/headSet/CompanyCode":
                     var idCompanyCodeValue = this.getView().byId("idCompanyCode").getValue();
-                    var oContextBinding = this.getModel().bindContext("/I_CompanyCodeVH" + "('" + idCompanyCodeValue.replace(/\s/g, "") + "')"); 
-                    var oMultiInput = this.getView().byId( "idCompanyCode");
+                    var oContextBinding = this.getModel().bindContext("/I_CompanyCodeVH" + "('" + idCompanyCodeValue.replace(/\s/g, "") + "')");
+                    var oMultiInput = this.getView().byId("idCompanyCode");
                     oContextBinding.requestObject().then(function (context) {
                         for (const key in context) {
                             if (key == "CompanyCodeName") {
                                 this.getModel("local").setProperty("idCompanyCode" + key, context[key]);
                                 var CompanyCodeText = context[key] + "(" + idCompanyCodeValue.replace(/\s/g, "") + ")";
-                            oMultiInput.setTokens([
-                                new Token({text: CompanyCodeText, key: idCompanyCodeValue})
-                            ]);
-                            oMultiInput.setValue(""); // 清除输入
+                                oMultiInput.setTokens([
+                                    new Token({ text: CompanyCodeText, key: idCompanyCodeValue })
+                                ]);
+                                oMultiInput.setValue(""); // 清除输入
                             }
                         }
-            
-                    }.bind(this));   
-                    case "/headSet/Customer":
-                        var idCustomerValue = this.getView().byId("idCustomer").getValue();
-                        var oContextBinding = this.getModel().bindContext("/I_BusinessPartnerVH" + "('" + idCustomerValue.replace(/\s/g, "") + "')");
-                        var oMultiInput1 = this.getView().byId( "idCustomer");
-                        oContextBinding.requestObject().then(function (context) {
-                            for (const key in context) {
-                                if (key == "OrganizationBPName1") {
-                                    this.getModel("local").setProperty("idCustomer" + key, context[key]);
-                                    var CustomerText = context[key] + "(" + idCustomerValue.replace(/\s/g, "") + ")";
+
+                    }.bind(this));
+                case "/headSet/Customer":
+                    var idCustomerValue = this.getView().byId("idCustomer").getValue();
+                    var oContextBinding = this.getModel().bindContext("/I_BusinessPartnerVH" + "('" + idCustomerValue.replace(/\s/g, "") + "')");
+                    var oMultiInput1 = this.getView().byId("idCustomer");
+                    oContextBinding.requestObject().then(function (context) {
+                        for (const key in context) {
+                            if (key == "OrganizationBPName1") {
+                                this.getModel("local").setProperty("idCustomer" + key, context[key]);
+                                var CustomerText = context[key] + "(" + idCustomerValue.replace(/\s/g, "") + ")";
                                 oMultiInput1.setTokens([
-                                    new Token({text: CustomerText, key: idCustomerValue})
+                                    new Token({ text: CustomerText, key: idCustomerValue })
                                 ]);
                                 oMultiInput1.setValue(""); // 清除输入
-                                }
                             }
-                
-                        }.bind(this));   
- 
-            } 
+                        }
+
+                    }.bind(this));
+                case "/headSet/PaymentMethod":
+                    var idPaymentMethodValue = this.getView().byId("idPaymentMethod").getValue();
+                    var oContextBinding = this.getModel().bindContext("/ZC_PaymentMethodVH" + "('" + idPaymentMethodValue.replace(/\s/g, "") + "')");
+                    var oMultiInput1 = this.getView().byId("idPaymentMethod");
+                    oContextBinding.requestObject().then(function (context) {
+                        for (const key in context) {
+                            if (key == "PaymentMethodName") {
+                                this.getModel("local").setProperty("idPaymentMethod" + key, context[key]);
+                                var PaymentMethodText = context[key] + "(" + idPaymentMethodValue.replace(/\s/g, "") + ")";
+                                oMultiInput1.setTokens([
+                                    new Token({ text: PaymentMethodText, key: idPaymentMethodValue })
+                                ]);
+                                oMultiInput1.setValue(""); // 清除输入
+                            }
+                        }
+
+                    }.bind(this));
+
+            }
 
         },
 

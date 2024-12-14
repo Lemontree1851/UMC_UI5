@@ -7,8 +7,9 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/Input",
-    "sap/m/Token"
-], function (Label, FilterGroupItem, SearchField, UIColumn, Text, Filter, FilterOperator, Input, Token) {
+    "sap/m/Token",
+    'sap/ui/model/type/String',
+], function (Label, FilterGroupItem, SearchField, UIColumn, Text, Filter, FilterOperator, Input, Token, TypeString) {
     "use strict";
 
     return {
@@ -34,6 +35,22 @@ sap.ui.define([
 
                 // Set filter group items
                 that._aVHFields.forEach(fieldName => {
+
+                    if (fieldName.includes("Name")) {
+                    } else {
+                        if(fieldName == "SupplierCompany") {
+                        // Set key fields for filtering in the Define Conditions Tab
+                        oDialog.setRangeKeyFields([{
+                            label: "{i18n>" + fieldName + "}",
+                            key: fieldName,
+                            type: "string",
+                            typeInstance: new TypeString({}, {
+                                maxLength: 7
+                            })
+                        }]);
+                    }
+                    }
+
                     var oFilterGroupItem = new FilterGroupItem({
                         groupName: "__$INTERNAL$",
                         visibleInFilterBar: true,
@@ -48,7 +65,7 @@ sap.ui.define([
                 // Set Basic Search for FilterBar
                 oFilterBar.setFilterBarExpanded(false);
                 oFilterBar.setBasicSearch(that._oBasicSearchField);
- 
+
 
                 // Trigger filter bar search when the basic search is fired
                 that._oBasicSearchField.attachSearch(function () {
@@ -83,8 +100,11 @@ sap.ui.define([
                         });
                     }
                     oDialog.update();
-                    oDialog.open();
+
                 }.bind(that));
+                oDialog.open();
+
+
             }.bind(that));
         },
 
@@ -128,11 +148,11 @@ sap.ui.define([
         onValueHelpOkPress: function (oEvent) {
             console.log("ok");
             var aTokens = oEvent.getParameter("tokens");
-            
+
             //--------------------------------------------------------------------------------
             var sInputPath = this._oInput.mBindingInfos.value.parts[0].path;
             console.log(aTokens[0].getProperty("key"));
-            
+
             //console.log(aTokens[1].getProperty("key"));
             if (sInputPath.includes("/")) {
                 // head bind
@@ -148,21 +168,21 @@ sap.ui.define([
                     this.getModel("local").setProperty("/headSet/" + sFieldName, aTokens[0].getProperty("text"));
                 }
                 */
-                var sFieldID = "id" + sInputPath.split("/")[2] ;
+                var sFieldID = "id" + sInputPath.split("/")[2];
                 var oView = this.getView();
                 console.log(aTokens);
-                var oMultiInput1 = oView.byId(sFieldID );
+                var oMultiInput1 = oView.byId(sFieldID);
                 oMultiInput1.setTokens(aTokens);
 
                 console.log(aTokens[0].getProperty("text"));
                 console.log(aTokens[0].getProperty("key"));
                 //var sItemPath1 = this._oInput.getParent().oBindingContexts.local.sPath + "/";
-               // for (var i = 0; i < aTokens.length; i++) {
-               //    oMultiInput1.setTokens([
-               //         new Token({text: aTokens[i].getProperty("text"), key: aTokens[i].getProperty("key")})
+                // for (var i = 0; i < aTokens.length; i++) {
+                //    oMultiInput1.setTokens([
+                //         new Token({text: aTokens[i].getProperty("text"), key: aTokens[i].getProperty("key")})
                 //    ]);
                 //}
- 
+
             } else {
 
                 // table item bind
@@ -185,7 +205,7 @@ sap.ui.define([
                         for (const key in context) {
                             if (!key.includes("@odata")) {
                                 this.getModel("local").setProperty(sItemPath + key, context[key]);
-                               
+
                             }
                         }
                         // Calculate amount
@@ -200,7 +220,7 @@ sap.ui.define([
                     }.bind(this));
                 } else {
                     this.getModel("local").setProperty(sInputPath + "Name", aTokens[0].getProperty("text").split("(")[0]);
-                   
+
                 }
             }
             //--------------------------------------------------------------------------------
@@ -213,6 +233,28 @@ sap.ui.define([
 
         onValueHelpAfterClose: function () {
             this._oVHD.destroy();
-        }
+        },
+        // @endregion
+        // Internal helper methods
+        _getDefaultTokens: function () {
+            var ValueHelpRangeOperation = compLibrary.valuehelpdialog.ValueHelpRangeOperation;
+            var oToken1 = new Token({
+                key: "PD-103",
+                text: "Mouse (PD-103)"
+            });
+
+            var oToken2 = new Token({
+                key: "range_0",
+                text: "!(=PD-102)"
+            }).data("range", {
+                "exclude": true,
+                "operation": ValueHelpRangeOperation.EQ,
+                "keyField": "ProductCode",
+                "value1": "PD-102",
+                "value2": ""
+            });
+
+            return [oToken1, oToken2];
+        },
     };
 });
