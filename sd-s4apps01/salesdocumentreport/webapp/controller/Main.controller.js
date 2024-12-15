@@ -614,14 +614,14 @@ sap.ui.define([
 
                     var baseItem = {
                         "Plan_Category": "PLN",
-                        "CompanyCode": aExcelSet[i].AccountDetnProductGroup,
+                        "CompanyCode": aExcelSet[i].Plant,
                         "Plant": aExcelSet[i].Plant,
                         "ProfitCenter": aExcelSet[i].ProfitCenter,
                         "Customer": aExcelSet[i].Customer,
                         "Product": aExcelSet[i].Product,
-                        "MaterialGroup1": aExcelSet[i].MaterialGroup1,
-                        "MaterialGroup2": aExcelSet[i].MaterialGroup2,
-                        "MaterialGroup3": aExcelSet[i].MaterialGroup3,
+                        "FirstSalesSpecProductGroup": aExcelSet[i].FirstSalesSpecProductGroup,
+                        "SecondSalesSpecProductGroup": aExcelSet[i].SecondSalesSpecProductGroup,
+                        "ThirdSalesSpecProductGroup": aExcelSet[i].ThirdSalesSpecProductGroup,
                         "MatlAccountAssignmentGroup": aExcelSet[i].MatlAccountAssignmentGroup,
 
                     };
@@ -698,27 +698,27 @@ sap.ui.define([
                     label: "Product",
                     type: sType,
                     property: "Product",
-                    width: 10
+                    width: 12
                 };
                 aExcelCol.push(oExcelCol);
                 var oExcelCol = {
                     label: "MaterialGroup1",
                     type: sType,
-                    property: "MaterialGroup1",
+                    property: "FirstSalesSpecProductGroup",
                     width: 10
                 };
                 aExcelCol.push(oExcelCol);
                 var oExcelCol = {
                     label: "MaterialGroup2",
                     type: sType,
-                    property: "MaterialGroup2",
+                    property: "SecondSalesSpecProductGroup",
                     width: 10
                 };
                 aExcelCol.push(oExcelCol);
                 var oExcelCol = {
                     label: "MaterialGroup3",
                     type: sType,
-                    property: "MaterialGroup3",
+                    property: "ThirdSalesSpecProductGroup",
                     width: 10
                 };
                 aExcelCol.push(oExcelCol);
