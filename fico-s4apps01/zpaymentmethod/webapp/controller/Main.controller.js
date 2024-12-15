@@ -192,6 +192,7 @@ sap.ui.define([
                     for (const activeContext of aContext) {
                         var boundContext = activeContext.getBoundContext();
                         var object = boundContext.getObject();
+                    
                         if (bEvent === "EXPORT") {
                             if (object.RecordUUID) {
                                 var sURL = this.getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + object.RecordUUID + ",IsActiveEntity=true)/PDFContent";
