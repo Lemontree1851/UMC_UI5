@@ -390,25 +390,32 @@ sap.ui.define([
                 console.log("ofpartition", ofpartition);
                 if (ofpartition.length > 0) {
                     Object.keys(ofpartition[0]).forEach(function (key) {
-                        if (key.indexOf("materialcost2000per") >= 0) {
-                            this.addColumn(key, this);
-                        }
-                        if (key.indexOf("Manufacturingcostper") >= 0) {
-                            this.addColumn(key, this);
-                        }
+                        //单价
                         if (key.indexOf("ConditionRateValue") >= 0) {
                             this.addColumn(key, this);
                         }
+                        //贡献利润(单价)
+                        if (key.indexOf("materialcost2000per") >= 0) {
+                            this.addColumn(key, this);
+                        }
+                        //销售总利润(单价)
+                        if (key.indexOf("Manufacturingcostper") >= 0) {
+                            this.addColumn(key, this);
+                        }
+                        //QTY
                         if (key.indexOf("salesplanamountindspcrcy") >= 0) {
                             this.addColumn(key, this);
                         }
+                        //销售额
                         if (key.indexOf("SalesAmount") >= 0) {
 
                             this.addColumn(key, this);
                         }
+                        //贡献利润
                         if (key.indexOf("ContributionProfitTotal") >= 0) {
                             this.addColumn(key, this);
                         }
+                        //销售总利润
                         if (key.indexOf("GrossProfitTotal") >= 0) {
                             this.addColumn(key, this);
                         }
@@ -629,10 +636,10 @@ sap.ui.define([
                         "MatlAccountAssignmentGroup": aExcelSet[i].MatlAccountAssignmentGroup,
 
                     };
- 
+
                     Object.keys(aExcelSet[i]).forEach(key => {
                         if (key.startsWith("SalesAmount")) {
-                            
+
                             var yearMonth = key.replace("SalesAmount", "");
                             var planKey = "salesplanamountindspcrcy" + yearMonth;
                             var oppositeQty = aExcelSet[i][planKey] > 0 ? -Math.abs(aExcelSet[i][planKey]) : Math.abs(aExcelSet[i][planKey]); // Flip the sign of QTY
@@ -647,9 +654,9 @@ sap.ui.define([
                                 "GLAccount": aExcelSet[i].GLAccount1,
                                 "GLAccountName": aExcelSet[i].GLAccountName1,
                                 "Amount": oppositeAmount1, // Dynamic key assignment
-                                "Currency": aExcelSet[i].DisplayCurrency1 ? aExcelSet[i].DisplayCurrency1 : "JPY" ,
-                                "QTY": oppositeQty, 
-                                "Unit": aExcelSet[i].SalesPlanUnit ,
+                                "Currency": aExcelSet[i].DisplayCurrency1 ? aExcelSet[i].DisplayCurrency1 : "JPY",
+                                "QTY": oppositeQty,
+                                "Unit": aExcelSet[i].SalesPlanUnit,
                             };
                             aExcelSetBI.push(item);
                             var item1 = {
@@ -659,7 +666,7 @@ sap.ui.define([
                                 "GLAccountName": aExcelSet[i].GLAccountName2,
                                 "Amount": oppositeAmount2, // Dynamic key assignment
                                 "Currency": aExcelSet[i].currency,
-                                "QTY": oppositeQty, 
+                                "QTY": oppositeQty,
                                 "Unit": aExcelSet[i].SalesPlanUnit,
                             };
                             aExcelSetBI.push(item1);
@@ -670,7 +677,7 @@ sap.ui.define([
                                 "GLAccountName": aExcelSet[i].GLAccountName3,
                                 "Amount": oppositeAmount3, // Dynamic key assignment
                                 "Currency": aExcelSet[i].currency1,
-                                "QTY": oppositeQty, 
+                                "QTY": oppositeQty,
                                 "Unit": aExcelSet[i].SalesPlanUnit,
                             };
                             aExcelSetBI.push(item2);
