@@ -643,9 +643,9 @@ sap.ui.define([
                                 "GLAccount": aExcelSet[i].GLAccount1,
                                 "GLAccountName": aExcelSet[i].GLAccountName1,
                                 "Amount": oppositeAmount1, // Dynamic key assignment
-                                "Currency": aExcelSet[i].DisplayCurrency1,
+                                "Currency": aExcelSet[i].DisplayCurrency1 ? aExcelSet[i].DisplayCurrency1 : "JPY" ,
                                 "QTY": oppositeQty, 
-                                "Unit": aExcelSet[i].SalesPlanUnit ? aExcelSet[i].SalesPlanUnit : "JPY" 
+                                "Unit": aExcelSet[i].SalesPlanUnit ,
                             };
                             aExcelSetBI.push(item);
                             var item1 = {
@@ -656,7 +656,7 @@ sap.ui.define([
                                 "Amount": oppositeAmount2, // Dynamic key assignment
                                 "Currency": aExcelSet[i].currency,
                                 "QTY": oppositeQty, 
-                                "Unit": aExcelSet[i].SalesPlanUnit ? aExcelSet[i].SalesPlanUnit : "JPY" 
+                                "Unit": aExcelSet[i].SalesPlanUnit,
                             };
                             aExcelSetBI.push(item1);
                             var item2 = {
@@ -667,7 +667,7 @@ sap.ui.define([
                                 "Amount": oppositeAmount3, // Dynamic key assignment
                                 "Currency": aExcelSet[i].currency1,
                                 "QTY": oppositeQty, 
-                                "Unit": aExcelSet[i].SalesPlanUnit ? aExcelSet[i].SalesPlanUnit : "JPY" 
+                                "Unit": aExcelSet[i].SalesPlanUnit,
                             };
                             aExcelSetBI.push(item2);
                         }
