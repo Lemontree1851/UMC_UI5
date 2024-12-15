@@ -628,17 +628,24 @@ sap.ui.define([
  
                     Object.keys(aExcelSet[i]).forEach(key => {
                         if (key.startsWith("SalesAmount")) {
+                            
                             var yearMonth = key.replace("SalesAmount", "");
                             var planKey = "salesplanamountindspcrcy" + yearMonth;
+                            var oppositeQty = aExcelSet[i][planKey] > 0 ? -Math.abs(aExcelSet[i][planKey]) : Math.abs(aExcelSet[i][planKey]); // Flip the sign of QTY
+
+                            var oppositeAmount1 = aExcelSet[i][key] > 0 ? -Math.abs(aExcelSet[i][key]) : Math.abs(aExcelSet[i][key]); // Flip the sign of QTY
+                            var oppositeAmount2 = aExcelSet[i].materialcost2000_n > 0 ? -Math.abs(aExcelSet[i].materialcost2000_n) : Math.abs(aExcelSet[i].materialcost2000_n); // Flip the sign of QTY
+                            var oppositeAmount3 = aExcelSet[i].Manufacturingcost_n > 0 ? -Math.abs(aExcelSet[i].Manufacturingcost_n) : Math.abs(aExcelSet[i].Manufacturingcost_n); // Flip the sign of QTY
+
                             var item = {
                                 "YearMonth": yearMonth,
                                 ...baseItem, // Spread the base item to include its properties
                                 "GLAccount": aExcelSet[i].GLAccount1,
                                 "GLAccountName": aExcelSet[i].GLAccountName1,
-                                "Amount": aExcelSet[i][key], // Dynamic key assignment
+                                "Amount": oppositeAmount1, // Dynamic key assignment
                                 "Currency": aExcelSet[i].DisplayCurrency1,
-                                "QTY": aExcelSet[i][planKey], 
-                                "Unit":aExcelSet[i].SalesPlanUnit 
+                                "QTY": oppositeQty, 
+                                "Unit": aExcelSet[i].SalesPlanUnit ? aExcelSet[i].SalesPlanUnit : "JPY" 
                             };
                             aExcelSetBI.push(item);
                             var item1 = {
@@ -646,10 +653,10 @@ sap.ui.define([
                                 ...baseItem, // Spread the base item to include its properties
                                 "GLAccount": aExcelSet[i].GLAccount2,
                                 "GLAccountName": aExcelSet[i].GLAccountName2,
-                                "Amount": aExcelSet[i][key], // Dynamic key assignment
+                                "Amount": oppositeAmount2, // Dynamic key assignment
                                 "Currency": aExcelSet[i].currency,
-                                "QTY": aExcelSet[i][planKey], 
-                                "Unit":aExcelSet[i].SalesPlanUnit 
+                                "QTY": oppositeQty, 
+                                "Unit": aExcelSet[i].SalesPlanUnit ? aExcelSet[i].SalesPlanUnit : "JPY" 
                             };
                             aExcelSetBI.push(item1);
                             var item2 = {
@@ -657,10 +664,10 @@ sap.ui.define([
                                 ...baseItem, // Spread the base item to include its properties
                                 "GLAccount": aExcelSet[i].GLAccount3,
                                 "GLAccountName": aExcelSet[i].GLAccountName3,
-                                "Amount": aExcelSet[i][key], // Dynamic key assignment
+                                "Amount": oppositeAmount3, // Dynamic key assignment
                                 "Currency": aExcelSet[i].currency1,
-                                "QTY": aExcelSet[i][planKey], 
-                                "Unit":aExcelSet[i].SalesPlanUnit 
+                                "QTY": oppositeQty, 
+                                "Unit": aExcelSet[i].SalesPlanUnit ? aExcelSet[i].SalesPlanUnit : "JPY" 
                             };
                             aExcelSetBI.push(item2);
                         }
