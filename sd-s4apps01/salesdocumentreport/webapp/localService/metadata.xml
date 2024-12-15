@@ -136,6 +136,14 @@
                 <Property Name="DisplayCurrency3" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
                 <Property Name="currency1" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
+                <Property Name="GLAccount1" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="G/L Account" sap:quickinfo="General Ledger Account"/>
+                <Property Name="GLAccount2" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="G/L Account" sap:quickinfo="General Ledger Account"/>
+                <Property Name="GLAccount3" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="G/L Account" sap:quickinfo="General Ledger Account"/>
+                <Property Name="GLAccountName1" Type="Edm.String" MaxLength="30"/>
+                <Property Name="GLAccountName2" Type="Edm.String" MaxLength="30"/>
+                <Property Name="GLAccountName3" Type="Edm.String" MaxLength="30"/>
+                <Property Name="SalesPlanUnit_c" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Companycode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
                 <Property Name="materialcost2000_n" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="currency" sap:variable-scale="true"/>
                 <Property Name="materialcost2000per_n" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="currency" sap:variable-scale="true"/>
                 <Property Name="Manufacturingcost_n" Type="Edm.Decimal" Precision="20" Scale="3" sap:unit="currency1" sap:variable-scale="true"/>

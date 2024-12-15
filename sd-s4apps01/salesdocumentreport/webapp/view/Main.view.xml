@@ -51,6 +51,7 @@
                                 key="SalesOrganization"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>SalesOrganization}"
+                                mandatory="mandatory"
                             >
                                 <!-- 可以添加默认聚合内容，如果有需要 -->
                             </smartFilterBar:ControlConfiguration>
@@ -89,6 +90,7 @@
                                     <Select
                                         id="idplantype"
                                         selectedKey=""
+                                        required="true" 
                                     >
                                         <core:Item
                                             id="A"
@@ -127,6 +129,7 @@
                                 key="ConditionCurrency"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>ConditionCurrency}"
+                                mandatory="mandatory"
                             >
                                 <!-- 可以添加默认聚合内容，如果有需要 -->
                             </smartFilterBar:ControlConfiguration>
@@ -744,7 +747,21 @@
                                 wrapping="false"
                             />
                         </table:template>
-                    </table:Column>                                   
+                    </table:Column>   
+                    <table:Column
+                        width="10rem"
+                        sortProperty="Companycode"
+                        label="{i18n>Companycode}"
+                        visible="false"
+                    >
+                        <table:template>
+                            <Text
+                                text="{local>Companycode}"
+                                tooltip="{local>Companycode}"
+                                wrapping="false"
+                            />
+                        </table:template>
+                    </table:Column>                                  
                     <!-- <table:Column
                         width="10rem"
                         sortProperty="SalesAmount"

@@ -110,7 +110,7 @@ sap.ui.define([
                 this.getEntityCount(aFilter, splitRange).then(function (iItemCount) {
                     if (iItemCount > 0) {
                         //设置要查询的字段
-                        let sParamtetrsOfSelect = "SalesOrganization,Customer,YearDate,Product,plantype,CustomerName,ProfitCenter,PlantName,SalesOffice,SalesGroup,CreatedByUser,MatlAccountAssignmentGroup,ProductGroup,ProductName,MaterialCost2000,Manufacturingcost,ContributionProfit,GrossProfit,CustomerAccountAssignmentGroup,FirstSalesSpecProductGroup,SecondSalesSpecProductGroup,ThirdSalesSpecProductGroup,AccountDetnProductGroup,ConditionRateValue_n,salesplanamountindspcrcy_n,SalesAmount_n,ContributionProfitTotal_n,GrossProfitTotal_n,materialcost2000per_n,Manufacturingcostper_n,materialcost2000_n,Manufacturingcost_n,GLAccount1,GLAccountName1,GLAccount2,GLAccountName2,GLAccount3,GLAccountName3,DisplayCurrency1,currency,currency1,SalesPlanUnit";
+                        let sParamtetrsOfSelect = "SalesOrganization,Customer,YearDate,Product,plantype,CustomerName,ProfitCenter,PlantName,SalesOffice,SalesGroup,CreatedByUser,MatlAccountAssignmentGroup,ProductGroup,ProductName,MaterialCost2000,Manufacturingcost,ContributionProfit,GrossProfit,CustomerAccountAssignmentGroup,FirstSalesSpecProductGroup,SecondSalesSpecProductGroup,ThirdSalesSpecProductGroup,AccountDetnProductGroup,ConditionRateValue_n,salesplanamountindspcrcy_n,SalesAmount_n,ContributionProfitTotal_n,GrossProfitTotal_n,materialcost2000per_n,Manufacturingcostper_n,materialcost2000_n,Manufacturingcost_n,GLAccount1,GLAccountName1,GLAccount2,GLAccountName2,GLAccount3,GLAccountName3,DisplayCurrency1,currency,currency1,SalesPlanUnit,CompanyCode";
                         //获取数据
                         this._LocalData.setProperty("/SalesReport", []);
                         this._LocalData.setProperty("/SalesReportTemp", []);
@@ -287,6 +287,8 @@ sap.ui.define([
                             GLAccount3: item.GLAccount3,
                             GLAccountName3: item.GLAccountName3,
 
+                            CompanyCode: item.CompanyCode,
+
                             DisplayCurrency1: item.DisplayCurrency1,
                             currency: item.currency,
                             currency1: item.currency1,
@@ -363,6 +365,8 @@ sap.ui.define([
                         GLAccountName2: item.GLAccountName2,
                         GLAccount3: item.GLAccount3,
                         GLAccountName3: item.GLAccountName3,
+
+                        CompanyCode: item.CompanyCode,
 
                         DisplayCurrency1: item.DisplayCurrency1,
                         currency: item.currency,
@@ -614,7 +618,7 @@ sap.ui.define([
 
                     var baseItem = {
                         "Plan_Category": "PLN",
-                        "CompanyCode": aExcelSet[i].Plant,
+                        "CompanyCode": aExcelSet[i].CompanyCode,
                         "Plant": aExcelSet[i].Plant,
                         "ProfitCenter": aExcelSet[i].ProfitCenter,
                         "Customer": aExcelSet[i].Customer,
