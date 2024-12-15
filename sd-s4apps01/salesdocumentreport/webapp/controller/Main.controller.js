@@ -216,7 +216,7 @@ sap.ui.define([
                     } else {
                         aResultTemp = that._LocalData.getProperty("/SalesReportTemp");
                         aResult = that.transformData(aResultTemp);
-                        console.log("aResult", aResult);
+                        //console.log("aResult", aResult);
                         that._LocalData.setProperty("/SalesReport", aResult);
                         that.addColumns();
 
@@ -294,9 +294,9 @@ sap.ui.define([
                             currency1: item.currency1,
                             SalesPlanUnit: item.SalesPlanUnit,
 
+                            ConditionRateValues: {},
                             materialcost2000pers: {},
                             Manufacturingcostpers: {},
-                            ConditionRateValues: {},
                             salesplanamountindspcrcys: {},
                             SalesAmounts: {},
                             ContributionProfitTotals: {},
@@ -317,9 +317,9 @@ sap.ui.define([
                     const dateKey3 = `ContributionProfitTotal${YearDate}`;
                     const dateKey4 = `GrossProfitTotal${YearDate}`;
 
+                    result[key].ConditionRateValues[dateKey] = item.ConditionRateValue_n;
                     result[key].materialcost2000pers[dateKey5] = item.materialcost2000per_n;
                     result[key].Manufacturingcostpers[dateKey6] = item.Manufacturingcostper_n;
-                    result[key].ConditionRateValues[dateKey] = item.ConditionRateValue_n;
                     result[key].salesplanamountindspcrcys[dateKey1] = item.salesplanamountindspcrcy_n;
                     result[key].SalesAmounts[dateKey2] = item.SalesAmount_n;
                     result[key].ContributionProfitTotals[dateKey3] = item.ContributionProfitTotal_n;
@@ -373,9 +373,9 @@ sap.ui.define([
                         currency1: item.currency1,
                         SalesPlanUnit: item.SalesPlanUnit,
 
+                        ...item.ConditionRateValues,
                         ...item.materialcost2000pers,// 展开动态生成的日期列
                         ...item.Manufacturingcostpers,
-                        ...item.ConditionRateValues,
                         ...item.salesplanamountindspcrcys,
                         ...item.SalesAmounts,
                         ...item.ContributionProfitTotals,
@@ -387,7 +387,7 @@ sap.ui.define([
 
             addColumns: function () {
                 var ofpartition = this._LocalData.getProperty("/SalesReport");
-                console.log("ofpartition", ofpartition);
+                //console.log("ofpartition", ofpartition);
                 if (ofpartition.length > 0) {
                     Object.keys(ofpartition[0]).forEach(function (key) {
                         //单价
@@ -426,7 +426,13 @@ sap.ui.define([
                 if (aResultTemp) {
                     if (aResultTemp.length > 0) {
                         Object.keys(aResultTemp[0]).forEach(function (key) {
-
+                            if (key.indexOf("ConditionRateValue") >= 0) {
+                                if (this.byId(key)) {
+                                    this.byId(key).destroyLabel();
+                                    this.byId(key).destroyTemplate();
+                                    this.byId(key).destroy(true);
+                                }
+                            }
                             if (key.indexOf("materialcost2000per") >= 0) {
                                 if (this.byId(key)) {
                                     this.byId(key).destroyLabel();
@@ -435,13 +441,6 @@ sap.ui.define([
                                 }
                             }
                             if (key.indexOf("Manufacturingcostper") >= 0) {
-                                if (this.byId(key)) {
-                                    this.byId(key).destroyLabel();
-                                    this.byId(key).destroyTemplate();
-                                    this.byId(key).destroy(true);
-                                }
-                            }
-                            if (key.indexOf("ConditionRateValue") >= 0) {
                                 if (this.byId(key)) {
                                     this.byId(key).destroyLabel();
                                     this.byId(key).destroyTemplate();
@@ -488,9 +487,9 @@ sap.ui.define([
                     text: sBindingPath,
                     tooltip: "{local>" + sColName + "}"
                 });
+                var ConditionRateValueLabel = oObj._ResourceBundle.getText("ConditionRateValueLabel") + "(";
                 var materialcost2000perLabel = oObj._ResourceBundle.getText("materialcost2000perLabel") + "(";
                 var ManufacturingcostperLabel = oObj._ResourceBundle.getText("ManufacturingcostperLabel") + "(";
-                var ConditionRateValueLabel = oObj._ResourceBundle.getText("ConditionRateValueLabel") + "(";
                 var salesplanamountindspcrcyLabel = oObj._ResourceBundle.getText("salesplanamountindspcrcyLabel") + "(";
                 var SalesAmountLabel = oObj._ResourceBundle.getText("SalesAmountLabel") + "(";
                 var ContributionProfitTotalLabel = oObj._ResourceBundle.getText("ContributionProfitTotalLabel") + "(";
@@ -498,9 +497,9 @@ sap.ui.define([
 
 
                 var sLabel = sColName;
+                sLabel = sLabel.replace("ConditionRateValue", ConditionRateValueLabel);
                 sLabel = sLabel.replace("materialcost2000per", materialcost2000perLabel);
                 sLabel = sLabel.replace("Manufacturingcostper", ManufacturingcostperLabel);
-                sLabel = sLabel.replace("ConditionRateValue", ConditionRateValueLabel);
                 sLabel = sLabel.replace("salesplanamountindspcrcy", salesplanamountindspcrcyLabel);
                 sLabel = sLabel.replace("SalesAmount", SalesAmountLabel);
                 sLabel = sLabel.replace("ContributionProfitTotal", ContributionProfitTotalLabel);
@@ -511,13 +510,13 @@ sap.ui.define([
                 var oCustomDataValue = { columnKey: sColName, leadingProperty: sColName };
                 var sWidth = "12rem";
                 var shAlign = "Begin";
+                if (sColName.indexOf("ConditionRateValue") >= 0) {
+                    shAlign = "End";
+                }
                 if (sColName.indexOf("materialcost2000per") >= 0) {
                     shAlign = "End";
                 }
                 if (sColName.indexOf("Manufacturingcostper") >= 0) {
-                    shAlign = "End";
-                }
-                if (sColName.indexOf("ConditionRateValue") >= 0) {
                     shAlign = "End";
                 }
                 if (sColName.indexOf("salesplanamountindspcrcy") >= 0) {
@@ -568,7 +567,7 @@ sap.ui.define([
                 var aExcelCol = [];
                 // 获取table的columns
                 var aTableCol = oTable.getColumns();
-                console.log(aTableCol);
+                //console.log(aTableCol);
                 for (var i = 0; i < aTableCol.length; i++) {
                     if (aTableCol[i].getVisible()) {
                         var sLabelText = aTableCol[i].getAggregation("label").getText();
@@ -619,7 +618,7 @@ sap.ui.define([
                 // 获取table数据
                 var aExcelSet = this._LocalData.getProperty(sPath);
                 var aExcelSetBI = [];
-                console.log(aExcelSet);
+                //console.log(aExcelSet);
 
                 for (var i = 0; i < aExcelSet.length; i++) {
 
@@ -686,7 +685,7 @@ sap.ui.define([
 
                 }
 
-                console.log("aExcelSetBI", aExcelSetBI);
+                //console.log("aExcelSetBI", aExcelSetBI);
 
                 var aExcelCol = [];
                 var sType = "string";
