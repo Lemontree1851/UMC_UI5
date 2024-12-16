@@ -6,7 +6,7 @@ sap.ui.define([
     "sap/m/MessageBox",
     "sap/ui/core/Fragment",
     "sap/m/Token"
-], function (ValueHelpDialog,ValueHelpDialog1, formatter, BusyDialog, MessageBox, Fragment, Token) {
+], function (ValueHelpDialog, ValueHelpDialog1, formatter, BusyDialog, MessageBox, Fragment, Token) {
     'use strict';
 
     var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog;
@@ -16,9 +16,10 @@ sap.ui.define([
         formatter: formatter,
 
         init: function () {
- 
+
             _myFunction = sap.ui.require("fico/zpaymentmethod/ext/controller/ListReportExt");
             _myBusyDialog = new BusyDialog();
+
             // *************************************************
             var oMessageTemplate = new sap.m.MessageItem({
                 type: '{type}',
@@ -127,7 +128,7 @@ sap.ui.define([
 
         onSearch: function () {
             var oControl1 = sap.ui.getCore();
- 
+
             var that = this;
             var oControl = sap.ui.getCore().byId("idMaterialRequisitionNo");
             var sMaterialRequisitionNo = oControl.getValue();
@@ -227,62 +228,102 @@ sap.ui.define([
         },
 
         handleChange: function (oEvent) {
- 
+
+            console.log("handleChange");
+
             this._oControl = oEvent.getSource();
             var sInputBindingPath = this._oControl.mBindingInfos.value.parts[0].path;
- 
+
             switch (sInputBindingPath) {
                 case "/headSet/CompanyCode":
                     var idCompanyCodeValue = this.getView().byId("idCompanyCode").getValue();
-                    var oContextBinding = this.getModel().bindContext("/I_CompanyCodeVH" + "('" + idCompanyCodeValue.replace(/\s/g, "") + "')");
                     var oMultiInput = this.getView().byId("idCompanyCode");
-                    oContextBinding.requestObject().then(function (context) {
-                        for (const key in context) {
-                            if (key == "CompanyCodeName") {
-                                this.getModel("local").setProperty("idCompanyCode" + key, context[key]);
-                                var CompanyCodeText = context[key] + "(" + idCompanyCodeValue.replace(/\s/g, "") + ")";
-                                oMultiInput.setTokens([
-                                    new Token({ text: CompanyCodeText, key: idCompanyCodeValue })
-                                ]);
-                                oMultiInput.setValue(""); // 清除输入
+                    if (idCompanyCodeValue) {
+                        var oContextBinding = this.getModel().bindContext("/I_CompanyCodeVH" + "('" + idCompanyCodeValue.replace(/\s/g, "") + "')");
+                        oContextBinding.requestObject().then(function (context) {
+                            for (const key in context) {
+                                if (key == "CompanyCodeName") {
+                                    this.getModel("local").setProperty("idCompanyCode" + key, context[key]);
+                                    var CompanyCodeText = context[key] + "(" + idCompanyCodeValue.replace(/\s/g, "") + ")";
+                                    oMultiInput.setTokens([
+                                        new Token({ text: CompanyCodeText, key: idCompanyCodeValue })
+                                    ]);
+                                    oMultiInput.setValue(""); // 清除输入
+                                    // Clear any previous error state
+                                    oMultiInput.setValueState("None");
+                                    oMultiInput.setValueStateText("");
+                                }
                             }
-                        }
 
-                    }.bind(this));
+                        }.bind(this)).catch(function (error) {
+                            // Handle any errors from the request
+                            oMultiInput.setValueState("Error");
+                            oMultiInput.setValueStateText("一意の説明を入力するか、一覧からアイテムを選択してください。");
+                        }.bind(this));
+                    } else {                                // Clear any previous error state
+                        oMultiInput.setValueState("None");
+                        oMultiInput.setValueStateText("");
+                    }
                 case "/headSet/Customer":
-                    var idCustomerValue = this.getView().byId("idCustomer").getValue();
-                    var oContextBinding = this.getModel().bindContext("/I_BusinessPartnerVH" + "('" + idCustomerValue.replace(/\s/g, "") + "')");
-                    var oMultiInput1 = this.getView().byId("idCustomer");
-                    oContextBinding.requestObject().then(function (context) {
-                        for (const key in context) {
-                            if (key == "OrganizationBPName1") {
-                                this.getModel("local").setProperty("idCustomer" + key, context[key]);
-                                var CustomerText = context[key] + "(" + idCustomerValue.replace(/\s/g, "") + ")";
-                                oMultiInput1.setTokens([
-                                    new Token({ text: CustomerText, key: idCustomerValue })
-                                ]);
-                                oMultiInput1.setValue(""); // 清除输入
-                            }
-                        }
 
-                    }.bind(this));
+                    var idCustomerValue = this.getView().byId("idCustomer").getValue();
+                    var oMultiInput1 = this.getView().byId("idCustomer");
+                    if (idCustomerValue) {
+                        var oContextBinding = this.getModel().bindContext("/I_BusinessPartnerVH" + "('" + idCustomerValue.replace(/\s/g, "") + "')");
+
+                        oContextBinding.requestObject().then(function (context) {
+                            for (const key in context) {
+                                if (key == "OrganizationBPName1") {
+                                    this.getModel("local").setProperty("idCustomer" + key, context[key]);
+                                    var CustomerText = context[key] + "(" + idCustomerValue.replace(/\s/g, "") + ")";
+                                    oMultiInput1.setTokens([
+                                        new Token({ text: CustomerText, key: idCustomerValue })
+                                    ]);
+                                    oMultiInput1.setValue(""); // 清除输入
+                                    // Clear any previous error state
+                                    oMultiInput1.setValueState("None");
+                                    oMultiInput1.setValueStateText("");
+                                }
+                            }
+                        }.bind(this)).catch(function (error) {
+                            // Handle any errors from the request
+                            oMultiInput1.setValueState("Error");
+                            oMultiInput1.setValueStateText("一意の説明を入力するか、一覧からアイテムを選択してください。");
+                        }.bind(this));
+                    } else {                                // Clear any previous error state
+                        oMultiInput1.setValueState("None");
+                        oMultiInput1.setValueStateText("");
+                    }
                 case "/headSet/PaymentMethod":
                     var idPaymentMethodValue = this.getView().byId("idPaymentMethod").getValue();
-                    var oContextBinding = this.getModel().bindContext("/ZC_PaymentMethodVH" + "('" + idPaymentMethodValue.replace(/\s/g, "") + "')");
-                    var oMultiInput1 = this.getView().byId("idPaymentMethod");
-                    oContextBinding.requestObject().then(function (context) {
-                        for (const key in context) {
-                            if (key == "PaymentMethodName") {
-                                this.getModel("local").setProperty("idPaymentMethod" + key, context[key]);
-                                var PaymentMethodText = context[key] + "(" + idPaymentMethodValue.replace(/\s/g, "") + ")";
-                                oMultiInput1.setTokens([
-                                    new Token({ text: PaymentMethodText, key: idPaymentMethodValue })
-                                ]);
-                                oMultiInput1.setValue(""); // 清除输入
-                            }
-                        }
+                    var oMultiInput2 = this.getView().byId("idPaymentMethod");
+                    if (idPaymentMethodValue) {
+                        var oContextBinding = this.getModel().bindContext("/ZC_PaymentMethodVH" + "('" + idPaymentMethodValue.replace(/\s/g, "") + "')");
 
-                    }.bind(this));
+                        oContextBinding.requestObject().then(function (context) {
+                            for (const key in context) {
+                                if (key == "PaymentMethodName") {
+                                    this.getModel("local").setProperty("idPaymentMethod" + key, context[key]);
+                                    var PaymentMethodText = context[key] + "(" + idPaymentMethodValue.replace(/\s/g, "") + ")";
+                                    oMultiInput2.setTokens([
+                                        new Token({ text: PaymentMethodText, key: idPaymentMethodValue })
+                                    ]);
+                                    oMultiInput2.setValue(""); // 清除输入
+                                    // Clear any previous error state
+                                    oMultiInput2.setValueState("None");
+                                    oMultiInput2.setValueStateText("");
+                                }
+                            }
+
+                        }.bind(this)).catch(function (error) {
+                            // Handle any errors from the request
+                            oMultiInput2.setValueState("Error");
+                            oMultiInput2.setValueStateText("一意の説明を入力するか、一覧からアイテムを選択してください。");
+                        }.bind(this));
+                    } else {                                // Clear any previous error state
+                        oMultiInput2.setValueState("None");
+                        oMultiInput2.setValueStateText("");
+                    }
 
             }
 

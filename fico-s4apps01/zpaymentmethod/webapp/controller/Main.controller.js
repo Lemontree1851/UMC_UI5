@@ -96,7 +96,7 @@ sap.ui.define([
             var aExcelSet = [];
             var aPromise = [];
 
-            var header = this.getModel("local").getProperty("/headSet");
+            var header = this.getModel("local").gesearchtProperty("/headSet");
             var aPLANT = this.getModel("local").getProperty("/headSet/Plant");
             var aCompanyCode = this.getModel("local").getProperty("/headSet/CompanyCode");
 
@@ -239,6 +239,22 @@ sap.ui.define([
             var aPromise = [];
             var aGroupItems;
             aGroupItems = [];
+
+            var valueStateCompanyCode = this.getView().byId("idCompanyCode").getValueState();
+            if (valueStateCompanyCode === "Error") {
+                MessageBox.error(this._ResourceBundle.getText("msgFilterError")); 
+                return; 
+            }
+            var valueStateCustomer = this.getView().byId("idCustomer").getValueState();
+            if (valueStateCustomer === "Error") {
+                MessageBox.error(this._ResourceBundle.getText("msgFilterError")); 
+                return; 
+            }
+            var valuePaymentMethod = this.getView().byId("idPaymentMethod").getValueState();
+            if (valuePaymentMethod === "Error") {
+                MessageBox.error(this._ResourceBundle.getText("msgFilterError")); 
+                return; 
+            }
 
             var aTokens = this.getView().byId("idCompanyCode").getTokens();
             var afilterSet = [];
