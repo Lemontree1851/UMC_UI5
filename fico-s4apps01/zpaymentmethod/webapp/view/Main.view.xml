@@ -9,8 +9,8 @@
     xmlns:core="sap.ui.core"
     core:require="{ handler: 'fico/zpaymentmethod/ext/controller/ListReportExt' }">
     <Page >
-        <content>
-        <Panel expandable="true" expanded="true" width="auto">
+        <content >
+        <Panel expandable="true" expanded="true" width="auto" >
             <HBox>
 
                 <VBox class="sapUiSmallMarginEnd">
@@ -112,10 +112,10 @@ displayFormat="yyyy/MM/dd"
         </Panel>
 
 
+ 
+            <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto" height="85%">
 
-            <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
-
-                <table:Table id="idTable" rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="2" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:Table id="idTable" rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="2" rowMode="Interactive"  class="sapUiSizeCompact myCustomTable">
                     <table:extension>
                         <OverflowToolbar>
                             
@@ -214,7 +214,7 @@ displayFormat="yyyy/MM/dd"
                     </table:columns>
                 </table:Table>
             </Panel>
-
+  
         </content>
     </Page>
 </mvc:View>

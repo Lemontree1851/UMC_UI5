@@ -16,9 +16,7 @@ sap.ui.define([
         formatter: formatter,
 
         init: function () {
-
-            console.log("listnini")
-
+ 
             _myFunction = sap.ui.require("fico/zpaymentmethod/ext/controller/ListReportExt");
             _myBusyDialog = new BusyDialog();
             // *************************************************
@@ -129,7 +127,7 @@ sap.ui.define([
 
         onSearch: function () {
             var oControl1 = sap.ui.getCore();
-            console.log("11coreplant" + oControl1);
+ 
             var that = this;
             var oControl = sap.ui.getCore().byId("idMaterialRequisitionNo");
             var sMaterialRequisitionNo = oControl.getValue();
@@ -229,13 +227,10 @@ sap.ui.define([
         },
 
         handleChange: function (oEvent) {
-
-            console.log("handleChange");
-
+ 
             this._oControl = oEvent.getSource();
             var sInputBindingPath = this._oControl.mBindingInfos.value.parts[0].path;
-            console.log(sInputBindingPath);
-
+ 
             switch (sInputBindingPath) {
                 case "/headSet/CompanyCode":
                     var idCompanyCodeValue = this.getView().byId("idCompanyCode").getValue();

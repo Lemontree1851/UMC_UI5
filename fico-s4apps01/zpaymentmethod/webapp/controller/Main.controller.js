@@ -40,7 +40,7 @@ sap.ui.define([
             var oDateRangeSelection = this.getView().byId("idReceiver");
             oDateRangeSelection.setDateValue(firstDayOfPreviousMonth); // First day of the previous month
             oDateRangeSelection.setSecondDateValue(lastDayOfPreviousMonth); // Last day of the previous month
-
+            this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
         },
 
@@ -182,6 +182,11 @@ sap.ui.define([
                 var num = iIndex;
                 aGroupItems.push(aExcelSet[num]);
             });
+ 
+			if (aSelectedIndices.length === 0) {
+				MessageBox.error(this._ResourceBundle.getText("msgNoSelect"));
+				return;
+			}
             aPromise.push(this._callODataAction(bEvent, aGroupItems));
 
             try {
@@ -372,8 +377,7 @@ sap.ui.define([
                 aGroupItems.push(afilterSet[i]);
  
             }
-            console.log("customer",aGroupItems);
-
+ 
             var aTokens = this.getView().byId("idPaymentMethod").getTokens();
             var afilterSet = [];
             for (var i = 0; i < aTokens.length; i++) {
