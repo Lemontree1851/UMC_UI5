@@ -149,7 +149,17 @@
                             <table:template>
                                 <Text text="{local>OutsideData}" wrapping="false"/>
                             </table:template>
-                        </table:Column>         
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>AcceptPeriodFrom}">
+                            <table:template>
+                                <Text text="{local>AcceptPeriodFrom}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>AcceptPeriodTo}">
+                            <table:template>
+                                <Text text="{local>AcceptPeriodTo}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>      
                     </table:columns>
                 </table:Table>
             </Panel>

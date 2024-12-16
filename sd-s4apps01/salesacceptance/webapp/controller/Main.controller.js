@@ -66,6 +66,8 @@ sap.ui.define([
                             "Currency": aSheetData[i]["Currency"],
                             "TaxRate": aSheetData[i]["TaxRate"],
                             "OutsideData": aSheetData[i]["OutsideData"],
+                            "AcceptPeriodFrom": aSheetData[i]["AcceptPeriodFrom"],
+                            "AcceptPeriodTo": aSheetData[i]["AcceptPeriodTo"],
                             "FinishStatus": ""
                         };
                         aExcelSet.push(item);
@@ -166,6 +168,8 @@ sap.ui.define([
                 for (var n = 0; n < aExcelSet.length; n++) {
                     aExcelSet[n].ReceiptDate = formatter.odataDate(aExcelSet[n].ReceiptDate);
                     aExcelSet[n].AcceptDate = formatter.odataDate(aExcelSet[n].AcceptDate);
+                    aExcelSet[n].AcceptPeriodFrom = formatter.odataDate(aExcelSet[n].AcceptPeriodFrom);
+                    aExcelSet[n].AcceptPeriodTo = formatter.odataDate(aExcelSet[n].AcceptPeriodTo);
                     aGroupItems.push(aExcelSet[n]);
                 }
                 aPromise.push(this._callODataAction(bEvent, aGroupItems));
