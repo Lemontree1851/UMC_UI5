@@ -59,10 +59,13 @@ displayFormat="yyyy/MM/dd"
                     <Label text="{i18n>Customer}:" required="false"/>
                     
                     <MultiInput id="idCustomer" editable="true" value="{local>/headSet/Customer}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/ZC_SupplierCompanyVH', ['SupplierCompany','SupplierCompanyName','CompanyCode'])" showSuggestion="true" suggestionRows="{ path: '/ZC_SupplierCompanyVH', length: 10 }" required="false" width="13rem">
+                        $event, $controller, '/ZC_SupplierCompanyVH', ['SupplierCompany','CompanyCode','SupplierCompanyName'])" showSuggestion="true" suggestionRows="{ path: '/ZC_SupplierCompanyVH', length: 50 }" required="false" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>Customer}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>CompanyCode}"/>
                             </Column>
                             <Column>
                                 <Label text="{i18n>CustomerName}"/>
@@ -71,6 +74,7 @@ displayFormat="yyyy/MM/dd"
                         <suggestionRows>
                             <ColumnListItem>
                                 <Label text="{SupplierCompany}" />
+                                <Label text="{CompanyCode}" />
                                 <Label text="{SupplierCompanyName}" />
                             </ColumnListItem>
                         </suggestionRows>
@@ -83,7 +87,7 @@ displayFormat="yyyy/MM/dd"
                  <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>PaymentMethod1}:" required="false"/>
                     <MultiInput id="idPaymentMethod" value="{local>/headSet/PaymentMethod}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/ZC_PaymentMethodVH', ['PaymentMethod','PaymentMethodName','Country'])" showSuggestion="true" suggestionRows="{ path: '/ZC_PaymentMethodVH', length: 10 }" required="false" width="13rem">
+                        $event, $controller, '/ZC_PaymentMethodVH', ['PaymentMethod','PaymentMethodName','Country'])" showSuggestion="true" suggestionRows="{ path: '/ZC_PaymentMethodVH', length: 20 }" required="false" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>PaymentMethod1}"/>

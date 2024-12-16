@@ -16,8 +16,9 @@ sap.ui.define([
     "sap/m/Token",
     "sap/ui/core/library",
     "sap/ui/core/date/UI5Date",
-    "../model/formatter1"
-], function (Base, formatter, xlsx, BusyDialog, MessageBox, JSONModel, CoreLibrary, UI5Date) {
+    "../model/formatter1",
+    "sap/m/Token"
+], function (Base, formatter, xlsx, BusyDialog, MessageBox, JSONModel, CoreLibrary, UI5Date, Token) {
     "use strict";
     var ValueState = CoreLibrary.ValueState;
     return Base.extend("fico.zpaymentmethod.controller.Main", {
@@ -145,7 +146,9 @@ sap.ui.define([
 
         },
         onSearch: function () {
-            this._callOData1("SEARCH");
+            setTimeout(() => {
+                this._callOData1("SEARCH");
+            }, 1000);
         },
         onClear: function () {
             this.getModel("local").setProperty("/excelSet", []);
@@ -235,11 +238,11 @@ sap.ui.define([
             }
         },
         _callOData1: function (bEvent) {
-
+ 
             var aPromise = [];
             var aGroupItems;
             aGroupItems = [];
-
+  
             var valueStateCompanyCode = this.getView().byId("idCompanyCode").getValueState();
             if (valueStateCompanyCode === "Error") {
                 MessageBox.error(this._ResourceBundle.getText("msgFilterError")); 
@@ -269,6 +272,7 @@ sap.ui.define([
                 afilterSet.push(filterItems);
                 aGroupItems.push(afilterSet[i]);
             }
+            console.log("3333",aTokens);
             if (!aTokens[0]) {
                 MessageBox.error("必須項目を入力ください");
                 return;
@@ -276,6 +280,7 @@ sap.ui.define([
 
             var aTokens = this.getView().byId("idCustomer").getTokens();
             var afilterSet = [];
+            var i2 = 0;
             for (var i = 0; i < aTokens.length; i++) {
                 if (aTokens[i].getProperty("key").includes("range")) {
                     var tokenText = aTokens[i].getProperty("text")
@@ -391,9 +396,8 @@ sap.ui.define([
                 }
                 afilterSet.push(filterItems);
                 aGroupItems.push(afilterSet[i]);
- 
+                var i2 = i;
             }
- 
             var aTokens = this.getView().byId("idPaymentMethod").getTokens();
             var afilterSet = [];
             for (var i = 0; i < aTokens.length; i++) {

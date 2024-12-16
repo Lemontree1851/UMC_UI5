@@ -38,17 +38,17 @@ sap.ui.define([
 
                     if (fieldName.includes("Name")) {
                     } else {
-                        if(fieldName == "SupplierCompany") {
-                        // Set key fields for filtering in the Define Conditions Tab
-                        oDialog.setRangeKeyFields([{
-                            label: "{i18n>" + fieldName + "}",
-                            key: fieldName,
-                            type: "string",
-                            typeInstance: new TypeString({}, {
-                                maxLength: 7
-                            })
-                        }]);
-                    }
+                        if (fieldName == "SupplierCompany") {
+                            // Set key fields for filtering in the Define Conditions Tab
+                            oDialog.setRangeKeyFields([{
+                                label: "{i18n>" + fieldName + "}",
+                                key: fieldName,
+                                type: "string",
+                                typeInstance: new TypeString({}, {
+                                    maxLength: 60
+                                })
+                            }]);
+                        }
                     }
 
                     var oFilterGroupItem = new FilterGroupItem({
@@ -110,6 +110,8 @@ sap.ui.define([
 
         onFilterBarSearch: function (oEvent) {
 
+            console.log("onFilterBarSearch");
+
             var aNewFilters = [];
             var sSearchQuery = this._oBasicSearchField.getValue(),
                 aSelectionSet = oEvent.getParameter("selectionSet");
@@ -123,9 +125,16 @@ sap.ui.define([
                 }
                 return aResult;
             }, []);
+
+
             if (sSearchQuery) {
                 this._aVHFields.forEach(fieldName => {
-                    aNewFilters.push(new Filter({ path: fieldName, operator: FilterOperator.Contains, value1: sSearchQuery }));
+                    console.log("fieldName", fieldName);
+                    if (fieldName === 'CompanyCode') {
+                        aNewFilters.push(new Filter({ path: fieldName, operator: FilterOperator.Contains, value1: sSearchQuery.substring(0, 4) }));
+                    } else {
+                        aNewFilters.push(new Filter({ path: fieldName, operator: FilterOperator.Contains, value1: sSearchQuery }));
+                    }
                 });
                 aFilters.push(new Filter({
                     filters: aNewFilters,

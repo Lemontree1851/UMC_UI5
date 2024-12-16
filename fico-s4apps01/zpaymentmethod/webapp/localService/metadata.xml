@@ -63,7 +63,7 @@
                 <Property Name="AmountInCompanyCodeCurrency" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="variable"/>
                 <Property Name="CompanyCodeCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
                 <Property Name="AccountingClerkPhoneNumber" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="AccountingClerkFaxNumber" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="AccountingClerkFaxNumber" Type="Edm.String" Nullable="false" MaxLength="31"/>
                 <Property Name="PaymentMethod_a" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10"/>
@@ -1679,6 +1679,9 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ZC_SupplierCompanyVHType/SupplierCompany">
+                <Annotation Term="SAP__common.Text" Path="SupplierCompanyName">
+                    <Annotation Term="SAP__UI.TextArrangement" EnumMember="SAP__UI.TextArrangementType/TextLast"/>
+                </Annotation>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Supplier"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Account Number of Supplier"/>
@@ -1690,14 +1693,6 @@
             </Annotations>
             <Annotations Target="SAP__self.ZC_SupplierCompanyVHType">
                 <Annotation Term="SAP__common.Label" String="Supplier Company Value Help"/>
-                <Annotation Term="SAP__UI.LineItem">
-                    <Collection>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="SupplierCompany"/>
-                            <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.Container/ZC_SupplierCompanyVH">
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
