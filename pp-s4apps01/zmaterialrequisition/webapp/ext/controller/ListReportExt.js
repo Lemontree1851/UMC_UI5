@@ -101,7 +101,6 @@ sap.ui.define([
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
-            sEmail = "xinlei.xu@sh.shin-china.com"
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -128,6 +127,7 @@ sap.ui.define([
                 }
                 oLocalModel.setProperty("/authorityCheck", {
                     button: {
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-View"),
                         Edit: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Edit"),
                         Delete: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Delete"),
                         Resent: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Email"),
