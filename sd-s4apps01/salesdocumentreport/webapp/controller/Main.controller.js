@@ -621,6 +621,10 @@ sap.ui.define([
                 //console.log(aExcelSet);
 
                 for (var i = 0; i < aExcelSet.length; i++) {
+                    var firstSalesSpecProductGroup = aExcelSet[i].FirstSalesSpecProductGroup.match(/^\d+/);
+                    var secondSalesSpecProductGroup = aExcelSet[i].SecondSalesSpecProductGroup.match(/^\d+/);
+                    var thirdSalesSpecProductGroup = aExcelSet[i].ThirdSalesSpecProductGroup.match(/^\d+/);
+
 
                     var baseItem = {
                         "Plan_Category": "PLN",
@@ -629,9 +633,9 @@ sap.ui.define([
                         "ProfitCenter": aExcelSet[i].ProfitCenter,
                         "Customer": aExcelSet[i].Customer,
                         "Product": aExcelSet[i].Product,
-                        "FirstSalesSpecProductGroup": aExcelSet[i].FirstSalesSpecProductGroup,
-                        "SecondSalesSpecProductGroup": aExcelSet[i].SecondSalesSpecProductGroup,
-                        "ThirdSalesSpecProductGroup": aExcelSet[i].ThirdSalesSpecProductGroup,
+                        "FirstSalesSpecProductGroup": firstSalesSpecProductGroup ? firstSalesSpecProductGroup[0] : null, 
+                        "SecondSalesSpecProductGroup": secondSalesSpecProductGroup ? secondSalesSpecProductGroup[0] : null,
+                        "ThirdSalesSpecProductGroup": thirdSalesSpecProductGroup ? thirdSalesSpecProductGroup[0] : null, // Extract or set to null if no match
                         "MatlAccountAssignmentGroup": aExcelSet[i].MatlAccountAssignmentGroup,
 
                     };
