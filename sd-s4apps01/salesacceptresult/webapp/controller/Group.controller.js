@@ -15,10 +15,10 @@ sap.ui.define([
             this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._BusyDialog = new BusyDialog();
-            
+
             var oRouter = this.getOwnerComponent().getRouter();
             oRouter.getRoute("Group").attachPatternMatched(this._onRouteMatched, this);
-            
+
         },
 
         _onRouteMatched: function (oEvent) {
@@ -27,9 +27,9 @@ sap.ui.define([
             var oFilter = JSON.parse(sAllData);  // 将过滤条件从 JSON 字符串解析为对象
 
             this._fetchData(oFilter);
-            
+
             this._oDataModel.setRefreshAfterChange(false);
-            this._oDataModel.refresh();    
+            this._oDataModel.refresh();
         },
         _fetchData: function (oFilter) {
             var oModel = this.getView().getModel().getData();
@@ -78,15 +78,37 @@ sap.ui.define([
                     var oReceivedData = oEvent.getParameter('data');
                     var iCount = 0;
                     oReceivedData.results.forEach(function (line) {
-                       if (line.SalesDocument !== ""){
-                          iCount = iCount + 1;
-                       }
+                        if (line.SalesDocument !== "") {
+                            iCount = iCount + 1;
+                        }
                     });
                     var headerText = this.getModel("i18n").getResourceBundle().getText("groupHeaderTitle", [iCount]);
                     // 更新 SmartTable 的 header 文本
                     this.setHeader(headerText);
                 },
-              };
+            };
+        },
+
+        onUITableRowsUpdated: function (oEvent) {
+            var oTable = oEvent.getSource();
+            var aRows = oTable.getRows();
+            var sType = "";
+
+            if (aRows && aRows.length > 0) {
+                for (var i = 0; i < aRows.length; i++) {
+                    var c1Cell = aRows[i].getCells()[0];
+                    if (c1Cell) {
+                        sType = c1Cell.getText();
+                        if (sType === "差異ナシ" || sType === "処理済み" || sType === "処理待ち" || sType === "処理不要") {
+                            $("#" + aRows[i].getId()).css("background-color", "#1E90FF");
+                        }
+                        else {
+                            $("#" + aRows[i].getId()).css("background-color", "");
+                        }
+
+                    }
+                }
+            }
         },
 
         onSave: function () {
@@ -123,7 +145,7 @@ sap.ui.define([
             var that = this;
             var listItems = this.byId("ReportTable").getSelectedIndices(); // get selected rows
             var selectedRows = [];
-            
+
             listItems.forEach((item) => {
                 var sPath = this.byId("ReportTable").getContextByIndex(item).getPath();
                 var oRow = this.getModel().getObject(sPath);
