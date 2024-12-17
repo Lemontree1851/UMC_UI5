@@ -102,7 +102,7 @@ sap.ui.define([
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
-                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
             oContextBinding.requestObject().then(function (context) {
                 var aAccessBtns = [],
@@ -141,6 +141,7 @@ sap.ui.define([
                         PlantSet: context._AssignPlant,
                         CompanySet: context._AssignCompany,
                         SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
                         RoleSet: context._AssignRole
                     }
                 });
