@@ -67,7 +67,7 @@
       <smartTable:SmartTable id="smartTable" entitySet="SalesAcceptanceResult" smartFilterId="smartFilterBar" tableType="Table"
 				showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}"
 				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-				beforeExport="onBeforeExport" requestAtLeastFields="CustomerName,PeriodTypeText,AcceptPeriodText,AcceptPeriodFromText,AcceptPeriodToText" fitContainer="false" height="100%">
+				beforeExport="onBeforeExport" requestAtLeastFields="CustomerName,PeriodTypeText,AcceptPeriodText,AcceptPeriodFromText,AcceptPeriodToText,AcceptPeriod,AcceptPeriodFrom,AcceptPeriodTo" fitContainer="false" height="100%">
         <smartTable:customToolbar>
 			<OverflowToolbar width="100%">
 			  <ToolbarSpacer/>

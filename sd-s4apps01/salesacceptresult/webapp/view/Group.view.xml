@@ -44,7 +44,7 @@
     <smartTable:SmartTable id="smartTable" entitySet="SalesAcceptanceResult" smartFilterId="smartFilterBar" tableType="Table"
 				showRowCount="false" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" 
 				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-				beforeExport="onBeforeExport" fitContainer="false" height="100%">
+				beforeExport="onBeforeExport" requestAtLeastFields="CustomerName,AcceptPeriod,AcceptPeriodFrom,AcceptPeriodTo" fitContainer="false" height="100%">
             <smartTable:customToolbar>
 			<OverflowToolbar width="100%">
 			  <ToolbarSpacer/>
