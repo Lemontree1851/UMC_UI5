@@ -134,7 +134,7 @@ sap.ui.define([
                 // 纳品书
                 _DELIVERYITEM.DeliveryItem.results.push({
                     REFERENCESDDOCUMENT: item.ReferenceSDDocument,
-                    MATERIALBYCUSTOMER: item.MaterialByCustomer,
+                    MATERIALBYCUSTOMER: item.MaterialByCustomer || item.Material,
                     DELIVERYDOCUMENTITEMTEXT: item.DeliveryDocumentItemText,
                     ACTUALDELIVERYQUANTITY: item.ActualDeliveryQuantity,
                     DELIVERYQUANTITYUNIT: item.DeliveryQuantityUnit,
@@ -144,7 +144,7 @@ sap.ui.define([
                 //受领书
                 _RECEIPTITEM.ReceiptItem.results.push({
                     REFERENCESDDOCUMENT: item.ReferenceSDDocument,
-                    MATERIALBYCUSTOMER: item.MaterialByCustomer,
+                    MATERIALBYCUSTOMER: item.MaterialByCustomer || item.Material,
                     DELIVERYDOCUMENTITEMTEXT: item.DeliveryDocumentItemText,
                     ACTUALDELIVERYQUANTITY: item.ActualDeliveryQuantity,
                     DELIVERYQUANTITYUNIT: item.DeliveryQuantityUnit
