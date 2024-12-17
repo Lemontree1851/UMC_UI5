@@ -70,6 +70,63 @@ sap.ui.define([
                 verticalScrolling: false
             });
             // *************************************************
+            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
+        },
+
+        _initialize: function () {
+            var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            sEmail = "xinlei.xu@sh.shin-china.com";
+            var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "zpickinglist-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.oErrorMessageDialog.open();
+                }
+                this.getModel("local").setProperty("/authorityCheck", {
+                    button: {
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "zpickinglist-View"),
+                        Edit: aAllAccessBtns.some(btn => btn.AccessId === "zpickinglist-Edit"),
+                        Delete: aAllAccessBtns.some(btn => btn.AccessId === "zpickinglist-Delete")
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.oErrorMessageDialog.open();
+            }.bind(this));
         },
 
         onBeforeRebindTable: function (oEvent) {
@@ -77,6 +134,7 @@ sap.ui.define([
             var oNewFilter,
                 sRequisitionDate,
                 aNewFilters = [];
+            var oSmartFilterBar, aFilterPlant = [];
             var sEntitySet = oEvent.getSource().getProperty("entitySet");
             if (sEntitySet === "ZC_PICKINGLIST_STD") {
                 sRequisitionDate = this.getModel("local").getProperty("/dateValue");
@@ -88,6 +146,29 @@ sap.ui.define([
                     });
                     aFilters.push(oNewFilter);
                 }
+                oSmartFilterBar = this.byId("idSmartFilterBar1");
+                aFilterPlant.push(oSmartFilterBar.getControlByKey("Plant").getSelectedKey());
+            } else {
+                oSmartFilterBar = this.byId("idSmartFilterBar2");
+                aFilterPlant = oSmartFilterBar.getControlByKey("Plant").getSelectedKeys();
+            }
+
+            var bHasError = false;
+            var sMessage = "";
+            var aAuthorityPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+            aFilterPlant.forEach(sValue => {
+                if (!aAuthorityPlantSet.some(data => data.Plant === sValue)) {
+                    bHasError = true;
+                    if (sMessage === "") {
+                        sMessage = sValue;
+                    } else {
+                        sMessage = sMessage + "、" + sValue;
+                    }
+                }
+            });
+            if (bHasError) {
+                MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [sMessage]));
+                aFilters.push(new Filter("Plant", FilterOperator.EQ, ''));
             }
         },
 

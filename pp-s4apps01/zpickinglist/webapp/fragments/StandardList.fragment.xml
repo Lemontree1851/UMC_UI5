@@ -10,10 +10,8 @@
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('STD_CREATE')"/>
-                <!-- <Button icon="sap-icon://edit" text="{i18n>Edit}" type="Transparent" press="onPressBtn('STD_EDIT')" visible="{= ${local>/std_mode} === 'display'}"/>
-                <Button icon="sap-icon://display" text="{i18n>Display}" type="Transparent" press="onPressBtn('STD_DISPLAY')" visible="{= ${local>/std_mode} === 'edit'}"/> -->
-                <Button icon="sap-icon://browse-folder" text="{i18n>ShowDetails}" type="Transparent" press="onPressBtn('STD_DETAIL')"/>
+                <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('STD_CREATE')" enabled="{= ${local>/authorityCheck/button/Edit}}"/>
+                <Button icon="sap-icon://browse-folder" text="{i18n>ShowDetails}" type="Transparent" press="onPressBtn('STD_DETAIL')" enabled="{= ${local>/authorityCheck/button/View}}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
         <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
