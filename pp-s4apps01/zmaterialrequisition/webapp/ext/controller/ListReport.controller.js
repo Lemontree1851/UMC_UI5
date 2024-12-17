@@ -28,10 +28,13 @@ sap.ui.define([
                     var sValue = filter.values[0];
                     if (aAuthorityPlantSet.length === 0) {
                         bHasError = true;
+                        if (sMessage === "") {
+                            sMessage = sValue;
+                        } else {
+                            sMessage = sMessage + "、" + sValue;
+                        }
                     } else if (!aAuthorityPlantSet.some(data => data.Plant === sValue)) {
                         bHasError = true;
-                    }
-                    if (bHasError) {
                         if (sMessage === "") {
                             sMessage = sValue;
                         } else {
