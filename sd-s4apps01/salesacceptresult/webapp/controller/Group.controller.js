@@ -174,8 +174,8 @@ sap.ui.define([
                             Zzkey: postData,
                             Ztype: "2",  //第二页面的保存
                             Event: bEvent,
-                            periodtype: aLTEXT1,
-                            acceptperiod: aLTEXT2
+                            PeriodType: aLTEXT1,
+                            AcceptPeriod: aLTEXT2
                         }
                     };
 
