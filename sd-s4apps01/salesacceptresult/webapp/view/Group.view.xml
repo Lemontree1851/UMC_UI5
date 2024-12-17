@@ -246,7 +246,7 @@
                 <Text text="{OutsideData}"/>
               </t:template>
             </t:Column>
-			<t:Column id="Remarks" label="{i18n>Remarks}" width="20rem" sortProperty="Remarks" filterProperty="Remarks" autoResizable="true">
+			<t:Column id="Remarks" label="{i18n>Remarks}" width="60rem" sortProperty="Remarks" filterProperty="Remarks" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Remarks ", "leadingProperty":"Remarks", "sortProperty":"Remarks", "filterProperty": "Remarks"}'/>
               </t:customData>
