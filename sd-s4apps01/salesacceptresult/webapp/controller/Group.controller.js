@@ -99,7 +99,7 @@ sap.ui.define([
                     var c1Cell = aRows[i].getCells()[0];
                     if (c1Cell) {
                         sType = c1Cell.getText();
-                        if (sType === "差異ナシ" || sType === "処理済み" || sType === "処理待ち" || sType === "処理不要") {
+                        if (sType === "差異ナシ" || sType === "処理済み" || sType === "処理待ち" || sType === "処理不要" || sType === "保留") {
                             $("#" + aRows[i].getId()).css("background-color", "#1E90FF");
                         }
                         else {
