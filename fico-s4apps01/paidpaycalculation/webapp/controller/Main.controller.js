@@ -65,6 +65,12 @@ sap.ui.define([
 					this.byId("ValuationQuantity10").setVisible(true);
 					this.byId("MaterialCost2000").setVisible(true);
 					this.byId("MaterialCost3000").setVisible(true);
+					this.byId("PurGrpAmount1").setVisible(true);
+					this.byId("PurGrpAmount2").setVisible(true);
+					this.byId("PurGrpAmount").setVisible(true);
+                    this.byId("ChargeableAmount1").setVisible(true);
+					this.byId("ChargeableAmount2").setVisible(true);
+					this.byId("ChargeableAmount").setVisible(true);
 
 					this.byId("ChargeableRate").setVisible(false);
 					this.byId("CurrentStockSemi").setVisible(false);
@@ -73,6 +79,8 @@ sap.ui.define([
 					this.byId("StockChangeAmount").setVisible(false);
 					this.byId("PaidMaterialCost").setVisible(false);
 					this.byId("RevenueRate").setVisible(false);
+					this.byId("PurGrpTot").setVisible(false);
+                    this.byId("ChargeableTot").setVisible(false);
 
 				} else {
 					this.byId("Product").setVisible(false);
@@ -119,6 +127,12 @@ sap.ui.define([
 					this.byId("ValuationQuantity10").setVisible(false);
 					this.byId("MaterialCost2000").setVisible(false);
 					this.byId("MaterialCost3000").setVisible(false);
+                    this.byId("PurGrpAmount1").setVisible(false);
+					this.byId("PurGrpAmount2").setVisible(false);
+					this.byId("PurGrpAmount").setVisible(false);
+                    this.byId("ChargeableAmount1").setVisible(false);
+					this.byId("ChargeableAmount2").setVisible(false);
+					this.byId("ChargeableAmount").setVisible(false);
 
 					this.byId("ChargeableRate").setVisible(true);
 					this.byId("CurrentStockSemi").setVisible(true);
@@ -127,6 +141,8 @@ sap.ui.define([
 					this.byId("StockChangeAmount").setVisible(true);
 					this.byId("PaidMaterialCost").setVisible(true);
 					this.byId("RevenueRate").setVisible(true);
+					this.byId("PurGrpTot").setVisible(true);
+                    this.byId("ChargeableTot").setVisible(true);
 				}
 			},
 

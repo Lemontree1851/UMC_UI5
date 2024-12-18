@@ -82,7 +82,7 @@
 		  </OverflowToolbar>
 		</smartTable:customToolbar>
 
-		<t:Table id="Table_Calc"  rowMode="Auto" rowsUpdated="onUITableRowsUpdated" >
+		  <t:Table id="Table_Calc"  rowMode="Auto" rowsUpdated="onUITableRowsUpdated" >
             <t:Column id="CompanyCode" label="{i18n>CompanyCode}" width="6rem" sortProperty="CompanyCode" filterProperty="CompanyCode" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
@@ -91,7 +91,7 @@
                 <Text text="{CompanyCode}"/>
               </t:template>
             </t:Column>
-			<t:Column id="FiscalYear" label="{i18n>FiscalYear}" width="6rem" sortProperty="FiscalYear" filterProperty="FiscalYear" autoResizable="true">
+			      <t:Column id="FiscalYear" label="{i18n>FiscalYear}" width="6rem" sortProperty="FiscalYear" filterProperty="FiscalYear" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYear", "leadingProperty":"FiscalYear", "sortProperty":"FiscalYear", "filterProperty": "FiscalYear"}'/>
               </t:customData>
@@ -108,7 +108,7 @@
                 <Text text="{Period}"/>
               </t:template>
             </t:Column>
-<t:Column id="Product" label="{i18n>Product}" width="10rem" sortProperty="Product" filterProperty="Product" autoResizable="true">
+            <t:Column id="Product" label="{i18n>Product}" width="10rem" sortProperty="Product" filterProperty="Product" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'/>
               </t:customData>
@@ -117,7 +117,7 @@
               </t:template>
             </t:Column>	
 
-		    <t:Column id="ProductDescription" label="{i18n>ProductDescription}" width="6rem" sortProperty="ProductDescription" filterProperty="ProductDescription" autoResizable="true">
+		        <t:Column id="ProductDescription" label="{i18n>ProductDescription}" width="6rem" sortProperty="ProductDescription" filterProperty="ProductDescription" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ProductDescription", "leadingProperty":"ProductDescription", "sortProperty":"ProductDescription", "filterProperty": "ProductDescription"}'/>
               </t:customData>
@@ -126,7 +126,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ProfitCenter" label="{i18n>ProfitCenter}" width="6rem" sortProperty="ProfitCenter" filterProperty="ProfitCenter" autoResizable="true">
+			      <t:Column id="ProfitCenter" label="{i18n>ProfitCenter}" width="6rem" sortProperty="ProfitCenter" filterProperty="ProfitCenter" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'/>
               </t:customData>
@@ -135,7 +135,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ProfitCenterName" label="{i18n>ProfitCenterName}" width="10rem" sortProperty="ProfitCenterName" filterProperty="ProfitCenterName" autoResizable="true">
+			      <t:Column id="ProfitCenterName" label="{i18n>ProfitCenterName}" width="10rem" sortProperty="ProfitCenterName" filterProperty="ProfitCenterName" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenterName", "leadingProperty":"ProfitCenterName", "sortProperty":"ProfitCenterName", "filterProperty": "ProfitCenterName"}'/>
               </t:customData>
@@ -153,7 +153,7 @@
               </t:template>
             </t:Column>
 
-			<t:Column id="CustomerName" label="{i18n>CustomerName}" width="6rem" sortProperty="CustomerName" filterProperty="CustomerName" autoResizable="true">
+			      <t:Column id="CustomerName" label="{i18n>CustomerName}" width="6rem" sortProperty="CustomerName" filterProperty="CustomerName" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName", "sortProperty":"CustomerName", "filterProperty": "CustomerName"}'/>
               </t:customData>
@@ -162,7 +162,7 @@
               </t:template>
             </t:Column>	
 		    
-			<t:Column id="Supplier" label="{i18n>Supplier}" width="6rem" sortProperty="Supplier" filterProperty="Supplier" autoResizable="true">
+			      <t:Column id="Supplier" label="{i18n>Supplier}" width="6rem" sortProperty="Supplier" filterProperty="Supplier" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier", "sortProperty":"Supplier", "filterProperty": "Supplier"}'/>
               </t:customData>
@@ -171,7 +171,7 @@
               </t:template>
             </t:Column>	
 				
-			<t:Column id="SupplierName" label="{i18n>SupplierName}" width="6rem" sortProperty="SupplierName" filterProperty="SupplierName" autoResizable="true">
+			      <t:Column id="SupplierName" label="{i18n>SupplierName}" width="6rem" sortProperty="SupplierName" filterProperty="SupplierName" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"SupplierName", "leadingProperty":"SupplierName", "sortProperty":"SupplierName", "filterProperty": "SupplierName"}'/>
               </t:customData>
@@ -181,7 +181,7 @@
             </t:Column>	
 
 			
-			<t:Column id="UpperProduct01" label="{i18n>UpperProduct01}" width="6rem" sortProperty="UpperProduct01" filterProperty="UpperProduct01" autoResizable="true">
+			      <t:Column id="UpperProduct01" label="{i18n>UpperProduct01}" width="6rem" sortProperty="UpperProduct01" filterProperty="UpperProduct01" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"UpperProduct01", "leadingProperty":"UpperProduct01", "sortProperty":"UpperProduct01", "filterProperty": "UpperProduct01"}'/>
               </t:customData>
@@ -190,7 +190,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass01" label="{i18n>ValuationClass01}" width="6rem" sortProperty="ValuationClass01" filterProperty="ValuationClass01" autoResizable="true">
+			      <t:Column id="ValuationClass01" label="{i18n>ValuationClass01}" width="6rem" sortProperty="ValuationClass01" filterProperty="ValuationClass01" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass01", "leadingProperty":"ValuationClass01", "sortProperty":"ValuationClass01", "filterProperty": "ValuationClass01"}'/>
               </t:customData>
@@ -199,7 +199,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost01" label="{i18n>Cost01}" width="6rem" sortProperty="Cost01" filterProperty="Cost01" autoResizable="true">
+			      <t:Column id="Cost01" label="{i18n>Cost01}" width="6rem" sortProperty="Cost01" filterProperty="Cost01" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost01", "leadingProperty":"Cost01", "sortProperty":"Cost01", "filterProperty": "Cost01"}'/>
               </t:customData>
@@ -208,7 +208,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity01" label="{i18n>ValuationQuantity01}" width="6rem" sortProperty="ValuationQuantity01" filterProperty="ValuationQuantity01" autoResizable="true">
+			      <t:Column id="ValuationQuantity01" label="{i18n>ValuationQuantity01}" width="6rem" sortProperty="ValuationQuantity01" filterProperty="ValuationQuantity01" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity01", "leadingProperty":"ValuationQuantity01", "sortProperty":"ValuationQuantity01", "filterProperty": "ValuationQuantity01"}'/>
               </t:customData>
@@ -217,7 +217,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="UpperProduct02" label="{i18n>UpperProduct02}" width="6rem" sortProperty="UpperProduct02" filterProperty="UpperProduct02" autoResizable="true">
+			      <t:Column id="UpperProduct02" label="{i18n>UpperProduct02}" width="6rem" sortProperty="UpperProduct02" filterProperty="UpperProduct02" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"UpperProduct02", "leadingProperty":"UpperProduct02", "sortProperty":"UpperProduct02", "filterProperty": "UpperProduct02"}'/>
               </t:customData>
@@ -226,7 +226,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass02" label="{i18n>ValuationClass02}" width="6rem" sortProperty="ValuationClass02" filterProperty="ValuationClass02" autoResizable="true">
+			      <t:Column id="ValuationClass02" label="{i18n>ValuationClass02}" width="6rem" sortProperty="ValuationClass02" filterProperty="ValuationClass02" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass02", "leadingProperty":"ValuationClass02", "sortProperty":"ValuationClass02", "filterProperty": "ValuationClass02"}'/>
               </t:customData>
@@ -235,7 +235,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost02" label="{i18n>Cost02}" width="6rem" sortProperty="Cost02" filterProperty="Cost02" autoResizable="true">
+			      <t:Column id="Cost02" label="{i18n>Cost02}" width="6rem" sortProperty="Cost02" filterProperty="Cost02" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost02", "leadingProperty":"Cost02", "sortProperty":"Cost02", "filterProperty": "Cost02"}'/>
               </t:customData>
@@ -244,7 +244,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity02" label="{i18n>ValuationQuantity02}" width="6rem" sortProperty="ValuationQuantity02" filterProperty="ValuationQuantity02" autoResizable="true">
+			      <t:Column id="ValuationQuantity02" label="{i18n>ValuationQuantity02}" width="6rem" sortProperty="ValuationQuantity02" filterProperty="ValuationQuantity02" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity02", "leadingProperty":"ValuationQuantity02", "sortProperty":"ValuationQuantity02", "filterProperty": "ValuationQuantity02"}'/>
               </t:customData>
@@ -262,7 +262,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass03" label="{i18n>ValuationClass03}" width="6rem" sortProperty="ValuationClass03" filterProperty="ValuationClass03" autoResizable="true">
+			      <t:Column id="ValuationClass03" label="{i18n>ValuationClass03}" width="6rem" sortProperty="ValuationClass03" filterProperty="ValuationClass03" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass03", "leadingProperty":"ValuationClass03", "sortProperty":"ValuationClass03", "filterProperty": "ValuationClass03"}'/>
               </t:customData>
@@ -271,7 +271,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost03" label="{i18n>Cost03}" width="6rem" sortProperty="Cost03" filterProperty="Cost03" autoResizable="true">
+			      <t:Column id="Cost03" label="{i18n>Cost03}" width="6rem" sortProperty="Cost03" filterProperty="Cost03" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost03", "leadingProperty":"Cost03", "sortProperty":"Cost03", "filterProperty": "Cost03"}'/>
               </t:customData>
@@ -280,7 +280,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity03" label="{i18n>ValuationQuantity03}" width="6rem" sortProperty="ValuationQuantity03" filterProperty="ValuationQuantity03" autoResizable="true">
+			      <t:Column id="ValuationQuantity03" label="{i18n>ValuationQuantity03}" width="6rem" sortProperty="ValuationQuantity03" filterProperty="ValuationQuantity03" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity03", "leadingProperty":"ValuationQuantity03", "sortProperty":"ValuationQuantity03", "filterProperty": "ValuationQuantity03"}'/>
               </t:customData>
@@ -289,7 +289,7 @@
               </t:template>
             </t:Column>
 
-			<t:Column id="UpperProduct04" label="{i18n>UpperProduct04}" width="6rem" sortProperty="UpperProduct04" filterProperty="UpperProduct04" autoResizable="true">
+			      <t:Column id="UpperProduct04" label="{i18n>UpperProduct04}" width="6rem" sortProperty="UpperProduct04" filterProperty="UpperProduct04" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"UpperProduct04", "leadingProperty":"UpperProduct04", "sortProperty":"UpperProduct04", "filterProperty": "UpperProduct04"}'/>
               </t:customData>
@@ -298,7 +298,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass04" label="{i18n>ValuationClass04}" width="6rem" sortProperty="ValuationClass04" filterProperty="ValuationClass04" autoResizable="true">
+			      <t:Column id="ValuationClass04" label="{i18n>ValuationClass04}" width="6rem" sortProperty="ValuationClass04" filterProperty="ValuationClass04" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass04", "leadingProperty":"ValuationClass04", "sortProperty":"ValuationClass04", "filterProperty": "ValuationClass04"}'/>
               </t:customData>
@@ -307,7 +307,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost04" label="{i18n>Cost04}" width="6rem" sortProperty="Cost04" filterProperty="Cost04" autoResizable="true">
+			      <t:Column id="Cost04" label="{i18n>Cost04}" width="6rem" sortProperty="Cost04" filterProperty="Cost04" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost04", "leadingProperty":"Cost04", "sortProperty":"Cost04", "filterProperty": "Cost04"}'/>
               </t:customData>
@@ -316,7 +316,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity04" label="{i18n>ValuationQuantity04}" width="6rem" sortProperty="ValuationQuantity04" filterProperty="ValuationQuantity04" autoResizable="true">
+			      <t:Column id="ValuationQuantity04" label="{i18n>ValuationQuantity04}" width="6rem" sortProperty="ValuationQuantity04" filterProperty="ValuationQuantity04" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity04", "leadingProperty":"ValuationQuantity04", "sortProperty":"ValuationQuantity04", "filterProperty": "ValuationQuantity04"}'/>
               </t:customData>
@@ -325,7 +325,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="UpperProduct05" label="{i18n>UpperProduct05}" width="6rem" sortProperty="UpperProduct05" filterProperty="UpperProduct05" autoResizable="true">
+			      <t:Column id="UpperProduct05" label="{i18n>UpperProduct05}" width="6rem" sortProperty="UpperProduct05" filterProperty="UpperProduct05" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"UpperProduct05", "leadingProperty":"UpperProduct05", "sortProperty":"UpperProduct05", "filterProperty": "UpperProduct05"}'/>
               </t:customData>
@@ -334,7 +334,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass05" label="{i18n>ValuationClass05}" width="6rem" sortProperty="ValuationClass05" filterProperty="ValuationClass05" autoResizable="true">
+			      <t:Column id="ValuationClass05" label="{i18n>ValuationClass05}" width="6rem" sortProperty="ValuationClass05" filterProperty="ValuationClass05" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass05", "leadingProperty":"ValuationClass05", "sortProperty":"ValuationClass05", "filterProperty": "ValuationClass05"}'/>
               </t:customData>
@@ -343,7 +343,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost05" label="{i18n>Cost05}" width="6rem" sortProperty="Cost05" filterProperty="Cost05" autoResizable="true">
+			      <t:Column id="Cost05" label="{i18n>Cost05}" width="6rem" sortProperty="Cost05" filterProperty="Cost05" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost05", "leadingProperty":"Cost05", "sortProperty":"Cost05", "filterProperty": "Cost05"}'/>
               </t:customData>
@@ -352,7 +352,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity05" label="{i18n>ValuationQuantity05}" width="6rem" sortProperty="ValuationQuantity05" filterProperty="ValuationQuantity05" autoResizable="true">
+			      <t:Column id="ValuationQuantity05" label="{i18n>ValuationQuantity05}" width="6rem" sortProperty="ValuationQuantity05" filterProperty="ValuationQuantity05" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity05", "leadingProperty":"ValuationQuantity05", "sortProperty":"ValuationQuantity05", "filterProperty": "ValuationQuantity05"}'/>
               </t:customData>
@@ -370,7 +370,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass06" label="{i18n>ValuationClass06}" width="6rem" sortProperty="ValuationClass06" filterProperty="ValuationClass06" autoResizable="true">
+			      <t:Column id="ValuationClass06" label="{i18n>ValuationClass06}" width="6rem" sortProperty="ValuationClass06" filterProperty="ValuationClass06" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass06", "leadingProperty":"ValuationClass06", "sortProperty":"ValuationClass06", "filterProperty": "ValuationClass06"}'/>
               </t:customData>
@@ -379,7 +379,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost06" label="{i18n>Cost06}" width="6rem" sortProperty="Cost06" filterProperty="Cost06" autoResizable="true">
+			      <t:Column id="Cost06" label="{i18n>Cost06}" width="6rem" sortProperty="Cost06" filterProperty="Cost06" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost06", "leadingProperty":"Cost06", "sortProperty":"Cost06", "filterProperty": "Cost06"}'/>
               </t:customData>
@@ -388,7 +388,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity06" label="{i18n>ValuationQuantity06}" width="6rem" sortProperty="ValuationQuantity06" filterProperty="ValuationQuantity06" autoResizable="true">
+			      <t:Column id="ValuationQuantity06" label="{i18n>ValuationQuantity06}" width="6rem" sortProperty="ValuationQuantity06" filterProperty="ValuationQuantity06" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity06", "leadingProperty":"ValuationQuantity06", "sortProperty":"ValuationQuantity06", "filterProperty": "ValuationQuantity06"}'/>
               </t:customData>
@@ -397,7 +397,7 @@
               </t:template>
             </t:Column>
 
-			<t:Column id="UpperProduct07" label="{i18n>UpperProduct07}" width="6rem" sortProperty="UpperProduct07" filterProperty="UpperProduct07" autoResizable="true">
+			      <t:Column id="UpperProduct07" label="{i18n>UpperProduct07}" width="6rem" sortProperty="UpperProduct07" filterProperty="UpperProduct07" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"UpperProduct07", "leadingProperty":"UpperProduct07", "sortProperty":"UpperProduct07", "filterProperty": "UpperProduct07"}'/>
               </t:customData>
@@ -406,7 +406,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass07" label="{i18n>ValuationClass07}" width="6rem" sortProperty="ValuationClass07" filterProperty="ValuationClass07" autoResizable="true">
+			      <t:Column id="ValuationClass07" label="{i18n>ValuationClass07}" width="6rem" sortProperty="ValuationClass07" filterProperty="ValuationClass07" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass07", "leadingProperty":"ValuationClass07", "sortProperty":"ValuationClass07", "filterProperty": "ValuationClass07"}'/>
               </t:customData>
@@ -415,7 +415,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost07" label="{i18n>Cost07}" width="6rem" sortProperty="Cost07" filterProperty="Cost07" autoResizable="true">
+			      <t:Column id="Cost07" label="{i18n>Cost07}" width="6rem" sortProperty="Cost07" filterProperty="Cost07" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost07", "leadingProperty":"Cost07", "sortProperty":"Cost07", "filterProperty": "Cost07"}'/>
               </t:customData>
@@ -424,7 +424,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity07" label="{i18n>ValuationQuantity07}" width="6rem" sortProperty="ValuationQuantity07" filterProperty="ValuationQuantity07" autoResizable="true">
+			      <t:Column id="ValuationQuantity07" label="{i18n>ValuationQuantity07}" width="6rem" sortProperty="ValuationQuantity07" filterProperty="ValuationQuantity07" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity07", "leadingProperty":"ValuationQuantity07", "sortProperty":"ValuationQuantity07", "filterProperty": "ValuationQuantity07"}'/>
               </t:customData>
@@ -433,7 +433,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="UpperProduct08" label="{i18n>UpperProduct08}" width="6rem" sortProperty="UpperProduct08" filterProperty="UpperProduct08" autoResizable="true">
+			      <t:Column id="UpperProduct08" label="{i18n>UpperProduct08}" width="6rem" sortProperty="UpperProduct08" filterProperty="UpperProduct08" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"UpperProduct08", "leadingProperty":"UpperProduct08", "sortProperty":"UpperProduct08", "filterProperty": "UpperProduct08"}'/>
               </t:customData>
@@ -442,7 +442,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass08" label="{i18n>ValuationClass08}" width="6rem" sortProperty="ValuationClass08" filterProperty="ValuationClass08" autoResizable="true">
+			      <t:Column id="ValuationClass08" label="{i18n>ValuationClass08}" width="6rem" sortProperty="ValuationClass08" filterProperty="ValuationClass08" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass08", "leadingProperty":"ValuationClass08", "sortProperty":"ValuationClass08", "filterProperty": "ValuationClass08"}'/>
               </t:customData>
@@ -451,7 +451,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost08" label="{i18n>Cost08}" width="6rem" sortProperty="Cost08" filterProperty="Cost08" autoResizable="true">
+			      <t:Column id="Cost08" label="{i18n>Cost08}" width="6rem" sortProperty="Cost08" filterProperty="Cost08" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost08", "leadingProperty":"Cost08", "sortProperty":"Cost08", "filterProperty": "Cost08"}'/>
               </t:customData>
@@ -460,7 +460,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity08" label="{i18n>ValuationQuantity08}" width="6rem" sortProperty="ValuationQuantity08" filterProperty="ValuationQuantity08" autoResizable="true">
+			      <t:Column id="ValuationQuantity08" label="{i18n>ValuationQuantity08}" width="6rem" sortProperty="ValuationQuantity08" filterProperty="ValuationQuantity08" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity08", "leadingProperty":"ValuationQuantity08", "sortProperty":"ValuationQuantity08", "filterProperty": "ValuationQuantity08"}'/>
               </t:customData>
@@ -469,7 +469,7 @@
               </t:template>
             </t:Column>
 
-			<t:Column id="UpperProduct09" label="{i18n>UpperProduct09}" width="6rem" sortProperty="UpperProduct09" filterProperty="UpperProduct09" autoResizable="true">
+			      <t:Column id="UpperProduct09" label="{i18n>UpperProduct09}" width="6rem" sortProperty="UpperProduct09" filterProperty="UpperProduct09" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"UpperProduct09", "leadingProperty":"UpperProduct09", "sortProperty":"UpperProduct09", "filterProperty": "UpperProduct09"}'/>
               </t:customData>
@@ -478,7 +478,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass09" label="{i18n>ValuationClass09}" width="6rem" sortProperty="ValuationClass09" filterProperty="ValuationClass09" autoResizable="true">
+			      <t:Column id="ValuationClass09" label="{i18n>ValuationClass09}" width="6rem" sortProperty="ValuationClass09" filterProperty="ValuationClass09" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass09", "leadingProperty":"ValuationClass09", "sortProperty":"ValuationClass09", "filterProperty": "ValuationClass09"}'/>
               </t:customData>
@@ -487,7 +487,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost09" label="{i18n>Cost09}" width="6rem" sortProperty="Cost09" filterProperty="Cost09" autoResizable="true">
+			      <t:Column id="Cost09" label="{i18n>Cost09}" width="6rem" sortProperty="Cost09" filterProperty="Cost09" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost09", "leadingProperty":"Cost09", "sortProperty":"Cost09", "filterProperty": "Cost09"}'/>
               </t:customData>
@@ -496,7 +496,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity09" label="{i18n>ValuationQuantity09}" width="6rem" sortProperty="ValuationQuantity09" filterProperty="ValuationQuantity09" autoResizable="true">
+			      <t:Column id="ValuationQuantity09" label="{i18n>ValuationQuantity09}" width="6rem" sortProperty="ValuationQuantity09" filterProperty="ValuationQuantity09" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity09", "leadingProperty":"ValuationQuantity09", "sortProperty":"ValuationQuantity09", "filterProperty": "ValuationQuantity09"}'/>
               </t:customData>
@@ -505,7 +505,7 @@
               </t:template>
             </t:Column>
 
-			<t:Column id="UpperProduct10" label="{i18n>UpperProduct10}" width="6rem" sortProperty="UpperProduct10" filterProperty="UpperProduct10" autoResizable="true">
+			      <t:Column id="UpperProduct10" label="{i18n>UpperProduct10}" width="6rem" sortProperty="UpperProduct10" filterProperty="UpperProduct10" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"UpperProduct10", "leadingProperty":"UpperProduct10", "sortProperty":"UpperProduct10", "filterProperty": "UpperProduct10"}'/>
               </t:customData>
@@ -514,7 +514,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="ValuationClass10" label="{i18n>ValuationClass10}" width="6rem" sortProperty="ValuationClass10" filterProperty="ValuationClass10" autoResizable="true">
+			      <t:Column id="ValuationClass10" label="{i18n>ValuationClass10}" width="6rem" sortProperty="ValuationClass10" filterProperty="ValuationClass10" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass10", "leadingProperty":"ValuationClass10", "sortProperty":"ValuationClass10", "filterProperty": "ValuationClass10"}'/>
               </t:customData>
@@ -523,7 +523,7 @@
               </t:template>
             </t:Column>		
 				
-			<t:Column id="Cost10" label="{i18n>Cost10}" width="6rem" sortProperty="Cost10" filterProperty="Cost10" autoResizable="true">
+			      <t:Column id="Cost10" label="{i18n>Cost10}" width="6rem" sortProperty="Cost10" filterProperty="Cost10" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost10", "leadingProperty":"Cost10", "sortProperty":"Cost10", "filterProperty": "Cost10"}'/>
               </t:customData>
@@ -532,7 +532,7 @@
               </t:template>
             </t:Column>			
 			
-			<t:Column id="ValuationQuantity10" label="{i18n>ValuationQuantity10}" width="6rem" sortProperty="ValuationQuantity10" filterProperty="ValuationQuantity10" autoResizable="true">
+			      <t:Column id="ValuationQuantity10" label="{i18n>ValuationQuantity10}" width="6rem" sortProperty="ValuationQuantity10" filterProperty="ValuationQuantity10" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity10", "leadingProperty":"ValuationQuantity10", "sortProperty":"ValuationQuantity10", "filterProperty": "ValuationQuantity10"}'/>
               </t:customData>
@@ -541,7 +541,7 @@
               </t:template>
             </t:Column>
 
-			<t:Column id="MaterialCost2000" label="{i18n>MaterialCost2000}" width="6rem" sortProperty="MaterialCost2000" filterProperty="MaterialCost2000" autoResizable="true">
+			      <t:Column id="MaterialCost2000" label="{i18n>MaterialCost2000}" width="6rem" sortProperty="MaterialCost2000" filterProperty="MaterialCost2000" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"MaterialCost2000", "leadingProperty":"MaterialCost2000", "sortProperty":"MaterialCost2000", "filterProperty": "MaterialCost2000"}'/>
               </t:customData>
@@ -550,7 +550,7 @@
               </t:template>
             </t:Column>
 			
-			<t:Column id="MaterialCost3000" label="{i18n>MaterialCost3000}" width="6rem" sortProperty="MaterialCost3000" filterProperty="MaterialCost3000" autoResizable="true">
+			      <t:Column id="MaterialCost3000" label="{i18n>MaterialCost3000}" width="6rem" sortProperty="MaterialCost3000" filterProperty="MaterialCost3000" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"MaterialCost3000", "leadingProperty":"MaterialCost3000", "sortProperty":"MaterialCost3000", "filterProperty": "MaterialCost3000"}'/>
               </t:customData>
@@ -559,7 +559,7 @@
               </t:template>
             </t:Column>
 			
-			<t:Column id="PurchasingGroup" label="{i18n>PurchasingGroup}" width="6rem" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup" autoResizable="true">
+			      <t:Column id="PurchasingGroup" label="{i18n>PurchasingGroup}" width="6rem" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroup", "leadingProperty":"PurchasingGroup", "sortProperty":"PurchasingGroup", "filterProperty": "PurchasingGroup"}'/>
               </t:customData>
@@ -577,7 +577,7 @@
               </t:template>
             </t:Column>
 
-			<t:Column id="PurGrpAmount2" label="{i18n>PurGrpAmount2}" width="6rem" sortProperty="PurGrpAmount2" filterProperty="PurGrpAmount2" autoResizable="true">
+			      <t:Column id="PurGrpAmount2" label="{i18n>PurGrpAmount2}" width="6rem" sortProperty="PurGrpAmount2" filterProperty="PurGrpAmount2" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"PurGrpAmount2", "leadingProperty":"PurGrpAmount2", "sortProperty":"PurGrpAmount2", "filterProperty": "PurGrpAmount2"}'/>
               </t:customData>
@@ -595,7 +595,7 @@
               </t:template>
             </t:Column>
             
-			<t:Column id="ChargeableAmount1" label="{i18n>ChargeableAmount1}" width="6rem" sortProperty="ChargeableAmount1" filterProperty="ChargeableAmount1" autoResizable="true">
+			      <t:Column id="ChargeableAmount1" label="{i18n>ChargeableAmount1}" width="6rem" sortProperty="ChargeableAmount1" filterProperty="ChargeableAmount1" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableAmount1", "leadingProperty":"ChargeableAmount1", "sortProperty":"ChargeableAmount1", "filterProperty": "ChargeableAmount1"}'/>
               </t:customData>
@@ -604,7 +604,7 @@
               </t:template>
             </t:Column>
 				
-			<t:Column id="ChargeableAmount2" label="{i18n>ChargeableAmount2}" width="6rem" sortProperty="ChargeableAmount2" filterProperty="ChargeableAmount2" autoResizable="true">
+			      <t:Column id="ChargeableAmount2" label="{i18n>ChargeableAmount2}" width="6rem" sortProperty="ChargeableAmount2" filterProperty="ChargeableAmount2" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableAmount2", "leadingProperty":"ChargeableAmount2", "sortProperty":"ChargeableAmount2", "filterProperty": "ChargeableAmount2"}'/>
               </t:customData>
@@ -613,7 +613,7 @@
               </t:template>
             </t:Column>
 					
-			<t:Column id="ChargeableAmount" label="{i18n>ChargeableAmount}" width="6rem" sortProperty="ChargeableAmount" filterProperty="ChargeableAmount" autoResizable="true">
+			      <t:Column id="ChargeableAmount" label="{i18n>ChargeableAmount}" width="6rem" sortProperty="ChargeableAmount" filterProperty="ChargeableAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableAmount", "leadingProperty":"ChargeableAmount", "sortProperty":"ChargeableAmount", "filterProperty": "ChargeableAmount"}'/>
               </t:customData>
@@ -622,7 +622,7 @@
               </t:template>
             </t:Column>	
 			
-			<t:Column id="PreviousStockAmount" label="{i18n>PreviousStockAmount}" width="6rem" sortProperty="PreviousStockAmount" filterProperty="PreviousStockAmount" autoResizable="true">
+			      <t:Column id="PreviousStockAmount" label="{i18n>PreviousStockAmount}" width="6rem" sortProperty="PreviousStockAmount" filterProperty="PreviousStockAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"PreviousStockAmount", "leadingProperty":"PreviousStockAmount", "sortProperty":"PreviousStockAmount", "filterProperty": "PreviousStockAmount"}'/>
               </t:customData>
@@ -631,7 +631,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="CurrentStockAmount" label="{i18n>CurrentStockAmount}" width="6rem" sortProperty="CurrentStockAmount" filterProperty="CurrentStockAmount" autoResizable="true">
+			      <t:Column id="CurrentStockAmount" label="{i18n>CurrentStockAmount}" width="6rem" sortProperty="CurrentStockAmount" filterProperty="CurrentStockAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockAmount", "leadingProperty":"CurrentStockAmount", "sortProperty":"CurrentStockAmount", "filterProperty": "CurrentStockAmount"}'/>
               </t:customData>
@@ -649,7 +649,7 @@
               </t:template>
             </t:Column>	
 
-			<t:Column id="CustomerRevenue" label="{i18n>CustomerRevenue}" width="6rem" sortProperty="CustomerRevenue" filterProperty="CustomerRevenue" autoResizable="true">
+			      <t:Column id="CustomerRevenue" label="{i18n>CustomerRevenue}" width="6rem" sortProperty="CustomerRevenue" filterProperty="CustomerRevenue" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerRevenue", "leadingProperty":"CustomerRevenue", "sortProperty":"CustomerRevenue", "filterProperty": "CustomerRevenue"}'/>
               </t:customData>
@@ -658,7 +658,7 @@
               </t:template>
             </t:Column>	
 				
-			<t:Column id="Revenue1" label="{i18n>Revenue1}" width="6rem" sortProperty="Revenue1" filterProperty="Revenue1" autoResizable="true">
+			      <t:Column id="Revenue1" label="{i18n>Revenue1}" width="6rem" sortProperty="Revenue1" filterProperty="Revenue1" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Revenue1", "leadingProperty":"Revenue1", "sortProperty":"Revenue1", "filterProperty": "Revenue1"}'/>
               </t:customData>
@@ -667,7 +667,7 @@
               </t:template>
             </t:Column>		
 			
-			<t:Column id="Revenue" label="{i18n>Revenue}" width="6rem" sortProperty="Revenue" filterProperty="Revenue" autoResizable="true">
+			      <t:Column id="Revenue" label="{i18n>Revenue}" width="6rem" sortProperty="Revenue" filterProperty="Revenue" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Revenue", "leadingProperty":"Revenue", "sortProperty":"Revenue", "filterProperty": "Revenue"}'/>
               </t:customData>
@@ -676,7 +676,7 @@
               </t:template>
             </t:Column>
 			
-      <t:Column id="ChargeableRate" label="{i18n>ChargeableRate}" width="6rem" sortProperty="ChargeableRate" filterProperty="ChargeableRate" autoResizable="true" visible="false">
+            <t:Column id="ChargeableRate" label="{i18n>ChargeableRate}" width="6rem" sortProperty="ChargeableRate" filterProperty="ChargeableRate" autoResizable="true" visible="false">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableRate", "leadingProperty":"ChargeableRate", "sortProperty":"ChargeableRate", "filterProperty": "ChargeableRate"}'/>
               </t:customData>
@@ -684,7 +684,7 @@
                 <Text text="{path:'ChargeableRate', formatter:'.formatter.formatFloat'}"/>
               </t:template>
             </t:Column>
-			<t:Column id="CurrentStockSemi" label="{i18n>CurrentStockSemi}" width="6rem" sortProperty="CurrentStockSemi" filterProperty="CurrentStockSemi" autoResizable="true" visible="false">
+		        <t:Column id="CurrentStockSemi" label="{i18n>CurrentStockSemi}" width="6rem" sortProperty="CurrentStockSemi" filterProperty="CurrentStockSemi" autoResizable="true" visible="false">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockSemi", "leadingProperty":"CurrentStockSemi", "sortProperty":"CurrentStockSemi", "filterProperty": "CurrentStockSemi"}'/>
               </t:customData>
@@ -692,8 +692,26 @@
                 <Text text="{path:'CurrentStockSemi', formatter:'.formatter.formatFloat'}"/>
               </t:template>
             </t:Column>
+            
+            <t:Column id="PurGrpTot" label="{i18n>PurGrpTot}" width="6rem" sortProperty="PurGrpTot" filterProperty="PurGrpTot" autoResizable="true" visible="false">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"PurGrpTot", "leadingProperty":"PurGrpTot", "sortProperty":"PurGrpTot", "filterProperty": "PurGrpTot"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'PurGrpTot', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>	
 
-			<t:Column id="CurrentStockFin" label="{i18n>CurrentStockFin}" width="6rem" sortProperty="CurrentStockFin" filterProperty="CurrentStockFin" autoResizable="true" visible="false">
+            <t:Column id="ChargeableTot" label="{i18n>ChargeableTot}" width="6rem" sortProperty="ChargeableTot" filterProperty="ChargeableTot" autoResizable="true" visible="false">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableTot", "leadingProperty":"ChargeableTot", "sortProperty":"ChargeableTot", "filterProperty": "ChargeableTot"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'ChargeableTot', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>	
+
+			      <t:Column id="CurrentStockFin" label="{i18n>CurrentStockFin}" width="6rem" sortProperty="CurrentStockFin" filterProperty="CurrentStockFin" autoResizable="true" visible="false">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockFin", "leadingProperty":"CurrentStockFin", "sortProperty":"CurrentStockFin", "filterProperty": "CurrentStockFin"}'/>
               </t:customData>
@@ -702,7 +720,7 @@
               </t:template>
             </t:Column>
 				
-			<t:Column id="CurrentStockTotal" label="{i18n>CurrentStockTotal}" width="6rem" sortProperty="CurrentStockTotal" filterProperty="CurrentStockTotal" autoResizable="true" visible="false">
+			      <t:Column id="CurrentStockTotal" label="{i18n>CurrentStockTotal}" width="6rem" sortProperty="CurrentStockTotal" filterProperty="CurrentStockTotal" autoResizable="true" visible="false">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockTotal", "leadingProperty":"CurrentStockTotal", "sortProperty":"CurrentStockTotal", "filterProperty": "CurrentStockTotal"}'/>
               </t:customData>
@@ -729,19 +747,16 @@
               </t:template>
             </t:Column>
 				
-			<t:Column id="RevenueRate" label="{i18n>RevenueRate}" width="6rem" sortProperty="RevenueRate" filterProperty="RevenueRate" autoResizable="true" visible="false">
+			      <t:Column id="RevenueRate" label="{i18n>RevenueRate}" width="6rem" sortProperty="RevenueRate" filterProperty="RevenueRate" autoResizable="true" visible="false">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"RevenueRate", "leadingProperty":"RevenueRate", "sortProperty":"RevenueRate", "filterProperty": "RevenueRate"}'/>
               </t:customData>
               <t:template>
                 <Text text="{path:'RevenueRate', formatter:'.formatter.formatFloat'}"/>
               </t:template>
-            </t:Column>	
-				
-				
-		  </t:Table>
-        </smartTable:SmartTable>
-
-	</f:content>
-   </f:DynamicPage>
+            </t:Column>					
+		    </t:Table>
+      </smartTable:SmartTable>
+	  </f:content>
+  </f:DynamicPage>
 </mvc:View>
