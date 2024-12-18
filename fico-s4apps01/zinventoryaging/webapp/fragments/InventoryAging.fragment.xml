@@ -163,6 +163,14 @@
                         <Text text="{path: 'ActualCost', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="8rem" label="{i18n>MaterialPriceUnitQty}" sortProperty="MaterialPriceUnitQty" filterProperty="MaterialPriceUnitQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MaterialPriceUnitQty", "leadingProperty":"MaterialPriceUnitQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path:'MaterialPriceUnitQty', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                    </table:template>
+                </table:Column>
                 <table:Column width="8rem" label="{i18n>InventoryAmount}" sortProperty="InventoryAmount" filterProperty="InventoryAmount" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"InventoryAmount", "leadingProperty":"InventoryAmount"}'/>

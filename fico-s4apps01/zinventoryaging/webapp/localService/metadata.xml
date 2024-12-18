@@ -83,11 +83,12 @@
                 <Property Name="ChargeableSupplyFlag" Type="Edm.String" MaxLength="5"/>
                 <Property Name="ProfitCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Profit Center"/>
                 <Property Name="ProfitCenterLongName" Type="Edm.String" MaxLength="40"/>
-                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10"/>
+                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
                 <Property Name="BusinessPartnerName" Type="Edm.String" MaxLength="70"/>
                 <Property Name="ValuationQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
                 <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="ActualCost" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="MaterialPriceUnitQty" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Price unit"/>
                 <Property Name="InventoryAmount" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationUnitPrice" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationAmount" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
