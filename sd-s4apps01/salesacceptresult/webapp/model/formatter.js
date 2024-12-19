@@ -105,6 +105,21 @@ sap.ui.define([
                 }
                 return n1;
             }
-        }
+        },
+
+        setTextVisible1: function (value) {
+			if (value) {
+				return (value === "1" ) ? true : false;
+			}
+			return false;
+		},
+        
+        setTextVisible2: function (value) {
+			if (value) {
+				return (value === "0" ) ? true : false;
+			}
+			return false;
+		},
+
     };
 });

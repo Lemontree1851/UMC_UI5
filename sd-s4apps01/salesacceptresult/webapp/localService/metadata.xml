@@ -125,6 +125,7 @@
                 <Property Name="Remarks" Type="Edm.String" MaxLength="100"/>
                 <Property Name="ReasonCategory" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Reason" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FinishStatus" Type="Edm.String" MaxLength="20"/>
                 <Property Name="CustomerName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="PeriodTypeText" Type="Edm.String" MaxLength="30"/>
                 <Property Name="AcceptPeriodText" Type="Edm.String" MaxLength="30"/>
@@ -594,6 +595,9 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_salesacceptance_result_o2.SalesAcceptanceResultType/ExchangeRateDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_salesacceptance_result_o2.SalesAcceptanceResultType/FinishStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_salesacceptance_result_o2.SalesAcceptanceResultType/Layer" xmlns="http://docs.oasis-open.org/odata/ns/edm">

@@ -31,6 +31,20 @@ sap.ui.define([
                 this._LocalData.setProperty("/head", this._oDataModel.getProperty("/" + aDataKey[0]));
 
             }.bind(this));
+
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.getRoute("Main").attachMatched(this._onRouteMatched, this);
+        },
+
+        _onRouteMatched: function () {
+            // Logic to refresh the first page
+            this._refreshPageContent();
+        },
+
+        _refreshPageContent: function () {
+            // Example: Refresh a model or call a service
+            this._oDataModel.setRefreshAfterChange(false);
+            this._oDataModel.refresh();
         },
 
         onBeforeRebindTable: function (oEvent, arg1, arg2, arg3, arg4) {
@@ -52,6 +66,14 @@ sap.ui.define([
                 path: "AcceptPeriod",
                 operator: "EQ",
                 value1: aLTEXT2
+            });
+            filters.push(oAcceptPeriod);
+
+            var aLTEXT3 = this.byId("idFinishStatus").getSelectedKey();
+            var oAcceptPeriod = new sap.ui.model.Filter({
+                path: "FinishStatus",
+                operator: "EQ",
+                value1: aLTEXT3
             });
             filters.push(oAcceptPeriod);
 

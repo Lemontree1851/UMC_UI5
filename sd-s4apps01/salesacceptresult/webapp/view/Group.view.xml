@@ -13,6 +13,7 @@
   <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
     <f:header>
         <f:DynamicPageHeader pinnable="true">
+          <Button text="前画面" press="onNavBack" type="Emphasized"/>
           <f:content>
             <smartFilterBar:SmartFilterBar id="smartFilterBar" useToolbar="false" entitySet="SalesAcceptanceResult" smartVariant="__SVM01" persistencyKey="SFB_Head" search="onSearch">
 			    <smartFilterBar:controlConfiguration>
@@ -33,7 +34,14 @@
 							</ComboBox>
 					    </smartFilterBar:customControl>
 				    </smartFilterBar:ControlConfiguration>
-    
+          <smartFilterBar:ControlConfiguration index="40" key="FinishStatus" visibleInAdvancedArea="true" label="{i18n>FinishStatus}" displayBehaviour="idAndDescription">
+						<smartFilterBar:customControl>
+							<ComboBox id="idFinishStatus" showSecondaryValues="true"
+								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' },filters:[{path: 'ZID',operator:'EQ',value1:'ZSD006'}] }">
+								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
+							</ComboBox>
+					    </smartFilterBar:customControl>
+				    </smartFilterBar:ControlConfiguration>
 			    </smartFilterBar:controlConfiguration>
 			</smartFilterBar:SmartFilterBar>
           </f:content>

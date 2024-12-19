@@ -65,13 +65,21 @@ sap.ui.define([
             });
             filters.push(oAcceptPeriod);
 
+            var aLTEXT3 = this.byId("idFinishStatus").getSelectedKey();
+            var oAcceptPeriod = new sap.ui.model.Filter({
+                path: "FinishStatus",
+                operator: "EQ",
+                value1: aLTEXT3
+            });
+            filters.push(oAcceptPeriod);
+            
             var oLayer = new sap.ui.model.Filter({
                 path: "Layer",
                 operator: "EQ",
                 value1: "2"
             });
             filters.push(oLayer);
-
+            
             var oBinding = oEvent.getParameter("bindingParams");
             oBinding.events = {
                 "dataReceived": function (oEvent) {
@@ -184,6 +192,13 @@ sap.ui.define([
 
             );
         },
+
+        onNavBack: function () {
+            // Get the router and navigate to the first page
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("Main", {}, true); // Replace true to clear the navigation history
+        }
+
 
     });
 });

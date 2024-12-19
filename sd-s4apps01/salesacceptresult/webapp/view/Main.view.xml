@@ -33,7 +33,14 @@
 							</ComboBox>
 					    </smartFilterBar:customControl>
 				    </smartFilterBar:ControlConfiguration>
-          <!-- <smartFilterBar:ControlConfiguration index="40" key="Layer" visibleInAdvancedArea="true" label="{i18n>Layer}" filterType="single"/> -->
+          <smartFilterBar:ControlConfiguration index="40" key="FinishStatus" visibleInAdvancedArea="true" label="{i18n>FinishStatus}" displayBehaviour="idAndDescription">
+						<smartFilterBar:customControl>
+							<ComboBox id="idFinishStatus" showSecondaryValues="true"
+								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' },filters:[{path: 'ZID',operator:'EQ',value1:'ZSD006'}] }">
+								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
+							</ComboBox>
+					    </smartFilterBar:customControl>
+				    </smartFilterBar:ControlConfiguration>
 			    </smartFilterBar:controlConfiguration>
 			</smartFilterBar:SmartFilterBar>
           </f:content>
@@ -275,7 +282,10 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Remarks ", "leadingProperty":"Remarks", "sortProperty":"Remarks", "filterProperty": "Remarks"}'/>
               </t:customData>
               <t:template>
-                <Input id="RemarksI" value="{Remarks}" editable="true" change="onChange($event,'Remarks')"/>
+                <VBox id="VBoxRemarks">
+                 <Text id="RemarksT" text="{Remarks}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
+                 <Input id="RemarksI" value="{Remarks}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" editable="true" change="onChange($event,'Remarks')"/>
+                </VBox>
               </t:template>
           </t:Column>
 			    <t:Column id="ProcessStatus" label="{i18n>ProcessStatus}" width="10rem" sortProperty="ProcessStatus" filterProperty="ProcessStatus" autoResizable="true">
@@ -283,11 +293,14 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ProcessStatus ", "leadingProperty":"ProcessStatus", "sortProperty":"ProcessStatus", "filterProperty": "ProcessStatus"}'/>
               </t:customData>
               <t:template>
-                 <ComboBox id="idProcessStatus" showSecondaryValues="true" selectedKey="{ProcessStatus}" required="true"
-										filterSecondaryValues="true" change="onChange($event,'ProcessStatus')"
+                <VBox id="VBoxProcessStatus">
+                 <Text id="ProcessStatusT" text="{ProcessStatus}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
+                 <ComboBox id="ProcessStatusC" showSecondaryValues="true" selectedKey="{ProcessStatus}" required="true"
+										filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'ProcessStatus')"
 										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' }, filters:[{path: 'ZID',operator:'EQ',value1:'ZSD008'}] }">
 										<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
                   </ComboBox>
+                </VBox>
               </t:template>
           </t:Column>
           <t:Column id="ReasonCategory" label="{i18n>ReasonCategory}" width="10rem" sortProperty="ReasonCategory" filterProperty="ReasonCategory" autoResizable="true">
@@ -295,11 +308,14 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ReasonCategory ", "leadingProperty":"ReasonCategory", "sortProperty":"ReasonCategory", "filterProperty": "ReasonCategory"}'/>
               </t:customData>
               <t:template>
-                 <ComboBox id="idReasonCategory" showSecondaryValues="true" selectedKey="{ReasonCategory}" required="true"
-										filterSecondaryValues="true" change="onChange($event,'ReasonCategory')"
+                <VBox id="VBoxReasonCategory">
+                 <Text id="ReasonCategoryT" text="{ReasonCategory}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
+                 <ComboBox id="ReasonCategoryC" showSecondaryValues="true" selectedKey="{ReasonCategory}" required="true"
+										filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'ReasonCategory')"
 										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' }, filters:[{path: 'ZID',operator:'EQ',value1:'ZSD009'}] }">
 										<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
                   </ComboBox>
+                </VBox>
               </t:template>
           </t:Column>
           <t:Column id="Reason" label="{i18n>Reason}" width="10rem" sortProperty="Reason" filterProperty="Reason" autoResizable="true">
@@ -307,11 +323,23 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Reason ", "leadingProperty":"Reason", "sortProperty":"Reason", "filterProperty": "Reason"}'/>
               </t:customData>
               <t:template>
-                 <ComboBox id="idReason" showSecondaryValues="true" selectedKey="{Reason}" required="true"
-										filterSecondaryValues="true" change="onChange($event,'Reason')"
+                <VBox id="VBoxReason">
+                  <Text id="ReasonT" text="{Reason}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
+                  <ComboBox id="ReasonC" showSecondaryValues="true" selectedKey="{Reason}" required="true"
+										filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'Reason')"
 										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' }, filters:[{path: 'ZID',operator:'EQ',value1:'ZSD010'}] }">
 										<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
                   </ComboBox>
+                </VBox>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="FinishStatus" label="{i18n>FinishStatus}" width="6rem" sortProperty="FinishStatus" filterProperty="FinishStatus" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"FinishStatus", "leadingProperty":"FinishStatus", "sortProperty":"FinishStatus", "filterProperty": "FinishStatus"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{FinishStatus}"/>
               </t:template>
             </t:Column>
 		      </t:Table>
