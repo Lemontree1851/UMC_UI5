@@ -455,7 +455,7 @@
               </t:template>
             </t:Column>
 	
-	        <t:Column id="Message" label="{i18n>Message}" width="10rem" sortProperty="Message" filterProperty="Message" autoResizable="true">
+	        <t:Column id="Message" label="{i18n>Message}" width="20rem" sortProperty="Message" filterProperty="Message" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Message", "leadingProperty":"Message", "sortProperty":"Message", "filterProperty": "Message"}'/>
               </t:customData>

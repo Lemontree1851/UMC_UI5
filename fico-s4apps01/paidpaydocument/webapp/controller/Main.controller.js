@@ -125,7 +125,7 @@ sap.ui.define([
                 } else {
                     var sType = "B";
                 }
-                var sBukrs = this.getView().byId("SFBCalculation").getControlByKey("CompanyCode").getValue();
+                var sBukrs = this.getView().byId("SFBDocument").getControlByKey("CompanyCode").getValue();
                 var sYear = new Date(this.byId("idGjahr").getValue()).getFullYear();
                 var sMonat = this.byId("idMonat").getSelectedKey();
                 if (sBukrs === 0 || sBukrs === "") {
