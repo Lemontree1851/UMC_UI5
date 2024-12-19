@@ -132,7 +132,7 @@ sap.ui.define([
                         Delete: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Delete"),
                         Resent: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Email"),
                         Print: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Print"),
-                        Approval: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Approval"),
+                        Approval: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Approve"),
                         CancelApproval: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-ApproveCancle"),
                         Posting: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-Posting"),
                         CancelPosting: aAllAccessBtns.some(btn => btn.AccessId === "zmaterialrequisition-PostingCancle")
