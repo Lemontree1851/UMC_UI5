@@ -621,78 +621,7 @@
                 <Text text="{path:'ChargeableAmount', formatter:'.formatter.formatFloat'}"/>
               </t:template>
             </t:Column>	
-			
-			      <t:Column id="PreviousStockAmount" label="{i18n>PreviousStockAmount}" width="6rem" sortProperty="PreviousStockAmount" filterProperty="PreviousStockAmount" autoResizable="true">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"PreviousStockAmount", "leadingProperty":"PreviousStockAmount", "sortProperty":"PreviousStockAmount", "filterProperty": "PreviousStockAmount"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'PreviousStockAmount', formatter:'.formatter.formatFloat'}"/>
-              </t:template>
-            </t:Column>	
-
-			      <t:Column id="CurrentStockAmount" label="{i18n>CurrentStockAmount}" width="6rem" sortProperty="CurrentStockAmount" filterProperty="CurrentStockAmount" autoResizable="true">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockAmount", "leadingProperty":"CurrentStockAmount", "sortProperty":"CurrentStockAmount", "filterProperty": "CurrentStockAmount"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'CurrentStockAmount', formatter:'.formatter.formatFloat'}"/>
-              </t:template>
-            </t:Column>		
-				
-            <t:Column id="CustomerRevenue1" label="{i18n>CustomerRevenue1}" width="6rem" sortProperty="CustomerRevenue1" filterProperty="CustomerRevenue1" autoResizable="true">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"CustomerRevenue1", "leadingProperty":"CustomerRevenue1", "sortProperty":"CustomerRevenue1", "filterProperty": "CustomerRevenue1"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'CustomerRevenue1', formatter:'.formatter.formatFloat'}"/>
-              </t:template>
-            </t:Column>	
-
-			      <t:Column id="CustomerRevenue" label="{i18n>CustomerRevenue}" width="6rem" sortProperty="CustomerRevenue" filterProperty="CustomerRevenue" autoResizable="true">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"CustomerRevenue", "leadingProperty":"CustomerRevenue", "sortProperty":"CustomerRevenue", "filterProperty": "CustomerRevenue"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'CustomerRevenue', formatter:'.formatter.formatFloat'}"/>
-              </t:template>
-            </t:Column>	
-				
-			      <t:Column id="Revenue1" label="{i18n>Revenue1}" width="6rem" sortProperty="Revenue1" filterProperty="Revenue1" autoResizable="true">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"Revenue1", "leadingProperty":"Revenue1", "sortProperty":"Revenue1", "filterProperty": "Revenue1"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'Revenue1', formatter:'.formatter.formatFloat'}"/>
-              </t:template>
-            </t:Column>		
-			
-			      <t:Column id="Revenue" label="{i18n>Revenue}" width="6rem" sortProperty="Revenue" filterProperty="Revenue" autoResizable="true">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"Revenue", "leadingProperty":"Revenue", "sortProperty":"Revenue", "filterProperty": "Revenue"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'Revenue', formatter:'.formatter.formatFloat'}"/>
-              </t:template>
-            </t:Column>
-			
-            <t:Column id="ChargeableRate" label="{i18n>ChargeableRate}" width="6rem" sortProperty="ChargeableRate" filterProperty="ChargeableRate" autoResizable="true" visible="false">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableRate", "leadingProperty":"ChargeableRate", "sortProperty":"ChargeableRate", "filterProperty": "ChargeableRate"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'ChargeableRate', formatter:'.formatter.formatFloat'}"/>
-              </t:template>
-            </t:Column>
-		        <t:Column id="CurrentStockSemi" label="{i18n>CurrentStockSemi}" width="6rem" sortProperty="CurrentStockSemi" filterProperty="CurrentStockSemi" autoResizable="true" visible="false">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockSemi", "leadingProperty":"CurrentStockSemi", "sortProperty":"CurrentStockSemi", "filterProperty": "CurrentStockSemi"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'CurrentStockSemi', formatter:'.formatter.formatFloat'}"/>
-              </t:template>
-            </t:Column>
-            
+			      
             <t:Column id="PurGrpTot" label="{i18n>PurGrpTot}" width="6rem" sortProperty="PurGrpTot" filterProperty="PurGrpTot" autoResizable="true" visible="false">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"PurGrpTot", "leadingProperty":"PurGrpTot", "sortProperty":"PurGrpTot", "filterProperty": "PurGrpTot"}'/>
@@ -709,7 +638,45 @@
               <t:template>
                 <Text text="{path:'ChargeableTot', formatter:'.formatter.formatFloat'}"/>
               </t:template>
+            </t:Column>
+            
+            <t:Column id="ChargeableRate" label="{i18n>ChargeableRate}" width="6rem" sortProperty="ChargeableRate" filterProperty="ChargeableRate" autoResizable="true" visible="false">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableRate", "leadingProperty":"ChargeableRate", "sortProperty":"ChargeableRate", "filterProperty": "ChargeableRate"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'ChargeableRate', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+
+			      <t:Column id="PreviousStockAmount" label="{i18n>PreviousStockAmount}" width="6rem" sortProperty="PreviousStockAmount" filterProperty="PreviousStockAmount" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"PreviousStockAmount", "leadingProperty":"PreviousStockAmount", "sortProperty":"PreviousStockAmount", "filterProperty": "PreviousStockAmount"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'PreviousStockAmount', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
             </t:Column>	
+
+			      <t:Column id="CurrentStockAmount" label="{i18n>CurrentStockAmount}" width="6rem" sortProperty="CurrentStockAmount" filterProperty="CurrentStockAmount" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockAmount", "leadingProperty":"CurrentStockAmount", "sortProperty":"CurrentStockAmount", "filterProperty": "CurrentStockAmount"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'CurrentStockAmount', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>					      
+            
+		        <t:Column id="CurrentStockSemi" label="{i18n>CurrentStockSemi}" width="6rem" sortProperty="CurrentStockSemi" filterProperty="CurrentStockSemi" autoResizable="true" visible="false">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockSemi", "leadingProperty":"CurrentStockSemi", "sortProperty":"CurrentStockSemi", "filterProperty": "CurrentStockSemi"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'CurrentStockSemi', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+            
+            	
 
 			      <t:Column id="CurrentStockFin" label="{i18n>CurrentStockFin}" width="6rem" sortProperty="CurrentStockFin" filterProperty="CurrentStockFin" autoResizable="true" visible="false">
               <t:customData>
@@ -747,6 +714,42 @@
               </t:template>
             </t:Column>
 				
+            <t:Column id="CustomerRevenue1" label="{i18n>CustomerRevenue1}" width="6rem" sortProperty="CustomerRevenue1" filterProperty="CustomerRevenue1" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CustomerRevenue1", "leadingProperty":"CustomerRevenue1", "sortProperty":"CustomerRevenue1", "filterProperty": "CustomerRevenue1"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'CustomerRevenue1', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>	
+
+			      <t:Column id="CustomerRevenue" label="{i18n>CustomerRevenue}" width="6rem" sortProperty="CustomerRevenue" filterProperty="CustomerRevenue" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"CustomerRevenue", "leadingProperty":"CustomerRevenue", "sortProperty":"CustomerRevenue", "filterProperty": "CustomerRevenue"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'CustomerRevenue', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>	
+				
+			      <t:Column id="Revenue1" label="{i18n>Revenue1}" width="6rem" sortProperty="Revenue1" filterProperty="Revenue1" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Revenue1", "leadingProperty":"Revenue1", "sortProperty":"Revenue1", "filterProperty": "Revenue1"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'Revenue1', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>		
+			
+			      <t:Column id="Revenue" label="{i18n>Revenue}" width="6rem" sortProperty="Revenue" filterProperty="Revenue" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"Revenue", "leadingProperty":"Revenue", "sortProperty":"Revenue", "filterProperty": "Revenue"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'Revenue', formatter:'.formatter.formatFloat'}"/>
+              </t:template>
+            </t:Column>
+            
 			      <t:Column id="RevenueRate" label="{i18n>RevenueRate}" width="6rem" sortProperty="RevenueRate" filterProperty="RevenueRate" autoResizable="true" visible="false">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"RevenueRate", "leadingProperty":"RevenueRate", "sortProperty":"RevenueRate", "filterProperty": "RevenueRate"}'/>

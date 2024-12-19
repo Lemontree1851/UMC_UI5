@@ -71,6 +71,8 @@ sap.ui.define([
                     this.byId("ChargeableAmount1").setVisible(true);
 					this.byId("ChargeableAmount2").setVisible(true);
 					this.byId("ChargeableAmount").setVisible(true);
+					this.byId("CustomerRevenue1").setVisible(true);
+					this.byId("Revenue1").setVisible(true);
 
 					this.byId("ChargeableRate").setVisible(false);
 					this.byId("CurrentStockSemi").setVisible(false);
@@ -133,6 +135,8 @@ sap.ui.define([
                     this.byId("ChargeableAmount1").setVisible(false);
 					this.byId("ChargeableAmount2").setVisible(false);
 					this.byId("ChargeableAmount").setVisible(false);
+					this.byId("CustomerRevenue1").setVisible(false);
+					this.byId("Revenue1").setVisible(false);
 
 					this.byId("ChargeableRate").setVisible(true);
 					this.byId("CurrentStockSemi").setVisible(true);
