@@ -10,7 +10,7 @@
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('STD_CREATE')" enabled="{= ${local>/authorityCheck/button/Edit}}"/>
+                <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('STD_CREATE')" enabled="{= ${local>/authorityCheck/button/Create}}"/>
                 <Button icon="sap-icon://browse-folder" text="{i18n>ShowDetails}" type="Transparent" press="onPressBtn('STD_DETAIL')" enabled="{= ${local>/authorityCheck/button/View}}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>

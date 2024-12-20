@@ -103,7 +103,9 @@ sap.ui.define([
                 this.getModel("local").setProperty("/authorityCheck", {
                     button: {
                         View: aAllAccessBtns.some(btn => btn.AccessId === "zpickinglist-View"),
+                        Create: aAllAccessBtns.some(btn => btn.AccessId === "zpickinglist-Create"),
                         Edit: aAllAccessBtns.some(btn => btn.AccessId === "zpickinglist-Edit"),
+                        Save: aAllAccessBtns.some(btn => btn.AccessId === "zpickinglist-Save"),
                         Delete: aAllAccessBtns.some(btn => btn.AccessId === "zpickinglist-Delete")
                     },
                     data: {

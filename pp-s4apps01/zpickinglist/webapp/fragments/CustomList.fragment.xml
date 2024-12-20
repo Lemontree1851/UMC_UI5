@@ -12,7 +12,7 @@
                 <ToolbarSpacer/>
                 <Button icon="sap-icon://edit" text="{i18n>Edit}" type="Transparent" press="onPressBtn('TAB_EDIT')" visible="{= ${local>/tab_mode} === 'display'}" enabled="{= ${local>/authorityCheck/button/Edit}}"/>
                 <Button icon="sap-icon://display" text="{i18n>Display}" type="Transparent" press="onPressBtn('TAB_DISPLAY')" visible="{= ${local>/tab_mode} === 'edit'}" enabled="{= ${local>/authorityCheck/button/Edit}}"/>
-                <Button icon="sap-icon://save" text="{i18n>Save}" type="Transparent" press="onPressBtn('TAB_SAVE')" enabled="{= ${local>/authorityCheck/button/Edit}}"/>
+                <Button icon="sap-icon://save" text="{i18n>Save}" type="Transparent" press="onPressBtn('TAB_SAVE')" enabled="{= ${local>/authorityCheck/button/Save}}"/>
                 <Button icon="sap-icon://delete" text="{i18n>Delete}" type="Transparent" press="onPressBtn('TAB_DELETE')" enabled="{= ${local>/authorityCheck/button/Delete}}"/>
                 <Button icon="sap-icon://browse-folder" text="{i18n>ShowDetails}" type="Transparent" press="onPressBtn('TAB_DETAIL')" enabled="{= ${local>/authorityCheck/button/View}}"/>
             </OverflowToolbar>
