@@ -24,8 +24,8 @@
             <smartFilterBar:SmartFilterBar id="SFBCalculation" useToolbar="false" entitySet="PaidPayCalculation" smartVariant="__SVM01" persistencyKey="CalculationBar" search="onSearch">
 
 		      <!--<RadioButtonGroup id="rbg1" columns="4" width="100%" class="sapUiMediumMarginBottom">-->
-		      <RadioButton groupName="GroupA" id="Option1" text="{i18n>Option1}" selected="true" select="onButtonSelect"/>
-		      <RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect"/>
+		      <RadioButton groupName="GroupA" id="Option1" text="{i18n>Option1}" selected="true" select="onButtonSelect" enabled="{= ${local>/authorityCheck/button/Material}}"/>
+		      <RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect" enabled="{= ${local>/authorityCheck/button/PurchasingGroup}}"/>
 				<!--</RadioButtonGroup>-->
 				<!--filterChange="check">-->
 				<smartFilterBar:controlConfiguration>
@@ -78,7 +78,7 @@
 		<smartTable:customToolbar>
 		  <OverflowToolbar id = "toolbar" width="100%">
 			<ToolbarSpacer/>
-			  <Button id="calc" icon="sap-icon://create" text="{i18n>ButtonText}" tooltip="{i18n>ButtonText}" press="onCalc"/>
+			  <Button id="calc" icon="sap-icon://create" text="{i18n>ButtonText}" tooltip="{i18n>ButtonText}" press="onCalc" enabled="{= ${local>/authorityCheck/button/Calc}}"/>
 		  </OverflowToolbar>
 		</smartTable:customToolbar>
 
