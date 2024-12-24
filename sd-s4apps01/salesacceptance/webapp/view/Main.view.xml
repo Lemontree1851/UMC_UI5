@@ -24,13 +24,13 @@
                         <OverflowToolbar>
                             <Text text="{local>/logInfo}"/>
                             <ToolbarSpacer/>
-                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}"/>
-                            <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}"/>
-                            <Button id="idInsertButton" icon="sap-icon://document" type="Transparent" text="{i18n>insertBtn}" press="onInsert" visible="{= ${local>/excelSet}.length > 0}"/>
-                            <Button id="idUpdateButton" icon="sap-icon://document" type="Transparent" text="{i18n>updateBtn}" press="onUpdate" visible="{= ${local>/excelSet}.length > 0}"/>
-                            <Button id="idDeleteButton" icon="sap-icon://document" type="Transparent" text="{i18n>deleteBtn}" press="onDelete" visible="{= ${local>/excelSet}.length > 0}"/>
-                            <Button id="idAppendButton" icon="sap-icon://document" type="Transparent" text="{i18n>appendBtn}" press="onAppend" visible="{= ${local>/excelSet}.length > 0}"/>
-                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Clear}}"/>
+                            <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Check}}"/>
+                            <Button id="idInsertButton" icon="sap-icon://document" type="Transparent" text="{i18n>insertBtn}" press="onInsert" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Create}}"/>
+                            <Button id="idUpdateButton" icon="sap-icon://document" type="Transparent" text="{i18n>updateBtn}" press="onUpdate" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Overwrite}}"/>
+                            <Button id="idDeleteButton" icon="sap-icon://document" type="Transparent" text="{i18n>deleteBtn}" press="onDelete" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Delete}}"/>
+                            <Button id="idAppendButton" icon="sap-icon://document" type="Transparent" text="{i18n>appendBtn}" press="onAppend" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Add}}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
                         </OverflowToolbar>
                     </table:extension>
                     <table:columns>
