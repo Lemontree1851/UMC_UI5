@@ -78,8 +78,8 @@
         <smartTable:customToolbar>
 			<OverflowToolbar width="100%">
 			  <ToolbarSpacer/>
-				  <Button id="save" icon="sap-icon://save" text="{i18n>saveButtonText}" tooltip="{i18n>saveButtonText}" press="onSave"/> 
-          <Button id="group" icon="sap-icon://group-2" text="{i18n>groupButtonText}" tooltip="{i18n>groupButtonText}" press="onGroup"/>    
+				  <Button id="save" icon="sap-icon://save" text="{i18n>saveButtonText}" tooltip="{i18n>saveButtonText}" press="onSave" enabled="{= ${local>/authorityCheck/button/Save}}"/> 
+          <Button id="group" icon="sap-icon://group-2" text="{i18n>groupButtonText}" tooltip="{i18n>groupButtonText}" press="onGroup" enabled="{= ${local>/authorityCheck/button/Navigate}}"/>    
  
       </OverflowToolbar>
 		</smartTable:customToolbar>
