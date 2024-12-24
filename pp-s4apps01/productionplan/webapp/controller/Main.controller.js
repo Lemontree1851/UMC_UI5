@@ -28,6 +28,7 @@ sap.ui.define([
             this._LocalData.setProperty("/zdays", 30);
 
             this.onUpdateTitle();
+            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
 
             // BEGIN 复制粘贴功能(必须)
             if (window.isSecureContext) {
@@ -120,6 +121,67 @@ sap.ui.define([
             if (oRange) {
                 handlePaste(that, aData, oRange);
             }
+        },
+
+        _initialize: function () {
+            this._UserInfo = sap.ushell.Container.getService("UserInfo");
+            var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "productionplan-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.oErrorMessageDialog.open();
+                }
+                this.getModel("local").setProperty("/authorityCheck", {
+                    button: {
+                        Edit: aAllAccessBtns.some(btn => btn.AccessId === "productionplan-Edit"),
+                        Save: aAllAccessBtns.some(btn => btn.AccessId === "productionplan-Save"),
+                        MRP: aAllAccessBtns.some(btn => btn.AccessId === "productionplan-MRP"),
+                        SOAssign: aAllAccessBtns.some(btn => btn.AccessId === "productionplan-SOAssign"),
+                        CO41: aAllAccessBtns.some(btn => btn.AccessId === "productionplan-CO41"),
+                        COOIS: aAllAccessBtns.some(btn => btn.AccessId === "productionplan-COOIS"),
+                        CS13: aAllAccessBtns.some(btn => btn.AccessId === "productionplan-CS13"),
+                        CA03: aAllAccessBtns.some(btn => btn.AccessId === "productionplan-CA03"),
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.oErrorMessageDialog.open();
+            }.bind(this));
         },
 
         onUpdateTitle: function (oEvent) {
@@ -320,13 +382,67 @@ sap.ui.define([
         },
 
         onEdit: function (oEvent) {
-            //Auth Check
-            if (sap.ushell && sap.ushell.Container) {
-                let user = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-                let username = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+            var oTable = this.byId("ReportTable");
+            let sNum = Number(this.byId("zdays").getValue());
+            sNum = 18 + sNum;
+            var aRows = oTable.getRows();
+            var sType = "";
+            var sSobmx = "";
+            if (aRows && aRows.length > 0) {
+                for (var i = 0; i < aRows.length; i++) {
+                    var c7Cell = aRows[i].getCells()[8];
+                    var c6Cell = aRows[i].getCells()[7];
+                    if (c7Cell) {
+                        sType = c7Cell.getText();
+                        sSobmx = c6Cell.getText();
+                        if (sType === "I" || sType === "P") {
 
-                this.authCheck(user, username)
-            }
+                            for (var j = 19; j < sNum; j++) {
+                                var cEdit = aRows[i].getCells()[j];
+                                var oItems = cEdit.getItems();
+                                if (cEdit) {
+                                    if (sSobmx === "52") {
+                                        oItems[1].setEditable(false); // 动态设置编辑状态
+                                    } else {
+                                        oItems[1].setEditable(true);
+                                    }
+                                }
+
+                            }
+                        };
+                    }
+                }
+            };
+            oTable.attachEvent("rowsUpdated", function () {
+                var aRows = oTable.getRows();
+                if (aRows && aRows.length > 0) {
+                    for (var i = 0; i < aRows.length; i++) {
+                        var c7Cell = aRows[i].getCells()[8];
+                        var c6Cell = aRows[i].getCells()[7];
+                        if (c7Cell) {
+                            var sType = c7Cell.getText();
+                            var sSobmx = c6Cell.getText();
+                            if (sType === "I" || sType === "P") {
+
+                                for (var j = 19; j < sNum; j++) {
+                                    var cEdit = aRows[i].getCells()[j];
+                                    if (cEdit && cEdit.getItems) {
+                                        var oItems = cEdit.getItems();
+                                        if (oItems && oItems[1]) {
+                                            if (sSobmx === "52") {
+                                                oItems[1].setEditable(false); // 动态设置编辑状态
+                                            } else {
+                                                oItems[1].setEditable(true);
+                                            }
+                                        }
+
+                                    }
+                                }
+                            };
+                        }
+                    }
+                }
+            });
         },
 
         onInputChange: function (oEvent, sProperty) {
@@ -335,90 +451,6 @@ sap.ui.define([
                 sPath = sPath + "/" + sProperty;
                 this._oDataModel.setProperty(sPath, oEvent.getParameter("value"));
             }
-        },
-
-        authCheck: function (user, username, sCheck) {
-            var sCheck;
-            var aPromise = [];
-            var bEvent = "EDIT";
-            aPromise.push(this.callAction("", bEvent, username));
-            Promise.all(aPromise).then((oData) => {
-                oData.forEach((item) => {
-                    sCheck = JSON.parse(item["processLogic"].Zzkey);
-                    if (sCheck === "") {
-                        MessageBox.error(this.getResourceBundle().getText("msg001"));
-                        return;
-                    } else {
-                        var oTable = this.byId("ReportTable");
-                        let sNum = Number(this.byId("zdays").getValue());
-                        sNum = 18 + sNum;
-                        var aRows = oTable.getRows();
-                        var sType = "";
-                        var sSobmx = "";
-                        if (aRows && aRows.length > 0) {
-                            for (var i = 0; i < aRows.length; i++) {
-                                var c7Cell = aRows[i].getCells()[8];
-                                var c6Cell = aRows[i].getCells()[7];
-                                if (c7Cell) {
-                                    sType = c7Cell.getText();
-                                    sSobmx = c6Cell.getText();
-                                    if (sType === "I" || sType === "P") {
-
-                                        for (var j = 19; j < sNum; j++) {
-                                            var cEdit = aRows[i].getCells()[j];
-                                            var oItems = cEdit.getItems();
-                                            if (cEdit) {
-                                                if (sSobmx === "52") {
-                                                    oItems[1].setEditable(false); // 动态设置编辑状态
-                                                } else {
-                                                    oItems[1].setEditable(true);
-                                                }
-                                            }
-
-                                        }
-                                    };
-                                }
-                            }
-                        };
-                        oTable.attachEvent("rowsUpdated", function () {
-                            var aRows = oTable.getRows();
-                            if (aRows && aRows.length > 0) {
-                                for (var i = 0; i < aRows.length; i++) {
-                                    var c7Cell = aRows[i].getCells()[8];
-                                    var c6Cell = aRows[i].getCells()[7];
-                                    if (c7Cell) {
-                                        var sType = c7Cell.getText();
-                                        var sSobmx = c6Cell.getText();
-                                        if (sType === "I" || sType === "P") {
-
-                                            for (var j = 19; j < sNum; j++) {
-                                                var cEdit = aRows[i].getCells()[j];
-                                                if (cEdit && cEdit.getItems) {
-                                                    var oItems = cEdit.getItems();
-                                                    if (oItems && oItems[1]) {
-                                                        if (sSobmx === "52") {
-                                                            oItems[1].setEditable(false); // 动态设置编辑状态
-                                                        } else {
-                                                            oItems[1].setEditable(true);
-                                                        }
-                                                    }
-
-                                                }
-                                            }
-                                        };
-                                    }
-                                }
-                            }
-                        });
-                    };
-                });
-
-            }).catch((error) => {
-                MessageBox.error(error.message);
-            }).finally(() => {
-                this._BusyDialog.close();
-            });
-
         },
 
         onWeb1: function (oEvent) {

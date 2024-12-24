@@ -48,14 +48,14 @@
         <smartTable:customToolbar>
           <OverflowToolbar width="100%">
             <ToolbarSpacer/>
-            <Button id="edit" icon="sap-icon://edit" text="{i18n>editButtonText}" tooltip="{i18n>editButtonText}" press="onEdit"/>
-            <Button id="post" icon="sap-icon://save" text="{i18n>postButtonText}" tooltip="{i18n>postButtonText}" press="onPost"/>
-            <Button id="web1" icon="sap-icon://internet-browser" text="{i18n>web1ButtonText}" tooltip="{i18n>web1ButtonText}" press="onWeb1"/>
-            <Button id="web2" icon="sap-icon://internet-browser" text="{i18n>web2ButtonText}" tooltip="{i18n>web2ButtonText}" press="onWeb2"/>
-            <Button id="web3" icon="sap-icon://internet-browser" text="{i18n>web3ButtonText}" tooltip="{i18n>web3ButtonText}" press="onWeb3"/>
-            <Button id="web4" icon="sap-icon://internet-browser" text="{i18n>web4ButtonText}" tooltip="{i18n>web4ButtonText}" press="onWeb4"/>
-            <Button id="web5" icon="sap-icon://internet-browser" text="{i18n>web5ButtonText}" tooltip="{i18n>web5ButtonText}" press="onWeb5"/>
-            <Button id="web6" icon="sap-icon://internet-browser" text="{i18n>web6ButtonText}" tooltip="{i18n>web6ButtonText}" press="onWeb6"/>
+            <Button id="edit" icon="sap-icon://edit" text="{i18n>editButtonText}" tooltip="{i18n>editButtonText}" press="onEdit" enabled="{= ${local>/authorityCheck/button/Edit}}"/>
+            <Button id="post" icon="sap-icon://save" text="{i18n>postButtonText}" tooltip="{i18n>postButtonText}" press="onPost" enabled="{= ${local>/authorityCheck/button/Save}}"/>
+            <Button id="web1" icon="sap-icon://internet-browser" text="{i18n>web1ButtonText}" tooltip="{i18n>web1ButtonText}" press="onWeb1" enabled="{= ${local>/authorityCheck/button/MRP}}"/>
+            <Button id="web2" icon="sap-icon://internet-browser" text="{i18n>web2ButtonText}" tooltip="{i18n>web2ButtonText}" press="onWeb2" enabled="{= ${local>/authorityCheck/button/SOAssign}}"/>
+            <Button id="web3" icon="sap-icon://internet-browser" text="{i18n>web3ButtonText}" tooltip="{i18n>web3ButtonText}" press="onWeb3" enabled="{= ${local>/authorityCheck/button/CO41}}"/>
+            <Button id="web4" icon="sap-icon://internet-browser" text="{i18n>web4ButtonText}" tooltip="{i18n>web4ButtonText}" press="onWeb4" enabled="{= ${local>/authorityCheck/button/COOIS}}"/>
+            <Button id="web5" icon="sap-icon://internet-browser" text="{i18n>web5ButtonText}" tooltip="{i18n>web5ButtonText}" press="onWeb5" enabled="{= ${local>/authorityCheck/button/CS13}}"/>
+            <Button id="web6" icon="sap-icon://internet-browser" text="{i18n>web6ButtonText}" tooltip="{i18n>web6ButtonText}" press="onWeb6" enabled="{= ${local>/authorityCheck/button/CA03}}"/>
           </OverflowToolbar>
         </smartTable:customToolbar>
         <t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" rowMode="Auto" enableColumnFreeze="true" paste="onPaste">
