@@ -25,7 +25,7 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ComponentUsageList" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" controlType="dropDownList" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="BillOfMaterialComponent" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialComponent}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
