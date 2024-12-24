@@ -173,6 +173,22 @@ sap.ui.define([
                     newFilter = new sap.ui.model.Filter("Ztype", sap.ui.model.FilterOperator.EQ, "B");
                 }
                 mBindingParams.filters.push(newFilter);
+
+                var bHasError = false;
+				var sMessage = "";
+				var sBukrs = this.getView().byId("SFBDocument").getControlByKey("CompanyCode").getValue();
+				var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
+
+				if (!aAuthorityCompanySet.some(data => data.CompanyCode === sBukrs)) {
+					bHasError = true;
+					sMessage = sBukrs;
+				}
+
+				if (bHasError) {
+					MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sMessage]));
+					return;
+				}
+
             },
 
             onPost: function (oEvent) {
