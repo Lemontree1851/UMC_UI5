@@ -20,6 +20,7 @@ sap.ui.define([
 
             _initialize: function () {
                 this._BusyDialog = new BusyDialog();
+                this._UserInfo = sap.ushell.Container.getService("UserInfo");
                 var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
                 var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
                 var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
