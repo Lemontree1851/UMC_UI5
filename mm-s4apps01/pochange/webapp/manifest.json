@@ -33,6 +33,15 @@
           "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "AuthorityService": {
+          "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+          "type": "OData",
+          "settings": {
+              "annotations": [],
+              "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+              "odataVersion": "4.0"
+          }
       }
     },
     "crossNavigation": {
@@ -116,6 +125,16 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+      },
+      "Authority": {
+          "dataSource": "AuthorityService",
+          "preload": true,
+          "settings": {
+              "synchronizationMode": "None",
+              "operationMode": "Server",
+              "autoExpandSelect": true,
+              "earlyRequests": true
+          }
       }
     },
     "resources": {
