@@ -20,7 +20,59 @@ sap.ui.define([
 
             _initialize: function () {
                 this._BusyDialog = new BusyDialog();
-                // bind attachment path
+                var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+                var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+                var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                    "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+                });
+                oContextBinding.requestObject().then(function (context) {
+                    var aAccessBtns = [],
+                        aAllAccessBtns = [];
+                    if (context._AssignRole && context._AssignRole.length > 0) {
+                        context._AssignRole.forEach(role => {
+                            aAccessBtns.push(role._UserRoleAccessBtn);
+                        });
+                        aAllAccessBtns = aAccessBtns.flat();
+                    }
+                    if (!aAllAccessBtns.some(btn => btn.AccessId === "sourcelistupload-View")) {
+                        if (!this.oErrorMessageDialog) {
+                            this.oErrorMessageDialog = new sap.m.Dialog({
+                                type: sap.m.DialogType.Message,
+                                state: "Error",
+                                content: new sap.m.Text({
+                                    text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                                })
+                            });
+                        }
+                        this.oErrorMessageDialog.open();
+                    }
+                    this.getModel("local").setProperty("/authorityCheck", {
+                        button: {
+                            View: aAllAccessBtns.some(btn => btn.AccessId === "sourcelistupload-View"),
+                            Clear: aAllAccessBtns.some(btn => btn.AccessId === "sourcelistupload-Clear"),
+                            Excute: aAllAccessBtns.some(btn => btn.AccessId === "sourcelistupload-Excute"),
+                            Export: aAllAccessBtns.some(btn => btn.AccessId === "sourcelistupload-Export")
+                        },
+                        data: {
+                            PlantSet: context._AssignPlant,
+                            CompanySet: context._AssignCompany,
+                            SalesOrgSet: context._AssignSalesOrg,
+                            PurchOrgSet: context._AssignPurchOrg,
+                            RoleSet: context._AssignRole
+                        }
+                    });
+                }.bind(this), function (oError) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                            })
+                        });
+                    }
+                    this.oErrorMessageDialog.open();
+                }.bind(this));
 
             },
 
@@ -84,10 +136,10 @@ sap.ui.define([
                 var aGroupKey = this.removeDuplicates(aExcelSet, ["Material", "Plant"]);
                 //var aGroupItems;
                 var aPromise = [];
-                
+
                 this._BusyDialog.open();
                 this.processOneBatchRequest(bEvent, 0, aExcelSet, aGroupKey, aPromise);
-    
+
                 // for (var m = 0; m < aGroupKey.length; m++) {
                 //     const sMaterial = aGroupKey[m].Material;
                 //     const sPlant = aGroupKey[m].Plant;
@@ -102,8 +154,8 @@ sap.ui.define([
                 //     aPromise.push(this._callODataAction(bEvent, aGroupItems));
                 // };
 
-        
-                
+
+
                 // try {
                 //     this._BusyDialog.open();
                 //     Promise.all(aPromise).then((aContext) => {
@@ -169,7 +221,7 @@ sap.ui.define([
                             aGroupItems.push(postDocs[n]);
                         }
                     }
-                    batchArray.push(that._callODataAction(bEvent,aGroupItems));
+                    batchArray.push(that._callODataAction(bEvent, aGroupItems));
                 };
                 postArray = postArray.concat(batchArray);
                 batchOfCount++;
@@ -259,7 +311,7 @@ sap.ui.define([
                             label: sLabelText,
                             // 数据类型，即设置excel该列的数据类型
                             type: (sTemplatePath === "ValidityStartDate" || sTemplatePath === "ValidityEndDate") ? "date" : "string",
-						    format: (sTemplatePath === "ValidityStartDate" || sTemplatePath === "ValidityEndDate") ? "yyyy/MM/dd" : "",
+                            format: (sTemplatePath === "ValidityStartDate" || sTemplatePath === "ValidityEndDate") ? "yyyy/MM/dd" : "",
 
                             // 获取数据的绑定路径，即设置excel该列的字段路径
                             property: sTemplatePath,
