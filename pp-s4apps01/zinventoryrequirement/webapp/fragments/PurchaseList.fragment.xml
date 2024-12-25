@@ -9,7 +9,7 @@
                 <table:extension>
                     <OverflowToolbar>
                         <ToolbarSpacer/>
-                        <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExportPurchaseList" visible="{= ${local>/PurchaseList}.length > 0}"/>
+                        <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExportPurchaseList" visible="{= ${local>/PurchaseList}.length > 0}" enabled="{= ${local>/authorityCheck/button/PurchaseListExport}}"/>
                     </OverflowToolbar>
                 </table:extension>
                 <table:columns>

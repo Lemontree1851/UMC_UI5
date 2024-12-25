@@ -8,9 +8,9 @@
                 <Text text="{i18n>Results}" visible="{= ${local>/resultSet}.length === 0}"/>
                 <Text text="{i18n>Results}({= ${local>/resultSet}.length})" visible="{= ${local>/resultSet}.length > 0}"/>
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://sum" type="Ghost" text="{i18n>Summary}" press="onSummary" visible="{= ${local>/filter/DisplayDimension} === 'H' &amp;&amp; ${local>/visible/Summary} === 'X'}"/>
-                <Button icon="sap-icon://list" type="Ghost" text="{i18n>PurchaseList}" press="onPurchaseList" visible="{= ${local>/filter/DisplayDimension} === 'H' &amp;&amp; ${local>/visible/PurchaseList} === 'X'}"/>
-                <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExport" visible="{= ${local>/resultSet}.length > 0}"/>
+                <Button icon="sap-icon://sum" type="Ghost" text="{i18n>Summary}" press="onSummary" visible="{= ${local>/filter/DisplayDimension} === 'H' &amp;&amp; ${local>/visible/Summary} === 'X'}" enabled="{= ${local>/authorityCheck/button/Summary}}"/>
+                <Button icon="sap-icon://list" type="Ghost" text="{i18n>PurchaseList}" press="onPurchaseList" visible="{= ${local>/filter/DisplayDimension} === 'H' &amp;&amp; ${local>/visible/PurchaseList} === 'X'}" enabled="{= ${local>/authorityCheck/button/PurchaseList}}"/>
+                <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExport" visible="{= ${local>/resultSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
             </OverflowToolbar>
         </table:extension>
     </table:Table>
