@@ -56,7 +56,7 @@
             <smartTable:customToolbar>
 			<OverflowToolbar width="100%">
 			  <ToolbarSpacer/>
-				  <Button id="save" icon="sap-icon://save" text="{i18n>saveButtonText}" tooltip="{i18n>saveButtonText}" press="onSave" enabled="{= ${local>/authorityCheck/button/Finish}"/> 
+				  <Button id="save" icon="sap-icon://save" text="{i18n>saveButtonText}" tooltip="{i18n>saveButtonText}" press="onSave" enabled="{= ${local>/authorityCheck/button/Finish}}"/> 
 
             </OverflowToolbar>
 		    </smartTable:customToolbar>
