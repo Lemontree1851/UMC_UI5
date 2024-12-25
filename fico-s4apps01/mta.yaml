@@ -3,259 +3,260 @@ ID: fico-s4apps01
 description: FICO - Fiori Apps
 version: 0.0.1
 modules:
-- name: fico-s4apps01-dest-content
-  type: com.sap.application.content
-  requires:
-  - name: fico-s4apps01-destination-service
-    parameters:
-      content-target: true
-  - name: fico-s4apps01-repo-host
-    parameters:
-      service-key:
-        name: fico-s4apps01-repo-host-key
-  - name: fico-s4apps01-uaa
-    parameters:
-      service-key:
-        name: fico-s4apps01-uaa-key
-  parameters:
-    content:
-      instance:
-        destinations:
-        - Name: fico-s4apps01_repo_host
-          ServiceInstanceName: fico-s4apps01-html5-srv
-          ServiceKeyName: fico-s4apps01-repo-host-key
-          sap.cloud.service: fico-s4apps01
-        - Authentication: OAuth2UserTokenExchange
-          Name: fico-s4apps01_uaa
-          ServiceInstanceName: fico-s4apps01-xsuaa-srv
-          ServiceKeyName: fico-s4apps01-uaa-key
-          sap.cloud.service: fico-s4apps01
-        existing_destinations_policy: update
-  build-parameters:
-    no-source: true
-- name: fico-s4apps01-app-content
-  type: com.sap.application.content
-  path: .
-  requires:
-  - name: fico-s4apps01-repo-host
-    parameters:
-      content-target: true
-  build-parameters:
-    build-result: resources
+  - name: fico-s4apps01-dest-content
+    type: com.sap.application.content
     requires:
-    - artifacts:
-      - ficopaidpay.zip
-      name: ficopaidpay
-      target-path: resources/
-    - artifacts:
-      - ficopaidpaycalculation.zip
-      name: ficopaidpaycalculation
-      target-path: resources/
-    - artifacts:
-      - ficopaidpaydocument.zip
-      name: ficopaidpaydocument
-      target-path: resources/
-    - artifacts:
-      - ficofixedassetprint.zip
-      name: ficofixedassetprint
-      target-path: resources/
-    - artifacts:
-      - ficozmfgorder.zip
-      name: ficozmfgorder
-      target-path: resources/
-    - artifacts:
-      - ficozaccountingdoc.zip
-      name: ficozaccountingdoc
-      target-path: resources/
-    - artifacts:
-      - ficozpaymentmethod.zip
-      name: ficozpaymentmethod
-      target-path: resources/
-    - artifacts:
-      - ficozdaystocktrans.zip
-      name: ficozdaystocktrans
-      target-path: resources/
-    - artifacts:
-      - ficozinventoryaging.zip
-      name: ficozinventoryaging
-      target-path: resources/
-    - artifacts:
-      - ficozstockageupload.zip
-      name: ficozstockageupload
-      target-path: resources/
-    - artifacts:
-      - ficozbindglupload.zip
-      name: ficozbindglupload
-      target-path: resources/
-    - artifacts:
-      - ficopaidpaylist.zip
-      name: ficopaidpaylist
-      target-path: resources/
-    - artifacts:
-      - ficozbindglaccountlist.zip
-      name: ficozbindglaccountlist
-      target-path: resources/
-    - artifacts:
-      - ficozagencypurchasingn.zip
-      name: ficozagencypurchasingn
-      target-path: resources/
-- name: ficopaidpay
-  type: html5
-  path: paidpay
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficopaidpaycalculation
-  type: html5
-  path: paidpaycalculation
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficopaidpaydocument
-  type: html5
-  path: paidpaydocument
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficofixedassetprint
-  type: html5
-  path: fixedassetprint
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozmfgorder
-  type: html5
-  path: zmfgorder
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozaccountingdoc
-  type: html5
-  path: zaccountingdoc
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozpaymentmethod
-  type: html5
-  path: zpaymentmethod
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozdaystocktrans
-  type: html5
-  path: zdaystocktrans
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozinventoryaging
-  type: html5
-  path: zinventoryaging
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozbindglupload
-  type: html5
-  path: zbindglupload
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozstockageupload
-  type: html5
-  path: zstockageupload
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficopaidpaylist
-  type: html5
-  path: paidpaylist
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozbindglaccountlist
-  type: html5
-  path: zbindglaccountlist
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-- name: ficozagencypurchasingn
-  type: html5
-  path: zagencypurchasingn
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
-resources:
-- name: fico-s4apps01-uaa
-  type: org.cloudfoundry.managed-service
-  parameters:
-    path: ./xs-security.json
-    service: xsuaa
-    service-name: fico-s4apps01-xsuaa-srv
-    service-plan: application
-- name: fico-s4apps01-destination-service
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      HTML5Runtime_enabled: true
-      init_data:
+      - name: fico-s4apps01-destination-service
+        parameters:
+          content-target: true
+      - name: fico-s4apps01-repo-host
+        parameters:
+          service-key:
+            name: fico-s4apps01-repo-host-key
+      - name: fico-s4apps01-uaa
+        parameters:
+          service-key:
+            name: fico-s4apps01-uaa-key
+    parameters:
+      content:
         instance:
           destinations:
-          - Authentication: NoAuthentication
-            Name: ui5
-            ProxyType: Internet
-            Type: HTTP
-            URL: https://ui5.sap.com
+            - Name: fico-s4apps01_repo_host
+              ServiceInstanceName: fico-s4apps01-html5-srv
+              ServiceKeyName: fico-s4apps01-repo-host-key
+              sap.cloud.service: fico-s4apps01
+            - Authentication: OAuth2UserTokenExchange
+              Name: fico-s4apps01_uaa
+              ServiceInstanceName: fico-s4apps01-xsuaa-srv
+              ServiceKeyName: fico-s4apps01-uaa-key
+              sap.cloud.service: fico-s4apps01
           existing_destinations_policy: update
-      version: 1.0.0
-    service: destination
-    service-name: fico-s4apps01-destination-service
-    service-plan: lite
-- name: fico-s4apps01-repo-host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-name: fico-s4apps01-html5-srv
-    service-plan: app-host
+    build-parameters:
+      no-source: true
+  - name: fico-s4apps01-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: fico-s4apps01-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - ficopaidpay.zip
+          name: ficopaidpay
+          target-path: resources/
+        - artifacts:
+            - ficopaidpaycalculation.zip
+          name: ficopaidpaycalculation
+          target-path: resources/
+        - artifacts:
+            - ficopaidpaydocument.zip
+          name: ficopaidpaydocument
+          target-path: resources/
+        - artifacts:
+            - ficofixedassetprint.zip
+          name: ficofixedassetprint
+          target-path: resources/
+        - artifacts:
+            - ficozmfgorder.zip
+          name: ficozmfgorder
+          target-path: resources/
+        - artifacts:
+            - ficozaccountingdoc.zip
+          name: ficozaccountingdoc
+          target-path: resources/
+        - artifacts:
+            - ficozpaymentmethod.zip
+          name: ficozpaymentmethod
+          target-path: resources/
+        - artifacts:
+            - ficozdaystocktrans.zip
+          name: ficozdaystocktrans
+          target-path: resources/
+        - artifacts:
+            - ficozinventoryaging.zip
+          name: ficozinventoryaging
+          target-path: resources/
+        - artifacts:
+            - ficozstockageupload.zip
+          name: ficozstockageupload
+          target-path: resources/
+        - artifacts:
+            - ficozbindglupload.zip
+          name: ficozbindglupload
+          target-path: resources/
+        - artifacts:
+            - ficopaidpaylist.zip
+          name: ficopaidpaylist
+          target-path: resources/
+        - artifacts:
+            - ficozbindglaccountlist.zip
+          name: ficozbindglaccountlist
+          target-path: resources/
+        - artifacts:
+            - ficozagencypurchasingnew.zip
+          name: ficozagencypurchasingnew
+          target-path: resources/
+  - name: ficopaidpay
+    type: html5
+    path: paidpay
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficopaidpaycalculation
+    type: html5
+    path: paidpaycalculation
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficopaidpaydocument
+    type: html5
+    path: paidpaydocument
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficofixedassetprint
+    type: html5
+    path: fixedassetprint
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficozmfgorder
+    type: html5
+    path: zmfgorder
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficozaccountingdoc
+    type: html5
+    path: zaccountingdoc
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficozpaymentmethod
+    type: html5
+    path: zpaymentmethod
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficozdaystocktrans
+    type: html5
+    path: zdaystocktrans
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficozinventoryaging
+    type: html5
+    path: zinventoryaging
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficozbindglupload
+    type: html5
+    path: zbindglupload
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficozstockageupload
+    type: html5
+    path: zstockageupload
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficopaidpaylist
+    type: html5
+    path: paidpaylist
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficozbindglaccountlist
+    type: html5
+    path: zbindglaccountlist
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+  - name: ficozagencypurchasingnew
+    type: html5
+    path: zagencypurchasingnew
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:cf
+      supported-platforms: []
+resources:
+  - name: fico-s4apps01-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: fico-s4apps01-xsuaa-srv
+      service-plan: application
+  - name: fico-s4apps01-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: fico-s4apps01-destination-service
+      service-plan: lite
+  - name: fico-s4apps01-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: fico-s4apps01-html5-srv
+      service-plan: app-host
 parameters:
   deploy_mode: html5-repo
+  enable-parallel-deployments: true

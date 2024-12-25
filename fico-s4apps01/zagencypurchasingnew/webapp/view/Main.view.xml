@@ -1,0 +1,37 @@
+<mvc:View controllerName="fico.zagencypurchasingnew.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="AgencyPurchasingSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="Itemdata" useDateRangeType="true" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="ZPostingDate" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PostingDate}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="CompanyCode" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="CompanyCode2" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode2}"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="fico.zagencypurchasingnew.fragments.StandardList" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
