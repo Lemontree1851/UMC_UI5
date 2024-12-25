@@ -210,41 +210,43 @@ sap.ui.define([
 			},
 
 			onBeforeRebindTable: function (oEvent, arg1, arg2, arg3, arg4) {
-				var mBindingParams = oEvent.getParameter("bindingParams");
-
-				var oGjahr = new Date(this.byId("idGjahr").getValue());
-				var oGjahrFilter = new sap.ui.model.Filter("FiscalYear", sap.ui.model.FilterOperator.EQ, oGjahr.getFullYear());
-				mBindingParams.filters.push(oGjahrFilter);
-
-				var sMonat = this.byId("idMonat").getSelectedKey();
-				var oMonatFilter = new sap.ui.model.Filter("Period", sap.ui.model.FilterOperator.EQ, sMonat);
-				mBindingParams.filters.push(oMonatFilter);
-
-				var sOption1 = this.byId("Option1").getSelected();
-				var newFilter;
-				if (sOption1 === true) {
-					newFilter = new sap.ui.model.Filter("Ztype", sap.ui.model.FilterOperator.EQ, "A");
-				} else {
-					newFilter = new sap.ui.model.Filter("Ztype", sap.ui.model.FilterOperator.EQ, "B");
-				}
-				mBindingParams.filters.push(newFilter);
-
-				var sLedge = this.getView().byId("idLedge").getSelectedKey();
-				mBindingParams.filters.push(new sap.ui.model.Filter("Ledge", "EQ", sLedge));
-
 				var bHasError = false;
 				var sMessage = "";
 				var sBukrs = this.getView().byId("SFBCalculation").getControlByKey("CompanyCode").getValue();
+				let parts = sBukrs.split("(");
+				let part = parts[1].substring(0, 4);
 				var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
 
-				if (!aAuthorityCompanySet.some(data => data.CompanyCode === sBukrs)) {
+				if (!aAuthorityCompanySet.some(data => data.CompanyCode === part)) {
 					bHasError = true;
-					sMessage = sBukrs;
+					sMessage = part;
 				}
 
 				if (bHasError) {
 					MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sMessage]));
-					return;
+				    return;
+				} else {
+					var mBindingParams = oEvent.getParameter("bindingParams");
+
+					var oGjahr = new Date(this.byId("idGjahr").getValue());
+					var oGjahrFilter = new sap.ui.model.Filter("FiscalYear", sap.ui.model.FilterOperator.EQ, oGjahr.getFullYear());
+					mBindingParams.filters.push(oGjahrFilter);
+
+					var sMonat = this.byId("idMonat").getSelectedKey();
+					var oMonatFilter = new sap.ui.model.Filter("Period", sap.ui.model.FilterOperator.EQ, sMonat);
+					mBindingParams.filters.push(oMonatFilter);
+
+					var sOption1 = this.byId("Option1").getSelected();
+					var newFilter;
+					if (sOption1 === true) {
+						newFilter = new sap.ui.model.Filter("Ztype", sap.ui.model.FilterOperator.EQ, "A");
+					} else {
+						newFilter = new sap.ui.model.Filter("Ztype", sap.ui.model.FilterOperator.EQ, "B");
+					}
+					mBindingParams.filters.push(newFilter);
+
+					var sLedge = this.getView().byId("idLedge").getSelectedKey();
+					mBindingParams.filters.push(new sap.ui.model.Filter("Ledge", "EQ", sLedge));
 				}
 
 			},
