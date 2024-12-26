@@ -52,7 +52,7 @@ sap.ui.define([
 						button: {
 							View: aAllAccessBtns.some(btn => btn.AccessId === "paidpaycalculation-View"),
 							Material: aAllAccessBtns.some(btn => btn.AccessId === "paidpaycalculation-MaterialCalculate"),
-							PurchasingGroup: aAllAccessBtns.some(btn => btn.AccessId === "paidpaycalculation-PurchasingGroupCalculate"),
+							PurchasingGroup: aAllAccessBtns.some(btn => btn.AccessId === "paidpaycalculation-PurchGroupCalculate"),
 							Calc: aAllAccessBtns.some(btn => btn.AccessId === "paidpaycalculation-Calculation")
 						},
 						data: {
@@ -224,7 +224,7 @@ sap.ui.define([
 
 				if (bHasError) {
 					MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sMessage]));
-				    return;
+					return;
 				} else {
 					var mBindingParams = oEvent.getParameter("bindingParams");
 
@@ -247,8 +247,8 @@ sap.ui.define([
 
 					var sLedge = this.getView().byId("idLedge").getSelectedKey();
 					mBindingParams.filters.push(new sap.ui.model.Filter("Ledge", "EQ", sLedge));
-				}
 
+				}
 			},
 
 			onCalc: function (oEvent) {
