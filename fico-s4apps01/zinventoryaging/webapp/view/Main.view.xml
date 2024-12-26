@@ -32,7 +32,7 @@
                                     <!-- <DatePicker id="idFiscalPeriod" displayFormat="MM" /> -->
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>	
-                                <smartFilterBar:ControlConfiguration index='40' key="Ledger" mandatory="mandatory" filterType="single" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Ledger}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Ledger" mandatory="mandatory" filterType="single" controlType="dropDownList" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Ledger}"/>
 
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>

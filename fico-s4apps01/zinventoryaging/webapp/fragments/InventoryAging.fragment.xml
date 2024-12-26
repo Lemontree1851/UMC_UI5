@@ -14,7 +14,7 @@
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://save" text="{i18n>ReCalculate}" type="Transparent" press="onPressBtn('ReCalculate')"/>
+                <Button icon="sap-icon://save" text="{i18n>ReCalculate}" type="Transparent" press="onPressBtn('ReCalculate')" enabled="{= ${local>/authorityCheck/button/ReCalculate}}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
         <table:Table id="idTable" selectionMode="None" fixedColumnCount="6" rowMode="Auto">
