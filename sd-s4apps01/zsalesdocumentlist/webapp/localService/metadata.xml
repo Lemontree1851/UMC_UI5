@@ -88,7 +88,7 @@
                 <Key>
                     <PropertyRef Name="Product"/>
                 </Key>
-                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:text="Product_Text" sap:label="Product" sap:quickinfo="Product Number"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:text="Product_Text" sap:label="Product" sap:quickinfo="Product Number"/>
                 <Property Name="Product_Text" Type="Edm.String" MaxLength="40" sap:label="Product Description" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="ProductExternalID" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="External Product ID" sap:quickinfo="External Representation of Material Number"/>
             </EntityType>
@@ -145,7 +145,7 @@
                 <Property Name="ShipToPartyName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="ShipToPartySearchTerm1" Type="Edm.String" MaxLength="20"/>
                 <Property Name="ShipToPartySearchTerm2" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Product" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:value-list="standard"/>
+                <Property Name="Product" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:value-list="standard"/>
                 <Property Name="SalesDocumentItemText" Type="Edm.String" MaxLength="40" sap:label="Item Description" sap:quickinfo="Short Text for Sales Order Item"/>
                 <Property Name="MaterialByCustomer" Type="Edm.String" MaxLength="35"/>
                 <Property Name="PurchaseOrderByCustomerItem" Type="Edm.String" MaxLength="35" sap:label="Customer Reference"/>
@@ -226,6 +226,7 @@
                 <Property Name="Indicator4" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="Indicator5" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="Indicator6" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
+                <Property Name="UserEmail" Type="Edm.String" MaxLength="241" sap:filter-restriction="single-value"/>
             </EntityType>
             <EntityType Name="ZC_SalesDocumentTypeVHType" sap:label="Sales Document Type Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -876,6 +877,10 @@
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="Indicator6"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="UserEmail"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                             </Collection>

@@ -111,6 +111,15 @@ sap.ui.define([
                 filters =[];
             }
 
+            //Authority check 
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            var oUserEmailFilter = new sap.ui.model.Filter({
+                path: "UserEmail",
+                operator: "EQ",
+                value1: sEmail
+            });
+            filters.push(oUserEmailFilter);
+
             var sIndicator1 = this.byId("idCB1").getSelected();
             var sIndicator2 = this.byId("idCB2").getSelected();
             var sIndicator3 = this.byId("idCB3").getSelected();
