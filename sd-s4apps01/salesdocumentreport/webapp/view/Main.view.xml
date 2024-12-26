@@ -289,7 +289,8 @@
                             type="Transparent"
                             press="onExport"
                             text="{i18n>onExport}"
-                            visible="{= ${local>/SalesReport}.length > 0}"  
+                            visible="{= ${local>/SalesReport}.length > 0}" 
+                            enabled="{= ${local>/authorityCheck/button/Export}}" 
                         />
                                                 <Button 
                             icon="sap-icon://excel-attachment"
@@ -297,6 +298,7 @@
                             press="onExportBI"
                             text="{i18n>onBIExport}"
                             visible="{= ${local>/SalesReport}.length > 0}"  
+                            enabled="{= ${local>/authorityCheck/button/BITransfer}}"
                         />
                     </OverflowToolbar>
                 </t:extension>
