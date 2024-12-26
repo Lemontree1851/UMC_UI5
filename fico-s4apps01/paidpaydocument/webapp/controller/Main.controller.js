@@ -158,11 +158,13 @@ sap.ui.define([
                 var bHasError = false;
                 var sMessage = "";
                 var sBukrs = this.getView().byId("SFBDocument").getControlByKey("CompanyCode").getValue();
+                let parts = sBukrs.split("(");
+				let part = parts[1].substring(0, 4);
                 var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
 
-                if (!aAuthorityCompanySet.some(data => data.CompanyCode === sBukrs)) {
+                if (!aAuthorityCompanySet.some(data => data.CompanyCode === part)) {
                     bHasError = true;
-                    sMessage = sBukrs;
+                    sMessage = part;
                 }
 
                 if (bHasError) {
