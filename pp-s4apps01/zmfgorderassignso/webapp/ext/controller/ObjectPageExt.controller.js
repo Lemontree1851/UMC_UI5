@@ -67,6 +67,90 @@ sap.ui.define([
             // *************************************************
         },
 
+        getAuthorityData: function (oModels) {
+            var oAuthorityModel = oModels.Authority;
+            var oLocalModel = oModels.local;
+            var oI18nModel = oModels.i18n;
+            var _UserInfo = sap.ushell.Container.getService("UserInfo");
+            var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
+            var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
+            sEmail = "xinlei.xu@sh.shin-china.com";
+            debugger;
+            var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "zmfgorderassignso-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: oI18nModel.getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.oErrorMessageDialog.open();
+                }
+                oLocalModel.setProperty("/authorityCheck", {
+                    button: {
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "zmfgorderassignso-View"),
+                        SOAssign: aAllAccessBtns.some(btn => btn.AccessId === "zmfgorderassignso-SOAssign"),
+                        QtyChange: aAllAccessBtns.some(btn => btn.AccessId === "zmfgorderassignso-QtyChange"),
+                        MatChange: aAllAccessBtns.some(btn => btn.AccessId === "zmfgorderassignso-MatChange"),
+                        SOChange: aAllAccessBtns.some(btn => btn.AccessId === "zmfgorderassignso-SOChange"),
+                        Delete: aAllAccessBtns.some(btn => btn.AccessId === "zmfgorderassignso-Delete")
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: oI18nModel.getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.oErrorMessageDialog.open();
+            }.bind(this));
+        },
+
+        onAfterRendering: function () {
+            var authorityCheck = this.getView().getModel("local").getProperty("/authorityCheck");
+            var aButtonControl = [
+                { buttonId: "AssignSalesOrderButton", control: "SOAssign" },
+                { buttonId: "ChangeAssignQtyButton", control: "QtyChange" },
+                { buttonId: "ChangeAssignMaterialButton", control: "MatChange" },
+                { buttonId: "ChangeAssignSalesOrderButton", control: "SOChange" },
+                { buttonId: "DeleteSOItemButton", control: "Delete" }
+            ];
+            aButtonControl.forEach(element => {
+                var button = document.querySelector('[id*="' + element.buttonId + '"]');
+                if (this.byId(button.id)) {
+                    // Doesn't work
+                    // this.byId(button.id).setEnabled(authorityCheck.button[element.control]);
+                    // Working fine
+                    this.byId(button.id).setVisible(authorityCheck.button[element.control]);
+                }
+            });
+        },
+
         // 受注割当
         onAssignSalesOrder: function (oEvent) {
             // Button -> ToolBar -> Table
@@ -75,7 +159,10 @@ sap.ui.define([
             if (parseFloat(this._oBindingData.AvailableAssignQty) === 0) {
                 MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("Message1"));
             } else {
-                this._getSalesOrderList("AssignSalesOrder", "SalesOrderList", this._oBindingData.Material, this._oBindingData.AvailableAssignQty);
+                this._getSalesOrderList("AssignSalesOrder", "SalesOrderList",
+                    this._oBindingData.ProductionPlant,
+                    this._oBindingData.Material,
+                    this._oBindingData.AvailableAssignQty);
             }
         },
 
@@ -94,10 +181,11 @@ sap.ui.define([
         // 割当受注変更
         onChangeAssignSalesOrder: function (oEvent) {
             this._getSelectedRowData(oEvent);
+            var sPlant = this.getView().getModel("local").getProperty("/SelectedItem/Plant");
             var sMaterial = this.getView().getModel("local").getProperty("/SelectedItem/Material");
             var sAssignQty = this.getView().getModel("local").getProperty("/SelectedItem/AssignQty");
             // this._getSalesOrderList("ChangeAssignSalesOrder", "SalesOrderList", sMaterial, this._iMaxQuantity);
-            this._getSalesOrderList("ChangeAssignSalesOrder", "SalesOrderList", sMaterial, parseFloat(sAssignQty));
+            this._getSalesOrderList("ChangeAssignSalesOrder", "SalesOrderList", sPlant, sMaterial, parseFloat(sAssignQty));
         },
 
         // 削除
@@ -173,10 +261,11 @@ sap.ui.define([
             this._iMaxQuantity = parseFloat(oBindingData.AvailableAssignQty) + parseFloat(oRow.AssignQty);
         },
 
-        _getSalesOrderList: function (sEvent, sFragmentName, sMaterial, iAvailableAssignQty) {
+        _getSalesOrderList: function (sEvent, sFragmentName, sPlant, sMaterial, iAvailableAssignQty) {
             this._CallODataV2("ACTION", "/getSalesOrderList", [], {
                 "Event": "",
                 "Zzkey": JSON.stringify({
+                    ProductionPlant: sPlant,
                     Material: sMaterial,
                     AvailableAssignQty: iAvailableAssignQty
                 }),
