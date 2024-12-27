@@ -71,10 +71,10 @@
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="MRPController" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="ProductionSupervisor" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="MatlCompRequirementDate" Type="Edm.Date" Nullable="false"/>
                 <Property Name="PlannedOrder" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="Assembly" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Assembly" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="BaseUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="PlannedTotalQtyInBaseUnit" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
                 <Property Name="BillOfMaterialItemNumber" Type="Edm.String" Nullable="false" MaxLength="6"/>
@@ -88,7 +88,7 @@
                 <Property Name="ReservationItem" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="100"/>
                 <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <Property Name="StatusText" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="StatusText" Type="Edm.String" Nullable="false" MaxLength="8"/>
                 <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.EntityControl"/>
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
@@ -151,6 +151,11 @@
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/ProductionSupervisor">
                 <Annotation Term="SAP__common.Label" String="製造責任者"/>
                 <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plndorderprodnsupervisorvh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.productionsupervisor'/$metadata</String>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/Material">
                 <Annotation Term="SAP__common.Label" String="品目"/>
@@ -173,6 +178,11 @@
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/PlannedOrder">
                 <Annotation Term="SAP__common.Label" String="計画手配番号"/>
                 <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plannedorderstdvh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.plannedorder'/$metadata</String>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/Assembly">
                 <Annotation Term="SAP__core.Computed"/>
@@ -358,15 +368,15 @@
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="MRPController"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                    <PropertyValue Property="AllowedExpressions" String=""/>
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="ProductionSupervisor"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                    <PropertyValue Property="AllowedExpressions" String=""/>
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="Material"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                    <PropertyValue Property="AllowedExpressions" String=""/>
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="MatlCompRequirementDate"/>
@@ -374,8 +384,14 @@
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="PlannedOrder"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                    <PropertyValue Property="AllowedExpressions" String=""/>
                                 </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>Plant</PropertyPath>
+                                <PropertyPath>MRPController</PropertyPath>
                             </Collection>
                         </PropertyValue>
                         <PropertyValue Property="NonFilterableProperties">
@@ -485,9 +501,6 @@
                 <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/Message">
-                <Annotation Term="SAP__common.Label" String="Message text"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/StatusText">
                 <Annotation Term="SAP__common.Label" String="Message text"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/__EntityControl/Updatable">

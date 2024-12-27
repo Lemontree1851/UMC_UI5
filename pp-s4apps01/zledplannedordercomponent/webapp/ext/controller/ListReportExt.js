@@ -5,13 +5,14 @@ sap.ui.define([
 ], function ( BusyDialog, MessageBox,MessageToast) {
     'use strict';
 
-    var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog;
+    var _myFunction, _myBusyDialog, _myMessageView, _myMessageDialog,_UserInfo;
     return {
         // formatter: formatter,
 
-        init: function () {
+        init: function (oModels) {
             _myFunction = sap.ui.require("pp/zledplannedordercomponent/ext/controller/ListReportExt");
             _myBusyDialog = new BusyDialog();
+            _UserInfo = sap.ushell.Container.getService("UserInfo");
             // *************************************************
             var oMessageTemplate = new sap.m.MessageItem({
                 type: '{type}',
@@ -61,6 +62,67 @@ sap.ui.define([
                 verticalScrolling: false
             });
             // *************************************************
+            var oLocalModel = oModels.local;
+            var oI18nModel = oModels.i18n;
+
+            // Authority Check
+            var oAuthorityModel = oModels.Authority;
+            this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel);
+        },
+
+        _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel) {
+            var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
+            // var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
+            var sEmail = "xinlei.xu@sh.shin-china.com";
+            var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "zledplannedordercomponent-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: oI18nModel.getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.oErrorMessageDialog.open();
+                }
+                oLocalModel.setProperty("/authorityCheck", {
+                    button: {
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "zledplannedordercomponent-View"),
+                        Accept: aAllAccessBtns.some(btn => btn.AccessId === "zledplannedordercomponent-Accept"),
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: oI18nModel.getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.oErrorMessageDialog.open();
+            }.bind(this));
         },
 
         onAccept: function () {

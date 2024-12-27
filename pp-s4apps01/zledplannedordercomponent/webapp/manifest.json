@@ -33,6 +33,15 @@
         "settings": {
           "localUri": "annotations/annotation.xml"
         }
+      },
+      "AuthorityService": {
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -102,10 +111,29 @@
       "local": {
         "type": "sap.ui.model.json.JSONModel",
         "preload": true
+      },
+      "Authority": {
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
       }
     },
     "resources": {
       "css": []
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ListReport.ListReportController": {
+            "controllerName": "pp.zledplannedordercomponent.ext.controller.ListReport"
+          }
+        }
+      }
     },
     "routing": {
       "config": {},
@@ -138,8 +166,8 @@
                   "actions": {
                     "ListReportExt": {
                       "press": "pp.zledplannedordercomponent.ext.controller.ListReportExt.onAccept",
+                      "enabled": "{local>/authorityCheck/button/Accept}",
                       "visible": true,
-                      "enabled": true,
                       "requiresSelection": true,
                       "text": "{@i18n>Accept}"
                     }
