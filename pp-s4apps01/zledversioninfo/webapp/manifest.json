@@ -51,6 +51,15 @@
           "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "AuthorityService": {
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -141,6 +150,16 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+      },
+      "Authority": {
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
       }
     },
     "resources": {
@@ -185,7 +204,7 @@
                     "upload": {
                       "press": "pp.zledversioninfo.ext.controller.ListReportExt.openUploadDialog",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Upload}",
                       "requiresSelection": false,
                       "text": "{@i18n>upload}",
                       "icon": "sap-icon://upload-to-cloud"
