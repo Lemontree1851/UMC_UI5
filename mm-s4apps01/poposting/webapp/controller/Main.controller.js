@@ -133,9 +133,9 @@ sap.ui.define([
                                         aExcelSet[index].Status = element.STATUS;
                                         aExcelSet[index].Message = element.MESSAGE;
                                         aExcelSet[index].DocumentDate = element.DOCUMENTDATE,
-                                            aExcelSet[index].PostingDate = element.POSTINGDATE,
-                                            aExcelSet[index].Plant = element.PLANT,
-                                            aExcelSet[index].StorageLocation = element.STORAGELOCATION
+                                        aExcelSet[index].PostingDate = element.POSTINGDATE,
+                                        aExcelSet[index].Plant = element.PLANT,
+                                        aExcelSet[index].StorageLocation = element.STORAGELOCATION
                                         aExcelSet[index].MaterialDocument = element.MATERIALDOCUMENT
                                         aExcelSet[index].MaterialDocumentYear = element.MATERIALDOCUMENTYEAR
                                         aExcelSet[index].MaterialDocumentItem = element.MATERIALDOCUMENTITEM
