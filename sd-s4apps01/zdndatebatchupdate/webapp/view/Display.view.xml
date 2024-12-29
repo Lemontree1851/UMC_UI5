@@ -52,6 +52,7 @@
                             <smartFilterBar:ControlConfiguration
                                 id="id0ControlConfiguration"
                                 key="ShippingPoint"
+                                controlType="dropDownList"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>ShippingPoint}"
                                 mandatory="notMandatory"
@@ -60,6 +61,7 @@
                             <smartFilterBar:ControlConfiguration
                                 id="id1ControlConfiguration"
                                 key="SalesOrganization"
+                                controlType="dropDownList"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>SalesOrganization}"
                                 mandatory="notMandatory"
@@ -68,6 +70,7 @@
                             <smartFilterBar:ControlConfiguration
                                 id="id2ControlConfiguration"
                                 key="Plant"
+                                controlType="dropDownList"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Plant}"
                                 mandatory="notMandatory"
@@ -76,6 +79,7 @@
                             <smartFilterBar:ControlConfiguration
                                 id="id3ControlConfiguration"
                                 key="SalesOffice"
+                                controlType="dropDownList"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>SalesOffice}"
                                 mandatory="notMandatory"
@@ -123,6 +127,7 @@
                             text="{i18n>DisplayView.downloadBtn}"
                             press="onExport"
                             visible="{local>/onExportvisible}"
+                            enabled="{= ${local>/authorityCheck/button/Export}}"
                         />
                     </OverflowToolbar>
                 </smartTable:customToolbar>

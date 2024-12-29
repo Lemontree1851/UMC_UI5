@@ -1,14 +1,14 @@
 sap.ui.define([
     "./BaseController",
     "../model/formatter",
-    "./messages",
+    "sap/m/MessageBox",
 	"sap/ui/model/Filter",
 	"sap/m/BusyDialog",
     "sap/ui/export/Spreadsheet"
 ], function(
     BaseController,
     formatter,
-    messages,
+    MessageBox,
 	Filter,
 	BusyDialog,
 	Spreadsheet
@@ -60,21 +60,25 @@ sap.ui.define([
 		},
 
 		onBeforeRebindTable: function (oEvent) {
-			// this._oDataModel.resetChanges();
-			// var oFilter = oEvent.getParameter("bindingParams").filters;
-			// var oNewFilter, aNewFilter = [];
-			// var oCreatedAt = this.byId("idDatePicker").getDateValue();
-			// if (oCreatedAt) {
-			// 	aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
-			// }
-			
-			// oNewFilter = new Filter({
-			// 	filters:aNewFilter,
-			// 	and:true
-			// });
-			// if (aNewFilter.length > 0) {
-			// 	oFilter.push(oNewFilter);
-			// }
+			var aFilters = oEvent.getParameter("bindingParams").filters;
+            var bHasError = false;
+            var sMessage = "";
+			var aFilterPlant = this.byId("idSmartFilterBar").getControlByKey("Plant").getSelectedKeys();
+            var aAuthorityPlantSet = this._LocalData.getProperty("/authorityCheck/data/PlantSet");
+            aFilterPlant.forEach(sValue => {
+                if (!aAuthorityPlantSet.some(data => data.Plant === sValue)) {
+                    bHasError = true;
+                    if (sMessage === "") {
+                        sMessage = sValue;
+                    } else {
+                        sMessage = sMessage + "、" + sValue;
+                    }
+                }
+            });
+            if (bHasError) {
+                MessageBox.error(this._ResourceBundle.getText("noAuthorityPlant", [sMessage]));
+                aFilters.push(new Filter("Plant", FilterOperator.EQ, ''));
+            }
 		},
 
 		onUITableRowsUpdated: function (oEvent) {
@@ -179,7 +183,7 @@ sap.ui.define([
 			var oTable = this.getView().byId("idDeliveryDocumentTable");
 			var listItems = oTable.getSelectedIndices();
 			if (listItems.length === 0) {
-				messages.showError(this._ResourceBundle.getText("msgNoSelect"));
+				MessageBox.error(this._ResourceBundle.getText("msgNoSelect"));
 				return aData;
 			}
 			listItems.forEach(_getData,this); //根据选择的行获取具体的数据
