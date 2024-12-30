@@ -24,28 +24,16 @@
                                 <smartFilterBar:ControlConfiguration index='20' key="Customer" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="MATERIALBYCUSTOMER" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MATERIALBYCUSTOMER}"/>
-                                <!-- <smartFilterBar:ControlConfiguration index='50' key="Duration" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Duration}"/> -->
-                                <smartFilterBar:ControlConfiguration index="50" key="Duration" visibleInAdvancedArea="true" label="{i18n>Duration}" visible="true" mandatory="mandatory"> 
-                                   <smartFilterBar:customControl> 
-                                    <DateRangeSelection
-                                        id="idDateRangeSelection1"
-                                        valueFormat="yyyy/MM"
-                                        displayFormat="yyyy/MM"
-                                    />
-                                   </smartFilterBar:customControl>
-                                 </smartFilterBar:ControlConfiguration>
-                                <!-- <smartFilterBar:ControlConfiguration index='60' key="CREATED_AT" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CREATED_AT}"/> -->
-                                <smartFilterBar:ControlConfiguration index="60" key="CREATED_AT" visibleInAdvancedArea="true" label="{i18n>CREATED_AT}" visible="true"> 
-                                   <smartFilterBar:customControl> 
-                                    <DateRangeSelection
-                                        id="idDateRangeSelection2"
-                                        valueFormat="yyyy/MM/dd"
-                                        displayFormat="yyyy/MM/dd"
-                                    />
-                                   </smartFilterBar:customControl>
-                                 </smartFilterBar:ControlConfiguration>
-                                <!-- <smartFilterBar:ControlConfiguration index='70' key="LatestOF" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>LatestOF}"/> -->
-                                <!-- <smartFilterBar:ControlConfiguration index='80' key="Contents" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Contents}"/> -->
+                                <smartFilterBar:ControlConfiguration index="50" key="Duration" visibleInAdvancedArea="true" label="{i18n>Duration}" visible="true" mandatory="mandatory">
+                                    <smartFilterBar:customControl>
+                                        <DateRangeSelection id="idDateRangeSelection1" valueFormat="yyyy/MM" displayFormat="yyyy/MM" />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index="60" key="CREATED_AT" visibleInAdvancedArea="true" label="{i18n>CREATED_AT}" visible="true">
+                                    <smartFilterBar:customControl>
+                                        <DateRangeSelection id="idDateRangeSelection2" valueFormat="yyyy/MM/dd" displayFormat="yyyy/MM/dd" />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
                                 <smartFilterBar:ControlConfiguration index="70" key="LatestOF" visibleInAdvancedArea="true" label="{i18n>LatestOF}">
                                     <smartFilterBar:customControl>
                                         <Select id="idZfunctionmode1" selectedKey="{local>/LatestOF}" change="onSelectModeChange">
@@ -54,7 +42,6 @@
                                         </Select>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-
                                 <smartFilterBar:ControlConfiguration index="80" key="Contents" visibleInAdvancedArea="true" label="{i18n>Contents}">
                                     <smartFilterBar:customControl>
                                         <Select id="idZfunctionmode2" selectedKey="{local>/Contents}" change="onSelectModeChange">
@@ -64,7 +51,6 @@
                                         </Select>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
@@ -109,7 +95,6 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="Period34" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Period35" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Period36" visible="false"/>
-
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
@@ -117,16 +102,13 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <!-- <table:Table id="tablelist" rows="{local>/data}" rowMode="Auto" visible="{= ${local>/data}.length > 0}" rowsUpdated="onUITableRowsUpdated" selectionMode="None"> -->
             <table:Table id="tablelist" rows="{local>/data}" selectionMode="MultiToggle" rowMode="Auto">
                 <table:extension>
-                    <!-- <OverflowToolbar style="Clear"> -->
                     <OverflowToolbar>
-                        <!-- <Title text="{i18n>Results}"/> -->
                         <Text text="{i18n>Results}" visible="{= ${local>/data}.length === 0}"/>
                         <Text text="{i18n>Results}({= ${local>/data}.length})" visible="{= ${local>/data}.length > 0}"/>
                         <ToolbarSpacer></ToolbarSpacer>
-                        <Button icon="sap-icon://excel-attachment" press="onDataExport" />
+                        <Button text="{i18n>Export}" icon="sap-icon://excel-attachment" press="onDataExport" visible="{= ${local>/data}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
                     </OverflowToolbar>
                 </table:extension>
             </table:Table>
