@@ -96,10 +96,10 @@ sap.ui.define([
                 });
             });
             var oRequestData = {
-                items: items,
-                user: "P00001",
-                username: "Xinlei Xu",
-                datetime: this._getCurrentDateTime()
+                items: items
+                // user: "P00001",
+                // username: "Xinlei Xu",
+                // datetime: this._getCurrentDateTime()
             }
             switch (bEvent) {
                 case "RELEASE":
