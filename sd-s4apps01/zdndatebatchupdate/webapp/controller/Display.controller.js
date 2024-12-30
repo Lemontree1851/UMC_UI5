@@ -3,6 +3,7 @@ sap.ui.define([
     "../model/formatter",
     "sap/m/MessageBox",
 	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 	"sap/m/BusyDialog",
     "sap/ui/export/Spreadsheet"
 ], function(
@@ -10,6 +11,7 @@ sap.ui.define([
     formatter,
     MessageBox,
 	Filter,
+	FilterOperator,
 	BusyDialog,
 	Spreadsheet
 ) {
@@ -26,59 +28,15 @@ sap.ui.define([
             var oRouter = this.getRouter();
 			oRouter.getRoute("RouteMain").attachMatched(this._onRouteMatched, this);
         },
-        // onRowActionItemPress : function(oEvent){
-		// 	var oItem, oCtx;
-
-		// 	oItem = oEvent.getSource();
-		// 	oCtx = oItem.getBindingContext();
-
-		// 	this.getRouter().navTo("PurchaseReq",{
-		// 		contextPath : oCtx.getProperty("UUID")
-		// 	});
-		// },
         _onRouteMatched : function (oEvent) {
             this.getView().getModel().resetChanges();
-			// var oArgs, oView;
-
-			// oArgs = oEvent.getParameter("arguments");
-			// oView = this.getView();
-
-			// oView.bindElement({
-			// 	path : "/PurchaseReq(guid'" + oArgs.contextPath + "')",
-			// 	events : {
-			// 		change: this._onBindingChange.bind(this),
-			// 		dataRequested: function (oEvent) {
-			// 			oView.setBusy(true);
-			// 		},
-			// 		dataReceived: function (oEvent) {
-			// 			oView.setBusy(false);
-			// 		}
-			// 	}
-			// });
-			// this.byId("idSmartForm").setEditable(false);
-			// this.byId("idPage").setShowFooter(false);
+			this._UserInfo = sap.ushell.Container.getService("UserInfo");
 		},
 
 		onBeforeRebindTable: function (oEvent) {
 			var aFilters = oEvent.getParameter("bindingParams").filters;
-            var bHasError = false;
-            var sMessage = "";
-			var aFilterPlant = this.byId("idSmartFilterBar").getControlByKey("Plant").getSelectedKeys();
-            var aAuthorityPlantSet = this._LocalData.getProperty("/authorityCheck/data/PlantSet");
-            aFilterPlant.forEach(sValue => {
-                if (!aAuthorityPlantSet.some(data => data.Plant === sValue)) {
-                    bHasError = true;
-                    if (sMessage === "") {
-                        sMessage = sValue;
-                    } else {
-                        sMessage = sMessage + "、" + sValue;
-                    }
-                }
-            });
-            if (bHasError) {
-                MessageBox.error(this._ResourceBundle.getText("noAuthorityPlant", [sMessage]));
-                aFilters.push(new Filter("Plant", FilterOperator.EQ, ''));
-            }
+			var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+			aFilters.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
 		},
 
 		onUITableRowsUpdated: function (oEvent) {
