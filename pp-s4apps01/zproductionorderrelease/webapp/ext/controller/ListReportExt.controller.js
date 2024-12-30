@@ -70,6 +70,20 @@ sap.ui.define([
                     clearInterval(timerId);
                 }
             }, 1000);
+
+            var authorityCheck = this.getView().getModel("local").getProperty("/authorityCheck");
+            var aButtonControl = [
+                { buttonId: "ReleaseButton", control: "Release" }
+            ];
+            aButtonControl.forEach(element => {
+                var button = document.querySelector('[id*="' + element.buttonId + '"]');
+                if (this.byId(button.id)) {
+                    // Doesn't work
+                    // this.byId(button.id).setEnabled(authorityCheck.button[element.control]);
+                    // Working fine
+                    this.byId(button.id).setVisible(authorityCheck.button[element.control]);
+                }
+            });
         },
 
         onRelease: function () {
