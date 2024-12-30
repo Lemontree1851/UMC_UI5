@@ -956,6 +956,29 @@ xmlns:m="sap.m"
                                 />
                             </t:template>
                         </t:Column>
+
+                        <t:Column
+                            id="id35Column"
+                            width="8rem"
+                            label="{i18n>OrderId}"
+                            sortProperty="OrderId"
+                            filterProperty="OrderId"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    id="id35CustomData"
+                                    key="p13nData"
+                                    value='\{"columnKey":"OrderId", "leadingProperty":"OrderId", "sortProperty":"OrderId", "filterProperty": "OrderId"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    id="idOrderIdText"
+                                    text="{OrderId}"
+                                />
+                            </t:template>
+                        </t:Column>
+
                         <t:Column
                             id="id24Column"
                             width="8rem"
