@@ -124,10 +124,10 @@ displayFormat="yyyy/MM/dd"
                         <OverflowToolbar>
                             
                             <ToolbarSpacer/>
-                            <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}"/>
-                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelSet}.length > 0}"/>
-                            <Button id="idJobButton" icon="sap-icon://pending" type="Transparent" text="{i18n>jobBtn}" press="onJob" visible="{= ${local>/excelSet}.length > 0}"/>
-                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>ExportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="onCheck" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/TestExcute}}"/>
+                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Excute}}"/>
+                            <Button id="idJobButton" icon="sap-icon://pending" type="Transparent" text="{i18n>jobBtn}" press="onJob" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/ExcuteWithJob}}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>ExportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
                        </OverflowToolbar>
                     </table:extension>
                     <table:columns>
