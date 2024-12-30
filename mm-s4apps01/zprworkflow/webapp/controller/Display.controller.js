@@ -30,7 +30,7 @@ sap.ui.define([
 
 			};
 			// *************************************************
-			//this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
+			this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
 		},
 
 		_initialize: function () {
