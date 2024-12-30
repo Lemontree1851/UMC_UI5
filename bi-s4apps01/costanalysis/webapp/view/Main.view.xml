@@ -5,9 +5,6 @@
     xmlns:f="sap.f"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:sv="sap.ui.comp.smartvariants">
-
-
-
     <f:DynamicPage headerExpanded="true">
         <f:title>
             <f:DynamicPageTitle>
@@ -42,7 +39,6 @@
                                         }"/>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-
                                 <!-- <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/> -->
                                 <!-- <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
@@ -57,7 +53,7 @@
                                 </smartFilterBar:ControlConfiguration> -->
                                 <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
-                                        <MultiComboBox id="sfbRep02SelFiscalMonth1" >
+                                        <MultiComboBox id="sfbRep02SelFiscalMonth1">
                                             <items>
                                                 <core:Item id="idRep02Month01" key="01" text="01"></core:Item>
                                                 <core:Item id="idRep02Month02" key="02" text="02"></core:Item>
@@ -75,13 +71,11 @@
                                         </MultiComboBox>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
- 
-                                <smartFilterBar:ControlConfiguration index='40' key="Product"  label="{i18n>Product}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Product" label="{i18n>Product}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
                                 <smartFilterBar:ControlConfiguration index='60' key="Material" label="{i18n>Material}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
-                            
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                         <!--加工費逆ザヤ防止分析-->
@@ -112,7 +106,7 @@
                                 </smartFilterBar:ControlConfiguration> -->
                                 <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
-                                        <MultiComboBox id="sfbRep02SelFiscalMonth2" >
+                                        <MultiComboBox id="sfbRep02SelFiscalMonth2">
                                             <items>
                                                 <core:Item id="idRep02Month101" key="01" text="01"></core:Item>
                                                 <core:Item id="idRep02Month102" key="02" text="02"></core:Item>
@@ -132,7 +126,6 @@
                                 </smartFilterBar:ControlConfiguration>
                                 <smartFilterBar:ControlConfiguration index='40' key="Product" label="{i18n>Product}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
-        
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
                                 <!-- <smartFilterBar:Contrd. -->
@@ -152,4 +145,3 @@
         </f:content>
     </f:DynamicPage>
 </mvc:View>
-
