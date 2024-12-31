@@ -42,6 +42,15 @@
                     "localUri": "localService/zui_prt_record_o4/metadata.xml",
                     "odataVersion": "4.0"
                 }
+            },
+            "AuthorityService": {
+                "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+                    "odataVersion": "4.0"
+                }
             }
         },
         "crossNavigation": {
@@ -75,9 +84,12 @@
         }
     },
     "sap.ui5": {
-        "flexEnabled": true,
+        "flexEnabled": false,
+        "config": {
+            "fullWidth": true
+        },
         "dependencies": {
-            "minUI5Version": "1.124.9",
+            "minUI5Version": "1.120.18",
             "libs": {
                 "sap.m": {},
                 "sap.ui.core": {}
@@ -115,6 +127,16 @@
             },
             "Print": {
                 "dataSource": "zui_prt_record_o4",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "Authority": {
+                "dataSource": "AuthorityService",
                 "preload": true,
                 "settings": {
                     "synchronizationMode": "None",
@@ -170,5 +192,8 @@
     "sap.cloud": {
         "public": true,
         "service": "mm-s4apps01"
+    },
+    "sap.platform.cf": {
+        "ui5VersionNumber": "1.120.18"
     }
 }

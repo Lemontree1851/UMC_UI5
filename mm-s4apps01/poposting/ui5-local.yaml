@@ -32,15 +32,8 @@ server:
         backend:
           - path: /sap
             url: https://my412552-api.s4hana.cloud.sap
-            destination: UMC_Dev_Customizing_BTP
-          - path: /sap
-            url: https://my412552-api.s4hana.cloud.sap
-            destination: UMC_Dev_Customizing_BTP
-            authenticationType: BasicAuthentication
-          - path: /sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/
-            url: https://my412552-api.s4hana.cloud.sap
-            destination: UMC_Dev_Customizing_BTP
-            authenticationType: BasicAuthentication
+            destination: UMC_Dev_Customizing
+            authenticationType: SAMLAssertion
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
