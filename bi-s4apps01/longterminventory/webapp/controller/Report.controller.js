@@ -8,22 +8,22 @@ sap.ui.define([
 
     return Controller.extend("bi.longterminventory.controller.Report", {
         formatter: formatter,
-        
-        onInit() {
+
+        onInit: function () {
             this._setInitialValue();
         },
 
-        _setInitialValue:function(){
+        _setInitialValue: function () {
             var oMonth = this.byId("sfbSelFiscalMonth");
             var oYear = this.byId("sfbDPFiscalYear");
             var dNow = new Date(Date.now());
             var nMonth = dNow.getMonth() + 1;
             var nYear = dNow.getFullYear();
 
-            if(nMonth <= 3){
+            if (nMonth <= 3) {
                 nMonth = nMonth + 10 - 1;
                 nYear = nYear - 1;
-            }else{
+            } else {
                 nMonth = nMonth - 3;
             }
 
@@ -37,7 +37,7 @@ sap.ui.define([
         onBeforeRebindTable: function (oEvent) {
             var oParameters = oEvent.getParameter("bindingParams");
             var oYear = this.byId("sfbDPFiscalYear");
-            var oMonth = this.byId("sfbSelFiscalMonth"); 
+            var oMonth = this.byId("sfbSelFiscalMonth");
 
             //Filter
             if (oYear) {
@@ -53,16 +53,16 @@ sap.ui.define([
                 }
             }
 
-            if(oMonth){
+            if (oMonth) {
                 var aMonth = oMonth.getSelectedKeys();
-                aMonth.forEach((e)=>{
+                aMonth.forEach((e) => {
                     oParameters.filters.push(
                         new Filter(
                             "Period",
                             FilterOperator.EQ,
                             e
                         )
-                    );  
+                    );
                 })
             }
         }

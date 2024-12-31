@@ -33,6 +33,15 @@
                     "localUri": "localService/metadata.xml",
                     "odataVersion": "2.0"
                 }
+            },
+            "AuthorityService": {
+                "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+                    "odataVersion": "4.0"
+                }
             }
         },
         "crossNavigation": {
@@ -66,9 +75,12 @@
         }
     },
     "sap.ui5": {
-        "flexEnabled": true,
+        "flexEnabled": false,
+        "config": {
+            "fullWidth": true
+        },
         "dependencies": {
-            "minUI5Version": "1.124.10",
+            "minUI5Version": "1.120.18",
             "libs": {
                 "sap.m": {},
                 "sap.ui.core": {}
@@ -96,6 +108,20 @@
                         "sap-value-list": "none"
                     }
                 }
+            },
+            "Authority": {
+                "dataSource": "AuthorityService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "local": {
+                "type": "sap.ui.model.json.JSONModel",
+                "preload": true
             }
         },
         "resources": {
@@ -119,15 +145,15 @@
             },
             "routes": [
                 {
-                    "name": "RouteMain",
-                    "pattern": ":?query:",
+                    "name": "Main",
+                    "pattern": "",
                     "target": [
-                        "TargetMain"
+                        "Main"
                     ]
                 }
             ],
             "targets": {
-                "TargetMain": {
+                "Main": {
                     "id": "Main",
                     "name": "Main"
                 }
@@ -142,5 +168,8 @@
     "sap.cloud": {
         "public": true,
         "service": "bi-s4apps01"
+    },
+    "sap.platform.cf": {
+        "ui5VersionNumber": "1.120.18"
     }
 }

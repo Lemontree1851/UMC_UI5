@@ -14,18 +14,10 @@ server:
             - /test-resources
           url: https://ui5.sap.com
         backend:
-          - path: /sap
+          - authenticationType: SAMLAssertion # SAML support for vscode
+            path: /sap
             url: https://my412552-api.s4hana.cloud.sap
-            destination: UMC_Dev_Customizing_BTP
-            authenticationType: BasicAuthentication
-          - path: /sap
-            url: https://my412552-api.s4hana.cloud.sap
-            destination: UMC_Dev_Customizing_BTP
-            authenticationType: BasicAuthentication
-          - path: /sap/opu/odata/sap/ZUI_BI006_LONGTERM_INV_O2
-            url: https://my412552-api.s4hana.cloud.sap
-            destination: UMC_Dev_Customizing_BTP
-            authenticationType: BasicAuthentication
+            destination: UMC_Dev_Customizing
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
