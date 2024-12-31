@@ -1,5 +1,6 @@
 <mvc:View controllerName="bi.longtermforcast.controller.Report"
-    xmlns:rowmodes="sap.ui.table.rowmodes" xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:rowmodes="sap.ui.table.rowmodes"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:smarttable="sap.ui.comp.smarttable"
@@ -8,185 +9,200 @@
     xmlns:f="sap.f"
     xmlns:sv="sap.ui.comp.smartvariants"
     xmlns:core="sap.ui.core" displayBlock="true" busyIndicatorDelay="0">
-            <smartfilterbar:SmartFilterBar id="reportFilter" entitySet="ZI_BI007_REPORT" smartVariant="__SVM02" persistencyKey="report02FilterPersistent" useToolbar="false">
-                <smartfilterbar:controlConfiguration>
-                    <smartfilterbar:ControlConfiguration id="sfbConfigCompanyCode" index="0" key="CompanyCode" label="{i18n>company}" /> 
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="report02SVM" showShare="true" showExecuteOnSelection="true" entitySet="ZI_BI007_REPORT"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartfilterbar:SmartFilterBar id="reportFilter" entitySet="ZI_BI007_REPORT" smartVariant="__SVM01" persistencyKey="report02FilterPersistent" useToolbar="false">
+                            <smartfilterbar:controlConfiguration>
+                                <smartfilterbar:ControlConfiguration id="sfbConfigCompanyCode" index="0" key="CompanyCode" label="{i18n>company}" />
+                                <smartfilterbar:ControlConfiguration id="sfbConfigFiscalYear" index="1" key="BaseFiscalYear" label="{i18n>fiscalYear}" mandatory="mandatory">
+                                    <smartfilterbar:customControl>
+                                        <DatePicker id="sfbDPFiscalYear" displayFormat="yyyy" valueFormat="yyyy" required="true" />
+                                    </smartfilterbar:customControl>
+                                </smartfilterbar:ControlConfiguration>
+                                <smartfilterbar:ControlConfiguration id="sfbConfigFiscalMonth" index="2" key="BasePeriod" label="{i18n>fiscalMonth}" mandatory="mandatory">
+                                    <smartfilterbar:customControl>
+                                        <ComboBox id="sfbSelFiscalMonth" required="true">
+                                            <items>
+                                                <core:Item id="idMonth01" key="01" text="01"></core:Item>
+                                                <core:Item id="idMonth02" key="02" text="02"></core:Item>
+                                                <core:Item id="idMonth03" key="03" text="03"></core:Item>
+                                                <core:Item id="idMonth04" key="04" text="04"></core:Item>
+                                                <core:Item id="idMonth05" key="05" text="05"></core:Item>
+                                                <core:Item id="idMonth06" key="06" text="06"></core:Item>
+                                                <core:Item id="idMonth07" key="07" text="07"></core:Item>
+                                                <core:Item id="idMonth08" key="08" text="08"></core:Item>
+                                                <core:Item id="idMonth09" key="09" text="09"></core:Item>
+                                                <core:Item id="idMonth10" key="10" text="10"></core:Item>
+                                                <core:Item id="idMonth11" key="11" text="11"></core:Item>
+                                                <core:Item id="idMonth12" key="12" text="12"></core:Item>
+                                            </items>
+                                        </ComboBox>
+                                    </smartfilterbar:customControl>
+                                </smartfilterbar:ControlConfiguration>
+                                <smartfilterbar:ControlConfiguration id="sfbConfigForcastYear" index="3" key="ForcastFiscalYear" label="{i18n>forcastYear}">
+                                    <smartfilterbar:customControl>
+                                        <DatePicker id="sfbDPForcastYear" displayFormat="yyyy" valueFormat="yyyy"/>
+                                    </smartfilterbar:customControl>
+                                </smartfilterbar:ControlConfiguration>
+                                <smartfilterbar:ControlConfiguration id="sfbConfigForcastlMonth" index="4" key="ForcastFiscalPeriod" label="{i18n>forcastMonth}">
+                                    <smartfilterbar:customControl>
+                                        <MultiComboBox id="sfbSelForcastMonth">
+                                            <items>
+                                                <core:Item id="idForcastMonth01" key="01" text="01"></core:Item>
+                                                <core:Item id="idForcastMonth02" key="02" text="02"></core:Item>
+                                                <core:Item id="idForcastMonth03" key="03" text="03"></core:Item>
+                                                <core:Item id="idForcastMonth04" key="04" text="04"></core:Item>
+                                                <core:Item id="idForcastMonth05" key="05" text="05"></core:Item>
+                                                <core:Item id="idForcastMonth06" key="06" text="06"></core:Item>
+                                                <core:Item id="idForcastMonth07" key="07" text="07"></core:Item>
+                                                <core:Item id="idForcastMonth08" key="08" text="08"></core:Item>
+                                                <core:Item id="idForcastMonth09" key="09" text="09"></core:Item>
+                                                <core:Item id="idForcastMonth10" key="10" text="10"></core:Item>
+                                                <core:Item id="idForcastMonth11" key="11" text="11"></core:Item>
+                                                <core:Item id="idForcastMonth12" key="12" text="12"></core:Item>
+                                            </items>
+                                        </MultiComboBox>
+                                    </smartfilterbar:customControl>
+                                </smartfilterbar:ControlConfiguration>
+                                <smartfilterbar:ControlConfiguration id="sfbConfigPlant" key="Plant" index="5" label="{i18n>plant}" />
+                                <smartfilterbar:ControlConfiguration id="sfbConfigProduct" key="Product" index="6" label="{i18n>product}" />
+                                <smartfilterbar:ControlConfiguration id="sfbConfigCustomer" key="Customer" index="7" label="{i18n>businessPartner}" />
+                            </smartfilterbar:controlConfiguration>
+                        </smartfilterbar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox>
+                <smarttable:SmartTable id="table" header="{i18n>appTitle}" smartVariant="__SVM01" smartFilterId="reportFilter" beforeRebindTable="onBeforeRebindTable" entitySet="ZI_BI007_REPORT" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" tableType="Table">
 
-                    <smartfilterbar:ControlConfiguration id="sfbConfigFiscalYear" index="1" key="BaseFiscalYear" label="{i18n>fiscalYear}" mandatory="mandatory" >
-                        <smartfilterbar:customControl>
-                            <DatePicker id="sfbDPFiscalYear" displayFormat="yyyy" valueFormat="yyyy" required="true" />
-                        </smartfilterbar:customControl>
-                    </smartfilterbar:ControlConfiguration>
+                    <table:Table id="tableReport02" threshold="20" selectionMode="None" fixedColumnCount="3">
+                        <table:rowMode>
+                            <rowmodes:Auto id="idReport02Auto" minRowCount="15"></rowmodes:Auto>
+                        </table:rowMode>
 
-                    <smartfilterbar:ControlConfiguration id="sfbConfigFiscalMonth" index="2" key="BasePeriod" label="{i18n>fiscalMonth}" mandatory="mandatory">
-                        <smartfilterbar:customControl>
-                           <ComboBox id="sfbSelFiscalMonth" required="true">
-                             <items>
-                                <core:Item id="idMonth01" key="01" text="01"></core:Item>
-                                <core:Item id="idMonth02" key="02" text="02"></core:Item>
-                                <core:Item id="idMonth03" key="03" text="03"></core:Item>
-                                <core:Item id="idMonth04" key="04" text="04"></core:Item>
-                                <core:Item id="idMonth05" key="05" text="05"></core:Item>
-                                <core:Item id="idMonth06" key="06" text="06"></core:Item>
-                                <core:Item id="idMonth07" key="07" text="07"></core:Item>
-                                <core:Item id="idMonth08" key="08" text="08"></core:Item>
-                                <core:Item id="idMonth09" key="09" text="09"></core:Item>
-                                <core:Item id="idMonth10" key="10" text="10"></core:Item>
-                                <core:Item id="idMonth11" key="11" text="11"></core:Item>
-                                <core:Item id="idMonth12" key="12" text="12"></core:Item>
-                             </items>
-                           </ComboBox>
-                        </smartfilterbar:customControl>
-                    </smartfilterbar:ControlConfiguration> 
+                        <table:columns>
+                            <table:Column id="idCompany" width="20em" label="{i18n>company}" sortProperty="CompanyCode" filterProperty="CompanyCode" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode",  "additionalProperty":"CompanyCodeName", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfCompany" text="{parts: [{path: 'CompanyCode'}, {path: 'CompanyCodeName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
 
-                    <smartfilterbar:ControlConfiguration id="sfbConfigForcastYear" index="3" key="ForcastFiscalYear" label="{i18n>forcastYear}">
-                        <smartfilterbar:customControl>
-                            <DatePicker id="sfbDPForcastYear" displayFormat="yyyy" valueFormat="yyyy"/>
-                        </smartfilterbar:customControl>
-                    </smartfilterbar:ControlConfiguration>
+                            <table:Column id="idType" width="10em" label="{i18n>type}" sortProperty="Type" filterProperty="Type" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"Type",  "leadingProperty":"Type", "sortProperty":"Type", "filterProperty": "Type"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfType" text="{Type}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
 
-                    <smartfilterbar:ControlConfiguration id="sfbConfigForcastlMonth" index="4" key="ForcastFiscalPeriod" label="{i18n>forcastMonth}">
-                        <smartfilterbar:customControl>
-                           <MultiComboBox id="sfbSelForcastMonth" >
-                             <items>
-                                <core:Item id="idForcastMonth01" key="01" text="01"></core:Item>
-                                <core:Item id="idForcastMonth02" key="02" text="02"></core:Item>
-                                <core:Item id="idForcastMonth03" key="03" text="03"></core:Item>
-                                <core:Item id="idForcastMonth04" key="04" text="04"></core:Item>
-                                <core:Item id="idForcastMonth05" key="05" text="05"></core:Item>
-                                <core:Item id="idForcastMonth06" key="06" text="06"></core:Item>
-                                <core:Item id="idForcastMonth07" key="07" text="07"></core:Item>
-                                <core:Item id="idForcastMonth08" key="08" text="08"></core:Item>
-                                <core:Item id="idForcastMonth09" key="09" text="09"></core:Item>
-                                <core:Item id="idForcastMonth10" key="10" text="10"></core:Item>
-                                <core:Item id="idForcastMonth11" key="11" text="11"></core:Item>
-                                <core:Item id="idForcastMonth12" key="12" text="12"></core:Item>
-                             </items>
-                           </MultiComboBox>
-                        </smartfilterbar:customControl>
-                    </smartfilterbar:ControlConfiguration> 
+                            <table:Column id="idFiscalYearMonth" width="6em" label="{i18n>yearMonth}" sortProperty="FiscalYearMonth" filterProperty="FiscalYearMonth" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYearMonth",  "leadingProperty":"FiscalYearMonth", "sortProperty":"FiscalYearMonth", "filterProperty": "FiscalYearMonth"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfFiscalYearMonth" text="{FiscalYearMonth}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
 
-                    <smartfilterbar:ControlConfiguration id="sfbConfigPlant" key="Plant" index="5" label="{i18n>plant}" /> 
-                    <smartfilterbar:ControlConfiguration id="sfbConfigProduct" key="Product" index="6" label="{i18n>product}" /> 
-                    <smartfilterbar:ControlConfiguration id="sfbConfigCustomer" key="Customer" index="7" label="{i18n>businessPartner}" /> 
-                </smartfilterbar:controlConfiguration>
-            </smartfilterbar:SmartFilterBar> 
+                            <table:Column id="idProfitCenter" width="10em" label="{i18n>profitCenter}" sortProperty="ProfitCenter" filterProperty="ProfitCenter" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "additionalProperty":"ProfitCenterName", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfProfitCenter" text="{parts: [{path: 'ProfitCenter'}, {path: 'ProfitCenterName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
 
-            <smarttable:SmartTable id="table" header="{i18n>appTitle}" smartVariant="__SVM02" smartFilterId="reportFilter" beforeRebindTable="onBeforeRebindTable" entitySet="ZI_BI007_REPORT" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" tableType="Table">
+                            <table:Column id="idProductType" width="10em" label="{i18n>materialType}" sortProperty="ProductType" filterProperty="ProductType" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"ProductType", "additionalProperty":"ProductTypeName", "leadingProperty":"ProductType", "sortProperty":"ProductType", "filterProperty": "ProductType"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfProductType" text="{parts: [{path: 'ProductType'}, {path: 'ProductTypeName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
 
-                <table:Table id="tableReport02" threshold="20" selectionMode="None" fixedColumnCount="3" >
-                    <table:rowMode>
-                        <rowmodes:Auto id="idReport02Auto" minRowCount="15"></rowmodes:Auto>
-                    </table:rowMode>
-                   
-                    <table:columns>
-                        <table:Column id="idCompany" width="20em" label="{i18n>company}" sortProperty="CompanyCode" filterProperty="CompanyCode" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode",  "additionalProperty":"CompanyCodeName", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfCompany" text="{parts: [{path: 'CompanyCode'}, {path: 'CompanyCodeName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
-                            </table:template>
-                        </table:Column>
+                            <table:Column id="idPlant" width="20em" label="{i18n>plant}" sortProperty="Plant" filterProperty="Plant" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"Plant",  "additionalProperty":"PlantName", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfPlant" text="{parts: [{path: 'Plant'}, {path: 'PlantName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
 
-                        <table:Column id="idType" width="10em" label="{i18n>type}" sortProperty="Type" filterProperty="Type" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Type",  "leadingProperty":"Type", "sortProperty":"Type", "filterProperty": "Type"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfType" text="{Type}" wrapping="false" />
-                            </table:template>
-                        </table:Column>                        
+                            <table:Column id="idProduct" width="20em" label="{i18n>product}" sortProperty="Product" filterProperty="Product" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"Product", "additionalProperty":"ProductName", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfProduct" text="{parts: [{path: 'Product'}, {path: 'ProductName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
 
-                        <table:Column id="idFiscalYearMonth" width="6em" label="{i18n>yearMonth}" sortProperty="FiscalYearMonth" filterProperty="FiscalYearMonth" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYearMonth",  "leadingProperty":"FiscalYearMonth", "sortProperty":"FiscalYearMonth", "filterProperty": "FiscalYearMonth"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfFiscalYearMonth" text="{FiscalYearMonth}" wrapping="false" />
-                            </table:template>
-                        </table:Column>
+                            <table:Column id="idCustomer" width="20em" label="{i18n>businessPartner}" sortProperty="Customer" filterProperty="Customer" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "additionalProperty":"CustomerName", "leadingProperty":"Customer", "sortProperty":"Customer", "filterProperty": "Customer"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfCustomer" text="{parts: [{path: 'Customer'}, {path: 'CustomerName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
 
-                        <table:Column id="idProfitCenter" width="10em" label="{i18n>profitCenter}" sortProperty="ProfitCenter" filterProperty="ProfitCenter" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "additionalProperty":"ProfitCenterName", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfProfitCenter" text="{parts: [{path: 'ProfitCenter'}, {path: 'ProfitCenterName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
-                            </table:template>
-                        </table:Column>
+                            <table:Column id="idQuantity" width="10em" label="{i18n>longTermInventory}" sortProperty="Qty" filterProperty="Qty" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"Qty",  "leadingProperty":"Qty", "sortProperty":"Qty", "filterProperty": "Qty"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <smartfield:SmartField id="sfQty" value="{Qty}" wrapping="false" editable="false" />
+                                </table:template>
+                            </table:Column>
 
-                        <table:Column id="idProductType" width="10em" label="{i18n>materialType}" sortProperty="ProductType" filterProperty="ProductType" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"ProductType", "additionalProperty":"ProductTypeName", "leadingProperty":"ProductType", "sortProperty":"ProductType", "filterProperty": "ProductType"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfProductType" text="{parts: [{path: 'ProductType'}, {path: 'ProductTypeName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
-                            </table:template>
-                        </table:Column>
+                            <table:Column id="idActualPrice" width="13em" label="{i18n>actualPrice}" sortProperty="ActualPrice" filterProperty="ActualPrice" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"ActualPrice", "leadingProperty":"ActualPrice", "sortProperty":"ActualPrice", "filterProperty": "ActualPrice"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfActualPrice" text="{parts: [{path: 'ActualPrice'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
 
-                        <table:Column id="idPlant" width="20em" label="{i18n>plant}" sortProperty="Plant" filterProperty="Plant" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Plant",  "additionalProperty":"PlantName", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfPlant" text="{parts: [{path: 'Plant'}, {path: 'PlantName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
-                            </table:template>
-                        </table:Column>
-
-                        <table:Column id="idProduct" width="20em" label="{i18n>product}" sortProperty="Product" filterProperty="Product" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Product", "additionalProperty":"ProductName", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfProduct" text="{parts: [{path: 'Product'}, {path: 'ProductName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
-                            </table:template>
-                        </table:Column>
-
-                        <table:Column id="idCustomer" width="20em" label="{i18n>businessPartner}" sortProperty="Customer" filterProperty="Customer" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "additionalProperty":"CustomerName", "leadingProperty":"Customer", "sortProperty":"Customer", "filterProperty": "Customer"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfCustomer" text="{parts: [{path: 'Customer'}, {path: 'CustomerName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
-                            </table:template>
-                        </table:Column>
-
-                        <table:Column id="idQuantity" width="10em" label="{i18n>longTermInventory}" sortProperty="Qty" filterProperty="Qty" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Qty",  "leadingProperty":"Qty", "sortProperty":"Qty", "filterProperty": "Qty"}'/>
-                            </table:customData>
-                            <table:template>
-                                <smartfield:SmartField id="sfQty" value="{Qty}" wrapping="false" editable="false" />
-                            </table:template>
-                        </table:Column>
-
-                        <table:Column id="idActualPrice" width="13em" label="{i18n>actualPrice}" sortProperty="ActualPrice" filterProperty="ActualPrice" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"ActualPrice", "leadingProperty":"ActualPrice", "sortProperty":"ActualPrice", "filterProperty": "ActualPrice"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfActualPrice" text="{parts: [{path: 'ActualPrice'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
-                            </table:template>
-                        </table:Column> 
-                         
-                         <table:Column id="idInventoryAmount" width="13em" label="{i18n>longTermInventoryAmount}" sortProperty="InventoryAmount" filterProperty="InventoryAmount" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"InventoryAmount", "leadingProperty":"InventoryAmount", "sortProperty":"InventoryAmount", "filterProperty": "InventoryAmount"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfInventoryAmount" text="{parts: [{path: 'InventoryAmount'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
-                            </table:template>
-                        </table:Column> 
-                        <table:Column id="idCurrency" width="6em" label="{i18n>currency}" sortProperty="Currency" filterProperty="Currency" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Currency",  "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text id="sfCurrency" text="{Currency}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>                                                                                                                                                                       
-                    </table:columns>
-                </table:Table>
-            </smarttable:SmartTable> 
+                            <table:Column id="idInventoryAmount" width="13em" label="{i18n>longTermInventoryAmount}" sortProperty="InventoryAmount" filterProperty="InventoryAmount" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"InventoryAmount", "leadingProperty":"InventoryAmount", "sortProperty":"InventoryAmount", "filterProperty": "InventoryAmount"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfInventoryAmount" text="{parts: [{path: 'InventoryAmount'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
+                            <table:Column id="idCurrency" width="6em" label="{i18n>currency}" sortProperty="Currency" filterProperty="Currency" visible="true">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"Currency",  "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text id="sfCurrency" text="{Currency}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                        </table:columns>
+                    </table:Table>
+                </smarttable:SmartTable>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>
