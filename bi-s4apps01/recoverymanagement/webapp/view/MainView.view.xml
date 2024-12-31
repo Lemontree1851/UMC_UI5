@@ -5,19 +5,19 @@
         <content>
             <IconTabBar id="idIconTabBar" expandable="true" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding" applyContentPadding="false" stretchContentHeight="true">
                 <items>
-                    <IconTabFilter id="idTabFilter1" text="{i18n>title1}" key="title1">
+                    <IconTabFilter id="idTabFilter1" text="{i18n>title1}" key="title1" enabled="{= ${local>/authorityCheck/button/Report1}}">
                         <mvc:XMLView id="idMasterView" viewName="bi.recoverymanagement.view.MasterMaintain" />
                     </IconTabFilter>
-                    <IconTabFilter id="idTabFilter2" text="{i18n>title2}" key="title2">
+                    <IconTabFilter id="idTabFilter2" text="{i18n>title2}" key="title2" enabled="{= ${local>/authorityCheck/button/Report2}}">
                         <mvc:XMLView id="idReport02View" viewName="bi.recoverymanagement.view.Report002" />
                     </IconTabFilter>
-                    <IconTabFilter id="idTabFilter3" text="{i18n>title3}" key="title3">
+                    <IconTabFilter id="idTabFilter3" text="{i18n>title3}" key="title3" enabled="{= ${local>/authorityCheck/button/Report3}}">
                         <mvc:XMLView id="idReport03View" viewName="bi.recoverymanagement.view.Report003" />
                     </IconTabFilter>
-                    <IconTabFilter id="idTabFilter4" text="{i18n>title4}" key="title4">
+                    <IconTabFilter id="idTabFilter4" text="{i18n>title4}" key="title4" enabled="{= ${local>/authorityCheck/button/Report4}}">
                         <mvc:XMLView id="idReport04View" viewName="bi.recoverymanagement.view.Report004" />
                     </IconTabFilter>
-                    <IconTabFilter id="idTabFilter5" text="{i18n>title5}" key="title5">
+                    <IconTabFilter id="idTabFilter5" text="{i18n>title5}" key="title5" enabled="{= ${local>/authorityCheck/button/Report5}}">
                         <mvc:XMLView id="idReport05View" viewName="bi.recoverymanagement.view.Report005" />
                     </IconTabFilter>
                 </items>

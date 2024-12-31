@@ -19,17 +19,17 @@ sap.ui.define([
                 this._setInitialValue();
             },
 
-            _setInitialValue:function(){ 
+            _setInitialValue: function () {
                 var oYear = this.byId("sfbRep01DPRecoveryYear");
                 var dNow = new Date(Date.now());
                 var nMonth = dNow.getMonth() + 1;
                 var nYear = dNow.getFullYear();
-    
-                if(nMonth <= 3){ 
+
+                if (nMonth <= 3) {
                     nYear = nYear - 1;
                 }
-     
-                var sYear = String(nYear); 
+
+                var sYear = String(nYear);
                 oYear.setValue(sYear);
             },
 
@@ -45,8 +45,13 @@ sap.ui.define([
                 var sType = oBindingContext.getProperty("RecoveryType");
                 var sCustomer = oBindingContext.getProperty("Customer");
 
+                var aAuthorityCompanySet = this.getView().getModel("local").getProperty("/authorityCheck/data/CompanySet");
+
                 if (!sCompany || sCompany === '') {
                     MessageBox.error(this._getI18nBundle().getText("companyCodeEmpty"));
+                    return;
+                } else if (!aAuthorityCompanySet.some(data => data.CompanyCode === sCompany)) {
+                    MessageBox.error(this._getI18nBundle().getText("noAuthorityCompany", [sCompany]));
                     return;
                 }
 
@@ -87,7 +92,7 @@ sap.ui.define([
 
             },
 
-            onSaveEditRecovery: function (oEvent) { 
+            onSaveEditRecovery: function (oEvent) {
 
                 var oModel = this.getView().getModel();
 
@@ -146,9 +151,9 @@ sap.ui.define([
 
             onCloseEditDialog: function (oEvent) {
                 var oModel = this.getView().getModel();
-               // var oContext = this.getView().byId("editForm").getBindingContext();
-                
-                if(oModel.hasPendingChanges()){
+                // var oContext = this.getView().byId("editForm").getBindingContext();
+
+                if (oModel.hasPendingChanges()) {
                     oModel.resetChanges();
                 }
 
@@ -176,16 +181,16 @@ sap.ui.define([
             onEdit: function (oEvent) {
                 var oTable = this.byId("tableMaster");
 
-                if(!oTable){
+                if (!oTable) {
                     return;
                 }
 
                 const aIndex = oTable.getSelectedIndices();
 
-                if(aIndex.length !== 1){
+                if (aIndex.length !== 1) {
                     MessageToast.show(this._getI18nBundle().getText("selectOneRecord"));
                     return;
-                } 
+                }
 
 
                 var oBindingContext = oTable.getContextByIndex(aIndex[0]);
@@ -240,9 +245,9 @@ sap.ui.define([
                 oDialog.destroy();
             },
 
-            onDestroy : function(oEvent){
+            onDestroy: function (oEvent) {
                 var oSource = oEvent.getSource();
-                if(oSource){
+                if (oSource) {
                     oSource.destroy();
                 }
             }
