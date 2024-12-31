@@ -501,7 +501,7 @@ sap.ui.define([
 		_bindTimelineAggregation: function () {
  
 			var afilters = [];
-			var ApplicationId = "00" + this._InsNo4;
+			var ApplicationId = this._InsNo4.padStart(6, '0'); 
 			var oFilter1 = new sap.ui.model.Filter("WorkflowId", sap.ui.model.FilterOperator.EQ, "purchaserequisition");
 			var oFilter2 = new sap.ui.model.Filter("InstanceId", sap.ui.model.FilterOperator.EQ, this._InsNo3);
 			var oFilter3 = new sap.ui.model.Filter("ApplicationId", sap.ui.model.FilterOperator.EQ, ApplicationId);
