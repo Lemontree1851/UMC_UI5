@@ -103,7 +103,7 @@
                             type="Transparent"
                             text="{i18n>saveBtn}"
                             press="onCreateDN"
-                            enabled="{local>/recordCheckSuccessed}"
+                            enabled="{= ${local>/recordCheckSuccessed} &amp;&amp; ${local>/authorityCheck/button/Process}}"
                         />
                     </OverflowToolbar>
                 </t:extension>
