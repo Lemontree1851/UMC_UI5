@@ -96,7 +96,7 @@
                             type="Transparent"
                             text="{i18n>btnCheckRecords}"
                             press="onCheckRecords"
-                            enabled="{= ${local>/excelSet}.length > 0}"
+                            enabled="{= ${local>/excelSet}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Check}}"
                         />
                         <Button
                             id="idCheckButton"
@@ -104,13 +104,13 @@
                             type="Transparent"
                             text="{i18n>btnPIRChange}"
                             press="onPIRChange"
-                            enabled="{local>/isRecordCheckSuccessed}"
+                            enabled="{= ${local>/isRecordCheckSuccessed} &amp;&amp; ${local>/authorityCheck/button/Excute}}"
                         />
                         <Button 
                             icon="sap-icon://excel-attachment"
                             type="Transparent"
                             press="onExport"
-                            enabled="{= ${local>/excelSet}.length > 0}"
+                            enabled="{= ${local>/excelSet}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Export}}"
                         />
                     </OverflowToolbar>
                 </t:extension>

@@ -115,13 +115,13 @@
                             type="Transparent"
                             text="{i18n>btnCreatePIR}"
                             press="onCreatePIR"
-                            enabled="{= ${local>/OFPartition}.length > 0}"
+                            enabled="{= ${local>/OFPartition}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Create}}"
                         />
                         <Button 
                             icon="sap-icon://excel-attachment"
                             type="Transparent"
                             press="onExport"
-                            enabled="{= ${local>/OFPartition}.length > 0}"
+                            enabled="{= ${local>/OFPartition}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Export}}"
                         />
                     </OverflowToolbar>
                 </t:extension>
