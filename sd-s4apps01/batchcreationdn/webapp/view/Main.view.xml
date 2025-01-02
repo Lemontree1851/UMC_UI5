@@ -70,6 +70,7 @@
                             id="idDNCreateButton"
                             text="{i18n>MainView.DNCreate}"
                             press="onDNButtonPress"
+                            enabled="{= ${local>/authorityCheck/button/Create}}"
                         />
                     </OverflowToolbar>
                 </smartTable:customToolbar>

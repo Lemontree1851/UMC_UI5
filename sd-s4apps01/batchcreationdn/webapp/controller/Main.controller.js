@@ -1,15 +1,16 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./Base",
     "../model/formatter",
     "./messages",
     "sap/m/BusyDialog",
     "sap/ui/core/Messaging",
     "sap/ui/core/Fragment",
-	"sap/m/Dialog"
+	"sap/m/Dialog",
+    "sap/ui/core/UIComponent",
 ],
-    function (Controller, formatter, messages, BusyDialog, Messaging, Fragment, Dialog ) {
+    function (Base, formatter, messages, BusyDialog, Messaging, Fragment, Dialog, UIComponent) {
         "use strict";
-        return Controller.extend("sd.batchcreationdn.controller.Main", {
+        return Base.extend("sd.batchcreationdn.controller.Main", {
             formatter: formatter,
             onInit: function () {
                 this._LocalData = this.getOwnerComponent().getModel("local");
@@ -26,6 +27,67 @@ sap.ui.define([
 			    eventBus.subscribe("channel1","Create", this.callAction.bind(this));
                 eventBus.subscribe("channel1","unspecifiedQuantityWarning", this.unspecifiedStorageLocationWarning.bind(this));
                 eventBus.subscribe("channel1","unspecifiedStorageLocationWarning", this.createDNConfirmWarning.bind(this));
+
+                // 权限校验
+                this._UserInfo = sap.ushell.Container.getService("UserInfo");
+                this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
+            },
+
+            _initialize: function () {
+                var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+                var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+                var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                    "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+                });
+                oContextBinding.requestObject().then(function (context) {
+                    var aAccessBtns = [],
+                        aAllAccessBtns = [];
+                    if (context._AssignRole && context._AssignRole.length > 0) {
+                        context._AssignRole.forEach(role => {
+                            aAccessBtns.push(role._UserRoleAccessBtn);
+                        });
+                        aAllAccessBtns = aAccessBtns.flat();
+                    }
+                    if (!aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-View")) {
+                        if (!this.oErrorMessageDialog) {
+                            this.oErrorMessageDialog = new sap.m.Dialog({
+                                type: sap.m.DialogType.Message,
+                                state: "Error",
+                                content: new sap.m.Text({
+                                    text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                                })
+                            });
+                        }
+                        this.oErrorMessageDialog.open();
+                    }
+                    this.getModel("local").setProperty("/authorityCheck", {
+                        button: {
+                            View: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-View"),
+                            Create: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-Create"),
+                            Edit: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-Edit"),
+                            Save: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-Save"),
+                            Delete: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-Delete")
+                        },
+                        data: {
+                            PlantSet: context._AssignPlant,
+                            CompanySet: context._AssignCompany,
+                            SalesOrgSet: context._AssignSalesOrg,
+                            PurchOrgSet: context._AssignPurchOrg,
+                            RoleSet: context._AssignRole
+                        }
+                    });
+                }.bind(this), function (oError) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                            })
+                        });
+                    }
+                    this.oErrorMessageDialog.open();
+                }.bind(this));
             },
 
             onBeforeRebindTable: function () {
