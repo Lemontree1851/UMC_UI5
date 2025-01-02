@@ -42,6 +42,15 @@
           "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "AuthorityService": {
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -117,9 +126,23 @@
           "earlyRequests": true
         }
       },
+      "Authority": {
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
+      },
+      "local": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
       }
     },
     "resources": {
@@ -154,21 +177,21 @@
                     "ListReportExt.js": {
                       "press": "sd.deliveryreceipt.ext.ListReportExt.onPrint",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Print}",
                       "requiresSelection": true,
                       "text": "{@i18n>print}"
                     },
                     "reprint": {
                       "press": "sd.deliveryreceipt.ext.ListReportExt.onReprint",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Reprint}",
                       "requiresSelection": true,
                       "text": "{i18n>reprint}"
                     },
                     "delete": {
                       "press": "sd.deliveryreceipt.ext.ListReportExt.onDelete",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Clear}",
                       "requiresSelection": true,
                       "text": "{i18n>delete}"
                     }
