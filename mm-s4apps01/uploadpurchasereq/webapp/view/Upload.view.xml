@@ -529,6 +529,16 @@
                         </t:template>
                     </t:Column>
                     <t:Column
+                        width="8rem"
+                        label="{i18n>OrderID}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>OrderID}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
                         id="id24Column"
                         width="8rem"
                         label="{i18n>AssetNo}"
