@@ -8,10 +8,73 @@ sap.ui.define([
 	"sap/m/Dialog"
 ], function(MessageToast, BusyDialog, messages, xml, decimal, Fragment, Dialog) {
     'use strict';
-    var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel;
+    var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel, _UserInfo;
     return {
-        init: function (oEvent) {
+        init: function (oModels) {
             _oFunctions = this;
+
+            _UserInfo = sap.ushell.Container.getService("UserInfo");
+
+            // Authority Check
+            var oAuthorityModel = oModels.Authority;
+            var oLocalModel = oModels.local;
+            var oI18nModel = oModels.i18n;
+            this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel);
+        },
+        _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel) {
+            var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
+            var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
+            var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: oI18nModel.getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.oErrorMessageDialog.open();
+                }
+                oLocalModel.setProperty("/authorityCheck", {
+                    button: {
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-View"),
+                        Print: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-Print"),
+                        Reprint: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-Reprint"),
+                        Clear: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-Clear")
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: oI18nModel.getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.oErrorMessageDialog.open();
+            }.bind(this));
         },
         onPrint: function(oEvent) {
             _oDataModel = this.getModel();
@@ -162,7 +225,7 @@ sap.ui.define([
                     BillingDocumentItem: item.BillingDocumentItem,
                     BillingDocumentDate: item.BillingDocumentDate,
                     SalesDocument: item.SalesDocument,
-                    MaterialByCustomer: item.MaterialByCustomer,
+                    MaterialByCustomer: item.MaterialByCustomer || item.Product,
                     BillingDocumentItemText: item.BillingDocumentItemText,
                     BillingQuantity: item.BillingQuantity,
                     UnitPrice: item.UnitPrice,

@@ -10,7 +10,7 @@ sap.ui.define([
             manifest: "json"
         },
         onAfterRendering: function () {
-            this.ListReportExt.init();
+            this.ListReportExt.init(this.oModels);
         }
     });
 }
