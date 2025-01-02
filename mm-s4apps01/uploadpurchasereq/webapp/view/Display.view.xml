@@ -187,16 +187,19 @@
                             type="Transparent"
                             text="{i18n>DisplayView.CreateBtn}"
                             press="createPurchseOrder"
+                            enabled="{= ${local>/authorityCheck/button/POLink}}"
                         />
                         <Button
                             type="Transparent"
                             text="{i18n>DisplayView.Application}"
                             press="applicationApproval"
+                            enabled="{= ${local>/authorityCheck/button/PRApproveSend}}"
                         />
                         <Button
                             type="Transparent"
                             text="{i18n>DisplayView.Revoke}"
                             press="revokeApproval"
+                            enabled="{= ${local>/authorityCheck/button/PRApproveReturn}}"
                         />
                     </OverflowToolbar>
                 </smartTable:customToolbar>

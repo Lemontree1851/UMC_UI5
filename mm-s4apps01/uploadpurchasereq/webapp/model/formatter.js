@@ -142,6 +142,7 @@ sap.ui.define([
         },
         ToggleEditable: function(editable,approveStatus, isApprove) {
             // 暂时不根据审批状态限制编辑
+            //editable="{parts:['local>/objectPageEditable','ApproveStatus','IsApprove'], formatter:'.formatter.ToggleEditable'}"
             // if( editable && ( approveStatus == '1' || (approveStatus == '3' && isApprove == '2') )) {
             //     return true;
             // }

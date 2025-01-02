@@ -103,7 +103,7 @@
                             text="{i18n>UploadView.saveBtn}"
                             press=".onButtonPress($event, 'save')"
                             visible="{= ${local>/excelSet}.length > 0}"
-                            enabled="{local>/recordCheckSuccessed}"
+                            enabled="{= ${local>/recordCheckSuccessed} &amp;&amp; ${local>/authorityCheck/button/Excute}}"
                         />
                         <Button
                             id="idDownloadButton"
@@ -111,7 +111,7 @@
                             type="Transparent"
                             text="{i18n>UploadView.DownloadBtn}"
                             press="onExport"
-                            enabled="{= ${local>/excelSet}.length > 0}"
+                            enabled="{= ${local>/excelSet}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Export}}"
                         />
                     </OverflowToolbar>
                 </t:extension>

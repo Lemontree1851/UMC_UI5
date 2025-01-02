@@ -39,8 +39,8 @@
                                 id="idSmartForm"
                                 app:defaultCheckBoxDisplayBehaviour="YesNo"
                                 app:defaultDropDownDisplayBehaviour="idAndDescription"
-                                editable="{parts:['local>/objectPageEditable','ApproveStatus','IsApprove'], formatter:'.formatter.ToggleEditable'}"
-                                editTogglable="true"
+                                editable="true"
+                                editTogglable="{local>/authorityCheck/button/Edit}"
                                 title="{Name}"
                                 validationMode="Async"
                                 editToggled="onSmartFormEditToggled"
@@ -381,7 +381,7 @@
                                 items="{Attach>DocumentInfoRecordToAttachmentNavigation}"
                                 multiple="false"
                                 mode="None"
-                                uploadEnabled="true"
+                                uploadEnabled="{local>/authorityCheck/button/AttachmentUpload}"
                                 instantUpload="false"
                                 beforeItemAdded="onBeforeItemAdded"
                                 uploadCompleted="onUploadCompleted"
@@ -398,7 +398,7 @@
                                             formatter: '.getMediaUrl'
                                         }"
                                         visibleEdit="false"
-                                        visibleRemove="true"
+                                        visibleRemove="{local>/authorityCheck/button/AttachmentDelete}"
                                     />
                                 </upload:items>
                             </upload:UploadSet>
