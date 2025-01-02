@@ -22,10 +22,10 @@
                         <OverflowToolbar id="_IDGenOverflowToolbar">
                             <Text id="_IDGenText" text="{local>/logInfo}"/>
                             <ToolbarSpacer id="_IDGenToolbarSpacer"/>
-                            <Button id="idSummaryButton" icon="sap-icon://sum" type="Transparent" text="{i18n>summaryBtn}" press="onSummary" visible="{= ${local>/excelHeadSet}.length > 0}"/>
-                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelHeadSet}.length > 0}"/>
-                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelHeadSet}.length > 0}"/>
-                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}"/>
+                            <Button id="idSummaryButton" icon="sap-icon://sum" type="Transparent" text="{i18n>summaryBtn}" press="onSummary" visible="{= ${local>/excelHeadSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Summary}}"/>
+                            <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="onExcute" visible="{= ${local>/excelHeadSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Excute}}"/>
+                            <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelHeadSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
+                            <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Clear}}"/>
                         </OverflowToolbar>
                     </table:extension>
                     <table:columns>
