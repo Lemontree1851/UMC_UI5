@@ -199,7 +199,8 @@ sap.ui.define([
                 }
                 var aSelectedItems = this._oTable.getSelectedIndices();
                 var iLen = aSelectedItems.length;
-                var sTitle;
+                var sTitle, sTitleVariable;
+                var iExceedsNum = 0;
                 var aItems = [],
                     aDetails = [];
                 var aMessageItems = [];
@@ -234,13 +235,13 @@ sap.ui.define([
                 });
                 switch (sEvent) {
                     case "STD_CREATE":
-                        sTitle = this.getModel("i18n").getResourceBundle().getText("Create");
+                        sTitleVariable = this.getModel("i18n").getResourceBundle().getText("Create");
                         break;
                     case "TAB_SAVE":
-                        sTitle = this.getModel("i18n").getResourceBundle().getText("Save");
+                        sTitleVariable = this.getModel("i18n").getResourceBundle().getText("Save");
                         break;
                     case "TAB_DELETE":
-                        sTitle = this.getModel("i18n").getResourceBundle().getText("Delete");
+                        sTitleVariable = this.getModel("i18n").getResourceBundle().getText("Delete");
                         break;
                     default:
                         break;
@@ -293,12 +294,13 @@ sap.ui.define([
                             // 移動数量は在庫数量を超えるかをチェックする
                             if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.StorageLocationFromStock)) {
                                 // 行 {0} の移動数量は在庫数量を超えました。
-                                aMessageItems.push({
-                                    type: "Error",
-                                    title: this.getModel("i18n").getResourceBundle().getText("Error"),
-                                    description: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo]),
-                                    subtitle: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo])
-                                });
+                                // aMessageItems.push({
+                                //     type: "Error",
+                                //     title: this.getModel("i18n").getResourceBundle().getText("Error"),
+                                //     description: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo]),
+                                //     subtitle: this.getModel("i18n").getResourceBundle().getText("Message2", [element.RowNo])
+                                // });
+                                iExceedsNum += 1;
                             }
                             // 移動数量は欠品数量を超えるかをチェックする
                             if (parseFloat(element.TotalTransferQuantity) < parseFloat(element.TotalShortFallQuantity)) {
@@ -346,7 +348,12 @@ sap.ui.define([
                     username: this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName(),
                     datetime: this.getCurrentUTCDateTime()
                 }
-                MessageBox.confirm(this.getModel("i18n").getResourceBundle().getText("ConfirmMessage", [sTitle]), {
+                if (iExceedsNum > 0) {
+                    sTitle = this.getModel("i18n").getResourceBundle().getText("Message9", [iExceedsNum]);
+                } else {
+                    sTitle = this.getModel("i18n").getResourceBundle().getText("ConfirmMessage", [sTitleVariable]);
+                }
+                MessageBox.confirm(sTitle, {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                     emphasizedAction: MessageBox.Action.OK,
                     onClose: function (sAction) {
