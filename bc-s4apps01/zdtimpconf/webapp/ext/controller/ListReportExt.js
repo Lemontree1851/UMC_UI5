@@ -26,7 +26,7 @@ sap.ui.define([
                     });
                     aAllAccessBtns = aAccessBtns.flat();
                 }
-                if (!aAllAccessBtns.some(btn => btn.AccessId === "zwfapprovalconfigmanage-View")) {
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "zdtimpconf-View")) {
                     if (!this.oErrorMessageDialog) {
                         this.oErrorMessageDialog = new sap.m.Dialog({
                             type: sap.m.DialogType.Message,
@@ -40,7 +40,7 @@ sap.ui.define([
                 }
                 oLocalModel.setProperty("/authorityCheck", {
                     button: {
-                        View: aAllAccessBtns.some(btn => btn.AccessId === "zwfapprovalconfigmanage-View")
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "zdtimpconf-View")
                     },
                     data: {
                         PlantSet: context._AssignPlant,
