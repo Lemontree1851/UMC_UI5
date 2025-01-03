@@ -95,11 +95,11 @@ sap.ui.define([
                     var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                     var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
                     // read valid data starting from line 4 
-                    for (var i = 2; i < aSheetData.length; i++) {
+                    for (var i = 4; i < aSheetData.length; i++) {
                         var item = {
                             "Status": "",
                             "Message": "",
-                            "Row": i - 1,
+                            "Row": i - 3,
                             "Material": aSheetData[i]["Material"],
                             "Plant": aSheetData[i]["Plant"],
                             "SourceListRecord": aSheetData[i]["SourceListRecord"],
