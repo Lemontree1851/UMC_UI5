@@ -190,7 +190,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableRate", "leadingProperty":"ChargeableRate", "sortProperty":"ChargeableRate", "filterProperty": "ChargeableRate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ChargeableRate', formatter:'.formatter.formatFloat'}"/>
+                <Text text="{'ChargeableRate'}"/>
               </t:template>
             </t:Column>
 
@@ -280,7 +280,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"RevenueRate", "leadingProperty":"RevenueRate", "sortProperty":"RevenueRate", "filterProperty": "RevenueRate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'RevenueRate', formatter:'.formatter.formatFloat'}"/>
+                <Text text="{RevenueRate'}"/>
               </t:template>
             </t:Column>
 
