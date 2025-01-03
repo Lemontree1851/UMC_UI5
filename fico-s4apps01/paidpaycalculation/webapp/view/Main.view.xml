@@ -755,7 +755,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"RevenueRate", "leadingProperty":"RevenueRate", "sortProperty":"RevenueRate", "filterProperty": "RevenueRate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'RevenueRate', formatter:'.formatter.formatFloat'}"/>
+                <Text text="{'RevenueRate'}"/>
               </t:template>
             </t:Column>					
 		    </t:Table>
