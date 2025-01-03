@@ -55,8 +55,8 @@ sap.ui.define([
             _initialize: function () {
                 var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
                 var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-                sUser="xinlei.xu";
-                sEmail="xinlei.xu@sh.shin-china.com";
+                this.sUser = sUser;
+                this.sEmail = sEmail;
                 var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                     "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
                 });
@@ -193,6 +193,8 @@ sap.ui.define([
                             if (sSoldToParty) {
                                 oItem.SoldToParty = sSoldToParty;
                             }
+                            oItem.FrontEndUser = this.sUser;
+                            oItem.FrontEndEmail = this.sEmail;
                             aExcelSet.push(this.convertObjectValuesToString(oItem));
                         }
                     } else if (iBtnIndex === 2) {
@@ -216,6 +218,8 @@ sap.ui.define([
                             if (sSoldToParty) {
                                 oItem.SoldToParty = sSoldToParty;
                             }
+                            oItem.FrontEndUser = this.sUser;
+                            oItem.FrontEndEmail = this.sEmail;
                             aExcelSet.push(this.convertObjectValuesToString(oItem));
                         }
                     }
@@ -237,7 +241,7 @@ sap.ui.define([
                     Object.entries(obj).map(([key, value]) => [key, String(value)])
                 );
             },
-
+            
             onCreateDN: function () {
                 var that = this;
                 var aExcelSet = this._LocalData.getProperty("/excelSet");
