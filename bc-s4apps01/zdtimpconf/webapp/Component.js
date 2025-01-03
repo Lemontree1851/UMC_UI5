@@ -1,10 +1,14 @@
 sap.ui.define([
     "sap/fe/core/AppComponent",
-    "sap/m/MessageBox"
-], function (Component, MessageBox) {
+    "sap/m/MessageBox",
+    "bc/zdtimpconf/ext/controller/ListReportExt"
+], function (Component, MessageBox, ListReportExt) {
     "use strict";
 
     return Component.extend("bc.zdtimpconf.Component", {
+
+        ListReportExt: ListReportExt,
+
         metadata: {
             manifest: "json"
         },
@@ -22,6 +26,8 @@ sap.ui.define([
                 + "\n\n"
                 + "许鑫磊";
             MessageBox.information(sMessage);
+            
+            this.ListReportExt.getAuthorityData(this.oModels);
         }
     });
 });
