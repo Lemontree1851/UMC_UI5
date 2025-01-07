@@ -90,15 +90,15 @@ sap.ui.define([
                 });
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
-                // read valid data starting from line 4
-                for (var i = 2; i < aSheetData.length; i++) {
+                // read valid data starting from line 6
+                for (var i = 4; i < aSheetData.length; i++) {
                     var item = {
                         "Status": "",
                         "Message": "",
                         "MaterialDocument": "",
                         "MaterialDocumentYear": "",
                         "MaterialDocumentItem": "",
-                        "Row": i - 1,
+                        "Row": i - 3,
                         "DocumentDate": aSheetData[i]["DOCUMENTDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.formatDateToUtc(aSheetData[i]["DOCUMENTDATE"]),
                         "PostingDate": aSheetData[i]["POSTINGDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.formatDateToUtc(aSheetData[i]["POSTINGDATE"]),
                         "MaterialDocumentHeaderText": aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"] === undefined ? "" : aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"],
