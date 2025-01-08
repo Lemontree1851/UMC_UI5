@@ -75,6 +75,10 @@ modules:
       - bczprinttemplate.zip
       name: bczprinttemplate
       target-path: resources/
+    - artifacts:
+      - bczprintrecord.zip
+      name: bczprintrecord
+      target-path: resources/
 - name: bczdtimpconf
   type: html5
   path: zdtimpconf
@@ -141,6 +145,15 @@ modules:
 - name: bczprinttemplate
   type: html5
   path: zprinttemplate
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bczprintrecord
+  type: html5
+  path: zprintrecord
   build-parameters:
     build-result: dist
     builder: custom
