@@ -26,7 +26,7 @@
                         <!--欠品一覧-->
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar1" entitySet="ZC_PICKINGLIST_STD" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" visible="{= ${local>/selectIndex} === 0}" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" controlType="dropDownList" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="RequisitionDate" mandatory="mandatory" label="{i18n>RequisitionDate}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" value="{
@@ -67,7 +67,7 @@
                         <!--入出庫一覧-->
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar2" entitySet="ZC_PICKINGLIST_TAB" useToolbar="false" smartVariant="__SVM01" persistencyKey="CustomListSFB" visible="{= ${local>/selectIndex} === 1}" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" controlType="dropDownList" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="StorageLocationTo" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>LocationTo}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="StorageLocationFrom" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>LocationFrom}"/>
                                 <smartFilterBar:ControlConfiguration index='70' key="MaterialGroup" visibleInAdvancedArea="true" label="{i18n>MaterialGroup}"/>

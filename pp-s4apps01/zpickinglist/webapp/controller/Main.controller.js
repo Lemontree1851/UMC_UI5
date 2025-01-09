@@ -148,10 +148,13 @@ sap.ui.define([
                     aFilters.push(oNewFilter);
                 }
                 oSmartFilterBar = this.byId("idSmartFilterBar1");
-                aFilterPlant.push(oSmartFilterBar.getControlByKey("Plant").getSelectedKey());
+                aFilterPlant.push(oSmartFilterBar.getControlByKey("Plant").getProperty("value").split(' ')[0]);
             } else {
                 oSmartFilterBar = this.byId("idSmartFilterBar2");
-                aFilterPlant = oSmartFilterBar.getControlByKey("Plant").getSelectedKeys();
+                var aTokens = oSmartFilterBar.getControlByKey("Plant").getTokens();
+                aTokens.forEach(token => {
+                    aFilterPlant.push(token.getKey());
+                });
             }
 
             var bHasError = false;
