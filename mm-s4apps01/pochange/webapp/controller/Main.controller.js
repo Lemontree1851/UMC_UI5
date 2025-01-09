@@ -47,7 +47,10 @@ sap.ui.define([
                     }
                     this.getModel("local").setProperty("/authorityCheck", {
                         button: {
-                            View: aAllAccessBtns.some(btn => btn.AccessId === "pochange-View")
+                            View: aAllAccessBtns.some(btn => btn.AccessId === "pochange-View"),
+                            Clear: aAllAccessBtns.some(btn => btn.AccessId === "pochange-Clear"),
+                            Excute: aAllAccessBtns.some(btn => btn.AccessId === "pochange-Excute"),
+                            Export: aAllAccessBtns.some(btn => btn.AccessId === "pochange-Export")
                         },
                         data: {
                             PlantSet: context._AssignPlant,
