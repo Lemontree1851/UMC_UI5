@@ -1,10 +1,10 @@
-<mvc:View controllerName="pp.zcomponentusagelist.controller.Main" displayBlock="true" 
-    xmlns:mvc="sap.ui.core.mvc" 
-    xmlns:core="sap.ui.core" 
+<mvc:View controllerName="pp.zcomponentusagelist.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
     xmlns="sap.m"
-	xmlns:f="sap.f" 
-    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
-	xmlns:sv="sap.ui.comp.smartvariants" 
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:table="sap.ui.table">
     <f:DynamicPage headerExpanded="true">
@@ -21,11 +21,11 @@
                     <CheckBox id = 'idCB1' text="{i18n>NoDisplayNonProduct}" width="11rem" select="onSelect"/> 
                     <CheckBox id = 'idCB2' text="{i18n>DisplayPurchasingInfo}" width="11rem" select="onSelect"/> 
                 </f:content>  -->
-                <f:content> 
+                <f:content>
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ComponentUsageList" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" controlType="dropDownList" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="BillOfMaterialComponent" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialComponent}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
@@ -51,10 +51,10 @@
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
                 </f:content>
-                <f:content> 
-                    <CheckBox id = 'idCB1' text="{i18n>NoDisplayNonProduct}" width="11rem" select="onSelect"/> 
-                    <CheckBox id = 'idCB2' text="{i18n>DisplayPurchasingInfo}" width="11rem" select="onSelect"/> 
-                </f:content> 
+                <f:content>
+                    <CheckBox id = 'idCB1' text="{i18n>NoDisplayNonProduct}" width="11rem" select="onSelect"/>
+                    <CheckBox id = 'idCB2' text="{i18n>DisplayPurchasingInfo}" width="11rem" select="onSelect"/>
+                </f:content>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
