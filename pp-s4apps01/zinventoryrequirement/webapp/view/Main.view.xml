@@ -19,7 +19,7 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_InventoryRequirement" useToolbar="false" smartVariant="__SVM01" persistencyKey="InventoryRequirementSFB" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="MRPArea" visibleInAdvancedArea="true" label="{i18n>MRPArea}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="MRPController" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
