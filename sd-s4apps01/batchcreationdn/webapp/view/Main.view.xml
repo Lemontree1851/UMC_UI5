@@ -65,12 +65,13 @@
                             id="idBatchInput"
                             text="{i18n>MainView.BatchInput}"
                             press="onDialogPress"
+                            enabled="{= ${local>/authorityCheck/button/Update}}"
                         />
                         <Button
                             id="idDNCreateButton"
                             text="{i18n>MainView.DNCreate}"
                             press="onDNButtonPress"
-                            enabled="{= ${local>/authorityCheck/button/Create}}"
+                            enabled="{= ${local>/authorityCheck/button/DNCreate}}"
                         />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
