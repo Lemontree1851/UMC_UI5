@@ -64,8 +64,8 @@ modules:
       name: sdinvoiceprint
       target-path: resources/
     - artifacts:
-      - sdcreditmantablen.zip
-      name: sdcreditmantablen
+      - sdzcreditmantablenew.zip
+      name: sdzcreditmantablenew
       target-path: resources/
     - artifacts:
       - sdsalesacceptdn.zip
@@ -132,9 +132,9 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
-- name: sdcreditmantablen
+- name: sdzcreditmantablenew
   type: html5
-  path: creditmantablen
+  path: zcreditmantablenew
   build-parameters:
     build-result: dist
     builder: custom

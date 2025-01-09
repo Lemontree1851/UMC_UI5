@@ -5,7 +5,7 @@ sap.ui.define([
     "sap/m/BusyDialog",
     "sap/ui/core/Messaging",
     "sap/ui/core/Fragment",
-	"sap/m/Dialog",
+    "sap/m/Dialog",
     "sap/ui/core/UIComponent",
 ],
     function (Base, formatter, messages, BusyDialog, Messaging, Fragment, Dialog, UIComponent) {
@@ -24,9 +24,9 @@ sap.ui.define([
                 Messaging.registerObject(this.getView(), true);
 
                 var eventBus = this.getOwnerComponent().getEventBus();
-			    eventBus.subscribe("channel1","Create", this.callAction.bind(this));
-                eventBus.subscribe("channel1","unspecifiedQuantityWarning", this.unspecifiedStorageLocationWarning.bind(this));
-                eventBus.subscribe("channel1","unspecifiedStorageLocationWarning", this.createDNConfirmWarning.bind(this));
+                eventBus.subscribe("channel1", "Create", this.callAction.bind(this));
+                eventBus.subscribe("channel1", "unspecifiedQuantityWarning", this.unspecifiedStorageLocationWarning.bind(this));
+                eventBus.subscribe("channel1", "unspecifiedStorageLocationWarning", this.createDNConfirmWarning.bind(this));
 
                 // 权限校验
                 this._UserInfo = sap.ushell.Container.getService("UserInfo");
@@ -63,10 +63,8 @@ sap.ui.define([
                     this.getModel("local").setProperty("/authorityCheck", {
                         button: {
                             View: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-View"),
-                            Create: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-Create"),
-                            Edit: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-Edit"),
-                            Save: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-Save"),
-                            Delete: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-Delete")
+                            Update: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-Update"),
+                            DNCreate: aAllAccessBtns.some(btn => btn.AccessId === "batchcreationdn-DNCreate")
                         },
                         data: {
                             PlantSet: context._AssignPlant,
@@ -111,26 +109,26 @@ sap.ui.define([
             },
             // 第一个警告
             unspecifiedQuantityWarning: function () {
-                if ( this.aSelectedData.some(line => Number(line.CurrDeliveryQty) === 0) ) {
+                if (this.aSelectedData.some(line => Number(line.CurrDeliveryQty) === 0)) {
                     var sMessageText = this._ResourceBundle.getText("msgUnspecifiedQuantity");
-                    messages.confirmAction("Confirmation",sMessageText,"channel1","unspecifiedQuantityWarning",this);
+                    messages.confirmAction("Confirmation", sMessageText, "channel1", "unspecifiedQuantityWarning", this);
                 } else {
                     this.createDNConfirmWarning();
                 }
             },
             // 第二个警告
             unspecifiedStorageLocationWarning: function () {
-                if ( this.aSelectedData.some(line => line.CurrStorageLocation === "") ) {
+                if (this.aSelectedData.some(line => line.CurrStorageLocation === "")) {
                     var sMessageText = this._ResourceBundle.getText("msgUnspecifiedStorageLocation");
-                    messages.confirmAction("Confirmation",sMessageText,"channel1","unspecifiedStorageLocationWarning",this);
+                    messages.confirmAction("Confirmation", sMessageText, "channel1", "unspecifiedStorageLocationWarning", this);
                 } else {
                     this.createDNConfirmWarning();
                 }
             },
             // 永远最后一个警告
             createDNConfirmWarning: function () {
-                var sMessageText = this._ResourceBundle.getText("msgConfirmation",[this.aSelectedData.length]);
-                messages.confirmAction("Confirmation",sMessageText,"channel1","Create",this);
+                var sMessageText = this._ResourceBundle.getText("msgConfirmation", [this.aSelectedData.length]);
+                messages.confirmAction("Confirmation", sMessageText, "channel1", "Create", this);
             },
             callAction: function () {
                 var that = this;
@@ -167,7 +165,7 @@ sap.ui.define([
                                     this._oDataModel.setProperty(sKey + "/CurrStorageLocation", inputParam.CurrStorageLocation);
                                 }
                             }
-                        },this);
+                        }, this);
                         this._BusyDialog.close();
                     }.bind(this),
                     error: function (oError) {
@@ -233,19 +231,19 @@ sap.ui.define([
                     case 'Edm.DateTime':
                     case 'Edm.Date':
                         this._oDataModel.setProperty(sPath + "/" + sProperty, this.formatter.odataDate(oEvent.getParameter('value')));
-                        inputParam = Object.assign(inputParam, {[sProperty]: this.formatter.odataDate(oEvent.getParameter('value'))});
+                        inputParam = Object.assign(inputParam, { [sProperty]: this.formatter.odataDate(oEvent.getParameter('value')) });
                         break;
                     default:
                         this._oDataModel.setProperty(sPath + "/" + sProperty, oEvent.getParameter('value'));
-                        inputParam = Object.assign(inputParam, {[sProperty]: oEvent.getParameter('value')});
+                        inputParam = Object.assign(inputParam, { [sProperty]: oEvent.getParameter('value') });
                         break;
                 }
-                this._LocalData.setProperty(sPath,inputParam);
-                
+                this._LocalData.setProperty(sPath, inputParam);
+
             },
-            onDialogPress: function (oEvent) {	
-                this.aNeedUpdateData = this.getSelectedRows(oEvent);	
-                if(this.aNeedUpdateData.length === 0) {
+            onDialogPress: function (oEvent) {
+                this.aNeedUpdateData = this.getSelectedRows(oEvent);
+                if (this.aNeedUpdateData.length === 0) {
                     return;
                 }
                 if (!this.Dialog) {
@@ -255,31 +253,31 @@ sap.ui.define([
                             id: oView.getId(),
                             name: "sd.batchcreationdn.view.BatchInput",
                             controller: this
-                        }).then(function (oDialog){
+                        }).then(function (oDialog) {
                             this.getView().addDependent(oDialog);
                             this.byId("idSmartFormBatchInput").bindElement(this.aNeedUpdateData[0].key);
                             return oDialog;
                         }.bind(this));
                     }
                 }
-                this.Dialog.then(function(oDialog) {
+                this.Dialog.then(function (oDialog) {
                     oDialog.open();
                 }.bind(this));
             },
-            
-            onDialogClose: function(){
+
+            onDialogClose: function () {
                 this.byId("AnswerDialog").close();
                 this.aNeedUpdateData = [];
             },
             onChangeGoodsIssueDate: function () {
                 let that = this;
                 let sDate = this.byId("idInputParam1").getValue();
-                
+
                 that.aNeedUpdateData.forEach(function (line) {
                     that._oDataModel.setProperty(line.key + "/CurrPlannedGoodsIssueDate", that.formatter.odataDate(sDate));
                     let inputParam = that._LocalData.getProperty(line.key) || {};
-                    inputParam = Object.assign(inputParam, {"CurrPlannedGoodsIssueDate": that.formatter.odataDate(sDate)});
-                    that._LocalData.setProperty(line.key,inputParam);
+                    inputParam = Object.assign(inputParam, { "CurrPlannedGoodsIssueDate": that.formatter.odataDate(sDate) });
+                    that._LocalData.setProperty(line.key, inputParam);
                 });
             },
             onChangeStorageLoc: function () {
@@ -288,8 +286,8 @@ sap.ui.define([
                 that.aNeedUpdateData.forEach(function (line) {
                     let inputParam = that._LocalData.getProperty(line.key) || {};
                     that._oDataModel.setProperty(line.key + "/CurrStorageLocation", sStorageLoc);
-                    inputParam = Object.assign(inputParam, {"CurrStorageLocation": sStorageLoc});
-                    that._LocalData.setProperty(line.key,inputParam);
+                    inputParam = Object.assign(inputParam, { "CurrStorageLocation": sStorageLoc });
+                    that._LocalData.setProperty(line.key, inputParam);
                 });
             }
 

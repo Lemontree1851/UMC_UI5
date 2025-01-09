@@ -71,6 +71,14 @@ modules:
       - bczauthorityapplicationlist.zip
       name: bczauthorityapplicationlist
       target-path: resources/
+    - artifacts:
+      - bczprinttemplate.zip
+      name: bczprinttemplate
+      target-path: resources/
+    - artifacts:
+      - bczprintrecord.zip
+      name: bczprintrecord
+      target-path: resources/
 - name: bczdtimpconf
   type: html5
   path: zdtimpconf
@@ -128,6 +136,24 @@ modules:
 - name: bczauthorityapplicationlist
   type: html5
   path: zauthorityapplicationlist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bczprinttemplate
+  type: html5
+  path: zprinttemplate
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: bczprintrecord
+  type: html5
+  path: zprintrecord
   build-parameters:
     build-result: dist
     builder: custom

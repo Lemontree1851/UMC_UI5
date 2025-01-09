@@ -70,6 +70,7 @@
                 <Property Name="SupplierInvoice" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="SupplierInvoiceItem" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="buzei" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="OldID" Type="Edm.String" Nullable="false" MaxLength="17"/>
                 <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="PurchasingOrganization" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -83,6 +84,8 @@
                 <Property Name="SupplierMaterialNumber" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="CustomerMaterial" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="ProductManufacturerNumber" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ManufacturerNumber" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="ManufacturerNumberName" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="PurchaseOrderItemText" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="NetPrice1" Type="Edm.String" Nullable="false" MaxLength="13"/>
                 <Property Name="DocumentCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
@@ -92,6 +95,8 @@
                 <Property Name="PurchaseOrderQuantityUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="NetAmount" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="variable"/>
                 <Property Name="NetPriceQuantity" Type="Edm.Decimal" Nullable="false" Precision="5"/>
+                <Property Name="IncotermsClassification" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="SupplierMaterialGroup" Type="Edm.String" Nullable="false" MaxLength="18"/>
                 <Property Name="AccountAssignmentCategory" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="CostCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="GLAccount" Type="Edm.String" Nullable="false" MaxLength="10"/>
@@ -150,7 +155,6 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchaseOrderItemUniqueID">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchaseOrderItemUniqueID}"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/MaterialDocument">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;MaterialDocument}"/>
@@ -183,6 +187,9 @@
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/buzei">
                 <Annotation Term="SAP__common.IsDigitSequence"/>
                 <Annotation Term="SAP__UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZR_POACCEPTANCEType/OldID">
+                <Annotation Term="SAP__common.Label" String="{@i18n&gt;OldID}"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/CompanyCode">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;CompanyCode}"/>
@@ -273,7 +280,6 @@
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/SupplierMaterialNumber">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;SupplierMaterialNumber}"/>
-                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/CustomerMaterial">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;CustomerMaterial}"/>
@@ -285,6 +291,20 @@
                 <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="MPN"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Manufacturer Part Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZR_POACCEPTANCEType/ManufacturerNumber">
+                <Annotation Term="SAP__common.Label" String="{@i18n&gt;ManufacturerNumber}"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_supplier_vh/0001;ps='srvd-zui_poacceptance_o4-0001';va='com.sap.gateway.srvd.zui_poacceptance_o4.v0001.et-zr_poacceptance.manufacturernumber'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Heading" String="Manufact."/>
+                <Annotation Term="SAP__common.QuickInfo" String="Number of a Manufacturer"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZR_POACCEPTANCEType/ManufacturerNumberName">
+                <Annotation Term="SAP__common.Label" String="{@i18n&gt;ManufacturerNumberName}"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/PurchaseOrderItemText">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;PurchaseOrderItemText}"/>
@@ -339,6 +359,12 @@
                 <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="per"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Price unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZR_POACCEPTANCEType/IncotermsClassification">
+                <Annotation Term="SAP__common.Label" String="{@i18n&gt;IncotermsClassification}"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZR_POACCEPTANCEType/SupplierMaterialGroup">
+                <Annotation Term="SAP__common.Label" String="{@i18n&gt;SupplierMaterialGroup}"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_POACCEPTANCEType/AccountAssignmentCategory">
                 <Annotation Term="SAP__common.Label" String="{@i18n&gt;AccountAssignmentCategory}"/>
@@ -573,6 +599,9 @@
                             <PropertyValue Property="Value" Path="PurchaseOrderItemUniqueID"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="OldID"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="MaterialGroup"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
@@ -586,6 +615,12 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="ProductManufacturerNumber"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ManufacturerNumber"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ManufacturerNumberName"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="PurchaseOrderItemText"/>
@@ -613,6 +648,12 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="NetPriceQuantity"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="IncotermsClassification"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="SupplierMaterialGroup"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="AccountAssignmentCategory"/>
@@ -732,6 +773,7 @@
                         <PropertyPath>Supplier</PropertyPath>
                         <PropertyPath>PurchaseOrder</PropertyPath>
                         <PropertyPath>PurchaseOrderItemUniqueID</PropertyPath>
+                        <PropertyPath>OldID</PropertyPath>
                         <PropertyPath>MaterialGroup</PropertyPath>
                         <PropertyPath>Material</PropertyPath>
                         <PropertyPath>SupplierMaterialNumber</PropertyPath>
@@ -773,6 +815,15 @@
                                     <PropertyValue Property="Property" PropertyPath="Material"/>
                                     <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
                                 </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ManufacturerNumber"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>Plant</PropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
