@@ -236,6 +236,12 @@
                                             value="{WbsElemnt}"
                                         />
                                     </smartForm:GroupElement>
+                                    <smartForm:GroupElement >
+                                        <smartField:SmartField
+                                            textLabel="{i18n>OrderID}"
+                                            value="{OrderId}"
+                                        />
+                                    </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id24GroupElement">
                                         <smartField:SmartField
                                             id="idAssetNoSmartField"

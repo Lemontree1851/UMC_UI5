@@ -26,6 +26,7 @@ sap.ui.define([
 			oRouter.getRoute("RouteMain").attachMatched(this._onRouteMatched, this);
         },
         onRowActionItemPress : function(oEvent){
+			this._oDataModel.resetChanges();
 			var oItem, oCtx;
 
 			oItem = oEvent.getSource();
@@ -223,6 +224,7 @@ sap.ui.define([
 								this._oDataModel.setProperty("/" + key + "/Type", line.TYPE);
 								this._oDataModel.setProperty("/" + key + "/Message", line.MESSAGE);
 								this._oDataModel.setProperty("/" + key + "/ApproveStatus", line.APPROVESTATUS);
+								this._oDataModel.setProperty("/" + key + "/ApproveStatusText", line.APPROVESTATUSTEXT);
 								this._oDataModel.setProperty("/" + key + "/WorkflowId", line.WORKFLOWID);
 								this._oDataModel.setProperty("/" + key + "/InstanceId", line.INSTANCEID);
 								this._oDataModel.setProperty("/" + key + "/ApplyDate", line.APPLYDATE);
