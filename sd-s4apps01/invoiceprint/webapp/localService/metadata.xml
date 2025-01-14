@@ -67,7 +67,7 @@
                 <Property Name="BillToParty" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="ShippingPoint" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="SalesOffice" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="BillingQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
                 <Property Name="BillingQuantityUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="OverallSDProcessStatus" Type="Edm.String" Nullable="false" MaxLength="1"/>
@@ -94,6 +94,7 @@
                 <Property Name="NetAmountIncludeTax10" Type="Edm.Decimal" Nullable="false" Precision="19" Scale="1"/>
                 <Property Name="NetAmountExclude" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
                 <Property Name="InvoiceNo" Type="Edm.String" Nullable="false" MaxLength="11"/>
+                <Property Name="InvoiceItemNo" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="TheCompanyPostalCode" Type="Edm.String" Nullable="false" MaxLength="120"/>
                 <Property Name="TheCompanyCityName1" Type="Edm.String" Nullable="false" MaxLength="120"/>
                 <Property Name="TheCompanyCityName2" Type="Edm.String" Nullable="false" MaxLength="120"/>
@@ -156,6 +157,11 @@
             </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/BillingDocumentType">
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_billingdocumenttypestdvh/0001;ps='srvd-zui_invoicereport_o4-0001';va='com.sap.gateway.srvd.zui_invoicereport_o4.v0001.et-zc_invoicereport.billingdocumenttype'/$metadata</String>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="SAP__common.Label" String="Billing Type"/>
                 <Annotation Term="SAP__common.Heading" String="BillT"/>
             </Annotations>
@@ -194,15 +200,7 @@
                 <Annotation Term="SAP__common.Heading" String="Bill-to"/>
             </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/ShippingPoint">
-                <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.ValueListReferences">
-                    <Collection>
-                        <String>../../../../srvd_f4/sap/i_shippingpointstdvh/0001;ps='srvd-zui_invoicereport_o4-0001';va='com.sap.gateway.srvd.zui_invoicereport_o4.v0001.et-zc_invoicereport.shippingpoint'/$metadata</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__common.Label" String="Shipping Point"/>
-                <Annotation Term="SAP__common.Heading" String="ShPt"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Shipping Point / Receiving Point"/>
+                <Annotation Term="SAP__common.Label" String="出荷ポイント"/>
             </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/SalesOffice">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -211,13 +209,8 @@
             </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/Product">
                 <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.ValueListReferences">
-                    <Collection>
-                        <String>../../../../srvd_f4/sap/i_productstdvh/0001;ps='srvd-zui_invoicereport_o4-0001';va='com.sap.gateway.srvd.zui_invoicereport_o4.v0001.et-zc_invoicereport.product'/$metadata</String>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="SAP__common.Label" String="Product"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Product Number"/>
+                <Annotation Term="SAP__common.Label" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
             </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/BillingQuantity">
                 <Annotation Term="SAP__measures.Unit" Path="BillingQuantityUnit"/>
@@ -230,8 +223,14 @@
                 <Annotation Term="SAP__common.Heading" String="SU"/>
             </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/OverallSDProcessStatus">
+                <Annotation Term="SAP__common.Label" String="会計へリリース"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Overall Status"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_overallsdprocessstatus/0001;ps='srvd-zui_invoicereport_o4-0001';va='com.sap.gateway.srvd.zui_invoicereport_o4.v0001.et-zc_invoicereport.overallsdprocessstatus'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
                 <Annotation Term="SAP__common.Heading" String="OS"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Overall Processing Status (Header/All Items)"/>
             </Annotations>
@@ -244,6 +243,12 @@
             <Annotations Target="SAP__self.InvoiceReportType">
                 <Annotation Term="SAP__common.CreatedBy" Path="CreatedByUser"/>
                 <Annotation Term="SAP__common.Label" String="請求書出力报表"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="請求書出力"/>
+                        <PropertyValue Property="TypeNamePlural" String="請求書出力"/>
+                    </Record>
+                </Annotation>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
@@ -299,6 +304,14 @@
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="NetAmountExclude"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="InvoiceItemNo"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -390,6 +403,9 @@
                 <Annotation Term="SAP__common.Label" String="Net Value"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Net Value of Billing item in Document Currency"/>
             </Annotations>
+            <Annotations Target="SAP__self.InvoiceReportType/InvoiceItemNo">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+            </Annotations>
             <Annotations Target="SAP__self.InvoiceReportType/TheCompanyPostalCode">
                 <Annotation Term="SAP__core.Computed"/>
             </Annotations>
@@ -452,6 +468,14 @@
                         <PropertyValue Property="Filterable" Bool="true"/>
                         <PropertyValue Property="FilterExpressionRestrictions">
                             <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BillingDocumentDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="CreationDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="RemitAddress"/>
                                     <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>

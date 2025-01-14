@@ -19,7 +19,7 @@ server:
           - path: /sap
             url: https://my412552-api.s4hana.cloud.sap
             destination: UMC_Dev_Customizing
-            authenticationType: BasicAuthentication
+            authenticationType: SAMLAssertion
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

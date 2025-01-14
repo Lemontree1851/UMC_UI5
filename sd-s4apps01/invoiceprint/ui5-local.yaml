@@ -29,7 +29,7 @@ server:
           - path: /sap
             url: https://my412552-api.s4hana.cloud.sap
             destination: UMC_Dev_Customizing
-            authenticationType: BasicAuthentication
+            authenticationType: SAMLAssertion
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
