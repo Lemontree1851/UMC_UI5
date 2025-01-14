@@ -1,5 +1,6 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
-	<Dialog id="AnswerDialog" title="{i18n>DialogTitle}" contentWidth="18rem" contentHeight="5rem" draggable="true">
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog id="AnswerDialog" draggable="true">
 		<FlexBox id="_IDGenFlexBox" direction="Column" alignItems="Center" justifyContent="Center" alignContent="Center">
 			<HBox id="_IDGenHBox1" justifyContent="Center">
 				<VBox id="_IDGenVBox">
@@ -7,6 +8,20 @@
 					<DatePicker id="idPrintDate" width="12rem" displayFormat="yyy/MM/dd" valueFormat="yyy/MM/dd"/>
 				</VBox>
 			</HBox>
+			<!-- ADD BEGIN BY XINLEI XU 2025/01/14 -->
+			<HBox id="_IDGenHBox2" justifyContent="Center">
+				<VBox id="_IDGenVBox2">
+					<Label id="_IDGenLabel2" text="{i18n>Creator}:"/>
+					<Input id="idCreator" width="12rem"/>
+				</VBox>
+			</HBox>
+			<HBox id="_IDGenHBox3" justifyContent="Center">
+				<VBox id="_IDGenVBox3">
+					<Label id="_IDGenLabel3" text="{i18n>Approver}:"/>
+					<Input id="idApprover" width="12rem"/>
+				</VBox>
+			</HBox>
+			<!-- ADD END BY XINLEI XU 2025/01/14 -->
 		</FlexBox>
 		<!-- <beginButton>
 			<Button id="_IDGenButton" text="{i18n>bConfirm}" press="onDialogConfirm"/>

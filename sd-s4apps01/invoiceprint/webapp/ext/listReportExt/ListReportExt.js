@@ -5,8 +5,8 @@ sap.ui.define([
     "../../lib/xml-js",
     "../../lib/decimal",
     "sap/ui/core/Fragment",
-	"sap/m/Dialog"
-], function(MessageToast, BusyDialog, messages, xml, decimal, Fragment, Dialog) {
+    "sap/m/Dialog"
+], function (MessageToast, BusyDialog, messages, xml, decimal, Fragment, Dialog) {
     'use strict';
     var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel, _UserInfo;
     return {
@@ -19,7 +19,7 @@ sap.ui.define([
             var oAuthorityModel = oModels.Authority;
             var oLocalModel = oModels.local;
             var oI18nModel = oModels.i18n;
-            this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel);
+            // this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel);
         },
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
@@ -76,12 +76,12 @@ sap.ui.define([
                 this.oErrorMessageDialog.open();
             }.bind(this));
         },
-        onPrint: function(oEvent) {
+        onPrint: function (oEvent) {
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
 
-            _oFunctions.onDialogPress(this.routing,this,"printInvoice");
+            _oFunctions.onDialogPress(this.routing, this, "printInvoice");
 
             // // 获取选择的行项目
             // if (this.getSelectedContexts) {
@@ -95,7 +95,7 @@ sap.ui.define([
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
-            _oFunctions.onDialogPress(this.routing,this,"reprintInvoice");
+            _oFunctions.onDialogPress(this.routing, this, "reprintInvoice");
             // // 获取选择的行项目
             // if (this.getSelectedContexts) {
             //     var aSelectedContexts = this.getSelectedContexts();
@@ -112,32 +112,32 @@ sap.ui.define([
             if (this.getSelectedContexts) {
                 var aSelectedContexts = this.getSelectedContexts();
             }
-            _oFunctions.onCustomAction(aSelectedContexts,"deleteInovice");
+            _oFunctions.onCustomAction(aSelectedContexts, "deleteInovice");
         },
 
-        onCustomAction: function (aSelectedContexts,sActionName, sPrintDate) {
+        onCustomAction: function (aSelectedContexts, sActionName, sPrintDate, sCreator, sApprover) {
             var aSelectedItem = [];
             var aPromise = [];
             var aItems = [];
-            aSelectedContexts.forEach( function (item) {
+            aSelectedContexts.forEach(function (item) {
                 var itemObject = item.getObject();
                 aSelectedItem.push(item.getObject());
                 aItems.push({
                     BillingDocument: itemObject.BillingDocument,
                     BillingDocumentItem: itemObject.BillingDocumentItem,
                 });
-            } );
-            if(_oFunctions.checkInconsistencies(aSelectedItem)) {
+            });
+            if (_oFunctions.checkInconsistencies(aSelectedItem)) {
                 messages.showError(_ResourceBundle.getText("msgInconsistencies"));
                 return;
             }
 
-            aPromise.push(_oFunctions.printAction(aItems,sActionName));
+            aPromise.push(_oFunctions.printAction(aItems, sActionName));
 
             Promise.all(aPromise).then(function (records) {
                 records.forEach(record => {
-                    if (sActionName !== "deleteInovice" ) {
-                        var pdfContent = _oFunctions.porcessPrintContent(record, sPrintDate);
+                    if (sActionName !== "deleteInovice") {
+                        var pdfContent = _oFunctions.porcessPrintContent(record, sPrintDate, sCreator, sApprover);
                         _oFunctions.getPDF(pdfContent);
                     } else {
                         messages.showSuccess(_ResourceBundle.getText("msgDeleteSuccessed"));
@@ -146,19 +146,19 @@ sap.ui.define([
             });
         },
 
-        printAction: function (items,sActionName) {
-            var promise = new Promise(function (resolve,reject) {
+        printAction: function (items, sActionName) {
+            var promise = new Promise(function (resolve, reject) {
                 var oAction = _oDataModel.bindContext("/InvoiceReport/com.sap.gateway.srvd.zui_invoicereport_o4.v0001." + sActionName + "(...)");
                 oAction.setParameter("Zzkey", JSON.stringify(items));
-                oAction.setParameter("Event","");
-                oAction.setParameter("RecordUUID","");
-                
-                oAction.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(( ) => {
+                oAction.setParameter("Event", "");
+                oAction.setParameter("RecordUUID", "");
+
+                oAction.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
                     try {
                         var records = oAction.getBoundContext().getObject().value; //获取返回的数据
-                    } catch (e) {}
+                    } catch (e) { }
                     resolve(records);
-                    
+
                 }).catch((oError) => {
                     messages.showError(oError.message);
                     reject(oError);
@@ -168,15 +168,14 @@ sap.ui.define([
         },
 
         //接收到从action返回的数据后，处理成PDF需要的
-        porcessPrintContent: function (aSelectedItem, sPrintDate) {
+        porcessPrintContent: function (aSelectedItem, sPrintDate, sCreator, sApprover) {
             // 检查选择的数据打印的维度是否一致，如果不一致则报错
             if (this.checkInconsistencies(aSelectedItem)) {
                 messages.showError(_ResourceBundle.getText("msgInconsistencies"));
                 return;
             }
-
             var pdfContent = {
-                PrintData:{
+                PrintData: {
                     results: []
                 }
             };
@@ -185,7 +184,7 @@ sap.ui.define([
                 iTotalNetAmountTax10 = 0,
                 iTotalNetAmountIncludeTax10 = 0,
                 iTotalNetAmountExclude = 0;
-            aSelectedItem.forEach(item=>{
+            aSelectedItem.forEach(item => {
                 iTotalNetAmount10 = Decimal.add(iTotalNetAmount10, item.NetAmount10);
                 iTotalNetAmountExclude = Decimal.add(iTotalNetAmountExclude, item.NetAmountExclude);
             });
@@ -196,6 +195,10 @@ sap.ui.define([
             // 请求书抬头
             var InvoicePrint = {
                 PrintDate: sPrintDate,
+                // ADD BEGIN BY XINLEI XU 2025/01/14
+                Creator: sCreator,
+                Approver: sApprover,
+                // ADD END BY XINLEI XU 2025/01/14
                 InvoiceNo: aSelectedItem[0].InvoiceNo,
                 TheCompanyPostalCode: aSelectedItem[0].TheCompanyPostalCode,
                 TheCompanyName: aSelectedItem[0].TheCompanyName,
@@ -214,8 +217,8 @@ sap.ui.define([
                 NetAmountTax10: iTotalNetAmountTax10.valueOf(),
                 NetAmountIncludeTax10: iTotalNetAmountIncludeTax10.valueOf(),
                 NetAmountExclude: iTotalNetAmountExclude.valueOf(),
-                to_Item:{
-                    results:[]
+                to_Item: {
+                    results: []
                 }
             }
             // 请求书行项目
@@ -290,15 +293,15 @@ sap.ui.define([
                 oBusyDialog.close();
             }
         },
-        
+
         checkInconsistencies: function (aExcelSet) {
             let isInconsistencies = false;
             // 如果数组为空或只有一个对象，直接返回一致
             if (aExcelSet.length <= 1) return false;
-        
+
             // 取第一个对象的这几个属性作为比较基准
             const { SoldToParty, ShippingPoint } = aExcelSet[0];
-        
+
             // 遍历数组，检查每个对象的这几个属性是否与基准一致
             for (let i = 1; i < aExcelSet.length; i++) {
                 const obj = aExcelSet[i];
@@ -311,10 +314,10 @@ sap.ui.define([
                     isInconsistencies = true; // 发现不一致，返回 true
                 }
             }
-        
             return isInconsistencies; // 所有对象都一致，返回 false
         },
-        onDialogPress: function (oRouting,that,sAction) {			
+
+        onDialogPress: function (oRouting, that, sAction) {
             if (!this.Dialog) {
                 var oView = oRouting.getView();
                 if (!this.Dialog) {
@@ -322,13 +325,13 @@ sap.ui.define([
                         id: oView.getId(),
                         name: "sd.invoiceprint.ext.fragment.Dialog",
                         controller: that
-                    }).then(function (oDialog){
+                    }).then(function (oDialog) {
                         oRouting.getView().addDependent(oDialog);
                         oDialog.setBeginButton(new sap.m.Button({
                             text: "{i18n>bConfirm}",
                             press: function () {
                                 var sPrintDate = oRouting.getView().byId("idPrintDate").getValue();
-                                if (sPrintDate === ''){
+                                if (sPrintDate === '') {
                                     const currentDate = new Date();
                                     sPrintDate = currentDate.toLocaleDateString('zh-CN', {
                                         year: 'numeric',
@@ -340,7 +343,11 @@ sap.ui.define([
                                 if (that.getSelectedContexts) {
                                     var aSelectedContexts = that.getSelectedContexts();
                                 }
-                                _oFunctions.onCustomAction(aSelectedContexts,sAction,sPrintDate);
+                                // ADD BEGIN BY XINLEI XU 2025/01/14
+                                var sCreator = oRouting.getView().byId("idCreator").getValue();
+                                var sApprover = oRouting.getView().byId("idApprover").getValue();
+                                // ADD END BY XINLEI XU 2025/01/14
+                                _oFunctions.onCustomAction(aSelectedContexts, sAction, sPrintDate, sCreator, sApprover);
                                 oDialog.close();
                             }
                         }));
@@ -350,26 +357,25 @@ sap.ui.define([
                                 oDialog.close();
                             }
                         }));
-
                         return oDialog;
                     }.bind(this));
                 }
             }
-            this.Dialog.then(function(oDialog) {
+            this.Dialog.then(function (oDialog) {
                 oDialog.open();
             }.bind(this));
         },
-    
-        onDialogClose: function(){
+
+        onDialogClose: function () {
             this.byId("AnswerDialog").close();
         },
 
-        onDialogConfirm: function() {
+        onDialogConfirm: function () {
             // 获取选择的行项目
             if (this.getSelectedContexts) {
                 var aSelectedContexts = this.getSelectedContexts();
             }
-            this.onCustomAction(aSelectedContexts,"printInvoice");
+            this.onCustomAction(aSelectedContexts, "printInvoice");
         },
 
     };
