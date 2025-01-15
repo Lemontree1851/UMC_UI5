@@ -80,8 +80,8 @@ sap.ui.define([
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
-
-            _oFunctions.onDialogPress(this.routing, this, "printInvoice");
+            this.sAction = "printInvoice";
+            _oFunctions.onDialogPress(this.routing, this, this.sAction);
 
             // // 获取选择的行项目
             // if (this.getSelectedContexts) {
@@ -95,7 +95,8 @@ sap.ui.define([
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
-            _oFunctions.onDialogPress(this.routing, this, "reprintInvoice");
+            this.sAction = "reprintInvoice";
+            _oFunctions.onDialogPress(this.routing, this, this.sAction);
             // // 获取选择的行项目
             // if (this.getSelectedContexts) {
             //     var aSelectedContexts = this.getSelectedContexts();
@@ -107,12 +108,12 @@ sap.ui.define([
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
-
+            this.sAction = "deleteInovice";
             // 获取选择的行项目
             if (this.getSelectedContexts) {
                 var aSelectedContexts = this.getSelectedContexts();
             }
-            _oFunctions.onCustomAction(aSelectedContexts, "deleteInovice");
+            _oFunctions.onCustomAction(aSelectedContexts, this.sAction);
         },
 
         onCustomAction: function (aSelectedContexts, sActionName, sPrintDate, sCreator, sApprover) {
@@ -326,57 +327,44 @@ sap.ui.define([
                         name: "sd.invoiceprint.ext.fragment.Dialog",
                         controller: that
                     }).then(function (oDialog) {
-                        oRouting.getView().addDependent(oDialog);
-                        oDialog.setBeginButton(new sap.m.Button({
-                            text: "{i18n>bConfirm}",
-                            press: function () {
-                                var sPrintDate = oRouting.getView().byId("idPrintDate").getValue();
-                                if (sPrintDate === '') {
-                                    const currentDate = new Date();
-                                    sPrintDate = currentDate.toLocaleDateString('zh-CN', {
-                                        year: 'numeric',
-                                        month: '2-digit',
-                                        day: '2-digit'
-                                    }).replace(/\//g, '/'); // 将年月日间的分隔符改为"/"
-                                }
-                                // 获取选择的行项目
-                                if (that.getSelectedContexts) {
-                                    var aSelectedContexts = that.getSelectedContexts();
-                                }
-                                // ADD BEGIN BY XINLEI XU 2025/01/14
-                                var sCreator = oRouting.getView().byId("idCreator").getValue();
-                                var sApprover = oRouting.getView().byId("idApprover").getValue();
-                                // ADD END BY XINLEI XU 2025/01/14
-                                _oFunctions.onCustomAction(aSelectedContexts, sAction, sPrintDate, sCreator, sApprover);
-                                oDialog.close();
-                            }
-                        }));
-                        oDialog.setEndButton(new sap.m.Button({
-                            text: "{i18n>bCancel}",
-                            press: function () {
-                                oDialog.close();
-                            }
-                        }));
                         return oDialog;
                     }.bind(this));
                 }
             }
             this.Dialog.then(function (oDialog) {
+                oRouting.getView().addDependent(oDialog);
+                oDialog.setBeginButton(new sap.m.Button({
+                    text: "{i18n>bConfirm}",
+                    press: function () {
+                        var sPrintDate = oRouting.getView().byId("idPrintDate").getValue();
+                        if (sPrintDate === '') {
+                            const currentDate = new Date();
+                            sPrintDate = currentDate.toLocaleDateString('zh-CN', {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit'
+                            }).replace(/\//g, '/'); // 将年月日间的分隔符改为"/"
+                        }
+                        // 获取选择的行项目
+                        if (that.getSelectedContexts) {
+                            var aSelectedContexts = that.getSelectedContexts();
+                        }
+                        // ADD BEGIN BY XINLEI XU 2025/01/14
+                        var sCreator = oRouting.getView().byId("idCreator").getValue();
+                        var sApprover = oRouting.getView().byId("idApprover").getValue();
+                        // ADD END BY XINLEI XU 2025/01/14
+                        _oFunctions.onCustomAction(aSelectedContexts, sAction, sPrintDate, sCreator, sApprover);
+                        oDialog.close();
+                    }
+                }));
+                oDialog.setEndButton(new sap.m.Button({
+                    text: "{i18n>bCancel}",
+                    press: function () {
+                        oDialog.close();
+                    }
+                }));
                 oDialog.open();
             }.bind(this));
-        },
-
-        onDialogClose: function () {
-            this.byId("AnswerDialog").close();
-        },
-
-        onDialogConfirm: function () {
-            // 获取选择的行项目
-            if (this.getSelectedContexts) {
-                var aSelectedContexts = this.getSelectedContexts();
-            }
-            this.onCustomAction(aSelectedContexts, "printInvoice");
-        },
-
+        }
     };
 });
