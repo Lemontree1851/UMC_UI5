@@ -82,20 +82,21 @@ sap.ui.define([
             },
 
             onBeforeRebindTable: function (oEvent, arg1, arg2, arg3, arg4) {
-                var mBindingParams = oEvent.getParameter("bindingParams");
+                // var mBindingParams = oEvent.getParameter("bindingParams");
+                // var newfilter;
 
-                var newfilter;
+                // // var oSelect = this.byId("idplantype"); // 通过ID获取Select控件
+                // // var selectedKey = oSelect.getSelectedKey();  // 获取选中的key值
+                // // newfilter = new sap.ui.model.Filter("plantype", sap.ui.model.FilterOperator.EQ, selectedKey);
+                // // mBindingParams.filters.push(newfilter);
 
-
-                var oSelect = this.byId("idplantype"); // 通过ID获取Select控件
-                var selectedKey = oSelect.getSelectedKey();  // 获取选中的key值
-                newfilter = new sap.ui.model.Filter("plantype", sap.ui.model.FilterOperator.EQ, selectedKey);
-                mBindingParams.filters.push(newfilter);
-
-                var oSelect = this.byId("idMonat"); // 通过ID获取Select控件
-                var selectedKey = oSelect.getSelectedKey();  // 获取选中的key值
-                newfilter = new sap.ui.model.Filter("YearDate", sap.ui.model.FilterOperator.EQ, selectedKey);
-                mBindingParams.filters.push(newfilter);
+                // var oSelect = this.byId("idMonat"); // 通过ID获取Select控件
+                // var selectedKey = oSelect.getSelectedKey();  // 获取选中的key值
+                // newfilter = new sap.ui.model.Filter("YearDate", sap.ui.model.FilterOperator.EQ, selectedKey);
+                // mBindingParams.filters.push(newfilter);
+ 
+                //newfilter = new sap.ui.model.Filter("YearDate", sap.ui.model.FilterOperator.EQ, selectedKey);
+                //mBindingParams.filters.push(newfilter);
 
             },
 
@@ -129,6 +130,45 @@ sap.ui.define([
             },
 
             onSearch: function (oEvent) {
+                var oSmartFilterBar = this.byId("idSmartFilterBar");
+                var oFilterData = oSmartFilterBar.getFilterData();
+ 
+                var SalesPlanVersion0 = oFilterData.SalesPlanVersion0;   
+                var SalesPlanVersion1 = oFilterData.SalesPlanVersion1;   
+                var SalesPlanVersion2 = oFilterData.SalesPlanVersion2;   
+                var SalesPlanVersion3 = oFilterData.SalesPlanVersion3;  
+ 
+                // allVersionsEmpty=値計画の売上&貢献利益&売上総利益が関連しますので、全部入力してください！
+                // zeroEmptyWithAtLeastOneEmpty=値計画の売上&貢献利益&売上総利益が関連しますので、全部入力してください！
+                // oneTwoThreeStartWithWrong=入力された検索条件が正しくなく、ルールに従って入力してください。
+
+                // Check if all SalesPlanVersion fields are empty
+                if (!SalesPlanVersion0 && !SalesPlanVersion1 && !SalesPlanVersion2 && !SalesPlanVersion3) {
+                    sap.m.MessageBox.error(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("allVersionsEmpty"));
+                    return;
+                }
+                // Check if SalesPlanVersion0 is empty and any of the other SalesPlanVersion fields are empty
+                if (!SalesPlanVersion0 && (!SalesPlanVersion1 || !SalesPlanVersion2 || !SalesPlanVersion3)) {
+                    sap.m.MessageBox.error(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("zeroEmptyWithAtLeastOneEmpty"));
+                    return;
+                }
+                // Check if SalesPlanVersion1, SalesPlanVersion2, SalesPlanVersion3 have the same starting letter and it's either 'A' or 'B'
+                var versions = [SalesPlanVersion1, SalesPlanVersion2, SalesPlanVersion3].filter(key => key !== null && key !== undefined && key !== '');
+                if (versions.length > 0) { // Only check if there are any non-empty versions
+                    var firstLetter = versions[0][0];
+                    if (!['A', 'B'].includes(firstLetter)) {
+                        sap.m.MessageBox.error(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("oneTwoThreeStartWithWrong"));
+                        return;
+                    }
+
+                    for (var i = 1; i < versions.length; i++) {
+                        if (versions[i][0] !== firstLetter) {
+                            sap.m.MessageBox.error(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("oneTwoThreeStartWithWrong"));
+                            return;
+                        }
+                    }
+                }
+ 
                 var aResultTemp = this._LocalData.getProperty("/SalesReport");
                 this.delColumns(aResultTemp);
 

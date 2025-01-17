@@ -41,7 +41,8 @@
                         entitySet="SalesReport"
                         persistencyKey="SalesReportSFB"
                         search="onSearch"
-                         class="sapUiResponsiveMargin"
+                        class="sapUiResponsiveMargin"
+                        
                     >
                         <smartFilterBar:controlConfiguration>
                             <!-- Sales Organization Bar -->
@@ -84,13 +85,14 @@
                                 id="plantypeBar"
                                 key="plantype"
                                 visibleInAdvancedArea="true"
+                                visible="false"
                                 label="{i18n>plantype}"
                             >
                                 <smartFilterBar:customControl>
                                     <Select
                                         id="idplantype"
                                         selectedKey=""
-                                        required="true" 
+                                        required="true"
                                     >
                                         <core:Item
                                             id="A"
@@ -105,7 +107,7 @@
                                     </Select>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
- 
+
                             <smartFilterBar:ControlConfiguration
                                 index="3"
                                 key="DateRange"
@@ -131,7 +133,45 @@
                                 label="{i18n>ConditionCurrency}"
                                 mandatory="mandatory"
                             >
-                                <!-- 可以添加默认聚合内容，如果有需要 -->
+                            </smartFilterBar:ControlConfiguration>
+                              <smartFilterBar:ControlConfiguration
+                                    index="66"
+                                    id="SalesPlanVersion0"
+                                    key="SalesPlanVersion0"
+                                    visibleInAdvancedArea="true"
+                                    label="{i18n>SalesPlanVersion0Bar}"
+                            
+                            >
+                            
+                            </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration
+                                    index="77"
+                                    id="SalesPlanVersion1"
+                                    key="SalesPlanVersion1"
+                                    visibleInAdvancedArea="true"
+                                    label="{i18n>SalesPlanVersion1Bar}"
+                                     
+                                    
+                            >
+                            
+                            </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration
+                                    index="88"
+                                    id="SalesPlanVersion2"
+                                    key="SalesPlanVersion2"
+                                    visibleInAdvancedArea="true"
+                                    label="{i18n>SalesPlanVersion2Bar}"
+                            >
+                            
+                            </smartFilterBar:ControlConfiguration>
+                                  <smartFilterBar:ControlConfiguration
+                                    index="99"
+                                    id="SalesPlanVersion3"
+                                    key="SalesPlanVersion3"
+                                    visibleInAdvancedArea="true"
+                                    label="{i18n>SalesPlanVersion3Bar}"
+                            >
+                            
                             </smartFilterBar:ControlConfiguration>
                             <!-- 隐藏的 ControlConfigurations -->
                             <smartFilterBar:ControlConfiguration
@@ -284,20 +324,20 @@
                             visible="{= ${local>/SalesReport}.length > 0}"
                         />
                         <ToolbarSpacer id="idToolbarSpacer" />
-                        <Button 
+                        <Button
                             icon="sap-icon://excel-attachment"
                             type="Transparent"
                             press="onExport"
                             text="{i18n>onExport}"
-                            visible="{= ${local>/SalesReport}.length > 0}" 
-                            enabled="{= ${local>/authorityCheck/button/Export}}" 
+                            visible="{= ${local>/SalesReport}.length > 0}"
+                            enabled="{= ${local>/authorityCheck/button/Export}}"
                         />
-                                                <Button 
+                        <Button
                             icon="sap-icon://excel-attachment"
                             type="Transparent"
                             press="onExportBI"
                             text="{i18n>onBIExport}"
-                            visible="{= ${local>/SalesReport}.length > 0}"  
+                            visible="{= ${local>/SalesReport}.length > 0}"
                             enabled="{= ${local>/authorityCheck/button/BITransfer}}"
                         />
                     </OverflowToolbar>
@@ -317,7 +357,7 @@
                             />
                         </table:template>
                     </table:Column>
- 
+
                     <table:Column
                         width="10rem"
                         sortProperty="Customer"
@@ -358,7 +398,7 @@
                             />
                         </table:template>
                     </table:Column>
-                    
+
                     <table:Column
                         width="10rem"
                         sortProperty="CustomerAccountAssignmentGroup"
@@ -453,7 +493,6 @@
                             />
                         </table:template>
                     </table:Column>
-                    
 
                     <table:Column
                         width="10rem"
@@ -510,7 +549,7 @@
                             />
                         </table:template>
                     </table:Column>
-                                        <table:Column
+                    <table:Column
                         width="10rem"
                         sortProperty="AccountDetnProductGroup"
                         label="{i18n>AccountDetnProductGroup}"
@@ -523,7 +562,6 @@
                             />
                         </table:template>
                     </table:Column>
-
 
                     <!-- <table:Column
                         width="10rem"
@@ -565,8 +603,8 @@
                             />
                         </table:template>
                     </table:Column>
- 
-<!-- 
+
+                    <!-- 
                     <table:Column
                         width="10rem"
                         sortProperty="ConditionRateValue"
@@ -678,8 +716,8 @@
                                 wrapping="false"
                             />
                         </table:template>
-                    </table:Column>    
-                    
+                    </table:Column>
+
                     <table:Column
                         width="10rem"
                         sortProperty="GLAccount3"
@@ -707,7 +745,7 @@
                                 wrapping="false"
                             />
                         </table:template>
-                    </table:Column>  
+                    </table:Column>
 
                     <table:Column
                         width="10rem"
@@ -722,7 +760,7 @@
                                 wrapping="false"
                             />
                         </table:template>
-                    </table:Column> 
+                    </table:Column>
                     <table:Column
                         width="10rem"
                         sortProperty="currency"
@@ -736,7 +774,7 @@
                                 wrapping="false"
                             />
                         </table:template>
-                    </table:Column>  
+                    </table:Column>
                     <table:Column
                         width="10rem"
                         sortProperty="currency1"
@@ -750,7 +788,7 @@
                                 wrapping="false"
                             />
                         </table:template>
-                    </table:Column>   
+                    </table:Column>
                     <table:Column
                         width="10rem"
                         sortProperty="Companycode"
@@ -764,7 +802,7 @@
                                 wrapping="false"
                             />
                         </table:template>
-                    </table:Column>                                  
+                    </table:Column>
                     <!-- <table:Column
                         width="10rem"
                         sortProperty="SalesAmount"
@@ -778,7 +816,6 @@
                             />
                         </table:template>
                     </table:Column> -->
-
 
                     <!-- <table:Column
                         width="10rem"
@@ -821,7 +858,7 @@
                             />
                         </table:template>
                     </table:Column> -->
-<!-- 
+                    <!-- 
                     <table:Column
                         width="10rem"
                         sortProperty="salesplanamountindspcrcy"
@@ -835,11 +872,6 @@
                             />
                         </table:template>
                     </table:Column> -->
-
-
-                   
-
-
 
                     <!-- <table:Column
                         id="SalesOrganization"

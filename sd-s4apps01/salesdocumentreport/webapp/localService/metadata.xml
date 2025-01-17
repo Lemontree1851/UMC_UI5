@@ -108,6 +108,10 @@
                 <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="50"/>
                 <Property Name="plantype" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="YearDate" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="SalesPlanVersion0" Type="Edm.String" MaxLength="40" sap:label="Version" sap:quickinfo="Sales Plan Version"/>
+                <Property Name="SalesPlanVersion1" Type="Edm.String" MaxLength="40" sap:label="Version" sap:quickinfo="Sales Plan Version"/>
+                <Property Name="SalesPlanVersion2" Type="Edm.String" MaxLength="40" sap:label="Version" sap:quickinfo="Sales Plan Version"/>
+                <Property Name="SalesPlanVersion3" Type="Edm.String" MaxLength="40" sap:label="Version" sap:quickinfo="Sales Plan Version"/>
                 <Property Name="CustomerName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="PlantName" Type="Edm.String" MaxLength="30"/>
                 <Property Name="MatlAccountAssignmentGroup" Type="Edm.String" MaxLength="2"/>
@@ -123,9 +127,9 @@
                 <Property Name="GrossProfitTotal" Type="Edm.String" MaxLength="20"/>
                 <Property Name="salesplanamountindspcrcy" Type="Edm.String" MaxLength="20"/>
                 <Property Name="CustomerAccountAssignmentGroup" Type="Edm.String" MaxLength="14"/>
-                <Property Name="FirstSalesSpecProductGroup" Type="Edm.String" MaxLength="3"/>
-                <Property Name="SecondSalesSpecProductGroup" Type="Edm.String" MaxLength="3"/>
-                <Property Name="ThirdSalesSpecProductGroup" Type="Edm.String" MaxLength="3"/>
+                <Property Name="FirstSalesSpecProductGroup" Type="Edm.String" MaxLength="30"/>
+                <Property Name="SecondSalesSpecProductGroup" Type="Edm.String" MaxLength="30"/>
+                <Property Name="ThirdSalesSpecProductGroup" Type="Edm.String" MaxLength="30"/>
                 <Property Name="AccountDetnProductGroup" Type="Edm.String" MaxLength="3"/>
                 <Property Name="SplitRange" Type="Edm.String" MaxLength="13" sap:display-format="UpperCase" sap:label="char13" sap:quickinfo="Character field 13 digits"/>
                 <Property Name="ConditionCurrency" Type="Edm.String" MaxLength="5" sap:value-list="standard" sap:semantics="currency-code"/>
@@ -143,7 +147,7 @@
                 <Property Name="GLAccountName2" Type="Edm.String" MaxLength="30"/>
                 <Property Name="GLAccountName3" Type="Edm.String" MaxLength="30"/>
                 <Property Name="SalesPlanUnit_c" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Companycode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
                 <Property Name="materialcost2000_n" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="currency" sap:variable-scale="true"/>
                 <Property Name="materialcost2000per_n" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="currency" sap:variable-scale="true"/>
                 <Property Name="Manufacturingcost_n" Type="Edm.Decimal" Precision="20" Scale="3" sap:unit="currency1" sap:variable-scale="true"/>
