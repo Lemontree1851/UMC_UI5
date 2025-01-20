@@ -63,6 +63,10 @@ modules:
       - bilongtermforcast.zip
       name: bilongtermforcast
       target-path: resources/
+    - artifacts:
+      - birecoveryupload.zip
+      name: birecoveryupload
+      target-path: resources/
 - name: birecoverymanagement
   type: html5
   path: recoverymanagement
@@ -106,7 +110,15 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: birecoveryupload
+  type: html5
+  path: recoveryupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
     - npm run build:cf
     supported-platforms: []
 resources:

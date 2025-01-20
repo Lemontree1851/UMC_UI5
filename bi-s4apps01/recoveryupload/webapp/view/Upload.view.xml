@@ -1,0 +1,236 @@
+<mvc:View controllerName="bi.recoveryupload.controller.Upload"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">
+    <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+        <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'StartsWith', value1 : 'ZUPLOAD_RECOVERY_' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+            <upload:items>
+                <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+            </upload:items>
+        </upload:UploadSet>
+    </Panel>
+    <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+        <RadioButtonGroup id="idRBGUpload" selectedIndex="{local>/UploadType}">
+            <RadioButton text="{i18n>UploadType_SB}"></RadioButton>
+            <RadioButton text="{i18n>UploadType_IN}"></RadioButton>
+            <RadioButton text="{i18n>UploadType_ST}"></RadioButton>
+            <RadioButton text="{i18n>UploadType_SS}"></RadioButton>
+        </RadioButtonGroup>
+        <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
+    </Panel>
+    <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+        <table:Table rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+            <table:extension>
+                <OverflowToolbar>
+                    <Text text="{local>/logInfo}"/>
+                    <ToolbarSpacer/>
+                    <Button id="idSaveButton" icon="sap-icon://save" type="Transparent" text="{i18n>saveBtn}" press="onSave" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Save}}"/>
+                    <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
+                </OverflowToolbar>
+            </table:extension>
+            <table:columns>
+                <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                    <table:template>
+                        <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="{ path:'local>Status',formatter:'.formatter.formatIcon' }"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>Message}">
+                    <table:template>
+                        <Text text="{local>Message}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>YearMonth}">
+                    <table:template>
+                        <Text text="{local>YearMonth}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>RecoveryManagementNumber}">
+                    <table:template>
+                        <Text text="{local>RecoveryManagementNumber}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <table:Column width="10rem" label="{i18n>PurchaseOrder}" visible="{= ${local>/UploadType} !== 3}">
+                    <table:template>
+                        <Text text="{local>PurchaseOrder}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>PurchaseOrderItem}" visible="{= ${local>/UploadType} !== 3}">
+                    <table:template>
+                        <Text text="{local>PurchaseOrderItem}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- SB -->
+                <table:Column width="10rem" label="{i18n>SpotbuyMaterial}" visible="{= ${local>/UploadType} === 0}">
+                    <table:template>
+                        <Text text="{local>SpotbuyMaterial}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>SpotbuyMaterialText}" visible="{= ${local>/UploadType} === 0}">
+                    <table:template>
+                        <Text text="{local>SpotbuyMaterialText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>SpotbuyMaterialPrice}" visible="{= ${local>/UploadType} === 0}">
+                    <table:template>
+                        <Text text="{local>SpotbuyMaterialPrice}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>GeneralMaterial}" visible="{= ${local>/UploadType} === 0}">
+                    <table:template>
+                        <Text text="{local>GeneralMaterial}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>GeneralMaterialText}" visible="{= ${local>/UploadType} === 0}">
+                    <table:template>
+                        <Text text="{local>GeneralMaterialText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>GeneralMaterialPrice}" visible="{= ${local>/UploadType} === 0}">
+                    <table:template>
+                        <Text text="{local>GeneralMaterialPrice}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>MaterialQuantity}" visible="{= ${local>/UploadType} === 0}">
+                    <table:template>
+                        <Text text="{local>MaterialQuantity}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- IN -->
+                <table:Column width="10rem" label="{i18n>InitialMaterial}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>InitialMaterial}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>InitialMaterialText}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>InitialMaterialText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>MateriaGroup}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>MateriaGroup}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>AccountingDocument}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>AccountingDocument}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>AccountingDocumentItem}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>AccountingDocumentItem}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>GLAccount}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>GLAccount}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>GLAccountText}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>GLAccountText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>FixedAsset}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>FixedAsset}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>FixedAssetText}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>FixedAssetText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>POQuantity}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>POQuantity}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>NetAmount}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>NetAmount}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>RecoveryNecessaryAmount}" visible="{= ${local>/UploadType} === 1}">
+                    <table:template>
+                        <Text text="{local>RecoveryNecessaryAmount}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- ST -->
+                <table:Column width="10rem" label="{i18n>TransportExpenseMaterial}" visible="{= ${local>/UploadType} === 2}">
+                    <table:template>
+                        <Text text="{local>TransportExpenseMaterial}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>TransportExpenseMaterialText}" visible="{= ${local>/UploadType} === 2}">
+                    <table:template>
+                        <Text text="{local>TransportExpenseMaterialText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>POQuantity}" visible="{= ${local>/UploadType} === 2}">
+                    <table:template>
+                        <Text text="{local>POQuantity}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>NetAmount}" visible="{= ${local>/UploadType} === 2}">
+                    <table:template>
+                        <Text text="{local>NetAmount}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>RecoveryNecessaryAmount}" visible="{= ${local>/UploadType} === 2}">
+                    <table:template>
+                        <Text text="{local>RecoveryNecessaryAmount}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- SS -->
+                <table:Column width="10rem" label="{i18n>MaterialDocument}" visible="{= ${local>/UploadType} === 3}">
+                    <table:template>
+                        <Text text="{local>MaterialDocument}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>MaterialDocumentItem}" visible="{= ${local>/UploadType} === 3}">
+                    <table:template>
+                        <Text text="{local>MaterialDocumentItem}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>SSMaterial}" visible="{= ${local>/UploadType} === 3}">
+                    <table:template>
+                        <Text text="{local>SSMaterial}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>SSMaterialText}" visible="{= ${local>/UploadType} === 3}">
+                    <table:template>
+                        <Text text="{local>SSMaterialText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>GLAccount}" visible="{= ${local>/UploadType} === 3}">
+                    <table:template>
+                        <Text text="{local>GLAccount}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>GLAccountText}" visible="{= ${local>/UploadType} === 3}">
+                    <table:template>
+                        <Text text="{local>GLAccountText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Quantity}" visible="{= ${local>/UploadType} === 3}">
+                    <table:template>
+                        <Text text="{local>Quantity}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Amount}" visible="{= ${local>/UploadType} === 3}">
+                    <table:template>
+                        <Text text="{local>Amount}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </Panel>
+</mvc:View>

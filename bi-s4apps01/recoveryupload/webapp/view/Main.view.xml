@@ -1,0 +1,14 @@
+<mvc:View controllerName="bi.recoveryupload.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <IconTabBar id="idIconTabBar" class="sapUiNoContentPadding" applyContentPadding="false" stretchContentHeight="true">
+        <items>
+            <IconTabFilter id="idTabFilter1" text="{i18n>IconTabFilter1}" key="IconTabFilter1" enabled="{= ${local>/authorityCheck/button/Upload}}">
+                <mvc:XMLView viewName="bi.recoveryupload.view.Upload" />
+            </IconTabFilter>
+            <IconTabFilter id="idTabFilter2" text="{i18n>IconTabFilter2}" key="IconTabFilter2" enabled="{= ${local>/authorityCheck/button/Report}}">
+                <mvc:XMLView viewName="bi.recoveryupload.view.Report" />
+            </IconTabFilter>
+        </items>
+    </IconTabBar>
+</mvc:View>
