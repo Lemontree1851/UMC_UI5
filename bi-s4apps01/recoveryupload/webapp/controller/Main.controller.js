@@ -1,24 +1,16 @@
 /* global XLSX:true */
 sap.ui.define([
-    "./Base",
-    "../model/formatter",
-    "../lib/xlsx",
-    "sap/m/BusyDialog",
-    "sap/m/MessageBox",
-    "sap/m/MessageToast"
-], function (Base, formatter, xlsx, BusyDialog, MessageBox, MessageToast) {
+    "./Base"
+], function (Base) {
     "use strict";
 
     return Base.extend("bi.recoveryupload.controller.Main", {
 
-        formatter: formatter,
-
         onInit: function () {
-            // this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
+            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
         },
 
         _initialize: function () {
-            this._BusyDialog = new BusyDialog();
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
@@ -49,6 +41,9 @@ sap.ui.define([
                 this.getModel("local").setProperty("/authorityCheck", {
                     button: {
                         View: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-View"),
+                        Upload: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Upload"),
+                        Report: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Report"),
+                        Clear: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Clear"),
                         Save: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Save"),
                         Export: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Export")
                     },

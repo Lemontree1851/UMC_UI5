@@ -26,6 +26,7 @@
                 <OverflowToolbar>
                     <Text text="{local>/logInfo}"/>
                     <ToolbarSpacer/>
+                    <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Clear}}"/>
                     <Button id="idSaveButton" icon="sap-icon://save" type="Transparent" text="{i18n>saveBtn}" press="onSave" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Save}}"/>
                     <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
                 </OverflowToolbar>
@@ -225,9 +226,9 @@
                         <Text text="{local>Quantity}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Amount}" visible="{= ${local>/UploadType} === 3}">
+                <table:Column width="10rem" label="{i18n>RecoveryNecessaryAmount}" visible="{= ${local>/UploadType} === 3}">
                     <table:template>
-                        <Text text="{local>Amount}" wrapping="false"/>
+                        <Text text="{local>RecoveryNecessaryAmount}" wrapping="false"/>
                     </table:template>
                 </table:Column>
             </table:columns>

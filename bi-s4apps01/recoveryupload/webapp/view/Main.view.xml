@@ -3,10 +3,10 @@
     xmlns="sap.m">
     <IconTabBar id="idIconTabBar" class="sapUiNoContentPadding" applyContentPadding="false" stretchContentHeight="true">
         <items>
-            <IconTabFilter id="idTabFilter1" text="{i18n>IconTabFilter1}" key="IconTabFilter1" enabled="{= ${local>/authorityCheck/button/Upload}}">
+            <IconTabFilter id="idTabFilter1" text="{i18n>IconTabFilter1}" key="IconTabFilter1" visible="{= ${local>/authorityCheck/button/Upload}}">
                 <mvc:XMLView viewName="bi.recoveryupload.view.Upload" />
             </IconTabFilter>
-            <IconTabFilter id="idTabFilter2" text="{i18n>IconTabFilter2}" key="IconTabFilter2" enabled="{= ${local>/authorityCheck/button/Report}}">
+            <IconTabFilter id="idTabFilter2" text="{i18n>IconTabFilter2}" key="IconTabFilter2" visible="{= ${local>/authorityCheck/button/Report}}">
                 <mvc:XMLView viewName="bi.recoveryupload.view.Report" />
             </IconTabFilter>
         </items>

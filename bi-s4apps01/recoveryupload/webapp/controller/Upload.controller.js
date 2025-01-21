@@ -114,7 +114,7 @@ sap.ui.define([
                                 "GLAccount": aSheetData[i]["GLAccount"] === undefined ? "" : aSheetData[i]["GLAccount"],
                                 "GLAccountText": aSheetData[i]["GLAccountText"] === undefined ? "" : aSheetData[i]["GLAccountText"],
                                 "Quantity": aSheetData[i]["Quantity"] === undefined ? "" : aSheetData[i]["Quantity"],
-                                "Amount": aSheetData[i]["Amount"] === undefined ? "" : aSheetData[i]["Amount"]
+                                "RecoveryNecessaryAmount": aSheetData[i]["RecoveryNecessaryAmount"] === undefined ? "" : aSheetData[i]["RecoveryNecessaryAmount"]
                             };
                             break;
                         default:
@@ -127,6 +127,11 @@ sap.ui.define([
                 this.byId("idFileUploader").clear();
                 this._BusyDialog.close();
             }.bind(this);
+        },
+
+        onClear: function () {
+            this.getModel("local").setProperty("/excelSet", []);
+            this.getModel("local").setProperty("/logInfo", "");
         },
 
         onSave: function () {
@@ -181,7 +186,8 @@ sap.ui.define([
                                 sap.m.URLHelper.redirect(sURL, true);
                             }
                         } else {
-                            JSON.parse(object.Zzkey).forEach(element => {
+                            var oZzkey = JSON.parse(object.Zzkey);
+                            oZzkey.JSONDATA.forEach(element => {
                                 for (var index = 0; index < aExcelSet.length; index++) {
                                     if (aExcelSet[index].Row === element.ROW) {
                                         aExcelSet[index].Status = element.STATUS;
