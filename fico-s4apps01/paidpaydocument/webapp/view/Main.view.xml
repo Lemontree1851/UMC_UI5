@@ -72,7 +72,7 @@
 		  <OverflowToolbar id = "toolbar" width="100%">
 			<ToolbarSpacer/>
 			  <Button id="post" icon="sap-icon://create" text="{i18n>ButtonText1}" tooltip="{i18n>ButtonText1}" press="onPost" enabled="{= ${local>/authorityCheck/button/Post}}"/>
-			  <Button id="cancel" icon="sap-icon://create" text="{i18n>ButtonText2}" tooltip="{i18n>ButtonText2}" press="onCancel" enabled="{= ${local>/authorityCheck/button/Reserve}}"/>
+			  <Button id="cancel" icon="sap-icon://create" text="{i18n>ButtonText2}" tooltip="{i18n>ButtonText2}" press="onCancel" enabled="{= ${local>/authorityCheck/button/Reverse}}"/>
 		  </OverflowToolbar>
 		</smartTable:customToolbar>
 

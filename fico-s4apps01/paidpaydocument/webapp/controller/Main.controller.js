@@ -53,7 +53,7 @@ sap.ui.define([
                             RevenueCost: aAllAccessBtns.some(btn => btn.AccessId === "paidpaydocument-RevenueCost"),
                             APAR: aAllAccessBtns.some(btn => btn.AccessId === "paidpaydocument-AccountReceivable AccountPayable"),
                             Post: aAllAccessBtns.some(btn => btn.AccessId === "paidpaydocument-Post"),
-                            Reserve: aAllAccessBtns.some(btn => btn.AccessId === "paidpaydocument-Reserve")
+                            Reverse: aAllAccessBtns.some(btn => btn.AccessId === "paidpaydocument-Reverse")
                         },
                         data: {
                             PlantSet: context._AssignPlant,
