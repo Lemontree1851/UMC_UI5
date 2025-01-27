@@ -43,6 +43,7 @@ sap.ui.define([
                         View: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-View"),
                         Upload: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Upload"),
                         Report: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Report"),
+                        Delete: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Delete"),
                         Clear: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Clear"),
                         Save: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Save"),
                         Export: aAllAccessBtns.some(btn => btn.AccessId === "recoveryupload-Export")

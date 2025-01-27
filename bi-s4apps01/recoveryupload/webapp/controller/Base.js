@@ -262,6 +262,46 @@ sap.ui.define([
                     }
                 }.bind(this)
             });
+        },
+
+        _CallODataV2: function (sMethod, sPath, aFilters, mUrlParameter, oRequestData) {
+            var that = this;
+            var oBusyDialog = new sap.m.BusyDialog();
+            oBusyDialog.open();
+            return new Promise(function (resolve, reject) {
+                var mParameters = {
+                    method: sMethod === "READ" ? "GET" : "POST",
+                    filters: aFilters,
+                    urlParameters: mUrlParameter,
+                    success: function (oResponse) {
+                        oBusyDialog.close();
+                        resolve(oResponse);
+                    },
+                    error: function (oErr) {
+                        oBusyDialog.close();
+                        reject(JSON.parse(oErr.responseText));
+                    }
+                };
+                switch (sMethod) {
+                    case "READ":
+                        that.getModel().read(sPath, mParameters);
+                        break;
+                    case "CREATE":
+                        that.getModel().create(sPath, oRequestData, mParameters);
+                        break;
+                    case "UPDATE":
+                        that.getModel().update(sPath, oRequestData, mParameters);
+                        break;
+                    case "DELETE":
+                        that.getModel().remove(sPath, mParameters);
+                        break;
+                    case "ACTION":
+                        that.getModel().callFunction(sPath, mParameters);
+                        break;
+                    default:
+                        break;
+                }
+            });
         }
     })
 });

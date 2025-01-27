@@ -19,6 +19,7 @@ sap.ui.define([
         createLocalModel: function () {
             var oModel = new JSONModel({
                 UploadType: 0,
+                filterUploadType: "SB",
                 logInfo: "",
                 excelSet: []
             });
