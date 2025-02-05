@@ -10,7 +10,7 @@
         showRowCount="false" useVariantManagement="false" useTablePersonalisation="true" 
         persistencyKey="SalesDocumentListST" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="RequestedDeliveryDate,SalesDocumentDate,Indicator1,Indicator2,Indicator3,Indicator4,Indicator5,Indicator6,UserEmail">
+        beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="TotalCountSo,TotalCountSoItem" ignoredFields="RequestedDeliveryDate,SalesDocumentDate,Indicator1,Indicator2,Indicator3,Indicator4,Indicator5,Indicator6,UserEmail,TotalCountSo,TotalCountSoItem">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>

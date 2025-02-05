@@ -218,6 +218,8 @@
                 <Property Name="YY1_ManagementNo_1_SDI" Type="Edm.String" MaxLength="18"/>
                 <Property Name="YY1_ManagementNo_2_SDI" Type="Edm.String" MaxLength="18"/>
                 <Property Name="YY1_ManagementNo_3_SDI" Type="Edm.String" MaxLength="18"/>
+                <Property Name="TotalCountSo" Type="Edm.Int64"/>
+                <Property Name="TotalCountSoItem" Type="Edm.Int64"/>
                 <Property Name="RequestedDeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="SalesDocumentDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="Indicator1" Type="Edm.Boolean" sap:filter-restriction="single-value" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>

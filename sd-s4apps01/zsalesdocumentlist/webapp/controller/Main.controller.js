@@ -93,11 +93,15 @@ sap.ui.define([
             oBinding.events = {
                 "dataReceived": function (oEvent) {
                     var oReceivedData = oEvent.getParameter('data');
-                    // 提取 SalesDocument 字段的值，并使用Set去除重复
-                    var setSalesDocuments = new Set(oReceivedData.results.map(item => item.SalesDocument));
-                    // 获取不重复的条目数
-                    var iSoCount = setSalesDocuments.size;
-                    var iSoItemCount = oReceivedData.results.length;
+                    var iSoCount = 0, iSoItemCount = 0;
+
+                    if (oReceivedData && 
+                        Array.isArray(oReceivedData.results) && 
+                        oReceivedData.results.length > 0) {
+                        iSoCount = oReceivedData.results[0].TotalCountSo;
+                        iSoItemCount = oReceivedData.results[0].TotalCountSoItem;
+                    }
+
                     var headerText = this.getModel("i18n").getResourceBundle().getText("Results",[iSoCount,iSoItemCount]);
                     // 更新 SmartTable 的 header 文本
                     this.setHeader(headerText);
