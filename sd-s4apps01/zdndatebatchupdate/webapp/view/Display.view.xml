@@ -118,6 +118,8 @@
                 placeToolbarInTable="true"
                 beforeRebindTable="onBeforeRebindTable"
                 showRowCount="false"
+                requestAtLeastFields="UserEmail,RecordCount"
+                ignoredFields="UserEmail,RecordCount"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar >
