@@ -1,6 +1,4 @@
-<mvc:View
-    controllerName="sd.zdndatebatchupdate.controller.Display"
-    displayBlock="true"
+<mvc:View controllerName="sd.zdndatebatchupdate.controller.Display" displayBlock="true"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
     xmlns:f="sap.f"
@@ -10,21 +8,12 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:smartTable="sap.ui.comp.smarttable"
-    xmlns:sv="sap.ui.comp.smartvariants"
-    height="100%"
-    busyIndicatorDelay="0"
->
+    xmlns:sv="sap.ui.comp.smartvariants" height="100%" busyIndicatorDelay="0">
     <f:DynamicPage id="idDynamicPage">
         <f:title>
             <f:DynamicPageTitle id="idDynamicPageTitle">
                 <f:heading>
-                    <sv:SmartVariantManagement
-                        id="idSmartVariantManagement"
-                        showShare="true"
-                        persistencyKey="deliveryDocumentFilter"
-                        showExecuteOnSelection="true"
-                        entitySet="DeliveryDocumentList"
-                    />
+                    <sv:SmartVariantManagement id="idSmartVariantManagement" showShare="true" persistencyKey="deliveryDocumentFilter" showExecuteOnSelection="true" entitySet="DeliveryDocumentList" />
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
@@ -32,75 +21,15 @@
             <f:DynamicPageHeader id="idDynamicPageHeader">
                 <f:content>
                     <!--数据查询-->
-                    <smartFilterBar:SmartFilterBar
-                        id="idSmartFilterBar"
-                        smartVariant="idSmartVariantManagement"
-                        persistencyKey="deliveryDocument"
-                        entitySet="DeliveryDocumentList"
-                        useToolbar="false"
-                        class="sapUiResponsiveMargin"
-                    >
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocument" entitySet="DeliveryDocumentList" useToolbar="false" class="sapUiResponsiveMargin">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration
-                                id="idControlConfiguration"
-                                key="DeliveryDocument"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>DeliveryDocument}"
-                                mandatory="notMandatory"
-                                index="1"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="id0ControlConfiguration"
-                                key="ShippingPoint"
-                                controlType="dropDownList"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>ShippingPoint}"
-                                mandatory="notMandatory"
-                                index="5"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="id1ControlConfiguration"
-                                key="SalesOrganization"
-                                controlType="dropDownList"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>SalesOrganization}"
-                                mandatory="notMandatory"
-                                index="10"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="id2ControlConfiguration"
-                                key="Plant"
-                                controlType="dropDownList"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>Plant}"
-                                mandatory="notMandatory"
-                                index="15"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="id3ControlConfiguration"
-                                key="SalesOffice"
-                                controlType="dropDownList"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>SalesOffice}"
-                                mandatory="notMandatory"
-                                index="20"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="id4ControlConfiguration"
-                                key="Product"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>Product}"
-                                mandatory="notMandatory"
-                                index="25"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="id5ControlConfiguration"
-                                key="StorageLocation"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>StorageLocation}"
-                                mandatory="notMandatory"
-                                index="30"
-                            >
+                            <smartFilterBar:ControlConfiguration id="idControlConfiguration" key="DeliveryDocument" visibleInAdvancedArea="true" label="{i18n>DeliveryDocument}" mandatory="notMandatory" index="1" />
+                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration" key="ShippingPoint" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>ShippingPoint}" mandatory="notMandatory" index="5" />
+                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="SalesOrganization" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}" mandatory="notMandatory" index="10" />
+                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="Plant" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="notMandatory" index="15" />
+                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="SalesOffice" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>SalesOffice}" mandatory="notMandatory" index="20" />
+                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="Product" visibleInAdvancedArea="true" label="{i18n>Product}" mandatory="notMandatory" index="25" />
+                            <smartFilterBar:ControlConfiguration id="id5ControlConfiguration" key="StorageLocation" visibleInAdvancedArea="true" label="{i18n>StorageLocation}" mandatory="notMandatory" index="30">
                             </smartFilterBar:ControlConfiguration>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
@@ -108,567 +37,266 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable
-                id="idSmartTable"
-                entitySet="DeliveryDocumentList"
-                smartFilterId="idSmartFilterBar"
-                smartVariant="idSmartVariantManagement"
-                persistencyKey="deliveryDocumentTable"
-                header="{local>/disInfo}"
-                placeToolbarInTable="true"
-                beforeRebindTable="onBeforeRebindTable"
-                showRowCount="false"
-                requestAtLeastFields="UserEmail,RecordCount"
-                ignoredFields="UserEmail,RecordCount"
-            >
+            <smartTable:SmartTable id="idSmartTable" entitySet="DeliveryDocumentList" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="UserEmail" ignoredFields="UserEmail">
                 <smartTable:customToolbar>
                     <OverflowToolbar >
                         <ToolbarSpacer />
-                        <Button
-                            type="Transparent"
-                            text="{i18n>DisplayView.downloadBtn}"
-                            press="onExport"
-                            visible="{local>/onExportvisible}"
-                            enabled="{= ${local>/authorityCheck/button/Export}}"
-                        />
+                        <Button type="Transparent" text="{i18n>DisplayView.downloadBtn}" press="onExport" visible="{local>/onExportvisible}" enabled="{= ${local>/authorityCheck/button/Export}}" />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
-                <t:Table
-                    id="idDeliveryDocumentTable"
-                    rowActionCount="1"
-                    rowsUpdated="onUITableRowsUpdated"
-                >
+                <t:Table id="idDeliveryDocumentTable" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
                     <!-- <t:rowMode>
                         <rm:Auto id="idAuto" />
                     </t:rowMode> -->
                     <!-- <t:rowActionTemplate>
-                        <t:RowAction
-                            id="idRowAction"
-                            visible="true"
-                        >
+                        <t:RowAction id="idRowAction" visible="true">
                             <t:items>
-                                <t:RowActionItem
-                                    id="idRowActionItem"
-                                    type="Navigation"
-                                    press="onRowActionItemPress"
-                                />
+                                <t:RowActionItem id="idRowActionItem" type="Navigation" press="onRowActionItemPress" />
                             </t:items>
                         </t:RowAction>
                     </t:rowActionTemplate> -->
                     <t:columns>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>DeliveryDocument}"
-                            sortProperty="DeliveryDocument"
-                            filterProperty="DeliveryDocument"
-                        >
+                        <t:Column width="8rem" label="{i18n>DeliveryDocument}" sortProperty="DeliveryDocument" filterProperty="DeliveryDocument">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"DeliveryDocument", "leadingProperty":"DeliveryDocument", "sortProperty":"DeliveryDocument", "filterProperty": "DeliveryDocument"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DeliveryDocument", "leadingProperty":"DeliveryDocument", "sortProperty":"DeliveryDocument", "filterProperty": "DeliveryDocument"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{DeliveryDocument}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{DeliveryDocument}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>ShippingPoint}"
-                            sortProperty="ShippingPoint"
-                            filterProperty="ShippingPoint"
-                        >
+                        <t:Column width="8rem" label="{i18n>ShippingPoint}" sortProperty="ShippingPoint" filterProperty="ShippingPoint">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"ShippingPoint", "leadingProperty":"ShippingPoint", "sortProperty":"ShippingPoint", "filterProperty": "ShippingPoint"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ShippingPoint", "leadingProperty":"ShippingPoint", "sortProperty":"ShippingPoint", "filterProperty": "ShippingPoint"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{ShippingPoint}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{ShippingPoint}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            id="id0Column"
-                            width="8rem"
-                            label="{i18n>SalesOrganization}"
-                            sortProperty="SalesOrganization"
-                            filterProperty="SalesOrganization"
-                        >
+                        <t:Column id="id0Column" width="8rem" label="{i18n>SalesOrganization}" sortProperty="SalesOrganization" filterProperty="SalesOrganization">
                             <t:customData>
-                                <core:CustomData
-                                    id="id0CustomData"
-                                    key="p13nData"
-                                    value='\{"columnKey":"SalesOrganization", "leadingProperty":"SalesOrganization", "sortProperty":"SalesOrganization", "filterProperty": "SalesOrganization"}'
+                                <core:CustomData id="id0CustomData" key="p13nData" value='\{"columnKey":"SalesOrganization", "leadingProperty":"SalesOrganization", "sortProperty":"SalesOrganization", "filterProperty": "SalesOrganization"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{SalesOrganization}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{SalesOrganization}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>SalesOffice}"
-                            sortProperty="SalesOffice"
-                            filterProperty="SalesOffice"
-                        >
+                        <t:Column width="8rem" label="{i18n>SalesOffice}" sortProperty="SalesOffice" filterProperty="SalesOffice">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"SalesOffice", "leadingProperty":"SalesOffice", "sortProperty":"SalesOffice", "filterProperty": "SalesOffice"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SalesOffice", "leadingProperty":"SalesOffice", "sortProperty":"SalesOffice", "filterProperty": "SalesOffice"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{SalesOffice}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{SalesOffice}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>SoldToParty}"
-                            sortProperty="SoldToParty"
-                            filterProperty="SoldToParty"
-                        >
+                        <t:Column width="8rem" label="{i18n>SoldToParty}" sortProperty="SoldToParty" filterProperty="SoldToParty">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"SoldToParty", "leadingProperty":"SoldToParty", "sortProperty":"SoldToParty", "filterProperty": "SoldToParty"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SoldToParty", "leadingProperty":"SoldToParty", "sortProperty":"SoldToParty", "filterProperty": "SoldToParty"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    id="idSoldToPartyText"
-                                    text="{SoldToParty}"
-                                />
+</t:customData>
+<t:template>
+<Text id="idSoldToPartyText" text="{SoldToParty}" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="14rem"
-                            label="{i18n>SoldToPartyName}"
-                            sortProperty="SoldToPartyName"
-                            filterProperty="SoldToPartyName"
-                        >
+                        <t:Column width="14rem" label="{i18n>SoldToPartyName}" sortProperty="SoldToPartyName" filterProperty="SoldToPartyName">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"SoldToPartyName", "leadingProperty":"SoldToPartyName", "sortProperty":"SoldToPartyName", "filterProperty": "SoldToPartyName"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SoldToPartyName", "leadingProperty":"SoldToPartyName", "sortProperty":"SoldToPartyName", "filterProperty": "SoldToPartyName"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{SoldToPartyName}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{SoldToPartyName}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>ShipToParty}"
-                            sortProperty="ShipToParty"
-                            filterProperty="ShipToParty"
-                        >
+                        <t:Column width="8rem" label="{i18n>ShipToParty}" sortProperty="ShipToParty" filterProperty="ShipToParty">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"ShipToParty", "leadingProperty":"ShipToParty", "sortProperty":"ShipToParty", "filterProperty": "ShipToParty"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ShipToParty", "leadingProperty":"ShipToParty", "sortProperty":"ShipToParty", "filterProperty": "ShipToParty"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{ShipToParty}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{ShipToParty}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="14rem"
-                            label="{i18n>ShipToPartyName}"
-                            sortProperty="ShipToPartyName"
-                            filterProperty="ShipToPartyName"
-                        >
+                        <t:Column width="14rem" label="{i18n>ShipToPartyName}" sortProperty="ShipToPartyName" filterProperty="ShipToPartyName">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"ShipToPartyName", "leadingProperty":"ShipToPartyName", "sortProperty":"ShipToPartyName", "filterProperty": "ShipToPartyName"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ShipToPartyName", "leadingProperty":"ShipToPartyName", "sortProperty":"ShipToPartyName", "filterProperty": "ShipToPartyName"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{ShipToPartyName}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{ShipToPartyName}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>DeliveryDocumentItem}"
-                            sortProperty="DeliveryDocumentItem"
-                            filterProperty="DeliveryDocumentItem"
-                        >
+                        <t:Column width="8rem" label="{i18n>DeliveryDocumentItem}" sortProperty="DeliveryDocumentItem" filterProperty="DeliveryDocumentItem">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"DeliveryDocumentItem", "leadingProperty":"DeliveryDocumentItem", "sortProperty":"DeliveryDocumentItem", "filterProperty": "DeliveryDocumentItem"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DeliveryDocumentItem", "leadingProperty":"DeliveryDocumentItem", "sortProperty":"DeliveryDocumentItem", "filterProperty": "DeliveryDocumentItem"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{DeliveryDocumentItem}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{DeliveryDocumentItem}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>Product}"
-                            sortProperty="Product"
-                            filterProperty="Product"
-                        >
+                        <t:Column width="8rem" label="{i18n>Product}" sortProperty="Product" filterProperty="Product">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"Product", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{Product}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{Product}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>Plant}"
-                            sortProperty="Plant"
-                            filterProperty="Plant"
-                        >
+                        <t:Column width="8rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{Plant}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{Plant}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>StorageLocation}"
-                            sortProperty="StorageLocation"
-                            filterProperty="StorageLocation"
-                        >
+                        <t:Column width="8rem" label="{i18n>StorageLocation}" sortProperty="StorageLocation" filterProperty="StorageLocation">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"StorageLocation", "leadingProperty":"StorageLocation", "sortProperty":"StorageLocation", "filterProperty": "StorageLocation"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"StorageLocation", "leadingProperty":"StorageLocation", "sortProperty":"StorageLocation", "filterProperty": "StorageLocation"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{StorageLocation}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{StorageLocation}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>ActualDeliveredQtyInBaseUnit}"
-                            sortProperty="ActualDeliveredQtyInBaseUnit"
-                            filterProperty="ActualDeliveredQtyInBaseUnit"
-                        >
+                        <t:Column width="8rem" label="{i18n>ActualDeliveredQtyInBaseUnit}" sortProperty="ActualDeliveredQtyInBaseUnit" filterProperty="ActualDeliveredQtyInBaseUnit">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"ActualDeliveredQtyInBaseUnit", "leadingProperty":"ActualDeliveredQtyInBaseUnit", "sortProperty":"ActualDeliveredQtyInBaseUnit", "filterProperty": "ActualDeliveredQtyInBaseUnit"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ActualDeliveredQtyInBaseUnit", "leadingProperty":"ActualDeliveredQtyInBaseUnit", "sortProperty":"ActualDeliveredQtyInBaseUnit", "filterProperty": "ActualDeliveredQtyInBaseUnit"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{ActualDeliveredQtyInBaseUnit}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{ActualDeliveredQtyInBaseUnit}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>BaseUnit}"
-                            sortProperty="BaseUnit"
-                            filterProperty="BaseUnit"
-                        >
+                        <t:Column width="8rem" label="{i18n>BaseUnit}" sortProperty="BaseUnit" filterProperty="BaseUnit">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"BaseUnit", "leadingProperty":"BaseUnit", "sortProperty":"BaseUnit", "filterProperty": "BaseUnit"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit", "leadingProperty":"BaseUnit", "sortProperty":"BaseUnit", "filterProperty": "BaseUnit"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{BaseUnit}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{BaseUnit}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>ProfitCenter}"
-                            sortProperty="ProfitCenter"
-                            filterProperty="ProfitCenter"
-                        >
+                        <t:Column width="8rem" label="{i18n>ProfitCenter}" sortProperty="ProfitCenter" filterProperty="ProfitCenter">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{ProfitCenter}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{ProfitCenter}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>ReferenceSDDocument}"
-                            sortProperty="ReferenceSDDocument"
-                            filterProperty="ReferenceSDDocument"
-                        >
+                        <t:Column width="8rem" label="{i18n>ReferenceSDDocument}" sortProperty="ReferenceSDDocument" filterProperty="ReferenceSDDocument">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"ReferenceSDDocument", "leadingProperty":"ReferenceSDDocument", "sortProperty":"ReferenceSDDocument", "filterProperty": "ReferenceSDDocument"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ReferenceSDDocument", "leadingProperty":"ReferenceSDDocument", "sortProperty":"ReferenceSDDocument", "filterProperty": "ReferenceSDDocument"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{ReferenceSDDocument}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{ReferenceSDDocument}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>ReferenceSDDocumentItem}"
-                            sortProperty="ReferenceSDDocumentItem"
-                            filterProperty="ReferenceSDDocumentItem"
-                        >
+                        <t:Column width="8rem" label="{i18n>ReferenceSDDocumentItem}" sortProperty="ReferenceSDDocumentItem" filterProperty="ReferenceSDDocumentItem">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"ReferenceSDDocumentItem", "leadingProperty":"ReferenceSDDocumentItem", "sortProperty":"ReferenceSDDocumentItem", "filterProperty": "ReferenceSDDocumentItem"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ReferenceSDDocumentItem", "leadingProperty":"ReferenceSDDocumentItem", "sortProperty":"ReferenceSDDocumentItem", "filterProperty": "ReferenceSDDocumentItem"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{ReferenceSDDocumentItem}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{ReferenceSDDocumentItem}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>DeliveryRelatedBillingStatus}"
-                            sortProperty="DeliveryRelatedBillingStatus"
-                            filterProperty="DeliveryRelatedBillingStatus"
-                        >
+                        <t:Column width="8rem" label="{i18n>DeliveryRelatedBillingStatus}" sortProperty="DeliveryRelatedBillingStatus" filterProperty="DeliveryRelatedBillingStatus">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"DeliveryRelatedBillingStatus", "leadingProperty":"DeliveryRelatedBillingStatus", "sortProperty":"DeliveryRelatedBillingStatus", "filterProperty": "DeliveryRelatedBillingStatus"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DeliveryRelatedBillingStatus", "leadingProperty":"DeliveryRelatedBillingStatus", "sortProperty":"DeliveryRelatedBillingStatus", "filterProperty": "DeliveryRelatedBillingStatus"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{DeliveryRelatedBillingStatus}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{DeliveryRelatedBillingStatus}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>DocumentDate}"
-                            sortProperty="DocumentDate"
-                            filterProperty="DocumentDate"
-                        >
+                        <t:Column width="8rem" label="{i18n>DocumentDate}" sortProperty="DocumentDate" filterProperty="DocumentDate">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"DocumentDate", "leadingProperty":"DocumentDate", "sortProperty":"DocumentDate", "filterProperty": "DocumentDate"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentDate", "leadingProperty":"DocumentDate", "sortProperty":"DocumentDate", "filterProperty": "DocumentDate"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{path:'DocumentDate', formatter:'.formatter.odataDate'}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{path:'DocumentDate', formatter:'.formatter.odataDate'}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>DeliveryDate}"
-                            sortProperty="DeliveryDate"
-                            filterProperty="DeliveryDate"
-                        >
+                        <t:Column width="8rem" label="{i18n>DeliveryDate}" sortProperty="DeliveryDate" filterProperty="DeliveryDate">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"DeliveryDate", "leadingProperty":"DeliveryDate", "sortProperty":"DeliveryDate", "filterProperty": "DeliveryDate"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DeliveryDate", "leadingProperty":"DeliveryDate", "sortProperty":"DeliveryDate", "filterProperty": "DeliveryDate"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{path:'DeliveryDate', formatter:'.formatter.odataDate'}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{path:'DeliveryDate', formatter:'.formatter.odataDate'}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>ActualGoodsMovementDate}"
-                            sortProperty="ActualGoodsMovementDate"
-                            filterProperty="ActualGoodsMovementDate"
-                        >
+                        <t:Column width="8rem" label="{i18n>ActualGoodsMovementDate}" sortProperty="ActualGoodsMovementDate" filterProperty="ActualGoodsMovementDate">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"ActualGoodsMovementDate", "leadingProperty":"ActualGoodsMovementDate", "sortProperty":"ActualGoodsMovementDate", "filterProperty": "ActualGoodsMovementDate"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ActualGoodsMovementDate", "leadingProperty":"ActualGoodsMovementDate", "sortProperty":"ActualGoodsMovementDate", "filterProperty": "ActualGoodsMovementDate"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{path:'ActualGoodsMovementDate', formatter:'.formatter.odataDate'}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{path:'ActualGoodsMovementDate', formatter:'.formatter.odataDate'}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>OverallGoodsMovementStatus}"
-                            sortProperty="OverallGoodsMovementStatus"
-                            filterProperty="OverallGoodsMovementStatus"
-                        >
+                        <t:Column width="8rem" label="{i18n>OverallGoodsMovementStatus}" sortProperty="OverallGoodsMovementStatus" filterProperty="OverallGoodsMovementStatus">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"OverallGoodsMovementStatus", "leadingProperty":"OverallGoodsMovementStatus", "sortProperty":"OverallGoodsMovementStatus", "filterProperty": "OverallGoodsMovementStatus"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OverallGoodsMovementStatus", "leadingProperty":"OverallGoodsMovementStatus", "sortProperty":"OverallGoodsMovementStatus", "filterProperty": "OverallGoodsMovementStatus"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{OverallGoodsMovementStatus}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{OverallGoodsMovementStatus}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>IntcoExtPlndTransfOfCtrlDteTme}"
-                            sortProperty="IntcoExtPlndTransfOfCtrlDteTme"
-                            filterProperty="IntcoExtPlndTransfOfCtrlDteTme"
-                        >
+                        <t:Column width="8rem" label="{i18n>IntcoExtPlndTransfOfCtrlDteTme}" sortProperty="IntcoExtPlndTransfOfCtrlDteTme" filterProperty="IntcoExtPlndTransfOfCtrlDteTme">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"IntcoExtPlndTransfOfCtrlDteTme", "leadingProperty":"IntcoExtPlndTransfOfCtrlDteTme", "sortProperty":"IntcoExtPlndTransfOfCtrlDteTme", "filterProperty": "IntcoExtPlndTransfOfCtrlDteTme"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IntcoExtPlndTransfOfCtrlDteTme", "leadingProperty":"IntcoExtPlndTransfOfCtrlDteTme", "sortProperty":"IntcoExtPlndTransfOfCtrlDteTme", "filterProperty": "IntcoExtPlndTransfOfCtrlDteTme"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{path:'IntcoExtPlndTransfOfCtrlDteTme', formatter:'.formatter.odataDate'}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{path:'IntcoExtPlndTransfOfCtrlDteTme', formatter:'.formatter.odataDate'}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>IntcoExtActlTransfOfCtrlDteTme}"
-                            sortProperty="IntcoExtActlTransfOfCtrlDteTme"
-                            filterProperty="IntcoExtActlTransfOfCtrlDteTme"
-                        >
+                        <t:Column width="8rem" label="{i18n>IntcoExtActlTransfOfCtrlDteTme}" sortProperty="IntcoExtActlTransfOfCtrlDteTme" filterProperty="IntcoExtActlTransfOfCtrlDteTme">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"IntcoExtActlTransfOfCtrlDteTme", "leadingProperty":"IntcoExtActlTransfOfCtrlDteTme", "sortProperty":"IntcoExtActlTransfOfCtrlDteTme", "filterProperty": "IntcoExtActlTransfOfCtrlDteTme"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IntcoExtActlTransfOfCtrlDteTme", "leadingProperty":"IntcoExtActlTransfOfCtrlDteTme", "sortProperty":"IntcoExtActlTransfOfCtrlDteTme", "filterProperty": "IntcoExtActlTransfOfCtrlDteTme"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{path:'IntcoExtActlTransfOfCtrlDteTme', formatter:'.formatter.odataDate'}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{path:'IntcoExtActlTransfOfCtrlDteTme', formatter:'.formatter.odataDate'}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>IntcoIntPlndTransfOfCtrlDteTme}"
-                            sortProperty="IntcoIntPlndTransfOfCtrlDteTme"
-                            filterProperty="IntcoIntPlndTransfOfCtrlDteTme"
-                        >
+                        <t:Column width="8rem" label="{i18n>IntcoIntPlndTransfOfCtrlDteTme}" sortProperty="IntcoIntPlndTransfOfCtrlDteTme" filterProperty="IntcoIntPlndTransfOfCtrlDteTme">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"IntcoIntPlndTransfOfCtrlDteTme", "leadingProperty":"IntcoIntPlndTransfOfCtrlDteTme", "sortProperty":"IntcoIntPlndTransfOfCtrlDteTme", "filterProperty": "IntcoIntPlndTransfOfCtrlDteTme"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IntcoIntPlndTransfOfCtrlDteTme", "leadingProperty":"IntcoIntPlndTransfOfCtrlDteTme", "sortProperty":"IntcoIntPlndTransfOfCtrlDteTme", "filterProperty": "IntcoIntPlndTransfOfCtrlDteTme"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{path:'IntcoIntPlndTransfOfCtrlDteTme', formatter:'.formatter.odataDate'}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{path:'IntcoIntPlndTransfOfCtrlDteTme', formatter:'.formatter.odataDate'}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>IntcoIntActlTransfOfCtrlDteTme}"
-                            sortProperty="IntcoIntActlTransfOfCtrlDteTme"
-                            filterProperty="IntcoIntActlTransfOfCtrlDteTme"
-                        >
+                        <t:Column width="8rem" label="{i18n>IntcoIntActlTransfOfCtrlDteTme}" sortProperty="IntcoIntActlTransfOfCtrlDteTme" filterProperty="IntcoIntActlTransfOfCtrlDteTme">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"IntcoIntActlTransfOfCtrlDteTme", "leadingProperty":"IntcoIntActlTransfOfCtrlDteTme", "sortProperty":"IntcoIntActlTransfOfCtrlDteTme", "filterProperty": "IntcoIntActlTransfOfCtrlDteTme"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IntcoIntActlTransfOfCtrlDteTme", "leadingProperty":"IntcoIntActlTransfOfCtrlDteTme", "sortProperty":"IntcoIntActlTransfOfCtrlDteTme", "filterProperty": "IntcoIntActlTransfOfCtrlDteTme"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{path:'IntcoIntActlTransfOfCtrlDteTme', formatter:'.formatter.odataDate'}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{path:'IntcoIntActlTransfOfCtrlDteTme', formatter:'.formatter.odataDate'}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{i18n>YY1_SalesDocType_DLH}"
-                            sortProperty="YY1_SalesDocType_DLH"
-                            filterProperty="YY1_SalesDocType_DLH"
-                        >
+                        <t:Column width="8rem" label="{i18n>YY1_SalesDocType_DLH}" sortProperty="YY1_SalesDocType_DLH" filterProperty="YY1_SalesDocType_DLH">
                             <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"YY1_SalesDocType_DLH", "leadingProperty":"YY1_SalesDocType_DLH", "sortProperty":"YY1_SalesDocType_DLH", "filterProperty": "YY1_SalesDocType_DLH"}'
+                                <core:CustomData key="p13nData" value='\{"columnKey":"YY1_SalesDocType_DLH", "leadingProperty":"YY1_SalesDocType_DLH", "sortProperty":"YY1_SalesDocType_DLH", "filterProperty": "YY1_SalesDocType_DLH"}'
                                 />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{YY1_SalesDocType_DLH}"
-                                    wrapping="false"
-                                />
+</t:customData>
+<t:template>
+<Text text="{YY1_SalesDocType_DLH}" wrapping="false" />
                             </t:template>
                         </t:Column>
                     </t:columns>

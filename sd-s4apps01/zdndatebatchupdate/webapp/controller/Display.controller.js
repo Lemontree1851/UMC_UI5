@@ -39,30 +39,49 @@ sap.ui.define([
 			aFilters.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
 
 			// ADD BEGIN BY XINLEI XU 2025/02/05
-			var oBinding = oEvent.getParameter("bindingParams");
-			oBinding.events = {
-				"dataReceived": function (oEvent) {
-					var iHeader = 0;
-					var iItems = 0;
-					var oReceivedData = oEvent.getParameter('data');
-					if (oReceivedData.results && oReceivedData.results.length > 0) {
-						var oRow = oReceivedData.results[0];
-						var oCount = oRow.RecordCount.split('-');
-						iHeader = oCount[0];
-						iItems = oCount[1];
-					}
-					var sDisInfo = this.getModel("i18n").getResourceBundle().getText("disInfo", [iHeader, iItems]);
-					if (iHeader > 0) {
-						this.getModel("local").setProperty("/disInfo", sDisInfo);
-						this.getModel("local").setProperty("/onExportvisible", true)
-					} else {
-						this.getModel("local").setProperty("/disInfo", "");
-						this.getModel("local").setProperty("/onExportvisible", false)
+			var that = this;
+			var iHeader = 0;
+			var iItems = 0;
+			var mParameters = {
+				filters: aFilters,
+				urlParameters: {
+					"$top": 999999999
+				},
+				success: function (oResponse) {
+					if (oResponse) {
+						if (oResponse.results && oResponse.results.length > 0) {
+							var aHeader = that._removeDuplicates(oResponse.results, ["DeliveryDocument"]);
+							iHeader = aHeader.length;
+							iItems = oResponse.results.length;
+							var sDisInfo = that.getOwnerComponent().getModel("i18n").getResourceBundle().getText("disInfo", [iHeader, iItems]);
+							if (iHeader > 0) {
+								that.getOwnerComponent().getModel("local").setProperty("/disInfo", sDisInfo);
+								that.getOwnerComponent().getModel("local").setProperty("/onExportvisible", true)
+							} else {
+								that.getOwnerComponent().getModel("local").setProperty("/disInfo", "");
+								that.getOwnerComponent().getModel("local").setProperty("/onExportvisible", false)
+							}
+						}
 					}
 				},
+				error: function (oErr) { }
 			};
-			// ADD END BY XINLEI XU 2025/02/05
+			this.getOwnerComponent().getModel().read("/DeliveryDocumentList", mParameters);
 		},
+		_removeDuplicates: function (arr, keys) {
+			return arr.reduce((result, obj) => {
+				const index = result.findIndex(item => {
+					return keys.every(key => item[key] === obj[key]);
+				});
+				if (index !== -1) {
+					result[index] = obj;
+				} else {
+					result.push(obj);
+				}
+				return result;
+			}, []);
+		},
+		// ADD END BY XINLEI XU 2025/02/05
 
 		// DEL BEGIN BY XINLEI XU 2025/02/05
 		// onUITableRowsUpdated: function (oEvent) {
