@@ -267,8 +267,6 @@ sap.ui.define([
             },
 
             postAction: function (postData, sType, bEvent, sYear, sMonat) {
-                var oModel = this._oDataModel;
-
                 return new Promise(
                     function (resolve, reject) {
                         var mParameter = {
