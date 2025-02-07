@@ -230,10 +230,6 @@ sap.ui.define([
                         oData.forEach((item) => {
                             let result = JSON.parse(item["processLogic"].Zzkey);
                             that.getView().byId("SFBDocument").search();
-                            // result.forEach(function (line) {
-
-
-                            // });
                         });
 
                     } else {
@@ -241,25 +237,7 @@ sap.ui.define([
                         oData.forEach((item) => {
                             let result = JSON.parse(item["processLogic"].Zzkey);
                             that.getView().byId("SFBDocument").search();
-                            // result.forEach(function (line) {
-                            //     let sPath = that.getModel().createKey("/PaidPayDocument", {
-                            //         CompanyCode: line.COMPANYCODE,
-                            //         FiscalYear: line.FISCALYEAR,
-                            //         Period: line.PERIOD,
-                            //         Customer: line.CUSTOMER,
-                            //         Supplier: line.SUPPLIER
-                            //     });
-                            //     that.getModel().setProperty(sPath + "/Belnr5", line.BELNR5);
-                            //     that.getModel().setProperty(sPath + "/Gjahr5", line.GJAHR5);
-                            //     that.getModel().setProperty(sPath + "/Belnr6", line.BELNR6);
-                            //     that.getModel().setProperty(sPath + "/Gjahr6", line.GJAHR6);
-                            //     that.getModel().setProperty(sPath + "/Belnr7", line.BELNR7);
-                            //     that.getModel().setProperty(sPath + "/Gjahr7", line.GJAHR7);
-                            //     that.getModel().setProperty(sPath + "/Belnr8", line.BELNR8);
-                            //     that.getModel().setProperty(sPath + "/Gjahr8", line.GJAHR8);
-                            //     that.getModel().setProperty(sPath + "/Status", line.STATUS);
-                            //     that.getModel().setProperty(sPath + "/Message", line.MESSAGE);
-                            // });
+                            
                         });
 
                     }
@@ -326,7 +304,7 @@ sap.ui.define([
                 } else {
                     var sType = "B";
                 }
-                var sBukrs = this.getView().byId("SFBCalculation").getControlByKey("CompanyCode").getValue();
+                var sBukrs = this.getView().byId("SFBDocument").getControlByKey("CompanyCode").getValue();
                 var sYear = new Date(this.byId("idGjahr").getValue()).getFullYear();
                 var sMonat = this.byId("idMonat").getSelectedKey();
                 if (sBukrs === 0 || sBukrs === "") {
@@ -347,58 +325,22 @@ sap.ui.define([
                 let postDocs = this.preparePostBody();
                 this.setBusy(true);
                 var aPromise = [];
-                aPromise.push(this.postAction(postDocs, sType, bEvent));
+                aPromise.push(this.postAction(postDocs, sType, bEvent, sYear, sMonat));
 
                 Promise.all(aPromise).then((oData) => {
                     if (sType === "A") {
                         oData.forEach((item) => {
                             let result = JSON.parse(item["processLogic"].Zzkey);
-                            result.forEach(function (line) {
-                                let sPath = that.getModel().createKey("/PaidPayDocument", {
-                                    CompanyCode: line.COMPANYCODE,
-                                    FiscalYear: line.FISCALYEAR,
-                                    Period: line.PERIOD,
-                                    Customer: line.CUSTOMER,
-                                    Supplier: line.SUPPLIER,
-                                    ProfitCenter: line.PROFITCENTER,
-                                    PurchasingGroup: line.PURCHASINGGROUP
-                                });
-                                that.getModel().setProperty(sPath + "/Belnr1", line.BELNR1);
-                                that.getModel().setProperty(sPath + "/Gjahr1", line.GJAHR1);
-                                that.getModel().setProperty(sPath + "/Belnr2", line.BELNR2);
-                                that.getModel().setProperty(sPath + "/Gjahr2", line.GJAHR2);
-                                that.getModel().setProperty(sPath + "/Belnr3", line.BELNR3);
-                                that.getModel().setProperty(sPath + "/Gjahr3", line.GJAHR3);
-                                that.getModel().setProperty(sPath + "/Belnr4", line.BELNR4);
-                                that.getModel().setProperty(sPath + "/Gjahr4", line.GJAHR4);
-                                that.getModel().setProperty(sPath + "/Status", line.STATUS);
-                                that.getModel().setProperty(sPath + "/Message", line.MESSAGE);
-                            });
+                            that.getView().byId("SFBDocument").search();
+                            
                         });
 
                     } else {
 
                         oData.forEach((item) => {
                             let result = JSON.parse(item["processLogic"].Zzkey);
-                            result.forEach(function (line) {
-                                let sPath = that.getModel().createKey("/PaidPayDocument", {
-                                    CompanyCode: line.COMPANYCODE,
-                                    FiscalYear: line.FISCALYEAR,
-                                    Period: line.PERIOD,
-                                    Customer: line.CUSTOMER,
-                                    Supplier: line.SUPPLIER
-                                });
-                                that.getModel().setProperty(sPath + "/Belnr5", line.BELNR5);
-                                that.getModel().setProperty(sPath + "/Gjahr5", line.GJAHR5);
-                                that.getModel().setProperty(sPath + "/Belnr6", line.BELNR6);
-                                that.getModel().setProperty(sPath + "/Gjahr6", line.GJAHR6);
-                                that.getModel().setProperty(sPath + "/Belnr7", line.BELNR7);
-                                that.getModel().setProperty(sPath + "/Gjahr7", line.GJAHR7);
-                                that.getModel().setProperty(sPath + "/Belnr8", line.BELNR8);
-                                that.getModel().setProperty(sPath + "/Gjahr8", line.GJAHR8);
-                                that.getModel().setProperty(sPath + "/Status", line.STATUS);
-                                that.getModel().setProperty(sPath + "/Message", line.MESSAGE);
-                            });
+                            that.getView().byId("SFBDocument").search();
+                           
                         });
 
                     }
