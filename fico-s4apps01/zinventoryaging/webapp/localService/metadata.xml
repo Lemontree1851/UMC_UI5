@@ -167,6 +167,8 @@
                 <Property Name="AmountMonth35" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth36" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
                 <Property Name="AmountMonth36" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="QuantityUnspecified" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
+                <Property Name="AmountUnspecified" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
             </EntityType>
             <EntityType Name="ZC_LedgerVHType" sap:label="Value Help for Ledger" sap:value-list="true" sap:content-version="1">
                 <Key>

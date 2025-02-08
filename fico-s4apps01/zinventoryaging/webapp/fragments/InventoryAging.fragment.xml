@@ -795,6 +795,22 @@
                         <Text text="{path:'AmountMonth36', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="8rem" label="{i18n>QuantityUnspecified}" sortProperty="QuantityUnspecified" filterProperty="QuantityUnspecified" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QuantityUnspecified", "leadingProperty":"QuantityUnspecified"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path:'QuantityUnspecified', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>AmountUnspecified}" sortProperty="AmountUnspecified" filterProperty="AmountUnspecified" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AmountUnspecified", "leadingProperty":"AmountUnspecified"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path:'AmountUnspecified', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                    </table:template>
+                </table:Column>
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>
