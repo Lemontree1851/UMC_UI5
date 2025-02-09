@@ -106,6 +106,14 @@ sap.ui.define([
             }
             var aLTEXT1 = this.byId("idPeriodType").getSelectedKey();
 
+            var aYear = new Date(this.byId("idAcceptYear").getValue());
+            var oAcceptYear = new sap.ui.model.Filter({
+                path: "AcceptYear",
+                operator: "EQ", 
+                value1: aYear
+            });
+            filters.push(oAcceptYear);
+            
             var oPeriodType = new sap.ui.model.Filter({
                 path: "PeriodType",
                 operator: "EQ",

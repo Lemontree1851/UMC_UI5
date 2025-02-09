@@ -25,6 +25,11 @@
 							</ComboBox>
 					    </smartFilterBar:customControl>
 				    </smartFilterBar:ControlConfiguration>
+          <smartFilterBar:ControlConfiguration index="21" key="AcceptYear" visibleInAdvancedArea="true" label="{i18n>AcceptYear}" mandatory="mandatory">
+						<smartFilterBar:customControl>
+							<DatePicker id="idAcceptYear" displayFormat="yyyy" />
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
 					<smartFilterBar:ControlConfiguration index="30" key="AcceptPeriod" visibleInAdvancedArea="true" label="{i18n>AcceptPeriod}" displayBehaviour="idAndDescription">
 						<smartFilterBar:customControl>
 							<ComboBox id="idAcceptPeriod" showSecondaryValues="true"
