@@ -110,7 +110,7 @@ sap.ui.define([
             var oAcceptYear = new sap.ui.model.Filter({
                 path: "AcceptYear",
                 operator: "EQ", 
-                value1: aYear
+                value1: aYear.getFullYear()
             });
             filters.push(oAcceptYear);
             

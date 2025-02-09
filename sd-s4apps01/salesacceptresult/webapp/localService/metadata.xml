@@ -82,6 +82,7 @@
                     <PropertyRef Name="SalesOrganization"/>
                     <PropertyRef Name="Customer"/>
                     <PropertyRef Name="PeriodType"/>
+                    <PropertyRef Name="AcceptYear"/>
                     <PropertyRef Name="AcceptPeriod"/>
                     <PropertyRef Name="SalesDocument"/>
                     <PropertyRef Name="SalesDocumentItem"/>
@@ -94,6 +95,7 @@
                 <Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Purch. Organization" sap:quickinfo="Purchasing Organization" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
                 <Property Name="PeriodType" Type="Edm.String" Nullable="false" MaxLength="1" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="AcceptYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
                 <Property Name="AcceptPeriod" Type="Edm.String" Nullable="false" MaxLength="2" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="SalesDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Sales Document" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="SalesDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:creatable="false" sap:updatable="false"/>
@@ -568,6 +570,9 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_salesacceptance_result_o2.SalesAcceptanceResultType/AcceptQty" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_salesacceptance_result_o2.SalesAcceptanceResultType/AcceptYear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_salesacceptance_result_o2.SalesAcceptanceResultType/AccountingExchangeRate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
