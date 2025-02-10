@@ -232,6 +232,8 @@ sap.ui.define([
         callAction: function (postData, bEvent) {
             let aLTEXT1 = this.byId("idPeriodType").getSelectedKey();
             let aLTEXT2 = this.byId("idAcceptPeriod").getSelectedKey();
+            let aYear = new Date(this.byId("idAcceptYear").getValue());
+            let aLText3 = aYear.getFullYear();
             return new Promise(
                 function (resolve, reject) {
                     var mParameter = {
@@ -247,6 +249,7 @@ sap.ui.define([
                             Ztype: "2",  //第二页面的保存
                             Event: bEvent,
                             PeriodType: aLTEXT1,
+                            AcceptYear: aLText3,
                             AcceptPeriod: aLTEXT2
                         }
                     };

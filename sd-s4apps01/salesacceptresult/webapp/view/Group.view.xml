@@ -168,7 +168,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"AcceptPrice", "leadingProperty":"AcceptPrice", "sortProperty":"AcceptPrice", "filterProperty": "AcceptPrice"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'AcceptPrice',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AcceptPrice',formatter:'.formatter.formatDecimal' }"/>
               </t:template>
             </t:Column>
 			<t:Column id="ConditionRateValue" label="{i18n>ConditionRateValue}" width="6rem" sortProperty="ConditionRateValue" filterProperty="ConditionRateValue" autoResizable="true">
@@ -200,7 +200,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"AccceptAmount", "leadingProperty":"AccceptAmount", "sortProperty":"AccceptAmount", "filterProperty": "AccceptAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'AccceptAmount',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AccceptAmount',formatter:'.formatter.formatDecimal' }"/>
               </t:template>
             </t:Column>
             <t:Column id="NetAmount" label="{i18n>NetAmount}" width="6rem" sortProperty="NetAmount" filterProperty="NetAmount" autoResizable="true">
@@ -211,12 +211,12 @@
                 <Text text="{ path:'NetAmount',formatter:'.formatter.formatFloat' }"/>
               </t:template>
             </t:Column>
-			<t:Column id="AccceptTaxAmount" label="{i18n>AccceptTaxAmount}" width="4rem" sortProperty="AccceptTaxAmount" filterProperty="AccceptTaxAmount" autoResizable="true">
+			<t:Column id="AccceptTaxAmount" label="{i18n>AccceptTaxAmount}" width="6rem" sortProperty="AccceptTaxAmount" filterProperty="AccceptTaxAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"AccceptTaxAmount", "leadingProperty":"AccceptTaxAmount", "sortProperty":"AccceptTaxAmount", "filterProperty": "AccceptTaxAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'AccceptTaxAmount',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AccceptTaxAmount',formatter:'.formatter.formatDecimal' }"/>
               </t:template>
             </t:Column>
 			<t:Column id="TaxAmount" label="{i18n>TaxAmount}" width="4rem" sortProperty="TaxAmount" filterProperty="TaxAmount" autoResizable="true">
