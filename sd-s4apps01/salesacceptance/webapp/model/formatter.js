@@ -80,6 +80,12 @@ sap.ui.define([
                 return n1;
             }
         },
+        
+        formatDecimal: function(value) {
+            if (value) {
+                return value ? parseFloat(value).toFixed(3) : "0.000";
+            }
+        },
 
         // format Float, two decimal + thousandths
         formatFloat: function (n, decimal) {

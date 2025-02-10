@@ -127,12 +127,12 @@
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>AcceptPrice}">
                             <table:template>
-                                <Text text="{local>AcceptPrice}" wrapping="false"/>
+                                <Text text="{path: 'local>AcceptPrice', formatter:'.formatter.formatDecimal'}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>AcceptAmount}">
+                        <table:Column width="6rem" label="{i18n>AccceptAmount}">
                             <table:template>
-                                <Text text="{local>AccceptAmount}" wrapping="false"/>
+                                <Text text="{path: 'local>AccceptAmount', formatter:'.formatter.formatDecimal' }" />
                             </table:template>
                         </table:Column> 
                         <table:Column width="10rem" label="{i18n>Currency}">

@@ -53,13 +53,9 @@
             <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
             <EntityType Name="SalesAcceptanceType">
                 <Key>
-                    <PropertyRef Name="SalesOrganization"/>
-                    <PropertyRef Name="Customer"/>
-                    <PropertyRef Name="PeriodType"/>
-                    <PropertyRef Name="AcceptPeriod"/>
-                    <PropertyRef Name="CustomerPO"/>
-                    <PropertyRef Name="ItemNo"/>
+                    <PropertyRef Name="UUID"/>
                 </Key>
+                <Property Name="UUID" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="PeriodType" Type="Edm.String" Nullable="false" MaxLength="1"/>
@@ -77,11 +73,12 @@
                 <Property Name="ReceiptQty" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3"/>
                 <Property Name="UnqualifiedQty" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3"/>
                 <Property Name="UndersupplyQty" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3"/>
-                <Property Name="AcceptPrice" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
-                <Property Name="AccceptAmount" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
+                <Property Name="AcceptPrice" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3"/>
+                <Property Name="AccceptAmount" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3"/>
                 <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5"/>
                 <Property Name="TaxRate" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="2"/>
                 <Property Name="OutsideData" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="FinishStatus" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="220"/>
                 <Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="3"/>
@@ -93,11 +90,9 @@
                 <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zui_salesacceptance_o4.v0001.EntityControl"/>
                 <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zui_salesacceptance_o4.v0001.SAP__Message)" Nullable="false"/>
             </EntityType>
-            <ComplexType Name="ZD_PARAMETERSFORSALESACCEPT">
-                <Property Name="AcceptPeriod" Type="Edm.String" Nullable="false" MaxLength="2"/>
-                <Property Name="Event" Type="Edm.String" Nullable="false" MaxLength="10"/>
-                <Property Name="OutsideData" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <Property Name="PeriodType" Type="Edm.String" Nullable="false" MaxLength="1"/>
+            <ComplexType Name="ZR_UPLOAD_PARAMETER">
+                <Property Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
                 <Property Name="Zzkey" Type="Edm.String" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="EntityControl">
@@ -115,39 +110,35 @@
             </ComplexType>
             <Action Name="processLogic" IsBound="true">
                 <Parameter Name="_it" Type="Collection(com.sap.gateway.srvd.zui_salesacceptance_o4.v0001.SalesAcceptanceType)" Nullable="false"/>
-                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Parameter Name="Event" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Parameter Name="Zzkey" Type="Edm.String" Nullable="false"/>
-                <Parameter Name="PeriodType" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <Parameter Name="AcceptPeriod" Type="Edm.String" Nullable="false" MaxLength="2"/>
-                <Parameter Name="OutsideData" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <ReturnType Type="com.sap.gateway.srvd.zui_salesacceptance_o4.v0001.ZD_PARAMETERSFORSALESACCEPT" Nullable="false"/>
+                <Parameter Name="RecordUUID" Type="Edm.String" Nullable="false" MaxLength="36"/>
+                <ReturnType Type="com.sap.gateway.srvd.zui_salesacceptance_o4.v0001.ZR_UPLOAD_PARAMETER" Nullable="false"/>
             </Action>
             <EntityContainer Name="Container">
                 <EntitySet Name="SalesAcceptance" EntityType="com.sap.gateway.srvd.zui_salesacceptance_o4.v0001.SalesAcceptanceType"/>
             </EntityContainer>
-            <Annotations Target="SAP__self.SalesAcceptanceType/SalesOrganization">
+            <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
+            </Annotations>
+            <Annotations Target="SAP__self.SalesAcceptanceType/UUID">
                 <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 Byte UUID in 16 Bytes (Raw Format)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.SalesAcceptanceType/SalesOrganization">
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Sales Organization"/>
                 <Annotation Term="SAP__common.Heading" String="SOrg."/>
             </Annotations>
             <Annotations Target="SAP__self.SalesAcceptanceType/Customer">
-                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Customer"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Customer Number"/>
             </Annotations>
-            <Annotations Target="SAP__self.SalesAcceptanceType/PeriodType">
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.SalesAcceptanceType/AcceptPeriod">
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
-            <Annotations Target="SAP__self.SalesAcceptanceType/CustomerPO">
-                <Annotation Term="SAP__core.Computed"/>
-            </Annotations>
             <Annotations Target="SAP__self.SalesAcceptanceType/ItemNo">
-                <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
             </Annotations>
             <Annotations Target="SAP__self.SalesAcceptanceType/AcceptQty">
@@ -161,12 +152,6 @@
             </Annotations>
             <Annotations Target="SAP__self.SalesAcceptanceType/UndersupplyQty">
                 <Annotation Term="SAP__measures.Unit" Path="Unit"/>
-            </Annotations>
-            <Annotations Target="SAP__self.SalesAcceptanceType/AcceptPrice">
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
-            </Annotations>
-            <Annotations Target="SAP__self.SalesAcceptanceType/AccceptAmount">
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency"/>
             </Annotations>
             <Annotations Target="SAP__self.SalesAcceptanceType/Currency">
                 <Annotation Term="SAP__common.IsCurrency"/>
@@ -216,6 +201,11 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Label" String="Zzkey"/>
                 <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.processLogic(Collection(SAP__self.SalesAcceptanceType))/RecordUUID">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
             </Annotations>
             <Annotations Target="SAP__self.SalesAcceptanceType">
                 <Annotation Term="SAP__common.Label" String="Sales Acceptance"/>
@@ -346,7 +336,7 @@
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZD_PARAMETERSFORSALESACCEPT/Zzkey">
+            <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/Zzkey">
                 <Annotation Term="SAP__common.Label" String="Zzkey"/>
                 <Annotation Term="SAP__common.QuickInfo" String="String Type"/>
             </Annotations>
