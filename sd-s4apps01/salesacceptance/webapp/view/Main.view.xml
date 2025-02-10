@@ -109,12 +109,7 @@
                             <table:template>
                                 <Text text="{ path:'local>AcceptQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
                             </table:template>
-                        </table:Column>
-                        <table:Column width="6rem" label="{i18n>AcceptQty}">
-                            <table:template>
-                                <Text text="{ path:'local>AcceptQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
-                            </table:template>
-                        </table:Column>      
+                        </table:Column>     
                         <table:Column width="6rem" label="{i18n>ReceiptQty}">
                             <table:template>
                                 <Text text="{ path:'local>ReceiptQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
@@ -135,6 +130,11 @@
                                 <Text text="{local>AcceptPrice}" wrapping="false"/>
                             </table:template>
                         </table:Column>
+                        <table:Column width="6rem" label="{i18n>AcceptAmount}">
+                            <table:template>
+                                <Text text="{local>AccceptAmount}" wrapping="false"/>
+                            </table:template>
+                        </table:Column> 
                         <table:Column width="10rem" label="{i18n>Currency}">
                             <table:template>
                                 <Text text="{local>Currency}" wrapping="false"/>
