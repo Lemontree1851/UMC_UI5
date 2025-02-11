@@ -57,7 +57,7 @@ sap.ui.define([
                         button: {
                             View: aAllAccessBtns.some(btn => btn.AccessId === "salesdocumentreport-View"),
                             Export: aAllAccessBtns.some(btn => btn.AccessId === "salesdocumentreport-Export"),
-                            BITransfer: aAllAccessBtns.some(btn => btn.AccessId === "salesdocumentreport-BITransfer") 
+                            BITransfer: aAllAccessBtns.some(btn => btn.AccessId === "salesdocumentreport-BITransfer")
                         },
                         data: {
                             PlantSet: context._AssignPlant,
@@ -94,7 +94,7 @@ sap.ui.define([
                 // var selectedKey = oSelect.getSelectedKey();  // 获取选中的key值
                 // newfilter = new sap.ui.model.Filter("YearDate", sap.ui.model.FilterOperator.EQ, selectedKey);
                 // mBindingParams.filters.push(newfilter);
- 
+
                 //newfilter = new sap.ui.model.Filter("YearDate", sap.ui.model.FilterOperator.EQ, selectedKey);
                 //mBindingParams.filters.push(newfilter);
 
@@ -132,12 +132,12 @@ sap.ui.define([
             onSearch: function (oEvent) {
                 var oSmartFilterBar = this.byId("idSmartFilterBar");
                 var oFilterData = oSmartFilterBar.getFilterData();
- 
-                var SalesPlanVersion0 = oFilterData.SalesPlanVersion0;   
-                var SalesPlanVersion1 = oFilterData.SalesPlanVersion1;   
-                var SalesPlanVersion2 = oFilterData.SalesPlanVersion2;   
-                var SalesPlanVersion3 = oFilterData.SalesPlanVersion3;  
- 
+
+                var SalesPlanVersion0 = oFilterData.SalesPlanVersion0;
+                var SalesPlanVersion1 = oFilterData.SalesPlanVersion1;
+                var SalesPlanVersion2 = oFilterData.SalesPlanVersion2;
+                var SalesPlanVersion3 = oFilterData.SalesPlanVersion3;
+
                 // allVersionsEmpty=値計画の売上&貢献利益&売上総利益が関連しますので、全部入力してください！
                 // zeroEmptyWithAtLeastOneEmpty=値計画の売上&貢献利益&売上総利益が関連しますので、全部入力してください！
                 // oneTwoThreeStartWithWrong=入力された検索条件が正しくなく、ルールに従って入力してください。
@@ -168,7 +168,7 @@ sap.ui.define([
                         }
                     }
                 }
- 
+
                 var aResultTemp = this._LocalData.getProperty("/SalesReport");
                 this.delColumns(aResultTemp);
 
@@ -718,6 +718,23 @@ sap.ui.define([
                 var aExcelSetBI = [];
                 //console.log(aExcelSet);
 
+                // ADD BEGIN BY XINLEI XU 2025/02/11
+                var oSmartFilterBar = this.byId("idSmartFilterBar");
+                var oFilterData = oSmartFilterBar.getFilterData();
+                var SalesPlanVersion0 = oFilterData.SalesPlanVersion0;
+                var sPlanCategory = "";
+                switch (SalesPlanVersion0.substring(0, 1)) {
+                    case "A":
+                        sPlanCategory = "BDG";
+                        break;
+                    case "B":
+                        sPlanCategory = "PLN";
+                        break;
+                    default:
+                        break;
+                }
+                // ADD END BY XINLEI XU 2025/02/11
+
                 for (var i = 0; i < aExcelSet.length; i++) {
                     var firstSalesSpecProductGroup = aExcelSet[i].FirstSalesSpecProductGroup.match(/^\d+/);
                     var secondSalesSpecProductGroup = aExcelSet[i].SecondSalesSpecProductGroup.match(/^\d+/);
@@ -725,7 +742,7 @@ sap.ui.define([
 
 
                     var baseItem = {
-                        "Plan_Category": "PLN",
+                        "Plan_Category": sPlanCategory, // "PLN", MOD BY XINLEI XU 2025/02/11
                         "CompanyCode": aExcelSet[i].CompanyCode,
                         "Plant": aExcelSet[i].Plant,
                         "ProfitCenter": aExcelSet[i].ProfitCenter,
