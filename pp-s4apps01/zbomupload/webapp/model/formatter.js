@@ -62,7 +62,7 @@ sap.ui.define([
             }
         },
 
-        // format Float, two decimal + thousandths
+        // format Float, decimal + thousandths
         formatFloat: function (n, decimal) {
             if (n) {
                 var sign = "";
@@ -71,6 +71,9 @@ sap.ui.define([
                     if (bNegative) {
                         n = "-" + n.substring(0, n.length - 1);
                     }
+                }
+                if (decimal === undefined) {
+                    decimal = 3;
                 }
                 var num = Number(n).toFixed(decimal);
                 if (num < 0) {
