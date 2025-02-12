@@ -19,7 +19,7 @@ sap.ui.define([
 
             this._oDataModel.attachBatchRequestCompleted(function (oEvent) {
                 this.setBusy(false);
-
+           
                 //Take any one of the returned data. 
                 //However, because the key value is used to retrieve the data in OData, you need to obtain all the key values first
                 var aDataKey = Object.getOwnPropertyNames(this._oDataModel.getProperty("/"));
@@ -105,6 +105,7 @@ sap.ui.define([
         },
 
         onBeforeRebindTable: function (oEvent, arg1, arg2, arg3, arg4) {
+            this._oDataModel.refresh(true,true);
             var filters = oEvent.getParameters().bindingParams.filters;
             if (!filters) {
                 filters = [];
@@ -152,7 +153,7 @@ sap.ui.define([
             if (oModel.hasPendingChanges()) {
                 // 重置未保存的更改
                 oModel.resetChanges();
-            }
+            };
         },
 
         onChange: function (oEvent, sProperty) {
