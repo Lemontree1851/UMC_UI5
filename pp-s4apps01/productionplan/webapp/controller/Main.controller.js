@@ -461,7 +461,7 @@ sap.ui.define([
             //MRP実行スケジュール
             switch (result) {
                 case "https://s01-test":
-                    window.open("https://my412552.s4hana.cloud.sap/ui#MRPRun-schedule?JobCatalogEntryName=SAP_SCM_MRP&/v4_JobRunList?sap-iapp-state=AS7Z8GAGA92B6PWBDCH0JWRN8PG5P17OQJ4XJDH8", "_blank");
+                    window.open("https://my417484.s4hana.cloud.sap/ui#MRPRun-schedule?JobCatalogEntryName=SAP_SCM_MRP&/v4_JobRunList?sap-iapp-state=AS8BAVNXZLJM1MJLBKRAME3U1BEKHDQ2VQTZULRZ", "_blank");
                     break;
             };
 
@@ -475,7 +475,7 @@ sap.ui.define([
             //製造指図と受注の割当
             switch (result) {
                 case "https://s01-test":
-                    window.open("https://s01-test.launchpad.cfapps.jp10.hana.ondemand.com/site/Dev#zmfgorderassignso-display?sap-ui-app-id-hint=saas_approuter_pp.zmfgorderassignso", "_blank");
+                    window.open("https://s01-test.launchpad.cfapps.jp10.hana.ondemand.com/site/Qas#zmfgorderassignso-display?sap-ui-app-id-hint=saas_approuter_pp.zmfgorderassignso&/?sap-iapp-state--history=TASHNR7KSTNE807YF67NSMEQ7XWVE4OCLHTUXL69U", "_blank");
                     break;
             };
         },
@@ -488,7 +488,7 @@ sap.ui.define([
             //製造指図発行
             switch (result) {
                 case "https://s01-test":
-                    window.open("https://my412552.s4hana.cloud.sap/ui#PlannedOrder-convertToProductionOrders?sap-ui-tech-hint=GUI", "_blank");
+                    window.open("https://my417484.s4hana.cloud.sap/ui#PlannedOrder-convertToProductionOrders?sap-ui-tech-hint=GUI", "_blank");
                     break;
             };
         },
@@ -501,7 +501,7 @@ sap.ui.define([
             //製造指図/計画手配監視
             switch (result) {
                 case "https://s01-test":
-                    window.open("https://my412552.s4hana.cloud.sap/ui#ProductionOrder-monitor?sap-ui-tech-hint=GUI", "_blank");
+                    window.open("https://my417484.s4hana.cloud.sap/ui#ProductionOrder-monitor?sap-ui-tech-hint=GUI", "_blank");
                     break;
             };
         },
@@ -527,7 +527,7 @@ sap.ui.define([
             //作業手順照会
             switch (result) {
                 case "https://s01-test":
-                    window.open("https://my412552.s4hana.cloud.sap/ui#ProductionRouting-display?sap-ui-tech-hint=GUI", "_blank");
+                    window.open("https://https://my417484.s4hana.cloud.sap/ui#ProductionRouting-display?sap-ui-tech-hint=GUI", "_blank");
                     break;
             };
         },
