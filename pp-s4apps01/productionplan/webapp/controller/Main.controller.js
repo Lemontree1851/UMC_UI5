@@ -454,69 +454,69 @@ sap.ui.define([
         },
 
         onWeb1: function (oEvent) {
-            let currentPath = window.location.href;
-            let parts = currentPath.split(".");
-            //let part = parts[0];
-            let result = parts[0];
-            //MRP実行スケジュール
-            switch (result) {
-                case "https://s01-test":
-                    window.open("https://my417484.s4hana.cloud.sap/ui#MRPRun-schedule?JobCatalogEntryName=SAP_SCM_MRP&/v4_JobRunList?sap-iapp-state=AS8BAVNXZLJM1MJLBKRAME3U1BEKHDQ2VQTZULRZ", "_blank");
-                    break;
-            };
+            //MRP
+            var aPromise = [];
+            aPromise.push(this.callAction("", "WEB1", ""));
+            Promise.all(aPromise).then((oData) => {
+                let sPath = JSON.parse(oData[0]["processLogic"].Zzkey);
+                window.open(sPath, "_blank");
 
+            }).catch((error) => {
+                MessageBox.error(error.message);
+            }).finally(() => {
+                this._BusyDialog.close();
+            });
         },
 
         onWeb2: function (oEvent) {
-            let currentPath = window.location.href;
-            let parts = currentPath.split(".");
-            //let part = parts[0];
-            let result = parts[0];
+            var sPath = jQuery.sap.getModulePath("pp.productionplan") + "#zmfgorderassignso-display";
             //製造指図と受注の割当
-            switch (result) {
-                case "https://s01-test":
-                    window.open("https://s01-test.launchpad.cfapps.jp10.hana.ondemand.com/site/Qas#zmfgorderassignso-display?sap-ui-app-id-hint=saas_approuter_pp.zmfgorderassignso&/?sap-iapp-state--history=TASHNR7KSTNE807YF67NSMEQ7XWVE4OCLHTUXL69U", "_blank");
-                    break;
-            };
+            window.open(sPath, "_blank");
         },
 
         onWeb3: function (oEvent) {
-            let currentPath = window.location.href;
-            let parts = currentPath.split(".");
-            //let part = parts[0];
-            let result = parts[0];
-            //製造指図発行
-            switch (result) {
-                case "https://s01-test":
-                    window.open("https://my417484.s4hana.cloud.sap/ui#PlannedOrder-convertToProductionOrders?sap-ui-tech-hint=GUI", "_blank");
-                    break;
-            };
+            //Planned Order
+            var aPromise = [];
+            aPromise.push(this.callAction("", "WEB3", ""));
+            Promise.all(aPromise).then((oData) => {
+                let sPath = JSON.parse(oData[0]["processLogic"].Zzkey);
+                window.open(sPath, "_blank");
+
+            }).catch((error) => {
+                MessageBox.error(error.message);
+            }).finally(() => {
+                this._BusyDialog.close();
+            });
         },
 
         onWeb4: function (oEvent) {
-            let currentPath = window.location.href;
-            let parts = currentPath.split(".");
-            //let part = parts[0];
-            let result = parts[0];
-            //製造指図/計画手配監視
-            switch (result) {
-                case "https://s01-test":
-                    window.open("https://my417484.s4hana.cloud.sap/ui#ProductionOrder-monitor?sap-ui-tech-hint=GUI", "_blank");
-                    break;
-            };
+            //Production Order
+            var aPromise = [];
+            aPromise.push(this.callAction("", "WEB4", ""));
+            Promise.all(aPromise).then((oData) => {
+                let sPath = JSON.parse(oData[0]["processLogic"].Zzkey);
+                window.open(sPath, "_blank");
+
+            }).catch((error) => {
+                MessageBox.error(error.message);
+            }).finally(() => {
+                this._BusyDialog.close();
+            });
         },
 
         onWeb5: function (oEvent) {
-            let currentPath = window.location.href;
-            let parts = currentPath.split(".");
-            //let part = parts[0];
-            let result = parts[0];
-            //サマリBOM
-            switch (result) {
-                case "https://s01-test":
-                    window.open("https://my412552.s4hana.cloud.sap/ui#MaterialBOM-summarizedBOM?sap-ui-tech-hint=GUI", "_blank");
-                    break;
-            };
+            //Bom
+            var aPromise = [];
+            aPromise.push(this.callAction("", "WEB5", ""));
+            Promise.all(aPromise).then((oData) => {
+                let sPath = JSON.parse(oData[0]["processLogic"].Zzkey);
+                window.open(sPath, "_blank");
+
+            }).catch((error) => {
+                MessageBox.error(error.message);
+            }).finally(() => {
+                this._BusyDialog.close();
+            });
         },
 
         onWeb6: function (oEvent) {
