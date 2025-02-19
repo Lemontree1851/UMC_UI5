@@ -208,7 +208,7 @@ sap.ui.define([
                 this.getEntityCount(aFilter, splitRange).then(function (iItemCount) {
                     if (iItemCount > 0) {
                         //设置要查询的字段
-                        let sParamtetrsOfSelect = "SalesOrganization,Customer,YearDate,Product,plantype,CustomerName,ProfitCenter,PlantName,SalesOffice,SalesGroup,CreatedByUser,MatlAccountAssignmentGroup,ProductGroup,ProductName,MaterialCost2000,Manufacturingcost,ContributionProfit,GrossProfit,CustomerAccountAssignmentGroup,FirstSalesSpecProductGroup,SecondSalesSpecProductGroup,ThirdSalesSpecProductGroup,AccountDetnProductGroup,ConditionRateValue_n,salesplanamountindspcrcy_n,SalesAmount_n,ContributionProfitTotal_n,GrossProfitTotal_n,materialcost2000per_n,Manufacturingcostper_n,materialcost2000_n,Manufacturingcost_n,GLAccount1,GLAccountName1,GLAccount2,GLAccountName2,GLAccount3,GLAccountName3,DisplayCurrency1,currency,currency1,SalesPlanUnit,CompanyCode";
+                        let sParamtetrsOfSelect = "SalesOrganization,Customer,YearDate,Product,plantype,CustomerName,ProfitCenter,Plant,PlantName,SalesOffice,SalesGroup,CreatedByUser,MatlAccountAssignmentGroup,ProductGroup,ProductName,MaterialCost2000,Manufacturingcost,ContributionProfit,GrossProfit,CustomerAccountAssignmentGroup,FirstSalesSpecProductGroup,SecondSalesSpecProductGroup,ThirdSalesSpecProductGroup,AccountDetnProductGroup,ConditionRateValue_n,salesplanamountindspcrcy_n,SalesAmount_n,ContributionProfitTotal_n,GrossProfitTotal_n,materialcost2000per_n,Manufacturingcostper_n,materialcost2000_n,Manufacturingcost_n,GLAccount1,GLAccountName1,GLAccount2,GLAccountName2,GLAccount3,GLAccountName3,DisplayCurrency1,currency,currency1,SalesPlanUnit,CompanyCode";
                         //获取数据
                         this._LocalData.setProperty("/SalesReport", []);
                         this._LocalData.setProperty("/SalesReportTemp", []);
@@ -355,6 +355,7 @@ sap.ui.define([
                             plantype: item.plantype,
 
                             ProfitCenter: item.ProfitCenter,
+                            Plant: item.Plant, // ADD BY XINLEI XU 2025/02/17
                             PlantName: item.PlantName,
                             CustomerName: item.CustomerName,
                             SalesOffice: item.SalesOffice,
@@ -434,6 +435,7 @@ sap.ui.define([
                         plantype: item.plantype,
 
                         ProfitCenter: item.ProfitCenter,
+                        Plant: item.Plant, // ADD BY XINLEI XU 2025/02/17
                         PlantName: item.PlantName,
                         CustomerName: item.CustomerName,
                         SalesOffice: item.SalesOffice,
@@ -736,10 +738,14 @@ sap.ui.define([
                 // ADD END BY XINLEI XU 2025/02/11
 
                 for (var i = 0; i < aExcelSet.length; i++) {
-                    var firstSalesSpecProductGroup = aExcelSet[i].FirstSalesSpecProductGroup.match(/^\d+/);
-                    var secondSalesSpecProductGroup = aExcelSet[i].SecondSalesSpecProductGroup.match(/^\d+/);
-                    var thirdSalesSpecProductGroup = aExcelSet[i].ThirdSalesSpecProductGroup.match(/^\d+/);
-
+                    // MOD BEGIN BY XINLEI XU 2025/02/19
+                    // var firstSalesSpecProductGroup = aExcelSet[i].FirstSalesSpecProductGroup.match(/^\d+/);
+                    // var secondSalesSpecProductGroup = aExcelSet[i].SecondSalesSpecProductGroup.match(/^\d+/);
+                    // var thirdSalesSpecProductGroup = aExcelSet[i].ThirdSalesSpecProductGroup.match(/^\d+/);
+                    var firstSalesSpecProductGroup = aExcelSet[i].FirstSalesSpecProductGroup.split("(");
+                    var secondSalesSpecProductGroup = aExcelSet[i].SecondSalesSpecProductGroup.split("(");
+                    var thirdSalesSpecProductGroup = aExcelSet[i].ThirdSalesSpecProductGroup.split("(");
+                    // MOD END BY XINLEI XU 2025/02/19
 
                     var baseItem = {
                         "Plan_Category": sPlanCategory, // "PLN", MOD BY XINLEI XU 2025/02/11
@@ -751,8 +757,10 @@ sap.ui.define([
                         "FirstSalesSpecProductGroup": firstSalesSpecProductGroup ? firstSalesSpecProductGroup[0] : null,
                         "SecondSalesSpecProductGroup": secondSalesSpecProductGroup ? secondSalesSpecProductGroup[0] : null,
                         "ThirdSalesSpecProductGroup": thirdSalesSpecProductGroup ? thirdSalesSpecProductGroup[0] : null, // Extract or set to null if no match
-                        "MatlAccountAssignmentGroup": aExcelSet[i].MatlAccountAssignmentGroup,
-
+                        // MOD BEGIN BY XINLEI XU 2025/02/18
+                        // "MatlAccountAssignmentGroup": aExcelSet[i].MatlAccountAssignmentGroup,
+                        "AccountDetnProductGroup": aExcelSet[i].AccountDetnProductGroup
+                        // MOD END BY XINLEI XU 2025/02/18
                     };
 
                     Object.keys(aExcelSet[i]).forEach(key => {
@@ -763,8 +771,17 @@ sap.ui.define([
                             var oppositeQty = aExcelSet[i][planKey] > 0 ? -Math.abs(aExcelSet[i][planKey]) : Math.abs(aExcelSet[i][planKey]); // Flip the sign of QTY
 
                             var oppositeAmount1 = aExcelSet[i][key] > 0 ? -Math.abs(aExcelSet[i][key]) : Math.abs(aExcelSet[i][key]); // Flip the sign of QTY
-                            var oppositeAmount2 = aExcelSet[i].materialcost2000_n > 0 ? -Math.abs(aExcelSet[i].materialcost2000_n) : Math.abs(aExcelSet[i].materialcost2000_n); // Flip the sign of QTY
-                            var oppositeAmount3 = aExcelSet[i].Manufacturingcost_n > 0 ? -Math.abs(aExcelSet[i].Manufacturingcost_n) : Math.abs(aExcelSet[i].Manufacturingcost_n); // Flip the sign of QTY
+
+                            // MOD BEGIN BY XINLEI XU 2025/02/17
+                            // var oppositeAmount2 = aExcelSet[i].materialcost2000_n > 0 ? -Math.abs(aExcelSet[i].materialcost2000_n) : Math.abs(aExcelSet[i].materialcost2000_n); // Flip the sign of QTY
+                            // var oppositeAmount3 = aExcelSet[i].Manufacturingcost_n > 0 ? -Math.abs(aExcelSet[i].Manufacturingcost_n) : Math.abs(aExcelSet[i].Manufacturingcost_n); // Flip the sign of QTY
+                            // 加工費 = 貢献利益（金額）- 売上総利益（金額）													
+                            var oppositeAmount2 = parseFloat(aExcelSet[i]["ContributionProfitTotal" + yearMonth]) - parseFloat(aExcelSet[i]["GrossProfitTotal" + yearMonth]);
+                            // 材料費 = 売上（金額）- 貢献利益（金額）
+                            var oppositeAmount3 = parseFloat(aExcelSet[i]["SalesAmount" + yearMonth]) - parseFloat(aExcelSet[i]["ContributionProfitTotal" + yearMonth]);
+                            oppositeAmount2 = oppositeAmount2.toFixed(2);
+                            oppositeAmount3 = oppositeAmount3.toFixed(2);
+                            // MOD END BY XINLEI XU 2025/02/17
 
                             var item = {
                                 "YearMonth": yearMonth,
@@ -783,9 +800,9 @@ sap.ui.define([
                                 "GLAccount": aExcelSet[i].GLAccount2,
                                 "GLAccountName": aExcelSet[i].GLAccountName2,
                                 "Amount": oppositeAmount2, // Dynamic key assignment
-                                "Currency": aExcelSet[i].currency,
-                                "QTY": oppositeQty,
-                                "Unit": aExcelSet[i].SalesPlanUnit,
+                                "Currency": aExcelSet[i].currency ? aExcelSet[i].currency : "JPY", // aExcelSet[i].currency,
+                                "QTY": "", // oppositeQty, // MOD BY XINLEI XU 2025/02/18
+                                "Unit": "" // aExcelSet[i].SalesPlanUnit // MOD BY XINLEI XU 2025/02/18
                             };
                             aExcelSetBI.push(item1);
                             var item2 = {
@@ -794,9 +811,9 @@ sap.ui.define([
                                 "GLAccount": aExcelSet[i].GLAccount3,
                                 "GLAccountName": aExcelSet[i].GLAccountName3,
                                 "Amount": oppositeAmount3, // Dynamic key assignment
-                                "Currency": aExcelSet[i].currency1,
-                                "QTY": oppositeQty,
-                                "Unit": aExcelSet[i].SalesPlanUnit,
+                                "Currency": aExcelSet[i].currency1 ? aExcelSet[i].currency1 : "JPY", // aExcelSet[i].currency1,
+                                "QTY": "", // oppositeQty, // MOD BY XINLEI XU 2025/02/18
+                                "Unit": "" // aExcelSet[i].SalesPlanUnit // MOD BY XINLEI XU 2025/02/18
                             };
                             aExcelSetBI.push(item2);
                         }
@@ -830,6 +847,33 @@ sap.ui.define([
                     width: 10
                 };
                 aExcelCol.push(oExcelCol);
+
+                // ADD BEGIN BY XINLEI XU 2025/02/17
+                var oExcelCol = {
+                    label: "Plant",
+                    type: sType,
+                    property: "Plant",
+                    width: 4
+                };
+                aExcelCol.push(oExcelCol);
+
+                var oExcelCol = {
+                    label: "ProfitCenter",
+                    type: sType,
+                    property: "ProfitCenter",
+                    width: 10
+                };
+                aExcelCol.push(oExcelCol);
+
+                var oExcelCol = {
+                    label: "Customer",
+                    type: sType,
+                    property: "Customer",
+                    width: 10
+                };
+                aExcelCol.push(oExcelCol);
+                // ADD END BY XINLEI XU 2025/02/17
+
                 var oExcelCol = {
                     label: "Product",
                     type: sType,
@@ -858,6 +902,17 @@ sap.ui.define([
                     width: 10
                 };
                 aExcelCol.push(oExcelCol);
+
+                // ADD BEGIN BY XINLEI XU 2025/02/17
+                var oExcelCol = {
+                    label: "MaterialACCGroup",
+                    type: sType,
+                    property: "AccountDetnProductGroup",
+                    width: 10
+                };
+                aExcelCol.push(oExcelCol);
+                // ADD END BY XINLEI XU 2025/02/17
+
                 var oExcelCol = {
                     label: "GL_Account",
                     type: sType,
