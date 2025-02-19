@@ -520,16 +520,18 @@ sap.ui.define([
         },
 
         onWeb6: function (oEvent) {
-            let currentPath = window.location.href;
-            let parts = currentPath.split(".");
-            //let part = parts[0];
-            let result = parts[0];
-            //作業手順照会
-            switch (result) {
-                case "https://s01-test":
-                    window.open("https://https://my417484.s4hana.cloud.sap/ui#ProductionRouting-display?sap-ui-tech-hint=GUI", "_blank");
-                    break;
-            };
+            //Production Routing
+            var aPromise = [];
+            aPromise.push(this.callAction("", "WEB6", ""));
+            Promise.all(aPromise).then((oData) => {
+                let sPath = JSON.parse(oData[0]["processLogic"].Zzkey);
+                window.open(sPath, "_blank");
+
+            }).catch((error) => {
+                MessageBox.error(error.message);
+            }).finally(() => {
+                this._BusyDialog.close();
+            });
         },
 
         onPost: function (oEvent) {
