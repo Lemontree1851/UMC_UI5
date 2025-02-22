@@ -41,7 +41,7 @@
                 </smartfilterbar:controlConfiguration>
             </smartfilterbar:SmartFilterBar> 
 
-            <smarttable:SmartTable id="table5" header="{i18n>title5}" smartVariant="__SVM05" beforeRebindTable="onBeforeRebindTable" entitySet="ZC_BI003_REPORT_005" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" smartFilterId="report05Filter" tableType="Table">
+            <smarttable:SmartTable id="table5" header="{i18n>title5}" smartVariant="__SVM05" beforeRebindTable="onBeforeRebindTable" entitySet="ZC_BI003_REPORT_005" persistencyKey="docPersistent" enableAutoBinding="false" beforeExport="onBeforeExport" showRowCount="true" smartFilterId="report05Filter" tableType="Table">
 
                 <table:Table id="tableReport05" threshold="20" selectionMode="None" fixedColumnCount="3"> 
                     <table:rowMode>

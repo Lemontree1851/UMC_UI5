@@ -2,8 +2,7 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-],
-function (Controller, Filter, FilterOperator) {
+], function (Controller, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("bi.recoverymanagement.controller.Report002", {
@@ -11,17 +10,17 @@ function (Controller, Filter, FilterOperator) {
             this._setInitialValue();
         },
 
-        _setInitialValue:function(){
+        _setInitialValue: function () {
             var oMonth = this.byId("sfbRep02SelFiscalMonth");
             var oYear = this.byId("sfbRep02DPRecoveryYear");
             var dNow = new Date(Date.now());
             var nMonth = dNow.getMonth() + 1;
             var nYear = dNow.getFullYear();
 
-            if(nMonth <= 3){
+            if (nMonth <= 3) {
                 nMonth = nMonth + 10 - 1;
                 nYear = nYear - 1;
-            }else{
+            } else {
                 nMonth = nMonth - 3;
             }
 
@@ -51,18 +50,32 @@ function (Controller, Filter, FilterOperator) {
                 }
             }
 
-            if(oMonth){
+            if (oMonth) {
                 var aMonth = oMonth.getSelectedKeys();
-                aMonth.forEach((e)=>{
+                aMonth.forEach((e) => {
                     oParameters.filters.push(
                         new Filter(
                             "FiscalMonth",
                             FilterOperator.EQ,
                             e
                         )
-                    );  
+                    );
                 })
             }
+        },
+
+        // ADD BEGIN BY XINLEI XU 2025/02/21
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date
+                    case "BillingDocumentDate":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                }
+            });
         }
+        // ADD END BY XINLEI XU 2025/02/21
     });
 });
