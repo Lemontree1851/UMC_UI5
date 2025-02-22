@@ -39,11 +39,39 @@ server:
       configuration:
         mountPath: /
         services:
-          - urlPath: /sap/opu/odata/sap/ZUI_UPLOADPR_O2
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/data
+          - urlPath: /sap/opu/odata/sap/API_CV_ATTACHMENT_SRV
+            metadataPath: ./webapp/localService/S4/API_CV_ATTACHMENT_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/API_CV_ATTACHMENT_SRV/data
             generateMockData: true
-        annotations: []
+          - urlPath: /sap/opu/odata/sap/API_DMS_PROCESS_SRV
+            metadataPath: ./webapp/localService/S4/API_DMS_PROCESS_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/API_DMS_PROCESS_SRV/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/ZUI_UPLOADPR_O2
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001
+            metadataPath: ./webapp/localService/PurchaseOrder/metadata.xml
+            mockdataPath: ./webapp/localService/PurchaseOrder/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001
+            metadataPath: ./webapp/localService/zui_dtimp_conf_o4/metadata.xml
+            mockdataPath: ./webapp/localService/zui_dtimp_conf_o4/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/ZUI_PRWORKFLOW_O2
+            metadataPath: ./webapp/localService/WorkFlow/metadata.xml
+            mockdataPath: ./webapp/localService/WorkFlow/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/localService/S4/API_CV_ATTACHMENT_SRV/API_CV_ATTACHMENT_SRV_Annotation.xml
+            urlPath: /destinations/UMC_Dev_Customizing/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_CV_ATTACHMENT_ANNO_MDL',Version='0001')/$value/
+          - localPath: ./webapp/localService/mainService/ZUI_UPLOADPR_O2_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_UPLOADPR_O2_VAN',Version='0001')/$value/
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:

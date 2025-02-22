@@ -34,6 +34,8 @@ sap.ui.define([
 
 			this._timeline = this.byId("idTimeline");
 			this._timeline.setEnableScroll(false);
+
+			this._LocalData.setProperty("/uploadFiles", []);
 		},
 		getMediaUrl: function (sUrlString) {
 			if (sUrlString) {
@@ -50,17 +52,43 @@ sap.ui.define([
 			var oArgs, oView;
 
 			oArgs = oEvent.getParameter("arguments");
+			this._contextPath = oArgs.contextPath;
 			oView = this.getView();
 			this._InsNo3 = oArgs.contextInstanceId;
 			this._InsNo4 = oArgs.contextApplicationId;
 			oView.bindElement({
 				path: "/PurchaseReq(guid'" + oArgs.contextPath + "')",
+				// ADD BEGIN BY XINLEI XU 2025/02/24
+				parameters: {
+					expand: "to_Attachment"
+				},
+				// ADD END BY XINLEI XU 2025/02/24
 				events: {
-					change: this._onBindingChange.bind(this),
+					// change: this._onBindingChange.bind(this), // DEL BY XINLEI XU 2025/02/24
 					dataRequested: function (oEvent) {
 						oView.setBusy(true);
 					},
 					dataReceived: function (oEvent) {
+						// ADD BEGIN BY XINLEI XU 2025/02/24
+						if (oEvent.getParameter("data")) {
+							var aUploadFiles = [];
+							var aAttachments = oEvent.getParameter("data").to_Attachment;
+							aAttachments.sort(function (a, b) {
+								return a.FileSeq - b.FileSeq;
+							});
+							aAttachments.forEach(item => {
+								aUploadFiles.push({
+									"prUUID": item.PrUuid,
+									"fileUUID": item.FileUuid,
+									"fileSeq": item.FileSeq,
+									"mediaType": item.FileType,
+									"fileName": item.FileName,
+									"fileSize": item.FileSize
+								});
+							});
+							this._LocalData.setProperty("/uploadFiles", aUploadFiles);
+						}
+						// ADD END BY XINLEI XU 2025/02/24
 						oView.setBusy(false);
 					}.bind(this)
 				}
@@ -279,7 +307,7 @@ sap.ui.define([
 		_bindTimelineAggregation: function () {
 
 			var afilters = [];
-			var ApplicationId = this._InsNo4.padStart(6, '0'); 
+			var ApplicationId = this._InsNo4.padStart(6, '0');
 			var oFilter1 = new sap.ui.model.Filter("WorkflowId", sap.ui.model.FilterOperator.EQ, "purchaserequisition");
 			var oFilter2 = new sap.ui.model.Filter("InstanceId", sap.ui.model.FilterOperator.EQ, this._InsNo3);
 			var oFilter3 = new sap.ui.model.Filter("ApplicationId", sap.ui.model.FilterOperator.EQ, ApplicationId);
@@ -297,5 +325,107 @@ sap.ui.define([
 		_timelineHasGrowing: function () {
 			return this._timeline.getGrowingThreshold() !== 0;
 		},
+
+		onBeforeUploadStarts: function (oEvent) {
+			var that = this;
+			this.aUploadFiles = this._LocalData.getProperty("/uploadFiles");
+			this.oFileUploadComponent = oEvent.getParameters("items").item.getFileObject();
+			if (this.oFileUploadComponent) {
+				var oFile = {
+					uuid: this._contextPath,
+					seq: this.aUploadFiles.length + 1,
+					file_name: this.oFileUploadComponent.name,
+					mime_type: this.oFileUploadComponent.type,
+					file_type: btoa(this.oFileUploadComponent.type),
+					file_size: this.oFileUploadComponent.size,
+					data: []
+				};
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					const decoder = new TextDecoder('utf-8'); // 使用 UTF-8 解码器
+					const rawString = decoder.decode(e.target.result);
+					oFile.data = btoa(encodeURIComponent(rawString));
+					debugger;
+					that._CallODataV2("ACTION", "/uploadFile", [], {
+						"Event": "",
+						"Zzkey": JSON.stringify(oFile),
+						"RecordUUID": ""
+					}, {}).then(function (oResponse) {
+						if (oResponse.uploadFile.Zzkey === "E") {
+							const indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileSeq === oFile.seq);
+							that.aUploadFiles.splice(indexToRemove, 1);
+							that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
+							MessageToast.show(that._ResourceBundle.getText("UploadFailed"));
+						} else {
+							var oFileRecord = JSON.parse(oResponse.uploadFile.Zzkey);
+							that.aUploadFiles.push({
+								"prUUID": oFileRecord.PR_UUID_C36,
+								"fileUUID": oFileRecord.FILE_UUID_C36,
+								"fileSeq": oFileRecord.FILE_SEQ,
+								"mediaType": oFileRecord.FILE_TYPE,
+								"fileName": oFileRecord.FILE_NAME,
+								"fileSize": oFileRecord.FILE_SIZE
+							});
+							that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
+						}
+					}.bind(that)), function (oError) {
+						const indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileSeq === oFile.seq);
+						that.aUploadFiles.splice(indexToRemove, 1);
+						that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
+						MessageToast.show(that._ResourceBundle.getText("UploadFailed"));
+					};
+				};
+				reader.readAsArrayBuffer(this.oFileUploadComponent);
+			}
+		},
+
+		onUploadCompleted: function (oEvent) {
+			var iResponseStatus = oEvent.getParameter("status");
+			if (iResponseStatus === 200) {
+
+			}
+		},
+
+		onDownloadFiles: function (oEvent) {
+			var oRow = oEvent.getSource().getParent().getParent().getParent();
+			var sPath = oRow.oBindingContexts.local.sPath;
+			var oFile = this._LocalData.getProperty(sPath);
+			// fileName: "S3接口.txt"
+			// fileSeq: 1
+			// fileSize: 96913
+			// fileUUID: "47289E53-E03F-1EEF-BC85-5B41CBCED6B5"
+			// mediaType: "text/plain"
+			// prUUID: "47289E53-E03F-1EEF-B8BA-BA9BB4D21694"
+			debugger;
+		},
+
+		onRemoveHandler: function (oEvent) {
+			var oRow = oEvent.getSource().getParent();
+			var sPath = oRow.oBindingContexts.local.sPath;
+			var oFile = this._LocalData.getProperty(sPath);
+			// fileName: "S3接口.txt"
+			// fileSeq: 1
+			// fileSize: 96913
+			// fileUUID: "47289E53-E03F-1EEF-BC85-5B41CBCED6B5"
+			// mediaType: "text/plain"
+			// prUUID: "47289E53-E03F-1EEF-B8BA-BA9BB4D21694"
+			debugger;
+			that._CallODataV2("ACTION", "/deleteFile", [], {
+				"Event": "",
+				"Zzkey": JSON.stringify(oFile),
+				"RecordUUID": ""
+			}, {}).then(function (oResponse) {
+				if (oResponse.uploadFile.Zzkey === "S") {
+					const indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileUUID === oFile.fileUUID);
+					that.aUploadFiles.splice(indexToRemove, 1);
+					that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
+					that.getModel().refresh();
+				} else {
+					MessageToast.show(that._ResourceBundle.getText("DeleteFileFailed"));
+				}
+			}.bind(that)), function (oError) {
+				MessageToast.show(that._ResourceBundle.getText("DeleteFileFailed"));
+			};
+		}
 	});
 });

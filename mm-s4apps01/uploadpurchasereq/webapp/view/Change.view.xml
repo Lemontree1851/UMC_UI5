@@ -1,8 +1,4 @@
-<mvc:View
-    controllerName="mm.uploadpurchasereq.controller.Change"
-    displayBlock="true"
-    height="100%"
-    busyIndicatorDelay="0"
+<mvc:View controllerName="mm.uploadpurchasereq.controller.Change" displayBlock="true" height="100%" busyIndicatorDelay="0"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:xuap="sap.uxap"
@@ -12,364 +8,155 @@
     xmlns:upload="sap.m.upload"
     xmlns:r="sap.suite.ui.commons"
     xmlns:core="sap.ui.core"
-    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
->
-    <Page
-        id="idPage"
-        showHeader="false"
-        floatingFooter="true"
-        showFooter="{local>/objectPageEditable}"
-    >
-        <xuap:ObjectPageLayout
-            id="idObjectPageLayout"
-            upperCaseAnchorBar="false"
-            showHeaderContent="false"
-        >
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <Page id="idPage" showHeader="false" floatingFooter="true" showFooter="{local>/objectPageEditable}">
+        <xuap:ObjectPageLayout id="idObjectPageLayout" upperCaseAnchorBar="false" showHeaderContent="false">
             <xuap:sections>
-                <xuap:ObjectPageSection
-                    id="idObjectPageSection"
-                    titleUppercase="false"
-                >
+                <xuap:ObjectPageSection id="idObjectPageSection" titleUppercase="false">
                     <xuap:subSections>
-                        <xuap:ObjectPageSubSection
-                            id="idObjectPageSubSection"
-                            title="{i18n>objectPageTitle}"
-                        >
-                            <smartForm:SmartForm
-                                id="idSmartForm"
-                                app:defaultCheckBoxDisplayBehaviour="YesNo"
-                                app:defaultDropDownDisplayBehaviour="idAndDescription"
-                                editable="true"
-                                editTogglable="{local>/authorityCheck/button/Edit}"
-                                title="{Name}"
-                                validationMode="Async"
-                                editToggled="onSmartFormEditToggled"
-                            >
+                        <xuap:ObjectPageSubSection id="idObjectPageSubSection" title="{i18n>objectPageTitle}">
+                            <smartForm:SmartForm id="idSmartForm" app:defaultCheckBoxDisplayBehaviour="YesNo" app:defaultDropDownDisplayBehaviour="idAndDescription" editable="true" editTogglable="{local>/authorityCheck/button/Edit}" title="{Name}" validationMode="Async" editToggled="onSmartFormEditToggled">
                                 <smartForm:layout>
-                                    <smartForm:ColumnLayout
-                                        id="idColumnLayout"
-                                        columnsM="2"
-                                        columnsL="3"
-                                        columnsXL="6"
-                                    />
+                                    <smartForm:ColumnLayout id="idColumnLayout" columnsM="2" columnsL="3" columnsXL="6" />
                                 </smartForm:layout>
                                 <smartForm:Group id="idGroup">
                                     <smartForm:GroupElement id="idGroupElement">
-                                        <smartField:SmartField
-                                            id="idPrNoSmartField"
-                                            textLabel="{i18n>PrNo}"
-                                            value="{PrNo}"
-                                        />
+                                        <smartField:SmartField id="idPrNoSmartField" textLabel="{i18n>PrNo}" value="{PrNo}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id35GroupElement">
-                                        <smartField:SmartField
-                                            id="idPrItemSmartField"
-                                            textLabel="{i18n>PrItem}"
-                                            value="{PrItem}"
-                                        />
+                                        <smartField:SmartField id="idPrItemSmartField" textLabel="{i18n>PrItem}" value="{PrItem}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id0GroupElement">
-                                        <smartField:SmartField
-                                            id="idPrTypeSmartField"
-                                            textLabel="{i18n>PrType}"
-                                            value="{PrType}"
-                                        />
+                                        <smartField:SmartField id="idPrTypeSmartField" textLabel="{i18n>PrType}" value="{PrType}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id1GroupElement">
-                                        <smartField:SmartField
-                                            id="idOrderTypeSmartField"
-                                            textLabel="{i18n>OrderType}"
-                                            value="{OrderType}"
-                                        />
+                                        <smartField:SmartField id="idOrderTypeSmartField" textLabel="{i18n>OrderType}" value="{OrderType}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id2GroupElement">
-                                        <smartField:SmartField
-                                            id="idSupplierSmartField"
-                                            textLabel="{i18n>Supplier}"
-                                            value="{Supplier}"
-                                        />
+                                        <smartField:SmartField id="idSupplierSmartField" textLabel="{i18n>Supplier}" value="{Supplier}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id3GroupElement">
-                                        <smartField:SmartField
-                                            id="idCompanyCodeSmartField"
-                                            textLabel="{i18n>CompanyCode}"
-                                            value="{CompanyCode}"
-                                        />
+                                        <smartField:SmartField id="idCompanyCodeSmartField" textLabel="{i18n>CompanyCode}" value="{CompanyCode}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id4GroupElement">
-                                        <smartField:SmartField
-                                            id="idPurchaseOrgSmartField"
-                                            textLabel="{i18n>PurchaseOrg}"
-                                            value="{PurchaseOrg}"
-                                        />
+                                        <smartField:SmartField id="idPurchaseOrgSmartField" textLabel="{i18n>PurchaseOrg}" value="{PurchaseOrg}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id5GroupElement">
-                                        <smartField:SmartField
-                                            id="idPurchaseGrpSmartField"
-                                            textLabel="{i18n>PurchaseGrp}"
-                                            value="{PurchaseGrp}"
-                                        />
+                                        <smartField:SmartField id="idPurchaseGrpSmartField" textLabel="{i18n>PurchaseGrp}" value="{PurchaseGrp}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id6GroupElement">
-                                        <smartField:SmartField
-                                            id="idPlantSmartField"
-                                            textLabel="{i18n>Plant}"
-                                            value="{Plant}"
-                                        />
+                                        <smartField:SmartField id="idPlantSmartField" textLabel="{i18n>Plant}" value="{Plant}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id7GroupElement">
-                                        <smartField:SmartField
-                                            id="idCurrencySmartField"
-                                            textLabel="{i18n>Currency}"
-                                            value="{Currency}"
-                                        />
+                                        <smartField:SmartField id="idCurrencySmartField" textLabel="{i18n>Currency}" value="{Currency}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id8GroupElement">
-                                        <smartField:SmartField
-                                            id="idItemCategorySmartField"
-                                            textLabel="{i18n>ItemCategory}"
-                                            value="{ItemCategory}"
-                                        />
+                                        <smartField:SmartField id="idItemCategorySmartField" textLabel="{i18n>ItemCategory}" value="{ItemCategory}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id9GroupElement">
-                                        <smartField:SmartField
-                                            id="idAccountTypeSmartField"
-                                            textLabel="{i18n>AccountType}"
-                                            value="{AccountType}"
-                                        />
+                                        <smartField:SmartField id="idAccountTypeSmartField" textLabel="{i18n>AccountType}" value="{AccountType}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id10GroupElement">
-                                        <smartField:SmartField
-                                            id="idMatIDSmartField"
-                                            textLabel="{i18n>MatID}"
-                                            value="{MatID}"
-                                        />
+                                        <smartField:SmartField id="idMatIDSmartField" textLabel="{i18n>MatID}" value="{MatID}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id11GroupElement">
-                                        <smartField:SmartField
-                                            id="idMatDescSmartField"
-                                            textLabel="{i18n>MatDesc}"
-                                            value="{MatDesc}"
-                                        />
+                                        <smartField:SmartField id="idMatDescSmartField" textLabel="{i18n>MatDesc}" value="{MatDesc}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id12GroupElement">
-                                        <smartField:SmartField
-                                            id="idMaterialGroupSmartField"
-                                            textLabel="{i18n>MaterialGroup}"
-                                            value="{MaterialGroup}"
-                                        />
+                                        <smartField:SmartField id="idMaterialGroupSmartField" textLabel="{i18n>MaterialGroup}" value="{MaterialGroup}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id13GroupElement">
-                                        <smartField:SmartField
-                                            id="idQuantitySmartField"
-                                            textLabel="{i18n>Quantity}"
-                                            value="{Quantity}"
-                                        />
+                                        <smartField:SmartField id="idQuantitySmartField" textLabel="{i18n>Quantity}" value="{Quantity}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id14GroupElement">
-                                        <smartField:SmartField
-                                            id="idUnitSmartField"
-                                            textLabel="{i18n>Unit}"
-                                            value="{Unit}"
-                                        />
+                                        <smartField:SmartField id="idUnitSmartField" textLabel="{i18n>Unit}" value="{Unit}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id15GroupElement">
-                                        <smartField:SmartField
-                                            id="idPriceSmartField"
-                                            textLabel="{i18n>Price}"
-                                            value="{Price}"
-                                        />
+                                        <smartField:SmartField id="idPriceSmartField" textLabel="{i18n>Price}" value="{Price}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id16GroupElement">
-                                        <smartField:SmartField
-                                            id="idUnitPriceSmartField"
-                                            textLabel="{i18n>UnitPrice}"
-                                            value="{UnitPrice}"
-                                        />
+                                        <smartField:SmartField id="idUnitPriceSmartField" textLabel="{i18n>UnitPrice}" value="{UnitPrice}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id17GroupElement">
-                                        <smartField:SmartField
-                                            id="idDeliveryDateSmartField"
-                                            textLabel="{i18n>DeliveryDate}"
-                                            value="{DeliveryDate}"
-                                        />
+                                        <smartField:SmartField id="idDeliveryDateSmartField" textLabel="{i18n>DeliveryDate}" value="{DeliveryDate}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id18GroupElement">
-                                        <smartField:SmartField
-                                            id="idLocationSmartField"
-                                            textLabel="{i18n>Location}"
-                                            value="{Location}"
-                                        />
+                                        <smartField:SmartField id="idLocationSmartField" textLabel="{i18n>Location}" value="{Location}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id19GroupElement">
-                                        <smartField:SmartField
-                                            id="idReturnItemSmartField"
-                                            textLabel="{i18n>ReturnItem}"
-                                            value="{ReturnItem}"
-                                        />
+                                        <smartField:SmartField id="idReturnItemSmartField" textLabel="{i18n>ReturnItem}" value="{ReturnItem}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id20GroupElement">
-                                        <smartField:SmartField
-                                            id="idFreeSmartField"
-                                            textLabel="{i18n>Free}"
-                                            value="{Free}"
-                                        />
+                                        <smartField:SmartField id="idFreeSmartField" textLabel="{i18n>Free}" value="{Free}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id21GroupElement">
-                                        <smartField:SmartField
-                                            id="idGlAccountSmartField"
-                                            textLabel="{i18n>GlAccount}"
-                                            value="{GlAccount}"
-                                        />
+                                        <smartField:SmartField id="idGlAccountSmartField" textLabel="{i18n>GlAccount}" value="{GlAccount}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id22GroupElement">
-                                        <smartField:SmartField
-                                            id="idCostCenterSmartField"
-                                            textLabel="{i18n>CostCenter}"
-                                            value="{CostCenter}"
-                                        />
+                                        <smartField:SmartField id="idCostCenterSmartField" textLabel="{i18n>CostCenter}" value="{CostCenter}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id23GroupElement">
-                                        <smartField:SmartField
-                                            id="idWbsElemntSmartField"
-                                            textLabel="{i18n>WbsElemnt}"
-                                            value="{WbsElemnt}"
-                                        />
+                                        <smartField:SmartField id="idWbsElemntSmartField" textLabel="{i18n>WbsElemnt}" value="{WbsElemnt}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement >
-                                        <smartField:SmartField
-                                            textLabel="{i18n>OrderId}"
-                                            value="{OrderId}"
-                                        />
+                                        <smartField:SmartField textLabel="{i18n>OrderId}" value="{OrderId}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id24GroupElement">
-                                        <smartField:SmartField
-                                            id="idAssetNoSmartField"
-                                            textLabel="{i18n>AssetNo}"
-                                            value="{AssetNo}"
-                                        />
+                                        <smartField:SmartField id="idAssetNoSmartField" textLabel="{i18n>AssetNo}" value="{AssetNo}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id25GroupElement">
-                                        <smartField:SmartField
-                                            id="idTaxSmartField"
-                                            textLabel="{i18n>Tax}"
-                                            value="{Tax}"
-                                        />
+                                        <smartField:SmartField id="idTaxSmartField" textLabel="{i18n>Tax}" value="{Tax}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id26GroupElement">
-                                        <smartField:SmartField
-                                            id="idItemTextSmartField"
-                                            textLabel="{i18n>ItemText}"
-                                            value="{ItemText}"
-                                        />
+                                        <smartField:SmartField id="idItemTextSmartField" textLabel="{i18n>ItemText}" value="{ItemText}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id27GroupElement">
-                                        <smartField:SmartField
-                                            id="idPrBySmartField"
-                                            textLabel="{i18n>PrBy}"
-                                            value="{PrBy}"
-                                        />
+                                        <smartField:SmartField id="idPrBySmartField" textLabel="{i18n>PrBy}" value="{PrBy}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id28GroupElement">
-                                        <smartField:SmartField
-                                            id="idTrackNoSmartField"
-                                            textLabel="{i18n>TrackNo}"
-                                            value="{TrackNo}"
-                                        />
+                                        <smartField:SmartField id="idTrackNoSmartField" textLabel="{i18n>TrackNo}" value="{TrackNo}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id29GroupElement">
-                                        <smartField:SmartField
-                                            id="idEanSmartField"
-                                            textLabel="{i18n>Ean}"
-                                            value="{Ean}"
-                                        />
+                                        <smartField:SmartField id="idEanSmartField" textLabel="{i18n>Ean}" value="{Ean}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id30GroupElement">
-                                        <smartField:SmartField
-                                            id="idCustomerRecSmartField"
-                                            textLabel="{i18n>CustomerRec}"
-                                            value="{CustomerRec}"
-                                        />
+                                        <smartField:SmartField id="idCustomerRecSmartField" textLabel="{i18n>CustomerRec}" value="{CustomerRec}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id31GroupElement">
-                                        <smartField:SmartField
-                                            id="idAssetOriSmartField"
-                                            textLabel="{i18n>AssetOri}"
-                                            value="{AssetOri}"
-                                        />
+                                        <smartField:SmartField id="idAssetOriSmartField" textLabel="{i18n>AssetOri}" value="{AssetOri}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id32GroupElement">
-                                        <smartField:SmartField
-                                            id="idMemoTextSmartField"
-                                            textLabel="{i18n>MemoText}"
-                                            value="{MemoText}"
-                                        />
+                                        <smartField:SmartField id="idMemoTextSmartField" textLabel="{i18n>MemoText}" value="{MemoText}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id33GroupElement">
-                                        <smartField:SmartField
-                                            id="idBuyPurpooseSmartField"
-                                            textLabel="{i18n>BuyPurpoose}"
-                                            value="{BuyPurpoose}"
-                                        />
+                                        <smartField:SmartField id="idBuyPurpooseSmartField" textLabel="{i18n>BuyPurpoose}" value="{BuyPurpoose}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id34GroupElement">
-                                        <smartField:SmartField
-                                            id="idIsLinkSmartField"
-                                            textLabel="{i18n>IsLink}"
-                                            value="{IsLink}"
-                                        />
+                                        <smartField:SmartField id="idIsLinkSmartField" textLabel="{i18n>IsLink}" value="{IsLink}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id36GroupElement">
-                                        <smartField:SmartField
-                                            id="idPurchaseOrderSmartField"
-                                            textLabel="{i18n>PurchaseOrder}"
-                                            value="{PurchaseOrder}"
-                                        />
+                                        <smartField:SmartField id="idPurchaseOrderSmartField" textLabel="{i18n>PurchaseOrder}" value="{PurchaseOrder}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id37GroupElement">
-                                        <smartField:SmartField
-                                            id="idPurchaseOrderItemSmartField"
-                                            textLabel="{i18n>PurchaseOrderItem}"
-                                            value="{PurchaseOrderItem}"
-                                        />
+                                        <smartField:SmartField id="idPurchaseOrderItemSmartField" textLabel="{i18n>PurchaseOrderItem}" value="{PurchaseOrderItem}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id38GroupElement">
-                                        <smartField:SmartField
-                                            id="idKyotenSmartField"
-                                            textLabel="{i18n>Kyoten}"
-                                            value="{Kyoten}"
-                                        />
+                                        <smartField:SmartField id="idKyotenSmartField" textLabel="{i18n>Kyoten}" value="{Kyoten}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement id="id39GroupElement">
-                                        <smartField:SmartField
-                                            id="idCreatedAtSmartField"
-                                            textLabel="{i18n>CreatedAt}"
-                                            value="{CreatedAt}"
-                                        />
+                                        <smartField:SmartField id="idCreatedAtSmartField" textLabel="{i18n>CreatedAt}" value="{CreatedAt}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField
-                                            textLabel="{i18n>ApplyDepart}"
-                                            value="{ApplyDepart}"
-                                        />
+                                        <smartField:SmartField textLabel="{i18n>ApplyDepart}" value="{ApplyDepart}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField
-                                            textLabel="{i18n>IsApprove}"
-                                            value="{IsApprove}"
-                                        />
+                                        <smartField:SmartField textLabel="{i18n>IsApprove}" value="{IsApprove}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField
-                                            textLabel="{i18n>SupplierMat}"
-                                            value="{SupplierMat}"
-                                        />
+                                        <smartField:SmartField textLabel="{i18n>SupplierMat}" value="{SupplierMat}" />
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField
-                                            textLabel="{i18n>PolinkBy}"
-                                            value="{PolinkBy}"
-                                        />
+                                        <smartField:SmartField textLabel="{i18n>PolinkBy}" value="{PolinkBy}" />
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
                             </smartForm:SmartForm>
@@ -378,52 +165,69 @@
                 </xuap:ObjectPageSection>
                 <xuap:ObjectPageSection id="id0ObjectPageSection">
                     <xuap:subSections>
-                        <xuap:ObjectPageSubSection
-                            id="id0ObjectPageSubSection"
-                            title="{i18n>attachment}"
-                        >
-                            <upload:UploadSet
-                                id="idUploadSet"
-                                items="{Attach>DocumentInfoRecordToAttachmentNavigation}"
-                                multiple="false"
-                                mode="None"
-                                uploadEnabled="{local>/authorityCheck/button/AttachmentUpload}"
-                                instantUpload="false"
-                                beforeItemAdded="onBeforeItemAdded"
-                                uploadCompleted="onUploadCompleted"
-                                fileRenamed="onFileRenamed"
-                                beforeItemRemoved="onBeforeItemRemoved"
-                            >
+                        <xuap:ObjectPageSubSection id="id0ObjectPageSubSection" title="{i18n>attachment}">
+                            <!-- MOD BEGIN BY XINLEI XU 2025/02/20 -->
+                            <!-- <upload:UploadSet id="idUploadSet" items="{Attach>DocumentInfoRecordToAttachmentNavigation}" multiple="false" mode="None" uploadEnabled="{local>/authorityCheck/button/AttachmentUpload}" instantUpload="false" beforeItemAdded="onBeforeItemAdded" uploadCompleted="onUploadCompleted" fileRenamed="onFileRenamed" beforeItemRemoved="onBeforeItemRemoved">
                                 <upload:items>
-                                    <upload:UploadSetItem
-                                        id="idUploadSetItem"
-                                        fileName="{Attach>FileName}"
-                                        mediaType="{Attach>MimeType}"
-                                        url="{
+                                    <upload:UploadSetItem id="idUploadSetItem" fileName="{Attach>FileName}" mediaType="{Attach>MimeType}" url="{
                                             path: 'Attach>__metadata/media_src',
                                             formatter: '.getMediaUrl'
-                                        }"
-                                        visibleEdit="false"
-                                        visibleRemove="{local>/authorityCheck/button/AttachmentDelete}"
-                                    />
+                                        }" visibleEdit="false" visibleRemove="{local>/authorityCheck/button/AttachmentDelete}" />
                                 </upload:items>
-                            </upload:UploadSet>
+                            </upload:UploadSet> -->
+                            <upload:UploadSetwithTable id="UploadSetTable" class="sapUiSmallMargin" sticky="ColumnHeaders,HeaderToolbar" width="auto" fixedLayout="false" autoPopinMode="true" hiddenInPopin="None" items="{ path: 'local>/uploadFiles', templateShareable: false }" maxFileNameLength="60" beforeUploadStarts="onBeforeUploadStarts" uploadCompleted="onUploadCompleted" mode="MultiSelect" growing="true" growingThreshold="5" multiSelectMode="SelectAll">
+                                <upload:headerToolbar>
+                                    <OverflowToolbar>
+                                        <Title text="{i18n>documentTableTitle} ({= ${local>/uploadFiles}.length})"/>
+                                        <ToolbarSpacer />
+                                        <upload:ActionsPlaceholder placeholderFor="UploadButtonPlaceholder" />
+                                        <!-- <Button id="downloadSelectedButton" text="Download" enabled="false" press="onDownloadFiles" /> -->
+                                    </OverflowToolbar>
+                                </upload:headerToolbar>
+                                <upload:columns>
+                                    <Column id="fileName" importance="High">
+                                        <header>
+                                            <Label text="{i18n>FileName}" />
+                                        </header>
+                                    </Column>
+                                    <Column id="fileSize">
+                                        <header>
+                                            <Label text="{i18n>FileSize}" />
+                                        </header>
+                                    </Column>
+                                    <Column id="actionButton" importance="High" />
+                                </upload:columns>
+                                <upload:items>
+                                    <upload:UploadSetwithTableItem fileName="{local>fileName}" mediaType="{local>mediaType}" url="{local>url}" fileSize="{local>fileSize}">
+                                        <upload:cells>
+                                            <HBox>
+                                                <core:Icon src="{ parts: ['local>mediaType', 'local>fileName'], formatter: '.formatter.getIconSrc' }" color="white" class="sapMUSTItemImage sapMUSTItemIcon" />
+                                                <VBox class="sapUiTinyMargin sapUiSmallMarginBegin">
+                                                    <Link text="{local>fileName}" press="onDownloadFiles" class="sapUiTinyMarginBottom" />
+                                                </VBox>
+                                            </HBox>
+                                            <Text text="{ parts: ['local>fileSize'], formatter: '.formatter.getFileSizeWithUnits' }" />
+                                            <Button class="sapUiTinyMarginBegin" type="Transparent" icon="sap-icon://decline" press="onRemoveHandler" />
+                                            <Text text="{local>prUUID}" visible="false"/>
+                                            <Text text="{local>fileUUID}" visible="false"/>
+                                            <Text text="{local>fileSeq}" visible="false"/>
+                                        </upload:cells>
+                                    </upload:UploadSetwithTableItem>
+                                </upload:items>
+                            </upload:UploadSetwithTable>
+                            <!-- MOD END BY XINLEI XU 2025/02/20 -->
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>
                 <xuap:ObjectPageSection>
                     <xuap:subSections>
-                        <xuap:ObjectPageSubSection
-                            title="{i18n>history}"
-                        >
+                        <xuap:ObjectPageSubSection title="{i18n>history}">
                             <Toolbar id="idToolbar">
-                                <CheckBox text="Scrollbar" select="onScrollbarSelected" />
+                                <CheckBox text="ScrollBar" select="onScrollbarSelected" />
                             </Toolbar>
-                            <r:Timeline id="idTimeline" content="{/ApprovalHistory}" filterList="{/ApprovalHistory}" showIcons="false"
-                                textHeight="100px">
+                            <r:Timeline id="idTimeline" content="{/ApprovalHistory}" filterList="{/ApprovalHistory}" showIcons="false" textHeight="100px">
                                 <r:content>
-                                    <r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{title}" userName="{Operator}"
-                                        filterValue="{Operator}" />
+                                    <r:TimelineItem id="idTemplateItem" dateTime="{CreatedAt}" text="{Remark}" title="{title}" userName="{Operator}" filterValue="{Operator}" />
                                 </r:content>
                                 <r:filterList>
                                     <r:TimelineFilterListItem key="{Operator}" text="{Operator}" />
@@ -436,21 +240,9 @@
         </xuap:ObjectPageLayout>
         <footer>
             <OverflowToolbar id="id0OverflowToolbar">
-                <Button
-                    id="idButton"
-                    icon="sap-icon://alert"
-                    text="{=${message>/}.length}"
-                    visible="{=${message>/}.length > 0}"
-                    type="Emphasized"
-                    press="onMessagePopoverPress"
-                />
+                <Button id="idButton" icon="sap-icon://alert" text="{=${message>/}.length}" visible="{=${message>/}.length > 0}" type="Emphasized" press="onMessagePopoverPress" />
                 <ToolbarSpacer id="id0ToolbarSpacer" />
-                <Button
-                    id="idTestButton"
-                    type="Emphasized"
-                    text="{i18n>ChangeView.InSave}"
-                    press="onButtonSavePress"
-                />
+                <Button id="idTestButton" type="Emphasized" text="{i18n>ChangeView.InSave}" press="onButtonSavePress" />
             </OverflowToolbar>
         </footer>
     </Page>

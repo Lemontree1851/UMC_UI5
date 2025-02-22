@@ -1,297 +1,300 @@
 {
-    "_version": "1.59.0",
-    "sap.app": {
-        "id": "mm.uploadpurchasereq",
-        "type": "application",
-        "i18n": "i18n/i18n.properties",
-        "applicationVersion": {
-            "version": "0.0.1"
-        },
-        "title": "{{appTitle}}",
-        "description": "{{appDescription}}",
-        "resources": "resources.json",
-        "sourceTemplate": {
-            "id": "@sap/generator-fiori:basic",
-            "version": "1.14.3",
-            "toolsId": "9b008c62-a40c-41e8-af9b-3ea16469926d"
-        },
-        "dataSources": {
-            "API_CV_ATTACHMENT_SRV": {
-                "uri": "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [
-                        "API_CV_ATTACHMENT_SRV_Annotation"
-                    ],
-                    "localUri": "localService/S4/API_CV_ATTACHMENT_SRV/metadata.xml",
-                    "odataVersion": "2.0"
-                }
-            },
-            "API_DMS_PROCESS_SRV": {
-                "uri": "/sap/opu/odata/sap/API_DMS_PROCESS_SRV/",
-                "type": "OData",
-                "settings": {
-                    "localUri": "localService/S4/API_DMS_PROCESS_SRV/metadata.xml"
-                }
-            },
-            "mainService": {
-                "uri": "/sap/opu/odata/sap/ZUI_UPLOADPR_O2/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [
-                        "annotation",
-                        "ZUI_UPLOADPR_O2_ANNOTATION"
-                    ],
-                    "localUri": "localService/metadata.xml",
-                    "odataVersion": "2.0"
-                }
-            },
-            "ZUI_UPLOADPR_O2_ANNOTATION": {
-                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_UPLOADPR_O2_VAN',Version='0001')/$value/",
-                "type": "ODataAnnotation"
-            },
-            "PurchaseOrder": {
-                "uri": "/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [],
-                    "localUri": "localService/metadata.xml",
-                    "odataVersion": "4.0"
-                }
-            },
-            "zui_dtimp_conf_o4": {
-                "uri": "/sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [],
-                    "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
-                    "odataVersion": "4.0"
-                }
-            },
-            "WorkFlow": {
-                "uri": "/sap/opu/odata/sap/ZUI_PRWORKFLOW_O2/",
-                "type": "OData",
-                "settings": {
-                    "localUri": "localService/metadata.xml",
-                    "odataVersion": "2.0"
-                }
-            },
-            "annotation": {
-                "type": "ODataAnnotation",
-                "uri": "annotations/annotation.xml",
-                "settings": {
-                    "localUri": "annotations/annotation.xml"
-                }
-            },
-            "API_CV_ATTACHMENT_SRV_Annotation": {
-                "uri": "/destinations/UMC_Dev_Customizing/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_CV_ATTACHMENT_ANNO_MDL',Version='0001')/$value/",
-                "type": "ODataAnnotation",
-                "settings": {
-                    "localUri": "localService/S4/API_CV_ATTACHMENT_SRV/API_CV_ATTACHMENT_SRV_Annotation.xml"
-                }
-            },
-            "AuthorityService": {
-                "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [],
-                    "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
-                    "odataVersion": "4.0"
-                }
-            }
-        },
-        "crossNavigation": {
-            "inbounds": {
-                "intent1": {
-                    "signature": {
-                        "parameters": {},
-                        "additionalParameters": "allowed"
-                    },
-                    "semanticObject": "uploadpurchasereq",
-                    "action": "display",
-                    "icon": "sap-icon://upload"
-                }
-            }
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "mm.uploadpurchasereq",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.14.3",
+      "toolsId": "9b008c62-a40c-41e8-af9b-3ea16469926d"
+    },
+    "dataSources": {
+      "API_CV_ATTACHMENT_SRV": {
+        "uri": "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "API_CV_ATTACHMENT_SRV_Annotation"
+          ],
+          "localUri": "localService/S4/API_CV_ATTACHMENT_SRV/metadata.xml",
+          "odataVersion": "2.0"
         }
-    },
-    "sap.platform.cf": {
-        "uisVersionNumber": "1.120"
-    },
-    "sap.ui": {
-        "technology": "UI5",
-        "icons": {
-            "icon": "",
-            "favIcon": "",
-            "phone": "",
-            "phone@2": "",
-            "tablet": "",
-            "tablet@2": ""
-        },
-        "deviceTypes": {
-            "desktop": true,
-            "tablet": true,
-            "phone": true
+      },
+      "API_DMS_PROCESS_SRV": {
+        "uri": "/sap/opu/odata/sap/API_DMS_PROCESS_SRV/",
+        "type": "OData",
+        "settings": {
+          "localUri": "localService/S4/API_DMS_PROCESS_SRV/metadata.xml"
         }
-    },
-    "sap.ui5": {
-        "flexEnabled": false,
-        "dependencies": {
-            "minUI5Version": "1.120.17",
-            "libs": {
-                "sap.m": {},
-                "sap.ui.core": {},
-                "sap.f": {},
-                "sap.suite.ui.generic.template": {},
-                "sap.ui.comp": {},
-                "sap.ui.generic.app": {},
-                "sap.ui.table": {},
-                "sap.ushell": {}
-            }
-        },
-        "contentDensities": {
-            "compact": true,
-            "cozy": true
-        },
-        "models": {
-            "i18n": {
-                "type": "sap.ui.model.resource.ResourceModel",
-                "settings": {
-                    "bundleName": "mm.uploadpurchasereq.i18n.i18n"
-                }
-            },
-            "Attach": {
-                "type": "sap.ui.model.odata.v2.ODataModel",
-                "settings": {
-                    "defaultOperationMode": "Server",
-                    "defaultBindingMode": "OneWay",
-                    "defaultCountMode": "Request"
-                },
-                "dataSource": "API_CV_ATTACHMENT_SRV",
-                "preload": true
-            },
-            "InfoRecord": {
-                "type": "sap.ui.model.odata.v2.ODataModel",
-                "settings": {
-                    "defaultOperationMode": "Server",
-                    "defaultBindingMode": "OneWay",
-                    "defaultCountMode": "Request"
-                },
-                "dataSource": "API_DMS_PROCESS_SRV",
-                "preload": true
-            },
-            "": {
-                "dataSource": "mainService",
-                "preload": true,
-                "settings": {
-                    "defaultOperationMode": "Server",
-                    "defaultBindingMode": "TwoWay",
-                    "defaultCountMode": "Inline"
-                }
-            },
-            "PurchaseOrder": {
-                "dataSource": "PurchaseOrder",
-                "preload": true,
-                "settings": {
-                    "operationMode": "Server",
-                    "autoExpandSelect": true,
-                    "earlyRequests": true
-                }
-            },
-            "Template": {
-                "dataSource": "zui_dtimp_conf_o4",
-                "preload": true,
-                "settings": {
-                    "synchronizationMode": "None",
-                    "operationMode": "Server",
-                    "autoExpandSelect": true,
-                    "earlyRequests": true
-                }
-            },
-            "WorkFlow": {
-                "dataSource": "WorkFlow",
-                "preload": true,
-                "settings": {
-                    "defaultOperationMode": "Server",
-                    "defaultBindingMode": "TwoWay",
-                    "defaultCountMode": "Inline"
-                }
-            },
-            "Authority": {
-                "dataSource": "AuthorityService",
-                "preload": true,
-                "settings": {
-                    "synchronizationMode": "None",
-                    "operationMode": "Server",
-                    "autoExpandSelect": true,
-                    "earlyRequests": true
-                }
-            }
-        },
-        "resources": {
-            "css": [
-                {
-                    "uri": "css/style.css"
-                }
-            ]
-        },
-        "routing": {
-            "config": {
-                "routerClass": "sap.m.routing.Router",
-                "viewType": "XML",
-                "async": true,
-                "viewPath": "mm.uploadpurchasereq.view",
-                "controlAggregation": "pages",
-                "controlId": "app",
-                "clearControlAggregation": false,
-                "bypassed": {
-                    "target": "notFound"
-                }
-            },
-            "routes": [
-                {
-                    "name": "RouteMain",
-                    "pattern": ":?query:",
-                    "target": [
-                        "TargetMain"
-                    ]
-                },
-                {
-                    "name": "PurchaseReq",
-                    "pattern": "PurchaseReq/{contextPath}/{contextPrNo}/{contextApplyDepart}/{contextInstanceId}/{contextApplicationId}",
-                    "target": "PurchaseReq"
-                }
-            ],
-            "targets": {
-                "TargetMain": {
-                    "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "Main",
-                    "viewName": "Main"
-                },
-                "PurchaseReq": {
-                    "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "PurchaseReq",
-                    "viewName": "Change"
-                },
-                "notFound": {
-                    "id": "notFound",
-                    "name": "NotFound",
-                    "transition": "show"
-                }
-            }
-        },
-        "rootView": {
-            "viewName": "mm.uploadpurchasereq.view.App",
-            "type": "XML",
-            "async": true,
-            "id": "App"
+      },
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZUI_UPLOADPR_O2/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZUI_UPLOADPR_O2_VAN",
+            "annotation"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
         }
+      },
+      "PurchaseOrder": {
+        "uri": "/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/PurchaseOrder/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "zui_dtimp_conf_o4": {
+        "uri": "/sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "WorkFlow": {
+        "uri": "/sap/opu/odata/sap/ZUI_PRWORKFLOW_O2/",
+        "type": "OData",
+        "settings": {
+          "localUri": "localService/WorkFlow/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "API_CV_ATTACHMENT_SRV_Annotation": {
+        "uri": "/destinations/UMC_Dev_Customizing/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_CV_ATTACHMENT_ANNO_MDL',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/S4/API_CV_ATTACHMENT_SRV/API_CV_ATTACHMENT_SRV_Annotation.xml"
+        }
+      },
+      "AuthorityService": {
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "ZUI_UPLOADPR_O2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_UPLOADPR_O2_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/mainService/ZUI_UPLOADPR_O2_VAN.xml"
+        }
+      }
     },
-    "sap.cloud": {
-        "public": true,
-        "service": "mm-s4apps01"
+    "crossNavigation": {
+      "inbounds": {
+        "intent1": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "uploadpurchasereq",
+          "action": "display",
+          "icon": "sap-icon://upload"
+        }
+      }
     }
+  },
+  "sap.platform.cf": {
+    "uisVersionNumber": "1.120"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.17",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "mm.uploadpurchasereq.i18n.i18n"
+        }
+      },
+      "Attach": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Request"
+        },
+        "dataSource": "API_CV_ATTACHMENT_SRV",
+        "preload": true
+      },
+      "InfoRecord": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Request"
+        },
+        "dataSource": "API_DMS_PROCESS_SRV",
+        "preload": true
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline"
+        }
+      },
+      "PurchaseOrder": {
+        "dataSource": "PurchaseOrder",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "Template": {
+        "dataSource": "zui_dtimp_conf_o4",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "WorkFlow": {
+        "dataSource": "WorkFlow",
+        "preload": true,
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline"
+        }
+      },
+      "Authority": {
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "mm.uploadpurchasereq.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false,
+        "bypassed": {
+          "target": "notFound"
+        }
+      },
+      "routes": [
+        {
+          "name": "RouteMain",
+          "pattern": ":?query:",
+          "target": [
+            "TargetMain"
+          ]
+        },
+        {
+          "name": "PurchaseReq",
+          "pattern": "PurchaseReq/{contextPath}/{contextPrNo}/{contextApplyDepart}/{contextInstanceId}/{contextApplicationId}",
+          "target": "PurchaseReq"
+        }
+      ],
+      "targets": {
+        "TargetMain": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Main",
+          "viewName": "Main"
+        },
+        "PurchaseReq": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "PurchaseReq",
+          "viewName": "Change"
+        },
+        "notFound": {
+          "id": "notFound",
+          "name": "NotFound",
+          "transition": "show"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "mm.uploadpurchasereq.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "mm-s4apps01"
+  }
 }

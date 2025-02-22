@@ -7,7 +7,7 @@ sap.ui.define([
         return BaseController.extend("mm.uploadpurchasereq.controller.Main", {
             onInit: function () {
                 this._UserInfo = sap.ushell.Container.getService("UserInfo");
-                this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
+                // this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
 
             },
             _initialize: function () {
