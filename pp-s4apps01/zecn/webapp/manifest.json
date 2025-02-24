@@ -77,7 +77,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.124.9",
+      "minUI5Version": "1.120.18",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -184,5 +184,8 @@
   "sap.cloud": {
     "public": true,
     "service": "pp-s4apps01"
+  },
+  "sap.platform.cf": {
+    "ui5VersionNumber": "1.120.18"
   }
 }
