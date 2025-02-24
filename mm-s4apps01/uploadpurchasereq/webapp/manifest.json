@@ -117,9 +117,6 @@
       }
     }
   },
-  "sap.platform.cf": {
-    "uisVersionNumber": "1.120"
-  },
   "sap.ui": {
     "technology": "UI5",
     "icons": {
@@ -139,7 +136,7 @@
   "sap.ui5": {
     "flexEnabled": false,
     "dependencies": {
-      "minUI5Version": "1.120.17",
+      "minUI5Version": "1.120.18",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -296,5 +293,8 @@
   "sap.cloud": {
     "public": true,
     "service": "mm-s4apps01"
+  },
+  "sap.platform.cf": {
+      "ui5VersionNumber": "1.120.18"
   }
 }
