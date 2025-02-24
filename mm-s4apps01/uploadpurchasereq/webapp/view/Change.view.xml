@@ -165,16 +165,22 @@
                 </xuap:ObjectPageSection>
                 <xuap:ObjectPageSection id="id0ObjectPageSection">
                     <xuap:subSections>
-                        <xuap:ObjectPageSubSection id="id0ObjectPageSubSection" title="{i18n>attachment}">
+                        <xuap:ObjectPageSubSection id="id0ObjectPageSubSection" title="{i18n>attachment}(非推奨)">
                             <!-- MOD BEGIN BY XINLEI XU 2025/02/20 -->
-                            <!-- <upload:UploadSet id="idUploadSet" items="{Attach>DocumentInfoRecordToAttachmentNavigation}" multiple="false" mode="None" uploadEnabled="{local>/authorityCheck/button/AttachmentUpload}" instantUpload="false" beforeItemAdded="onBeforeItemAdded" uploadCompleted="onUploadCompleted" fileRenamed="onFileRenamed" beforeItemRemoved="onBeforeItemRemoved">
+                            <upload:UploadSet id="idUploadSet" items="{Attach>DocumentInfoRecordToAttachmentNavigation}" multiple="false" mode="None" uploadEnabled="{local>/authorityCheck/button/AttachmentUpload}" instantUpload="false" beforeItemAdded="onBeforeItemAdded" uploadCompleted="onUploadCompleted" fileRenamed="onFileRenamed" beforeItemRemoved="onBeforeItemRemoved">
                                 <upload:items>
                                     <upload:UploadSetItem id="idUploadSetItem" fileName="{Attach>FileName}" mediaType="{Attach>MimeType}" url="{
                                             path: 'Attach>__metadata/media_src',
                                             formatter: '.getMediaUrl'
                                         }" visibleEdit="false" visibleRemove="{local>/authorityCheck/button/AttachmentDelete}" />
                                 </upload:items>
-                            </upload:UploadSet> -->
+                            </upload:UploadSet>
+                        </xuap:ObjectPageSubSection>
+                    </xuap:subSections>
+                </xuap:ObjectPageSection>
+                <xuap:ObjectPageSection id="id0ObjectPageSection1">
+                    <xuap:subSections>
+                        <xuap:ObjectPageSubSection id="id0ObjectPageSubSection1" title="{i18n>attachment}(新しい)">
                             <upload:UploadSetwithTable id="UploadSetTable" class="sapUiSmallMargin" multiple="false" uploadEnabled="{local>/authorityCheck/button/AttachmentUpload}" sticky="ColumnHeaders,HeaderToolbar" width="auto" fixedLayout="false" autoPopinMode="true" hiddenInPopin="None" items="{ path: 'local>/uploadFiles', templateShareable: false }" maxFileNameLength="60" beforeUploadStarts="onBeforeUploadStarts" uploadCompleted="onUploadCompleted" mode="MultiSelect" growing="true" growingThreshold="5" multiSelectMode="SelectAll">
                                 <upload:headerToolbar>
                                     <OverflowToolbar>
