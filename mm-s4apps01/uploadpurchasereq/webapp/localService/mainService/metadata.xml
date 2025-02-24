@@ -512,7 +512,7 @@
                     <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
                     <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
                 </FunctionImport>
-                <FunctionImport Name="uploadFile" ReturnType="cds_zui_uploadpr_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                <FunctionImport Name="handleFile" ReturnType="cds_zui_uploadpr_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
                     <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
                     <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
                     <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
@@ -606,8 +606,6 @@
                         <PropertyValue Property="NonFilterableProperties">
                             <Collection>
                                 <PropertyPath>Delete_mc</PropertyPath>
-                                <PropertyPath>Delete_mc</PropertyPath>
-                                <PropertyPath>Update_mc</PropertyPath>
                                 <PropertyPath>Update_mc</PropertyPath>
                             </Collection>
                         </PropertyValue>
@@ -629,11 +627,6 @@
                                             <PropertyValue Property="Insertable" Bool="false"/>
                                         </Record>
                                     </PropertyValue>
-                                    <PropertyValue Property="InsertRestrictions">
-                                        <Record>
-                                            <PropertyValue Property="Insertable" Bool="false"/>
-                                        </Record>
-                                    </PropertyValue>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -647,8 +640,6 @@
                         <PropertyValue Property="NonSortableProperties">
                             <Collection>
                                 <PropertyPath>Delete_mc</PropertyPath>
-                                <PropertyPath>Delete_mc</PropertyPath>
-                                <PropertyPath>Update_mc</PropertyPath>
                                 <PropertyPath>Update_mc</PropertyPath>
                             </Collection>
                         </PropertyValue>

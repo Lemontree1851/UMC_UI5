@@ -175,10 +175,11 @@
                                         }" visibleEdit="false" visibleRemove="{local>/authorityCheck/button/AttachmentDelete}" />
                                 </upload:items>
                             </upload:UploadSet> -->
-                            <upload:UploadSetwithTable id="UploadSetTable" class="sapUiSmallMargin" sticky="ColumnHeaders,HeaderToolbar" width="auto" fixedLayout="false" autoPopinMode="true" hiddenInPopin="None" items="{ path: 'local>/uploadFiles', templateShareable: false }" maxFileNameLength="60" beforeUploadStarts="onBeforeUploadStarts" uploadCompleted="onUploadCompleted" mode="MultiSelect" growing="true" growingThreshold="5" multiSelectMode="SelectAll">
+                            <upload:UploadSetwithTable id="UploadSetTable" class="sapUiSmallMargin" multiple="false" uploadEnabled="{local>/authorityCheck/button/AttachmentUpload}" sticky="ColumnHeaders,HeaderToolbar" width="auto" fixedLayout="false" autoPopinMode="true" hiddenInPopin="None" items="{ path: 'local>/uploadFiles', templateShareable: false }" maxFileNameLength="60" beforeUploadStarts="onBeforeUploadStarts" uploadCompleted="onUploadCompleted" mode="MultiSelect" growing="true" growingThreshold="5" multiSelectMode="SelectAll">
                                 <upload:headerToolbar>
                                     <OverflowToolbar>
-                                        <Title text="{i18n>documentTableTitle} ({= ${local>/uploadFiles}.length})"/>
+                                        <!-- <Title text="{i18n>documentTableTitle} ({= ${local>/uploadFiles}.length})"/> -->
+                                        <Title text="{i18n>documentTableTitle} ({= ${local>/uploadFilesLen}})"/>
                                         <ToolbarSpacer />
                                         <upload:ActionsPlaceholder placeholderFor="UploadButtonPlaceholder" />
                                         <!-- <Button id="downloadSelectedButton" text="Download" enabled="false" press="onDownloadFiles" /> -->
@@ -198,19 +199,16 @@
                                     <Column id="actionButton" importance="High" />
                                 </upload:columns>
                                 <upload:items>
-                                    <upload:UploadSetwithTableItem fileName="{local>fileName}" mediaType="{local>mediaType}" url="{local>url}" fileSize="{local>fileSize}">
+                                    <upload:UploadSetwithTableItem fileName="{local>fileName}" mediaType="{local>fileType}" url="{local>url}" fileSize="{local>fileSize}">
                                         <upload:cells>
                                             <HBox>
-                                                <core:Icon src="{ parts: ['local>mediaType', 'local>fileName'], formatter: '.formatter.getIconSrc' }" color="white" class="sapMUSTItemImage sapMUSTItemIcon" />
+                                                <core:Icon src="{ parts: ['local>fileType', 'local>fileName'], formatter: '.formatter.getIconSrc' }" color="white" class="sapMUSTItemImage sapMUSTItemIcon" />
                                                 <VBox class="sapUiTinyMargin sapUiSmallMarginBegin">
                                                     <Link text="{local>fileName}" press="onDownloadFiles" class="sapUiTinyMarginBottom" />
                                                 </VBox>
                                             </HBox>
                                             <Text text="{ parts: ['local>fileSize'], formatter: '.formatter.getFileSizeWithUnits' }" />
-                                            <Button class="sapUiTinyMarginBegin" type="Transparent" icon="sap-icon://decline" press="onRemoveHandler" />
-                                            <Text text="{local>prUUID}" visible="false"/>
-                                            <Text text="{local>fileUUID}" visible="false"/>
-                                            <Text text="{local>fileSeq}" visible="false"/>
+                                            <Button class="sapUiTinyMarginBegin" type="Transparent" icon="sap-icon://decline" press="onRemoveHandler" visible="{local>/authorityCheck/button/AttachmentDelete}"/>
                                         </upload:cells>
                                     </upload:UploadSetwithTableItem>
                                 </upload:items>

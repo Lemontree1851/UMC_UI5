@@ -34,8 +34,6 @@ sap.ui.define([
 
 			this._timeline = this.byId("idTimeline");
 			this._timeline.setEnableScroll(false);
-
-			this._LocalData.setProperty("/uploadFiles", []);
 		},
 		getMediaUrl: function (sUrlString) {
 			if (sUrlString) {
@@ -58,41 +56,45 @@ sap.ui.define([
 			this._InsNo4 = oArgs.contextApplicationId;
 			oView.bindElement({
 				path: "/PurchaseReq(guid'" + oArgs.contextPath + "')",
-				// ADD BEGIN BY XINLEI XU 2025/02/24
-				parameters: {
-					expand: "to_Attachment"
-				},
-				// ADD END BY XINLEI XU 2025/02/24
 				events: {
 					// change: this._onBindingChange.bind(this), // DEL BY XINLEI XU 2025/02/24
 					dataRequested: function (oEvent) {
 						oView.setBusy(true);
 					},
 					dataReceived: function (oEvent) {
-						// ADD BEGIN BY XINLEI XU 2025/02/24
-						if (oEvent.getParameter("data")) {
-							var aUploadFiles = [];
-							var aAttachments = oEvent.getParameter("data").to_Attachment;
-							aAttachments.sort(function (a, b) {
-								return a.FileSeq - b.FileSeq;
-							});
-							aAttachments.forEach(item => {
-								aUploadFiles.push({
-									"prUUID": item.PrUuid,
-									"fileUUID": item.FileUuid,
-									"fileSeq": item.FileSeq,
-									"mediaType": item.FileType,
-									"fileName": item.FileName,
-									"fileSize": item.FileSize
-								});
-							});
-							this._LocalData.setProperty("/uploadFiles", aUploadFiles);
-						}
-						// ADD END BY XINLEI XU 2025/02/24
 						oView.setBusy(false);
 					}.bind(this)
 				}
 			});
+			// ADD BEGIN BY XINLEI XU 2025/02/24
+			oView.setBusy(true);
+			this._CallODataV2("READ", "/PurchaseReq(guid'" + oArgs.contextPath + "')/to_Attachment", [], {
+			}, {}).then(function (oResponse) {
+				if (oResponse) {
+					var aUploadFiles = [];
+					var aAttachments = oResponse.results;
+					aAttachments.sort(function (a, b) {
+						return a.FileSeq - b.FileSeq;
+					});
+					aAttachments.forEach(item => {
+						aUploadFiles.push({
+							"prUUID": item.PrUuid,
+							"fileUUID": item.FileUuid,
+							"fileSeq": item.FileSeq,
+							"fileType": item.FileType,
+							"fileName": item.FileName,
+							"fileSize": item.FileSize,
+							"s3FileName": item.S3Filename
+						});
+					});
+					this._LocalData.setProperty("/uploadFiles", aUploadFiles);
+					this._LocalData.setProperty("/uploadFilesLen", aUploadFiles.length);
+				}
+				oView.setBusy(false);
+			}.bind(this)), function (oError) {
+				oView.setBusy(false);
+			};
+			// ADD END BY XINLEI XU 2025/02/24
 			this.byId("idSmartForm").setEditable(false);
 			this.byId("idPage").setShowFooter(false);
 			this._bindTimelineAggregation();
@@ -326,6 +328,7 @@ sap.ui.define([
 			return this._timeline.getGrowingThreshold() !== 0;
 		},
 
+		// ADD BEGIN BY XINLEI XU 2025/02/21
 		onBeforeUploadStarts: function (oEvent) {
 			var that = this;
 			this.aUploadFiles = this._LocalData.getProperty("/uploadFiles");
@@ -342,90 +345,110 @@ sap.ui.define([
 				};
 				var reader = new FileReader();
 				reader.onload = function (e) {
-					const decoder = new TextDecoder('utf-8'); // 使用 UTF-8 解码器
-					const rawString = decoder.decode(e.target.result);
-					oFile.data = btoa(encodeURIComponent(rawString));
-					debugger;
-					that._CallODataV2("ACTION", "/uploadFile", [], {
-						"Event": "",
+					// ArrayBuffer => Base64
+					var uint8Array = new Uint8Array(e.target.result);
+					var binary = String.fromCharCode.apply(null, uint8Array);
+					oFile.data = btoa(binary);
+					// upload
+					that._CallODataV2("ACTION", "/handleFile", [], {
+						"Event": "UPLOAD",
 						"Zzkey": JSON.stringify(oFile),
 						"RecordUUID": ""
 					}, {}).then(function (oResponse) {
-						if (oResponse.uploadFile.Zzkey === "E") {
-							const indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileSeq === oFile.seq);
+						if (oResponse.handleFile.Zzkey === "E") {
+							var indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileSeq === oFile.seq);
 							that.aUploadFiles.splice(indexToRemove, 1);
 							that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
+							that._LocalData.setProperty("/uploadFilesLen", that.aUploadFiles.length);
 							MessageToast.show(that._ResourceBundle.getText("UploadFailed"));
 						} else {
-							var oFileRecord = JSON.parse(oResponse.uploadFile.Zzkey);
+							var oFileRecord = JSON.parse(oResponse.handleFile.Zzkey);
 							that.aUploadFiles.push({
 								"prUUID": oFileRecord.PR_UUID_C36,
 								"fileUUID": oFileRecord.FILE_UUID_C36,
 								"fileSeq": oFileRecord.FILE_SEQ,
-								"mediaType": oFileRecord.FILE_TYPE,
+								"fileType": oFileRecord.FILE_TYPE,
 								"fileName": oFileRecord.FILE_NAME,
-								"fileSize": oFileRecord.FILE_SIZE
+								"fileSize": oFileRecord.FILE_SIZE,
+								"s3FileName": oFileRecord.S3_FILENAME
 							});
 							that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
+							that._LocalData.setProperty("/uploadFilesLen", that.aUploadFiles.length);
 						}
 					}.bind(that)), function (oError) {
 						const indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileSeq === oFile.seq);
 						that.aUploadFiles.splice(indexToRemove, 1);
 						that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
+						that._LocalData.setProperty("/uploadFilesLen", that.aUploadFiles.length);
 						MessageToast.show(that._ResourceBundle.getText("UploadFailed"));
-					};
+					}.bind(that);
 				};
 				reader.readAsArrayBuffer(this.oFileUploadComponent);
 			}
 		},
-
 		onUploadCompleted: function (oEvent) {
 			var iResponseStatus = oEvent.getParameter("status");
 			if (iResponseStatus === 200) {
 
 			}
 		},
+		// ADD END BY XINLEI XU 2025/02/21
 
+		// ADD BEGIN BY XINLEI XU 2025/02/24
 		onDownloadFiles: function (oEvent) {
 			var oRow = oEvent.getSource().getParent().getParent().getParent();
 			var sPath = oRow.oBindingContexts.local.sPath;
 			var oFile = this._LocalData.getProperty(sPath);
-			// fileName: "S3接口.txt"
-			// fileSeq: 1
-			// fileSize: 96913
-			// fileUUID: "47289E53-E03F-1EEF-BC85-5B41CBCED6B5"
-			// mediaType: "text/plain"
-			// prUUID: "47289E53-E03F-1EEF-B8BA-BA9BB4D21694"
-			debugger;
+			this._CallODataV2("ACTION", "/handleFile", [], {
+				"Event": "DOWNLOAD",
+				"Zzkey": JSON.stringify(oFile),
+				"RecordUUID": ""
+			}, {}).then(function (oResponse) {
+				if (oResponse.handleFile.Zzkey === "E") {
+					MessageToast.show(this._ResourceBundle.getText("DownloadFileFailed"));
+				} else {
+					var oDownloadObject = JSON.parse(oResponse.handleFile.Zzkey);
+					// Base64 => Blob
+					var byteCharacters = atob(oDownloadObject.VALUE);
+					var bytes = new Uint8Array(byteCharacters.length);
+					for (let i = 0; i < byteCharacters.length; i++) {
+						bytes[i] = byteCharacters.charCodeAt(i);
+					}
+					var blob = new Blob([bytes.buffer], {
+						type: oDownloadObject.FILE_TYPE
+					});
+					var oDownLoad = document.createElement("a");
+					oDownLoad.href = window.URL.createObjectURL(blob);
+					oDownLoad.download = oDownloadObject.FILE_NAME;
+					oDownLoad.click();
+				}
+			}.bind(this)), function (oError) {
+				MessageToast.show(this._ResourceBundle.getText("DownloadFileFailed"));
+			}.bind(this);
 		},
 
 		onRemoveHandler: function (oEvent) {
 			var oRow = oEvent.getSource().getParent();
 			var sPath = oRow.oBindingContexts.local.sPath;
 			var oFile = this._LocalData.getProperty(sPath);
-			// fileName: "S3接口.txt"
-			// fileSeq: 1
-			// fileSize: 96913
-			// fileUUID: "47289E53-E03F-1EEF-BC85-5B41CBCED6B5"
-			// mediaType: "text/plain"
-			// prUUID: "47289E53-E03F-1EEF-B8BA-BA9BB4D21694"
-			debugger;
-			that._CallODataV2("ACTION", "/deleteFile", [], {
-				"Event": "",
+			this.aUploadFiles = this._LocalData.getProperty("/uploadFiles");
+			this._CallODataV2("ACTION", "/handleFile", [], {
+				"Event": "DELETE",
 				"Zzkey": JSON.stringify(oFile),
 				"RecordUUID": ""
 			}, {}).then(function (oResponse) {
-				if (oResponse.uploadFile.Zzkey === "S") {
-					const indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileUUID === oFile.fileUUID);
-					that.aUploadFiles.splice(indexToRemove, 1);
-					that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
-					that.getModel().refresh();
+				if (oResponse.handleFile.Zzkey === "S") {
+					const indexToRemove = this.aUploadFiles.findIndex(obj => obj.fileUUID === oFile.fileUUID);
+					this.aUploadFiles.splice(indexToRemove, 1);
+					this._LocalData.setProperty("/uploadFiles", this.aUploadFiles);
+					this._LocalData.setProperty("/uploadFilesLen", this.aUploadFiles.length);
 				} else {
-					MessageToast.show(that._ResourceBundle.getText("DeleteFileFailed"));
+					MessageToast.show(this._ResourceBundle.getText("DeleteFileFailed"));
 				}
-			}.bind(that)), function (oError) {
-				MessageToast.show(that._ResourceBundle.getText("DeleteFileFailed"));
-			};
+			}.bind(this)), function (oError) {
+				MessageToast.show(this._ResourceBundle.getText("DeleteFileFailed"));
+			}.bind(this);
 		}
+		// ADD END BY XINLEI XU 2025/02/24
 	});
 });
