@@ -157,6 +157,6 @@ sap.ui.define([
         getFileSizeWithUnits: function (iFileSize) {
             return UploadSetwithTable.getFileSizeWithUnits(iFileSize);
         }
-        // ADD BEGIN BY XINLEI XU 2025/02/20
+        // ADD END BY XINLEI XU 2025/02/20
     };
 });

@@ -1,7 +1,7 @@
 sap.ui.define([
     "sap/ui/core/format/DateFormat",
-], function (DateFormat,
-	) {
+    "sap/m/upload/UploadSetwithTable"
+], function (DateFormat, UploadSetwithTable) {
     "use strict";
     return {
         setState: function (v) {
@@ -57,7 +57,7 @@ sap.ui.define([
                     });
                     return oDateFormat.format(new Date(value));
                 } else {
-                    if (value.length === 8){
+                    if (value.length === 8) {
                         return value.substring(0, 4) + "/" + value.substring(4, 6) + "/" + value.substring(6);
                     }
                 }
@@ -78,7 +78,7 @@ sap.ui.define([
                     }
                     return null;
                 } else {
-                    if (value.length === 6){
+                    if (value.length === 6) {
                         return value.substring(0, 2) + ":" + value.substring(2, 4) + ":" + value.substring(4);
                     }
                 }
@@ -88,7 +88,7 @@ sap.ui.define([
 
         odataDate: function (v) {
             var deliveryDate = new Date(v);
-            if ( isNaN(date.getTime()) ) {
+            if (isNaN(date.getTime())) {
                 return "";
             }
             var oDateFormat = DateFormat.getDateTimeInstance({
@@ -121,19 +121,27 @@ sap.ui.define([
         },
         convertLocalDateToUTCDate: function (localDate = new Date()) {
             // 获取当前时区偏移（分钟）
-            let timezoneOffset = localDate.getTimezoneOffset(); 
+            let timezoneOffset = localDate.getTimezoneOffset();
             // 调整时区偏移，将本地时间转换为 UTC 时间（时间不变）
             let utcDate = new Date(localDate.getTime() - timezoneOffset * 60000);
             return utcDate;
         },
         convertISOString: function (v) {
             let localDate = new Date(v);
-            if(!isNaN(localDate.getTime)){
-                return localDate.toISOString().slice(0,10);
+            if (!isNaN(localDate.getTime)) {
+                return localDate.toISOString().slice(0, 10);
             } else {
                 return v;
             }
-        }
+        },
 
+        // ADD BEGIN BY XINLEI XU 2025/02/24
+        getIconSrc: function (mediaType, thumbnailUrl) {
+            return UploadSetwithTable.getIconForFileType(mediaType, thumbnailUrl);
+        },
+        getFileSizeWithUnits: function (iFileSize) {
+            return UploadSetwithTable.getFileSizeWithUnits(iFileSize);
+        }
+        // ADD END BY XINLEI XU 2025/02/24
     };
 });

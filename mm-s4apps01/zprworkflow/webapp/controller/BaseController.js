@@ -10,8 +10,8 @@ sap.ui.define([
 
 		onInit: function () {
 			this.localData = this.getOwnerComponent().getModel("local");
-            this.oDataModel = this.getOwnerComponent().getModel();
-            this.resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			this.oDataModel = this.getOwnerComponent().getModel();
+			this.resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
 
 		getRouter: function () {
@@ -27,7 +27,7 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				this.getRouter().navTo("RouteMain", {}, true /*no history*/ );
+				this.getRouter().navTo("RouteMain", {}, true /*no history*/);
 			}
 		},
 		setBusy: function (busy) {
@@ -85,8 +85,54 @@ sap.ui.define([
 				}
 				return result;
 			};
+		},
+
+		_CallODataV2: function (sMethod, sPath, aFilters, mUrlParameter, oRequestData) {
+			var that = this;
+			var oBusyDialog = new sap.m.BusyDialog();
+			oBusyDialog.open();
+			return new Promise(function (resolve, reject) {
+				var mParameters = {
+					method: sMethod === "READ" ? "GET" : "POST",
+					filters: aFilters,
+					urlParameters: mUrlParameter,
+					success: function (oResponse) {
+						oBusyDialog.close();
+						resolve(oResponse);
+					},
+					error: function (oErr) {
+						oBusyDialog.close();
+						// var oError = JSON.parse(oErr.responseText);
+						// var sMsg;
+						// if (oError.error.innererror.errordetails.length > 0) {
+						//     sMsg = oError.error.innererror.errordetails[0].message;
+						// } else {
+						//     sMsg = oError.error.message.value;
+						// }
+						// MessageBox.error(sMsg);
+						reject(JSON.parse(oErr.responseText));
+					}
+				};
+				switch (sMethod) {
+					case "READ":
+						that.getView().getModel().read(sPath, mParameters);
+						break;
+					case "CREATE":
+						that.getView().getModel().create(sPath, oRequestData, mParameters);
+						break;
+					case "UPDATE":
+						that.getView().getModel().update(sPath, oRequestData, mParameters);
+						break;
+					case "DELETE":
+						that.getView().getModel().remove(sPath, mParameters);
+						break;
+					case "ACTION":
+						that.getView().getModel().callFunction(sPath, mParameters);
+						break;
+					default:
+						break;
+				}
+			});
 		}
-
 	});
-
 });

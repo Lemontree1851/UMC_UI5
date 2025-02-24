@@ -110,7 +110,7 @@
     "sap.ui5": {
         "flexEnabled": false,
         "dependencies": {
-            "minUI5Version": "1.124.9",
+            "minUI5Version": "1.120.18",
             "libs": {
                 "sap.m": {},
                 "sap.uxap": {},
@@ -229,7 +229,7 @@
                     "clearControlAggregation": false,
                     "viewId": "PurchaseReq",
                     "viewName": "Change"
-                },              
+                },
                 "Attachments": {
                     "viewType": "XML",
                     "transition": "slide",
@@ -298,5 +298,8 @@
     "sap.cloud": {
         "public": true,
         "service": "mm-s4apps01"
+    },
+    "sap.platform.cf": {
+        "ui5VersionNumber": "1.120.18"
     }
 }
