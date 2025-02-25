@@ -246,7 +246,7 @@ sap.ui.define([
                 items: items,
                 user: _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail(),
                 // username: _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName(),
-                username: _UserInfo.getLastName() + _UserInfo.getFirstName(),
+                username: _UserInfo.getLastName() + " " + _UserInfo.getFirstName(),
                 datetime: _myFunction._getCurrentDateTime()
             }
             if (!_myFunction._requiredFields(oTable, this)) {
@@ -736,7 +736,7 @@ sap.ui.define([
                 items: items,
                 user: _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail(),
                 // username: _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName(),
-                username: _UserInfo.getLastName() + _UserInfo.getFirstName(),
+                username: _UserInfo.getLastName() + " " + _UserInfo.getFirstName(),
                 datetime: _myFunction._getCurrentDateTime()
             }
             switch (bEvent) {

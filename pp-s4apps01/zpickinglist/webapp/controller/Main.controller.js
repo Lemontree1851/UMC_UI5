@@ -349,7 +349,7 @@ sap.ui.define([
                     items: aItems,
                     user: this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(),
                     // username: this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName(),
-                    username: this._UserInfo.getLastName() + this._UserInfo.getFirstName(),
+                    username: this._UserInfo.getLastName() + " " + this._UserInfo.getFirstName(),
                     datetime: this.getCurrentUTCDateTime()
                 }
                 if (iExceedsNum > 0) {
