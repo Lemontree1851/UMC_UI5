@@ -65,6 +65,24 @@ sap.ui.define([
             }
         },
 
+        // 0000/00/00
+        date1: function (value) {
+            if (value) {
+                let localDate = new Date(value);
+                if (!isNaN(localDate.getTime()) && value.ms) {
+                    var oDateFormat = DateFormat.getDateTimeInstance({
+                        pattern: "yyyy/MM/dd"
+                    });
+                    return oDateFormat.format(new Date(value));
+                } else {
+                    if (value.length === 8) {
+                        return value.substring(0, 4) + "/" + value.substring(4, 6) + "/" + value.substring(6);
+                    }
+                }
+                return value;
+            }
+        },
+
         // 00:00:00
         time: function (value) {
             if (value) {

@@ -109,7 +109,9 @@ sap.ui.define([
 							"fileType": item.FileType,
 							"fileName": item.FileName,
 							"fileSize": item.FileSize,
-							"s3FileName": item.S3Filename
+							"s3FileName": item.S3Filename,
+							"lastModifiedBy": item.LastChangedBy + " (" + item.LastChangedByName + ")",
+							"lastModifiedAt": item.LastChangedAt
 						});
 					});
 					this._LocalData.setProperty("/uploadFiles", aUploadFiles);

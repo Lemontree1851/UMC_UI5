@@ -55,6 +55,11 @@
                                             <Label text="{i18n>FileSize}" />
                                         </header>
                                     </Column>
+                                    <Column id="lastModified">
+                                        <header>
+                                            <Label text="{i18n>LastModified}" />
+                                        </header>
+                                    </Column>
                                     <!-- <Column id="actionButton" importance="High" /> -->
                                 </upload:columns>
                                 <upload:items>
@@ -67,6 +72,10 @@
                                                 </VBox>
                                             </HBox>
                                             <Text text="{ parts: ['local>fileSize'], formatter: '.formatter.getFileSizeWithUnits' }" />
+                                            <VBox>
+                                                <Text text="{local>lastModifiedBy}" />
+                                                <Text class="sapUiTinyMarginTop" text="{ parts: ['local>lastModifiedAt'], formatter: '.formatter.date1'}" />
+                                            </VBox>
                                             <!-- <Button class="sapUiTinyMarginBegin" type="Transparent" icon="sap-icon://decline" press="onRemoveHandler" visible="{local>/authorityCheck/button/AttachmentDelete}"/> -->
                                         </upload:cells>
                                     </upload:UploadSetwithTableItem>
