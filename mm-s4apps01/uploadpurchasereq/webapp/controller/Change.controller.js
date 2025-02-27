@@ -346,46 +346,51 @@ sap.ui.define([
 					data: []
 				};
 				var reader = new FileReader();
+				this.getView().setBusy(true);
 				reader.onload = function (e) {
 					// ArrayBuffer => Base64
 					var uint8Array = new Uint8Array(e.target.result);
-					var binary = String.fromCharCode.apply(null, uint8Array);
-					oFile.data = btoa(binary);
-					// upload
-					that._CallODataV2("ACTION", "/handleFile", [], {
-						"Event": "UPLOAD",
-						"Zzkey": JSON.stringify(oFile),
-						"RecordUUID": ""
-					}, {}).then(function (oResponse) {
-						if (oResponse.handleFile.Zzkey === "E") {
-							var indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileSeq === oFile.seq);
+					// var binary = String.fromCharCode.apply(null, uint8Array);
+					var binary = that._largeCharCodeToString(uint8Array);
+					if (binary) {
+						oFile.data = btoa(binary);
+						that.getView().setBusy(false);
+						// upload
+						that._CallODataV2("ACTION", "/handleFile", [], {
+							"Event": "UPLOAD",
+							"Zzkey": JSON.stringify(oFile),
+							"RecordUUID": ""
+						}, {}).then(function (oResponse) {
+							if (oResponse.handleFile.Zzkey === "E") {
+								var indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileSeq === oFile.seq);
+								that.aUploadFiles.splice(indexToRemove, 1);
+								that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
+								that._LocalData.setProperty("/uploadFilesLen", that.aUploadFiles.length);
+								MessageToast.show(that._ResourceBundle.getText("UploadFailed"));
+							} else {
+								var oFileRecord = JSON.parse(oResponse.handleFile.Zzkey);
+								that.aUploadFiles.push({
+									"prUUID": oFileRecord.PR_UUID_C36,
+									"fileUUID": oFileRecord.FILE_UUID_C36,
+									"fileSeq": oFileRecord.FILE_SEQ,
+									"fileType": oFileRecord.FILE_TYPE,
+									"fileName": oFileRecord.FILE_NAME,
+									"fileSize": oFileRecord.FILE_SIZE,
+									"s3FileName": oFileRecord.S3_FILENAME,
+									"lastModifiedBy": oFileRecord.LAST_CHANGED_BY + " (" + oFileRecord.LAST_CHANGED_BY_NAME + ")",
+									"lastModifiedAt": new Date()
+								});
+								that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
+								that._LocalData.setProperty("/uploadFilesLen", that.aUploadFiles.length);
+							}
+						}.bind(that)), function (oError) {
+							const indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileSeq === oFile.seq);
 							that.aUploadFiles.splice(indexToRemove, 1);
 							that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
 							that._LocalData.setProperty("/uploadFilesLen", that.aUploadFiles.length);
 							MessageToast.show(that._ResourceBundle.getText("UploadFailed"));
-						} else {
-							var oFileRecord = JSON.parse(oResponse.handleFile.Zzkey);
-							that.aUploadFiles.push({
-								"prUUID": oFileRecord.PR_UUID_C36,
-								"fileUUID": oFileRecord.FILE_UUID_C36,
-								"fileSeq": oFileRecord.FILE_SEQ,
-								"fileType": oFileRecord.FILE_TYPE,
-								"fileName": oFileRecord.FILE_NAME,
-								"fileSize": oFileRecord.FILE_SIZE,
-								"s3FileName": oFileRecord.S3_FILENAME,
-								"lastModifiedBy": oFileRecord.LAST_CHANGED_BY + " (" + oFileRecord.LAST_CHANGED_BY_NAME + ")",
-								"lastModifiedAt": new Date()
-							});
-							that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
-							that._LocalData.setProperty("/uploadFilesLen", that.aUploadFiles.length);
-						}
-					}.bind(that)), function (oError) {
-						const indexToRemove = that.aUploadFiles.findIndex(obj => obj.fileSeq === oFile.seq);
-						that.aUploadFiles.splice(indexToRemove, 1);
-						that._LocalData.setProperty("/uploadFiles", that.aUploadFiles);
-						that._LocalData.setProperty("/uploadFilesLen", that.aUploadFiles.length);
-						MessageToast.show(that._ResourceBundle.getText("UploadFailed"));
-					}.bind(that);
+						}.bind(that);
+					}
 				};
 				reader.readAsArrayBuffer(this.oFileUploadComponent);
 			}
@@ -452,7 +457,23 @@ sap.ui.define([
 			}.bind(this)), function (oError) {
 				MessageToast.show(this._ResourceBundle.getText("DeleteFileFailed"));
 			}.bind(this);
-		}
+		},
 		// ADD END BY XINLEI XU 2025/02/24
+
+		// ADD BEGIN BY XINLEI XU 2025/02/27 超长数组时需分块处理以避免堆栈溢出
+		_largeCharCodeToString: function (codes, chunkSize = 100000) {
+			let result = [];
+			try {
+				for (let i = 0; i < codes.length; i += chunkSize) {
+					const chunk = codes.slice(i, i + chunkSize);
+					result.push(String.fromCharCode(...chunk));
+				}
+				return result.join('');
+			} catch (error) {
+				this.getView().setBusy(false);
+				MessageToast.show(error);
+			}
+		}
+		// ADD END BY XINLEI XU 2025/02/27
 	});
 });
