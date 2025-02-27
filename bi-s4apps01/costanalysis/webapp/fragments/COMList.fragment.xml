@@ -6,12 +6,11 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="COSTANALYSISCOM" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="CustomListST" 
-    header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" >
+    <smartTable:SmartTable entitySet="COSTANALYSISCOM" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="CustomListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true">
 
         <table:Table id="idCustomListTable" selectionMode="MultiToggle" rowMode="Auto">
             <table:columns>
-                <table:Column width="4rem" label="{i18n>YearMonth}" sortProperty="YearMonth" filterProperty="YearMonth">
+                <table:Column width="6rem" label="{i18n>YearMonth}" sortProperty="YearMonth" filterProperty="YearMonth">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"YearMonth", "leadingProperty":"YearMonth"}'/>
                     </table:customData>
@@ -27,15 +26,14 @@
                         <Text text="{Companycode}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>CompanycodeText}" sortProperty="CompanycodeText" filterProperty="CompanycodeText">
+                <table:Column width="10rem" label="{i18n>CompanycodeText}" sortProperty="CompanycodeText" filterProperty="CompanycodeText">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"CompanycodeText", "leadingProperty":"CompanycodeText"}'/>
                     </table:customData>
                     <table:template>
                         <Text text="{CompanycodeText}" wrapping="false" />
                     </table:template>
-                </table:Column>       
-
+                </table:Column>
                 <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
@@ -44,7 +42,7 @@
                         <Text text="{Plant}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>PlantText}" sortProperty="PlantText" filterProperty="PlantText">
+                <table:Column width="10rem" label="{i18n>PlantText}" sortProperty="PlantText" filterProperty="PlantText">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PlantText", "leadingProperty":"PlantText"}'/>
                     </table:customData>
@@ -52,7 +50,7 @@
                         <Text text="{PlantText}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>Product}" sortProperty="Product" filterProperty="Product">
+                <table:Column width="10rem" label="{i18n>Product}" sortProperty="Product" filterProperty="Product">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product"}'/>
                     </table:customData>
@@ -68,7 +66,7 @@
                         <Text text="{ProductDescription}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
+                <table:Column width="10rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material"}'/>
                     </table:customData>
@@ -84,7 +82,7 @@
                         <Text text="{MaterialDescription}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>profitcenter}" sortProperty="profitcenter" filterProperty="profitcenter">
+                <table:Column width="10rem" label="{i18n>profitcenter}" sortProperty="profitcenter" filterProperty="profitcenter">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"profitcenter", "leadingProperty":"profitcenter"}'/>
                     </table:customData>
@@ -100,7 +98,7 @@
                         <Text text="{profitcentername}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>Quantity}" sortProperty="Quantity" filterProperty="Quantity">
+                <table:Column width="10rem" label="{i18n>Quantity}" sortProperty="Quantity" filterProperty="Quantity">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Quantity", "leadingProperty":"Quantity"}'/>
                     </table:customData>
@@ -108,7 +106,7 @@
                         <Text text="{Quantity}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
+                <table:Column width="10rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
                     </table:customData>
@@ -116,7 +114,7 @@
                         <Text text="{Customer}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
+                <table:Column width="10rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
                     </table:customData>
@@ -124,7 +122,7 @@
                         <Text text="{CustomerName}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>EstimatedPrice}" sortProperty="EstimatedPrice" filterProperty="EstimatedPrice">
+                <table:Column width="10rem" label="{i18n>EstimatedPrice}" sortProperty="EstimatedPrice" filterProperty="EstimatedPrice">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"EstimatedPrice", "leadingProperty":"EstimatedPrice"}'/>
                     </table:customData>
@@ -132,7 +130,7 @@
                         <Text text="{EstimatedPrice}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>FinalPrice}" sortProperty="FinalPrice" filterProperty="FinalPrice">
+                <table:Column width="10rem" label="{i18n>FinalPrice}" sortProperty="FinalPrice" filterProperty="FinalPrice">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"FinalPrice", "leadingProperty":"FinalPrice"}'/>
                     </table:customData>
@@ -140,7 +138,7 @@
                         <Text text="{FinalPrice}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>FinalPostingDate}" sortProperty="FinalPostingDate" filterProperty="FinalPostingDate">
+                <table:Column width="10rem" label="{i18n>FinalPostingDate}" sortProperty="FinalPostingDate" filterProperty="FinalPostingDate">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"FinalPostingDate", "leadingProperty":"FinalPostingDate"}'/>
                     </table:customData>
@@ -148,7 +146,7 @@
                         <Text text="{FinalPostingDate}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>FinalSupplier}" sortProperty="FinalSupplier" filterProperty="FinalSupplier">
+                <table:Column width="10rem" label="{i18n>FinalSupplier}" sortProperty="FinalSupplier" filterProperty="FinalSupplier">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"FinalSupplier", "leadingProperty":"FinalSupplier"}'/>
                     </table:customData>
@@ -156,7 +154,7 @@
                         <Text text="{FinalSupplier}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>FixedSupplier}" sortProperty="FixedSupplier" filterProperty="FixedSupplier">
+                <table:Column width="10rem" label="{i18n>FixedSupplier}" sortProperty="FixedSupplier" filterProperty="FixedSupplier">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"FixedSupplier", "leadingProperty":"FixedSupplier"}'/>
                     </table:customData>
@@ -164,7 +162,7 @@
                         <Text text="{FixedSupplier}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>StandardPrice}" sortProperty="StandardPrice" filterProperty="StandardPrice">
+                <table:Column width="10rem" label="{i18n>StandardPrice}" sortProperty="StandardPrice" filterProperty="StandardPrice">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"StandardPrice", "leadingProperty":"StandardPrice"}'/>
                     </table:customData>
@@ -172,7 +170,7 @@
                         <Text text="{StandardPrice}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>MovingAveragePrice}" sortProperty="MovingAveragePrice" filterProperty="MovingAveragePrice">
+                <table:Column width="10rem" label="{i18n>MovingAveragePrice}" sortProperty="MovingAveragePrice" filterProperty="MovingAveragePrice">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MovingAveragePrice", "leadingProperty":"MovingAveragePrice"}'/>
                     </table:customData>
@@ -188,7 +186,7 @@
                         <Text text="{Currency}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>BillingQuantity}" sortProperty="BillingQuantity" filterProperty="BillingQuantity">
+                <table:Column width="10rem" label="{i18n>BillingQuantity}" sortProperty="BillingQuantity" filterProperty="BillingQuantity">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantity", "leadingProperty":"BillingQuantity"}'/>
                     </table:customData>
@@ -196,7 +194,7 @@
                         <Text text="{BillingQuantity}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>BillingQuantityUnit}" sortProperty="BillingQuantityUnit" filterProperty="BillingQuantityUnit">
+                <table:Column width="10rem" label="{i18n>BillingQuantityUnit}" sortProperty="BillingQuantityUnit" filterProperty="BillingQuantityUnit">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantityUnit", "leadingProperty":"BillingQuantityUnit"}'/>
                     </table:customData>
@@ -204,7 +202,6 @@
                         <Text text="{BillingQuantityUnit}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>
