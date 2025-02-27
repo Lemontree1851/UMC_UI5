@@ -1,15 +1,15 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "../model/formatter",
-    "./messages",
+	"sap/ui/core/mvc/Controller",
+	"../model/formatter",
+	"./messages",
 	"sap/ui/model/Filter",
 	"sap/m/MessageBox",
 	"sap/ui/export/Spreadsheet",
 	"sap/m/BusyDialog",
-], function(
-    Controller,
-    formatter,
-    messages,
+], function (
+	Controller,
+	formatter,
+	messages,
 	Filter,
 	MessageBox,
 	Spreadsheet,
@@ -18,18 +18,18 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("pp.ofpartition.controller.OFPartition", {
-        formatter : formatter,
-        onInit: function () {
-            this._BusyDialog = new BusyDialog();
-            this._LocalData = this.getOwnerComponent().getModel("local");
-            this._oDataModel = this.getOwnerComponent().getModel();
-            this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-            // this._oDataModel.attachRequestCompleted(function (oEvent) {
+		formatter: formatter,
+		onInit: function () {
+			this._BusyDialog = new BusyDialog();
+			this._LocalData = this.getOwnerComponent().getModel("local");
+			this._oDataModel = this.getOwnerComponent().getModel();
+			this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			// this._oDataModel.attachRequestCompleted(function (oEvent) {
 			// 	try {
 			// 		var oResponse, aResults;
 			// 		if (oEvent.getParameter("method") === "GET" && oEvent.getParameter("response").statusCode === "200" &&
 			// 			oEvent.getParameter("url").split("?")[0] === "OFPartition") {
-						
+
 			// 			oResponse = oEvent.getParameter("response");
 			// 			aResults = JSON.parse(oResponse.responseText).d.results;
 			// 			// this.fillOFPartition(this.allPostResults,aResults);
@@ -37,27 +37,27 @@ sap.ui.define([
 			// 	} catch (e) {}
 			// }.bind(this));
 
-            this.aHttpRequest = [];
+			this.aHttpRequest = [];
 			this.dataFinished = true;
-        },
+		},
 
-        onSearch: function (oEvent) {
-            this.errorPopup = false;
+		onSearch: function (oEvent) {
+			this.errorPopup = false;
 			var aFilter = this.getView().byId("idSmartFilterBar").getFilters();
 			var oNewFilter, aNewFilter = [];
 
 			// 获取分割范围
 			var oDateRange = this.byId("idDateRangeSelection");
 			if (oDateRange.getValue()) {
-				var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2,"0")}`;
-				var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2,"0")}`;
+				var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2, "0")}`;
+				var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2, "0")}`;
 				var splitRange = splitStart + "-" + splitEnd;
-				aNewFilter.push(new Filter("SplitRange", "EQ", splitRange)); 
+				aNewFilter.push(new Filter("SplitRange", "EQ", splitRange));
 			}
 
 			oNewFilter = new Filter({
-				filters:aNewFilter,
-				and:true
+				filters: aNewFilter,
+				and: true
 			});
 			if (aNewFilter.length > 0) {
 				aFilter.push(oNewFilter);
@@ -66,15 +66,16 @@ sap.ui.define([
 				aFilter = [];
 			}
 			// this.getFilter(aFilter)
-				//中止之前的请求,防止上次正在请求的数据请求完成后错误的添加到此次请求中
+			//中止之前的请求,防止上次正在请求的数据请求完成后错误的添加到此次请求中
 			this.aHttpRequest.forEach(function (req) {
 				req.abort();
 			});
-			
+
 			this.getEntityCount(aFilter, splitRange).then(function (iItemCount) {
 				if (iItemCount > 0) {
 					//设置要查询的字段
-					let sParamtetrsOfSelect = "Customer,Plant,Material,MaterialByCustomer,MaterialName,RequirementDate,RequirementQty";
+					// let sParamtetrsOfSelect = "Customer,Plant,Material,MaterialByCustomer,MaterialName,RequirementDate,RequirementQty";
+					let sParamtetrsOfSelect = "UUID,DataJson"; // MOD BY XINLEI XU 2025/02/27
 					//获取数据
 					this._LocalData.setProperty("/OFPartition", []);
 					this._LocalData.setProperty("/OFPartitionTemp", []);
@@ -84,7 +85,7 @@ sap.ui.define([
 					this.byId("idDynamicPage").setBusy(false);
 				}
 			}.bind(this));
-        },
+		},
 
 		getEntityCount: function (aFilter, splitRange) {
 			var that = this;
@@ -117,7 +118,7 @@ sap.ui.define([
 			return promise;
 		},
 
-        getEntityContentOnePage: function (iTop, iSkip, aFilter, sParamtetrsOfSelect, splitRange) {
+		getEntityContentOnePage: function (iTop, iSkip, aFilter, sParamtetrsOfSelect, splitRange) {
 			sParamtetrsOfSelect = sParamtetrsOfSelect ? sParamtetrsOfSelect : "";
 			var that = this;
 			this.aHttpRequest = [];
@@ -137,9 +138,14 @@ sap.ui.define([
 					},
 					success: function (oData) {
 						if (oData.results.length > 0) {
-							aResultTemp.push.apply(aResultTemp, oData.results);
+							// MOD BEGIN BY XINLEI XU 2025/02/27
+							// aResultTemp.push.apply(aResultTemp, oData.results);
+							oData.results.forEach(element => {
+								aResultTemp.push.apply(aResultTemp, JSON.parse(element.DataJson));
+							});
+							// MOD END BY XINLEI XU 2025/02/27
 							that._LocalData.setProperty("/OFPartitionTemp", aResultTemp);
-						} 
+						}
 						resolve(oData);
 					},
 					error: function (oError) {
@@ -154,7 +160,7 @@ sap.ui.define([
 								sErrorMessage = oError.responseText;
 							}
 							sErrorMessage = sErrorMessage + that._ResourceBundle.getText("DataError");
-							if(!that.errorPopup) {
+							if (!that.errorPopup) {
 								MessageBox.error(sErrorMessage);
 								that.errorPopup = true;
 								that._LocalData.setProperty("/OFPartition", []);
@@ -170,7 +176,7 @@ sap.ui.define([
 				// that.aHttpRequest.push(that.getOwnerComponent().getModel().read("/OFPartition(SplitRange='" + splitRange + "')/Set", mParameters));
 				that.aHttpRequest.push(that.getOwnerComponent().getModel().read("/OFPartition", mParameters));
 			});
-            promise.then(function (oData) {
+			promise.then(function (oData) {
 				// 如果存在next参数，说明数据还未取完，需要再次取值
 				if (oData.__next) {
 					//abap cloud中odata每次最多只能取5000条，所以当还有数据时 iSkip加5000即可
@@ -178,7 +184,7 @@ sap.ui.define([
 					// 且需要前一页执行完毕之后才处理第二页
 					iSkip = iSkip + 5000;
 					that.getEntityContentOnePage(iTop, iSkip, aFilter, sParamtetrsOfSelect, splitRange);
-				// 如果不存在next参数则说明数据已经取完
+					// 如果不存在next参数则说明数据已经取完
 				} else {
 					aResultTemp = that._LocalData.getProperty("/OFPartitionTemp");
 					aResult = that.transformData(aResultTemp);
@@ -190,59 +196,62 @@ sap.ui.define([
 					that.dataFinished = true;
 					// that.byId("idDynamicPage").setBusy(false);
 				}
-            });
+			});
 			// aPromise.push(promise);
 		},
 
-		onRowsUpdated:function(){
+		onRowsUpdated: function () {
 			if (this.dataFinished) {
 				this.byId("idDynamicPage").setBusy(false);
 			}
 		},
 
-        transformData: function (data) {
-            // 创建一个对象来存储转换后的数据
-            let result = {};
-        
-            // 遍历数据数组
-            data.forEach(item => {
-                // 使用Customer, Plant, Material作为key值组合
-                const key = `${item.Customer}_${item.Plant}_${item.Material}`;
-        
-                // 如果当前组合的key不存在于result中，则初始化它
-                if (!result[key]) {
-                    result[key] = {
+		transformData: function (data) {
+			// 创建一个对象来存储转换后的数据
+			let result = {};
+
+			// 遍历数据数组
+			data.forEach(item => {
+				// 使用Customer, Plant, Material作为key值组合
+				const key = `${item.Customer}_${item.Plant}_${item.Material}`;
+
+				// 如果当前组合的key不存在于result中，则初始化它
+				if (!result[key]) {
+					result[key] = {
 						// Type: item.Type,
 						// Message: item.Message,
-                        Customer: item.Customer,
-                        Plant: item.Plant,
-                        Material: item.Material,
+						Customer: item.Customer,
+						Plant: item.Plant,
+						Material: item.Material,
 						MaterialByCustomer: item.MaterialByCustomer,
 						MaterialName: item.MaterialName,
-                        ReqDates: {}
-                    };
-                }
-        
-                // 将日期作为列名，使用RequirementQty填充
-				let ReqDate = item.RequirementDate.getFullYear().toString();
-				ReqDate = ReqDate + (item.RequirementDate.getMonth() + 1).toString().padStart(2,"0")
-				ReqDate = ReqDate + item.RequirementDate.getDate().toString().padStart(2,"0")
-                const dateKey = `ReqDate${ReqDate}`;
-                result[key].ReqDates[dateKey] = item.RequirementQty;
-            });
-        
-            // 将对象转化为数组形式，并将ReqDates展开为列
-            return Object.values(result).map(item => {
-                return {
-                    Customer: item.Customer,
-                    Plant: item.Plant,
-                    Material: item.Material,
+						ReqDates: {}
+					};
+				}
+
+				// 将日期作为列名，使用RequirementQty填充
+				// MOD BEGIN BY XINLEI XU 2025/02/27
+				// let ReqDate = item.RequirementDate.getFullYear().toString();
+				// ReqDate = ReqDate + (item.RequirementDate.getMonth() + 1).toString().padStart(2, "0")
+				// ReqDate = ReqDate + item.RequirementDate.getDate().toString().padStart(2, "0")
+				let ReqDate = item.RequirementDate.replace(/[^0-9]/g, '');
+				// MOD END BY XINLEI XU 2025/02/27
+				const dateKey = `ReqDate${ReqDate}`;
+				result[key].ReqDates[dateKey] = item.RequirementQty;
+			});
+
+			// 将对象转化为数组形式，并将ReqDates展开为列
+			return Object.values(result).map(item => {
+				return {
+					Customer: item.Customer,
+					Plant: item.Plant,
+					Material: item.Material,
 					MaterialByCustomer: item.MaterialByCustomer,
 					MaterialName: item.MaterialName,
-                    ...item.ReqDates // 展开动态生成的日期列
-                };
-            });
-        },
+					...item.ReqDates // 展开动态生成的日期列
+				};
+			});
+		},
 
 		addColumns: function () {
 			var ofpartition = this._LocalData.getProperty("/OFPartition");
@@ -255,15 +264,15 @@ sap.ui.define([
 			}
 		},
 
-		addColumn: function(sColName,oObj){
+		addColumn: function (sColName, oObj) {
 			var sBindingPath = `{path:'local>${sColName}', type:'pp.ofpartition.controller.CustomDecimal'}`;
 			// 生成input控件
 			var oText = new sap.m.Input({
-							value : sBindingPath,
-					    	tooltip:"{local>" + sColName + "}"
-						});
+				value: sBindingPath
+				// tooltip: "{local>" + sColName + "}" DEL BY XINLEI XU 2025/02/27
+			});
 			var sLabel = sColName.slice(7);
-			var oCustomDataValue = {columnKey: sColName, leadingProperty: sColName};
+			var oCustomDataValue = { columnKey: sColName, leadingProperty: sColName };
 			var sWidth = "8rem";
 			var shAlign = "Begin";
 			if (sColName.indexOf("ReqDate") >= 0) {
@@ -272,37 +281,37 @@ sap.ui.define([
 			// 生成column id
 			var sId = oObj.getView().createId(sColName);
 			// 如果相同ID的column存在则删除(为了保证column的顺序，需要重新添加)
-			if (oObj.byId(sId)){
+			if (oObj.byId(sId)) {
 				oObj.byId(sId).destroyLabel();
 				oObj.byId(sId).destroyTemplate();
 				oObj.byId(sId).destroy(true);
 			}
 			// 往表中添加column
 			var oColumn = new sap.ui.table.Column({
-					id: oObj.getView().createId(sColName),
-					hAlign: shAlign,
-					label: sLabel,
-					width: sWidth,
-					template: oText,
-					// customData: new sap.ui.core.CustomData({
-					// 				key: "p13nData",
-					// 				value: oCustomDataValue
-					// 			})
-				});
+				id: oObj.getView().createId(sColName),
+				hAlign: shAlign,
+				label: sLabel,
+				width: sWidth,
+				template: oText,
+				// customData: new sap.ui.core.CustomData({
+				// 				key: "p13nData",
+				// 				value: oCustomDataValue
+				// 			})
+			});
 			oObj.getView().byId("reportTable1").addColumn(oColumn);
 		},
-		onPositionColumn:function() {
+		onPositionColumn: function () {
 			this.byId(this.getView().createId("ReqDate20241030")).focus();
 		},
 
 		onCreatePIR: function () {
-			
+
 			var aOFPartition = this._LocalData.getProperty("/OFPartition");
 			var aSelectedItem = this.preparePostBody();
 			var aPromise = [];
 			var that = this;
 			var processDate = this.getDates();
-			aSelectedItem.forEach( function (line){
+			aSelectedItem.forEach(function (line) {
 				var promise = new Promise((resolve, reject) => {
 					var createPrintRecord = this.getOwnerComponent().getModel("pir").bindContext("/ZC_CREATEPIR/com.sap.gateway.srvd.zui_createpir_o4.v0001.processOFPartition(...)");
 					createPrintRecord.setParameter("Customer", line.Customer);
@@ -354,8 +363,8 @@ sap.ui.define([
 				that.byId("idDynamicPage").setBusy(false);
 			});
 		},
-		  
-		preparePostBody: function() {
+
+		preparePostBody: function () {
 			var postDocs = [];
 			var oTable = this.byId("reportTable1");
 			var listItems = oTable.getSelectedIndices();
@@ -363,7 +372,7 @@ sap.ui.define([
 				messages.showError(this._ResourceBundle.getText("msgNoSelect"));
 				return;
 			}
-			listItems.forEach(_getData,this); //根据选择的行获取具体的数据
+			listItems.forEach(_getData, this); //根据选择的行获取具体的数据
 			function _getData(sSelected, index) { //sSelected为选中的行
 				var key = oTable.getContextByIndex(sSelected).getPath();
 				var lineData = this._LocalData.getProperty(key); //根据选中的行获取到ODATA键值，然后再获取到具体属性值
@@ -380,37 +389,38 @@ sap.ui.define([
 				if (key.startsWith('ReqDate')) {
 					const date = key.replace('ReqDate', ''); // 获取后面的日期
 					// 本来只取数量大于0的数据，但特殊情况下，全部为0也要至少保证一条数据，所以使用isFisrtDate控制
-					if(Number(data[`ReqDate${date}`]) > 0 || isFisrtDate) {
+					if (Number(data[`ReqDate${date}`]) > 0 || isFisrtDate) {
 						isFisrtDate = false;
 						result.push({
 							Customer: data.Customer,
 							Plant: data.Plant,
 							Material: data.Material,
 							RequirementDate: date,
-							RequirementMonth: date.substring(0,6),
-							RequirementQty: data[`ReqDate${date}`]
+							RequirementMonth: date.substring(0, 6),
+							// MOD BEGIN BY XINLEI XU 2025/02/27
+							// RequirementQty: data[`ReqDate${date}`]
+							RequirementQty: data[`ReqDate${date}`].toString()
+							// MOD END BY XINLEI XU 2025/02/27
 						});
 					}
-					
 				}
 			});
-		
 			return result;
 		},
 
 		getDates: function () {
 			// 获取当前日期
 			const currentDate = new Date();
-		
+
 			// 获取当前月份1号的日期
 			const firstDayOfCurrentMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-		
+
 			// 获取当前月份+24个月的月底日期
 			const futureDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 24 + 1, 0);
-		
+
 			return {
-				firstDayOfCurrentMonth: firstDayOfCurrentMonth.toISOString().slice(0, 10).replaceAll("-",""),
-				lastDayOfFutureMonth: futureDate.toISOString().slice(0, 10).replaceAll("-","")
+				firstDayOfCurrentMonth: firstDayOfCurrentMonth.toISOString().slice(0, 10).replaceAll("-", ""),
+				lastDayOfFutureMonth: futureDate.toISOString().slice(0, 10).replaceAll("-", "")
 			};
 		},
 
