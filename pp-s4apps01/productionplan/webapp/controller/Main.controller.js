@@ -468,10 +468,19 @@ sap.ui.define([
             });
         },
 
-        onWeb2: function (oEvent) {
-            var sPath = jQuery.sap.getModulePath("pp.productionplan") + "#zmfgorderassignso-display";
+        onWeb2: function (oEvent) {          
             //製造指図と受注の割当
-            window.open(sPath, "_blank");
+            var aPromise = [];
+            aPromise.push(this.callAction("", "WEB2", ""));
+            Promise.all(aPromise).then((oData) => {
+                let sPath = JSON.parse(oData[0]["processLogic"].Zzkey);
+                window.open(sPath, "_blank");
+
+            }).catch((error) => {
+                MessageBox.error(error.message);
+            }).finally(() => {
+                this._BusyDialog.close();
+            });
         },
 
         onWeb3: function (oEvent) {
