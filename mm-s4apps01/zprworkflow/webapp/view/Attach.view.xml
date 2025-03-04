@@ -17,10 +17,11 @@
     <Page id="idPageAttach" showHeader="false" floatingFooter="true" showFooter="{local>/objectPageEditable}">
         <xuap:ObjectPageLayout id="idObjectPageLayoutAttach" upperCaseAnchorBar="false" showHeaderContent="false">
             <xuap:sections>
-                <xuap:ObjectPageSection id="id0ObjectPageSectionAttach">
+                <!-- DEL BEGIN BY XINLEI XU 2025/03/04 -->
+                <!-- <xuap:ObjectPageSection id="id0ObjectPageSectionAttach">
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection id="id0ObjectPageSubSectionAttach" title="{i18n>attachment}(非推奨)">
-                            <!-- MOD BEGIN BY XINLEI XU 2025/02/24 -->
+
                             <upload:UploadSet id="idUploadSetAttach" items="{Attach>DocumentInfoRecordToAttachmentNavigation}" multiple="false" mode="None" uploadButtonInvisible="true" uploadEnabled="true" instantUpload="false" beforeItemAdded="onBeforeItemAdded" uploadCompleted="onUploadCompleted" fileRenamed="onFileRenamed" beforeItemRemoved="onBeforeItemRemoved">
                                 <upload:items>
                                     <upload:UploadSetItem id="idUploadSetItemAttach" fileName="{Attach>FileName}" mediaType="{Attach>MimeType6}" url="{
@@ -31,10 +32,12 @@
                             </upload:UploadSet>
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
-                </xuap:ObjectPageSection>
+                </xuap:ObjectPageSection> -->
+                <!-- DEL BEGIN BY XINLEI XU 2025/03/04 -->
+                <!-- ADD BEGIN BY XINLEI XU 2025/02/24 -->
                 <xuap:ObjectPageSection id="id0ObjectPageSectionAttach1">
                     <xuap:subSections>
-                        <xuap:ObjectPageSubSection id="id0ObjectPageSubSectionAttach1" title="{i18n>attachment}(新しい)">
+                        <xuap:ObjectPageSubSection id="id0ObjectPageSubSectionAttach1" title="{i18n>attachment}">
                             <upload:UploadSetwithTable id="UploadSetTable" class="sapUiSmallMargin" multiple="false" uploadButtonInvisible="true" sticky="ColumnHeaders,HeaderToolbar" width="auto" fixedLayout="false" autoPopinMode="true" hiddenInPopin="None" items="{ path: 'local>/uploadFiles', templateShareable: false }" maxFileNameLength="60" beforeUploadStarts="onBeforeUploadStarts" uploadCompleted="onUploadCompleted" mode="MultiSelect" growing="true" growingThreshold="5" multiSelectMode="SelectAll">
                                 <upload:headerToolbar>
                                     <OverflowToolbar>
@@ -81,10 +84,10 @@
                                     </upload:UploadSetwithTableItem>
                                 </upload:items>
                             </upload:UploadSetwithTable>
-                            <!-- MOD END BY XINLEI XU 2025/02/24 -->
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>
+                <!-- ADD END BY XINLEI XU 2025/02/24 -->
             </xuap:sections>
         </xuap:ObjectPageLayout>
         <footer>

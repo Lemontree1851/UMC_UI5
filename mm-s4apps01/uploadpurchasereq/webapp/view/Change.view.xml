@@ -163,10 +163,10 @@
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>
-                <xuap:ObjectPageSection id="id0ObjectPageSection">
+                <!-- DEL BEGIN BY XINLEI XU 2025/03/04 -->
+                <!-- <xuap:ObjectPageSection id="id0ObjectPageSection">
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection id="id0ObjectPageSubSection" title="{i18n>attachment}(非推奨)">
-                            <!-- MOD BEGIN BY XINLEI XU 2025/02/20 -->
                             <upload:UploadSet id="idUploadSet" items="{Attach>DocumentInfoRecordToAttachmentNavigation}" multiple="false" mode="None" uploadEnabled="{local>/authorityCheck/button/AttachmentUpload}" instantUpload="false" beforeItemAdded="onBeforeItemAdded" uploadCompleted="onUploadCompleted" fileRenamed="onFileRenamed" beforeItemRemoved="onBeforeItemRemoved">
                                 <upload:items>
                                     <upload:UploadSetItem id="idUploadSetItem" fileName="{Attach>FileName}" mediaType="{Attach>MimeType}" url="{
@@ -177,12 +177,13 @@
                             </upload:UploadSet>
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
-                </xuap:ObjectPageSection>
+                </xuap:ObjectPageSection> -->
+                <!-- DEL BEGIN BY XINLEI XU 2025/03/04 -->
+                <!-- ADD BEGIN BY XINLEI XU 2025/02/20 -->
                 <xuap:ObjectPageSection id="id0ObjectPageSection1">
                     <xuap:subSections>
-                        <xuap:ObjectPageSubSection id="id0ObjectPageSubSection1" title="{i18n>attachment}(新しい)">
+                        <xuap:ObjectPageSubSection id="id0ObjectPageSubSection1" title="{i18n>attachment}">
                             <VBox>
-                                <MessageStrip text="单个文件不超过15MB." type="Information" showIcon="true"/>
                                 <upload:UploadSetwithTable id="UploadSetTable" class="sapUiSmallMargin" multiple="false" uploadEnabled="{local>/authorityCheck/button/AttachmentUpload}" sticky="ColumnHeaders,HeaderToolbar" width="auto" fixedLayout="false" autoPopinMode="true" hiddenInPopin="None" items="{ path: 'local>/uploadFiles', templateShareable: false }" maxFileNameLength="60" beforeUploadStarts="onBeforeUploadStarts" uploadCompleted="onUploadCompleted" mode="MultiSelect" growing="true" growingThreshold="5" multiSelectMode="SelectAll">
                                     <upload:headerToolbar>
                                         <OverflowToolbar>
@@ -231,10 +232,10 @@
                                     </upload:items>
                                 </upload:UploadSetwithTable>
                             </VBox>
-                            <!-- MOD END BY XINLEI XU 2025/02/20 -->
                         </xuap:ObjectPageSubSection>
                     </xuap:subSections>
                 </xuap:ObjectPageSection>
+                <!-- ADD END BY XINLEI XU 2025/02/20 -->
                 <xuap:ObjectPageSection>
                     <xuap:subSections>
                         <xuap:ObjectPageSubSection title="{i18n>history}">

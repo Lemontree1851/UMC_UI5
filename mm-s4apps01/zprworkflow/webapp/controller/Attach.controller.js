@@ -82,7 +82,7 @@ sap.ui.define([
 			oView.bindElement({
 				path: "/PurchaseReqWFLink(guid'" + oArgs.contextPath + "')",
 				events: {
-					change: this._onBindingChange.bind(this), // DEL BY XINLEI XU 2025/02/24
+					// change: this._onBindingChange.bind(this), // DEL BY XINLEI XU 2025/03/04
 					dataRequested: function (oEvent) {
 						oView.setBusy(true);
 					},
