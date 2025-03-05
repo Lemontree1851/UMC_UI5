@@ -162,11 +162,13 @@ sap.ui.define([
 						},this);
                     },this);
 					this._BusyDialog.close();
+					this.getModel().refresh();
                 }.bind(this),
                 error: function (oError) {
                     this._LocalData.setProperty("/recordCheckSuccessed", false);
                     messages.showError(messages.parseErrors(oError));
 					this._BusyDialog.close();
+					this.getModel().refresh();
                 }.bind(this)
             });
             // oModel.submitChanges({ groupId: "myId" });
@@ -233,10 +235,12 @@ sap.ui.define([
 						},this);
                     },this);
 					this._BusyDialog.close();
+					this.getModel().refresh();
                 }.bind(this),
                 error: function (oError) {
                     messages.showError(messages.parseErrors(oError));
 					this._BusyDialog.close();
+					this.getModel().refresh();
                 }.bind(this)
             });
 		},
