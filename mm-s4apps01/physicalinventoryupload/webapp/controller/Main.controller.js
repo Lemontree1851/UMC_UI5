@@ -227,11 +227,13 @@ sap.ui.define([
                         console.log(error);
                         MessageBox.error((error.message));
                     }).finally(() => {
-                        that._BusyDialog.close();
+                        // that._BusyDialog.close();
+                        this._BusyDialog.close();
                     });
                 } catch (error) {
                     MessageBox.error(error.message);
-                    that._BusyDialog.close();
+                    // that._BusyDialog.close();
+                    this._BusyDialog.close();
                 }
 
             },
