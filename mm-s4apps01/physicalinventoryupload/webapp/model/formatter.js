@@ -11,17 +11,23 @@ sap.ui.define([
             if (value === "E") {
                 return "Error";
             }
+            if (value === "W") {
+                return "Warning";
+            }
             return "None";
         },
 
-        formatResult: function (v) {
-            if (v === "S") {
-                return "Success";
+        formatStateIcon: function (value) {
+            if (value === "S") {
+                return "sap-icon://status-positive";
             }
-            if (v === "E") {
-                return "Error";
+            if (value === "E") {
+                return "sap-icon://status-negative";
             }
-            return "";
+            if (value === "W") {
+                return "sap-icon://status-critical";
+            }
+            return "sap-icon://status-inactive";
         },
 
         // format Date
@@ -35,13 +41,13 @@ sap.ui.define([
             return value;
         },
         odataDate: function (sDate) {
-			var oDate = new Date(sDate);
-			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-				pattern: "yyyyMMdd"
-			});
-			var sFormatDate = oDateFormat.format(oDate, false);
-			return new Date(sFormatDate);
-		},
+            var oDate = new Date(sDate);
+            var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+                pattern: "yyyyMMdd"
+            });
+            var sFormatDate = oDateFormat.format(oDate, false);
+            return new Date(sFormatDate);
+        },
         // 格式化时间
         formatTime: function (value) {
             if (value) {

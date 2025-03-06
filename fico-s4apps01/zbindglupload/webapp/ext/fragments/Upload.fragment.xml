@@ -28,46 +28,43 @@
                         <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="handler.onExport" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
                     </OverflowToolbar>
                 </table:extension>
-                    <table:columns>
-                        <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
-                            <table:template>
-                                <ObjectStatus state="{ path:'local>Status',formatter:'handler.formatter.formatState' }" icon="sap-icon://status-positive"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="20rem" label="{i18n>Message}">
-                            <table:template>
-                                <Text text="{local>Message}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                       
-                        <table:Column width="6rem" label="{i18n>ChartOfAccounts}">
-                            <table:template>
-                                <Text text="{local>ChartOfAccounts}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="6rem" label="{i18n>GLAccount}">
-                            <table:template>
-                                <Text text="{local>GLAccount}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                         <table:Column width="20rem" label="{i18n>GLAccountName}">
-                            <table:template>
-                                <Text text="{local>GLAccountName}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="6rem" label="{i18n>FinancialStatementItem}">
-                            <table:template>
-                                <Text text="{local>FinancialStatementItem}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="20rem" label="{i18n>FinancialStatementItemText}">
-                            <table:template>
-                                <Text text="{local>FinancialStatementItemText}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                      
-
-                    </table:columns>
+                <table:columns>
+                    <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                        <table:template>
+                            <ObjectStatus state="{ path:'local>Status',formatter:'handler.formatter.formatState' }" icon="{ path:'local>Status', formatter:'handler.formatter.formatStateIcon'}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>Message}">
+                        <table:template>
+                            <Text text="{local>Message}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>ChartOfAccounts}">
+                        <table:template>
+                            <Text text="{local>ChartOfAccounts}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>GLAccount}">
+                        <table:template>
+                            <Text text="{local>GLAccount}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>GLAccountName}">
+                        <table:template>
+                            <Text text="{local>GLAccountName}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem" label="{i18n>FinancialStatementItem}">
+                        <table:template>
+                            <Text text="{local>FinancialStatementItem}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>FinancialStatementItemText}">
+                        <table:template>
+                            <Text text="{local>FinancialStatementItemText}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
             </table:Table>
         </Panel>
     </Dialog>

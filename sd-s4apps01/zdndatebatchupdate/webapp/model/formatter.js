@@ -1,27 +1,33 @@
 sap.ui.define([
     "sap/ui/core/format/DateFormat",
 ], function (DateFormat,
-	) {
+) {
     "use strict";
     return {
-        setState: function (v) {
-            if (v === "S") {
+        setState: function (value) {
+            if (value === "S") {
                 return "Success";
             }
-            if (v === "E") {
+            if (value === "E") {
                 return "Error";
+            }
+            if (value === "W") {
+                return "Warning";
             }
             return "None";
         },
 
-        setStateIcon: function (v) {
-            if (v === "S") {
+        setStateIcon: function (value) {
+            if (value === "S") {
                 return "sap-icon://status-positive";
             }
-            if (v === "E") {
+            if (value === "E") {
                 return "sap-icon://status-negative";
             }
-            return "sap-icon://status-negative";
+            if (value === "W") {
+                return "sap-icon://status-critical";
+            }
+            return "sap-icon://status-inactive";
         },
 
         setResult: function (v) {
@@ -43,19 +49,19 @@ sap.ui.define([
             var regPos = /^\d+(\.\d+)?$/;
             let localDate = new Date(value);
             var intDate = Number(value);
-            if(value === null || intDate === 0){
+            if (value === null || intDate === 0) {
                 return;
-            }else{
+            } else {
                 if (!isNaN(localDate.getTime())) {
                     var oDateFormat = DateFormat.getDateTimeInstance({
                         pattern: "yyyy/MM/dd"
                     });
                     // return oDateFormat.format(new Date(value));
                     return
-                }else{
-                    if (value.length === 8 && regPos.test(value)){
+                } else {
+                    if (value.length === 8 && regPos.test(value)) {
                         return value.substring(0, 4) + "/" + value.substring(4, 6) + "/" + value.substring(6);
-                    }else{
+                    } else {
                         return;
                     }
                 }
@@ -78,7 +84,7 @@ sap.ui.define([
         },
 
         odataDate: function (v) {
-            if ( v === null ) {
+            if (v === null) {
                 return "";
             }
             var deliveryDate = new Date(v);
@@ -112,15 +118,15 @@ sap.ui.define([
         },
         convertLocalDateToUTCDate: function (localDate = new Date()) {
             // 获取当前时区偏移（分钟）
-            let timezoneOffset = localDate.getTimezoneOffset(); 
+            let timezoneOffset = localDate.getTimezoneOffset();
             // 调整时区偏移，将本地时间转换为 UTC 时间（时间不变）
             let utcDate = new Date(localDate.getTime() - timezoneOffset * 60000);
             return utcDate;
         },
         convertISOString: function (v) {
             let localDate = new Date(v);
-            if(!isNaN(localDate.getTime)){
-                return localDate.toISOString().slice(0,10);
+            if (!isNaN(localDate.getTime)) {
+                return localDate.toISOString().slice(0, 10);
             } else {
                 return v;
             }

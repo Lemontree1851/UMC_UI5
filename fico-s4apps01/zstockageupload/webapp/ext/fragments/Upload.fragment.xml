@@ -28,67 +28,67 @@
                         <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="handler.onExport" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
                     </OverflowToolbar>
                 </table:extension>
-                    <table:columns>
-                        <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
-                            <table:template>
-                                <ObjectStatus state="{ path:'local>Status',formatter:'handler.formatter.formatState' }" icon="sap-icon://status-positive"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="20rem" label="{i18n>Message}">
-                            <table:template>
-                                <Text text="{local>Message}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                                                <table:Column width="4rem" label="{i18n>InventoryType}">
-                            <table:template>
-                                <Text text="{local>InventoryType}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>  
-                        <table:Column width="6rem" label="{i18n>CompanyCode}">
-                            <table:template>
-                                <Text text="{local>CompanyCode}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>   
-                        <table:Column width="6rem" label="{i18n>Ledger}">
-                            <table:template>
-                                <Text text="{local>Ledger}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>       
-                                                <table:Column width="6rem" label="{i18n>CalendarYear}">
-                            <table:template>
-                                <Text text="{local>CalendarYear}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="6rem" label="{i18n>CalendarMonth}">
-                            <table:template>
-                                <Text text="{local>CalendarMonth}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>                    
-                        <table:Column width="6rem" label="{i18n>Plant}">
-                            <table:template>
-                                <Text text="{local>Plant}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="16rem" label="{i18n>Material}">
-                            <table:template>
-                                <Text text="{local>Material}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-                         <table:Column width="6rem" label="{i18n>Age}">
-                            <table:template>
-                                <Text text="{local>Age}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
-   
-                        <table:Column width="6rem" label="{i18n>Qty}">
-                            <table:template>
-                                <Text text="{local>Qty}" wrapping="false"/>
-                            </table:template>
-                        </table:Column>
+                <table:columns>
+                    <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                        <table:template>
+                            <ObjectStatus state="{ path:'local>Status',formatter:'handler.formatter.formatState' }" icon="{ path:'local>Status', formatter:'handler.formatter.formatStateIcon'}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="20rem" label="{i18n>Message}">
+                        <table:template>
+                            <Text text="{local>Message}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="18rem" label="{i18n>InventoryType}">
+                        <table:template>
+                            <Text text="{local>InventoryType}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem" label="{i18n>CompanyCode}">
+                        <table:template>
+                            <Text text="{local>CompanyCode}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem" label="{i18n>Ledger}">
+                        <table:template>
+                            <Text text="{local>Ledger}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem" label="{i18n>CalendarYear}">
+                        <table:template>
+                            <Text text="{local>CalendarYear}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem" label="{i18n>CalendarMonth}">
+                        <table:template>
+                            <Text text="{local>CalendarMonth}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem" label="{i18n>Plant}">
+                        <table:template>
+                            <Text text="{local>Plant}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="16rem" label="{i18n>Material}">
+                        <table:template>
+                            <Text text="{local>Material}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem" label="{i18n>Age}">
+                        <table:template>
+                            <Text text="{local>Age}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
 
-                      
+                    <table:Column width="6rem" label="{i18n>Qty}">
+                        <table:template>
+                            <Text text="{local>Qty}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
 
-                    </table:columns>
+
+
+                </table:columns>
             </table:Table>
         </Panel>
     </Dialog>

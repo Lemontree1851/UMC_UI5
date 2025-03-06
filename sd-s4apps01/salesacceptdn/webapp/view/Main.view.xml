@@ -1,219 +1,98 @@
-<mvc:View
-    controllerName="sd.salesacceptdn.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true"
+<mvc:View controllerName="sd.salesacceptdn.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"
     xmlns:unified="sap.ui.unified"
     xmlns:upload="sap.m.upload"
     xmlns:t="sap.ui.table"
     xmlns:rm="sap.ui.table.rowmodes"
     xmlns:sf="sap.ui.comp.smartfield"
-    xmlns:form="sap.ui.comp.smartform"
->
-    <VBox
-        id="idVBox"
-        fitContainer="true"
-    >
-        <Panel
-            id="idPanel"
-            expandable="true"
-            headerText="{i18n>templateText}"
-            width="auto"
-        >
-            <upload:UploadSet
-                id="idUploadSet"
-                items="{ path : 'Template>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_SALESACCEPTDN' } }"
-                multiple="false"
-                mode="None"
-                uploadEnabled="false"
-                uploadButtonInvisible="true"
-                instantUpload="false"
-            >
+    xmlns:form="sap.ui.comp.smartform">
+    <VBox id="idVBox" fitContainer="true">
+        <Panel id="idPanel" expandable="true" headerText="{i18n>templateText}" width="auto">
+            <upload:UploadSet id="idUploadSet" items="{ path : 'Template>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_SALESACCEPTDN' } }" multiple="false" mode="None" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
                 <upload:items>
-                    <upload:UploadSetItem
-                        id="idUploadSetItem"
-                        fileName="{Template>TemplateName}"
-                        mediaType="{Template>TemplateMimeType}"
-                        url="{Template>TemplateContent}"
-                        visibleEdit="false"
-                        visibleRemove="false"
-                    />
+                    <upload:UploadSetItem id="idUploadSetItem" fileName="{Template>TemplateName}" mediaType="{Template>TemplateMimeType}" url="{Template>TemplateContent}" visibleEdit="false" visibleRemove="false" />
                 </upload:items>
             </upload:UploadSet>
         </Panel>
-        <Panel
-            id="idFileUploadPanel"
-            expandable="true"
-            expanded="true"
-            headerText="{i18n>uploadText}"
-            width="auto"
-        >
+        <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
             <RadioButtonGroup id="idRBGUpload">
                 <RadioButton text="{i18n>btn1}"></RadioButton>
                 <RadioButton text="{i18n>btn2}"></RadioButton>
                 <RadioButton text="{i18n>btn3}"></RadioButton>
             </RadioButtonGroup>
-            <unified:FileUploader
-                id="idFileUploader"
-                fileType="xlsx,xls,csv"
-                change="onFileUploaderChange"
-                width="40%"
-                class="sapUiSmallMargin"
-                sameFilenameAllowed="true"
-            />
+            <unified:FileUploader id="idFileUploader" fileType="xlsx,xls,csv" change="onFileUploaderChange" width="40%" class="sapUiSmallMargin" sameFilenameAllowed="true" />
             <Label text="{i18n>SoldToParty}:" class="sapUiSmallMarginBegin sapUiTinyMarginTop sapUiTinyMarginEnd"/>
-            <Input id="idSoldToParty" width="20%" showValueHelp="true"  value="{local>/soldToParty}"
-                valueHelpRequest=".onPressValueHelp($event, true, 'SoldToParty')" change=".onValueChange($event,'SoldToParty')" />
+            <Input id="idSoldToParty" width="20%" showValueHelp="true" value="{local>/soldToParty}" valueHelpRequest=".onPressValueHelp($event, true, 'SoldToParty')" change=".onValueChange($event,'SoldToParty')" />
         </Panel>
-        <Panel
-            id="id0Panel"
-            expandable="true"
-            expanded="true"
-            headerText="{i18n>result}"
-            width="auto"
-            height="100%"
-        >
+        <Panel id="id0Panel" expandable="true" expanded="true" headerText="{i18n>result}" width="auto" height="100%">
             <layoutData>
-                <FlexItemData
-                    id="idFlexItemData"
-                    maxHeight="100%"
-                    maxWidth="100%"
-                    growFactor="1"
-                />
+                <FlexItemData id="idFlexItemData" maxHeight="100%" maxWidth="100%" growFactor="1" />
             </layoutData>
-            <t:Table
-                id="idTable"
-                rows="{local>/excelSet}"
-                selectionMode="Multi"
-                class="sapUiSizeCompact"
-            >
+            <t:Table id="idTable" rows="{local>/excelSet}" selectionMode="Multi" class="sapUiSizeCompact">
                 <t:rowMode>
                     <rm:Auto id="idAuto" />
                 </t:rowMode>
                 <t:extension>
                     <OverflowToolbar id="idOverflowToolbar">
-                        <Text
-                            id="idLogInfoText"
-                            text="{local>/logInfo}"
-                        />
+                        <Text id="idLogInfoText" text="{local>/logInfo}" />
                         <ToolbarSpacer id="idToolbarSpacer" />
-                        <Button
-                            id="idSaveButton"
-                            icon="sap-icon://document"
-                            type="Transparent"
-                            text="{i18n>saveBtn}"
-                            press="onCreateDN"
-                            enabled="{= ${local>/recordCheckSuccessed} &amp;&amp; ${local>/authorityCheck/button/Process}}"
-                        />
+                        <Button id="idSaveButton" icon="sap-icon://document" type="Transparent" text="{i18n>saveBtn}" press="onCreateDN" enabled="{= ${local>/recordCheckSuccessed} &amp;&amp; ${local>/authorityCheck/button/Process}}" />
                     </OverflowToolbar>
                 </t:extension>
                 <t:columns>
-                    <t:Column
-                        width="6rem"
-                        sortProperty="Type"
-                        hAlign="Center"
-                        label="{i18n>Status}"
-                    >
+                    <t:Column width="6rem" sortProperty="Type" hAlign="Center" label="{i18n>Status}">
                         <t:template>
-                            <ObjectStatus
-                                state="{
+                            <ObjectStatus state="{
                                     path: 'local>Type',
                                     formatter: '.formatter.setState'
-                                }"
-                                icon="{
+                                }" icon="{
                                     path: 'local>Type',
                                     formatter: '.formatter.setStateIcon'
-                                }"
-                            />
+                                }" />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        width="5rem"
-                        sortProperty="Result"
-                        label="{i18n>Result}"
-                    >
+                    <!-- <t:Column width="5rem" sortProperty="Result" label="{i18n>Result}">
                         <t:template>
-                            <Text
-                                id="idTypeText"
-                                text="{
+                            <Text id="idTypeText" text="{
                                     path: 'local>Type',
                                     formatter: '.formatter.setResult'
-                                }"
-                            />
+                                }" />
+                        </t:template>
+                    </t:Column> -->
+                    <t:Column width="15rem" sortProperty="Message" label="{i18n>Message}">
+                        <t:template>
+                            <Text id="idMessageText" text="{local>Message}" tooltip="{local>Message}" wrapping="false" />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        width="12rem"
-                        sortProperty="Message"
-                        label="{i18n>Message}"
-                    >
+                    <t:Column width="8rem" label="{i18n>PurchaseFrom}">
                         <t:template>
-                            <Text
-                                id="idMessageText"
-                                text="{local>Message}"
-                                tooltip="{local>Message}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>PurchaseFrom}" />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        width="8rem"
-                        label="{i18n>PurchaseFrom}"
-                    >
+                    <t:Column width="8rem" label="{i18n>SoldTo}">
                         <t:template>
-                            <Text
-                                text="{local>PurchaseFrom}"
-                            />
+                            <Text text="{local>SoldTo}" />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        width="8rem"
-                        label="{i18n>SoldTo}"
-                    >
+                    <t:Column width="12rem" label="{i18n>PurchaseOrderByCustomer}">
                         <t:template>
-                            <Text
-                                text="{local>SoldTo}"
-                            />
+                            <Text text="{local>PurchaseOrderByCustomer}" />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        width="12rem"
-                        label="{i18n>PurchaseOrderByCustomer}"
-                    >
+                    <t:Column width="8rem" label="{i18n>AcceptDate}">
                         <t:template>
-                            <Text
-                                text="{local>PurchaseOrderByCustomer}"
-                            />
+                            <Text text="{local>AcceptDate}" />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        width="8rem"
-                        label="{i18n>AcceptDate}"
-                    >
+                    <t:Column width="9rem" label="{i18n>ProductByPurchase}">
                         <t:template>
-                            <Text
-                                text="{local>AcceptDate}"
-                            />
+                            <Text text="{local>ProductByPurchase}" />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        width="9rem"
-                        label="{i18n>ProductByPurchase}"
-                    >
+                    <t:Column width="8rem" label="{i18n>AcceptQuantity}">
                         <t:template>
-                            <Text
-                                text="{local>ProductByPurchase}"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="8rem"
-                        label="{i18n>AcceptQuantity}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>AcceptQuantity}"
-                            />
+                            <Text text="{local>AcceptQuantity}" />
                         </t:template>
                     </t:Column>
                     <t:Column width="8rem" label="{i18n>SalesDocument}">
@@ -236,7 +115,7 @@
                             <Text text="{local>DeliveryDocumentType}" />
                         </t:template>
                     </t:Column>
-                    <t:Column width="8rem" label="{i18n>DeliveryDocumentText}">
+                    <t:Column width="10rem" label="{i18n>DeliveryDocumentText}">
                         <t:template>
                             <Text text="{local>DeliveryDocumentText}" />
                         </t:template>
@@ -336,7 +215,7 @@
                             <Text text="{local>IncotermsClassification}" />
                         </t:template>
                     </t:Column>
-                    <t:Column width="8rem" label="{i18n>IncotermsLocation1}">
+                    <t:Column width="10rem" label="{i18n>IncotermsLocation1}">
                         <t:template>
                             <Text text="{local>IncotermsLocation1}" />
                         </t:template>
@@ -351,7 +230,6 @@
                             <Text text="{parts:['local>UnDeliveredQty','local>OrderQuantityUnit'], type:'sap.ui.model.type.Unit'}" />
                         </t:template>
                     </t:Column>
-
                 </t:columns>
             </t:Table>
         </Panel>

@@ -11,6 +11,9 @@ sap.ui.define([
             if (value === "E") {
                 return "Error";
             }
+            if (value === "W") {
+                return "Warning";
+            }
             return "None";
         },
 
@@ -21,7 +24,10 @@ sap.ui.define([
             if (value === "E") {
                 return "sap-icon://status-negative";
             }
-            return "sap-icon://alert";
+            if (value === "W") {
+                return "sap-icon://status-critical";
+            }
+            return "sap-icon://status-inactive";
         },
 
         // format Date

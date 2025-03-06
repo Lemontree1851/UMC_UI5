@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:unified="sap.ui.unified"
     xmlns:upload="sap.m.upload"
-    xmlns:table="sap.ui.table">    
+    xmlns:table="sap.ui.table">
     <Page >
         <content>
             <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
@@ -29,70 +29,71 @@
                         </OverflowToolbar>
                     </table:extension>
                     <table:columns>
-                        <table:Column id="_IDGenColumn1" width="15rem" sortProperty="Status" filterProperty="Status">
-						    <Label id="_IDGenLabel" text="{i18n>Status}"/>
-							<table:template>
-								<Text id="_IDGenText1" text="{parts:['local>Status'], formatter:'.formatter.formatResult'}"/>
-							</table:template>
-                        </table:Column>   
+                        <table:Column id="_IDGenColumn1" width="6rem" sortProperty="Status" filterProperty="Status">
+                            <Label id="_IDGenLabel" text="{i18n>Status}"/>
+                            <table:template>
+                                <!-- <Text id="_IDGenText1" text="{ parts:['local>Status'], formatter:'.formatter.formatResult'}"/> -->
+                                <ObjectStatus id="_IDGenText1" state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="{ parts:['local>Status'], formatter:'.formatter.formatStateIcon'}"/>
+                            </table:template>
+                        </table:Column>
                         <table:Column id="_IDGenColumn2" width="15rem" label="{i18n>Message}">
                             <table:template>
                                 <Text id="_IDGenText2" text="{local>Message}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="_IDGenColumn3" width="15rem" label="{i18n>Plant}">
+                        <table:Column id="_IDGenColumn3" width="6rem" label="{i18n>Plant}">
                             <table:template>
                                 <Text id="_IDGenText3" text="{local>Plant}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="_IDGenColumn4" width="20rem" label="{i18n>StorageLocation}">
+                        <table:Column id="_IDGenColumn4" width="6rem" label="{i18n>StorageLocation}">
                             <table:template>
                                 <Text id="_IDGenText4" text="{local>StorageLocation}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="_IDGenColumn5" width="20rem" label="{i18n>InventorySpecialStockType}">
+                        <table:Column id="_IDGenColumn5" width="8rem" label="{i18n>InventorySpecialStockType}">
                             <table:template>
                                 <Text id="_IDGenText5" text="{local>InventorySpecialStockType}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="_IDGenColumn6" width="20rem" label="{i18n>Material}">
+                        <table:Column id="_IDGenColumn6" width="10rem" label="{i18n>Material}">
                             <table:template>
                                 <Text id="_IDGenText6" text="{local>Material}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="_IDGenColumn7" width="20rem" label="{i18n>Supplier}">
+                        <table:Column id="_IDGenColumn7" width="8rem" label="{i18n>Supplier}">
                             <table:template>
                                 <Text id="_IDGenText7" text="{local>Supplier}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="_IDGenColumn8" width="20rem" label="{i18n>Quantity}">
+                        <table:Column id="_IDGenColumn8" width="10rem" label="{i18n>Quantity}" hAlign="End">
                             <table:template>
                                 <Text id="_IDGenText8" text="{local>Quantity}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="_IDGenColumn9" width="20rem" label="{i18n>UnitOfEntry}">
+                        <table:Column id="_IDGenColumn9" width="6rem" label="{i18n>UnitOfEntry}">
                             <table:template>
                                 <Text id="_IDGenText9" text="{local>UnitOfEntry}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="_IDGenColumn10" width="20rem" label="{i18n>PhysicalInventoryItemIsZero}">
+                        <table:Column id="_IDGenColumn10" width="8rem" label="{i18n>PhysicalInventoryItemIsZero}">
                             <table:template>
                                 <Text id="_IDGenText10" text="{local>PhysicalInventoryItemIsZero}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column id="_IDGenColumn11" width="20rem" label="{i18n>Batch}">
+                        <table:Column id="_IDGenColumn11" width="8rem" label="{i18n>Batch}">
                             <table:template>
                                 <Text id="_IDGenText11" text="{local>Batch}" wrapping="false"/>
                             </table:template>
-                        </table:Column>   
-                        <table:Column id="_IDGenColumn12" width="20rem" label="{i18n>ReasonForPhysInvtryDifference}">
+                        </table:Column>
+                        <table:Column id="_IDGenColumn12" width="10rem" label="{i18n>ReasonForPhysInvtryDifference}">
                             <table:template>
                                 <Text id="_IDGenText12" text="{local>ReasonForPhysInvtryDifference}" wrapping="false"/>
                             </table:template>
-                        </table:Column>                 
+                        </table:Column>
                     </table:columns>
                 </table:Table>
             </Panel>
-        </content>        
+        </content>
     </Page>
 </mvc:View>

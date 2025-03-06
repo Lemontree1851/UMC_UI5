@@ -30,15 +30,15 @@
                     <table:columns>
                         <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
                             <table:template>
-                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="{ path:'local>Status', formatter:'.formatter.formatStateIcon'}"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
+                        <!-- <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
 						    <Label text="{i18n>Type}"/>
 							<table:template>
 								<Text text="{parts:['local>Status'], formatter:'.formatter.formatResult'}"/>
 							</table:template>
-                        </table:Column>   
+                        </table:Column>    -->
                         <table:Column width="15rem" label="{i18n>Message}">
                             <table:template>
                                 <Text text="{local>Message}" wrapping="false"/>
@@ -79,22 +79,22 @@
                                 <Text text="{local>PurchasingOrganization}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="4rem" label="{i18n>SupplierIsFixed}">
+                        <table:Column width="6rem" label="{i18n>SupplierIsFixed}">
                             <table:template>
                                 <Text text="{local>SupplierIsFixed}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="4rem" label="{i18n>SourceOfSupplyIsBlocked}">
+                        <table:Column width="8rem" label="{i18n>SourceOfSupplyIsBlocked}">
                             <table:template>
                                 <Text text="{local>SourceOfSupplyIsBlocked}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="4rem" label="{i18n>MrpSourcingControl}">
+                        <table:Column width="6rem" label="{i18n>MrpSourcingControl}">
                             <table:template>
                                 <Text text="{local>MrpSourcingControl}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="4rem" label="{i18n>Xflag}">
+                        <table:Column width="6rem" label="{i18n>Xflag}">
                             <table:template>
                                 <Text text="{local>Xflag}" wrapping="false"/>
                             </table:template>
