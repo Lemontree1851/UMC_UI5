@@ -19,15 +19,12 @@ sap.ui.define([
             this._BusyDialog = new BusyDialog();
 
             // 绑定模板附件path
-            var oUploadSet = this.byId("idUploadSet");
-            var sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='" + "SAT" +
-                "',DocumentInfoRecordDocNumber='" + "10000000000" + "',DocumentInfoRecordDocVersion='" +
-                "00" + "',DocumentInfoRecordDocPart='" + "000" + "')";
-            oUploadSet.bindElement(sPath);
-
+            // var oUploadSet = this.byId("idUploadSet");
+            // var sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='" + "SAT" +
+            //     "',DocumentInfoRecordDocNumber='" + "10000000000" + "',DocumentInfoRecordDocVersion='" +
+            //     "00" + "',DocumentInfoRecordDocPart='" + "000" + "')";
+            // oUploadSet.bindElement(sPath);
         },
-
-        
 
         getMediaUrl: function (sUrlString) {
             if (sUrlString) {

@@ -59,6 +59,18 @@ sap.ui.define([
                             RoleSet: context._AssignRole
                         }
                     });
+                    // ADD BEGIN BY XINLEI XU 2025/03/10
+                    var params = this.getOwnerComponent().getComponentData() && this.getOwnerComponent().getComponentData().startupParameters;
+                    if (sap.ushell && sap.ushell.Container) {
+                        var bFlag = params && params.hasOwnProperty("JumpFromEmail") && params.JumpFromEmail[0];
+                    } else {
+                        var oUriParameters = jQuery.sap.getUriParameters();
+                        bFlag = oUriParameters.get("JumpFromEmail");
+                    }
+                    if (bFlag) {
+                        this.getView().byId("id0IconTabBar").setSelectedKey("result2");
+                    }
+                    // ADD END BY XINLEI XU 2025/03/10
                 }.bind(this), function (oError) {
                     if (!this.oErrorMessageDialog) {
                         this.oErrorMessageDialog = new sap.m.Dialog({
