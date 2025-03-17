@@ -97,6 +97,7 @@ sap.ui.define([
                     });
                     var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                     var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
+                    var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(); // ADD BY XINLEI XU 2025/03/17
                     // read valid data starting from line 3
                     for (var i = 4; i < aSheetData.length; i++) {
                         var item = {
@@ -113,6 +114,7 @@ sap.ui.define([
                             "PhysicalInventoryItemIsZero": aSheetData[i]["PhysicalInventoryItemIsZero"] === undefined ? "" : aSheetData[i]["PhysicalInventoryItemIsZero"],
                             "Batch": aSheetData[i]["Batch"] === undefined ? "" : aSheetData[i]["Batch"],
                             "ReasonForPhysInvtryDifference": aSheetData[i]["ReasonForPhysInvtryDifference"] === undefined ? "" : aSheetData[i]["ReasonForPhysInvtryDifference"],
+                            "UserEmail": sEmail // ADD BY XINLEI XU 2025/03/17
                         };
                         aExcelSet.push(item);
                     }
