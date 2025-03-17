@@ -2,13 +2,13 @@ sap.ui.define([
     "./Base",
     "../model/formatter",
     "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
     "sap/ui/core/format/DateFormat",
-],
-function (Base,formatter, Filter, DateFormat) {
+], function (Base, formatter, Filter, FilterOperator, DateFormat) {
     "use strict";
 
     return Base.extend("pp.oflist.controller.Main", {
-        formatter:formatter,
+        formatter: formatter,
         onInit: function () {
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
@@ -68,25 +68,30 @@ function (Base,formatter, Filter, DateFormat) {
 
         onBeforeRebindTable: function (oEvent) {
             var oFilter = oEvent.getParameter("bindingParams").filters;
-			var oNewFilter, aNewFilter = [];
-			var sOnlyIsActiveSelectedKey = this.byId("idOnlyIsActive").getSelectedKey();
-			if (sOnlyIsActiveSelectedKey === "1") {
-				aNewFilter.push(new Filter("PlndIndepRqmtIsActive", "EQ", true)); 
-			}
-            var oDataRange = this.byId("idDateRangeSelection");
-            if(oDataRange.getValue()) {
-                var sDateFrom = DateFormat.getDateTimeInstance({pattern: oDataRange.getValueFormat()}).format(oDataRange.getFrom());
-                var sDateTo = DateFormat.getDateTimeInstance({pattern: oDataRange.getValueFormat()}).format(oDataRange.getTo());
-                aNewFilter.push(new Filter("RequirementDate", "BT", sDateFrom, sDateTo)); 
+            var oNewFilter, aNewFilter = [];
+            var sOnlyIsActiveSelectedKey = this.byId("idOnlyIsActive").getSelectedKey();
+            if (sOnlyIsActiveSelectedKey === "1") {
+                aNewFilter.push(new Filter("PlndIndepRqmtIsActive", "EQ", true));
             }
-			
-			oNewFilter = new Filter({
-				filters:aNewFilter,
-				and:true
-			});
-			if (aNewFilter.length > 0) {
-				oFilter.push(oNewFilter);
-			}
+            var oDataRange = this.byId("idDateRangeSelection");
+            if (oDataRange.getValue()) {
+                var sDateFrom = DateFormat.getDateTimeInstance({ pattern: oDataRange.getValueFormat() }).format(oDataRange.getFrom());
+                var sDateTo = DateFormat.getDateTimeInstance({ pattern: oDataRange.getValueFormat() }).format(oDataRange.getTo());
+                aNewFilter.push(new Filter("RequirementDate", "BT", sDateFrom, sDateTo));
+            }
+
+            oNewFilter = new Filter({
+                filters: aNewFilter,
+                and: true
+            });
+            if (aNewFilter.length > 0) {
+                oFilter.push(oNewFilter);
+            }
+
+            // ADD BEGIN BY XINLEI XU 2025/03/17
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            oFilter.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
+            // ADD END BY XINLEI XU 2025/03/17
         }
     });
 });
