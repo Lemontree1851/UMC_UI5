@@ -115,6 +115,11 @@ sap.ui.define([
 				aFilters.push(new Filter("CREATED_AT", FilterOperator.BT, splitStart2, splitEnd2));
 			}
 
+			// ADD BEGIN BY XINLEI XU 2025/03/17
+			var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+			aFilters.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
+			// ADD END BY XINLEI XU 2025/03/17
+
 			var oFilterData = oSearchBar.getFilterData();
 			this.getTableContent(aFilters, oFilterData, oTable);
 		},
