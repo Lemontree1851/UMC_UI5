@@ -93,6 +93,10 @@ sap.ui.define([
             }
             mBindingParams.filters.push(newFilter);
 
+            // ADD BEGIN BY XINLEI XU 2025/03/17
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            mBindingParams.filters.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
+            // ADD END BY XINLEI XU 2025/03/17
         },
 
         onBeforeExport: function (oEvent) {
