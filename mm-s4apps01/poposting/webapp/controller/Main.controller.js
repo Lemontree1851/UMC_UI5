@@ -90,6 +90,7 @@ sap.ui.define([
                 });
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
+                var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(); // ADD BY XINLEI XU 2025/03/17
                 // read valid data starting from line 6
                 for (var i = 4; i < aSheetData.length; i++) {
                     var item = {
@@ -106,7 +107,8 @@ sap.ui.define([
                         "QuantityInEntryUnit": aSheetData[i]["QUANTITYINENTRY"] === undefined ? "" : aSheetData[i]["QUANTITYINENTRY"],
                         "Batch": aSheetData[i]["BATCH"] === undefined ? "" : aSheetData[i]["BATCH"],
                         "Plant": aSheetData[i]["PLANT"] === undefined ? "" : aSheetData[i]["PLANT"],
-                        "StorageLocation": aSheetData[i]["STORAGELOCATION"] === undefined ? "" : aSheetData[i]["STORAGELOCATION"]
+                        "StorageLocation": aSheetData[i]["STORAGELOCATION"] === undefined ? "" : aSheetData[i]["STORAGELOCATION"],
+                        "UserEmail": sEmail // ADD BY XINLEI XU 2025/03/17
                     };
                     aExcelSet.push(item);
                 }
