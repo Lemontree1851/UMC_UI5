@@ -19,7 +19,7 @@ sap.ui.define([
 
             this._oDataModel.attachBatchRequestCompleted(function (oEvent) {
                 this.setBusy(false);
-           
+
                 //Take any one of the returned data. 
                 //However, because the key value is used to retrieve the data in OData, you need to obtain all the key values first
                 var aDataKey = Object.getOwnPropertyNames(this._oDataModel.getProperty("/"));
@@ -105,7 +105,7 @@ sap.ui.define([
         },
 
         onBeforeRebindTable: function (oEvent, arg1, arg2, arg3, arg4) {
-            this._oDataModel.refresh(true,true);
+            this._oDataModel.refresh(true, true);
             var filters = oEvent.getParameters().bindingParams.filters;
             if (!filters) {
                 filters = [];
@@ -118,11 +118,11 @@ sap.ui.define([
                 value1: aLTEXT1
             });
             filters.push(oPeriodType);
-            
+
             var aYear = new Date(this.byId("idAcceptYear").getValue());
             var oAcceptYear = new sap.ui.model.Filter({
                 path: "AcceptYear",
-                operator: "EQ", 
+                operator: "EQ",
                 value1: aYear.getFullYear()
             });
             filters.push(oAcceptYear);
@@ -149,6 +149,12 @@ sap.ui.define([
                 value1: "1"
             });
             filters.push(oLayer);
+
+            // ADD BEGIN BY XINLEI XU 2025/03/19
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            filters.push(new sap.ui.model.Filter("UserEmail", "EQ", sEmail));
+            // ADD END BY XINLEI XU 2025/03/19
+
             var oModel = this.getOwnerComponent().getModel();
             if (oModel.hasPendingChanges()) {
                 // 重置未保存的更改
