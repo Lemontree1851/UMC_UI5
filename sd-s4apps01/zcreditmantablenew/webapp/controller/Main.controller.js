@@ -85,6 +85,11 @@ sap.ui.define([
 				aFilters.push(new Filter("zyear", FilterOperator.EQ, sYear.getFullYear()));
 			}
 
+			// ADD BEGIN BY XINLEI XU 2025/03/19
+			var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+			aFilters.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
+			// ADD END BY XINLEI XU 2025/03/19
+
 			var oFilterData = oSearchBar.getFilterData();
 			this.getTableContent(aFilters, oFilterData, oTable);
 		},
