@@ -98,6 +98,7 @@ sap.ui.define([
                     });
                     var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                     var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
+                    var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(); // ADD BY XINLEI XU 2025/03/19
                     // read valid data starting from line 3 
                     for (var i = 1; i < aSheetData.length; i++) {
                         var item = {
@@ -126,7 +127,8 @@ sap.ui.define([
                             "OutsideData": aSheetData[i]["OutsideData"],
                             "AcceptPeriodFrom": aSheetData[i]["AcceptPeriodFrom"],
                             "AcceptPeriodTo": aSheetData[i]["AcceptPeriodTo"],
-                            "FinishStatus": ""
+                            "FinishStatus": "",
+                            "UserEmail": sEmail // ADD BY XINLEI XU 2025/03/19
                         };
                         aExcelSet.push(item);
                     }

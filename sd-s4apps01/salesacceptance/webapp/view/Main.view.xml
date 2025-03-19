@@ -36,36 +36,36 @@
                     <table:columns>
                         <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
                             <table:template>
-                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="sap-icon://status-positive"/>
+                                <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="{ path:'local>Status', formatter:'.formatter.formatStateIcon'}"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
+                        <!-- <table:Column width="5rem" sortProperty="Status" filterProperty="Status">
 						    <Label text="{i18n>Type}"/>
 							<table:template>
 								<Text text="{parts:['local>Status'], formatter:'.formatter.formatResult'}"/>
 							</table:template>
-                        </table:Column>   
+                        </table:Column>    -->
                         <table:Column width="15rem" label="{i18n>Message}">
                             <table:template>
                                 <Text text="{local>Message}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>SalesOrganization}">
+                        <table:Column width="10rem" label="{i18n>SalesOrganization}">
                             <table:template>
                                 <Text text="{local>SalesOrganization}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>Customer}">
+                        <table:Column width="10rem" label="{i18n>Customer}">
                             <table:template>
                                 <Text text="{local>Customer}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>PeriodType}">
+                        <table:Column width="10rem" label="{i18n>PeriodType}">
                             <table:template>
                                 <Text text="{local>PeriodType}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>AcceptPeriod}">
+                        <table:Column width="10rem" label="{i18n>AcceptPeriod}">
                             <table:template>
                                 <Text text="{local>AcceptPeriod}" wrapping="false"/>
                             </table:template>
@@ -75,7 +75,7 @@
                                 <Text text="{local>CustomerPO}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="4rem" label="{i18n>ItemNo}">
+                        <table:Column width="8rem" label="{i18n>ItemNo}">
                             <table:template>
                                 <Text text="{local>ItemNo}" wrapping="false"/>
                             </table:template>
@@ -95,32 +95,32 @@
                                 <Text text="{local>CustomerMaterialText}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>ReceiptDate}">
+                        <table:Column width="10rem" label="{i18n>ReceiptDate}">
                             <table:template>
                                 <Text text="{ path:'local>ReceiptDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>AcceptDate}">
+                        <table:Column width="10rem" label="{i18n>AcceptDate}">
                             <table:template>
                                 <Text text="{ path:'local>AcceptDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>AcceptQty}">
+                        <table:Column width="10rem" label="{i18n>AcceptQty}">
                             <table:template>
                                 <Text text="{ path:'local>AcceptQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
                             </table:template>
                         </table:Column>     
-                        <table:Column width="6rem" label="{i18n>ReceiptQty}">
+                        <table:Column width="10rem" label="{i18n>ReceiptQty}">
                             <table:template>
                                 <Text text="{ path:'local>ReceiptQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
                             </table:template>
                         </table:Column>      
-                        <table:Column width="6rem" label="{i18n>UnqualifiedQty}">
+                        <table:Column width="10rem" label="{i18n>UnqualifiedQty}">
                             <table:template>
                                 <Text text="{ path:'local>UnqualifiedQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>UndersupplyQty}">
+                        <table:Column width="10rem" label="{i18n>UndersupplyQty}">
                             <table:template>
                                 <Text text="{ path:'local>UndersupplyQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
                             </table:template>
@@ -130,7 +130,7 @@
                                 <Text text="{path: 'local>AcceptPrice', formatter:'.formatter.formatDecimal'}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>AccceptAmount}">
+                        <table:Column width="10rem" label="{i18n>AccceptAmount}">
                             <table:template>
                                 <Text text="{path: 'local>AccceptAmount', formatter:'.formatter.formatDecimal' }" />
                             </table:template>
