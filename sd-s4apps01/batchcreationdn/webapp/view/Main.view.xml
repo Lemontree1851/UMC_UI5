@@ -50,13 +50,14 @@
                 id="idSmartTable"
                 entitySet="SalesOrderForDN"
                 smartFilterId="idSmartFilterBar"
-                enableExport="false"
+                enableExport="true"
                 persistencyKey="SalesOrderForDNTable"
                 smartVariant="idSmartVariantManagement"
                 header="{i18n>tableHeaderTitle}"
                 placeToolbarInTable="true"
                 editable="true"
                 beforeRebindTable="onBeforeRebindTable"
+                beforeExport="onBeforeExport"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar id="idOverflowToolbar">
@@ -83,7 +84,7 @@
                         <rowmodes:Auto id="_IDGenAuto" ></rowmodes:Auto>
                     </t:rowMode>
                     <t:Column id="_IDGenColumn"
-                        width="4rem"
+                        width="6rem"
                         label="{/#SalesOrderForDNType/Type/@sap:label}"
                         sortProperty="Type"
                         filterProperty="Type"
