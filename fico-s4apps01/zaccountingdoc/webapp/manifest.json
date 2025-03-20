@@ -197,12 +197,13 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "GridTable"
+                    "type": "GridTable",
+                    "selectAll": true
                   },
                   "actions": {
                     "Action1": {
                       "press": "fico.zaccountingdoc.ext.listExtension.ListExtension.onPrint1",
-                      "visible": true, 
+                      "visible": true,
                       "enabled": "{local>/authorityCheck/button/Export}",
                       "requiresSelection": true,
                       "text": "{i18n>i18nprint}"
