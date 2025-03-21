@@ -399,7 +399,7 @@ sap.ui.define([
 							RequirementMonth: date.substring(0, 6),
 							// MOD BEGIN BY XINLEI XU 2025/02/27
 							// RequirementQty: data[`ReqDate${date}`]
-							RequirementQty: data[`ReqDate${date}`].toString()
+							RequirementQty: Number(data[`ReqDate${date}`]).toString()
 							// MOD END BY XINLEI XU 2025/02/27
 						});
 					}

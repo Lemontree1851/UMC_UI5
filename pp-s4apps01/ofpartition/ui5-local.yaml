@@ -34,10 +34,20 @@ server:
         mountPath: /
         services:
           - urlPath: /sap/opu/odata/sap/ZUI_OFPARTITION_O2
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/data
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
             generateMockData: true
-        annotations: []
+          - urlPath: /sap/opu/odata4/sap/ZUI_CREATEPIR_O4/srvd/sap/ZUI_CREATEPIR_O4/0001
+            metadataPath: ./webapp/localService/createPIR/metadata.xml
+            mockdataPath: ./webapp/localService/createPIR/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/localService/mainService/ZUI_OFPARTITION_O2_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_OFPARTITION_O2_VAN',Version='0001')/$value/
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
