@@ -26,9 +26,11 @@ sap.ui.define([
                     DisplayDimension: "H", // 横表示
                     ShowInformation: "X",  // はい
                     ShowDetailLines: "X",  // はい
-                    ShowDEMAND: "X"        // はい
+                    ShowDEMAND: "X",       // はい
+                    FromMRPTable: true     // はい
                 },
-                resultSet: []
+                resultSet: [],
+                MRPSynchronousTime: ""
             });
             return oModel;
         }

@@ -77,6 +77,15 @@
                                         </Select>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='170' key="FromMRPTable" visibleInAdvancedArea="true" label="{i18n>FromMRPTable}">
+                                    <smartFilterBar:customControl>
+                                        <Switch state="{local>/filter/FromMRPTable}" customTextOn=" " customTextOff=" ">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="UUID" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>

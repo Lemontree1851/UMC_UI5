@@ -57,7 +57,8 @@ sap.ui.define([
                         Export: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-Export"),
                         Summary: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-Summary"),
                         PurchaseList: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-PurchaseList"),
-                        PurchaseListExport: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-PurchaseListExport")
+                        PurchaseListExport: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-PurchaseListExport"),
+                        MRPSynchronous: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-MRPSynchronous"),
                     },
                     data: {
                         PlantSet: context._AssignPlant,
@@ -67,6 +68,35 @@ sap.ui.define([
                         RoleSet: context._AssignRole
                     }
                 });
+                // ADD BEGIN BY XINLEI XU 2025/03/21 CM#4333
+                this._myBusyDialog.open();
+                this._CallODataV2("ACTION", "/GetMRPSynchronousTime", [], {}, {}).then(function (oResponse) {
+                    this._myBusyDialog.close();
+                    var oResult = JSON.parse(oResponse.GetMRPSynchronousTime.Zzkey);
+                    var oMessageStrip = this.byId("idMRPSynchronousMsg");
+                    var oButton = this.byId("idMRPSynchronous");
+                    var sType = "",
+                        sText = "";
+                    var sDateTime = oResult.SCHEDULEEND === "" ? oResult.SCHEDULEBEGIN : oResult.SCHEDULEEND;
+                    var sDateTimeStr = sDateTime.substring(0, 4) + "/" + sDateTime.substring(4, 6) + "/" + sDateTime.substring(6, 8) + " " +
+                        sDateTime.substring(8, 10) + ":" + sDateTime.substring(10, 12) + ":" + sDateTime.substring(12, 14);
+                    var iTimezoneOffset = new Date().getTimezoneOffset();
+                    var newDate = new Date(new Date(sDateTimeStr).getTime() - iTimezoneOffset * 60 * 1000);
+                    if (oResult.SCHEDULEEND) {
+                        sType = "Success";
+                        sText = this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg1", [newDate]);
+                    } else {
+                        sType = "Warning";
+                        sText = this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg2", [oResult.SCHEDULEUSER, newDate]);
+                        oButton.setEnabled(false);
+                    }
+                    oMessageStrip.setText(sText);
+                    oMessageStrip.setType(sType);
+                }.bind(this), function (oError) {
+                    this._myBusyDialog.close();
+                    MessageBox.error(oError);
+                }.bind(this));
+                // ADD END BY XINLEI XU 2025/03/21 CM#4333
             }.bind(this), function (oError) {
                 if (!this.oErrorMessageDialog) {
                     this.oErrorMessageDialog = new sap.m.Dialog({
@@ -95,6 +125,7 @@ sap.ui.define([
             var sShowInformation = this.getModel("local").getProperty("/filter/ShowInformation");
             var sShowDetailLines = this.getModel("local").getProperty("/filter/ShowDetailLines");
             var sShowDEMAND = this.getModel("local").getProperty("/filter/ShowDEMAND");
+            var bFromMRPTable = this.getModel("local").getProperty("/filter/FromMRPTable"); // ADD BY XINLEI XU 2025/03/14
 
             aFilters.push(new Filter("DisplayUnit", FilterOperator.EQ, sDisplayUnit));
             aFilters.push(new Filter("DisplayDimension", FilterOperator.EQ, sDisplayDimension));
@@ -102,6 +133,9 @@ sap.ui.define([
             aFilters.push(new Filter("ShowInformation", FilterOperator.EQ, sShowInformation === "X" ? true : false));
             aFilters.push(new Filter("ShowDetailLines", FilterOperator.EQ, sShowDetailLines === "X" ? true : false));
             aFilters.push(new Filter("ShowDEMAND", FilterOperator.EQ, sShowDEMAND === "X" ? true : false));
+            // ADD BEGIN BY XINLEI XU 2025/03/14
+            aFilters.push(new Filter("FromMRPTable", FilterOperator.EQ, bFromMRPTable));
+            // ADD END BY XINLEI XU 2025/03/14
 
             this.removeAllColumns();
             this._CallODataV2("READ", "/ZC_InventoryRequirement", aFilters, {}, {}).then(function (oResponse) {
@@ -492,6 +526,39 @@ sap.ui.define([
             };
             // export excel file
             new Spreadsheet(oSettings).build();
+        },
+
+        // ADD BEGIN BY XINLEI XU 2025/03/21 CM#4333
+        onMRPSynchronous: function () {
+            this._myBusyDialog.open();
+            this._CallODataV2("ACTION", "/ScheduleMRPSynchronous", [], {
+                "Event": "",
+                "Zzkey": this._UserInfo.getLastName() + " " + this._UserInfo.getFirstName(),
+                "RecordUUID": ""
+            }, {}).then(function (oResponse) {
+                this._myBusyDialog.close();
+                if (oResponse.ScheduleMRPSynchronous.Event === "S") {
+                    this.byId("idMRPSynchronous").setEnabled(false);
+                    var oResult = JSON.parse(oResponse.ScheduleMRPSynchronous.Zzkey);
+                    MessageBox.success(this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg3", [oResult.JOBNAME]));
+                    var oMessageStrip = this.byId("idMRPSynchronousMsg");
+                    var sDateTime = oResult.SCHEDULEBEGIN;
+                    var sDateTimeStr = sDateTime.substring(0, 4) + "/" + sDateTime.substring(4, 6) + "/" + sDateTime.substring(6, 8) + " " +
+                        sDateTime.substring(8, 10) + ":" + sDateTime.substring(10, 12) + ":" + sDateTime.substring(12, 14);
+                    var iTimezoneOffset = new Date().getTimezoneOffset();
+                    var newDate = new Date(new Date(sDateTimeStr).getTime() - iTimezoneOffset * 60 * 1000);
+                    var sType = "Warning";
+                    var sText = this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg2", [oResult.SCHEDULEUSER, newDate]);
+                    oMessageStrip.setText(sText);
+                    oMessageStrip.setType(sType);
+                } else {
+                    MessageBox.error(oResponse.ScheduleMRPSynchronous.Zzkey);
+                }
+            }.bind(this), function (oError) {
+                this._myBusyDialog.close();
+                MessageBox.error(oError);
+            }.bind(this));
         }
+        // ADD END BY XINLEI XU 2025/03/21 CM#4333
     });
 });
