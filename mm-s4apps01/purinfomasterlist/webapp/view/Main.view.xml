@@ -97,6 +97,7 @@
 								<smartFilterBar:ControlConfiguration index="999" key="productsalesorg" visible="false"/>
 								<smartFilterBar:ControlConfiguration index="999" key="zvalue2" visible="false"/>
 								<smartFilterBar:ControlConfiguration index="999" key="Rate" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="UserEmail" visible="false"/>
 							</smartFilterBar:controlConfiguration>
 						</smartFilterBar:SmartFilterBar>
 					</FlexBox>
@@ -104,7 +105,7 @@
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
-			<smartTable:SmartTable id="smartTable_Mast" smartVariant="__SVM01" persistencyKey="PurInfoMasterST" entitySet="PurInfoMaster" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" requestAtLeastFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion" ignoredFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion">
+			<smartTable:SmartTable id="smartTable_Mast" smartVariant="__SVM01" persistencyKey="PurInfoMasterST" entitySet="PurInfoMaster" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" requestAtLeastFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion" ignoredFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion,UserEmail">
 
 				<table:Table id="Table_Calc" selectionMode="MultiToggle" selectionBehavior="Row" rowMode="Auto">
 					<table:columns>
