@@ -54,7 +54,11 @@
                             <PropertyValue Property="Value" Path="OriginalAcquisitionAmount"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="quantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="InvestmentReason"/>
+                            <PropertyValue Property="Label" String="投資理由"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AssetTypeName"/>
