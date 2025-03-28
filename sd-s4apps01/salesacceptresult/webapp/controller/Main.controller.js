@@ -262,5 +262,50 @@ sap.ui.define([
             });
         },
 
+        // ADD BEGIN BY XINLEI XU 2025/03/28
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date
+                    case "PostingDate":
+                    case "AcceptDate":
+                    case "ExchangeRateDate":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                    case "AcceptPrice":
+                    case "AccceptAmount":
+                    case "NetAmount":
+                    case "AccceptTaxAmount":
+                    case "TaxAmount":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 3;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "AcceptQty":
+                    case "BillingQuantity":
+                    case "ConditionRateValue":
+                    case "AccountingExchangeRate":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "ConditionQuantity":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.textAlign = "End";
+                        break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+        }
+        // ADD END BY XINLEI XU 2025/03/28
     });
 });
