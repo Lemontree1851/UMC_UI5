@@ -15,7 +15,7 @@ sap.ui.define([
             this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._BusyDialog = new BusyDialog();
-            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
+            this.getRouter().getRoute("Group").attachMatched(this._initialize, this);
 
             var oRouter = this.getOwnerComponent().getRouter();
             oRouter.getRoute("Group").attachPatternMatched(this._onRouteMatched, this);
@@ -109,11 +109,11 @@ sap.ui.define([
             var aYear = new Date(this.byId("idAcceptYear").getValue());
             var oAcceptYear = new sap.ui.model.Filter({
                 path: "AcceptYear",
-                operator: "EQ", 
+                operator: "EQ",
                 value1: aYear.getFullYear()
             });
             filters.push(oAcceptYear);
-            
+
             var oPeriodType = new sap.ui.model.Filter({
                 path: "PeriodType",
                 operator: "EQ",
@@ -136,14 +136,19 @@ sap.ui.define([
                 value1: aLTEXT3
             });
             filters.push(oAcceptPeriod);
-            
+
             var oLayer = new sap.ui.model.Filter({
                 path: "Layer",
                 operator: "EQ",
                 value1: "2"
             });
             filters.push(oLayer);
-            
+
+            // ADD BEGIN BY XINLEI XU 2025/03/31
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            filters.push(new sap.ui.model.Filter("UserEmail", "EQ", sEmail));
+            // ADD END BY XINLEI XU 2025/03/31
+
             var oBinding = oEvent.getParameter("bindingParams");
             oBinding.events = {
                 "dataReceived": function (oEvent) {
