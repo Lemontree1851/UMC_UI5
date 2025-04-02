@@ -16,7 +16,7 @@ sap.ui.define([
     "use strict";
 
     return BaseController.extend("sd.zdndatebatchupdate.controller.Upload", {
-        formatter : formatter,
+        formatter: formatter,
         onInit: function () {
             this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
@@ -24,25 +24,26 @@ sap.ui.define([
             this._BusyDialog = new BusyDialog();
 
             // // 绑定模板附件path
-			// var oUploadSet = this.byId("idUploadSet");
-			// var sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='" + "SAT" +
-			// 	"',DocumentInfoRecordDocNumber='" + "10000000000" + "',DocumentInfoRecordDocVersion='" +
-			// 	"00" + "',DocumentInfoRecordDocPart='" + "000" + "')";
-			// oUploadSet.bindElement(sPath);
-            
+            // var oUploadSet = this.byId("idUploadSet");
+            // var sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='" + "SAT" +
+            // 	"',DocumentInfoRecordDocNumber='" + "10000000000" + "',DocumentInfoRecordDocVersion='" +
+            // 	"00" + "',DocumentInfoRecordDocPart='" + "000" + "')";
+            // oUploadSet.bindElement(sPath);
+
+            this._UserInfo = sap.ushell.Container.getService("UserInfo");
         },
 
         getMediaUrl: function (sUrlString) {
-			if (sUrlString) {
-				var sUrl = new URL(sUrlString);
-				var iStart = sUrl.href.indexOf(sUrl.origin);
-				var sPath = sUrl.href.substring(iStart + sUrl.origin.length, sUrl.href.length);
-				//return "/S4" + sPath;
-				return jQuery.sap.getModulePath("sd.zdndatebatchupdate") + sPath;
-			} else {
-				return "";
-			}
-		},
+            if (sUrlString) {
+                var sUrl = new URL(sUrlString);
+                var iStart = sUrl.href.indexOf(sUrl.origin);
+                var sPath = sUrl.href.substring(iStart + sUrl.origin.length, sUrl.href.length);
+                //return "/S4" + sPath;
+                return jQuery.sap.getModulePath("sd.zdndatebatchupdate") + sPath;
+            } else {
+                return "";
+            }
+        },
 
         onFileUploaderChange: function (oEvent) {
             this._BusyDialog.open();
@@ -83,10 +84,10 @@ sap.ui.define([
                 var aSheet1 = XLSX.utils.sheet_to_row_object_array(oSheet1);
                 // for循环每一行的内容添加到数据集当中,数据从第excel的3行开始（第一行默认为技术字段，不读取，第二行为说明行，JS中从0开始，所以从1开始读）
                 var pritem = 0;
-                
+                var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(); // ADD BY XINLEI XU 2025/04/02
                 for (var i = 1; i < aSheet1.length; i++) {
-                    pritem ++;
-                    
+                    pritem++;
+
                     oItem = {
                         Status: "",
                         Message: "",
@@ -106,6 +107,7 @@ sap.ui.define([
                         IntcoIntPlndTransfOfCtrlDteTme: aSheet1[i]["IntcoIntPlndTransfOfCtrlDteTme"] ? aSheet1[i]["IntcoIntPlndTransfOfCtrlDteTme"].toString().toUpperCase() : "" || "",
                         IntcoIntActlTransfOfCtrlDteTme: aSheet1[i]["IntcoIntActlTransfOfCtrlDteTme"] ? aSheet1[i]["IntcoIntActlTransfOfCtrlDteTme"].toString().toUpperCase() : "" || "",
                         YY1_SalesDocType_DLH: aSheet1[i]["YY1_SalesDocType_DLH"] || "",
+                        UserEmail: sEmail // ADD BY XINLEI XU 2025/04/02
                     };
                     //因为有些数据读出来是数值类型，但odta要求字符类型，通过此种方式将所有值转换成字符类型
                     oItem = JSON.parse(JSON.stringify(oItem));
@@ -126,19 +128,19 @@ sap.ui.define([
             }.bind(this);
         },
 
-        checkDate: function (aExcelSet) {   
-            var regPos = /^\d+(\.\d+)?$/;     
+        checkDate: function (aExcelSet) {
+            var regPos = /^\d+(\.\d+)?$/;
             // 遍历数组
             for (let i = 0; i < aExcelSet.length; i++) {
                 const obj = aExcelSet[i];
                 aExcelSet[i].Status = "";
                 aExcelSet[i].Message = "";
 
-                if((!regPos.test(obj.IntcoExtActlTransfOfCtrlDteTme) || !regPos.test(obj.IntcoIntActlTransfOfCtrlDteTme) || obj.IntcoExtActlTransfOfCtrlDteTme.length !== 8 || obj.IntcoIntActlTransfOfCtrlDteTme.length !== 8)
-                    && obj.IntcoExtActlTransfOfCtrlDteTme !== "NULL" && obj.IntcoIntActlTransfOfCtrlDteTme !== "NULL"){
-                    if(obj.IntcoExtActlTransfOfCtrlDteTme.length !== 0 && obj.IntcoIntActlTransfOfCtrlDteTme.length !== 0){
+                if ((!regPos.test(obj.IntcoExtActlTransfOfCtrlDteTme) || !regPos.test(obj.IntcoIntActlTransfOfCtrlDteTme) || obj.IntcoExtActlTransfOfCtrlDteTme.length !== 8 || obj.IntcoIntActlTransfOfCtrlDteTme.length !== 8)
+                    && obj.IntcoExtActlTransfOfCtrlDteTme !== "NULL" && obj.IntcoIntActlTransfOfCtrlDteTme !== "NULL") {
+                    if (obj.IntcoExtActlTransfOfCtrlDteTme.length !== 0 && obj.IntcoIntActlTransfOfCtrlDteTme.length !== 0) {
                         aExcelSet[i].Status = "E";
-                        aExcelSet[i].Message = this._ResourceBundle.getText("msgDate"); 
+                        aExcelSet[i].Message = this._ResourceBundle.getText("msgDate");
                     }
                 }
             }
@@ -151,8 +153,8 @@ sap.ui.define([
         //     aDeferredGroups = aDeferredGroups.concat(["UploadHead0"]);
         //     oModel.setDeferredGroups(aDeferredGroups);
         //     for (var i = 0; i < postDocs.length; i++) {
-		// 		this.postCreate(postDocs[i], i);
-		// 	}
+        // 		this.postCreate(postDocs[i], i);
+        // 	}
         //     oModel.submitChanges({ groupId: "UploadHead0" });
         // },
 
@@ -160,8 +162,8 @@ sap.ui.define([
             let postDocs = this.preparePostBatchBody();
             this._BusyDialog.open();
             for (var i = 0; i < postDocs.length; i++) {
-				this.postAction(sAction, postDocs[i], i);
-			}
+                this.postAction(sAction, postDocs[i], i);
+            }
             // var that = this;
             // var aExcelSet = this._LocalData.getProperty("/excelSet");
             // this._BusyDialog.open();
@@ -171,19 +173,19 @@ sap.ui.define([
             //     that._BusyDialog.close();
             // });
         },
-// 
+        // 
         // preparePostBody: function () {
         //     let aExcelSet = this._LocalData.getProperty("/excelSet"),
-		// 	    postDocs = [],
-		// 	    postDoc,
-		// 	    post = [];
+        // 	    postDocs = [],
+        // 	    postDoc,
+        // 	    post = [];
 
-		// 	aExcelSet.forEach(function (line) {
-		// 		post.push(JSON.parse(JSON.stringify(line)));
-		// 	}, this);
+        // 	aExcelSet.forEach(function (line) {
+        // 		post.push(JSON.parse(JSON.stringify(line)));
+        // 	}, this);
 
-		// 	postDocs = post;
-		// 	return postDocs;
+        // 	postDocs = post;
+        // 	return postDocs;
         // },
         preparePostBatchBody: function () {
             let aExcelSet = this._LocalData.getProperty("/excelSet");

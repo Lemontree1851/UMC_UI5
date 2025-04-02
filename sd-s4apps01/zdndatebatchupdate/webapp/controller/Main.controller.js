@@ -41,7 +41,7 @@ function (BaseController,BusyDialog) {
                 this.getOwnerComponent().getModel("local").setProperty("/authorityCheck", {
                     button: {
                         View: aAllAccessBtns.some(btn => btn.AccessId === "zdndatebatchupdate-View"),
-                        Inport: aAllAccessBtns.some(btn => btn.AccessId === "zdndatebatchupdate-Inport"),
+                        Import: aAllAccessBtns.some(btn => btn.AccessId === "zdndatebatchupdate-Import"),
                         Export: aAllAccessBtns.some(btn => btn.AccessId === "zdndatebatchupdate-Export")
                     },
                     data: {

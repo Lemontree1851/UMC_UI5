@@ -63,7 +63,7 @@
                             text="{i18n>UploadView.saveBtn}"
                             press=".onButtonPress($event, 'save')"
                             visible="{= ${local>/excelSet}.length > 0}" 
-                            enabled="{= ${local>/authorityCheck/button/Inport}}"/>
+                            enabled="{= ${local>/authorityCheck/button/Import}}"/>
                     </OverflowToolbar>
                 </t:extension>
                 <t:columns>
