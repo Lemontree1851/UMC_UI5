@@ -165,7 +165,7 @@
                                 </table:template>
                             </table:Column>
 
-                            <table:Column id="idQuantity" width="10em" label="{i18n>longTermInventory}" sortProperty="Qty" filterProperty="Qty" visible="true">
+                            <table:Column id="idQuantity" width="10em" label="{i18n>longTermInventory}" sortProperty="Qty" filterProperty="Qty" visible="true" hAlign="End">
                                 <table:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"Qty",  "leadingProperty":"Qty", "sortProperty":"Qty", "filterProperty": "Qty"}'/>
                                 </table:customData>
@@ -174,7 +174,7 @@
                                 </table:template>
                             </table:Column>
 
-                            <table:Column id="idActualPrice" width="13em" label="{i18n>actualPrice}" sortProperty="ActualPrice" filterProperty="ActualPrice" visible="true">
+                            <table:Column id="idActualPrice" width="13em" label="{i18n>actualPrice}" sortProperty="ActualPrice" filterProperty="ActualPrice" visible="true" hAlign="End">
                                 <table:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"ActualPrice", "leadingProperty":"ActualPrice", "sortProperty":"ActualPrice", "filterProperty": "ActualPrice"}'/>
                                 </table:customData>
@@ -183,7 +183,7 @@
                                 </table:template>
                             </table:Column>
 
-                            <table:Column id="idInventoryAmount" width="13em" label="{i18n>longTermInventoryAmount}" sortProperty="InventoryAmount" filterProperty="InventoryAmount" visible="true">
+                            <table:Column id="idInventoryAmount" width="13em" label="{i18n>longTermInventoryAmount}" sortProperty="InventoryAmount" filterProperty="InventoryAmount" visible="true" hAlign="End">
                                 <table:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"InventoryAmount", "leadingProperty":"InventoryAmount", "sortProperty":"InventoryAmount", "filterProperty": "InventoryAmount"}'/>
                                 </table:customData>

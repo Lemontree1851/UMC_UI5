@@ -4,7 +4,13 @@ sap.ui.define([
     return {
 
         formatCodeName: function (code, name) {
-            return `${name} (${code})`;
+            if (code && name) {
+                return `${name} (${code})`;
+            } else if (code) {
+                return `${code}`;
+            } else if (name) {
+                return `${name}`;
+            }
         }
     }
 });

@@ -104,6 +104,17 @@ sap.ui.define([
                     );
                 });
             }
+
+            // ADD BEGIN BY XINLEI XU 2025/04/03
+            if (sYear && sMonth) {
+                oParameters.filters.push(
+                    new Filter(
+                        "BaseFiscalYearMonth",
+                        FilterOperator.EQ,
+                        sYear + sMonth
+                    ));
+            }
+
         }
     });
 });
