@@ -80,80 +80,28 @@ sap.ui.define([
             onButtonSelect: function (oEvent) {
                 var sOption1 = this.byId("Option1").getSelected();
                 if (sOption1 === true) {
-                    this.byId("ProfitCenter").setVisible(true);
-                    this.byId("ProfitCenterName").setVisible(true);
-                    this.byId("PurchasingGroup").setVisible(true);
-                    this.byId("PurGrpAmount").setVisible(true);
-                    this.byId("ChargeableAmount").setVisible(true);
-                    this.byId("ChargeableRate").setVisible(true);
-                    this.byId("PreviousStockAmount").setVisible(true);
-                    this.byId("CurrentStockAmount").setVisible(true);
-                    this.byId("CurrentStockSemi").setVisible(true);
-                    this.byId("CurrentStockFin").setVisible(true);
-                    this.byId("CurrentStockTotal").setVisible(true);
-                    this.byId("StockChangeAmount").setVisible(true);
-                    this.byId("PaidMaterialCost").setVisible(true);
-                    this.byId("CustomerRevenue").setVisible(true);
-                    this.byId("Revenue").setVisible(true);
-                    this.byId("RevenueRate").setVisible(true);
-                    this.byId("Gjahr1").setVisible(true);
-                    this.byId("Belnr1").setVisible(true);
-                    this.byId("Gjahr2").setVisible(true);
-                    this.byId("Belnr2").setVisible(true);
-                    this.byId("Gjahr3").setVisible(true);
-                    this.byId("Belnr3").setVisible(true);
-                    this.byId("Gjahr4").setVisible(true);
-                    this.byId("Belnr4").setVisible(true);
-
-                    this.byId("AP").setVisible(false);
-                    this.byId("AR").setVisible(false);
-                    this.byId("Gjahr5").setVisible(false);
-                    this.byId("Belnr5").setVisible(false);
-                    this.byId("Gjahr6").setVisible(false);
-                    this.byId("Belnr6").setVisible(false);
-                    this.byId("Gjahr7").setVisible(false);
-                    this.byId("Belnr7").setVisible(false);
-                    this.byId("Gjahr8").setVisible(false);
-                    this.byId("Belnr8").setVisible(false);
+                    this.getView().getModel("local").setProperty("/showA", true);
+					this.getView().getModel("local").setProperty("/showB", false);
                 } else {
-                    this.byId("ProfitCenter").setVisible(false);
-                    this.byId("ProfitCenterName").setVisible(false);
-                    this.byId("PurchasingGroup").setVisible(false);
-                    this.byId("PurGrpAmount").setVisible(false);
-                    this.byId("ChargeableAmount").setVisible(false);
-                    this.byId("ChargeableRate").setVisible(false);
-                    this.byId("PreviousStockAmount").setVisible(false);
-                    this.byId("CurrentStockAmount").setVisible(false);
-                    this.byId("CurrentStockSemi").setVisible(false);
-                    this.byId("CurrentStockFin").setVisible(false);
-                    this.byId("CurrentStockTotal").setVisible(false);
-                    this.byId("StockChangeAmount").setVisible(false);
-                    this.byId("PaidMaterialCost").setVisible(false);
-                    this.byId("CustomerRevenue").setVisible(false);
-                    this.byId("Revenue").setVisible(false);
-                    this.byId("RevenueRate").setVisible(false);
-                    this.byId("Gjahr1").setVisible(false);
-                    this.byId("Belnr1").setVisible(false);
-                    this.byId("Gjahr2").setVisible(false);
-                    this.byId("Belnr2").setVisible(false);
-                    this.byId("Gjahr3").setVisible(false);
-                    this.byId("Belnr3").setVisible(false);
-                    this.byId("Gjahr4").setVisible(false);
-                    this.byId("Belnr4").setVisible(false);
-
-                    this.byId("AP").setVisible(true);
-                    this.byId("AR").setVisible(true);
-                    this.byId("Gjahr5").setVisible(true);
-                    this.byId("Belnr5").setVisible(true);
-                    this.byId("Gjahr6").setVisible(true);
-                    this.byId("Belnr6").setVisible(true);
-                    this.byId("Gjahr7").setVisible(true);
-                    this.byId("Belnr7").setVisible(true);
-                    this.byId("Gjahr8").setVisible(true);
-                    this.byId("Belnr8").setVisible(true);
+                    this.getView().getModel("local").setProperty("/showA", false);
+					this.getView().getModel("local").setProperty("/showB", true);
                 }
             },
 
+            onAfterRendering: function (oEvent) {
+				var bOption1Selected = this.byId("Option1").getSelected();
+				if (bOption1Selected === true) {
+					setTimeout(() => {
+						this.getView().getModel("local").setProperty("/showA", true);
+					}, 100);
+				} else {
+					setTimeout(() => {
+						this.getView().getModel("local").setProperty("/showA", false);
+					}, 100);
+				}
+				
+			},
+            
             onBeforeRebindTable: function (oEvent) {
                 var bHasError = false;
                 var sMessage = "";
