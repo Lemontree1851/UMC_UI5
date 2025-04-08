@@ -100,8 +100,12 @@ sap.ui.define([
                         "MaterialDocumentYear": "",
                         "MaterialDocumentItem": "",
                         "Row": i - 3,
-                        "DocumentDate": aSheetData[i]["DOCUMENTDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.formatDateToUtc(aSheetData[i]["DOCUMENTDATE"]),
-                        "PostingDate": aSheetData[i]["POSTINGDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.formatDateToUtc(aSheetData[i]["POSTINGDATE"]),
+                        // MOD BEGIN BY XINLEI XU 2025/04/08
+                        // "DocumentDate": aSheetData[i]["DOCUMENTDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.formatDateToUtc(aSheetData[i]["DOCUMENTDATE"]),
+                        // "PostingDate": aSheetData[i]["POSTINGDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.formatDateToUtc(aSheetData[i]["POSTINGDATE"]),
+                        "DocumentDate": aSheetData[i]["DOCUMENTDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.convertLocalDateToUTCDate(aSheetData[i]["DOCUMENTDATE"]),
+                        "PostingDate": aSheetData[i]["POSTINGDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.convertLocalDateToUTCDate(aSheetData[i]["POSTINGDATE"]),
+                        // MOD BEGIN BY XINLEI XU 2025/04/08
                         "MaterialDocumentHeaderText": aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"] === undefined ? "" : aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"],
                         "OrderKey": aSheetData[i]["PURCHASEORDER"] === undefined ? "" : aSheetData[i]["PURCHASEORDER"],
                         "QuantityInEntryUnit": aSheetData[i]["QUANTITYINENTRY"] === undefined ? "" : aSheetData[i]["QUANTITYINENTRY"],
@@ -129,6 +133,15 @@ sap.ui.define([
 
             // 转换为UTC字符串
             return oDate.toISOString();
+        },
+
+        convertLocalDateToUTCDate: function (sDate) {
+            let localDate = new Date(sDate);
+            // 获取当前时区偏移（分钟）
+            let timezoneOffset = localDate.getTimezoneOffset();
+            // 调整时区偏移，将本地时间转换为 UTC 时间（时间不变）
+            let utcDate = new Date(localDate.getTime() - timezoneOffset * 60000);
+            return utcDate;
         },
 
         onClear: function () {
@@ -187,13 +200,13 @@ sap.ui.define([
                                     if (aExcelSet[index].Row === element.ROW) {
                                         aExcelSet[index].Status = element.STATUS;
                                         aExcelSet[index].Message = element.MESSAGE;
-                                        aExcelSet[index].DocumentDate = element.DOCUMENTDATE,
-                                            aExcelSet[index].PostingDate = element.POSTINGDATE,
-                                            aExcelSet[index].Plant = element.PLANT,
-                                            aExcelSet[index].StorageLocation = element.STORAGELOCATION
-                                        aExcelSet[index].MaterialDocument = element.MATERIALDOCUMENT
-                                        aExcelSet[index].MaterialDocumentYear = element.MATERIALDOCUMENTYEAR
-                                        aExcelSet[index].MaterialDocumentItem = element.MATERIALDOCUMENTITEM
+                                        aExcelSet[index].DocumentDate = element.DOCUMENTDATE;
+                                        aExcelSet[index].PostingDate = element.POSTINGDATE;
+                                        aExcelSet[index].Plant = element.PLANT;
+                                        aExcelSet[index].StorageLocation = element.STORAGELOCATION;
+                                        aExcelSet[index].MaterialDocument = element.MATERIALDOCUMENT;
+                                        aExcelSet[index].MaterialDocumentYear = element.MATERIALDOCUMENTYEAR;
+                                        aExcelSet[index].MaterialDocumentItem = element.MATERIALDOCUMENTITEM;
                                     }
                                 }
                                 if (element.STATUS === 'E') {
