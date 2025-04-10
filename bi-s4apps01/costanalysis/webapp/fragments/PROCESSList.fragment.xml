@@ -6,12 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="COSTANALYSISPROCESS" smartFilterId="idSmartFilterBar2" 
-    tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
-    persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" 
-    visible="{= ${local>/selectIndex} === 1}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" 
-    showFullScreenButton="true" >
-
+    <smartTable:SmartTable entitySet="COSTANALYSISPROCESS" smartFilterId="idSmartFilterBar2" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 1}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true">
         <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
             <table:columns>
                 <table:Column width="6rem" label="{i18n>YearMonth}" sortProperty="YearMonth" filterProperty="YearMonth">
@@ -37,7 +32,7 @@
                     <table:template>
                         <Text text="{CompanycodeText}" wrapping="false" />
                     </table:template>
-                </table:Column>       
+                </table:Column>
                 <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
@@ -86,7 +81,7 @@
                         <Text text="{profitcentername}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>EstimatedPrice_SMT}" sortProperty="EstimatedPrice_SMT" filterProperty="EstimatedPrice_SMT">
+                <table:Column width="10rem" label="{i18n>EstimatedPrice_SMT}" sortProperty="EstimatedPrice_SMT" filterProperty="EstimatedPrice_SMT" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"EstimatedPrice_SMT", "leadingProperty":"EstimatedPrice_SMT"}'/>
                     </table:customData>
@@ -94,7 +89,7 @@
                         <Text text="{EstimatedPrice_SMT}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>EstimatedPrice_AI}" sortProperty="EstimatedPrice_AI" filterProperty="EstimatedPrice_AI">
+                <table:Column width="10rem" label="{i18n>EstimatedPrice_AI}" sortProperty="EstimatedPrice_AI" filterProperty="EstimatedPrice_AI" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"EstimatedPrice_AI", "leadingProperty":"EstimatedPrice_AI"}'/>
                     </table:customData>
@@ -102,7 +97,7 @@
                         <Text text="{EstimatedPrice_AI}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>EstimatedPrice_FAT}" sortProperty="EstimatedPrice_FAT" filterProperty="EstimatedPrice_FAT">
+                <table:Column width="10rem" label="{i18n>EstimatedPrice_FAT}" sortProperty="EstimatedPrice_FAT" filterProperty="EstimatedPrice_FAT" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"EstimatedPrice_FAT", "leadingProperty":"EstimatedPrice_FAT"}'/>
                     </table:customData>
@@ -110,7 +105,7 @@
                         <Text text="{EstimatedPrice_FAT}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ActualPrice_SMT}" sortProperty="ActualPrice_SMT" filterProperty="ActualPrice_SMT">
+                <table:Column width="10rem" label="{i18n>ActualPrice_SMT}" sortProperty="ActualPrice_SMT" filterProperty="ActualPrice_SMT" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ActualPrice_SMT", "leadingProperty":"ActualPrice_SMT"}'/>
                     </table:customData>
@@ -118,7 +113,7 @@
                         <Text text="{ActualPrice_SMT}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ActualPrice_AI}" sortProperty="ActualPrice_AI" filterProperty="ActualPrice_AI">
+                <table:Column width="10rem" label="{i18n>ActualPrice_AI}" sortProperty="ActualPrice_AI" filterProperty="ActualPrice_AI" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ActualPrice_AI", "leadingProperty":"ActualPrice_AI"}'/>
                     </table:customData>
@@ -126,7 +121,7 @@
                         <Text text="{ActualPrice_AI}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ActualPrice_FAT}" sortProperty="ActualPrice_FAT" filterProperty="ActualPrice_FAT">
+                <table:Column width="15rem" label="{i18n>ActualPrice_FAT}" sortProperty="ActualPrice_FAT" filterProperty="ActualPrice_FAT" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ActualPrice_FAT", "leadingProperty":"ActualPrice_FAT"}'/>
                     </table:customData>
@@ -142,15 +137,15 @@
                         <Text text="{Currency}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>yieldqty}" sortProperty="yieldqty" filterProperty="yieldqty">
+                <table:Column width="10rem" label="{i18n>yieldqty}" sortProperty="yieldqty" filterProperty="yieldqty" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"yieldqty", "leadingProperty":"yieldqty"}'/>
                     </table:customData>
                     <table:template>
                         <Text text="{yieldqty}" wrapping="false"/>
                     </table:template>
-                </table:Column> 
-                <table:Column width="10rem" label="{i18n>BillingQuantity}" sortProperty="BillingQuantity" filterProperty="BillingQuantity">
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>BillingQuantity}" sortProperty="BillingQuantity" filterProperty="BillingQuantity" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantity", "leadingProperty":"BillingQuantity"}'/>
                     </table:customData>
