@@ -154,12 +154,36 @@
                         <Text text="{FinalSupplier}" wrapping="false"/>
                     </table:template>
                 </table:Column>
+                <table:Column width="10rem" label="{i18n>FinalSupplierName}" sortProperty="FinalSupplierName" filterProperty="FinalSupplierName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"FinalSupplierName", "leadingProperty":"FinalSupplierName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{FinalSupplierName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>FinalPurchaseOrder}" sortProperty="FinalPurchaseOrder" filterProperty="FinalPurchaseOrder">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"FinalPurchaseOrder", "leadingProperty":"FinalPurchaseOrder"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{FinalPurchaseOrder}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
                 <table:Column width="10rem" label="{i18n>FixedSupplier}" sortProperty="FixedSupplier" filterProperty="FixedSupplier">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"FixedSupplier", "leadingProperty":"FixedSupplier"}'/>
                     </table:customData>
                     <table:template>
                         <Text text="{FixedSupplier}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>FixedSupplierName}" sortProperty="FixedSupplierName" filterProperty="FixedSupplierName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"FixedSupplierName", "leadingProperty":"FixedSupplierName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{FixedSupplierName}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>StandardPrice}" sortProperty="StandardPrice" filterProperty="StandardPrice">
