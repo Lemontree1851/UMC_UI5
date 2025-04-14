@@ -93,10 +93,12 @@ sap.ui.define([
 				if (bOption1Selected === true) {
 					setTimeout(() => {
 						this.getView().getModel("local").setProperty("/showA", true);
+                        this.getView().getModel("local").setProperty("/showB", false);
 					}, 100);
 				} else {
 					setTimeout(() => {
 						this.getView().getModel("local").setProperty("/showA", false);
+                        this.getView().getModel("local").setProperty("/showB", true);
 					}, 100);
 				}
 				
