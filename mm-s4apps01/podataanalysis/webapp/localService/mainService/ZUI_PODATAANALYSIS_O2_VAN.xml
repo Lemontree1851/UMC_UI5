@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../../sap/zui_podataanalysis_o2/$metadata">
+        <edmx:Include Namespace="ZUI_PODATAANALYSIS_O2" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="zui_podataanalysis_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_podataanalysis_o2.I_StorageLocationStdVHType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="StorageLocation"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="StorageLocationName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_podataanalysis_o2.ZC_POAPPROVEVHType/Zvalue2">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_podataanalysis_o2.ZC_POREMAINVHType/Zvalue2">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_podataanalysis_o2.PODataAnalysisType/SequentialNmbrOfSuplrConf">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_podataanalysis_o2.PODataAnalysisType/NetPriceQuantity">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_podataanalysis_o2.PODataAnalysisType/NetPriceAmount">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_podataanalysis_o2.PODataAnalysisType/PurchaseOrderItemCategory">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_podataanalysis_o2.PODataAnalysisType">
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="PO状況分析レポート"/>
+                        <PropertyValue Property="TypeNamePlural" String="PO状況分析レポート"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="伝票タイプ"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="購買グループ"/>
+                            <PropertyValue Property="Value" Path="PurchasingGroup"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="購買グループ名称"/>
+                            <PropertyValue Property="Value" Path="PurchasingGroupName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="MRPエリア"/>
+                            <PropertyValue Property="Value" Path="MRPArea"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="MRPコントロール"/>
+                            <PropertyValue Property="Value" Path="MRPResponsible"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="コントロール名称"/>
+                            <PropertyValue Property="Value" Path="MRPControllerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Header REMARK"/>
+                            <PropertyValue Property="Value" Path="PlainLongText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="項目テキスト"/>
+                            <PropertyValue Property="Value" Path="PlainLongText1"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="購買発注番号"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="行明細番号"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="交番発注番号ー行明細"/>
+                            <PropertyValue Property="Value" Path="POPOItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="勘定設定 Categ."/>
+                            <PropertyValue Property="Value" Path="AccountAssignmentCategory"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="購買依頼"/>
+                            <PropertyValue Property="Value" Path="PurchaseRequisition"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="購買依頼（＃）"/>
+                            <PropertyValue Property="Value" Path="PurchaseRequisitionItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="購買依頼者"/>
+                            <PropertyValue Property="Value" Path="RequisitionerName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="購買依頼追跡番号"/>
+                            <PropertyValue Property="Value" Path="RequirementTracking"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="海外PO番号/回収管理番号"/>
+                            <PropertyValue Property="Value" Path="InternationalArticleNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="得意先コード"/>
+                            <PropertyValue Property="Value" Path="YY1_BPCODE_PRD_PRD"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="得意先名称"/>
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="仕入先コード"/>
+                            <PropertyValue Property="Value" Path="Supplier"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="仕入先名称"/>
+                            <PropertyValue Property="Value" Path="SupplierName1"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="供給者部門"/>
+                            <PropertyValue Property="Value" Path="SupplierSubrange"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="供給者部門テキスト"/>
+                            <PropertyValue Property="Value" Path="SupplierSubrangetext"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="品目グループ"/>
+                            <PropertyValue Property="Value" Path="MaterialGroup"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="品目コード"/>
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="品目テキスト"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderItemText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="仕入先品目コード"/>
+                            <PropertyValue Property="Value" Path="SupplierMaterialNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="内部品目"/>
+                            <PropertyValue Property="Value" Path="ManufacturerMaterial"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="MPN番号"/>
+                            <PropertyValue Property="Value" Path="ManufacturerPartNmbr"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Manufacturer code"/>
+                            <PropertyValue Property="Value" Path="Manufacturer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Name of manufacturer"/>
+                            <PropertyValue Property="Value" Path="SupplierName2"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="L/T"/>
+                            <PropertyValue Property="Value" Path="PlannedDeliveryDurationInDays"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="入庫処理時間"/>
+                            <PropertyValue Property="Value" Path="GoodsReceiptDurationInDays"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="丸め数量"/>
+                            <PropertyValue Property="Value" Path="LotSizeRoundingQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO単価"/>
+                            <PropertyValue Property="Value" Path="NetPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="通貨"/>
+                            <PropertyValue Property="Value" Path="DocumentCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO発行日"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO納期"/>
+                            <PropertyValue Property="Value" Path="ScheduleLineDeliveryDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO発注数量"/>
+                            <PropertyValue Property="Value" Path="OrderQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO残"/>
+                            <PropertyValue Property="Value" Path="PoNokoru"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="発注単位"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderQuantityUnit"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="MC要求"/>
+                            <PropertyValue Property="Value" Path="McRequire"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="注意"/>
+                            <PropertyValue Property="Value" Path="Attention"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="購買納入日付"/>
+                            <PropertyValue Property="Value" Path="MRPDILIVERYDATE"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String=" 生産計画日付"/>
+                            <PropertyValue Property="Value" Path="MRPElementReschedulingDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="例外"/>
+                            <PropertyValue Property="Value" Path="Exception1"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="回答納期"/>
+                            <PropertyValue Property="Value" Path="DeliveryDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="生産可能日付"/>
+                            <PropertyValue Property="Value" Path="PossibleProductionDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="納期回答数"/>
+                            <PropertyValue Property="Value" Path="ConfirmedQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="金額"/>
+                            <PropertyValue Property="Value" Path="NetAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="参照"/>
+                            <PropertyValue Property="Value" Path="SupplierConfirmationExtNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="原産国"/>
+                            <PropertyValue Property="Value" Path="SupplierCertOriginCountry"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="入庫済数量"/>
+                            <PropertyValue Property="Value" Path="RoughGoodsReceiptQty"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="承認サイン"/>
+                            <PropertyValue Property="Value" Path="WorkflowTaskResult"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="承認テキスト"/>
+                            <PropertyValue Property="Value" Path="Taskresulttext"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO登録者"/>
+                            <PropertyValue Property="Value" Path="CreatedByUser"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PO連携担当者"/>
+                            <PropertyValue Property="Value" Path="CorrespncInternalReference"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="プラント"/>
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="保管場所"/>
+                            <PropertyValue Property="Value" Path="StorageLocation"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="保管場所テキスト"/>
+                            <PropertyValue Property="Value" Path="StorageLocationName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="納入完了"/>
+                            <PropertyValue Property="Value" Path="IsCompletelyDelivered"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="下請対象"/>
+                            <PropertyValue Property="Value" Path="SupplierRespSalesPersonName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="税コード"/>
+                            <PropertyValue Property="Value" Path="TaxCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="基軸通貨"/>
+                            <PropertyValue Property="Value" Path="IncotermsClassification"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="注文書発行"/>
+                            <PropertyValue Property="Value" Path="Porelease"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="価格設定日制御"/>
+                            <PropertyValue Property="Value" Path="PricingDateControl"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="NCNR、CANCELルール"/>
+                            <PropertyValue Property="Value" Path="ShippingInstructionName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="基板取り数"/>
+                            <PropertyValue Property="Value" Path="productionmemopageformat"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="減少数量"/>
+                            <PropertyValue Property="Value" Path="MRPRelevantQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="旧購買発注番号明細"/>
+                            <PropertyValue Property="Value" Path="CorrespncExternalReference"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="基板取数(製造/検査メモ)"/>
+                            <PropertyValue Property="Value" Path="ProductionOrInspectionMemoTxt"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="価格単位"/>
+                            <PropertyValue Property="Value" Path="NetPriceQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="单价计算"/>
+                            <PropertyValue Property="Value" Path="NetPriceAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="PurchaseOrderItemCategory"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderItemCategory"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="行明細番号"/>
+                            <PropertyValue Property="Value" Path="SequentialNmbrOfSuplrConf"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>PurchasingGroup</PropertyPath>
+                        <PropertyPath>MRPResponsible</PropertyPath>
+                        <PropertyPath>PurchaseOrder</PropertyPath>
+                        <PropertyPath>POPOItem</PropertyPath>
+                        <PropertyPath>AccountAssignmentCategory</PropertyPath>
+                        <PropertyPath>InternationalArticleNumber</PropertyPath>
+                        <PropertyPath>Supplier</PropertyPath>
+                        <PropertyPath>Material</PropertyPath>
+                        <PropertyPath>SupplierMaterialNumber</PropertyPath>
+                        <PropertyPath>PurchaseOrderDate</PropertyPath>
+                        <PropertyPath>ScheduleLineDeliveryDate</PropertyPath>
+                        <PropertyPath>DeliveryDate</PropertyPath>
+                        <PropertyPath>WorkflowTaskResult</PropertyPath>
+                        <PropertyPath>CreatedByUser</PropertyPath>
+                        <PropertyPath>CorrespncInternalReference</PropertyPath>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>StorageLocation</PropertyPath>
+                        <PropertyPath>IncotermsClassification</PropertyPath>
+                        <PropertyPath>CorrespncExternalReference</PropertyPath>
+                        <PropertyPath>ponokodis</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="_Entities"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

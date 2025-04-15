@@ -1,0 +1,374 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc">
+    <table:Table id="idListTable" rows="{local>/resultSet}" selectionMode="MultiToggle" rowMode="Auto">
+        <table:extension>
+            <OverflowToolbar>
+                <Text text="{i18n>Results}" visible="{= ${local>/resultSet}.length === 0}"/>
+                <Text text="{i18n>Results}({= ${local>/resultSet}.length})" visible="{= ${local>/resultSet}.length > 0}"/>
+                <ToolbarSpacer/>
+                <MessageStrip id="idMRPSynchronousMsg" showIcon="true"/>
+                <Button id="idMRPSynchronous" icon="sap-icon://synchronize" type="Ghost" text="{i18n>MRPSynchronous}" press="onMRPSynchronous" enabled="{= ${local>/authorityCheck/button/MRPSynchronous}}"/>
+                <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExport" visible="{= ${local>/resultSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
+            </OverflowToolbar>
+        </table:extension>
+        <table:columns>
+            <table:Column width="8rem" label="{i18n>PurchaseOrderType}">
+                <table:template>
+                    <Text text="{local>PURCHASEORDERTYPE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="8rem" label="{i18n>PurchasingGroup}">
+                <table:template>
+                    <Text text="{local>PURCHASINGGROUP}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PurchasingGroupName}">
+                <table:template>
+                    <Text text="{local>PURCHASINGGROUPNAME}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="8rem" label="{i18n>MRPArea}">
+                <table:template>
+                    <Text text="{local>MRPAREA}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="8rem" label="{i18n>MRPResponsible}">
+                <table:template>
+                    <Text text="{local>MRPRESPONSIBLE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>MRPControllerName}">
+                <table:template>
+                    <Text text="{local>MRPCONTROLLERNAME}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PlainLongText}">
+                <table:template>
+                    <Text text="{local>PLAINLONGTEXT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PlainLongText1}">
+                <table:template>
+                    <Text text="{local>PLAINLONGTEXT1}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PurchaseOrder}">
+                <table:template>
+                    <Text text="{local>PURCHASEORDER}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PurchaseOrderItem}">
+                <table:template>
+                    <Text text="{local>PURCHASEORDERITEM}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>POPOItem}">
+                <table:template>
+                    <Text text="{local>POPOITEM}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>AccountAssignmentCategory}">
+                <table:template>
+                    <Text text="{local>ACCOUNTASSIGNMENTCATEGORY}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PurchaseRequisition}">
+                <table:template>
+                    <Text text="{local>PURCHASEREQUISITION}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PurchaseRequisitionItem}">
+                <table:template>
+                    <Text text="{local>PURCHASEREQUISITIONITEM}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>RequisitionerName}">
+                <table:template>
+                    <Text text="{local>REQUISITIONERNAME}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>RequirementTracking}">
+                <table:template>
+                    <Text text="{local>REQUIREMENTTRACKING}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="15rem" label="{i18n>InternationalArticleNumber}">
+                <table:template>
+                    <Text text="{local>INTERNATIONALARTICLENUMBER}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>YY1_BPCODE_PRD_PRD}">
+                <table:template>
+                    <Text text="{local>YY1_BPCODE_PRD_PRD}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Customer}">
+                <table:template>
+                    <Text text="{local>CUSTOMER}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Supplier}">
+                <table:template>
+                    <Text text="{local>SUPPLIER}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>SupplierName1}">
+                <table:template>
+                    <Text text="{local>SUPPLIERNAME1}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>SupplierSubrange}">
+                <table:template>
+                    <Text text="{local>SUPPLIERSUBRANGE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>SupplierSubrangeText}">
+                <table:template>
+                    <Text text="{local>SUPPLIERSUBRANGETEXT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>MaterialGroup}">
+                <table:template>
+                    <Text text="{local>MATERIALGROUP}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Material}">
+                <table:template>
+                    <Text text="{local>MATERIAL}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PurchaseOrderItemText}">
+                <table:template>
+                    <Text text="{local>PURCHASEORDERITEMTEXT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>SupplierMaterialNumber}">
+                <table:template>
+                    <Text text="{local>SUPPLIERMATERIALNUMBER}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>ManufacturerMaterial}">
+                <table:template>
+                    <Text text="{local>MANUFACTURERMATERIAL}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>ManufacturerPartNmbr}">
+                <table:template>
+                    <Text text="{local>MANUFACTURERPARTNMBR}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Manufacturer}">
+                <table:template>
+                    <Text text="{local>MANUFACTURER}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>SupplierName2}">
+                <table:template>
+                    <Text text="{local>SUPPLIERNAME2}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PlannedDeliveryDurationInDays}" hAlign="End">
+                <table:template>
+                    <Text text="{local>PLANNEDDELIVERYDURATIONINDAYS}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>GoodsReceiptDurationInDays}" hAlign="End">
+                <table:template>
+                    <Text text="{local>GOODSRECEIPTDURATIONINDAYS}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>LotSizeRoundingQuantity}" hAlign="End">
+                <table:template>
+                    <Text text="{local>LOTSIZEROUNDINGQUANTITY}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>NetPrice}" hAlign="End">
+                <table:template>
+                    <Text text="{local>NETPRICE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>DocumentCurrency}">
+                <table:template>
+                    <Text text="{local>DOCUMENTCURRENCY}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PurchaseOrderDate}">
+                <table:template>
+                    <Text text="{local>PURCHASEORDERDATE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>ScheduleLineDeliveryDate}">
+                <table:template>
+                    <Text text="{local>SCHEDULELINEDELIVERYDATE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>OrderQuantity}" hAlign="End">
+                <table:template>
+                    <Text text="{local>ORDERQUANTITY}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PoNokoru}" hAlign="End">
+                <table:template>
+                    <Text text="{local>PONOKORU}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PurchaseOrderQuantityUnit}">
+                <table:template>
+                    <Text text="{local>PURCHASEORDERQUANTITYUNIT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>McRequire}">
+                <table:template>
+                    <Text text="{local>MCREQUIRE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Attention}">
+                <table:template>
+                    <Text text="{local>ATTENTION}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>MRPDeliveryDate}">
+                <table:template>
+                    <Text text="{local>MRPDELIVERYDATE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>MRPElementReschedulingDate}">
+                <table:template>
+                    <Text text="{local>MRPELEMENTRESCHEDULINGDATE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Exception1}">
+                <table:template>
+                    <Text text="{local>EXCEPTION1}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>DeliveryDate}">
+                <table:template>
+                    <Text text="{local>DELIVERYDATE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PossibleProductionDate}">
+                <table:template>
+                    <Text text="{local>POSSIBLEPRODUCTIONDATE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>ConfirmedQuantity}" hAlign="End">
+                <table:template>
+                    <Text text="{local>CONFIRMEDQUANTITY}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>NetAmount}" hAlign="End">
+                <table:template>
+                    <Text text="{local>NETAMOUNT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>SupplierConfirmationExtNumber}">
+                <table:template>
+                    <Text text="{local>SUPPLIERCONFIRMATIONEXTNUMBER}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>SupplierCertOriginCountry}">
+                <table:template>
+                    <Text text="{local>SUPPLIERCERTORIGINCOUNTRY}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>RoughGoodsReceiptQty}" hAlign="End">
+                <table:template>
+                    <Text text="{local>ROUGHGOODSRECEIPTQTY}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>WorkflowTaskResult}">
+                <table:template>
+                    <Text text="{local>WORKFLOWTASKRESULT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>TaskResultText}">
+                <table:template>
+                    <Text text="{local>TASKRESULTTEXT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>CreatedByUser}">
+                <table:template>
+                    <Text text="{local>CREATEDBYUSER}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>CorrespncInternalReference}">
+                <table:template>
+                    <Text text="{local>CORRESPNCINTERNALREFERENCE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Plant}">
+                <table:template>
+                    <Text text="{local>PLANT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>StorageLocation}">
+                <table:template>
+                    <Text text="{local>STORAGELOCATION}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>StorageLocationName}">
+                <table:template>
+                    <Text text="{local>STORAGELOCATIONNAME}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>IsCompletelyDelivered}">
+                <table:template>
+                    <Text text="{local>ISCOMPLETELYDELIVERED}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>SupplierRespSalesPersonName}">
+                <table:template>
+                    <Text text="{local>SUPPLIERRESPSALESPERSONNAME}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>TaxCode}">
+                <table:template>
+                    <Text text="{local>TAXCODE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>IncotermsClassification}">
+                <table:template>
+                    <Text text="{local>INCOTERMSCLASSIFICATION}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PORelease}">
+                <table:template>
+                    <Text text="{local>PORELEASE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>PricingDateControl}">
+                <table:template>
+                    <Text text="{local>PRICINGDATECONTROL}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="15rem" label="{i18n>ShippingInstructionName}">
+                <table:template>
+                    <Text text="{local>SHIPPINGINSTRUCTIONNAME}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>productionmemopageformat}">
+                <table:template>
+                    <Text text="{local>PRODUCTIONMEMOPAGEFORMAT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>MRPRelevantQuantity}" hAlign="End">
+                <table:template>
+                    <Text text="{local>MRPRELEVANTQUANTITY}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>CorrespncExternalReference}">
+                <table:template>
+                    <Text text="{local>CORRESPNCEXTERNALREFERENCE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="15rem" label="{i18n>ProductionOrInspectionMemoTxt}">
+                <table:template>
+                    <Text text="{local>PRODUCTIONORINSPECTIONMEMOTXT}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

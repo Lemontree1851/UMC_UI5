@@ -1,0 +1,118 @@
+<mvc:View controllerName="mm.podataanalysis.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="PODataAnalysisSVM" showShare="true" showExecuteOnSelection="true" entitySet="PODataAnalysis"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="PODataAnalysis" useToolbar="false" smartVariant="__SVM01" persistencyKey="PODataAnalysisSFB" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="PurchaseOrder" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="POPOItem" visibleInAdvancedArea="true" label="{i18n>POPOItem}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="AccountAssignmentCategory" visibleInAdvancedArea="true" label="{i18n>AccountAssignmentCategory}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="InternationalArticleNumber" visibleInAdvancedArea="true" label="{i18n>InternationalArticleNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="PurchaseOrderDate" visibleInAdvancedArea="true" label="{i18n>PurchaseOrderDate}"/>
+                                <smartFilterBar:ControlConfiguration index='110' key="ScheduleLineDeliveryDate" visibleInAdvancedArea="true" label="{i18n>ScheduleLineDeliveryDate}"/>
+                                <smartFilterBar:ControlConfiguration index='120' key="DeliveryDate" visibleInAdvancedArea="true" label="{i18n>DeliveryDate}"/>
+                                <smartFilterBar:ControlConfiguration index='130' key="WorkflowTaskResult" visibleInAdvancedArea="true" label="{i18n>WorkflowTaskResult}"/>
+                                <smartFilterBar:ControlConfiguration index='140' key="CreatedByUser" visibleInAdvancedArea="true" label="{i18n>CreatedByUser}"/>
+                                <smartFilterBar:ControlConfiguration index='150' key="CorrespncInternalReference" visibleInAdvancedArea="true" label="{i18n>CorrespncInternalReference}"/>
+                                <smartFilterBar:ControlConfiguration index='160' key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='170' key="StorageLocation" visibleInAdvancedArea="true" label="{i18n>StorageLocation}"/>
+                                <smartFilterBar:ControlConfiguration index='180' key="IncotermsClassification" visibleInAdvancedArea="true" label="{i18n>IncotermsClassification}"/>
+                                <smartFilterBar:ControlConfiguration index='190' key="CorrespncExternalReference" visibleInAdvancedArea="true" label="{i18n>CorrespncExternalReference}"/>
+                                <smartFilterBar:ControlConfiguration index='200' key="ponokodis" visibleInAdvancedArea="true" label="{i18n>ponokodis}"/>
+                                <smartFilterBar:ControlConfiguration index='210' key="FromMRPTable" visibleInAdvancedArea="true" label="{i18n>FromMRPTable}">
+                                    <smartFilterBar:customControl>
+                                        <Switch state="{local>/filter/FromMRPTable}" customTextOn=" " customTextOff=" ">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="UUID" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchasingGroupName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MRPArea" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MRPControllerName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PlainLongText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PlainLongText1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseRequisition" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseRequisitionItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="RequisitionerName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="RequirementTracking" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_BPCODE_PRD_PRD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Customer" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierName1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierSubrange" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierSubrangeText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItemText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ManufacturerMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ManufacturerPartNmbr" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Manufacturer" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierName2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PlannedDeliveryDurationInDays" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GoodsReceiptDurationInDays" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LotSizeRoundingQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NetPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DocumentCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OrderQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PoNokoru" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderQuantityUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="McRequire" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Attention" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MRPDeliveryDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MRPElementReschedulingDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Exception1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PossibleProductionDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ConfirmedQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NetAmount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierConfirmationExtNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierCertOriginCountry" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="RoughGoodsReceiptQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TaskResultText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StorageLocationName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsCompletelyDelivered" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierRespSalesPersonName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TaxCode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PORelease" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PricingDateControl" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShippingInstructionName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="productionmemopageformat" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MRPRelevantQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductionOrInspectionMemoTxt" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <!-- <FlexBox fitContainer="true"> -->
+            <core:Fragment fragmentName="mm.podataanalysis.fragments.List" type="XML"/>
+            <!-- </FlexBox> -->
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

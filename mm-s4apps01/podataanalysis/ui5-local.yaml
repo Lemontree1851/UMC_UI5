@@ -10,7 +10,6 @@ framework:
   libraries:
     - name: sap.m
     - name: sap.ui.core
-    - name: sap.fe.templates
     - name: sap.ushell
     - name: themelib_sap_horizon
 server:
@@ -21,26 +20,33 @@ server:
         port: 35729
         path: webapp
         delay: 300
-    - name: fiori-tools-proxy
-      afterMiddleware: compression
-      configuration:
-        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
-        backend:
-          - path: /sap
-            url: https://my412552-api.s4hana.cloud.sap
-            destination: UMC_Dev_Customizing_BTP
-    - name: sap-fe-mockserver
-      beforeMiddleware: csp
-      configuration:
-        mountPath: /
-        services:
-          - urlPath: /sap/opu/odata4/sap/zui_podataanalysis_o4/srvd/sap/zui_podataanalysis_o4/0001
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/data
-            generateMockData: true
-        annotations: []
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
         component: mm.podataanalysis
         ui5Theme: sap_horizon
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - authenticationType: reentranceTicket # SAML support for vscode
+            path: /sap
+            url: https://my412552.s4hana.cloud.sap
+            destination: UMC_Dev_Customizing
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /sap/opu/odata/sap/ZUI_PODATAANALYSIS_O2
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/localService/mainService/ZUI_PODATAANALYSIS_O2_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_PODATAANALYSIS_O2_VAN',Version='0001')/$value/

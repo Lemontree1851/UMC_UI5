@@ -1,13 +1,13 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Mon Sep 09 2024 06:34:31 GMT+0000 (Coordinated Universal Time)|
-|**App Generator**<br>@sap/generator-fiori-elements|
-|**App Generator Version**<br>1.14.5|
+|**Generation Date and Time**<br>Wed Apr 09 2025 02:57:02 GMT+0000 (Coordinated Universal Time)|
+|**App Generator**<br>@sap/generator-fiori-freestyle|
+|**App Generator Version**<br>1.17.1|
 |**Generation Platform**<br>SAP Business Application Studio|
-|**Template Used**<br>List Report Page V4|
+|**Template Used**<br>simple|
 |**Service Type**<br>SAP System (ABAP On Premise)|
-|**Service URL**<br>https://my412552-api.s4hana.cloud.sap/sap/opu/odata4/sap/zui_podataanalysis_o4/srvd/sap/zui_podataanalysis_o4/0001/|
+|**Service URL**<br>https://my412552.s4hana.cloud.sap/sap/opu/odata4/sap/zui_podataanalysis_o4/srvd/sap/zui_podataanalysis_o4/0001/|
 |**Module Name**<br>podataanalysis|
 |**Application Title**<br>PO Data Analysis|
 |**Namespace**<br>mm|
@@ -16,7 +16,6 @@
 |**Enable Code Assist Libraries**<br>False|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
-|**Main Entity**<br>PODataAnalysis|
 
 ## podataanalysis
 

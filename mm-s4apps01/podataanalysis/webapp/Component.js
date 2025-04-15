@@ -1,21 +1,29 @@
-sap.ui.define(
-    ["sap/fe/core/AppComponent",
-     "mm/podataanalysis/ext/controller/ListReportExt"
-    ],
+sap.ui.define([
+    "sap/ui/core/UIComponent",
+    "mm/podataanalysis/model/models"
+], (UIComponent, models) => {
+    "use strict";
 
-    function (Component, ListReportExt) {
-        "use strict";
+    return UIComponent.extend("mm.podataanalysis.Component", {
+        metadata: {
+            manifest: "json",
+            interfaces: [
+                "sap.ui.core.IAsyncContentCreation"
+            ]
+        },
 
-        return Component.extend("mm.podataanalysis.Component", {
+        init() {
+            // call the base component's init function
+            UIComponent.prototype.init.apply(this, arguments);
 
-            ListReportExt: ListReportExt,
-            metadata: {
-                manifest: "json"
-            },
+            // set the device model
+            this.setModel(models.createDeviceModel(), "device");
 
-            onAfterRendering: function () {
-                ListReportExt.init(this.oModels);
-            }
-        });
-    }
-);
+            // enable routing
+            this.getRouter().initialize();
+
+            // set the local model
+            this.setModel(models.createLocalModel(), "local");
+        }
+    });
+});
