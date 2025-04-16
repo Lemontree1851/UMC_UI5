@@ -176,8 +176,36 @@ sap.ui.define([
             }
         },
 
-        onSearch: function () {
+        onSearch: function (oEvent) {
             this.getModel().resetChanges();
+
+            // ADD BEGIN BY XINLEI XU 2025/04/16 导出性能优化
+            var iSelectIndex = this.getModel("local").getProperty("/selectIndex");
+            if (iSelectIndex === 0) {
+                var aFilters = this.byId("idSmartFilterBar1").getFilters()[0].aFilters;
+                var oNewFilter,
+                    aNewFilters = [];
+                var sRequisitionDate = this.getModel("local").getProperty("/dateValue");
+                aNewFilters.push(new Filter("RequisitionDate", FilterOperator.EQ, sRequisitionDate));
+                if (aNewFilters.length) {
+                    oNewFilter = new Filter({
+                        filters: aNewFilters,
+                        and: false
+                    });
+                    aFilters.push(oNewFilter);
+                }
+                // 并行处理 优化速度
+                this.getModel().setUseBatch(false);
+                this._CallODataV2("READ", "/ZC_PICKINGLIST_STD", aFilters, { "$top": 999999999 }, {}).then(function (oResponse) {
+                    if (oResponse) {
+                        this.getModel("local").setProperty("/StandardList", oResponse.results);
+                    }
+                    this.getModel().setUseBatch(true);
+                }.bind(this)), function (oError) {
+                    this.getModel().setUseBatch(true);
+                }.bind(this);
+            }
+            // ADD END BY XINLEI XU 2025/04/16 导出性能优化
         },
 
         onPressBtn: function (sEvent) {
@@ -548,18 +576,28 @@ sap.ui.define([
                         //     sType = sap.ui.export.EdmType.Date;
                         //     break;
                         //  Number 分隔符 没有小数位
-                        case "TotalRequiredQuantity":
-                        case "TotalShortFallQuantity":
-                        case "StorageLocationToStock":
-                        case "OrderRequiredQuantity":
-                        case "ResidueStockQuantity":
-                        case "ShortQuantity":
-                        case "ConfirmedAvailableQuantity":
+                        // MOD BEGIN BY XINLEI XU 2025/04/16 取数性能优化，该处字段名调整为全大写
+                        // case "TotalRequiredQuantity":
+                        // case "TotalShortFallQuantity":
+                        // case "StorageLocationToStock":
+                        // case "RequiredQuantity":
+                        // case "ResidueStockQuantity":
+                        // case "ShortQuantity":
+                        // case "ConfirmedAvailableQuantity":
+                        case "TOTAL_REQUIRED_QUANTITY":
+                        case "TOTAL_SHORTFALL_QUANTITY":
+                        case "STORAGE_LOCATION_TO_STOCK":
+                        case "REQUIRED_QUANTITY":
+                        case "RESIDUE_STOCK_QUANTITY":
+                        case "SHORT_QUANTITY":
+                        case "CONFIRMED_AVAILABLE_QUANTITY":
                             sType = sap.ui.export.EdmType.Number;
                             bDelimiter = true;
                             iScale = 3;
                             sTextAlign = "End";
-                            sUnitProperty = "BaseUnit";
+                            // sUnitProperty = "BaseUnit";
+                            sUnitProperty = "BASE_UNIT";
+                            // MOD END BY XINLEI XU 2025/04/16
                             break;
                         default:
                             sType = sap.ui.export.EdmType.String;
@@ -590,6 +628,72 @@ sap.ui.define([
                 },
                 dataSource: aExcelSet,
                 fileName: this.getModel("i18n").getResourceBundle().getText("DetailsFileName") + "_" + this.getCurrentDateTime() + ".xlsx"
+            };
+            // export excel file
+            new Spreadsheet(oSettings).build();
+        },
+
+        onExportStandardList: function () {
+            var oTable = this.byId("idStandardListTable");
+            var aExcelSet = this.getModel("local").getProperty("/StandardList");
+            var aExcelCol = [];
+            var aTableCol = oTable.getColumns();
+            for (var i = 0; i < aTableCol.length; i++) {
+                if (aTableCol[i].getVisible()) {
+                    var sLabelText = aTableCol[i].getAggregation("label").getText();
+                    var sType, sTextAlign, sUnitProperty, bDelimiter, iScale;
+                    var sFieldName = aTableCol[i].getAggregation("template").getBindingPath("text");
+                    if (!sFieldName) {
+                        sFieldName = aTableCol[i].getAggregation("template").mBindingInfos.value.parts[0].path;
+                    }
+                    switch (sFieldName) {
+                        //  Date
+                        // case "RequisitionDate":
+                        //     sType = sap.ui.export.EdmType.Date;
+                        //     break;
+                        //  Number 分隔符 没有小数位
+                        case "TotalRequiredQuantity":
+                        case "TotalShortFallQuantity":
+                        case "StorageLocationToStock":
+                        case "M_CARD_Quantity":
+                        case "TotalTransferQuantity":
+                        case "StorageLocationFromStock":
+                        case "GR_SlipsQuantity":
+                            sType = sap.ui.export.EdmType.Number;
+                            bDelimiter = true;
+                            iScale = 3;
+                            sTextAlign = "End";
+                            sUnitProperty = "BaseUnit";
+                            break;
+                        default:
+                            sType = sap.ui.export.EdmType.String;
+                            sTextAlign = "Begin";
+                            sUnitProperty = "";
+                            break;
+                    }
+                    var oExcelCol = {
+                        label: sLabelText,
+                        type: sType,
+                        property: sFieldName,
+                        width: parseFloat(aTableCol[i].getWidth()),
+                        textAlign: sTextAlign,
+                        unitProperty: sUnitProperty,
+                        delimiter: bDelimiter,
+                        scale: iScale
+                    };
+                    aExcelCol.push(oExcelCol);
+                }
+            }
+            var oSettings = {
+                workbook: {
+                    columns: aExcelCol,
+                    context: {
+                        version: "1.54",
+                        hierarchyLevel: "level"
+                    }
+                },
+                dataSource: aExcelSet,
+                fileName: this.getModel("i18n").getResourceBundle().getText("StandardListFileName") + "_" + this.getCurrentDateTime() + ".xlsx"
             };
             // export excel file
             new Spreadsheet(oSettings).build();

@@ -6,12 +6,13 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_STD" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExportStandardList" showFullScreenButton="true" requestAtLeastFields="BaseUnit,LaboratoryOrDesignOfficeName,DetailsJson" ignoredFields="BaseUnit,LaboratoryOrDesignOfficeName,RequisitionDate,MRPController,ProductionSupervisor,DetailsJson,ExternalProductGroup">
+    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_STD" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" enableExport="false" beforeExport="onBeforeExportStandardList" showFullScreenButton="true" requestAtLeastFields="BaseUnit,LaboratoryOrDesignOfficeName,DetailsJson" ignoredFields="BaseUnit,LaboratoryOrDesignOfficeName,RequisitionDate,MRPController,ProductionSupervisor,DetailsJson,ExternalProductGroup">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
                 <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('STD_CREATE')" enabled="{= ${local>/authorityCheck/button/Create}}"/>
                 <Button icon="sap-icon://browse-folder" text="{i18n>ShowDetails}" type="Transparent" press="onPressBtn('STD_DETAIL')" enabled="{= ${local>/authorityCheck/button/View}}"/>
+                <Button icon="sap-icon://excel-attachment" text="{i18n>Download}" type="Transparent" press="onExportStandardList"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
         <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
