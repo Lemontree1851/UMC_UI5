@@ -12,7 +12,7 @@
                 <ToolbarSpacer/>
                 <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('STD_CREATE')" enabled="{= ${local>/authorityCheck/button/Create}}"/>
                 <Button icon="sap-icon://browse-folder" text="{i18n>ShowDetails}" type="Transparent" press="onPressBtn('STD_DETAIL')" enabled="{= ${local>/authorityCheck/button/View}}"/>
-                <Button icon="sap-icon://excel-attachment" text="{i18n>Download}" type="Transparent" press="onExportStandardList"/>
+                <Button icon="sap-icon://excel-attachment" text="{i18n>Download}" type="Transparent" press="onExportStandardList" enabled="{= ${local>/StandardList}.length > 0}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
         <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
