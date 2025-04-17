@@ -595,8 +595,11 @@ sap.ui.define([
                 var ContributionProfitTotalLabel = oObj._ResourceBundle.getText("ContributionProfitTotalLabel") + "(";
                 var GrossProfitTotalLabel = oObj._ResourceBundle.getText("GrossProfitTotalLabel") + "(";
 
+                // MOD BEGIN BY XINLEI XU 2025/04/17
+                // var sLabel = sColName;
+                var sLabel = sColName.split("_")[0]; // 下划线后 新拼接了会计年月
+                // MOD END BY XINLEI XU 2025/04/17
 
-                var sLabel = sColName;
                 sLabel = sLabel.replace("ConditionRateValue", ConditionRateValueLabel);
                 sLabel = sLabel.replace("materialcost2000per", materialcost2000perLabel);
                 sLabel = sLabel.replace("Manufacturingcostper", ManufacturingcostperLabel);
@@ -767,6 +770,7 @@ sap.ui.define([
                         if (key.startsWith("SalesAmount")) {
 
                             var yearMonth = key.replace("SalesAmount", "");
+                            var yearPeriod = yearMonth.split("_")[1]; // ADD BY XINLEI XU 2025/04/17 会计年月
                             var planKey = "salesplanamountindspcrcy" + yearMonth;
                             var oppositeQty = aExcelSet[i][planKey] > 0 ? -Math.abs(aExcelSet[i][planKey]) : Math.abs(aExcelSet[i][planKey]); // Flip the sign of QTY
 
@@ -784,7 +788,7 @@ sap.ui.define([
                             // MOD END BY XINLEI XU 2025/02/17
 
                             var item = {
-                                "YearMonth": yearMonth,
+                                "YearMonth": yearPeriod, // yearMonth,
                                 ...baseItem, // Spread the base item to include its properties
                                 "GLAccount": aExcelSet[i].GLAccount1,
                                 "GLAccountName": aExcelSet[i].GLAccountName1,
@@ -795,7 +799,7 @@ sap.ui.define([
                             };
                             aExcelSetBI.push(item);
                             var item1 = {
-                                "YearMonth": yearMonth,
+                                "YearMonth": yearPeriod, // yearMonth,
                                 ...baseItem, // Spread the base item to include its properties
                                 "GLAccount": aExcelSet[i].GLAccount2,
                                 "GLAccountName": aExcelSet[i].GLAccountName2,
@@ -806,7 +810,7 @@ sap.ui.define([
                             };
                             aExcelSetBI.push(item1);
                             var item2 = {
-                                "YearMonth": yearMonth,
+                                "YearMonth": yearPeriod, // yearMonth,
                                 ...baseItem, // Spread the base item to include its properties
                                 "GLAccount": aExcelSet[i].GLAccount3,
                                 "GLAccountName": aExcelSet[i].GLAccountName3,
