@@ -542,7 +542,7 @@
               </VBox>
             </t:template>
           </t:Column>
-          <t:Column id="D028" label="{local>/Date028}" width="5rem" sortProperty="D028" filterProperty="D028" visible="{= ${local>/zday} >= 28 ? true : false }" autoResizable="true">
+          <t:Column id="D028" label="{local>/Date028}" width="5rem" sortProperty="D028" filterProperty="D028" visible="{= ${local>/zdays} >= 28 ? true : false }" autoResizable="true">
             <t:customData>
               <core:CustomData key="p13nData" value='\{"columnKey":"D028", "leadingProperty":"D028", "sortProperty":"D028", "filterProperty": "D028"}'/>
             </t:customData>
