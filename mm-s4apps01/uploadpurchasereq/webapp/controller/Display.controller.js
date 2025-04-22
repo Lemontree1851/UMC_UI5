@@ -1,31 +1,33 @@
 sap.ui.define([
-    "./BaseController",
-    "../model/formatter",
-    "./messages",
+	"./BaseController",
+	"../model/formatter",
+	"./messages",
 	"sap/ui/model/Filter",
 	"sap/m/BusyDialog"
-], function(
-    BaseController,
-    formatter,
-    messages,
+], function (
+	BaseController,
+	formatter,
+	messages,
 	Filter,
 	BusyDialog
 ) {
 	"use strict";
 
 	return BaseController.extend("mm.uploadpurchasereq.controller.Display", {
-        formatter : formatter,
-        onInit: function () {
+		formatter: formatter,
+
+		onInit: function () {
 			this._LocalData = this.getOwnerComponent().getModel("local");
 			this._oDataModel = this.getOwnerComponent().getModel();
 			this._oWorkFlow = this.getOwnerComponent().getModel("WorkFlow");
 
 			this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-            this._BusyDialog = new BusyDialog();
-            var oRouter = this.getRouter();
+			this._BusyDialog = new BusyDialog();
+			var oRouter = this.getRouter();
 			oRouter.getRoute("RouteMain").attachMatched(this._onRouteMatched, this);
-        },
-        onRowActionItemPress : function(oEvent){
+		},
+
+		onRowActionItemPress: function (oEvent) {
 			this._oDataModel.resetChanges();
 			var oItem, oCtx;
 
@@ -37,16 +39,17 @@ sap.ui.define([
 			if (!InstanceId) {
 				InstanceId = "00000000-0000-0000-0000-000000000000";
 			}
-			this.getRouter().navTo("PurchaseReq",{
-				contextPath : oCtx.getProperty("UUID"),
+			this.getRouter().navTo("PurchaseReq", {
+				contextPath: oCtx.getProperty("UUID"),
 				contextPrNo: oCtx.getProperty("PrNo"),
 				contextApplyDepart: oCtx.getProperty("ApplyDepart"),
 				contextInstanceId: InstanceId,
 				contextApplicationId: oCtx.getProperty("ApplicationId"),
 			});
 		},
-        _onRouteMatched : function (oEvent) {
-            this.getView().getModel().resetChanges();
+
+		_onRouteMatched: function (oEvent) {
+			this.getView().getModel().resetChanges();
 			// var oArgs, oView;
 
 			// oArgs = oEvent.getParameter("arguments");
@@ -66,29 +69,41 @@ sap.ui.define([
 			// });
 			// this.byId("idSmartForm").setEditable(false);
 			// this.byId("idPage").setShowFooter(false);
+			this._UserInfo = sap.ushell.Container.getService("UserInfo");
 		},
 
 		onBeforeRebindTable: function (oEvent) {
 			this._oDataModel.resetChanges();
 			var oFilter = oEvent.getParameter("bindingParams").filters;
-			var oNewFilter, aNewFilter = [];
-			var oCreatedAt = this.byId("idDatePicker").getDateValue();
-			if (oCreatedAt) {
-				aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
-			}
 
-			var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
-			if(sApproveStatus !== "0") {
-				aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
+			// DEL BEGIN BY XINLEI XU 2025/04/21 CR#4359
+			// var oNewFilter, aNewFilter = [];
+			// var oCreatedAt = this.byId("idDatePicker").getDateValue();
+			// if (oCreatedAt) {
+			// 	aNewFilter.push(new Filter("CreatedAt", "EQ", formatter.convertLocalDateToUTCDate(oCreatedAt))); 
+			// }
+
+			// var sApproveStatus = this.byId("idApproveStatusSelect").getSelectedKey();
+			// if(sApproveStatus !== "0") {
+			// 	aNewFilter.push(new Filter("ApproveStatus", "EQ", sApproveStatus)); 
+			// }
+
+			// oNewFilter = new Filter({
+			// 	filters:aNewFilter,
+			// 	and:true
+			// });
+			// if (aNewFilter.length > 0) {
+			// 	oFilter.push(oNewFilter);
+			// }
+			// DEL END BY XINLEI XU 2025/04/21 CR#4359
+
+			// ADD BEGIN BY XINLEI XU 2025/04/22 CR#4359
+			var sApproveStatus = this.byId("idViewRange").getSelectedKey();
+			if (sApproveStatus === "1") {
+				var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+				oFilter.push(new Filter("CreatedByUserEmail", "EQ", sEmail));
 			}
-			
-			oNewFilter = new Filter({
-				filters:aNewFilter,
-				and:true
-			});
-			if (aNewFilter.length > 0) {
-				oFilter.push(oNewFilter);
-			}
+			// ADD END BY XINLEI XU 2025/04/22 CR#4359
 		},
 
 		createPurchseOrder: function (oEvent) {
@@ -97,10 +112,19 @@ sap.ui.define([
 				return;
 			}
 			this.postAction("createPurchaseOrder", JSON.stringify(aSelectedItems));
-
 		},
 
-		preparePostBody:function () {
+		// ADD BEGIN BY XINLEI XU 2025/04/22 CR#4359
+		deletePR: function () {
+			var aSelectedItems = this.preparePostBody();
+			if (aSelectedItems.length === 0) {
+				return;
+			}
+			this.postAction("deletePR", JSON.stringify(aSelectedItems));
+		},
+		// ADD END BY XINLEI XU 2025/04/22 CR#4359
+
+		preparePostBody: function () {
 			var aData = [];
 			var postDocs = [];
 			// 根据id值获取table 
@@ -110,7 +134,7 @@ sap.ui.define([
 				messages.showError(this._ResourceBundle.getText("msgNoSelect"));
 				return aData;
 			}
-			listItems.forEach(_getData,this); //根据选择的行获取具体的数据
+			listItems.forEach(_getData, this); //根据选择的行获取具体的数据
 			function _getData(iSelected, index) { //sSelected为选中的行
 				let key = oTable.getContextByIndex(iSelected).getPath();
 				let lineData = this._oDataModel.getProperty(key); //根据选中的行获取到ODATA键值，然后再获取到具体属性值
@@ -120,7 +144,7 @@ sap.ui.define([
 			return aData;
 		},
 
-		removeDuplicates: function(arr) {
+		removeDuplicates: function (arr) {
 			const map = new Map();
 			arr.forEach(item => {
 				const key = `${item.PrNo}`;
@@ -128,51 +152,65 @@ sap.ui.define([
 			});
 			return Array.from(map.values());
 		},
+
 		postAction: function (sAction, postData) {
 			this._BusyDialog.open();
-            var oModel = this._oDataModel;
-            oModel.callFunction(`/${sAction}`, {
-                method: "POST",
-                // groupId: "myId",//如果设置groupid，会多条一起进入action
-                changeSetId: 1,
-                //建议只传输前端修改的参数，其他字段从后端获取
-                urlParameters: {
-                    Event: sAction,
-                    Zzkey: postData
-                },
-                success: function (oData) {
-					var aDataKey = Object.getOwnPropertyNames(this._oDataModel.getProperty("/"));
-					for (var i = aDataKey.length - 1; i >= 0; i--) {
-						if (aDataKey[i].slice(0,11) !== "PurchaseReq") {
-							aDataKey.splice(i, 1);
+			var oModel = this._oDataModel;
+			oModel.callFunction(`/${sAction}`, {
+				method: "POST",
+				// groupId: "myId",//如果设置groupid，会多条一起进入action
+				changeSetId: 1,
+				//建议只传输前端修改的参数，其他字段从后端获取
+				urlParameters: {
+					Event: sAction,
+					Zzkey: postData
+				},
+				success: function (oData) {
+					// ADD BEGIN BY XINLEI XU 2025/04/22 CR#4359
+					if (sAction === "deletePR") {
+						if (oData.deletePR.Zzkey === 'S') {
+							messages.showSuccess(this._ResourceBundle.getText("DeletePRSuccess"));
+						} else {
+							messages.showError(this._ResourceBundle.getText("DeletePRError"));
 						}
 					}
-                    let result = JSON.parse(oData[sAction].Zzkey);
-                    result.forEach(function (line) {
-                        aDataKey.forEach(function(key, index){
-							var lineData = this._oDataModel.getProperty("/" + key);
-							if (lineData.UUID.replace(/-/g, '') === this.base64ToHex(line.UUID)) {
-								// lineCount++;
-								this._oDataModel.setProperty("/" + key + "/Type", line.TYPE);
-								this._oDataModel.setProperty("/" + key + "/Message", line.MESSAGE);
-								this._oDataModel.setProperty("/" + key + "/PurchaseOrder", line.PURCHASEORDER);
-								this._oDataModel.setProperty("/" + key + "/PurchaseOrderItem", line.PURCHASEORDERITEM);
-								this._oDataModel.setProperty("/" + key + "/ApproveStatus", line.APPROVESTATUS);
+					// ADD END BY XINLEI XU 2025/04/22 CR#4359
+					else {
+						var aDataKey = Object.getOwnPropertyNames(this._oDataModel.getProperty("/"));
+						for (var i = aDataKey.length - 1; i >= 0; i--) {
+							if (aDataKey[i].slice(0, 11) !== "PurchaseReq") {
+								aDataKey.splice(i, 1);
 							}
-						},this);
-                    },this);
+						}
+						let result = JSON.parse(oData[sAction].Zzkey);
+						result.forEach(function (line) {
+							aDataKey.forEach(function (key, index) {
+								var lineData = this._oDataModel.getProperty("/" + key);
+								if (lineData.UUID.replace(/-/g, '') === this.base64ToHex(line.UUID)) {
+									// lineCount++;
+									this._oDataModel.setProperty("/" + key + "/Type", line.TYPE);
+									this._oDataModel.setProperty("/" + key + "/Message", line.MESSAGE);
+									this._oDataModel.setProperty("/" + key + "/PurchaseOrder", line.PURCHASEORDER);
+									this._oDataModel.setProperty("/" + key + "/PurchaseOrderItem", line.PURCHASEORDERITEM);
+									this._oDataModel.setProperty("/" + key + "/ApproveStatus", line.APPROVESTATUS);
+								}
+							}, this);
+						}, this);
+					}
 					this._BusyDialog.close();
 					this.getModel().refresh();
-                }.bind(this),
-                error: function (oError) {
-                    this._LocalData.setProperty("/recordCheckSuccessed", false);
-                    messages.showError(messages.parseErrors(oError));
+				}.bind(this),
+				error: function (oError) {
+					if (sAction !== "deletePR") { // ADD BY XINLEI XU 2025/04/22 CR#4359
+						this._LocalData.setProperty("/recordCheckSuccessed", false);
+					}
+					messages.showError(messages.parseErrors(oError));
 					this._BusyDialog.close();
 					this.getModel().refresh();
-                }.bind(this)
-            });
-            // oModel.submitChanges({ groupId: "myId" });
-        },
+				}.bind(this)
+			});
+			// oModel.submitChanges({ groupId: "myId" });
+		},
 
 		base64ToHex: function (base64) {
 			const raw = atob(base64);  // Decode the base64 string
@@ -191,6 +229,7 @@ sap.ui.define([
 			}
 			this.postWorkFlowAction("Application", JSON.stringify(aSelectedItems));
 		},
+
 		revokeApproval: function () {
 			var aSelectedItems = this.prepareWorkFlowPostBody();
 			if (aSelectedItems.length === 0) {
@@ -198,28 +237,29 @@ sap.ui.define([
 			}
 			this.postWorkFlowAction("Revoke", JSON.stringify(aSelectedItems));
 		},
+
 		postWorkFlowAction: function (sAction, postData) {
 			this._BusyDialog.open();
-            var oModel = this._oWorkFlow;
-            oModel.callFunction(`/${sAction}`, {
-                method: "POST",
-                // groupId: "myId",//如果设置groupid，会多条一起进入action
-                changeSetId: 1,
-                //建议只传输前端修改的参数，其他字段从后端获取
-                urlParameters: {
-                    Event: sAction,
-                    Zzkey: postData
-                },
-                success: function (oData) {
+			var oModel = this._oWorkFlow;
+			oModel.callFunction(`/${sAction}`, {
+				method: "POST",
+				// groupId: "myId",//如果设置groupid，会多条一起进入action
+				changeSetId: 1,
+				//建议只传输前端修改的参数，其他字段从后端获取
+				urlParameters: {
+					Event: sAction,
+					Zzkey: postData
+				},
+				success: function (oData) {
 					var aDataKey = Object.getOwnPropertyNames(this._oDataModel.getProperty("/"));
 					for (var i = aDataKey.length - 1; i >= 0; i--) {
-						if (aDataKey[i].slice(0,11) !== "PurchaseReq") {
+						if (aDataKey[i].slice(0, 11) !== "PurchaseReq") {
 							aDataKey.splice(i, 1);
 						}
 					}
-                    let result = JSON.parse(oData[sAction].Zzkey);
-                    result.forEach(function (line) {
-                        aDataKey.forEach(function(key, index){
+					let result = JSON.parse(oData[sAction].Zzkey);
+					result.forEach(function (line) {
+						aDataKey.forEach(function (key, index) {
 							var lineData = this._oDataModel.getProperty("/" + key);
 							if (lineData.PrNo === line.PRNO) {
 								// lineCount++;
@@ -232,17 +272,17 @@ sap.ui.define([
 								this._oDataModel.setProperty("/" + key + "/ApplyDate", line.APPLYDATE);
 								this._oDataModel.setProperty("/" + key + "/ApplyTime", line.APPLYTIME);
 							}
-						},this);
-                    },this);
+						}, this);
+					}, this);
 					this._BusyDialog.close();
 					this.getModel().refresh();
-                }.bind(this),
-                error: function (oError) {
-                    messages.showError(messages.parseErrors(oError));
+				}.bind(this),
+				error: function (oError) {
+					messages.showError(messages.parseErrors(oError));
 					this._BusyDialog.close();
 					this.getModel().refresh();
-                }.bind(this)
-            });
+				}.bind(this)
+			});
 		},
 		prepareWorkFlowPostBody: function () {
 			var aData = [];
@@ -257,7 +297,7 @@ sap.ui.define([
 			var sUser = sap.ushell.Container.getService("UserInfo").getUser().getFullName();
 			var sEmail = sap.ushell.Container.getService("UserInfo").getUser().getEmail();
 			var sTimeZone = this.getUTCOffset();
-			listItems.forEach(_getData,this); //根据选择的行获取具体的数据
+			listItems.forEach(_getData, this); //根据选择的行获取具体的数据
 			function _getData(iSelected, index) { //sSelected为选中的行
 				let key = oTable.getContextByIndex(iSelected).getPath();
 				let lineData = this._oDataModel.getProperty(key); //根据选中的行获取到ODATA键值，然后再获取到具体属性值
@@ -274,32 +314,26 @@ sap.ui.define([
 			const offsetMinutes = -date.getTimezoneOffset(); // 与 UTC 的分钟偏移量
 			const hours = Math.floor(offsetMinutes / 60);
 			const minutes = Math.abs(offsetMinutes % 60);
-			
+
 			// 格式化为简短 UTC±HHMM 格式
 			const sign = hours >= 0 ? '+' : '-';
-			const formattedOffset = minutes === 0 
-				? `UTC${sign}${Math.abs(hours)}` 
+			const formattedOffset = minutes === 0
+				? `UTC${sign}${Math.abs(hours)}`
 				: `UTC${sign}${Math.abs(hours)}${minutes}`;
 			return formattedOffset;
 		},
+
 		onBeforeExport: function (oEvent) {
-			// var that = this;
-            // var mExcelSettings = oEvent.getParameter("exportSettings");
-
-            // mExcelSettings.fileName = tabName + '_' + this.toDateTime(new Date());
-
-            // mExcelSettings.workbook.columns.forEach(function(oColumn) {
-            //     switch (oColumn.property) {
-            //     //千分位 并且是数值类型能求和，如果关联 货币就无法求和
-            //         case "Sagaku": 
-            //             oColumn.type = sap.ui.export.EdmType.Number;
-            //             // oColumn.unitProperty = 'Waers';
-            //             oColumn.textAlign = 'end';
-            //             oColumn.width = 20;
-            //             oColumn.delimiter = true;//控制千分位
-            //             break;
-            //     }
-            // });
-        },
+			var mExcelSettings = oEvent.getParameter("exportSettings");
+			mExcelSettings.workbook.columns.forEach(function (oColumn) {
+				switch (oColumn.property) {
+					// Date
+					case "DeliveryDate":
+					case "ApplyDate":
+						oColumn.type = sap.ui.export.EdmType.Date;
+						break;
+				}
+			});
+		},
 	});
 });

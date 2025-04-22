@@ -1,7 +1,7 @@
 sap.ui.define([
-    "./BaseController",
-    "../model/formatter",
-    "./messages",
+	"./BaseController",
+	"../model/formatter",
+	"./messages",
 	"sap/m/MessageBox",
 	"sap/ui/core/Messaging",
 	"sap/m/MessageToast",
@@ -11,45 +11,45 @@ sap.ui.define([
 	"sap/suite/ui/commons/library",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/Filter",
- 
 
-], function(
-    BaseController,
-    formatter,
-    messages,
+
+], function (
+	BaseController,
+	formatter,
+	messages,
 	MessageBox,
 	Messaging,
 	MessageToast,
 	Fragment,
 	Dialog,
 	BusyDialog,
-	mobileLibrary, 
+	mobileLibrary,
 	suiteLibrary,
 	FilterOperator,
 	Filter,
 	JSONModel,
- 
+
 
 ) {
 	"use strict";
 	// shortcut for sap.m.DialogType
 
 	return BaseController.extend("mm.zprworkflow.controller.Change", {
-		
-        formatter : formatter,
-        onInit: function (oEvent) {
-            // this._BusyDialog = new BusyDialog();
+
+		formatter: formatter,
+		onInit: function (oEvent) {
+			// this._BusyDialog = new BusyDialog();
 
 			this._BusyDialog = new BusyDialog();
 			this._LocalData = this.getOwnerComponent().getModel("local");
-            this._oDataModel = this.getOwnerComponent().getModel();
-            this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-            var oRouter = this.getRouter();
+			this._oDataModel = this.getOwnerComponent().getModel();
+			this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oRouter = this.getRouter();
 			oRouter.getRoute("PurchaseReq").attachMatched(this._onRouteMatched, this);
- 
+
 			this.byId('idSmartTable1').rebindTable();
 			this._oDataModel.refresh(true);
- 
+
 			// set message model
 			this.getView().setModel(Messaging.getMessageModel(), "message");
 
@@ -59,7 +59,7 @@ sap.ui.define([
 			this._timeline.setEnableScroll(false);
 			//this._timeline.setAlignment("Left");
 
-        },
+		},
 		getMediaUrl: function (sUrlString) {
 			if (sUrlString) {
 				var sUrl = new URL(sUrlString);
@@ -71,7 +71,7 @@ sap.ui.define([
 				return "";
 			}
 		},
-        _onRouteMatched : function (oEvent) {
+		_onRouteMatched: function (oEvent) {
 			var oArgs, oView;
 
 			oArgs = oEvent.getParameter("arguments");
@@ -80,21 +80,21 @@ sap.ui.define([
 			this._InsNo = oArgs.contextPrNo;
 			this._InsNo1 = oArgs.contextApplyDepart;
 			this._InsNo2 = oArgs.contextPath;
- 			this._InsNo3 = oArgs.contextInstanceId;
- 			this._InsNo4 = oArgs.contextApplicationId;
+			this._InsNo3 = oArgs.contextInstanceId;
+			this._InsNo4 = oArgs.contextApplicationId;
 
-			 if (sap.ushell && sap.ushell.Container) {
-				 this._UserFullName = sap.ushell.Container.getService("UserInfo").getUser().getFullName();
-				 this._UserEmail = sap.ushell.Container.getService("UserInfo").getUser().getEmail();
-				  
-			 };
-			 //console.log("/PurchaseReqWFSum(ApplyDepart='" + oArgs.contextApplyDepart + "',PrNo='" + oArgs.contextPrNo + "')");
-  //"/PurchaseReqWFItem(guid'" + oArgs.contextPath + "')",
+			if (sap.ushell && sap.ushell.Container) {
+				this._UserFullName = sap.ushell.Container.getService("UserInfo").getUser().getFullName();
+				this._UserEmail = sap.ushell.Container.getService("UserInfo").getUser().getEmail();
+
+			};
+			//console.log("/PurchaseReqWFSum(ApplyDepart='" + oArgs.contextApplyDepart + "',PrNo='" + oArgs.contextPrNo + "')");
+			//"/PurchaseReqWFItem(guid'" + oArgs.contextPath + "')",
 
 
 			oView.bindElement({
-				path : "/PurchaseReqWFLink(guid'" + oArgs.contextPath + "')",
-				events : {
+				path: "/PurchaseReqWFLink(guid'" + oArgs.contextPath + "')",
+				events: {
 					//change: this._onBindingChange.bind(this),
 					dataRequested: function (oEvent) {
 						oView.setBusy(true);
@@ -104,7 +104,7 @@ sap.ui.define([
 					}.bind(this)
 				}
 			});
- 
+
 			this.byId("idSmartForm").setEditable(false);
 			this.byId("idPage").setShowFooter(true);
 			this._bindTimelineAggregation();
@@ -112,26 +112,26 @@ sap.ui.define([
 			this._oDataModel.refresh(true);
 		},
 
-		onRowActionItemPress : function(oEvent){
+		onRowActionItemPress: function (oEvent) {
 			var oItem, oCtx;
 
 			oItem = oEvent.getSource();
 			oCtx = oItem.getBindingContext();
-			this.getRouter().navTo("Attachments",{
-				contextPath : oCtx.getProperty("UUID"),
+			this.getRouter().navTo("Attachments", {
+				contextPath: oCtx.getProperty("UUID"),
 				contextPrNo: oCtx.getProperty("PrNo")
 			});
 		},
- 
+
 		onBeforeRebindTable: function (oEvent) {
-			 
+
 			this._oDataModel.resetChanges();
 			var oFilter = oEvent.getParameter("bindingParams").filters;
 			var oNewFilter, aNewFilter = [];
 			oFilter.push(new sap.ui.model.Filter("PrNo", "EQ", this._InsNo));
 
 		},
-		_onBindingChange : function (oEvent) {
+		_onBindingChange: function (oEvent) {
 			// No data for the binding
 			if (!this.getView().getBindingContext()) {
 				this.getRouter().getTargets().display("notFound");
@@ -144,7 +144,7 @@ sap.ui.define([
 				// 	this._bindUploadSetUrl(oUploadSet,item);
 				// }
 				this.getInfoRecord(item).then(function (res) {
-					this._bindUploadSetUrl(oUploadSet,res);
+					this._bindUploadSetUrl(oUploadSet, res);
 				}.bind(this)).catch(function () {
 					oUploadSet.unbindElement("Attach");
 					oUploadSet.setUploadUrl();
@@ -176,41 +176,41 @@ sap.ui.define([
 		onBeforeItemAdded: function (oEvent) {
 			var oUploadSet = oEvent.getSource();
 			var sFileName = encodeURIComponent(oEvent.getParameter("item").getFileName());
-			if(oUploadSet.getUploadUrl()) {
+			if (oUploadSet.getUploadUrl()) {
 				this._saveAttachment(oUploadSet, sFileName);
 			} else {
 				// 创建采购申请的文档信息记录
 				var item = this.getView().getBindingContext().getObject();
-				var sInfoRecordDocNumber = item.PrNo + item.PrItem.padStart(5,"0") + item.UUID.slice(-10).toUpperCase();
-				
-				this.createInfoRecord(sInfoRecordDocNumber).then( function (res) {
-					this._bindUploadSetUrl(oUploadSet,res);
+				var sInfoRecordDocNumber = item.PrNo + item.PrItem.padStart(5, "0") + item.UUID.slice(-10).toUpperCase();
+
+				this.createInfoRecord(sInfoRecordDocNumber).then(function (res) {
+					this._bindUploadSetUrl(oUploadSet, res);
 					this._saveAttachment(oUploadSet, sFileName);
 					//同时将InfoRecordDocNumber写入采购申请中
 					// var sPath = this.getView().getBindingContext().sPath;
 					// this._oDataModel.setProperty(sPath + "/DocumentInfoRecordDocNumber", sInfoRecordDocNumber);
 				}.bind(this));
 			}
-            
-        },
+
+		},
 		onUploadCompleted: function (oEvent) {
 			oEvent.getSource().getBinding("items").refresh();
 		},
 		getInfoRecord: function (item) {
-			var sInfoRecordDocNumber = item.PrNo + item.PrItem.padStart(5,"0") + item.UUID.slice(-10).toUpperCase();
+			var sInfoRecordDocNumber = item.PrNo + item.PrItem.padStart(5, "0") + item.UUID.slice(-10).toUpperCase();
 			var oInfoRecordModel = this.getView().getModel("InfoRecord");
 			const sPath = "/A_DocumentInfoRecord(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
 				sInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')";
-			var promise = new Promise (function (resolve, reject) {
-				var mParameters = {	
+			var promise = new Promise(function (resolve, reject) {
+				var mParameters = {
 					success: function (oData) {
 						resolve(oData);
-						 
+
 					}.bind(this),
 					error: function (oError) {
 						Messaging.removeAllMessages();
 						reject();
-						 
+
 					}.bind(this)
 				};
 				oInfoRecordModel.read(sPath, mParameters);
@@ -225,7 +225,7 @@ sap.ui.define([
 				"DocumentInfoRecordDocVersion": "00",
 				"DocumentInfoRecordDocPart": "000"
 			};
-			var promise = new Promise (function (resolve, reject) {
+			var promise = new Promise(function (resolve, reject) {
 				var mParameters = {
 					success: function (oData) {
 						resolve(oData);
@@ -238,10 +238,10 @@ sap.ui.define([
 			}.bind(this));
 			return promise;
 		},
-		onDialogPress: function () {	
+		onDialogPress: function () {
 
-            if (!this.Dialog) {
-                var oView = this.getView();
+			if (!this.Dialog) {
+				var oView = this.getView();
 				if (!this.Dialog) {
 					var oView = this.getView();
 					if (!this.Dialog) {
@@ -249,29 +249,29 @@ sap.ui.define([
 							id: oView.getId(),
 							name: "mm.zprworkflow.fragment.Dialog",
 							controller: this
-						}).then(function (oDialog){
+						}).then(function (oDialog) {
 							this.getView().addDependent(oDialog);
 							// oDialog.setModel(oView.getModel());
- 
+
 							return oDialog;
 						}.bind(this));
 					}
 				}
-				this.Dialog.then(function(oDialog) {
+				this.Dialog.then(function (oDialog) {
 					oDialog.open();
 				}.bind(this));
-            }
-			
-            this.Dialog.then(function(oDialog) {
-                oDialog.open();
-				var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
-				oTextArea.setValue(""); 
-            }.bind(this));
-        },
-		onDialogRejectPress: function () {	
+			}
 
-            if (!this.DialogReject) {
-                var oView = this.getView();
+			this.Dialog.then(function (oDialog) {
+				oDialog.open();
+				var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
+				oTextArea.setValue("");
+			}.bind(this));
+		},
+		onDialogRejectPress: function () {
+
+			if (!this.DialogReject) {
+				var oView = this.getView();
 				if (!this.DialogReject) {
 					var oView = this.getView();
 					if (!this.DialogReject) {
@@ -279,47 +279,47 @@ sap.ui.define([
 							id: oView.getId(),
 							name: "mm.zprworkflow.fragment.DialogReject",
 							controller: this
-						}).then(function (oDialog){
+						}).then(function (oDialog) {
 							this.getView().addDependent(oDialog);
 							// oDialog.setModel(oView.getModel());
 							return oDialog;
 						}.bind(this));
 					}
 				}
-				this.DialogReject.then(function(oDialog) {
+				this.DialogReject.then(function (oDialog) {
 					oDialog.open();
 				}.bind(this));
-            }
-            this.DialogReject.then(function(oDialog) {
-                oDialog.open();
+			}
+			this.DialogReject.then(function (oDialog) {
+				oDialog.open();
 				oDialog.open();
 				var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
-				oTextArea.setValue(""); 
-            }.bind(this));
-        },
-        onDialogClose: function(){
+				oTextArea.setValue("");
+			}.bind(this));
+		},
+		onDialogClose: function () {
 
-            this.byId("AnswerDialogq").close();
-        },
+			this.byId("AnswerDialogq").close();
+		},
 
-        onDialogConfirm: function() {
-            this.AcceptPRWF();
-        },
-		onDialogCloseReject: function(){
+		onDialogConfirm: function () {
+			this.AcceptPRWF();
+		},
+		onDialogCloseReject: function () {
 
-            this.byId("AnswerDialog").close();
-        },
+			this.byId("AnswerDialog").close();
+		},
 
-        onDialogConfirmReject: function() {
-            this.RejectPRWF();
-        },
+		onDialogConfirmReject: function () {
+			this.RejectPRWF();
+		},
 		_bindUploadSetUrl: function (oUploadSet, item) {
 			const sDocumentInfoRecordDocNumber = item.DocumentInfoRecordDocNumber;
 			const sPath = "Attach>/A_DocumentInfoRecordAttch(DocumentInfoRecordDocType='SAT',DocumentInfoRecordDocNumber='" +
-			sDocumentInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')";
- 
+				sDocumentInfoRecordDocNumber + "',DocumentInfoRecordDocVersion='00',DocumentInfoRecordDocPart='000')";
+
 			oUploadSet.bindElement(sPath);
- 
+
 		},
 		_saveAttachment: function (oUploadSet, sFileName) {
 			const csrfToken = this._oDataModel.securityTokenAvailable();
@@ -327,10 +327,10 @@ sap.ui.define([
 			csrfToken.then(function (res) {
 				oUploadSet.removeAllHeaderFields();
 				oUploadSet.addHeaderField(
-					new sap.ui.core.Item({key:"x-csrf-token", text:res})
+					new sap.ui.core.Item({ key: "x-csrf-token", text: res })
 				);
 				oUploadSet.addHeaderField(
-					new sap.ui.core.Item({key:"slug", text:sFileName})
+					new sap.ui.core.Item({ key: "slug", text: sFileName })
 				);
 				oUploadSet.upload();
 			});
@@ -338,7 +338,7 @@ sap.ui.define([
 		onFileRenamed: function (oEvent) {
 			var oUploadSet = oEvent.getSource();
 			var sFileName = encodeURIComponent(oEvent.getParameter("item").getFileName());
-			this._saveAttachment(oUploadSet,sFileName);
+			this._saveAttachment(oUploadSet, sFileName);
 		},
 		onBeforeItemRemoved: function (oEvent) {
 			oEvent.preventDefault();
@@ -374,7 +374,7 @@ sap.ui.define([
 			this._bindTimelineAggregation();
 
 		},
-		preparePostBody:function () {
+		preparePostBody: function () {
 			var oTextArea = this.byId("textArea1"); // Get the TextArea control by ID
 			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
 			var aData = [];
@@ -382,19 +382,19 @@ sap.ui.define([
 			var item = {
 				"PrNo": this._InsNo,
 				"ApplyDepart": this._InsNo1,
-				"InstanceId":this._InsNo3,
-				"ApplicationId":this._InsNo4 ,
-				"WorkflowId":"purchaserequisition",
+				"InstanceId": this._InsNo3,
+				"ApplicationId": this._InsNo4,
+				"WorkflowId": "purchaserequisition",
 				"Remark": sValue,
-				"UserEmail":this._UserEmail,
-				"UserFullName":this._UserFullName ,
-				"timezone":sTimeZone
+				"UserEmail": this._UserEmail,
+				"UserFullName": this._UserFullName,
+				"timezone": sTimeZone
 			};
 			aData.push(item);
- 
+
 			return aData;
 		},
-		preparePostBodyReject:function () {
+		preparePostBodyReject: function () {
 			var oTextArea = this.byId("textArea"); // Get the TextArea control by ID
 			var sValue = oTextArea.getValue(); // Retrieve the value from the TextArea
 			var aData = [];
@@ -402,61 +402,61 @@ sap.ui.define([
 			var item = {
 				"PrNo": this._InsNo,
 				"ApplyDepart": this._InsNo1,
-				"InstanceId":this._InsNo3,
-				"ApplicationId":this._InsNo4 ,
-				"WorkflowId":"purchaserequisition",
+				"InstanceId": this._InsNo3,
+				"ApplicationId": this._InsNo4,
+				"WorkflowId": "purchaserequisition",
 				"Remark": sValue,
-				"UserEmail":this._UserEmail,
-				"UserFullName":this._UserFullName,
-				"timezone":sTimeZone
+				"UserEmail": this._UserEmail,
+				"UserFullName": this._UserFullName,
+				"timezone": sTimeZone
 			};
 			aData.push(item);
- 
+
 			return aData;
 		},
 		postAction: function (sAction, postData) {
 			this._BusyDialog.open();
-            var oModel = this._oDataModel;
-            oModel.callFunction(`/${sAction}`, {
-                method: "POST",
-                // groupId: "myId",//如果设置groupid，会多条一起进入action
-                changeSetId: 1,
-                //建议只传输前端修改的参数，其他字段从后端获取
-                urlParameters: {
-                    Event: sAction,
-                    Zzkey: postData
-                },
-                success: function (oData) {
+			var oModel = this._oDataModel;
+			oModel.callFunction(`/${sAction}`, {
+				method: "POST",
+				// groupId: "myId",//如果设置groupid，会多条一起进入action
+				changeSetId: 1,
+				//建议只传输前端修改的参数，其他字段从后端获取
+				urlParameters: {
+					Event: sAction,
+					Zzkey: postData
+				},
+				success: function (oData) {
 					var aDataKey = Object.getOwnPropertyNames(this._oDataModel.getProperty("/"));
 					for (var i = aDataKey.length - 1; i >= 0; i--) {
-						if (aDataKey[i].slice(0,11) !== "PurchaseReq") {
+						if (aDataKey[i].slice(0, 11) !== "PurchaseReq") {
 							aDataKey.splice(i, 1);
 						}
 					}
-                    let result = JSON.parse(oData[sAction].Zzkey);
+					let result = JSON.parse(oData[sAction].Zzkey);
 					this._LocalData.setProperty("/recordCheckSuccessed", false);
- 
-					if(this.byId("AnswerDialogq")){this.byId("AnswerDialogq").close();}
-					if(this.byId("AnswerDialog")){this.byId("AnswerDialog").close();}
-                    result.forEach(function (line) {
-						if(line.TYPE == 'S'){
+
+					if (this.byId("AnswerDialogq")) { this.byId("AnswerDialogq").close(); }
+					if (this.byId("AnswerDialog")) { this.byId("AnswerDialog").close(); }
+					result.forEach(function (line) {
+						if (line.TYPE == 'S') {
 							messages.showSuccess(line.MESSAGE);
-						}else{
+						} else {
 							messages.showError(line.MESSAGE);
 						}
-                    },this);
+					}, this);
 
 
 					this._BusyDialog.close();
-                }.bind(this),
-                error: function (oError) {
-                    this._LocalData.setProperty("/recordCheckSuccessed", false);
-                    messages.showError(messages.parseErrors(oError));
+				}.bind(this),
+				error: function (oError) {
+					this._LocalData.setProperty("/recordCheckSuccessed", false);
+					messages.showError(messages.parseErrors(oError));
 					this._BusyDialog.close();
-                }.bind(this)
-            });
-            // oModel.submitChanges({ groupId: "myId" });
-        },
+				}.bind(this)
+			});
+			// oModel.submitChanges({ groupId: "myId" });
+		},
 		base64ToHex: function (base64) {
 			const raw = atob(base64);  // Decode the base64 string
 			let result = '';
@@ -466,10 +466,10 @@ sap.ui.define([
 			}
 			return result.toLowerCase();
 		},
-		onPressItems : function(evt) {
+		onPressItems: function (evt) {
 			//MessageToast.show("The TimelineItem is pressed.");
 		},
- 
+
 		orientationChanged: function (oEvent) {
 			var sKey = oEvent.getParameter("selectedItem").getProperty("key");
 			this._timeline.setAxisOrientation(sKey);
@@ -490,25 +490,25 @@ sap.ui.define([
 			const offsetMinutes = -date.getTimezoneOffset(); // 与 UTC 的分钟偏移量
 			const hours = Math.floor(offsetMinutes / 60);
 			const minutes = Math.abs(offsetMinutes % 60);
-			
+
 			// 格式化为简短 UTC±HHMM 格式
 			const sign = hours >= 0 ? '+' : '-';
-			const formattedOffset = minutes === 0 
-				? `UTC${sign}${Math.abs(hours)}` 
+			const formattedOffset = minutes === 0
+				? `UTC${sign}${Math.abs(hours)}`
 				: `UTC${sign}${Math.abs(hours)}${minutes}`;
 			return formattedOffset;
 		},
 		_bindTimelineAggregation: function () {
- 
+
 			var afilters = [];
-			var ApplicationId = this._InsNo4.padStart(6, '0'); 
+			var ApplicationId = this._InsNo4.padStart(6, '0');
 			var oFilter1 = new sap.ui.model.Filter("WorkflowId", sap.ui.model.FilterOperator.EQ, "purchaserequisition");
 			var oFilter2 = new sap.ui.model.Filter("InstanceId", sap.ui.model.FilterOperator.EQ, this._InsNo3);
 			var oFilter3 = new sap.ui.model.Filter("ApplicationId", sap.ui.model.FilterOperator.EQ, ApplicationId);
 			afilters.push(oFilter1, oFilter2, oFilter3);
 			this._timeline.bindAggregation("content", {
 				path: "/ApprovalHistory",
-				filters:afilters,
+				filters: afilters,
 				//sorter: new sap.ui.model.Sorter("ZSEQ", true), 
 				template: this.byId("idTemplateItem").clone()
 			});
@@ -537,11 +537,24 @@ sap.ui.define([
 		_getMessagePopover() {
 			if (!this.MessageDialog) {
 				this.MessageDialog = this.loadFragment({
-										name: "mm.zprworkflow.fragment.MessagePopover"
-									});
+					name: "mm.zprworkflow.fragment.MessagePopover"
+				});
 			}
-
 			return this.MessageDialog;
-		} 
+		},
+
+		// ADD BEGIN BY XINLEI XU 2025/04/23 CR#4359
+		onBeforeExport: function (oEvent) {
+			var mExcelSettings = oEvent.getParameter("exportSettings");
+			mExcelSettings.workbook.columns.forEach(function (oColumn) {
+				switch (oColumn.property) {
+					// Date
+					case "DeliveryDate":
+						oColumn.type = sap.ui.export.EdmType.Date;
+						break;
+				}
+			});
+		}
+		// ADD END BY XINLEI XU 2025/04/23 CR#4359
 	});
 });

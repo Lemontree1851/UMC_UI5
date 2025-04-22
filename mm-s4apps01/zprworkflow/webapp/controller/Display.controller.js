@@ -120,26 +120,27 @@ sap.ui.define([
 			this._oDataModel.resetChanges();
 			var oFilter = oEvent.getParameter("bindingParams").filters;
 			oFilter.push(new sap.ui.model.Filter("EmailAddress", "EQ", this._UserEmail));
-			// 			this._oDataModel.resetChanges();
-			var oFilter = oEvent.getParameter("bindingParams").filters;
-			var oNewFilter, aNewFilter = [];
-			var oApplyDate = this.byId("idDatePicker").getDateValue();
-			if (oApplyDate) {
-				var year = oApplyDate.getFullYear();
-				var month = (oApplyDate.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
-				var day = oApplyDate.getDate().toString().padStart(2, '0');
-				var formattedDate = `${year}${month}${day}`;
-				if (oApplyDate) {
-					aNewFilter.push(new Filter("ApplyDate", "EQ", formattedDate));
-				}
-			}
 
-			oNewFilter = new Filter({
-				filters: aNewFilter
-			});
-			if (aNewFilter.length > 0) {
-				oFilter.push(oNewFilter);
-			}
+			// DEL BEGIN BY XINLEI XU 2025/04/23 CR#4359
+			// var oFilter = oEvent.getParameter("bindingParams").filters;
+			// var oNewFilter, aNewFilter = [];
+			// var oApplyDate = this.byId("idDatePicker").getDateValue();
+			// if (oApplyDate) {
+			// 	var year = oApplyDate.getFullYear();
+			// 	var month = (oApplyDate.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+			// 	var day = oApplyDate.getDate().toString().padStart(2, '0');
+			// 	var formattedDate = `${year}${month}${day}`;
+			// 	if (oApplyDate) {
+			// 		aNewFilter.push(new Filter("ApplyDate", "EQ", formattedDate));
+			// 	}
+			// }
+			// oNewFilter = new Filter({
+			// 	filters: aNewFilter
+			// });
+			// if (aNewFilter.length > 0) {
+			// 	oFilter.push(oNewFilter);
+			// }
+			// DEL END BY XINLEI XU 2025/04/23 CR#4359
 		},
 
 		createPurchseOrder: function (oEvent) {
@@ -356,9 +357,21 @@ sap.ui.define([
 			var year = date.getFullYear();
 			var month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
 			var day = date.getDate().toString().padStart(2, '0');
-
 			return `${year}${month}${day}`;
-		}
+		},
 
+		// ADD BEGIN BY XINLEI XU 2025/04/23 CR#4359
+		onBeforeExport: function (oEvent) {
+			var mExcelSettings = oEvent.getParameter("exportSettings");
+			mExcelSettings.workbook.columns.forEach(function (oColumn) {
+				switch (oColumn.property) {
+					// Date
+					case "ApplyDate":
+						oColumn.type = sap.ui.export.EdmType.Date;
+						break;
+				}
+			});
+		}
+		// ADD END BY XINLEI XU 2025/04/23 CR#4359
 	});
 });
