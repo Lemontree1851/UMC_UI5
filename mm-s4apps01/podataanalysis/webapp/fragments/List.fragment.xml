@@ -10,7 +10,7 @@
                 <ToolbarSpacer/>
                 <MessageStrip id="idMRPSynchronousMsg" showIcon="true"/>
                 <Button id="idMRPSynchronous" icon="sap-icon://synchronize" type="Ghost" text="{i18n>MRPSynchronous}" press="onMRPSynchronous" enabled="{= ${local>/authorityCheck/button/MRPSynchronous}}"/>
-                <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExport" visible="{= ${local>/resultSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
+                <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExport" enabled="{= ${local>/authorityCheck/button/Export} &amp;&amp; ${local>/resultSet}.length > 0}"/>
             </OverflowToolbar>
         </table:extension>
         <table:columns>
