@@ -354,7 +354,7 @@ sap.ui.define([
                                         });
                                     }
                                 } else {
-                                    if (parseFloat(element.TotalTransferQuantity) > parseFloat(element.TotalShortFallQuantity)) {
+                                    if (parseFloat(element.TotalTransferQuantity) > (parseFloat(element.TotalShortFallQuantity) + parseFloat(element.GR_SlipsQuantity))) {
                                         // 行 {0} の移動数量は欠品数量を超えました。
                                         aMessageItems.push({
                                             type: "Warning",
