@@ -334,7 +334,7 @@ sap.ui.define([
                                 iExceedsNum += 1;
                             }
                             // 移動数量は欠品数量を超えるかをチェックする
-                            if (parseFloat(element.TotalTransferQuantity) < parseFloat(element.TotalShortFallQuantity)) {
+                            if (parseFloat(element.TotalTransferQuantity) < (parseFloat(element.TotalShortFallQuantity) + parseFloat(element.GR_SlipsQuantity))) {
                                 // 行 {0} の移動数量は欠品数量より少ないです。
                                 aMessageItems.push({
                                     type: "Warning",
