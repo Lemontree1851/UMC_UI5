@@ -39,13 +39,25 @@ sap.ui.define([
 			if (!InstanceId) {
 				InstanceId = "00000000-0000-0000-0000-000000000000";
 			}
-			this.getRouter().navTo("PurchaseReq", {
-				contextPath: oCtx.getProperty("UUID"),
-				contextPrNo: oCtx.getProperty("PrNo"),
-				contextApplyDepart: oCtx.getProperty("ApplyDepart"),
-				contextInstanceId: InstanceId,
-				contextApplicationId: oCtx.getProperty("ApplicationId"),
-			});
+			// ADD BEGIN BY XINLEI XU 2025/04/30 CR#4359
+			if (oCtx.getProperty("PrType") === "4") { // ApplyDepart 非必输
+				this.getRouter().navTo("PurchaseReq", {
+					contextPath: oCtx.getProperty("UUID"),
+					contextPrNo: oCtx.getProperty("PrNo"),
+					contextApplyDepart: oCtx.getProperty("ApplyDepart") === "" ? "1" : oCtx.getProperty("ApplyDepart"),
+					contextInstanceId: InstanceId,
+					contextApplicationId: oCtx.getProperty("ApplicationId"),
+				});
+			} else {
+				// ADD END BY XINLEI XU 2025/04/30
+				this.getRouter().navTo("PurchaseReq", {
+					contextPath: oCtx.getProperty("UUID"),
+					contextPrNo: oCtx.getProperty("PrNo"),
+					contextApplyDepart: oCtx.getProperty("ApplyDepart"),
+					contextInstanceId: InstanceId,
+					contextApplicationId: oCtx.getProperty("ApplicationId"),
+				});
+			}
 		},
 
 		_onRouteMatched: function (oEvent) {
