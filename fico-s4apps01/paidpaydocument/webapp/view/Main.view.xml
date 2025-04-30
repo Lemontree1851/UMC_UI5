@@ -76,7 +76,7 @@
 		  </OverflowToolbar>
 		</smartTable:customToolbar>
 
-		<t:Table id="Table_Doc" selectionMode="MultiToggle" rowMode="Auto" columnResize="onAfterRendering">
+		<t:Table id="Table_Doc" selectionMode="MultiToggle" rowMode="Auto" columnResize="onAfterRendering" columnMove="onAfterRendering">
             <t:Column id="CompanyCode" label="{i18n>CompanyCode}" width="6rem" sortProperty="CompanyCode" filterProperty="CompanyCode" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
