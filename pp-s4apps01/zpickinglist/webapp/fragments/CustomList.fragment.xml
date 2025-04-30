@@ -6,7 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_TAB" smartFilterId="idSmartFilterBar2" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="CustomListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 1}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExportCustomList" showFullScreenButton="true" requestAtLeastFields="BaseUnit,CreatedByUserName,LastChangedByUserName,CreatedTime,LastChangedTime,LocalLastChangedAt,DetailsJson,LaboratoryOrDesignOfficeName" ignoredFields="BaseUnit,CreatedByUserName,LastChangedByUserName,CreatedTime,LastChangedTime,LocalLastChangedAt,DetailsJson,LaboratoryOrDesignOfficeName,DeleteFlag,ExternalProductGroup">
+    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_TAB" smartFilterId="idSmartFilterBar2" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="CustomListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 1}" beforeRebindTable="onBeforeRebindTable" enableExport="false" beforeExport="onBeforeExportCustomList" showFullScreenButton="true" requestAtLeastFields="BaseUnit,CreatedByUserName,LastChangedByUserName,CreatedTime,LastChangedTime,LocalLastChangedAt,DetailsJson,LaboratoryOrDesignOfficeName" ignoredFields="BaseUnit,CreatedByUserName,LastChangedByUserName,CreatedTime,LastChangedTime,LocalLastChangedAt,DetailsJson,LaboratoryOrDesignOfficeName,DeleteFlag,ExternalProductGroup">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -15,16 +15,33 @@
                 <Button icon="sap-icon://save" text="{i18n>Save}" type="Transparent" press="onPressBtn('TAB_SAVE')" enabled="{= ${local>/authorityCheck/button/Save}}"/>
                 <Button icon="sap-icon://delete" text="{i18n>Delete}" type="Transparent" press="onPressBtn('TAB_DELETE')" enabled="{= ${local>/authorityCheck/button/Delete}}"/>
                 <Button icon="sap-icon://browse-folder" text="{i18n>ShowDetails}" type="Transparent" press="onPressBtn('TAB_DETAIL')" enabled="{= ${local>/authorityCheck/button/View}}"/>
+                <Button icon="sap-icon://excel-attachment" text="{i18n>Download}" type="Transparent" press="onExportCustomList" enabled="{= ${local>/CustomList}.length > 0}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
         <table:Table id="idCustomListTable" selectionMode="MultiToggle" rowMode="Auto">
             <table:columns>
-                <table:Column width="4rem" label="{i18n>RowNo}" sortProperty="RowNo" filterProperty="RowNo">
+                <!-- <table:Column width="4rem" label="{i18n>RowNo}" sortProperty="RowNo" filterProperty="RowNo">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RowNo", "leadingProperty":"RowNo"}'/>
                     </table:customData>
                     <table:template>
                         <Text text="{RowNo}" />
+                    </table:template>
+                </table:Column> -->
+                <table:Column width="10rem" label="{i18n>Reservation}" sortProperty="Reservation" filterProperty="Reservation">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Reservation", "leadingProperty":"Reservation"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Reservation}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>ReservationItem}" sortProperty="ReservationItem" filterProperty="ReservationItem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ReservationItem", "leadingProperty":"ReservationItem"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ReservationItem}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
@@ -201,22 +218,6 @@
                     </table:customData>
                     <table:template>
                         <Text text="{MaterialGroup}" wrapping="false"/>
-                    </table:template>
-                </table:Column>
-                <table:Column width="10rem" label="{i18n>Reservation}" sortProperty="Reservation" filterProperty="Reservation">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"Reservation", "leadingProperty":"Reservation"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{Reservation}" wrapping="false"/>
-                    </table:template>
-                </table:Column>
-                <table:Column width="10rem" label="{i18n>ReservationItem}" sortProperty="ReservationItem" filterProperty="ReservationItem">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"ReservationItem", "leadingProperty":"ReservationItem"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{ReservationItem}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>PostingStatus}" sortProperty="PostingStatus" filterProperty="PostingStatus">

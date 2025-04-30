@@ -181,8 +181,10 @@ sap.ui.define([
 
             // ADD BEGIN BY XINLEI XU 2025/04/16 导出性能优化
             var iSelectIndex = this.getModel("local").getProperty("/selectIndex");
+            var aFilters, sPath;
             if (iSelectIndex === 0) {
-                var aFilters = this.byId("idSmartFilterBar1").getFilters()[0].aFilters;
+                sPath = "/ZC_PICKINGLIST_STD";
+                aFilters = this.byId("idSmartFilterBar1").getFilters()[0].aFilters;
                 var oNewFilter,
                     aNewFilters = [];
                 var sRequisitionDate = this.getModel("local").getProperty("/dateValue");
@@ -194,17 +196,24 @@ sap.ui.define([
                     });
                     aFilters.push(oNewFilter);
                 }
-                // 并行处理 优化速度
-                this.getModel().setUseBatch(false);
-                this._CallODataV2("READ", "/ZC_PICKINGLIST_STD", aFilters, { "$top": 999999999 }, {}).then(function (oResponse) {
-                    if (oResponse) {
-                        this.getModel("local").setProperty("/StandardList", oResponse.results);
-                    }
-                    this.getModel().setUseBatch(true);
-                }.bind(this)), function (oError) {
-                    this.getModel().setUseBatch(true);
-                }.bind(this);
+            } else {
+                sPath = "/ZC_PICKINGLIST_TAB";
+                aFilters = this.byId("idSmartFilterBar2").getFilters()[0].aFilters;
             }
+            // 并行处理 优化速度
+            this.getModel().setUseBatch(false);
+            this._CallODataV2("READ", sPath, aFilters, { "$top": 999999999 }, {}).then(function (oResponse) {
+                if (oResponse) {
+                    if (iSelectIndex === 0) {
+                        this.getModel("local").setProperty("/StandardList", oResponse.results);
+                    } else {
+                        this.getModel("local").setProperty("/CustomList", oResponse.results);
+                    }
+                }
+                this.getModel().setUseBatch(true);
+            }.bind(this)), function (oError) {
+                this.getModel().setUseBatch(true);
+            }.bind(this);
             // ADD END BY XINLEI XU 2025/04/16 导出性能优化
         },
 
@@ -694,6 +703,73 @@ sap.ui.define([
                 },
                 dataSource: aExcelSet,
                 fileName: this.getModel("i18n").getResourceBundle().getText("StandardListFileName") + "_" + this.getCurrentDateTime() + ".xlsx"
+            };
+            // export excel file
+            new Spreadsheet(oSettings).build();
+        },
+
+        onExportCustomList: function () {
+            var oTable = this.byId("idCustomListTable");
+            var aExcelSet = this.getModel("local").getProperty("/CustomList");
+            var aExcelCol = [];
+            var aTableCol = oTable.getColumns();
+            for (var i = 0; i < aTableCol.length; i++) {
+                if (aTableCol[i].getVisible()) {
+                    var sLabelText = aTableCol[i].getAggregation("label").getText();
+                    var sType, sTextAlign, sUnitProperty, bDelimiter, iScale;
+                    var sFieldName = aTableCol[i].getAggregation("template").getBindingPath("text");
+                    if (!sFieldName) {
+                        sFieldName = aTableCol[i].getAggregation("template").mBindingInfos.value.parts[0].path;
+                    }
+                    switch (sFieldName) {
+                        //  Date
+                        case "CreatedDate":
+                        case "LastChangedDate":
+                            sType = sap.ui.export.EdmType.Date;
+                            break;
+                        //  Number 分隔符 没有小数位
+                        case "TotalRequiredQuantity":
+                        case "TotalShortFallQuantity":
+                        case "StorageLocationToStock":
+                        case "M_CARD_Quantity":
+                        case "TotalTransferQuantity":
+                        case "StorageLocationFromStock":
+                        case "GR_SlipsQuantity":
+                            sType = sap.ui.export.EdmType.Number;
+                            bDelimiter = true;
+                            iScale = 3;
+                            sTextAlign = "End";
+                            sUnitProperty = "BaseUnit";
+                            break;
+                        default:
+                            sType = sap.ui.export.EdmType.String;
+                            sTextAlign = "Begin";
+                            sUnitProperty = "";
+                            break;
+                    }
+                    var oExcelCol = {
+                        label: sLabelText,
+                        type: sType,
+                        property: sFieldName,
+                        width: parseFloat(aTableCol[i].getWidth()),
+                        textAlign: sTextAlign,
+                        unitProperty: sUnitProperty,
+                        delimiter: bDelimiter,
+                        scale: iScale
+                    };
+                    aExcelCol.push(oExcelCol);
+                }
+            }
+            var oSettings = {
+                workbook: {
+                    columns: aExcelCol,
+                    context: {
+                        version: "1.54",
+                        hierarchyLevel: "level"
+                    }
+                },
+                dataSource: aExcelSet,
+                fileName: this.getModel("i18n").getResourceBundle().getText("CustomListFileName") + "_" + this.getCurrentDateTime() + ".xlsx"
             };
             // export excel file
             new Spreadsheet(oSettings).build();

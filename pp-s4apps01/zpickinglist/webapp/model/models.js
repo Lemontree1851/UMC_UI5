@@ -22,7 +22,8 @@ sap.ui.define([
                 tab_mode: "display",
                 dateValue: new Date(),
                 detailSet: [],
-                StandardList: []
+                StandardList: [],
+                CustomList: []
             });
             return oModel;
         },
