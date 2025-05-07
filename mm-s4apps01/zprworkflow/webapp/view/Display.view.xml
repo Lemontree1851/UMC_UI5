@@ -53,6 +53,7 @@
                             <smartFilterBar:ControlConfiguration key="PrTypeText" visible="false" />
                             <smartFilterBar:ControlConfiguration key="ApplyDepartText" visible="false" />
                             <smartFilterBar:ControlConfiguration key="KyotenText" visible="false" />
+                            <smartFilterBar:ControlConfiguration key="PurchasingGroupName" visible="false" />
                             <!-- ADD END BY XINLEI XU 2025/04/23 CR#4359 -->
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
@@ -60,7 +61,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="PurchaseReqWF" smartFilterId="idSmartFilterBar" beforeExport="onBeforeExport" smartVariant="idSmartVariantManagement" persistencyKey="uploadPurchaseReqTable" header="{i18n>tableHeaderTitle}" placeToolbarInTable="true" requestAtLeastFields="UUID,WorkflowId,InstanceId,ApplicationId" beforeRebindTable="onBeforeRebindTable" ignoredFields="UUID,UserZseq,WorkflowId,InstanceId,ApplicationId,EmailAddress,ApproveStatusText,PrTypeText,ApplyDepartText,KyotenText,Delete_mc,Update_mc">
+            <smartTable:SmartTable id="idSmartTable" entitySet="PurchaseReqWF" smartFilterId="idSmartFilterBar" beforeExport="onBeforeExport" smartVariant="idSmartVariantManagement" persistencyKey="uploadPurchaseReqTable" header="{i18n>tableHeaderTitle}" placeToolbarInTable="true" requestAtLeastFields="UUID,WorkflowId,InstanceId,ApplicationId,PurchasingGroupName" beforeRebindTable="onBeforeRebindTable" ignoredFields="UUID,UserZseq,WorkflowId,InstanceId,ApplicationId,EmailAddress,ApproveStatusText,PrTypeText,ApplyDepartText,KyotenText,PurchasingGroupName,Delete_mc,Update_mc">
                 <smartTable:customToolbar>
                     <OverflowToolbar id="OverflowToolbar1">
                         <ToolbarSpacer id="ToolbarSpacer1"/>
@@ -128,6 +129,16 @@
                                 <Text id="idPurchaseGrpText" text="{PurchaseGrp}" wrapping="false"/>
                             </t:template>
                         </t:Column>
+                        <!-- ADD BEGIN BY XINLEI XU 2025/05/07 CR#4359 -->
+                        <t:Column width="10rem" label="{i18n>PurchasingGroupName}" sortProperty="PurchasingGroupName" filterProperty="PurchasingGroupName">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroupName", "leadingProperty":"PurchasingGroupName", "sortProperty":"PurchasingGroupName", "filterProperty": "PurchasingGroupName"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchasingGroupName}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <!-- ADD END BY XINLEI XU 2025/05/07 CR#4359 -->
                         <t:Column id="id27Column" width="8rem" label="{i18n>PrBy}" sortProperty="PrBy" filterProperty="PrBy">
                             <t:customData>
                                 <core:CustomData id="id27CustomData" key="p13nData" value='\{"columnKey":"PrBy", "leadingProperty":"PrBy", "sortProperty":"PrBy", "filterProperty": "PrBy"}'/>

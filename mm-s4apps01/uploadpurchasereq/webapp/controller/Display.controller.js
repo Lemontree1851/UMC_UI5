@@ -44,7 +44,7 @@ sap.ui.define([
 				this.getRouter().navTo("PurchaseReq", {
 					contextPath: oCtx.getProperty("UUID"),
 					contextPrNo: oCtx.getProperty("PrNo"),
-					contextApplyDepart: oCtx.getProperty("ApplyDepart") === "" ? "1" : oCtx.getProperty("ApplyDepart"),
+					contextApplyDepart: oCtx.getProperty("ApplyDepart") === "" ? "-" : oCtx.getProperty("ApplyDepart"),
 					contextInstanceId: InstanceId,
 					contextApplicationId: oCtx.getProperty("ApplicationId"),
 				});
