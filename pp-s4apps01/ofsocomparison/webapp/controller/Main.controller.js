@@ -486,7 +486,6 @@ sap.ui.define([
 				}
 
 				if (titleVariable.PeriodT27) {
-					v
 					oTable.addColumn(new Column({
 						label: titleVariable.PeriodT27,
 						template: new Text({
