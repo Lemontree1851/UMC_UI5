@@ -19,7 +19,7 @@ sap.ui.define([
             var oAuthorityModel = oModels.Authority;
             var oLocalModel = oModels.local;
             var oI18nModel = oModels.i18n;
-            // this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel);
+            this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel);
         },
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
@@ -148,19 +148,21 @@ sap.ui.define([
         },
 
         printAction: function (items, sActionName) {
+            var oBusyDialog = new BusyDialog();
             var promise = new Promise(function (resolve, reject) {
                 var oAction = _oDataModel.bindContext("/InvoiceReport/com.sap.gateway.srvd.zui_invoicereport_o4.v0001." + sActionName + "(...)");
                 oAction.setParameter("Zzkey", JSON.stringify(items));
                 oAction.setParameter("Event", "");
                 oAction.setParameter("RecordUUID", "");
-
+                oBusyDialog.open();
                 oAction.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
+                    oBusyDialog.close();
                     try {
                         var records = oAction.getBoundContext().getObject().value; //获取返回的数据
                     } catch (e) { }
                     resolve(records);
-
                 }).catch((oError) => {
+                    oBusyDialog.close();
                     messages.showError(oError.message);
                     reject(oError);
                 });
@@ -235,6 +237,10 @@ sap.ui.define([
                     UnitPrice: item.UnitPrice,
                     NetAmount: item.NetAmount,
                     TaxRate: item.TaxRate,
+                    // ADD BEGIN BY XINLEI XU 2025/04/18 CM#4423
+                    PurchaseOrderByCustomer: item.PurchaseOrderByCustomer,
+                    YY1_ItemRemarks_1_BDI: item.YY1_ItemRemarks_1_BDI
+                    // ADD END BY XINLEI XU 2025/04/18 CM#4423
                 });
             });
             InvoicePrint.to_Item.results = results;
@@ -350,8 +356,8 @@ sap.ui.define([
                             var aSelectedContexts = that.getSelectedContexts();
                         }
                         // ADD BEGIN BY XINLEI XU 2025/01/14
-                        var sCreator = oRouting.getView().byId("idCreator").getValue();
-                        var sApprover = oRouting.getView().byId("idApprover").getValue();
+                        var sCreator = ""; // oRouting.getView().byId("idCreator").getValue();
+                        var sApprover = ""; // oRouting.getView().byId("idApprover").getValue();
                         // ADD END BY XINLEI XU 2025/01/14
                         _oFunctions.onCustomAction(aSelectedContexts, sAction, sPrintDate, sCreator, sApprover);
                         oDialog.close();
