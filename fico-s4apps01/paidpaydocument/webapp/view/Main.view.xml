@@ -284,7 +284,25 @@
               </t:template>
             </t:Column>
 
-	        <t:Column id="Currency" label="{i18n>Currency}" width="6rem" sortProperty="Currency" filterProperty="Currency" autoResizable="true">
+            <t:Column id="AR" label="{i18n>AR}" visible="{local>/showB}" width="12rem" sortProperty="AR" filterProperty="AR" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"AR", "leadingProperty":"AR", "sortProperty":"AR", "filterProperty": "AR"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'AR', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="AP" visible="{local>/showB}" label="{i18n>AP}" width="12rem" sortProperty="AP" filterProperty="AP" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"AP", "leadingProperty":"AP", "sortProperty":"AP", "filterProperty": "AP"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'AP', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="Currency" label="{i18n>Currency}" width="6rem" sortProperty="Currency" filterProperty="Currency" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'/>
               </t:customData>
@@ -302,7 +320,7 @@
               </t:template>
             </t:Column>
             
-			<t:Column id="Belnr1" visible="{local>/showA}" label="{i18n>Belnr1}" width="6rem" sortProperty="Belnr1" filterProperty="Belnr1" autoResizable="true">
+			      <t:Column id="Belnr1" visible="{local>/showA}" label="{i18n>Belnr1}" width="6rem" sortProperty="Belnr1" filterProperty="Belnr1" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Belnr1", "leadingProperty":"Belnr1", "sortProperty":"Belnr1", "filterProperty": "Belnr1"}'/>
               </t:customData>
@@ -364,26 +382,8 @@
                 <Text text="{Belnr4}" tooltip="{Belnr4}" wrapping="false"/>
               </t:template>
             </t:Column>
-
-            <t:Column id="AP" visible="{local>/showB}" label="{i18n>AP}" width="12rem" sortProperty="AP" filterProperty="AP" autoResizable="true">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"AP", "leadingProperty":"AP", "sortProperty":"AP", "filterProperty": "AP"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'AP', formatter:'.formatter.formatFloat'}" wrapping="false"/>
-              </t:template>
-            </t:Column>
             
-			<t:Column id="AR" label="{i18n>AR}" visible="{local>/showB}" width="12rem" sortProperty="AR" filterProperty="AR" autoResizable="true">
-              <t:customData>
-                <core:CustomData key="p13nData" value='\{"columnKey":"AR", "leadingProperty":"AR", "sortProperty":"AR", "filterProperty": "AR"}'/>
-              </t:customData>
-              <t:template>
-                <Text text="{path:'AR', formatter:'.formatter.formatFloat'}" wrapping="false"/>
-              </t:template>
-            </t:Column>
-
-	        <t:Column id="Gjahr5" label="{i18n>Gjahr5}" visible="{local>/showB}" width="6rem" sortProperty="Gjahr5" filterProperty="Gjahr5" autoResizable="true">
+	          <t:Column id="Gjahr5" label="{i18n>Gjahr5}" visible="{local>/showB}" width="6rem" sortProperty="Gjahr5" filterProperty="Gjahr5" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Gjahr5", "leadingProperty":"Gjahr5", "sortProperty":"Gjahr5", "filterProperty": "Gjahr5"}'/>
               </t:customData>
